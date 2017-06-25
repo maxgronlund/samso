@@ -1,13 +1,15 @@
-h1 fo
 = simple_form_for [:admin, @user] do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
     = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+    - if current_user.can_edit?(@user)
+      = f.simple_fields_for :roles do |roles_form|
+        = roles_form.input :permission, collection: Role::ROLES, include_blank: false
 
-    = f.simple_fields_for :roles do |roles_form|
-      = roles_form.input :permission, collection: Role::ROLES, include_blank: false
 
   .form-actions
     = f.button :submit
