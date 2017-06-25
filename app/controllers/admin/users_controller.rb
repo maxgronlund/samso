@@ -5,7 +5,6 @@ class Admin::UsersController < AdminController
   # GET /users.json
   def index
     @users = User.all
-    ap current_user
   end
 
   # GET /users/1
