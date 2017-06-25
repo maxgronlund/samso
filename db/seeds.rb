@@ -6,4 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.create(name: "admin", email: "max@synthmax.dk")
+user = User.where(
+  name: "admin",
+  email: "admin@example.com"
+).first_or_create(
+  name: "admin",
+  email: "admin@example.com"
+)
+
+role = Role.create(
+  user_id: user.id,
+  permission: Role::ADMIN
+)
+
+if user
+  user.password = 'ChangeMe1337'
+  user.password_confirmation = 'ChangeMe1337'
+  user.save
+end
