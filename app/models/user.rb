@@ -6,4 +6,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :roles, dependent: :destroy
+
+  accepts_nested_attributes_for :roles
 end
