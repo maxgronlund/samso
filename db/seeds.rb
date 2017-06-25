@@ -14,7 +14,10 @@ user = User.where(
   email: "admin@example.com"
 )
 
-role = Role.create(
+role = Role.where(
+  user_id: user.id,
+  permission: Role::ADMIN
+).first_or_create(
   user_id: user.id,
   permission: Role::ADMIN
 )
