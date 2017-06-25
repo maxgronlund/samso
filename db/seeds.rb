@@ -22,6 +22,14 @@ role = Role.where(
   permission: Role::ADMIN
 )
 
+role = Role.where(
+  user_id: user.id,
+  permission: Role::SUPER_ADMIN
+).first_or_create(
+  user_id: user.id,
+  permission: Role::SUPER_ADMIN
+)
+
 if user
   user.password = 'ChangeMe1337'
   user.password_confirmation = 'ChangeMe1337'
