@@ -77,6 +77,7 @@ class Admin::UsersController < AdminController
       :email,
       :password,
       :password_confirmation,
-      roles_attributes: [:permission, :id])
+      roles_attributes: [:permission, :id]
+    )
   end
 end

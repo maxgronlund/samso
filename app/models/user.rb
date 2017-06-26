@@ -21,5 +21,4 @@ class User < ApplicationRecord
     return true unless user.persisted?
     super_admin? && user != self
   end
-
 end
