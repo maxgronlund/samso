@@ -2,10 +2,10 @@
 
 one:
   user: one
-  permission: MyString
-  active: false
+  permission: admin
+  active: true
 
 two:
   user: two
-  permission: MyString
-  active: false
+  permission: member
+  active: true
