@@ -1,8 +1,5 @@
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-# include Devise::Test::ControllerHelpers
-#include Devise::Test::ControllerHelpers, type: :controller
-#include Devise::Test::ControllerHelpers, type: :view
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
