@@ -935,6 +935,7 @@ $(function() {
 	});
 
 });
+/*
 $(function () {
 
 	$('#sidebar-menu, #customize-menu').metisMenu({
@@ -953,6 +954,7 @@ $(function () {
 	});
 
 });
+*/
 //Flot Bar Chart
 $(function() {
 

@@ -16,5 +16,6 @@
 //= require turbolinks
 //= require admin/Sortable
 //= require admin/modular_admin
-//= require admin/metisMenu
+//= require admin/metismenu
+//= require admin/init-metismenu
 // require admin/vendor
