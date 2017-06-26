@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  resources :admin, only: [:index]
+
   devise_for :users
   get 'home/index'
 

@@ -1,0 +1,340 @@
+.main-wrapper
+  #app.app
+    header.header
+      .header-block.header-block-collapse.hidden-lg-up
+        button#sidebar-collapse-btn.collapse-btn
+          i.fa.fa-bars
+      .header-block.header-block-search.hidden-sm-down
+        form role="search"
+          .input-container
+            i.fa.fa-search
+            input placeholder="Search" type="search" /
+            .underline
+      /.header-block.header-block-buttons
+      /  a.btn.btn-sm.header-btn href="https://github.com/modularcode/modular-admin-html"
+      /    i.fa.fa-github-alt
+      /    span View on GitHub
+      /  a.btn.btn-sm.header-btn href="https://github.com/modularcode/modular-admin-html/stargazers"
+      /    i.fa.fa-star
+      /    span Star Us
+      /  a.btn.btn-sm.header-btn href="https://github.com/modularcode/modular-admin-html/releases/download/v1.1.1/modular-admin-html-1.1.1.zip"
+      /    i.fa.fa-cloud-download
+      /    span Download .zip
+      .header-block.header-block-nav
+        ul.nav-profile
+          li.notifications.new
+            a data-toggle="dropdown" href=""
+              i.fa.fa-bell-o
+              sup
+                span.counter 8
+            .dropdown-menu.notifications-dropdown-menu
+              ul.notifications-container
+                li
+                  a.notification-item href=""
+                  .img-col
+                    .img style=("background-image: url('assets/faces/3.jpg')")
+                  .body-col
+                    p
+                      span.accent Zack Alien
+                      | pushed new commit:
+                      /= succeed "." do
+                      /  span.accent Fix page load performance issue
+                li
+                  a.notification-item href=""
+                  .img-col
+                    .img style=("background-image: url('assets/faces/5.jpg')")
+                  .body-col
+                    p
+                      span.accent Amaya Hatsumi
+                      | started new task:
+                      /= succeed "." do
+                      /  span.accent Dashboard UI design.
+                li
+                  a.notification-item href=""
+                  .img-col
+                    .img style=("background-image: url('assets/faces/8.jpg')")
+                  .body-col
+                    p
+                      span.accent Andy Nouman
+                      | deployed new version of
+                      span.accent NodeJS REST Api V3
+              footer
+                ul
+                  li
+                    a href=""
+                      | View All
+          li.profile.dropdown
+            a.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+            .img style=("background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')")
+            span.name
+              | John Doe
+            .dropdown-menu.profile-dropdown-menu aria-labelledby="dropdownMenu1"
+              a.dropdown-item href="#"
+                i.fa.fa-user.icon
+                | Profile
+              a.dropdown-item href="#"
+                i.fa.fa-bell.icon
+                | Notifications
+              a.dropdown-item href="#"
+                i.fa.fa-gear.icon
+                | Settings
+              .dropdown-divider
+              a.dropdown-item href="login.html"
+                i.fa.fa-power-off.icon
+                | Logout
+    aside.sidebar
+      .sidebar-container
+        .sidebar-header
+          .brand
+            .logo
+              span.l.l1
+              span.l.l2
+              span.l.l3
+              span.l.l4
+              span.l.l5
+            | Modular Admin
+        nav.menu
+          ul#sidebar-menu.nav.metismenu
+            li
+              a href="index.html"
+                i.fa.fa-home
+                | Dashboard
+            li
+              a href=""
+                i.fa.fa-th-large
+                | Items Manager
+                i.fa.arrow
+              ul
+                li
+                  a href="items-list.html"
+                    | Items List
+                li
+                  a href="item-editor.html"
+                    | Item Editor
+            li
+              a href=""
+                i.fa.fa-bar-chart
+                | Charts
+                i.fa.arrow
+              ul
+                li
+                  a href="charts-flot.html"
+                    | Flot Charts
+                li
+                  a href="charts-morris.html"
+                    | Morris Charts
+            li
+              a href=""
+                i.fa.fa-table
+                | Tables
+                i.fa.arrow
+              ul
+                li
+                  a href="static-tables.html"
+                    | Static Tables
+                li
+                  a href="responsive-tables.html"
+                    | Responsive Tables
+            li
+              a href="forms.html"
+                i.fa.fa-pencil-square-o
+                | Forms
+            li
+              a href=""
+                i.fa.fa-desktop
+                | UI Elements
+                i.fa.arrow
+              ul
+                li
+                  a href="buttons.html"
+                    | Buttons
+                li
+                  a href="cards.html"
+                    | Cards
+                li
+                  a href="typography.html"
+                    | Typography
+                li
+                  a href="icons.html"
+                    | Icons
+                li
+                  a href="grid.html"
+                    | Grid
+            li.active.open
+              a href=""
+                i.fa.fa-file-text-o
+                | Pages
+                i.fa.arrow
+              ul
+                li
+                  a href="login.html"
+                    | Login
+                li
+                  a href="signup.html"
+                    | Sign Up
+                li
+                  a href="reset.html"
+                    | Reset
+                li.active
+                  a href="error-404.html"
+                    | Error 404 App
+                li
+                  a href="error-404-alt.html"
+                    | Error 404 Global
+                li
+                  a href="error-500.html"
+                    | Error 500 App
+                li
+                  a href="error-500-alt.html"
+                    | Error 500 Global
+            li
+              a href="https://github.com/modularcode/modular-admin-html"
+                i.fa.fa-github-alt
+                | Theme Docs
+      footer.sidebar-footer
+        ul#customize-menu.nav.metismenu
+          li
+            ul
+              li.customize
+                .customize-item
+                  .row.customize-header
+                    .col-xs-4
+                    .col-xs-4
+                      label.title fixed
+                    .col-xs-4
+                      label.title static
+                  .row.hidden-md-down
+                    .col-xs-4
+                      label.title Sidebar:
+                    .col-xs-4
+                      label
+                        input.radio name="sidebarPosition" type="radio" value="sidebar-fixed" /
+                        span
+                    .col-xs-4
+                      label
+                        input.radio name="sidebarPosition" type="radio" value="" /
+                        span
+                  .row
+                    .col-xs-4
+                      label.title Header:
+                    .col-xs-4
+                      label
+                        input.radio name="headerPosition" type="radio" value="header-fixed" /
+                        span
+                    .col-xs-4
+                      label
+                        input.radio name="headerPosition" type="radio" value="" /
+                        span
+                  .row
+                    .col-xs-4
+                      label.title Footer:
+                    .col-xs-4
+                      label
+                        input.radio name="footerPosition" type="radio" value="footer-fixed" /
+                        span
+                    .col-xs-4
+                      label
+                        input.radio name="footerPosition" type="radio" value="" /
+                        span
+                .customize-item
+                  ul.customize-colors
+                    li
+                      span.color-item.color-red data-theme="red"
+                    li
+                      span.color-item.color-orange data-theme="orange"
+                    li
+                      span.color-item.color-green.active data-theme=""
+                    li
+                      span.color-item.color-seagreen data-theme="seagreen"
+                    li
+                      span.color-item.color-blue data-theme="blue"
+                    li
+                      span.color-item.color-purple data-theme="purple"
+            a href=""
+              i.fa.fa-cog
+              | Customize
+    #sidebar-overlay.sidebar-overlay
+    /article.content.error-404-page
+    /  section.section
+    /    .error-card
+    /      .error-title-block
+    /        h1.error-title 404
+    /        h2.error-sub-title Sorry, page not found
+    /      .error-container
+    /        p You better try our awesome search:
+    /        .row
+    /          .col-xs-12
+    /            .input-group
+    /              input.form-control type="text" /
+    /              span.input-group-btn
+    /                button.btn.btn-primary type="button"  Search
+    /        br/
+    /        a.btn.btn-primary href="index.html"
+    /          i.fa.fa-angle-left
+    /          | Back to Dashboard
+    footer.footer
+      .footer-block.buttons
+        iframe.footer-github-btn frameborder="0" height="20px" scrolling="0" src="https://ghbtns.com/github-btn.html?user=modularcode&repo=modular-admin-html&type=star&count=true" width="140px"
+      .footer-block.author
+        ul
+          li
+            | created by
+            a href="https://github.com/modularcode"  ModularCode
+          li
+            a href="https://github.com/modularcode/modular-admin-html#get-in-touch"  get in touch
+    #modal-media.modal.fade
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            button.close aria-label="Close" data-dismiss="modal" type="button"
+              span aria-hidden="true"  &times;
+              span.sr-only Close
+            h4.modal-title Media Library
+          .modal-body.modal-tab-container
+            ul.nav.nav-tabs.modal-tabs role="tablist"
+              li.nav-item
+                a.nav-link data-toggle="tab" href="#gallery" role="tab"  Gallery
+              li.nav-item
+                a.nav-link.active data-toggle="tab" href="#upload" role="tab"  Upload
+            .tab-content.modal-tab-content
+              #gallery.tab-pane.fade role="tabpanel"
+                .images-container
+                  .row
+              #upload.tab-pane.fade.active.in role="tabpanel"
+                .upload-container
+                  #dropzone
+                    form#demo-upload.dropzone.needsclick.dz-clickable action="/" enctype="multipart/form-data" method="POST"
+                      .dz-message-block
+                        .dz-message.needsclick Drop files here or click to upload.
+          .modal-footer
+            button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+            button.btn.btn-primary type="button"  Insert Selected
+        /! /.modal-content
+      /! /.modal-dialog
+    /! /.modal
+    #confirm-modal.modal.fade
+      .modal-dialog role="document"
+        .modal-content
+          .modal-header
+            button.close aria-label="Close" data-dismiss="modal" type="button"
+              span aria-hidden="true"  &times;
+            h4.modal-title
+              i.fa.fa-warning
+              | Alert
+          .modal-body
+            p Are you sure want to do this?
+          .modal-footer
+            button.btn.btn-primary data-dismiss="modal" type="button"  Yes
+            button.btn.btn-secondary data-dismiss="modal" type="button"  No
+        /! /.modal-content
+      /! /.modal-dialog
+    /! /.modal
+/! Reference block for JS
+/#ref.ref
+/  .color-primary
+/  .chart
+/    .color-primary
+/    .color-secondary
+/script src="js/vendor.js"
+/script src="js/app.js"
+/
