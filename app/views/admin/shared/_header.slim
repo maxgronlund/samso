@@ -1,0 +1,50 @@
+header.header
+  .header-block.header-block-collapse.hidden-lg-up
+    button#sidebar-collapse-btn.collapse-btn
+      i.fa.fa-bars
+
+  .header-block.header-block-nav
+    = render 'shared/login_links'
+  /.header-block.header-block-nav
+  /  ul.nav-profile
+  /    li.notifications.new
+  /      a data-toggle="dropdown" href=""
+  /        /i.fa.fa-bell-o
+  /        /sup
+  /        /  span.counter 8
+  /      .dropdown-menu.notifications-dropdown-menu
+  /        ul.notifications-container
+  /          li
+  /            a.notification-item href=""
+  /            .img-col
+  /              .img style=("background-image: url('assets/faces/3.jpg')")
+  /            .body-col
+  /              p
+  /                span.accent Zack Alien
+  /                | pushed new commit:
+  /                /= succeed "." do
+  /                /  span.accent Fix page load performance issue
+  /          li
+  /            a.notification-item href=""
+  /            .img-col
+  /              .img style=("background-image: url('assets/faces/5.jpg')")
+  /            .body-col
+  /              p
+  /                span.accent Amaya Hatsumi
+  /                | started new task:
+  /                /= succeed "." do
+  /                /  span.accent Dashboard UI design.
+  /          li
+  /            a.notification-item href=""
+  /            .img-col
+  /              .img style=("background-image: url('assets/faces/8.jpg')")
+  /            .body-col
+  /              p
+  /                span.accent Andy Nouman
+  /                | deployed new version of
+  /                span.accent NodeJS REST Api V3
+  /        footer
+  /          ul
+  /            li
+  /              a href=""
+  /               | View All

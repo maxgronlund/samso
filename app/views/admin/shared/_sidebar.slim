@@ -1,0 +1,177 @@
+aside.sidebar
+  .sidebar-container
+    .sidebar-header
+      .brand
+        .logo
+          span.l.l1
+          span.l.l2
+          span.l.l3
+          span.l.l4
+          span.l.l5
+        | Modular Admin
+    nav.menu
+      ul#sidebar-menu.nav.metismenu
+        li
+          = link_to admin_index_path do
+            i.fa.fa-home
+            | Skrivebord
+        li
+          = link_to admin_users_path do
+            i.fa.fa-home
+            | Brugere
+        / li
+        /   a href=""
+        /     i.fa.fa-th-large
+        /     | Items Manager
+        /     i.fa.arrow
+        /   ul
+        /     li
+        /       a href="items-list.html"
+        /         | Items List
+        /     li
+        /       a href="item-editor.html"
+        /         | Item Editor
+        / li
+        /   a href=""
+        /     i.fa.fa-bar-chart
+        /     | Charts
+        /     i.fa.arrow
+        /   ul
+        /     li
+        /       a href="charts-flot.html"
+        /         | Flot Charts
+        /     li
+        /       a href="charts-morris.html"
+        /         | Morris Charts
+        / li
+        /   a href=""
+        /     i.fa.fa-table
+        /     | Tables
+        /     i.fa.arrow
+        /   ul
+        /     li
+        /       a href="static-tables.html"
+        /         | Static Tables
+        /     li
+        /       a href="responsive-tables.html"
+        /         | Responsive Tables
+        / li
+        /   a href="forms.html"
+        /     i.fa.fa-pencil-square-o
+        /     | Forms
+        / li
+        /   a href=""
+        /     i.fa.fa-desktop
+        /     | UI Elements
+        /     i.fa.arrow
+        /   ul
+        /     li
+        /       a href="buttons.html"
+        /         | Buttons
+        /     li
+        /       a href="cards.html"
+        /         | Cards
+        /     li
+        /       a href="typography.html"
+        /         | Typography
+        /     li
+        /       a href="icons.html"
+        /         | Icons
+        /     li
+        /       a href="grid.html"
+        /         | Grid
+        / li
+        /   a href=""
+        /     i.fa.fa-file-text-o
+        /     | Pages
+        /     i.fa.arrow
+        /   ul
+        /     li
+        /       a href="login.html"
+        /         | Login
+        /     li
+        /       a href="signup.html"
+        /         | Sign Up
+        /     li
+        /       a href="reset.html"
+        /         | Reset
+        /     li.active
+        /       a href="error-404.html"
+        /         | Error 404 App
+        /     li
+        /       a href="error-404-alt.html"
+        /         | Error 404 Global
+        /     li
+        /       a href="error-500.html"
+        /         | Error 500 App
+        /     li
+        /       a href="error-500-alt.html"
+        /         | Error 500 Global
+        / li
+        /   a href="https://github.com/modularcode/modular-admin-html"
+        /     i.fa.fa-github-alt
+        /     | Theme Docs
+
+#sidebar-overlay.sidebar-overlay
+  / footer.sidebar-footer
+  /   ul#customize-menu.nav.metismenu
+  /     li
+  /       ul
+  /         li.customize
+  /           .customize-item
+  /             .row.customize-header
+  /               .col-xs-4
+  /               .col-xs-4
+  /                 label.title fixed
+  /               .col-xs-4
+  /                 label.title static
+  /             .row.hidden-md-down
+  /               .col-xs-4
+  /                 label.title Sidebar:
+  /               .col-xs-4
+  /                 label
+  /                   input.radio name="sidebarPosition" type="radio" value="sidebar-fixed" /
+  /                   span
+  /               .col-xs-4
+  /                 label
+  /                   input.radio name="sidebarPosition" type="radio" value="" /
+  /                   span
+  /             .row
+  /               .col-xs-4
+  /                 label.title Header:
+  /               .col-xs-4
+  /                 label
+  /                   input.radio name="headerPosition" type="radio" value="header-fixed" /
+  /                   span
+  /               .col-xs-4
+  /                 label
+  /                   input.radio name="headerPosition" type="radio" value="" /
+  /                   span
+  /             .row
+  /               .col-xs-4
+  /                 label.title Footer:
+  /               .col-xs-4
+  /                 label
+  /                   input.radio name="footerPosition" type="radio" value="footer-fixed" /
+  /                   span
+  /               .col-xs-4
+  /                 label
+  /                   input.radio name="footerPosition" type="radio" value="" /
+  /                   span
+  /           .customize-item
+  /             ul.customize-colors
+  /               li
+  /                 span.color-item.color-red data-theme="red"
+  /               li
+  /                 span.color-item.color-orange data-theme="orange"
+  /               li
+  /                 span.color-item.color-green.active data-theme=""
+  /               li
+  /                 span.color-item.color-seagreen data-theme="seagreen"
+  /               li
+  /                 span.color-item.color-blue data-theme="blue"
+  /               li
+  /                 span.color-item.color-purple data-theme="purple"
+  /       a href=""
+  /         i.fa.fa-cog
+  /         | Customize

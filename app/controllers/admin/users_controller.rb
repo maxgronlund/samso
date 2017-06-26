@@ -43,7 +43,7 @@ class Admin::UsersController < AdminController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(updated_params)
         format.html { redirect_to admin_users_path(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -79,5 +79,14 @@ class Admin::UsersController < AdminController
       :password_confirmation,
       roles_attributes: [:permission, :id]
     )
+  end
+
+  def updated_params
+    params_copy = user_params.dup
+    if params_copy[:password].empty?
+      params_copy.delete :password
+      params_copy.delete :password_confirmation
+    end
+    params_copy
   end
 end

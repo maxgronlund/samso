@@ -4,12 +4,17 @@
   .form-inputs
     = f.input :name
     = f.input :email
-    = f.input :password
-    = f.input :password_confirmation
+    = f.input :password,
+      hint: 'Udfyldes kun hvis password skal skiftes',
+      placeholder: '••••••••••',
+      label: 'Password'
+    = f.input :password_confirmation,
+      placeholder: '••••••••••',
+      label: 'Gentag password'
     - if current_user.can_edit?(@user)
       = f.simple_fields_for :roles do |roles_form|
-        = roles_form.input :permission, collection: Role::ROLES, include_blank: false
+        = roles_form.input :permission, collection: Role::ROLES, include_blank: false, label: 'Adgangs rettigheder'
 
 
   .form-actions
-    = f.button :submit
+    = f.submit 'Gem', class: 'btn btn-primary'

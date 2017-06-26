@@ -7,5 +7,13 @@ html
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
 
   body
-    = yield
-    = render 'shared/login_links'
+    .main-wrapper
+      #app.app
+        = render 'admin/shared/header'
+        = render 'admin/shared/sidebar'
+        .content
+          - if notice
+            .alert.alert-info
+              = notice
+          = yield
+        = render 'admin/shared/footer'
