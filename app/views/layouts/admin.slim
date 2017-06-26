@@ -6,6 +6,6 @@ html
     = stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
 
-  body.loaded
+  body
     = yield
     = render 'shared/login_links'
