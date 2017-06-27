@@ -1,10 +1,12 @@
 class Admin::UsersController < AdminController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_selected
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    @selected = 'users'
   end
 
   # GET /users/1
@@ -63,6 +65,10 @@ class Admin::UsersController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'users'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
