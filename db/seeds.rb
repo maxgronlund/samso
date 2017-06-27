@@ -79,8 +79,6 @@ contents = [
 
 contents.each do |content|
   Content
-  .where(identifier: content[:identifier])
-  .first_or_create(content)
+    .where(identifier: content[:identifier])
+    .first_or_create(content)
 end
-
-

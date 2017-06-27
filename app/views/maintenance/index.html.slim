@@ -12,8 +12,8 @@
   /! /HEADER
   /!
   section.text-center
-    h1.margin-bottom-20.size-30 = @content0.title
-    p.size-20.font-lato = @content0.body
+    h1.margin-bottom-20.size-30 = @content0.try(:title)
+    p.size-20.font-lato = @content0.try(:body)
     /! socials
     a.social-icon.social-icon-sm.social-facebook href="#" title="Facebook"
       i.fa.fa-facebook aria-hidden="true"
@@ -36,15 +36,15 @@
         .col-md-4.col-sm-4
           i.fa.fa-info-circle.fa-5x
           h2.size-17.margin-top-6 = @content1.title
-          p.text-muted = @content1.body
+          p.text-muted = @content1.try(:body)
         .col-md-4.col-sm-4
           i.fa.fa-clock-o.fa-5x
-          h2.size-17.margin-top-6 = @content2.title
-          p.text-muted = @content2.body
+          h2.size-17.margin-top-6 = @content2.try(:title)
+          p.text-muted = @content2.try(:body)
         .col-md-4.col-sm-4
           i.fa.fa-comments-o.fa-5x
-          h2.size-17.margin-top-6 = @content3.title
-          p.text-muted = @content3.body
+          h2.size-17.margin-top-6 = @content3.try(:title)
+          p.text-muted = @content3.try(:body)
 
   /! /
 /! /wrapper

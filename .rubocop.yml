@@ -11,6 +11,10 @@
 # Configuration parameters: Include.
 # Include: **/Gemfile, **/gems.rb
 
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+
 Bundler/OrderedGems:
   Exclude:
     - 'Gemfile'

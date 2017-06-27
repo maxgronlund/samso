@@ -5,8 +5,4 @@ class MaintenanceController < ApplicationController
     @content2 = Admin::SystemSetup.maintenance_content(2)
     @content3 = Admin::SystemSetup.maintenance_content(3)
   end
-
-  private
-
-
 end
