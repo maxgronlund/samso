@@ -1,0 +1,33 @@
+h3 Listing contents
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Title
+        th Position
+        th Contentable
+        th colspan="3"
+
+    tbody
+      - @contents.each do |content|
+        tr
+          td = content.title
+          td = content.position
+          td = content.contentable.class.name
+          td.float-right-button-container
+            /= link_to t('show'),
+            /  admin_content_path(content),
+            /  class: 'btn btn-primary btn-sm'
+            = link_to t('edit'),
+              edit_admin_content_path(content),
+              class: 'btn btn-secondary btn-sm'
+            / = link_to t('delete'),
+            /   admin_content_path(content),
+            /   data: { confirm: 'Are you sure?' },
+            /   method: :delete,
+            /   class: 'btn btn-danger btn-sm'
+
+br
+
+= link_to 'New Content', new_admin_content_path

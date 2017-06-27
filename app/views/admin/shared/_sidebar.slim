@@ -11,14 +11,28 @@ aside.sidebar
         | Modular Admin
     nav.menu
       ul#sidebar-menu.nav.metismenu
-        li
+        li class="#{@selected == 'dashboad' ? 'active' : ''}"
           = link_to admin_index_path do
             i.fa.fa-home
             | Skrivebord
-        li
+        li class="#{@selected == 'users' ? 'active' : ''}"
           = link_to admin_users_path do
-            i.fa.fa-home
+            i.fa.fa-users
             | Brugere
+        li class="#{@selected == 'system_setups' ? 'active' : ''}"
+          = link_to edit_admin_system_setup_path(Admin::SystemSetup.first)
+            i.fa.fa-gear
+            | System opsætning
+        li class="#{@selected == 'contents' ? 'active' : ''}"
+          a href=""
+            i.fa.fa-th-large
+            | Inhold
+            i.fa.arrow
+          ul
+            li
+              = link_to admin_contents_path
+                  i.fa.fa-list
+                  '&nbsp;Midlertidig forside
         / li
         /   a href=""
         /     i.fa.fa-th-large

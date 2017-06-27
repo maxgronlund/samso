@@ -7519,6 +7519,7 @@ textarea {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0;
+  margin-right: 10px;
 }
 
 [type="number"]::-webkit-inner-spin-button,

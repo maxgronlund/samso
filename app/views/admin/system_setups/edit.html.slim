@@ -1,8 +1,9 @@
-h1 Editing admin_system_setup
+h3 = t('edit_model', model_name: 'System opsætning')
 
 == render 'form'
 
-= link_to 'Show', @admin_system_setup
-'  |
-= link_to 'Back', admin_system_setups_path
+/= link_to t('show'), admin_user_path(@user)
+/'  |
+/= link_to t('back'), admin_users_path
+
 

@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @content.title
+p
+  strong Body:
+  = @content.body
+p
+  strong Identifier:
+  = @content.identifier
+p
+  strong Position:
+  = @content.position
+p
+  strong Contentable:
+  = @content.contentable
+
+= link_to 'Edit', edit_content_path(@content)
+'  |
+= link_to 'Back', contents_path

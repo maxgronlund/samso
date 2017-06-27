@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   def index
-    if Admin::SystemSetups.first.maintenance
-      redirect_to maintenance_index_path
-    end
+    redirect_to maintenance_index_path if Admin::SystemSetup.first.maintenance
   end
 end
