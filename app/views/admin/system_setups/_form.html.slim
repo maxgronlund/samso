@@ -1,0 +1,8 @@
+= simple_form_for(@admin_system_setup) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :maintenance
+
+  .form-actions
+    = f.button :submit

@@ -35,3 +35,9 @@ if user
   user.password_confirmation = 'ChangeMe1337'
   user.save
 end
+
+unless Admin::SystemSetup.first
+  Admin::SystemSetup.create(
+    maintenance: true
+  )
+end

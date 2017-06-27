@@ -38,7 +38,6 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
 gem 'devise-i18n'
-gem  'fast_gettext'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
