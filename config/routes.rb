@@ -5,11 +5,12 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users
       resources :contents
+      resources :system_setups, only: [:edit, :update]
     end
 
     resources :admin, only: [:index]
     resources :maintenance, only: [:index]
-    resources :system_setups, only: [:edit, :update]
+
     devise_for :users
 
     get '/:locale' => 'home#index'

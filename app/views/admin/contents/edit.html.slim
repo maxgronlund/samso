@@ -1,8 +1,8 @@
-h1 Editing content
+h3 = t('edit_model', model_name: @content.model_name.human)
 
 == render 'form'
 
-= link_to 'Show', @content
-'  |
-= link_to 'Back', contents_path
+
+= link_to t('back'), admin_contents_path
+
 

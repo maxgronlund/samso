@@ -16,17 +16,17 @@ h3 Listing contents
           td = content.position
           td = content.contentable.class.name
           td.float-right-button-container
-            = link_to t('show'),
-              admin_content_path(content),
-              class: 'btn btn-primary btn-sm'
+            /= link_to t('show'),
+            /  admin_content_path(content),
+            /  class: 'btn btn-primary btn-sm'
             = link_to t('edit'),
               edit_admin_content_path(content),
               class: 'btn btn-secondary btn-sm'
-            = link_to t('delete'),
-              admin_content_path(content),
-              data: { confirm: 'Are you sure?' },
-              method: :delete,
-              class: 'btn btn-danger btn-sm'
+            / = link_to t('delete'),
+            /   admin_content_path(content),
+            /   data: { confirm: 'Are you sure?' },
+            /   method: :delete,
+            /   class: 'btn btn-danger btn-sm'
 
 br
 

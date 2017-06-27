@@ -1,5 +1,6 @@
-class Admin::SystemSetupsController < ApplicationController
+class Admin::SystemSetupsController < AdminController
   before_action :set_admin_system_setup, only: [:show, :edit, :update, :destroy]
+  before_action :set_selected
 
   # GET /admin/system_setups/1/edit
   def edit
@@ -10,7 +11,7 @@ class Admin::SystemSetupsController < ApplicationController
   def update
     respond_to do |format|
       if @admin_system_setup.update(admin_system_setup_params)
-        format.html { redirect_to @admin_system_setup, notice: 'System setup er opdateret.' }
+        format.html { redirect_to admin_index_path, notice: 'System setup er opdateret.' }
         format.json { render :show, status: :ok, location: @admin_system_setup }
       else
         format.html { render :edit }
@@ -20,6 +21,10 @@ class Admin::SystemSetupsController < ApplicationController
   end
 
   private
+
+  def set_selected
+    @selected = 'system_setups'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_system_setup

@@ -1046,8 +1046,7 @@ label,
     border: 1px solid #85CE36; }
 
 .radio,
-.checkbox {
-  display: none; }
+.checkbox
   .radio + span,
   .checkbox + span {
     padding: 0;

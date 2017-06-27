@@ -1,18 +1,15 @@
 = simple_form_for [:admin, @user] do |f|
   = f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :email
-    = f.input :password,
-      hint: t('user.password.hint'),
-      placeholder: '••••••••••'
-    = f.input :password_confirmation,
-      placeholder: '••••••••••'
-    - if current_user.can_edit?(@user)
-      = f.simple_fields_for :roles do |roles_form|
-        = roles_form.input :permission, collection: Role::ROLES, include_blank: false
+  = f.input :name
+  = f.input :email
+  = f.input :password,
+    hint: t('user.password.hint'),
+    placeholder: '••••••••••'
+  = f.input :password_confirmation,
+    placeholder: '••••••••••'
+  - if current_user.can_edit?(@user)
+    = f.simple_fields_for :roles do |roles_form|
+      = roles_form.input :permission, collection: Role::ROLES, include_blank: false
 
-
-  .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+  = f.submit t('save'), class: 'btn btn-primary'

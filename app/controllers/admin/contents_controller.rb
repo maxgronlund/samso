@@ -1,5 +1,6 @@
 class Admin::ContentsController < AdminController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
+  before_action :set_selected
 
   # GET /contents
   # GET /contents.json
@@ -28,7 +29,7 @@ class Admin::ContentsController < AdminController
 
     respond_to do |format|
       if @content.save
-        format.html { redirect_to admin_content_path(@content), notice: 'Content was successfully created.' }
+        format.html { redirect_to admin_contents_path, notice: 'Content was successfully created.' }
         format.json { render :show, status: :created, location: @content }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class Admin::ContentsController < AdminController
   def update
     respond_to do |format|
       if @content.update(content_params)
-        format.html { redirect_to redirect_to admin_content_path(@content), notice: 'Content was successfully updated.' }
+        format.html { redirect_to admin_contents_path, notice: 'Content was successfully updated.' }
         format.json { render :show, status: :ok, location: @content }
       else
         format.html { render :edit }
@@ -62,6 +63,10 @@ class Admin::ContentsController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'contents'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_content
