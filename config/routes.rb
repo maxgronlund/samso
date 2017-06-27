@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contents
   get 'maintenance/index'
 
   scope "(:locale)", locale: /da|en/ do

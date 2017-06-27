@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627094026) do
+ActiveRecord::Schema.define(version: 20170627165552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(version: 20170627094026) do
     t.boolean "maintenance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.text "identifier"
+    t.integer "position"
+    t.string "locale", default: "da"
+    t.string "contentable_type"
+    t.bigint "contentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contentable_type", "contentable_id"], name: "index_contents_on_contentable_type_and_contentable_id"
   end
 
   create_table "roles", force: :cascade do |t|

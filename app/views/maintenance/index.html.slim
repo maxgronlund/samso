@@ -1,2 +1,57 @@
-h1 Maintenance#index
-p Find me in app/views/maintenance/index.html.slim
+/! wrapper
+#wrapper
+  /! HEADER
+  #header.clearfix.text-center
+    h2
+      'SAMSO.DK
+      / i.fa.fa-facebook aria-hidden="true"
+      / span.glyphicon.glyphicon-trash aria-hidden="true"
+    /! Logo
+    /a.logo.logo-responsive href="index.html"
+    /  = image_tag("smarty/logo_dark.png")
+  /! /HEADER
+  /!
+  section.text-center
+    h1.margin-bottom-20.size-30 = @content0.title
+    p.size-20.font-lato = @content0.body
+    /! socials
+    a.social-icon.social-icon-sm.social-facebook href="#" title="Facebook"
+      i.fa.fa-facebook aria-hidden="true"
+      i.fa.fa-facebook aria-hidden="true"
+    a.social-icon.social-icon-sm.social-twitter href="#" title="Twitter"
+      i.fa.fa-twitter
+      i.fa.fa-twitter
+    a.social-icon.social-icon-sm.social-gplus href="#" title=("Google plus")
+      i.fa.fa-google-plus
+      i.fa.fa-google-plus
+    a.social-icon.social-icon-sm.social-linkedin href="#" title="Linkedin"
+      i.fa.fa-linkedin
+      i.fa.fa-linkedin
+    /! /socials
+  /! /
+  /!
+  section.text-center
+    .container
+      .row
+        .col-md-4.col-sm-4
+          i.fa.fa-info-circle.fa-5x
+          h2.size-17.margin-top-6 = @content1.title
+          p.text-muted = @content1.body
+        .col-md-4.col-sm-4
+          i.fa.fa-clock-o.fa-5x
+          h2.size-17.margin-top-6 = @content2.title
+          p.text-muted = @content2.body
+        .col-md-4.col-sm-4
+          i.fa.fa-comments-o.fa-5x
+          h2.size-17.margin-top-6 = @content3.title
+          p.text-muted = @content3.body
+
+  /! /
+/! /wrapper
+/! SCROLL TO TOP
+a#toTop href="#"
+/! PRELOADER
+/#preloader
+/  .inner
+/    span.loader
+/! /PRELOADER

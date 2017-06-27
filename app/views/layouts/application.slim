@@ -6,12 +6,14 @@ html
     = csrf_meta_tags
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag  "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700"
+
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
 
-  body
+  body.smoothscroll.enable-animation
     = yield
-    = render 'shared/login_links'
+    /= render 'shared/login_links'
 
 
 
