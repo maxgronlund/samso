@@ -62,13 +62,14 @@ class Admin::SystemSetupsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_system_setup
-      @admin_system_setup = Admin::SystemSetup.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_system_setup_params
-      params.require(:admin_system_setup).permit(:maintenance)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_system_setup
+    @admin_system_setup = Admin::SystemSetup.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def admin_system_setup_params
+    params.require(:admin_system_setup).permit(:maintenance)
+  end
 end
