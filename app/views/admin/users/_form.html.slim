@@ -5,16 +5,14 @@
     = f.input :name
     = f.input :email
     = f.input :password,
-      hint: 'Udfyldes kun hvis password skal skiftes',
-      placeholder: '••••••••••',
-      label: 'Password'
+      hint: t('user.password.hint'),
+      placeholder: '••••••••••'
     = f.input :password_confirmation,
-      placeholder: '••••••••••',
-      label: 'Gentag password'
+      placeholder: '••••••••••'
     - if current_user.can_edit?(@user)
       = f.simple_fields_for :roles do |roles_form|
-        = roles_form.input :permission, collection: Role::ROLES, include_blank: false, label: 'Adgangs rettigheder'
+        = roles_form.input :permission, collection: Role::ROLES, include_blank: false
 
 
   .form-actions
-    = f.submit 'Gem', class: 'btn btn-primary'
+    = f.submit t('save'), class: 'btn btn-primary'

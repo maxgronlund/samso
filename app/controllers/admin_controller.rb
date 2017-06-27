@@ -1,5 +1,5 @@
 # used to restrict access to the admin namespace
-class AdminController < ActionController::Base
+class AdminController < ApplicationController
   before_action :authenticate_user!
   def index
   end

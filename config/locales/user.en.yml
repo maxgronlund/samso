@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    attributes:
+
+      role:
+        permission: 'Access permissions'
+
+  user:
+    password:
+      hint: 'Only fill to change password'
+    pluralized: Users

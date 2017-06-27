@@ -29,12 +29,11 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: 'Hello world'
-  show: 'Show'
-  back: 'Back'
-  edit_model: "Editing %{model_name}"
-  edit: 'Edit'
-  save: 'Save'
-  delete: 'Delete'
-  index: "%{model_name}"
+da:
+  hello: "Hello world"
+  show: 'Vis'
+  back: 'Tilbag'
+  edit_model: "Rediger %{model_name}"
+  edit: 'Rediger'
+  save: 'Gem'
+  delete: 'Slet'

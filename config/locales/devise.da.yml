@@ -55,3 +55,4 @@ da:
       not_saved:
         one: "1 fejl medførte at denne %{resource} ikke kunne gemmes:"
         other: "%{count} fejl medførte at denne %{resource} ikke kunne gemmes:"
+

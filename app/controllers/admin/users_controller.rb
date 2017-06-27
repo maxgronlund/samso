@@ -15,11 +15,12 @@ class Admin::UsersController < AdminController
   # GET /users/new
   def new
     @user = User.new
-    ap @user.roles.build
+    @user.roles.build
   end
 
   # GET /users/1/edit
   def edit
+
   end
 
   # POST /users

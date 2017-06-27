@@ -1,0 +1,26 @@
+da:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: 'Password skal være mindst 6 karakterer langt'
+            password_confirmation:
+              confirmation: 'Password og gentagelse af password passet ikke sammen'
+
+    models:
+      user: Bruger
+    attributes:
+      user:
+        name: "Navn"
+        email: "email"
+        password: 'Password'
+        password_confirmation: 'Gentag password'
+      role:
+        permission: 'Adgangs rettigheder'
+
+  user:
+    password:
+      hint: 'Udfyldes kun hvis password skal skiftes'
+    pluralized: Brugere
