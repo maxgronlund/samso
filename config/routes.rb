@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  #get 'maintenance/index'
-
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :users

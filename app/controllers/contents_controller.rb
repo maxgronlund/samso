@@ -62,13 +62,14 @@ class ContentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_content
-      @content = Content.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def content_params
-      params.require(:content).permit(:title, :body, :identifier, :position, :contentable_id, :contentable_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_content
+    @content = Content.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def content_params
+    params.require(:content).permit(:title, :body, :identifier, :position, :contentable_id, :contentable_type)
+  end
 end
