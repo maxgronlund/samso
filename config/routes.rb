@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :contents
-  get 'maintenance/index'
+  #get 'maintenance/index'
 
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :users
+      resources :contents
     end
 
     resources :admin, only: [:index]
