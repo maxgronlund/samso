@@ -16,7 +16,7 @@ class User < ApplicationRecord
   }
 
   # Validate the attached image is image/jpg, image/png, etc
-  validates_attachment_content_type :avatar, content_type: %r{ /\Aimage\/.*\Z/ }
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?
