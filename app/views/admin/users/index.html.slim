@@ -5,6 +5,7 @@ h3 = t('user.pluralized')
       tr
         th Navn
         th Email
+        th Adgang
         th colspan="3"
 
     tbody
@@ -13,6 +14,7 @@ h3 = t('user.pluralized')
         tr
           td = user.name
           td = user.email
+          td = user.role_names
           td.float-right-button-container
             = link_to t('show'), admin_user_path(user), class: 'btn btn-primary btn-sm'
             - if current_user.can_edit?(user)

@@ -25,8 +25,10 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
           .dropdown-menu.dropdown-menu-right aria-labelledby="dropdown01"
             - if user_signed_in?
               = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+              = link_to 'Min profil', user_path(current_user), class: 'dropdown-item'
             - else
               = link_to 'Login', new_user_session_path, class: 'dropdown-item'
+              = link_to t(".sign_up"), new_registration_path('user'), class: 'dropdown-item'
 
             /a.dropdown-item href="#"  Action
             /a.dropdown-item href="#"  Another action

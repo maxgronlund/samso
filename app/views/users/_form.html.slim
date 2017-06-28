@@ -1,9 +1,11 @@
-= simple_form_for(@user) do |f|
+= simple_form_for [@user], multipart: true do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
     = f.input :email
+    = f.label :avatar
+    = f.file_field :avatar
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-primary'

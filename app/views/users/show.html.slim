@@ -1,12 +1,14 @@
-p#notice = notice
+= render 'shared/navbar'
+.container.pt-60
+  p#notice = notice
+  = image_tag( @user.avatar_url(:square))
 
-p
-  strong Name:
-  = @user.name
-p
-  strong Email:
-  = @user.email
+  p
+    strong Name:
+    = @user.name
+  p
+    strong Email:
+    = @user.email
 
-= link_to t('edit'), edit_user_path(@user)
-'  |
-= link_to t('back'), users_path
+  = link_to t('edit'), edit_user_path(@user)
+
