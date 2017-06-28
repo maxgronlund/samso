@@ -22,8 +22,6 @@ class ApplicationController < ActionController::Base
   helper_method :admin?
 
   def current_url?(current_url, request_url)
-    ap current_url
-    ap request_url
     current_url ==  request_url
   end
   helper_method :current_url?

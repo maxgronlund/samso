@@ -21,6 +21,7 @@ Things you may want to cover:
 
 * Database migration
   $ heroku run --app samso rake db:migrate
+  $ heroku logs --tail --app samso
 
 * How to run the test suite
   $ rake
@@ -33,6 +34,7 @@ Things you may want to cover:
 
 * Tips
   $ rails g scaffold content title body:text identifier:text position:integer contentable:references{polymorphic} --no-helper --no-assets --no-controller-specs --no-view-specs
-  rails g controller about index  --no-helper --no-assets --no-controller-specs
+  $ rails g controller about index  --no-helper --no-assets --no-controller-specs
+  $
 
 * Huray ported
