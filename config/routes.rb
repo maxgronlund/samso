@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :users
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
       resources :system_setups, only: [:edit, :update]
     end
 
+    resources :about, only: [:index]
     resources :admin, only: [:index]
     resources :maintenance, only: [:index]
 

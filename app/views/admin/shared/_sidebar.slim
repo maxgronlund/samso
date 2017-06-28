@@ -2,18 +2,22 @@ aside.sidebar
   .sidebar-container
     .sidebar-header
       .brand
-        .logo
-          span.l.l1
-          span.l.l2
-          span.l.l3
-          span.l.l4
-          span.l.l5
-        | Modular Admin
+        /.logo
+        /  span.l.l1
+        /  span.l.l2
+        /  span.l.l3
+        /  span.l.l4
+        /  span.l.l5
+        'SAMSO Admin
     nav.menu
       ul#sidebar-menu.nav.metismenu
+        li
+          = link_to root_path do
+            i.fa.fa-home
+            | Forsiden
         li class="#{@selected == 'dashboad' ? 'active' : ''}"
           = link_to admin_index_path do
-            i.fa.fa-home
+            i.fa.fa-dashboard
             | Skrivebord
         li class="#{@selected == 'users' ? 'active' : ''}"
           = link_to admin_users_path do

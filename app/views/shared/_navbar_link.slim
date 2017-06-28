@@ -1,0 +1,10 @@
+- if current_url?(link_url, request.url)
+  li.nav-item.active
+    a.nav-link
+      '&nbsp;
+      = link_name
+      span.sr-only (current)
+- else
+  li.nav-item
+    = link_to link_name, link, class: 'nav-link'
+    /a.nav-link href="#"  Link
