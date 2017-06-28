@@ -99,5 +99,5 @@ Rails.application.configure do
     }
   }
 
-  config.secrets.secret_key_base = ENV.fetch('SECRET_KEY_BASE')
+  config.secret_key_base = ENV.fetch('SECRET_KEY_BASE')
 end
