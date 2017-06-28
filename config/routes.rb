@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :users

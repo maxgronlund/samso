@@ -1,4 +1,4 @@
-= simple_form_for [:admin, @user] do |f|
+= simple_form_for [:admin, @user], multipart: true do |f|
   = f.error_notification
 
   = f.input :name
@@ -11,5 +11,8 @@
   - if current_user.can_edit?(@user)
     = f.simple_fields_for :roles do |roles_form|
       = roles_form.input :permission, collection: Role::ROLES, include_blank: false
+
+  = f.label :avatar
+  = f.file_field :avatar
 
   = f.submit t('save'), class: 'btn btn-primary'

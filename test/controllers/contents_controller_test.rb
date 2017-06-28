@@ -1,24 +1,26 @@
 require 'test_helper'
 
 class ContentsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
     @content = contents(:one)
     @system_setup = admin_system_setups(:one)
+    sign_in users(:one)
   end
 
   test 'should get index' do
-    get contents_url(locale: 'da')
+    get admin_contents_url(locale: 'da')
     assert_response :success
   end
 
   test 'should get new' do
-    get new_content_url(locale: 'da')
+    get new_admin_content_url(locale: 'da')
     assert_response :success
   end
 
   test 'should create content' do
     assert_difference('Content.count') do
-      post contents_url, params:
+      post admin_contents_url, params:
       {
         content: {
           body: @content.body,
@@ -30,22 +32,23 @@ class ContentsControllerTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    assert_redirected_to content_url(Content.last, locale: 'da')
+    assert_redirected_to admin_contents_url(locale: 'da')
   end
 
   test 'should show content' do
-    get content_url(@content)
+    get admin_contents_url(locale: 'da')
     assert_response :success
   end
 
   test 'should get edit' do
-    get edit_content_url(@content, locale: 'da')
+    get edit_admin_content_url(@content, locale: 'da')
     assert_response :success
   end
 
   test 'should update content' do
-    patch content_url(
-      @content,
+    patch admin_content_url(
+      id: @content.id,
+      locale: 'da',
       params: {
         content: {
           body: @content.body,
@@ -56,14 +59,14 @@ class ContentsControllerTest < ActionDispatch::IntegrationTest
         }
       }
     )
-    assert_redirected_to content_url(@content, locale: 'da')
+    assert_redirected_to admin_contents_url(locale: 'da')
   end
 
   test 'should destroy content' do
     assert_difference('Content.count', -1) do
-      delete content_url(@content, locale: 'da')
+      delete admin_content_url(@content, locale: 'da')
     end
 
-    assert_redirected_to contents_url(locale: 'da')
+    assert_redirected_to admin_contents_url(locale: 'da')
   end
 end
