@@ -98,4 +98,6 @@ Rails.application.configure do
       s3_region: ENV.fetch('AWS_REGION')
     }
   }
+
+  config.secrets.secret_key_base = ENV.fetch('SECRET_KEY_BASE')
 end
