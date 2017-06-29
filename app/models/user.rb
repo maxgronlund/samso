@@ -17,8 +17,7 @@ class User < ApplicationRecord
   }
 
   # Validate the attached image is image/jpg, image/png, etc
-  validates_attachment_content_type :avatar, content_type:  %r{\Aimage\/.*\Z}
-  # %r{Aimage\/.*\Z}
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
   validates :name, :email, presence: true
 
   def super_admin?
