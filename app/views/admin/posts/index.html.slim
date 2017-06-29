@@ -1,4 +1,4 @@
-h3 Listing contents
+h3 Listing posts
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -10,24 +10,24 @@ h3 Listing contents
         th colspan="3"
 
     tbody
-      - @contents.each do |content|
+      - @posts.each do |post|
         tr
-          td = content.title
-          td = content.position
-          td = content.contentable.class.name
+          td = post.title
+          td = post.position
+          td = post.postable.class.name
           td.float-right-button-container
             /= link_to t('show'),
-            /  admin_content_path(content),
+            /  admin_post_path(post),
             /  class: 'btn btn-primary btn-sm'
             = link_to t('edit'),
-              edit_admin_content_path(content),
+              edit_admin_post_path(post),
               class: 'btn btn-secondary btn-sm'
             / = link_to t('delete'),
-            /   admin_content_path(content),
+            /   admin_post_path(post),
             /   data: { confirm: 'Are you sure?' },
             /   method: :delete,
             /   class: 'btn btn-danger btn-sm'
 
 br
 
-= link_to 'New Content', new_admin_content_path
+= link_to 'New Content', new_admin_post_path

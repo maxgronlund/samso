@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class ContentsTest < ApplicationSystemTestCase
+class PostsTest < ApplicationSystemTestCase
   # test 'visiting the index' do
   #   visit contents_url
   #

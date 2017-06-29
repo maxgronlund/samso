@@ -1,12 +1,12 @@
 # system setup
 class Admin::SystemSetup < ApplicationRecord
-  has_many :contents, as: :contentable
+  has_many :posts, as: :postable
 
   # usage Admin::SystemSetup.maintenance_content
   def self.maintenance_content(position)
     Admin::SystemSetup
       .first
-      .contents
+      .posts
       .where(
         identifier: [
           '90acf22f-ccaa-4169-b873-24c36e0b8b8',

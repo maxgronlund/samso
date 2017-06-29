@@ -42,7 +42,7 @@ unless Admin::SystemSetup.first
   )
 end
 
-contents = [
+posts = [
   {
     title: 'SAMSO.DK BLIVER OPDATERET',
     body: 'Vi arbejder på sagen og er tilbage hurtigst muligt.',
@@ -77,8 +77,8 @@ contents = [
   }
 ]
 
-contents.each do |content|
-  Content
-    .where(identifier: content[:identifier])
-    .first_or_create(content)
+posts.each do |post|
+  Post
+    .where(identifier: post[:identifier])
+    .first_or_create(post)
 end
