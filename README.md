@@ -35,7 +35,7 @@ Things you may want to cover:
 * Tips
   $ rails g scaffold content title body:text identifier:text position:integer contentable:references{polymorphic} --no-helper --no-assets --no-controller-specs --no-view-specs
   $ rails g controller about index  --no-helper --no-assets --no-controller-specs
-  $
+  $ heroku run rails console --app samso
 
 * Huray ported
 
