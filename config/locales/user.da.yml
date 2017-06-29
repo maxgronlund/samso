@@ -8,6 +8,14 @@ da:
               too_short: 'Password skal være mindst 6 karakterer langt'
             password_confirmation:
               confirmation: 'Password og gentagelse af password passet ikke sammen'
+            email:
+              blank: 'Email skal udfyldes'
+              invalid: 'Ugyldig email'
+            password:
+              blank: 'Password skal udfyldes'
+              too_short: 'Password skal være længere'
+            name:
+              blank: 'Navn skal udfyldes'
 
     models:
       user: Bruger
@@ -23,4 +31,10 @@ da:
   user:
     password:
       hint: 'Udfyldes kun hvis password skal skiftes'
+      send_me_reset_password_instructions: 'Send reset password link'
     pluralized: Brugere
+    admin: 'Administrator'
+    super_admin: Super administrator
+    member: Bruger
+
+

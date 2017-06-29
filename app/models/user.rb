@@ -10,14 +10,15 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :roles
 
   has_attached_file :avatar, styles: {
-      thumb: '100x100>',
-      square: '200x200#',
-      medium: '300x300>'
-    }
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>',
+    default_url: ":style/missing_avatar.jpg"
+  }
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-
+  validates :name, :email, presence: true
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?
@@ -30,5 +31,21 @@ class User < ApplicationRecord
   def can_edit?(user)
     return true unless user.persisted?
     super_admin? && user != self
+  end
+
+  def role_names
+    permissions = ""
+    roles.each do |role|
+      permissions += I18n.t("user.#{role.permission}") + " "
+    end
+    permissions
+  end
+
+  def avatar_url(size)
+    source = 'https://s3.eu-central-1.amazonaws.com' + avatar.url(size).gsub('//s3.amazonaws.com', '')
+    if source == 'https://s3.eu-central-1.amazonaws.com/avatars/square/missing.png'
+      source = "https://s3.eu-central-1.amazonaws.com/samso-files/users/avatars/missing/#{size.to_s}/missing.png"
+    end
+    source
   end
 end

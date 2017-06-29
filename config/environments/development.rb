@@ -62,11 +62,4 @@ Rails.application.configure do
       s3_region: Rails.application.secrets.s3_region
     }
   }
-
-  ap Rails.application.secrets.s3_bucket_name
-  ap Rails.application.secrets.access_key_id
-  ap Rails.application.secrets.secret_access_key
-  ap Rails.application.secrets.s3_region
-
-
 end

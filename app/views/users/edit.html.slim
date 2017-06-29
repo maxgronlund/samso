@@ -1,8 +1,12 @@
-h1 Editing user
+= render 'shared/navbar'
+.container.pt-60
+  p#notice = notice
 
-== render 'form'
 
-= link_to t('show'), @user
-'  |
-= link_to t('back'), users_path
+  h3 = t('edit_model', model_name: @user.model_name.human)
+
+  == render 'form'
+
+  = link_to t('show'), @user
+
 
