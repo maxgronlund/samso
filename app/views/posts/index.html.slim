@@ -19,7 +19,7 @@ table
         td = content.body
         td = content.identifier
         td = content.position
-        td = content.contentable
+        td = content.postable
         td = link_to 'Show', content
         td = link_to 'Edit', edit_content_path(content)
         td = link_to 'Destroy', content, data: { confirm: 'Are you sure?' }, method: :delete

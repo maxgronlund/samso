@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @post.title
+p
+  strong Body:
+  = @post.body
+p
+  strong Identifier:
+  = @post.identifier
+p
+  strong Position:
+  = @post.position
+p
+  strong Contentable:
+  = @post.postable
+
+= link_to 'Edit', edit_admin_post_path(@post)
+'  |
+= link_to 'Back', admin_posts_path
