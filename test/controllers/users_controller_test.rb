@@ -5,32 +5,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)
   end
 
-  test "should get index" do
-    get users_url(locale: 'en')
-    assert_response :success
-  end
-
   test "should get new" do
     get new_user_url(locale: 'en')
     assert_response :success
   end
 
-  test "should create user" do
-    assert_difference('User.count') do
-      post users_url(
-        locale: 'en',
-        params: {
-          user: {
-            email: @user.email,
-            name: @user.name,
-            password: 'ej5yafohL',
-            password_confirmation: 'ej5yafohL'
-          }
-        }
-      )
-    end
-    assert_redirected_to root_path
-  end
+  # test "should create user" do
+  #   assert_difference('User.count') do
+  #     post users_url(
+  #       locale: 'en',
+  #       params: {
+  #         user: {
+  #           email: @user.email,
+  #           name: @user.name,
+  #           password: 'ej5yafohL',
+  #           password_confirmation: 'ej5yafohL'
+  #         }
+  #       }
+  #     )
+  #   end
+  #   assert_redirected_to root_path
+  # end
 
   test "should show user" do
     get user_url(@user, locale: 'en')
