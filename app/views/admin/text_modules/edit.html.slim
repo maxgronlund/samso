@@ -3,14 +3,16 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
 = simple_form_for [:admin, @page, @text_module] do |f|
   = f.error_notification
 
-  = f.input :title
-  = f.input :body
+  = f.input :title,
+    hint: 'Bliver vist på oversigts side'
+  = f.input :body, label: false
 
   = f.submit t('save'), class: 'btn btn-primary'
 
 
 
 javascript:
+  $('selector').froalaEditor();
   $(function() {
     $('#text_module_body').froalaEditor({toolbarInline: false})
   });
