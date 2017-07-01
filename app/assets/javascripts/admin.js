@@ -19,5 +19,5 @@
 //= require admin/metisMenu
 //= require admin/init-metismenu
 //= require admin/init-froala
-//= require admin/froala_editor/froala_editor.min
-//= require admin/froala_editor/paragraph_format.min
+// require admin/froala_editor/froala_editor.min
+// require admin/froala_editor/paragraph_format.min
