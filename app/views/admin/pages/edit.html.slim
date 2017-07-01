@@ -1,0 +1,8 @@
+h3 = t('edit_model', model_name: @page.model_name.human)
+hr
+== render 'form'
+
+= link_to 'Show', @page
+'  |
+= link_to 'Back', admin_pages_path
+

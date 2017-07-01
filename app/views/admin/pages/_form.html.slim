@@ -1,0 +1,58 @@
+= simple_form_for [:admin, @page] do |f|
+  = f.error_notification
+
+  .row
+    .col-sm-6
+      = f.input :active
+    .col-sm-6
+  .row
+    .col-sm-6
+      = f.input :title
+      = f.input :layout,
+        collection: Page::LAYOUTS,
+        include_blank: false
+    .col-sm-6
+      = f.input :menu_id,
+        collection: Page.menus,
+        include_blank: false
+
+      = f.input :menu_title
+  .row
+    .col-sm-6
+      = f.input :locale,
+        collection: Page.locales,
+        include_blank: false
+    .col-sm-6
+      = f.input :menu_position
+
+  = f.submit t('save'), class: 'btn btn-primary'
+
+hr
+h4 Layouts
+.row
+  .col-sm-2.mb-12
+    h6 Alabama
+    = image_tag('layouts/alabama.png', class: "img-fluid")
+  .col-sm-2.mb-12
+    h6 Alaska
+    = image_tag('layouts/alaska.png', class: "img-fluid")
+  .col-sm-2.mb-12
+    h6 Arizona
+    = image_tag('layouts/arizona.png', class: "img-fluid")
+  .col-sm-2.mb-12
+    h6 Arkansas
+    = image_tag('layouts/arkansas.png', class: "img-fluid")
+  .col-sm-2.mb-12
+    h6 California
+    = image_tag('layouts/california.png', class: "img-fluid")
+  .col-sm-2.mb-12
+    h6 Colorado
+    = image_tag('layouts/colorado.png', class: "img-fluid")
+.row
+  .col-sm-2.mb-12
+    h6 Connecticut
+    = image_tag('layouts/connecticut.png', class: "img-fluid")
+  .col-sm-2.mb-12
+    h6 Delaware
+    = image_tag('layouts/delaware.png', class: "img-fluid")
+

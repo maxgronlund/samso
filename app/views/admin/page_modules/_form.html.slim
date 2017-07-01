@@ -1,0 +1,16 @@
+= simple_form_for [:admin, @page, @page_module] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.hidden_field :page_id, value: @page.id
+    /= f.association :moduleable
+    = f.hidden_field :slot_id, value: @page_module.slot_id
+    /= f.input :position
+
+    = f.input :moduleable_type,
+      collection: Page.content_types,
+      include_blank: false,
+      label: t('page.section_types')
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'

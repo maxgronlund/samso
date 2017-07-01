@@ -1,0 +1,6 @@
+.row
+  .col-sm-12
+    .section-slot
+      - @page.page_modules.where(slot_id: 0).each do |page_module|
+        = render 'admin/page_modules/show', page_module: page_module
+    = link_to t('page.add_content'), new_admin_page_page_module_path(page, slot_id: 0), class: 'btn btn-primary btn-sm'

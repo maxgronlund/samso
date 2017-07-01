@@ -1,0 +1,34 @@
+h3
+  = t('pages')
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th = t(Page.human_attribute_name('title'))
+        th = t(Page.human_attribute_name('menu_title'))
+        th = t(Page.human_attribute_name('position'))
+        th = t(Page.human_attribute_name('active'))
+        th = t(Page.human_attribute_name('locale'))
+        th = t(Page.human_attribute_name('user_id'))
+        th colspan=3
+
+
+    tbody
+      - @pages.each do |page|
+        tr
+          td = page.title
+          td = page.menu_title
+          td = page.menu_id
+          td = page.active
+          td = page.locale
+          td = page.author_name
+          td.float-right-button-container
+            = link_to t('show'), page, class: 'btn btn-secondary btn-sm'
+            = link_to t('manage_content'), admin_page_path(page), class: 'btn btn-secondary btn-sm'
+            = link_to t('edit'), edit_admin_page_path(page), class: 'btn btn-primary btn-sm'
+            = link_to t('delete'), admin_page_path(page), data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
+
+br
+
+= link_to 'Opret side', new_admin_page_path, class: 'btn btn-primary'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629201618) do
+ActiveRecord::Schema.define(version: 20170701064207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,32 @@ ActiveRecord::Schema.define(version: 20170629201618) do
     t.boolean "maintenance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "page_modules", force: :cascade do |t|
+    t.bigint "page_id"
+    t.string "moduleable_type"
+    t.bigint "moduleable_id"
+    t.integer "slot_id"
+    t.integer "position", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moduleable_type", "moduleable_id"], name: "index_page_modules_on_moduleable_type_and_moduleable_id"
+    t.index ["page_id"], name: "index_page_modules_on_page_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "title"
+    t.string "menu_title"
+    t.string "menu_id"
+    t.integer "menu_position", default: 0
+    t.boolean "active"
+    t.string "locale"
+    t.bigint "user_id"
+    t.string "layout", default: "alabama"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -43,6 +69,13 @@ ActiveRecord::Schema.define(version: 20170629201618) do
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
+  create_table "text_modules", force: :cascade do |t|
+    t.string "title", default: ""
+    t.text "body", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -65,5 +98,6 @@ ActiveRecord::Schema.define(version: 20170629201618) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "page_modules", "pages"
   add_foreign_key "roles", "users"
 end

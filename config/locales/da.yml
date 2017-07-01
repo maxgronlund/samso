@@ -33,8 +33,14 @@ da:
   hello: "Hello world"
   show: 'Vis'
   back: 'Tilbag'
+  new_model: "Opret %{model_name}"
   edit_model: "Rediger %{model_name}"
   edit: 'Rediger'
   save: 'Gem'
   delete: 'Slet'
   site_name: 'SAMSØ'
+  not_in_any_menus: Ingen
+  in_top_menu_bar: Menubjælken
+  da: Dansk
+  en: Engelsk
+  manage_content: 'Rediger inhold'

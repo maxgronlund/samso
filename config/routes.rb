@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
-      resources :users
+      resources :pages do
+        resources :page_modules, only: [:new, :create, :destroy]
+        resources :text_modules, only: [:edit, :update]
+      end
       resources :posts
       resources :system_setups, only: [:edit, :update]
+      resources :users
     end
-
     resources :about, only: [:index]
     resources :admin, only: [:index]
     resources :maintenance, only: [:index]
-
+    resources :pages, only: [:show]
     devise_for :users
-
     get '/:locale' => 'home#index'
     root to: "home#index"
     resources :users, except: [:index]

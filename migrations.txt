@@ -1,0 +1,26 @@
+
+rails g scaffold post title body:text identifier:text position:integer postable:references{polymorphic} --no-helper --no-assets --no-controller-specs
+
+rails g scaffold Page title menu_title position:integer active:boolean locale user:belongs_to  --no-helper --no-assets --no-controller-specs
+rails g scaffold Layout title menu_title position:integer active:boolean locale user:belongs_to  --no-helper --no-assets --no-controller-specs
+
+rails g scaffold PageModule page:belongs_to moduleable:references{polymorphic} slot_id:integer position:integer --no-helper --no-assets --no-controller-specs
+
+
+rails g scaffold TextModule body:text --no-helper --no-assets --no-controller-specs
+
+
+
+Page
+  has_one :page_layout
+
+PageLayout
+  belongs_to :page
+  has_many :page_sections
+
+PageSection
+  has_many :posts, as: :postable
+  belongs_to :page_layout
+
+Post:
+  belongs_to :postable

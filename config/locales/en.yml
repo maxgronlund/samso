@@ -33,8 +33,13 @@ en:
   hello: 'Hello world'
   show: 'Show'
   back: 'Back'
+  new_model: "Create %{model_name}"
   edit_model: "Editing %{model_name}"
   edit: 'Edit'
   save: 'Save'
   delete: 'Delete'
-  index: "%{model_name}"
+  site_name: 'SAMSO'
+  not_in_any_menus: "Don't show"
+  in_top_menu_bar: 'In the menu bar'
+  da: Danish
+  en: English
