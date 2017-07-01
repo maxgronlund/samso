@@ -1,6 +1,6 @@
 class Admin::PageModulesController < AdminController
   before_action :set_page_module, only: [:show, :edit, :update, :destroy]
-  before_action :new_page_with_page_module
+  before_action :new_page_with_page_module, only: [:create]
 
   # GET /page_modules
   # GET /page_modules.json
@@ -108,6 +108,11 @@ class Admin::PageModulesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def page_module_params
-    params.require(:page_module).permit(:page_id, :moduleable_id, :moduleable_type, :slot_id, :position)
+    params.require(:page_module).permit(
+      :page_id,
+      :moduleable_id,
+      :moduleable_type,
+      :slot_id,
+      :position)
   end
 end
