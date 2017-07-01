@@ -1,0 +1,24 @@
+da:
+  activerecord:
+    errors:
+      models:
+        page:
+    attributes:
+      page:
+        title: Overskrift
+        menu_title: 'Navn i menu'
+        menu_position: Position i menu
+        menu_id: Vælg menu
+        active: Aktiveret
+        locale: Sprog
+        user_id: Oprettet af
+
+
+    models:
+      page: Side
+
+  pages: Sider
+  page:
+    edit_content: Rediger inhold
+    add_content: Tilføj inhold
+    section_types: Sektion typer

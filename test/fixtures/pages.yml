@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  menu_title: MyString
+  menu_id: in_top_menu_bar
+  menu_position: 1
+  active: false
+  locale: alabama
+  user: one
+
+two:
+  title: MyString
+  menu_title: MyString
+  menu_id: not_in_any_menus
+  menu_position: 1
+  active: false
+  locale: alabama
+  user: two

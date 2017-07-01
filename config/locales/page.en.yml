@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    errors:
+      models:
+        page:
+    attributes:
+      page:
+        title: Title
+        menu_title: 'Name in menu'
+        menu_position: Position in menu
+        menu_id: Select menu
+        active: Aktive
+        locale: Language
+        user_id: Created by
+
+
+    models:
+      page: Page
+
+  pages: Pages
+  page:
+    edit_content: Edit content
+    add_content: 'Add content'
+    section_types: Section types

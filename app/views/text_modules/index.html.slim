@@ -1,0 +1,21 @@
+h1 Listing text_modules
+
+table
+  thead
+    tr
+      th Body
+      th
+      th
+      th
+
+  tbody
+    - @text_modules.each do |text_module|
+      tr
+        td = text_module.body
+        td = link_to 'Show', text_module
+        td = link_to 'Edit', edit_text_module_path(text_module)
+        td = link_to 'Destroy', text_module, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Text module', new_text_module_path

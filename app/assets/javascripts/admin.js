@@ -11,11 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+// require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
 //= require admin/Sortable
 //= require admin/modular_admin
 //= require admin/metisMenu
 //= require admin/init-metismenu
+//= require admin/init-froala
+//= require froala_editor.min.js
+//= require 'admin/froala_editor/paragraph_format.min.js'
 // require admin/vendor

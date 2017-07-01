@@ -1,0 +1,23 @@
+/= debug page_module.moduleable
+- case page_module.moduleable.class.name
+- when 'TextModule'
+  = render 'admin/text_modules/show', page: page_module.page, text_module: page_module.moduleable
+hr
+/p#notice = notice
+/
+/p
+/  strong Page:
+/  = @page_module.page
+/p
+/  strong Moduleable:
+/  = @page_module.moduleable
+/p
+/  strong Slot:
+/  = @page_module.slot_id
+/p
+/  strong Position:
+/  = @page_module.position
+/
+/= link_to 'Edit', edit_page_module_path(@page_module)
+/'  |
+/= link_to 'Back', page_modules_path
