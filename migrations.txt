@@ -9,6 +9,8 @@ rails g scaffold PageModule page:belongs_to moduleable:references{polymorphic} s
 
 rails g scaffold TextModule body:text --no-helper --no-assets --no-controller-specs
 
+rails g migration AddImageAndTeaserToTextModules teaser:text
+
 
 
 Page

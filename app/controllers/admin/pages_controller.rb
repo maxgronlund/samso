@@ -3,13 +3,14 @@ class Admin::PagesController < AdminController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.all
+    @pages = Page.where(locale: I18n.locale)
   end
 
   # GET /pages/1
   # GET /pages/1.json
   def show
     @page = Page.find(params[:id])
+    @admin_namespace = true
   end
 
   # GET /pages/new

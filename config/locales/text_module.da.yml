@@ -1,0 +1,20 @@
+da:
+  activerecord:
+    errors:
+      models:
+    attributes:
+      text_section:
+        title: Overskrift
+        layout: Layout
+
+    models:
+      text_module: Tekst sektion
+
+  text_module:
+    hints:
+      title: Som den bliver vist på oversigts side
+      image: Vises kun hvis det valgte layout understøtter det
+      url: Billed / Link / Knap bruger denne url
+      url_text: Tekst til knappe og link, vises ikke hvis feltet er tomt
+    placeholders:
+      url: http://samso.dk

@@ -1,1 +1,6 @@
-= text_module.body
+- if @admin_namespace
+
+  = render 'text_modules/links', text_module: text_module, page: page
+
+= render "text_modules/layouts/#{text_module.layout}", text_module: text_module, page: page
+

@@ -1,0 +1,36 @@
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.text-module, .content-box .title {
+  margin-top: 8px;
+}
+
+
+/*
+.calefornia, .content-box {
+  float: left;
+  width:;
+}
+*/
+/*
+@media (min-width: 1500px) {
+  .calefornia, .image-box {
+    float: left;
+    width: 30%;
+  }
+
+  .calefornia, .content-box {
+    float: left;
+    width: 70%;
+  }
+
+  .box {
+    background-color: #fdd;
+  }
+}
+*/

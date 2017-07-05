@@ -1,15 +1,110 @@
 h3 = t('edit_model', model_name: @text_module.model_name.human)
-
-= simple_form_for [:admin, @page, @text_module] do |f|
+= simple_form_for [:admin, @page, @text_module], multipart: true do |f|
   = f.error_notification
+  .row
+    .col-sm-6
+      = f.input :layout,
+        collection: TextModule::LAYOUTS,
+        include_blank: false
 
-  = f.input :title,
-    hint: 'Bliver vist på oversigts side'
-  = f.input :body, label: false
+      = label_tag 'billed'
+      = f.input :image,
+        label: false,
+        hint: t('text_module.hints.image')
+
+      = f.input :image_size,
+        collection: TextModule::IMAGE_SIZES,
+        include_blank: false
+
+    .col-sm-6
+      = f.input :url,
+        hint: t('text_module.hints.url'),
+        placeholder: t('text_module.placeholders.url')
+      = f.input :url_text,
+        hint: t('text_module.hints.url_text')
+
+  .row
+    .col-sm-12
+      = f.input :title,
+        hint: t('text_module.hints.title')
+      = f.input :body,
+        label: false
 
   = f.submit t('save'), class: 'btn btn-primary'
 
+hr
+h4 Layouts
+.row.mb-20
+  .col-sm-4
+    .module-admin-header
+      .layout
+        strong alfa-romeo
+        '&nbsp;1 - 8 coll
+    = image_tag('text_module/alfa-romeo.png', class: "img-fluid")
+  .col-sm-4
+    .module-admin-header
+      .layout
+        strong aston-martin
+        '&nbsp; 3 coll
+    = image_tag('text_module/aston-martin.png', class: "img-fluid")
+  .col-sm-4
+    .module-admin-header
+      .layout
+        strong audi
+        '&nbsp; 3 coll
+    = image_tag('text_module/audi.png', class: "img-fluid")
 
+
+
+/  /.col-sm-6
+/  /  strong audi
+/  /  '&nbsp;image ratio: 769x180
+/  /  = render 'admin/text_modules/layouts/audi'
+/
+/    strong bmw
+/    '&nbsp;image ratio: 769x270
+/    = render 'admin/text_modules/layouts/bmw'
+/.row.mb-20
+/  .col-sm-12.mb-12
+/    h6 bmw
+/    = image_tag('text_module/bmw.png', class: "img-fluid")
+/.row.mb-20
+/  .col-sm-12.mb-12
+/    h6 bugatti
+/    = image_tag('text_module/bugatti.png', class: "img-fluid")
+/.row.mb-20
+/  .col-sm-12.mb-12
+/    h6 buick
+/    = image_tag('text_module/buick.png', class: "img-fluid")
+/
+.row
+  .col-sm-6.mb-12
+    h6 cadillac
+    = image_tag('text_module/cadillac.png', class: "img-fluid")
+  .col-sm-6.mb-12
+    h6 chevron
+    = image_tag('text_module/chevron.png', class: "img-fluid")
+
+.row
+  .col-sm-6.mb-12
+    h6 chrysler
+    = image_tag('text_module/chrysler.png', class: "img-fluid")
+  .col-sm-6.mb-12
+    h6 citroen
+    = image_tag('text_module/citroen.png', class: "img-fluid")
+
+.row
+  .col-sm-6.mb-12
+    h6 daihatsu
+    = image_tag('text_module/daihatsu.png', class: "img-fluid")
+  .col-sm-6.mb-12
+    h6 dodge
+    = image_tag('text_module/dodge.png', class: "img-fluid")
+
+.row
+  .col-sm-6.mb-12
+    h6 fiat
+    = image_tag('text_module/fiat.png', class: "img-fluid")
 
 javascript:
   $('selector').froalaEditor();

@@ -4,4 +4,8 @@ class AdminController < ApplicationController
   def index
     @selected = 'dashboad'
   end
+
+  def set_namespace
+    @admin_namespace = true
+  end
 end

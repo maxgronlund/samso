@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
+  before_action :set_admin
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
@@ -17,18 +18,22 @@ class ApplicationController < ActionController::Base
   helper_method :super_admin?
 
   def admin?
-    current_user && current_user.admin?
+    @admin ||= current_user && current_user.admin?
   end
   helper_method :admin?
 
   def current_url?(current_url, request_url)
-    current_url ==  request_url
+    current_url == request_url
   end
   helper_method :current_url?
 
-    protected
+  protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+  end
+
+  def set_admin
+    @admin = admin?
+  end
 end

@@ -1,0 +1,10 @@
+.text-module
+  .audi
+    = link_to text_module.url do
+      - if umage_url = text_module.image_url(text_module.image_size.to_sym)
+        = image_tag(umage_url, class: "img-fluid rounded-circle")
+      h2 = text_module.title
+      p = raw(text_module.body)
+      - if text_module.url
+        .btn.btn-secondary
+          = text_module.url_text + ' »'

@@ -1,21 +1,11 @@
-p#notice = notice
+= render 'shared/navbar'
+.container.mt-20
+  - if @admin
+    .row
+      .col-sm-12
+        .float-right
+          = link_to t('edit'), admin_page_path(@page)
 
-p
-  strong Title:
-  = @page.title
-/ p
-/   strong Menu title:
-/   = @page.menu_title
-/ p
-/   strong Position:
-/   = @page.position
-/ p
-/   strong Active:
-/   = @page.active
-/ p
-/   strong Locale:
-/   = @page.locale
-/ p
-/   strong User:
-/   = @page.user
 
+
+  = render 'pages/show', page: @page

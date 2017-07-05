@@ -27,7 +27,7 @@ class Page < ApplicationRecord
   end
 
   def self.locales
-    LOCALES.map { |locale| I18n.t(locale) }
+    LOCALES.map { |locale| [I18n.t(locale), locale] }
   end
 
   def self.content_types

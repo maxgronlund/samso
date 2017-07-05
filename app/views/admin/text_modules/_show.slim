@@ -1,7 +1,6 @@
+= render "text_modules/layouts/#{text_module.layout}", text_module: text_module
 .row
-  .col-sm-8
-    h6 Text section
-  .col-sm-4
+  .col
     .float-right-button-container
       = link_to t('edit'),
         edit_admin_page_text_module_path(page, text_module),
@@ -11,4 +10,8 @@
         data: { confirm: 'Are you sure?' },
         method: :delete, class: 'btn btn-danger btn-sm'
 
-= raw(text_module.body)
+
+
+
+
+

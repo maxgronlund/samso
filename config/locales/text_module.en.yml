@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    errors:
+      models:
+    attributes:
+      text_section:
+        title: Title
+        layout: Layout
+
+    models:
+      text_module: Text section
+
+  text_module:
+    hints:
+      title: As shown on the index page
+      image: Only shown if the selected layout supports it
+      url: Immage / Link / Button uses this url
+      url_text: Text for link / button, not shown if field is left blank
+    placeholders:
+      url: http://samso.dk

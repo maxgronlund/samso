@@ -113,6 +113,7 @@ class Admin::PageModulesController < AdminController
       :moduleable_id,
       :moduleable_type,
       :slot_id,
-      :position)
+      :position
+    )
   end
 end

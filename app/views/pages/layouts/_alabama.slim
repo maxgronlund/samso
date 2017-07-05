@@ -1,0 +1,6 @@
+.row
+  .col-sm-12
+    .section-slot
+      - @page.page_modules.where(slot_id: 200).each do |page_module|
+        = render 'page_modules/show', page_module: page_module
+
