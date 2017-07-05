@@ -18,6 +18,7 @@ class Page < ApplicationRecord
     colorado
     connecticut
     delaware
+    florida
   ).freeze
 
   PAGE_MODULES = [%w(text_module TextModule)].freeze
