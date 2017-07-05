@@ -2,7 +2,7 @@
   .bmw
     .card.card-inverse.mb-10
       = link_to text_module.url do
-        - if umage_url = text_module.image_url(:size_769x270)
+        - if umage_url = text_module.image_url(text_module.image_size)
           = image_tag(umage_url, class: "img-fluid")
         .card-img-overlay
           h4.card-title = text_module.title

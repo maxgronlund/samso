@@ -5,6 +5,6 @@
         = image_tag(umage_url, class: "img-fluid rounded-circle")
       h2 = text_module.title
       p = raw(text_module.body)
-      - if text_module.url
+      - if text_module.show_link?
         .btn.btn-secondary
           = text_module.url_text + ' »'
