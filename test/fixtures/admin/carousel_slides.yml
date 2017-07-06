@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  body: MyText
+  position: 1
+  admin_carousel_module: one
+
+two:
+  title: MyString
+  body: MyText
+  position: 1
+  admin_carousel_module: two

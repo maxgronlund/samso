@@ -1,9 +1,0 @@
-= simple_form_for [:admin, @page, @carousel_module], url: url_for(action: 'update', controller: 'admin/carousel_modules'), method: 'put' do |f|
-  = f.error_notification
-
-  .form-inputs
-    = f.input :name
-    = f.input :layout
-
-  .form-actions
-    = f.button :submit

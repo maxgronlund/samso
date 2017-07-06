@@ -1,0 +1,12 @@
+/= simple_form_for [@admin_carousel_module, @admin_carousel_slide] do |f|
+= simple_form_for [:admin, @admin_carousel_module, @admin_carousel_slide], url: url_for(action: 'create', controller: 'admin/carousel_slides'), method: 'post' do |f|
+  = f.error_notification
+  = f.hidden_field :carousel_module_id, value: @admin_carousel_module.id
+  .form-inputs
+    = f.input :title
+    = f.input :body
+    = f.input :position
+    /= f.association :admin_carousel_module
+
+  .form-actions
+    = f.button :submit
