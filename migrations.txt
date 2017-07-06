@@ -11,6 +11,8 @@ rails g scaffold TextModule body:text --no-helper --no-assets --no-controller-sp
 
 rails g migration AddImageAndTeaserToTextModules teaser:text
 
+rails g scaffold admin/carousel_module name layout --no-helper --no-assets --no-controller-specs
+
 
 
 Page

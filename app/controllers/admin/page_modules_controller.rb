@@ -76,6 +76,8 @@ class Admin::PageModulesController < AdminController
     case @page_module.moduleable_type
     when 'TextModule'
       edit_admin_page_text_module_path(@page, @page_module.moduleable_id)
+    when 'Admin::CarouselModule'
+      edit_admin_page_carousel_module_path(@page, @page_module.moduleable_id)
     end
   end
 
@@ -98,6 +100,8 @@ class Admin::PageModulesController < AdminController
     case page_module_params[:moduleable_type]
     when 'TextModule'
       @moduleable = TextModule.create
+    when 'Admin::CarouselModule'
+      ap @moduleable = Admin::CarouselModule.create
     end
   end
 

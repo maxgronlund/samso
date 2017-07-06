@@ -21,7 +21,10 @@ class Page < ApplicationRecord
     florida
   ).freeze
 
-  PAGE_MODULES = [%w(text_module TextModule)].freeze
+  PAGE_MODULES = [
+    %w(text_module TextModule),
+    %w(carousel_module Admin::CarouselModule)
+  ].freeze
 
   def self.menus
     MENUS.map { |menu| I18n.t(menu) }
