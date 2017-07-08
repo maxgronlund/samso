@@ -1,0 +1,24 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/carousel_slide: 'Billed'
+    attributes:
+      admin/carousel_slide:
+        title: Overskrift
+        body: Tekst
+
+    models:
+      admin/carousel_slide: Slide
+
+  carousel_slide:
+    new: 'Opret slide'
+
+
+
+
+
+
+
+
+

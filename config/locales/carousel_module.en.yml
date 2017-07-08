@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      admin/carousel_module:
+        one: Carousel sektion
+        other: Carousel sektion
+    attributes:
+      admin/carousel_module:
+        name: Name
+
+  carousel_module:
+    edit: 'Edit layout'
+    back_to_slides: Back to slides

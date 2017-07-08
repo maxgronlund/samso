@@ -10,14 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require tether.min
 //= require jquery
 // require jquery_ujs
 //= require rails-ujs
+//= require bootstrap
 //= require turbolinks
 //= require admin/Sortable
 //= require admin/modular_admin
 //= require admin/metisMenu
 //= require admin/init-metismenu
-// require admin/init-froala
-// require admin/froala_editor/froala_editor.min
-// require admin/froala_editor/paragraph_format.min

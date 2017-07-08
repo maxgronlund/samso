@@ -1,9 +1,9 @@
-= render 'shared/navbar'
+= render 'shared/navbar', menu: @menu
 .container.mt-40
   - if @admin
     .row
       .col-sm-12
         .float-right
-          = link_to t('edit'), admin_page_path(@page)
+          = link_to t('page.edit'), admin_page_path(@page)
 
   = render 'pages/show', page: @page

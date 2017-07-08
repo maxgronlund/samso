@@ -4,9 +4,10 @@ en:
       models:
 
     attributes:
+      page_module:
+        active: Activate
 
     models:
       page_module: Page sections
 
   text_module: Text section
-  carousel_module: Carousel section

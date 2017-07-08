@@ -1,8 +1,4 @@
 h1 Editing admin_carousel_slide
 
-== render 'form'
-
-= link_to 'Show', @admin_carousel_slide
-'  |
-= link_to 'Back', admin_carousel_slides_path
-
+= simple_form_for [:admin, @admin_carousel_module, @admin_carousel_slide], multipart: true, url: url_for(action: 'update', controller: 'admin/carousel_slides'), method: 'patch' do |f|
+  == render 'form', f: f

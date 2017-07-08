@@ -1,4 +1,4 @@
-= render 'shared/navbar'
+= render 'shared/navbar', menu: @menu
 .container.pt-60
   .row.justify-content-center
     .col-lg-4.col-sm-8.col-xs-9
@@ -17,34 +17,3 @@
               = f.button :submit, t('.sign_in'), class: 'btn btn-primary'
 
           = render 'devise/shared/links'
-
-
-
-
-
-
-
-/= render 'shared/navbar'
-/.container.pt-60
-/  .row.justify-content-center
-/
-/
-/    .col-sm-4
-/      .card
-/        .card-header
-/           h2 = t('.sign_in')
-/
-/        .card-block
-/          = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-/            .form-inputs
-/              = f.input :email, required: false, autofocus: true
-/              = f.input :password, required: false
-/              = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-/
-/            .form-actions
-/              = f.button :submit, t('.sign_in'), class: 'btn btn-primary'
-/
-/
-/
-/          = render 'devise/shared/links'
-/

@@ -1,3 +1,4 @@
+# Slides for the carousel section
 class CreateAdminCarouselSlides < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_carousel_slides do |t|

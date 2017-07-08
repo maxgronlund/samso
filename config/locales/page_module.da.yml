@@ -4,12 +4,13 @@ da:
       models:
 
     attributes:
+      page_module:
 
     models:
       page_module: Side sektion
 
   text_module: Tekst sektion
-  carousel_module: Billed karrusel
+
 
 
 

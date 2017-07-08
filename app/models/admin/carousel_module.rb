@@ -1,3 +1,4 @@
+# Module for carousel
 class Admin::CarouselModule < ApplicationRecord
   has_many :slides, class_name: 'Admin::CarouselSlide', dependent: :destroy
 
@@ -10,5 +11,9 @@ class Admin::CarouselModule < ApplicationRecord
       moduleable_type: 'Admin::CarouselModule',
       moduleable_id: id
     )
+  end
+
+  def page
+    page_module.page
   end
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @page = pages(:one)
+    @page = pages(:front_page)
   end
 
   test 'should show page' do

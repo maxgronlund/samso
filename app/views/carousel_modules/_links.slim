@@ -4,10 +4,10 @@
 
   .edit-links
     = link_to t('edit'),
-      edit_admin_page_carousel_module_path(page, carousel_module)
+      admin_page_carousel_module_path(page, carousel_module)
     ' |
     = link_to t('delete'),
       admin_page_page_module_path(page, carousel_module.page_module),
       method: :delete,
-      data: { confirm: 'Are you sure?' }
+      data: { confirm: t('are_you_sure') }
     '&nbsp;

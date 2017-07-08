@@ -1,4 +1,30 @@
-h1 CarouselModule
 - if @admin_namespace
   = render 'carousel_modules/links', carousel_module: carousel_module, page: page
-/= render "text_modules/layouts/#{text_module.layout}", text_module: text_module, page: page
+
+#carouselExampleIndicators data-ride="carousel" class="carousel slide #{dom_id(carousel_module)}"
+  ol.carousel-indicators
+    - carousel_module.slides.order(:position).each_with_index do |slide, index|
+      li class="#{index == 0 ? 'active' : ''}" data-slide-to="{index.to_s}"  data-target="#carouselExampleIndicators"
+
+  .carousel-inner role="listbox"
+    - carousel_module.slides.order(:position).each_with_index do |slide, index|
+      div class="#{index == 0 ? 'carousel-item active' : 'carousel-item'}"
+        = image_tag(slide.image_url('12_col_3x1'.to_sym))
+        .carousel-caption.d-none.d-md-block
+          - if slide.page
+            = link_to page_path(slide.page)
+              h3 = slide.title
+              p = slide.body
+          - else
+            h3 = slide.title
+            p = slide.body
+
+  a.carousel-control-prev data-slide="prev" href="#carouselExampleIndicators" role="button"
+    span.carousel-control-prev-icon aria-hidden="true"
+    span.sr-only Previous
+  a.carousel-control-next data-slide="next" href="#carouselExampleIndicators" role="button"
+    span.carousel-control-next-icon aria-hidden="true"
+    span.sr-only Next
+
+javascript:
+  $(".#{dom_id(carousel_module)}").carousel()

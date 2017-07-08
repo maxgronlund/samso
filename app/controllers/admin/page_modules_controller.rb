@@ -29,14 +29,10 @@ class Admin::PageModulesController < AdminController
   # POST /page_modules
   # POST /page_modules.json
   def create
-    respond_to do |format|
-      if @page_module.save!
-        format.html { redirect_to edit_moduleable_path, notice: 'Page module was successfully created.' }
-        format.json { render :show, status: :created, location: @page_module }
-      else
-        format.html { render :new }
-        format.json { render json: @page_module.errors, status: :unprocessable_entity }
-      end
+    if @page_module.save!
+      redirect_to edit_moduleable_path
+    else
+      render :new
     end
   end
 
@@ -77,7 +73,7 @@ class Admin::PageModulesController < AdminController
     when 'TextModule'
       edit_admin_page_text_module_path(@page, @page_module.moduleable_id)
     when 'Admin::CarouselModule'
-      edit_admin_page_carousel_module_path(@page, @page_module.moduleable_id)
+      admin_page_carousel_module_path(@page, @page_module.moduleable_id)
     end
   end
 

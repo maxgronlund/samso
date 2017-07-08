@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+carousel_one:
   name: MyString
   layout: MyString
 
-two:
+
+carousel_two:
   name: MyString
   layout: MyString

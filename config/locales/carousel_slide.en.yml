@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    errors:
+      models:
+        carousel_slide:
+    attributes:
+      carousel_slide:
+        title: Title
+
+    models:
+      carousel_slide: Slide
+
+  carousel_slide:
+    new: 'Add slide'
+
