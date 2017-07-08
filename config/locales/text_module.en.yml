@@ -1,7 +1,5 @@
 en:
   activerecord:
-    errors:
-      models:
     attributes:
       text_section:
         title: Title

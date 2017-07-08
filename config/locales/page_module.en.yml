@@ -4,6 +4,8 @@ en:
       models:
 
     attributes:
+      page_module:
+        active: Activate
 
     models:
       page_module: Page sections

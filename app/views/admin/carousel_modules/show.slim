@@ -1,0 +1,43 @@
+.row
+  .col-sm-8
+    h3 = t('carousel_module.slides')
+  .col-sm-4
+    .edit-page-links
+      = link_to t('carousel_module.edit'), edit_admin_page_carousel_module_path(@page, @carousel_module)
+      '  |
+      = link_to t('page.back'), admin_page_path(@page)
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+        th =t(Admin::CarouselSlide.human_attribute_name('title'))
+        th Position
+        th Link
+        th
+
+    tbody
+      - @admin_carousel_slides.each do |admin_carousel_slide|
+        tr
+          td = image_tag(admin_carousel_slide.image_url(:thumb))
+          td = admin_carousel_slide.title
+          td = admin_carousel_slide.position
+          td
+            - if admin_carousel_slide.page
+              = admin_carousel_slide.page.title
+          td
+            .float-right-button-container
+              = link_to t('edit'),
+                edit_admin_carousel_module_carousel_slide_path(admin_carousel_slide.carousel_module, admin_carousel_slide),
+                class: 'btn btn-primary btn-sm'
+              = link_to t('delete'),
+                admin_carousel_module_carousel_slide_path(admin_carousel_slide.carousel_module, admin_carousel_slide),
+                data: { confirm: t('are_you_sure') },
+                method: :delete,
+                class: 'btn btn-danger btn-sm'
+
+= link_to t('carousel_slide.new'),
+  new_admin_carousel_module_carousel_slide_path(@carousel_module),
+  class: 'btn btn-primary'
+

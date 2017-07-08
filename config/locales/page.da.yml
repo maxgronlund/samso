@@ -2,7 +2,7 @@ da:
   activerecord:
     errors:
       models:
-        page:
+        page: Side
     attributes:
       page:
         title: Overskrift
@@ -12,8 +12,6 @@ da:
         active: Aktiveret
         locale: Sprog
         user_id: Oprettet af
-
-
     models:
       page: Side
 
@@ -22,3 +20,7 @@ da:
     edit_content: Rediger inhold
     add_content: Tilføj sektion
     section_types: Sektion typer
+    show: Vis side
+    edit_layout: Side opsætning
+    edit: Rediger side
+    back: Tilbage til side

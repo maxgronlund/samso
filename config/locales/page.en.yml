@@ -1,8 +1,5 @@
 en:
   activerecord:
-    errors:
-      models:
-        page:
     attributes:
       page:
         title: Title
@@ -22,3 +19,7 @@ en:
     edit_content: Edit content
     add_content: 'Add section'
     section_types: Section types
+    show: Show page
+    edit_layout: Page setup
+    edit: Edit page
+    back: Back to page

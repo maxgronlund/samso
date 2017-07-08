@@ -1,7 +1,5 @@
 da:
   activerecord:
-    errors:
-      models:
     attributes:
       text_section:
         title: Overskrift

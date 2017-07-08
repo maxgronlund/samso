@@ -1,14 +1,13 @@
 da:
   activerecord:
-    errors:
-      models:
-
     attributes:
+      page_module:
 
     models:
       page_module: Side sektion
 
   text_module: Tekst sektion
+
 
 
 
