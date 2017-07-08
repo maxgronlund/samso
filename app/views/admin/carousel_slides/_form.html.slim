@@ -1,0 +1,16 @@
+/= simple_form_for [@admin_carousel_module, @admin_carousel_slide] do |f|
+
+= f.error_notification
+= f.hidden_field :carousel_module_id, value: @admin_carousel_module.id
+.row
+  .col-sm-6
+    = f.input :title
+    = f.input :body
+  .col-sm-6
+    = f.input :position
+    = f.input :image
+    = f.association :page, collection: Page.active().where(locale: I18n.locale)
+  /= f.association :admin_carousel_module
+
+.form-actions
+  = f.submit t('save'), class: 'btn btn-primary'

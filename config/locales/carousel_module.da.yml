@@ -1,0 +1,13 @@
+da:
+  activerecord:
+    models:
+      admin/carousel_module:
+        one: Karrusle sektion
+        other: Karrusle sektioner
+    attributes:
+      admin/carousel_module:
+        name: Navn
+
+  carousel_module:
+    edit: 'Redig layout'
+    back_to_slides: 'Tilbage til slides'

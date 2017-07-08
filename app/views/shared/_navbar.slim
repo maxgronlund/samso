@@ -4,10 +4,16 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
   = link_to t('site_name'), root_path, class: 'navbar-brand'
   #navbarsExampleDefault.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
-      = render 'shared/navbar_link', link_name: 'Home',  link_url: root_url, link: root_path
-      = render 'shared/navbar_link', link_name: 'Om os', link_url: about_index_url ,link: about_index_path
-      - if  admin?
-        = render 'shared/navbar_link', link_name: 'Admin', link_url: admin_index_url ,link: admin_index_path
+      - menu.each do |page|
+        = render 'shared/navbar_link',
+          link_name: page.title,
+          link_url: page_path(page),
+          link: page_path(page)
+
+      /= render 'shared/navbar_link', link_name: 'Home',  link_url: root_url, link: root_path
+      /= render 'shared/navbar_link', link_name: 'Om os', link_url: about_index_url ,link: about_index_path
+
+
       /li.nav-item
       /  a.nav-link href="#"  Link
       /li.nav-item
@@ -20,16 +26,22 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
       /    a.dropdown-item href="#"  Something else here
     .my-2.my-lg-0
       ul.navbar-nav
+        - if  admin?
+
+          li.nav-item
+            = render 'shared/navbar_link',
+              link_name: 'Admin',
+              link_url: admin_index_url
         li.nav-item.dropdown
           a#dropdown01.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="http://example.com"  Min Konto
           .dropdown-menu.dropdown-menu-right aria-labelledby="dropdown01"
             - if user_signed_in?
               = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
               = link_to 'Min profil', user_path(current_user), class: 'dropdown-item'
+
             - else
               = link_to 'Login', new_user_session_path, class: 'dropdown-item'
               = link_to t(".sign_up"), new_registration_path('user'), class: 'dropdown-item'
-
             /a.dropdown-item href="#"  Action
             /a.dropdown-item href="#"  Another action
             /a.dropdown-item href="#"  Something else here

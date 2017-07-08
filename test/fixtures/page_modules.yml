@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  page: one
-  moduleable: one
-  moduleable_type: Moduleable
+  page: front_page
+  moduleable: carousel_one
+  moduleable_type: "Admin::CarouselModule"
   slot_id: 1
   position: 1
 
 two:
-  page: two
-  moduleable: two
-  moduleable_type: Moduleable
+  page: about_page
+  moduleable: carousel_two
+  moduleable_type: "Admin::CarouselModule"
   slot_id: 1
-  position: 1
+  position: 2

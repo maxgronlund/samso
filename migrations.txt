@@ -13,6 +13,17 @@ rails g scaffold TextModule body:text --no-helper --no-assets --no-controller-sp
 
 rails g migration AddImageAndTeaserToTextModules teaser:text
 
+rails g scaffold admin/carousel_module name layout --no-helper --no-assets --no-controller-specs
+
+
+rails g scaffold admin/carousel_slide title body:text position:integer admin_carousel_module:belongs_to --no-helper --no-assets --no-controller-specs
+
+
+# rails g migration AddPageToCarouselClide page:references
+
+rails g migration AddLandingPageToAdminSystemSetup da_landing_page_id:integer en_landing_page_id:integer
+
+
 
 
 Page

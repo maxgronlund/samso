@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+slide_one:
+  title: MyString
+  body: MyText
+  position: 1
+  carousel_module: carousel_one
+
+slide_two:
+  title: MyString
+  body: MyText
+  position: 1
+  carousel_module: carousel_two

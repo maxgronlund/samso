@@ -2,6 +2,7 @@
 class Page < ApplicationRecord
   belongs_to :user
   has_many :page_modules, dependent: :destroy
+  has_many :admin_carousel_slide
 
   NOT_IN_ANY_MENUS = 'not_in_any_menus'.freeze
   TOP_MENU_BAR     = 'in_top_menu_bar'.freeze
@@ -21,7 +22,12 @@ class Page < ApplicationRecord
     florida
   ).freeze
 
-  PAGE_MODULES = [%w(text_module TextModule)].freeze
+  PAGE_MODULES = [
+    %w(text_module TextModule),
+    %w(carousel_module Admin::CarouselModule)
+  ].freeze
+
+  scope :active, -> { where(active: true) }
 
   def self.menus
     MENUS.map { |menu| I18n.t(menu) }
@@ -37,5 +43,9 @@ class Page < ApplicationRecord
 
   def author_name
     user.nil? ? '' : user.name
+  end
+
+  def self.for_menu(menu_id)
+    active.where(locale: I18n.locale, menu_id: menu_id)
   end
 end

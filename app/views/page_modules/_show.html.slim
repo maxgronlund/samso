@@ -1,4 +1,6 @@
 - case page_module.moduleable.class.name
 - when 'TextModule'
   = render 'text_modules/show', page: page_module.page, text_module: page_module.moduleable
+- when 'Admin::CarouselModule'
+  = render 'carousel_modules/show', page: page_module.page, carousel_module: page_module.moduleable
 
