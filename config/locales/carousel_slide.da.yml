@@ -2,11 +2,15 @@ da:
   activerecord:
     errors:
       models:
-        admin/carousel_slide: 'Billed'
+        admin/carousel_slide:
+          attributes:
+            title:
+              blank: Mangler
     attributes:
       admin/carousel_slide:
         title: Overskrift
         body: Tekst
+        page: Link til side
 
     models:
       admin/carousel_slide: Slide
@@ -18,7 +22,4 @@ da:
 
 
 
-
-
-
-
+# da.activerecord.errors.models.admin/carousel_slide.attributes.title.blank

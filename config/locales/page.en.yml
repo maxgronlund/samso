@@ -1,8 +1,5 @@
 en:
   activerecord:
-    errors:
-      models:
-        page:
     attributes:
       page:
         title: Title

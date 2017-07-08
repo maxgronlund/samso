@@ -2,8 +2,10 @@ en:
   activerecord:
     errors:
       models:
-        carousel_slide:
-    attributes:
+        admin/carousel_slide:
+          attributes:
+            title:
+              blank: Missing
       carousel_slide:
         title: Title
 

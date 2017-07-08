@@ -1,8 +1,5 @@
 da:
   activerecord:
-    errors:
-      models:
-
     attributes:
       page_module:
 

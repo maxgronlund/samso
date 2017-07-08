@@ -1,7 +1,7 @@
 # Slides for the carousel module
 class Admin::CarouselSlide < ApplicationRecord
   belongs_to :carousel_module, class_name: 'Admin::CarouselModule'
-  belongs_to :page
+  belongs_to :page, optional: true
 
   has_attached_file :image, styles: {
     thumb: '180x60#',
@@ -12,6 +12,7 @@ class Admin::CarouselSlide < ApplicationRecord
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
+  validates :carousel_module, :image, :title, presence: true
 
   def parrent_page
     carousel_module.page_module.page

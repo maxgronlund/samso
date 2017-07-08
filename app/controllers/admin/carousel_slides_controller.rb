@@ -41,6 +41,7 @@ class Admin::CarouselSlidesController < AdminController
   # PATCH/PUT /admin/carousel_slides/1
   # PATCH/PUT /admin/carousel_slides/1.json
   def update
+    @admin_carousel_module = Admin::CarouselModule.find(params[:carousel_module_id])
     if @admin_carousel_slide.update(admin_carousel_slide_params)
       redirect_to show_carousel_path
     else
