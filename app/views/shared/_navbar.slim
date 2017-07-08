@@ -6,7 +6,7 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
     ul.navbar-nav.mr-auto
       - menu.each do |page|
         = render 'shared/navbar_link',
-          link_name: page.title,
+          link_name: page.menu_title,
           link_url: page_path(page),
           link: page_path(page)
 
