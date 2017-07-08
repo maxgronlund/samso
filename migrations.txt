@@ -1,3 +1,5 @@
+  $ rails g scaffold content title body:text identifier:text position:integer contentable:references{polymorphic} --no-helper --no-assets --no-controller-specs --no-view-specs
+  $ rails g controller about index  --no-helper --no-assets --no-controller-specs
 
 rails g scaffold post title body:text identifier:text position:integer postable:references{polymorphic} --no-helper --no-assets --no-controller-specs
 
