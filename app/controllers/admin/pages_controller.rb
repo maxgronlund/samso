@@ -1,5 +1,6 @@
 class Admin::PagesController < AdminController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_selected
   # GET /pages
   # GET /pages.json
   def index
@@ -64,6 +65,10 @@ class Admin::PagesController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'pages'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_page

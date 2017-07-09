@@ -5,8 +5,9 @@ class Admin::CarouselSlide < ApplicationRecord
 
   has_attached_file :image, styles: {
     thumb: '180x60#',
-    '12_col_3x1'.to_sym => '1200x400#',
-    '6_coll_1x1'.to_sym => '600x300#',
+    '12_col_4x1'.to_sym => '1200x400#',
+    '9_coll_3x1'.to_sym => '900x300#',
+    '6_coll_2x1'.to_sym => '600x300#',
     default_url: 'style/missing_squarde_image.jpg'
   }
 

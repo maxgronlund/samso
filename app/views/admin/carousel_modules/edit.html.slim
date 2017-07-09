@@ -14,7 +14,10 @@
 
   .form-inputs
     = f.input :name
-    = f.input :layout
+
+    = f.input :layout,
+      collection: Admin::CarouselModule.image_sizes,
+      include_blank: false
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

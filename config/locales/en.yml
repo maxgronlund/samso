@@ -30,18 +30,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: 'Hello world'
-  show: 'Show'
-  back: 'Back'
+  hello: Hello world
+  show: Show
+  back: Back
   new_model: "Create %{model_name}"
   edit_model: "Editing %{model_name}"
-  edit: 'Edit'
-  save: 'Save'
-  delete: 'Delete'
-  site_name: 'SAMSO'
-  not_in_any_menus: "Don't show"
-  in_top_menu_bar: 'In the menu bar'
+  edit: Edit
+  save: Save
+  delete: Delete
+  site_name: SAMSO
+  not_in_any_menus: None
+  menu_bar: The menu bar
   da: Danish
   en: English
-  manage_content: 'Edit content'
-  are_you_sure: 'Are you sure?'
+  manage_content: Edit content
+  are_you_sure: Are you sure?
+  big: Large
+  medium: Medium
+  smal: Small

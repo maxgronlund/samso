@@ -13037,6 +13037,7 @@ button.close {
   border-width: 10px;
 }
 
+/*
 .carousel {
   position: relative;
 }
@@ -13269,6 +13270,7 @@ button.close {
     bottom: 20px;
   }
 }
+*/
 
 .align-baseline {
   vertical-align: baseline !important;

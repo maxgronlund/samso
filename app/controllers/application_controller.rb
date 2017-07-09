@@ -39,6 +39,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_menu
-    @menu = Page.for_menu('Menubjælken')
+    @menu = Page.for_menu('menu_bar')
   end
 end

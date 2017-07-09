@@ -97,7 +97,7 @@ class Admin::PageModulesController < AdminController
     when 'TextModule'
       @moduleable = TextModule.create
     when 'Admin::CarouselModule'
-      ap @moduleable = Admin::CarouselModule.create
+      @moduleable = Admin::CarouselModule.create
     end
   end
 

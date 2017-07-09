@@ -13,7 +13,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         hint: t('text_module.hints.image')
 
       = f.input :image_size,
-        collection: TextModule::IMAGE_SIZES,
+        collection: TextModule::image_sizes,
         include_blank: false
 
     .col-sm-6

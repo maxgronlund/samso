@@ -1,6 +1,4 @@
-h1 New admin_carousel_slide
-
+h3 = t('new_model', model_name: Admin::CarouselSlide.model_name.human)
+hr
 = simple_form_for [:admin, @admin_carousel_module, @admin_carousel_slide], multipart: true, url: url_for(action: 'create', controller: 'admin/carousel_slides'), method: 'post' do |f|
   == render 'form', f: f
-
-/= link_to 'Back', admin_carousel_slides_path

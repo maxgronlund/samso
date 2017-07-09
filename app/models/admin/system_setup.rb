@@ -18,4 +18,17 @@ class Admin::SystemSetup < ApplicationRecord
       .where(position: position)
       .first
   end
+
+  def self.landing_page
+    system_setup = Admin::SystemSetup.first
+    I18n.locale
+    case I18n.locale
+    when :da
+      page_id = system_setup.da_landing_page_id
+      return Page.find_by(id: page_id)
+    when :en
+      page_id = system_setup.en_landing_page_id
+      return Page.find_by(id: page_id)
+    end
+  end
 end

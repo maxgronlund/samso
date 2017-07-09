@@ -4,12 +4,12 @@
 #carouselExampleIndicators data-ride="carousel" class="carousel slide #{dom_id(carousel_module)}"
   ol.carousel-indicators
     - carousel_module.slides.order(:position).each_with_index do |slide, index|
-      li class="#{index == 0 ? 'active' : ''}" data-slide-to="{index.to_s}"  data-target="#carouselExampleIndicators"
+      li class="#{index == 0 ? 'active ' : ''}" data-slide-to="#{index.to_s}"  data-target="#carouselExampleIndicators"
 
   .carousel-inner role="listbox"
     - carousel_module.slides.order(:position).each_with_index do |slide, index|
       div class="#{index == 0 ? 'carousel-item active' : 'carousel-item'}"
-        = image_tag(slide.image_url('12_col_3x1'.to_sym))
+        = image_tag(slide.image_url(carousel_module.layout.to_sym), class: 'img-fluid')
         .carousel-caption.d-none.d-md-block
           - if slide.page
             = link_to page_path(slide.page)
