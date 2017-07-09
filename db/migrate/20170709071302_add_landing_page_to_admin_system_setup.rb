@@ -17,7 +17,7 @@ class AddLandingPageToAdminSystemSetup < ActiveRecord::Migration[5.1]
   def initialize_pages
     user_id = super_admin_id
     pages_params = [
-      { title: 'Forside', menu_title: 'SAMSØ', menu_id: 'Ingen', ocale: 'da', user_id: user_id, layout: 'alabama', active: true },
+      { title: 'Forside', menu_title: 'SAMSØ', menu_id: 'Ingen', locale: 'da', user_id: user_id, layout: 'alabama', active: true },
       { title: 'Front page', menu_title: 'SAMSØ', menu_id: 'None', locale: 'en', user_id: user_id, layout: 'alabama', active: true }
     ]
 
