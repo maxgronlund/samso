@@ -3,7 +3,7 @@
 front_page:
   title: MyString
   menu_title: MyString
-  menu_id: in_top_menu_bar
+  menu_id: menu_bar
   menu_position: 1
   active: true
   locale: alabama
@@ -12,7 +12,7 @@ front_page:
 about_page:
   title: MyString
   menu_title: MyString
-  menu_id: not_in_any_menus
+  menu_id: menu_bar
   menu_position: 10
   active: true
   locale: alabama

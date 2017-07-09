@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    redirect_to maintenance_index_path if Admin::SystemSetup.first.maintenance
+    landing_page = Admin::SystemSetup.landing_page
+    redirect_to page_path(landing_page) if landing_page
   end
 end

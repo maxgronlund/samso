@@ -27,21 +27,25 @@ aside.sidebar
           = link_to edit_admin_system_setup_path(Admin::SystemSetup.first)
             i.fa.fa-gear
             | System opsætning
-        li class="#{@selected == 'contents' ? 'active' : ''}"
-          a href=""
-            i.fa.fa-th-large
-            | Inhold
-            i.fa.arrow
-          ul
-            li
-              = link_to admin_posts_path
-                  i.fa.fa-list
-                  '&nbsp;Midlertidig forside
-            li
-              = link_to admin_pages_path
-                  i.fa.fa-list
-                  '&nbsp;
-                  = t('pages')
+        li class="#{@selected == 'pages' ? 'active' : ''}"
+          = link_to admin_pages_path
+            i.fa.fa-gear
+            | Sider
+        / li class="#{@selected == 'contents' ? 'active' : ''}"
+        /   a href=""
+        /     i.fa.fa-th-large
+        /     | Inhold
+        /     i.fa.arrow
+        /   ul
+        /     li
+        /       = link_to admin_posts_path
+        /           i.fa.fa-list
+        /           '&nbsp;Midlertidig forside
+        /     li
+        /       = link_to admin_pages_path
+        /           i.fa.fa-list
+        /           '&nbsp;
+        /           = t('pages')
         / li
         /   a href=""
         /     i.fa.fa-th-large

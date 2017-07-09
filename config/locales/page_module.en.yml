@@ -1,13 +1,11 @@
 en:
   activerecord:
-    errors:
-      models:
-
     attributes:
       page_module:
-        active: Activate
 
     models:
-      page_module: Page sections
+      page_module: Section
 
-  text_module: Text section
+  page_module:
+    text_module: Text sektion
+    carousel_module: Image carousel

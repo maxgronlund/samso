@@ -6,6 +6,8 @@ en:
           attributes:
             title:
               blank: Missing
+            image:
+              blank: Image missing
       carousel_slide:
         title: Title
 

@@ -1,4 +1,5 @@
-h1 Editing admin_carousel_slide
+h3 = t('edit_model', model_name: Admin::CarouselSlide.model_name.human)
+hr
 
 = simple_form_for [:admin, @admin_carousel_module, @admin_carousel_slide], multipart: true, url: url_for(action: 'update', controller: 'admin/carousel_slides'), method: 'patch' do |f|
   == render 'form', f: f

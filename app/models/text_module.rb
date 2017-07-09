@@ -28,14 +28,6 @@ class TextModule < ApplicationRecord
     fiat
   ).freeze
 
-  IMAGE_SIZES = [
-    ['4 coll squared', '4_coll_squared'],
-    ['4 coll 16/9', '4_coll_16_9'],
-    ['8 coll low', '8_coll_low'],
-    ['8 col medium', '8_coll_medium'],
-    ['8 col high', '8_coll_high']
-  ].freeze
-
   def admin_page
     page_module.page
   end
@@ -55,5 +47,15 @@ class TextModule < ApplicationRecord
 
   def show_link?
     !url.to_s.empty?
+  end
+
+  def self.image_sizes
+    [
+      ['4 coll squared', '4_coll_squared'],
+      ['4 coll 16/9', '4_coll_16_9'],
+      ['8 coll low', '8_coll_low'],
+      ['8 col medium', '8_coll_medium'],
+      ['8 col high', '8_coll_high']
+    ]
   end
 end

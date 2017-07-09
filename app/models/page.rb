@@ -4,10 +4,6 @@ class Page < ApplicationRecord
   has_many :page_modules, dependent: :destroy
   has_many :admin_carousel_slide
 
-  NOT_IN_ANY_MENUS = 'not_in_any_menus'.freeze
-  TOP_MENU_BAR     = 'in_top_menu_bar'.freeze
-
-  MENUS = [NOT_IN_ANY_MENUS, TOP_MENU_BAR].freeze
   LOCALES = %w(da en).freeze
 
   LAYOUTS = %w(
@@ -29,23 +25,34 @@ class Page < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
-  def self.menus
-    MENUS.map { |menu| I18n.t(menu) }
-  end
-
   def self.locales
     LOCALES.map { |locale| [I18n.t(locale), locale] }
   end
 
   def self.content_types
-    PAGE_MODULES.map { |page_module| [I18n.t(page_module[0]), page_module[1]] }
+    [
+      [I18n.t('page_module.text_module'), 'text_module'],
+      [I18n.t('page_module.carousel_module'), 'Admin::CarouselModule']
+    ]
   end
 
   def author_name
     user.nil? ? '' : user.name
   end
 
+  def self.menu_collection
+    [
+      [I18n.t('not_in_any_menus'), 'not_in_any_menus'],
+      [I18n.t('menu_bar'), 'menu_bar']
+    ]
+  end
+
   def self.for_menu(menu_id)
-    active.where(locale: I18n.locale, menu_id: menu_id)
+    active.where(locale: I18n.locale.to_s, menu_id: menu_id)
+  end
+
+  def self.front_page
+    page_id = Admin::SystemSetup.landing_page_id
+    Page.where(id: page_id)
   end
 end

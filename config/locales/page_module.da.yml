@@ -4,9 +4,12 @@ da:
       page_module:
 
     models:
-      page_module: Side sektion
+      page_module: Sektion
 
-  text_module: Tekst sektion
+  page_module:
+    text_module: Tekst sektion
+    carousel_module: Billed karrusel
+
 
 
 

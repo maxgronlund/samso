@@ -19,7 +19,6 @@ class Admin::CarouselSlidesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # test 'should create admin_carousel_slide' do
-  #   ap @carousel_module.id
   #   assert_difference('Admin::CarouselSlide.count') do
   #     post admin_carousel_module_carousel_slide_url(params: {
   #       admin_carousel_slide: {
