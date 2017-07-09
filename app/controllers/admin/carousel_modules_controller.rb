@@ -12,14 +12,11 @@ class Admin::CarouselModulesController < AdminController
   # PATCH/PUT /admin/carousel_modules/1
   # PATCH/PUT /admin/carousel_modules/1.json
   def update
-    respond_to do |format|
-      if @carousel_module.update(admin_carousel_module_params)
-        format.html { redirect_to admin_page_path(@page) }
-        format.json { render :show, status: :ok, location: @carousel_module }
-      else
-        format.html { render :edit }
-        format.json { render json: @carousel_module.errors, status: :unprocessable_entity }
-      end
+    if @carousel_module.update(admin_carousel_module_params)
+      #redirect_to admin_page_path(@page)
+      redirect_to admin_page_carousel_module_path(@page, @carousel_module)
+    else
+      render :edit
     end
   end
 

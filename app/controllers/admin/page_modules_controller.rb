@@ -41,20 +41,6 @@ class Admin::PageModulesController < AdminController
     @page_module = @page.page_modules.new(params_with_module)
   end
 
-  # PATCH/PUT /page_modules/1
-  # PATCH/PUT /page_modules/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @page_module.update(page_module_params)
-  #       format.html { redirect_to moduleable_path, notice: 'Page module was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @page_module }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @page_module.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   # DELETE /page_modules/1
   # DELETE /page_modules/1.json
   def destroy
@@ -73,7 +59,7 @@ class Admin::PageModulesController < AdminController
     when 'TextModule'
       edit_admin_page_text_module_path(@page, @page_module.moduleable_id)
     when 'Admin::CarouselModule'
-      admin_page_carousel_module_path(@page, @page_module.moduleable_id)
+      edit_admin_page_carousel_module_path(@page, @page_module.moduleable_id)
     end
   end
 
