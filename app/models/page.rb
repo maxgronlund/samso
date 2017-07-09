@@ -31,7 +31,7 @@ class Page < ApplicationRecord
 
   def self.content_types
     [
-      [I18n.t('page_module.text_module'), 'text_module'],
+      [I18n.t('page_module.text_module'), 'TextModule'],
       [I18n.t('page_module.carousel_module'), 'Admin::CarouselModule']
     ]
   end
