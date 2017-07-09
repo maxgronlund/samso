@@ -30,7 +30,10 @@ class Page < ApplicationRecord
   end
 
   def self.content_types
-    PAGE_MODULES.map { |page_module| [I18n.t(page_module[0]), page_module[1]] }
+    [
+      [I18n.t('page_module.text_module'), 'text_module'],
+      [I18n.t('page_module.carousel_module'), 'Admin::CarouselModule']
+    ]
   end
 
   def author_name

@@ -6,6 +6,8 @@ da:
           attributes:
             title:
               blank: Mangler
+            image:
+              blank: Billed mangler
     attributes:
       admin/carousel_slide:
         title: Overskrift
@@ -23,3 +25,4 @@ da:
 
 
 # da.activerecord.errors.models.admin/carousel_slide.attributes.title.blank
+# da.activerecord.errors.models.admin/carousel_slide.attributes.image.blank
