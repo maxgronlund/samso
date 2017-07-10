@@ -1,6 +1,7 @@
 # Module for carousel
 class Admin::CarouselModule < ApplicationRecord
   has_many :slides, class_name: 'Admin::CarouselSlide', dependent: :destroy
+  attr_accessor :position
 
   def admin_page
     page_module.page
@@ -23,5 +24,9 @@ class Admin::CarouselModule < ApplicationRecord
       [I18n.t('medium'), '9_coll_3x1'],
       [I18n.t('small'), '6_coll_2x1']
     ]
+  end
+
+  def position
+    page_module.position
   end
 end

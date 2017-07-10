@@ -13,7 +13,7 @@ class Admin::CarouselModulesController < AdminController
   # PATCH/PUT /admin/carousel_modules/1.json
   def update
     if @carousel_module.update(admin_carousel_module_params)
-      #redirect_to admin_page_path(@page)
+      @carousel_module.page_module.update_attributes(position: admin_carousel_module_params[:position])
       redirect_to admin_page_carousel_module_path(@page, @carousel_module)
     else
       render :edit
@@ -30,6 +30,6 @@ class Admin::CarouselModulesController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_carousel_module_params
-    params.require(:admin_carousel_module).permit(:name, :layout)
+    params.require(:admin_carousel_module).permit(:name, :layout, :position)
   end
 end

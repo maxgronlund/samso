@@ -10,6 +10,8 @@ class TextModule < ApplicationRecord
     default_url: 'style/missing_squarde_image.jpg'
   }
 
+  attr_accessor :position
+
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
@@ -33,6 +35,7 @@ class TextModule < ApplicationRecord
   end
 
   def page_module
+    ap 'find page module'
     PageModule.find_by(
       moduleable_type: 'TextModule',
       moduleable_id: id
@@ -57,5 +60,9 @@ class TextModule < ApplicationRecord
       ['8 col medium', '8_coll_medium'],
       ['8 col high', '8_coll_high']
     ]
+  end
+
+  def position
+    page_module.position
   end
 end

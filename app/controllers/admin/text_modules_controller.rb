@@ -1,12 +1,6 @@
 class Admin::TextModulesController < AdminController
   before_action :set_text_module, only: [:show, :edit, :update, :destroy]
 
-  # GET /text_modules/new
-  def new
-    @text_module = TextModule.new
-    @page = Page.find(params[:page_id])
-  end
-
   # GET /text_modules/1/edit
   def edit
     @page = Page.find(params[:page_id])
@@ -23,14 +17,11 @@ class Admin::TextModulesController < AdminController
   # PATCH/PUT /text_modules/1
   # PATCH/PUT /text_modules/1.json
   def update
-    respond_to do |format|
-      if @text_module.update(text_module_params)
-        format.html { redirect_to admin_page_path(@text_module.admin_page) }
-        format.json { render :show, status: :ok, location: @text_module }
-      else
-        format.html { render :edit }
-        format.json { render json: @text_module.errors, status: :unprocessable_entity }
-      end
+    if @text_module.update(text_module_params)
+      @text_module.page_module.update_attributes(position: text_module_params[:position])
+      redirect_to admin_page_path(@text_module.admin_page)
+    else
+      render :edit
     end
   end
 
@@ -60,7 +51,8 @@ class Admin::TextModulesController < AdminController
       :image,
       :image_size,
       :url,
-      :url_text
+      :url_text,
+      :position
     )
   end
 end

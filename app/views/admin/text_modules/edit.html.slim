@@ -17,6 +17,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         include_blank: false
 
     .col-sm-6
+      = f.input :position, as: :integer
       = f.input :url,
         hint: t('text_module.hints.url'),
         placeholder: t('text_module.placeholders.url')

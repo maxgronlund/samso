@@ -13,7 +13,7 @@
   = f.error_notification
 
   .form-inputs
-    /= f.input :name
+    = f.input :position, as: :integer
 
     = f.input :layout,
       collection: Admin::CarouselModule.image_sizes,

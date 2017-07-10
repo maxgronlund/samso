@@ -1,4 +1,4 @@
-- page_modules.each do |page_module|
+- page_modules.order(:position).each do |page_module|
   = render 'page_modules/show', page_module: page_module
 - if @admin_namespace
   = link_to t('page.add_content'), new_admin_page_page_module_path(page, slot_id: slot_id), class: 'btn btn-primary btn-sm'
