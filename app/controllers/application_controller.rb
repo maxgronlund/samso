@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_admin
   before_action :set_menu
+  before_action :set_default_page
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
@@ -32,6 +33,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+  end
+
+  def set_default_page
+    @page ||= Admin::SystemSetup.landing_page
   end
 
   def set_admin

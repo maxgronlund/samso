@@ -42,6 +42,7 @@ gem 'sendgrid-ruby'
 gem 'slim-rails'
 gem 'simple_form'
 gem 'paperclip'
+gem 'airbrake', '~> 6.2'
 gem 'aws-sdk', '~> 2.3'
 # gem "wysiwyg-rails"
 
