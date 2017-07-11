@@ -1,0 +1,21 @@
+h3 = t('edit_model', model_name: @admin_subscription_module.model_name.human)
+= simple_form_for [:admin, @page, @admin_subscription_module], url: url_for(action: 'update', controller: 'admin/subscription_modules'), method: 'patch' do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :body
+    = f.input :position
+    = f.input :layout
+
+  .form-actions
+    = f.button :submit
+
+/h1 Editing admin_subscription_module
+/
+/== render 'form'
+/
+/= link_to 'Show', @admin_subscription_module
+/'  |
+/= link_to 'Back', admin_subscription_modules_path
+

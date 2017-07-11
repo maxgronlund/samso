@@ -1,0 +1,8 @@
+da:
+  role:
+    member: Medlem
+    admin: Administrator
+    super_admin: Super administrator
+    subscriber: Abonnent
+
+

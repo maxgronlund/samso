@@ -1,0 +1,34 @@
+- if @page
+  = render 'shared/navbar', menu: @menu, top_page: @page
+.container.mt-80
+  .col-sm-12
+    h1 Payment gateway goes here
+    'type in payment info card id etc..
+    hr
+
+
+    = form_tag('/payments', method: :post)
+
+
+      .row
+        .col-sm-6
+          .form-group.full_name.required.user_full_name
+            = label_tag '* Fornavn og efternavn', nil, class: 'control-label email required', for: 'user_full_name'
+            = text_field_tag 'user_full_name', nil, class: 'form-control'
+
+          .form-group.full_name.required.user_email
+            = label_tag '* Email', nil, class: 'control-label email required', for: 'user_email'
+            = text_field_tag 'user_email', nil, class: 'form-control'
+
+
+        .col-sm-6
+          .form-group.email.required.user_address
+            = label_tag '* Adresse', nil, class: 'control-label user_address required', for: 'user_address'
+            = text_field_tag 'Adresse', nil, class: 'form-control'
+
+          .form-group.email.required.user_postal_code_city
+            = label_tag '* Postnr. / by', nil, class: 'control-label user_postal_code_city required', for: 'user_postal_code_city'
+            = text_field_tag 'Adresse', nil, class: 'form-control'
+
+      br
+      = submit_tag "Fortsæt", class: "btn btn-primary"

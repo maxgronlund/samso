@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :roles, dependent: :destroy
+  has_many :subscribtions, class_name: 'Admin::Subscription', dependent: :destroy
 
   accepts_nested_attributes_for :roles
 
@@ -47,5 +48,13 @@ class User < ApplicationRecord
       source = 'https://s3.eu-central-1.amazonaws.com/samso-files/users/avatars/missing/#{size.to_s}/missing.png'
     end
     source
+  end
+
+  def access_to_subscribed_content?
+    false
+  end
+
+  def self.super_admin
+    Role.find_by(permission: Role::SUPER_ADMIN).user
   end
 end

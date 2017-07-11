@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709071302) do
+ActiveRecord::Schema.define(version: 20170711095010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,48 @@ ActiveRecord::Schema.define(version: 20170709071302) do
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
   end
 
+  create_table "admin_subscription_modules", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "layout"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_subscription_types", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.boolean "internet_version"
+    t.boolean "print_version"
+    t.decimal "price"
+    t.string "locale"
+    t.boolean "active"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position", default: 0
+  end
+
+  create_table "admin_subscriptions", force: :cascade do |t|
+    t.integer "subscription_type_id"
+    t.string "duration"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
+    t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
+  end
+
   create_table "admin_system_setups", force: :cascade do |t|
     t.boolean "maintenance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "da_landing_page_id"
     t.integer "en_landing_page_id"
+    t.integer "da_subscription_page_id"
+    t.integer "en_subscription_page_id"
   end
 
   create_table "page_modules", force: :cascade do |t|
@@ -68,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170709071302) do
     t.string "layout", default: "alabama"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "require_subscription", default: false
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
@@ -130,6 +167,7 @@ ActiveRecord::Schema.define(version: 20170709071302) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "page_modules", "pages"
   add_foreign_key "roles", "users"
 end

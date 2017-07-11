@@ -2,17 +2,6 @@ class Admin::PageModulesController < AdminController
   before_action :set_page_module, only: [:show, :edit, :update, :destroy]
   before_action :new_page_with_page_module, only: [:create]
 
-  # GET /page_modules
-  # GET /page_modules.json
-  # def index
-  #   @page_modules = PageModule.all
-  # end
-  #
-  # # GET /page_modules/1
-  # # GET /page_modules/1.json
-  # def show
-  # end
-
   # GET /page_modules/new
   def new
     @page = Page.find(params[:page_id])
@@ -60,6 +49,8 @@ class Admin::PageModulesController < AdminController
       edit_admin_page_text_module_path(@page, @page_module.moduleable_id)
     when 'Admin::CarouselModule'
       edit_admin_page_carousel_module_path(@page, @page_module.moduleable_id)
+    when 'Admin::SubscriptionModule'
+      edit_admin_page_subscription_module_path(@page, @page_module.moduleable_id)
     end
   end
 
@@ -67,6 +58,10 @@ class Admin::PageModulesController < AdminController
     case @page_module.moduleable_type
     when 'TextModule'
       TextModule.find(@page_module.moduleable_id).destroy
+    when 'Admin::CarouselModule'
+      Admin::CarouselModule.find(@page_module.moduleable_id).destroy
+    when 'Admin::SubscriptionModule'
+      Admin::SubscriptionModule.find(@page_module.moduleable_id).destroy
     end
   end
 
@@ -84,6 +79,8 @@ class Admin::PageModulesController < AdminController
       @moduleable = TextModule.create
     when 'Admin::CarouselModule'
       @moduleable = Admin::CarouselModule.create
+    when 'Admin::SubscriptionModule'
+      @moduleable = Admin::SubscriptionModule.create
     end
   end
 

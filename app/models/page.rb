@@ -18,11 +18,6 @@ class Page < ApplicationRecord
     florida
   ).freeze
 
-  PAGE_MODULES = [
-    %w(text_module TextModule),
-    %w(carousel_module Admin::CarouselModule)
-  ].freeze
-
   scope :active, -> { where(active: true) }
 
   def self.locales
@@ -32,7 +27,8 @@ class Page < ApplicationRecord
   def self.content_types
     [
       [I18n.t('page_module.text_module'), 'TextModule'],
-      [I18n.t('page_module.carousel_module'), 'Admin::CarouselModule']
+      [I18n.t('page_module.carousel_module'), 'Admin::CarouselModule'],
+      [I18n.t('page_module.subscription_module'), 'Admin::SubscriptionModule']
     ]
   end
 

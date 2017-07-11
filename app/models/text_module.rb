@@ -35,7 +35,6 @@ class TextModule < ApplicationRecord
   end
 
   def page_module
-    ap 'find page module'
     PageModule.find_by(
       moduleable_type: 'TextModule',
       moduleable_id: id

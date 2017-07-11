@@ -1,0 +1,19 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/subscription_type: Abonnement type
+    attributes:
+      admin/subscription_type:
+        title: Navn
+        body: Beskrivelse
+        duration: Varighed i dage
+        locale: Sprog
+        print_version: Papirudgave
+        internet_version: Internet adgang
+        price: Pris i DKK
+        active: Aktiv
+    models:
+      admin/subscription_type:
+        one: Abonnementstype
+        other: Abonnementstyper

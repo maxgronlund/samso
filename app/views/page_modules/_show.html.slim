@@ -4,4 +4,5 @@
     = render 'text_modules/show', page: page_module.page, text_module: page_module.moduleable
   - when 'Admin::CarouselModule'
     = render 'carousel_modules/show', page: page_module.page, carousel_module: page_module.moduleable
-
+  -when 'Admin::SubscriptionModule'
+    = render 'subscription_modules/show', page: page_module.page, subscription_module: page_module.moduleable

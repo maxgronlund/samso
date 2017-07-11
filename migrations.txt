@@ -23,7 +23,16 @@ rails g scaffold admin/carousel_slide title body:text position:integer admin_car
 
 rails g migration AddLandingPageToAdminSystemSetup da_landing_page_id:integer en_landing_page_id:integer
 
+rails g scaffold admin/subscription_type title body:text internet_version:boolean print_version:boolean price:integer locale active:boolean --no-helper --no-assets --no-controller-specs
 
+rails g scaffold admin/subscription subscription_type:belongs_to duration start_date:date end_date:date user:belongs_to --no-helper --no-assets --no-controller-specs
+
+
+rails g scaffold admin/subscription_module name body layout --no-helper --no-assets --no-controller-specs
+
+rails g controller payments new create show --no-helper --no-assets --no-controller-specs
+
+rails g model payment full_name address postal_code_and_city news_letter:boolean subscription:belongs_to user:belongs_to
 
 
 Page

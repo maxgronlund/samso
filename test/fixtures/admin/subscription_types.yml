@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  title: MyString
+  body: MyText
+  internet_version: true
+  print_version: false
+  price: 2000
+  locale: da
+  active: false
+  duration: 7
+
+two:
+  id: 2
+  title: MyString
+  body: MyText
+  internet_version: true
+  print_version: false
+  price: 2000
+  locale: en
+  active: false
+  duration: 30

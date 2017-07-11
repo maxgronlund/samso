@@ -1,0 +1,8 @@
+en:
+  role:
+    member: Member
+    admin: Administrator
+    super_admin: Super administrator
+    subscriber: Subscriber
+
+

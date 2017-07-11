@@ -1,0 +1,17 @@
+= simple_form_for(@admin_subscription_type) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :body
+    = f.input :duration
+    = f.input :internet_version
+    = f.input :print_version
+    = f.input :price
+    = f.hidden_field :locale, value: I18n.locale.to_s
+    = f.input :active
+    = f.input :position,
+      hint: 'laveste position vises først på listen'
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'

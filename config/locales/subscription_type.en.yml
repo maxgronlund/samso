@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    errors:
+      models:
+        subscription_type: Subscribtion type
+    attributes:
+      subscription_type:
+        name: Name
+        body: Description
+        locale: Language
+        print: Paper version
+        internet: Internet
+        price: Price in 'øre'
+        active: Active
+    models:
+      subscription_type: Subscribtion type

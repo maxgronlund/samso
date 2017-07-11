@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @admin_subscription_module.name
+p
+  strong Body:
+  = @admin_subscription_module.body
+p
+  strong Layout:
+  = @admin_subscription_module.layout
+
+= link_to 'Edit', edit_admin_subscription_module_path(@admin_subscription_module)
+'  |
+= link_to 'Back', admin_subscription_modules_path
