@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :roles, dependent: :destroy
   has_many :subscribtions, class_name: 'Admin::Subscription', dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   accepts_nested_attributes_for :roles
 

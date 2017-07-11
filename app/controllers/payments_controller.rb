@@ -1,7 +1,8 @@
 class PaymentsController < ApplicationController
 
   def new
-    ap payment_params
+    Admin::SubscriptionType.find(payment_params[:subscription_type_id])
+    @payment = Payment.new
     find_page
   end
 

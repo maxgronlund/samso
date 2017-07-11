@@ -24,8 +24,11 @@ class SubscriptionsController < ApplicationController
   # POST /admin/subscriptions
   # POST /admin/subscriptions.json
   def create
-
+    ap subscription_params
     subscription_params.delete :authenticity_token
+    subscription_params.delete :commit
+    subscription_params.delete :controller
+    subscription_params.delete :action
     redirect_to new_payment_path(subscription_params)
 
     # @admin_subscription = Admin::Subscription.new(admin_subscription_params)

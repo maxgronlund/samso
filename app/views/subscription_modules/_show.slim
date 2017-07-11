@@ -8,9 +8,9 @@ hr
   - Admin::SubscriptionType.for_subscription.each_with_index do |subscription_type, index|
     = label_tag do
       - if index == 0
-        = radio_button_tag 'subscription_type', subscription_type.id, checked='checked'
+        = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
       - else
-        = radio_button_tag 'subscription_type', subscription_type.id
+        = radio_button_tag 'subscription_type_id', subscription_type.id
 
       '&nbsp
       b = subscription_type.title
@@ -18,26 +18,3 @@ hr
 
     hr
   = submit_tag "Fortsæt", class: "btn btn-primary"
-  /= hidden_field :pages, :page_id, :value => page.id
-/= simple_form_for(Admin::Subscription.new) do |f|
-/  = f.error_notification
-/
-/  .form-inputs
-/    .form-group.radio_buttons.required.admin_subscription_subscription_type
-/      - Admin::SubscriptionType.where(locale: I18n.locale.to_s).each do |subscription_type|
-/        br
-/        input name="admin_subscription[subscription_type_id]" type="hidden" value=""
-/        span.radio
-/          label for="admin_subscription_subscription_type_id_#{subscription_type.id}"
-/            input.radio_buttons.required id="admin_subscription_subscription_type_id_#{subscription_type.id}"  name="admin_subscription[subscription_type_id]" type="radio" value="1"
-/            = subscription_type.title
-/            br = subscription_type.body
-/
-/    /= f.association :subscription_type, as: :radio_buttons
-/    /= f.input :duration
-/    /= f.input :start_date
-/    /= f.input :end_date
-/    /= f.association :user
-/
-/  .form-actions
-/    = f.button :submit
