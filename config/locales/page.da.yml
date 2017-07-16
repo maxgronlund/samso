@@ -12,6 +12,7 @@ da:
         active: Aktiveret
         locale: Sprog
         user_id: Oprettet af
+        require_subscription: Kun adgang for abonnenter
     models:
       page: Side
 

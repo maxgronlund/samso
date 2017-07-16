@@ -1,0 +1,29 @@
+h1 Listing admin_subscriptions
+
+table
+  thead
+    tr
+      th Subscription type
+      th Duration
+      th Start date
+      th End date
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @admin_subscriptions.each do |admin_subscription|
+      tr
+        td = admin_subscription.subscription_type
+        td = admin_subscription.duration
+        td = admin_subscription.start_date
+        td = admin_subscription.end_date
+        td = admin_subscription.user
+        td = link_to 'Show', admin_subscription
+        td = link_to 'Edit', edit_admin_subscription_path(admin_subscription)
+        td = link_to 'Destroy', admin_subscription, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Subscription', new_admin_subscription_path

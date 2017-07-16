@@ -11,6 +11,7 @@ da:
             email:
               blank: 'Email skal udfyldes'
               invalid: 'Ugyldig email'
+              taken: 'Email er allerede brugt'
             password:
               blank: 'Password skal udfyldes'
               too_short: 'Password skal være længere'

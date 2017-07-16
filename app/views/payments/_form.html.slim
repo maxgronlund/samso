@@ -1,0 +1,22 @@
+= simple_form_for(@payment) do |f|
+  = f.error_notification
+  .row
+    .col-sm-6
+      .form-inputs
+        = f.input :name
+        = f.input :address
+        = f.input :postal_code_and_city
+        - unless user_signed_in?
+          = f.input :email
+          = f.input :password
+          = f.input :password_confirmation
+        = f.input :news_letter
+        = f.hidden_field :subscription_type_id, value: @subscription_type_id
+    .col-sm-6
+      .form-inputs
+        h3 DIPS
+        'payment form there
+
+
+  .form-actions
+    = f.button :submit

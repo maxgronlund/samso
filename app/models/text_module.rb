@@ -1,5 +1,6 @@
 # raw text to place on a page
 class TextModule < ApplicationRecord
+  belongs_to :page, optional: true
   has_attached_file :image, styles: {
     size_640_240: '640x240#',
     '4_coll_squared'.to_sym => '400x400#',
@@ -28,6 +29,7 @@ class TextModule < ApplicationRecord
     daihatsu
     dodge
     fiat
+    ford
   ).freeze
 
   def admin_page
@@ -35,7 +37,6 @@ class TextModule < ApplicationRecord
   end
 
   def page_module
-    ap 'find page module'
     PageModule.find_by(
       moduleable_type: 'TextModule',
       moduleable_id: id

@@ -1,0 +1,10 @@
+= simple_form_for(@admin_subscription_module) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :body
+    = f.input :layout
+
+  .form-actions
+    = f.button :submit

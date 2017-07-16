@@ -85,7 +85,8 @@ class Admin::PagesController < AdminController
       :active,
       :locale,
       :user_id,
-      :layout
+      :layout,
+      :require_subscription
     )
   end
 end

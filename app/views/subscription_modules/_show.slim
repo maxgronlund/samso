@@ -1,0 +1,28 @@
+- if @admin_namespace
+  = render 'subscription_modules/links', subscription_module: subscription_module, page: page
+
+/- if user_signed_in?
+/  = link_to t('sign_up'), new_user_session_path, class: 'btn btn-warning btn-lg'
+/- else
+/  = link_to t('create_account'), new_user_session_path, class: 'btn btn-warning btn-lg'
+
+
+hr
+h3 = subscription_module.name
+= subscription_module.body
+hr
+= form_tag('/subscriptions', method: :post)
+  - Admin::SubscriptionType.for_subscription.each_with_index do |subscription_type, index|
+    = label_tag do
+      - if index == 0
+        = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
+      - else
+        = radio_button_tag 'subscription_type_id', subscription_type.id
+
+      '&nbsp
+      b = subscription_type.title
+      br = subscription_type.body
+
+    hr
+  = submit_tag "Fortsæt", class: "btn btn-primary"
+/ touched

@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @payment.name
+p
+  strong Email:
+  = @payment.email
+p
+  strong Address:
+  = @payment.address
+p
+  strong Postal code and city:
+  = @payment.postal_code_and_city
+p
+  strong Password:
+  = @payment.password
+p
+  strong Password confirmation:
+  = @payment.password_confirmation
+p
+  strong News letter:
+  = @payment.news_letter
+p
+  strong Subscription:
+  = @payment.subscription
+p
+  strong User:
+  = @payment.user
+
+= link_to 'Edit', edit_payment_path(@payment)
+'  |
+= link_to 'Back', payments_path

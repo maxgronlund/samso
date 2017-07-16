@@ -1,0 +1,35 @@
+h2 = I18n.t('activerecord.models.admin/subscription_type', count: 2)
+
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th = t('activerecord.attributes.admin/subscription_type.title')
+        th = t('activerecord.attributes.admin/subscription_type.duration')
+        th = t('activerecord.attributes.admin/subscription_type.internet_version')
+        th = t('activerecord.attributes.admin/subscription_type.print_version')
+        th = t('activerecord.attributes.admin/subscription_type.price')
+        /th = t('activerecord.attributes.admin/subscription_type.locale')
+        th = t('activerecord.attributes.admin/subscription_type.active')
+        th colspan="3"
+
+
+    tbody
+      - @admin_subscription_types.each do |admin_subscription_type|
+        tr
+          td = admin_subscription_type.title
+          td = admin_subscription_type.duration
+          td = admin_subscription_type.internet_version ? '√' : ''
+          td = admin_subscription_type.print_version ? '√' : ''
+          td = number_to_currency(admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
+          /td = admin_subscription_type.locale
+          td = admin_subscription_type.active ? '√' : ''
+          td.float-right-button-container
+            = link_to t('show'), admin_subscription_type, class: 'btn btn-primary btn-sm'
+            = link_to t('edit'), edit_admin_subscription_type_path(admin_subscription_type), class: 'btn btn-secondary btn-sm'
+            = link_to t('delete'), admin_subscription_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
+
+br
+
+= link_to t('new_model', model_name: Admin::SubscriptionType.model_name.human), new_admin_subscription_type_path, class: 'btn btn-primary'

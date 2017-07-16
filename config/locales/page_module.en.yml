@@ -7,5 +7,6 @@ en:
       page_module: Section
 
   page_module:
-    text_module: Text sektion
+    text_module: Text section
     carousel_module: Image carousel
+    subscription_module: 'Subscription section'
