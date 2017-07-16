@@ -39,27 +39,27 @@ class Admin::SubscriptionsController < AdminController
 
   # PATCH/PUT /admin/subscriptions/1
   # PATCH/PUT /admin/subscriptions/1.json
-  def update
-    respond_to do |format|
-      if @admin_subscription.update(admin_subscription_params)
-        format.html { redirect_to @admin_subscription, notice: 'Subscription was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_subscription }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_subscription.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /admin/subscriptions/1
-  # DELETE /admin/subscriptions/1.json
-  def destroy
-    @admin_subscription.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_subscriptions_url, notice: 'Subscription was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @admin_subscription.update(admin_subscription_params)
+  #       format.html { redirect_to @admin_subscription, notice: 'Subscription was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @admin_subscription }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @admin_subscription.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  #
+  # # DELETE /admin/subscriptions/1
+  # # DELETE /admin/subscriptions/1.json
+  # def destroy
+  #   @admin_subscription.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to admin_subscriptions_url, notice: 'Subscription was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,6 +1,13 @@
 - if @admin_namespace
   = render 'subscription_modules/links', subscription_module: subscription_module, page: page
 
+/- if user_signed_in?
+/  = link_to t('sign_up'), new_user_session_path, class: 'btn btn-warning btn-lg'
+/- else
+/  = link_to t('create_account'), new_user_session_path, class: 'btn btn-warning btn-lg'
+
+
+hr
 h3 = subscription_module.name
 = subscription_module.body
 hr

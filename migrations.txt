@@ -32,7 +32,9 @@ rails g scaffold admin/subscription_module name body layout --no-helper --no-ass
 
 rails g controller payments new create show --no-helper --no-assets --no-controller-specs
 
-rails g model payment full_name address postal_code_and_city news_letter:boolean subscription:belongs_to user:belongs_to
+rails g scaffold payment name email address postal_code_and_city password password_confirmation news_letter:boolean subscription:belongs_to user:belongs_to --no-helper --no-assets --no-controller-specs
+
+rails g migration add_login_required_title_to_admin_subscriptions login_required_title login_required_body:text
 
 
 Page

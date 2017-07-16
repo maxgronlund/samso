@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :payments
+  #devise_for :users, controllers: { sessions: 'users/sessions' }
+
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :pages do
@@ -23,12 +26,12 @@ Rails.application.routes.draw do
     resources :pages, only: [:show]
     resources :subscriptions
     #resources :subscription_types
-    devise_for :users
+    #devise_for :users
+    devise_for :users, controllers: { sessions: 'users/sessions' }
     get '/:locale' => 'home#index'
     root to: "home#index"
     resources :users, except: [:index]
 
-    resources :payments, only: [:new, :create, :show]
-  end
+    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

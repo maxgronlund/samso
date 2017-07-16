@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :roles, dependent: :destroy
-  has_many :subscribtions, class_name: 'Admin::Subscription', dependent: :destroy
+  has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :payments, dependent: :destroy
 
   accepts_nested_attributes_for :roles
@@ -52,6 +52,8 @@ class User < ApplicationRecord
   end
 
   def access_to_subscribed_content?
+    return false unless subscriptions.any?
+    return subscriptions.where("end_date >= :today", {today: Date.today}).any?
     false
   end
 
