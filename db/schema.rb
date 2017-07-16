@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712070737) do
+ActiveRecord::Schema.define(version: 20170716182827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,8 @@ ActiveRecord::Schema.define(version: 20170712070737) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.string "image_size"
+    t.integer "page_id"
+    t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 
   create_table "users", force: :cascade do |t|

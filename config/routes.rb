@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :subscriptions
     #resources :subscription_types
     #devise_for :users
-    devise_for :users, controllers: { sessions: 'users/sessions' }
+    devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     get '/:locale' => 'home#index'
     root to: "home#index"
     resources :users, except: [:index]

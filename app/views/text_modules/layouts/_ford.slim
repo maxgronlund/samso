@@ -1,0 +1,11 @@
+.text-module
+  .aston-martin
+    .mb-10
+      = render 'text_modules/image', text_module: text_module, image_size: text_module.image_size.to_sym
+      .card-block
+        h4.card-title = text_module.title
+        p.card-text = raw(text_module.body)
+        p.card-text
+        - if text_module.url.present?
+          .float-right
+            = link_to text_module.url_text, text_module.url, class: 'btn btn-warning'

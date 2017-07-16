@@ -7,6 +7,8 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         collection: TextModule::LAYOUTS,
         include_blank: false
 
+      = f.input :position, as: :integer
+
       = label_tag 'billed'
       = f.input :image,
         label: false,
@@ -17,7 +19,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         include_blank: false
 
     .col-sm-6
-      = f.input :position, as: :integer
+      = f.association :page, collection: Page.active().where(locale: I18n.locale)
       = f.input :url,
         hint: t('text_module.hints.url'),
         placeholder: t('text_module.placeholders.url')

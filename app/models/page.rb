@@ -3,6 +3,7 @@ class Page < ApplicationRecord
   belongs_to :user
   has_many :page_modules, dependent: :destroy
   has_many :admin_carousel_slide
+  has_many :text_modules
 
   LOCALES = %w(da en).freeze
 

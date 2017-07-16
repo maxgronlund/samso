@@ -50,3 +50,6 @@ PageSection
 
 Post:
   belongs_to :postable
+
+
+rails g migration add_page_id_to_text_moduels page_id:integer

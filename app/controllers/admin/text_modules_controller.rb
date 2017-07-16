@@ -52,7 +52,8 @@ class Admin::TextModulesController < AdminController
       :image_size,
       :url,
       :url_text,
-      :position
+      :position,
+      :page_id
     )
   end
 end
