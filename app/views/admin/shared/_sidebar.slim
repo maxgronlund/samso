@@ -23,13 +23,17 @@ aside.sidebar
           = link_to admin_users_path do
             i.fa.fa-users
             | Brugere
+        li class="#{@selected == 'subscription_types' ? 'active' : ''}"
+          = link_to admin_subscription_types_path do
+            i.fa.fa-shopping-cart
+            | Abonnement typer
         li class="#{@selected == 'system_setups' ? 'active' : ''}"
           = link_to edit_admin_system_setup_path(Admin::SystemSetup.first)
             i.fa.fa-gear
             | System opsætning
         li class="#{@selected == 'pages' ? 'active' : ''}"
           = link_to admin_pages_path
-            i.fa.fa-gear
+            i.fa.fa-list
             | Sider
         / li class="#{@selected == 'contents' ? 'active' : ''}"
         /   a href=""

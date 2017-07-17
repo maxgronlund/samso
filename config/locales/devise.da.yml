@@ -1,5 +1,5 @@
 da:
-  devise:
+  users:
     confirmations:
       confirmed: "Din konto er blevet bekræftet."
       send_instructions: "Om få minutter vil du modtage en email med instruktioner om aktivering af din konto."
@@ -41,6 +41,8 @@ da:
     sessions:
       signed_in: "Du er nu logget ind."
       signed_out: "Du er nu logget ud."
+      new:
+        sign_in: Login
     unlocks:
       send_instructions: 'Om få minutter vil du modtage en email med instruktioner om genåbning af din konto.'
       send_paranoid_instructions: 'Hvis din e-mail adresse findes i vores database vil du modtage in e-mail med instutioner om hvordan du kan låse din konto op.'

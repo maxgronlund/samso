@@ -1,0 +1,12 @@
+= simple_form_for(@admin_subscription) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :subscription_type
+    = f.input :duration
+    = f.input :start_date
+    = f.input :end_date
+    = f.association :user
+
+  .form-actions
+    = f.button :submit

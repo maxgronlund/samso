@@ -1,0 +1,37 @@
+h1 Listing payments
+
+table
+  thead
+    tr
+      th Name
+      th Email
+      th Address
+      th Postal code and city
+      th Password
+      th Password confirmation
+      th News letter
+      th Subscription
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @payments.each do |payment|
+      tr
+        td = payment.name
+        td = payment.email
+        td = payment.address
+        td = payment.postal_code_and_city
+        td = payment.password
+        td = payment.password_confirmation
+        td = payment.news_letter
+        td = payment.subscription
+        td = payment.user
+        td = link_to 'Show', payment
+        td = link_to 'Edit', edit_payment_path(payment)
+        td = link_to 'Destroy', payment, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Payment', new_payment_path

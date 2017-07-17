@@ -1,0 +1,1 @@
+json.partial! "admin_subscription_modules/admin_subscription_module", admin_subscription_module: @admin_subscription_module

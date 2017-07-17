@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @admin_subscription_type.title
+p
+  strong Body:
+  = @admin_subscription_type.body
+p
+  strong Internet version:
+  = @admin_subscription_type.internet_version
+p
+  strong Print version:
+  = @admin_subscription_type.print_version
+p
+  strong Price:
+  = @admin_subscription_type.price
+p
+  strong Locale:
+  = @admin_subscription_type.locale
+p
+  strong Active:
+  = @admin_subscription_type.active
+p
+  strong Position:
+  = @admin_subscription_type.position
+
+= link_to 'Edit', edit_admin_subscription_type_path(@admin_subscription_type)
+'  |
+= link_to 'Back', admin_subscription_types_path

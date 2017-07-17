@@ -29,6 +29,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_url?
 
+  def access_to_subscribed_content?
+    return false unless current_user
+    current_user.access_to_subscribed_content?
+  end
+  helper_method :access_to_subscribed_content?
+
   protected
 
   # def configure_permitted_parameters

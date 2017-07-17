@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Subscription type:
+  = @admin_subscription.subscription_type
+p
+  strong Duration:
+  = @admin_subscription.duration
+p
+  strong Start date:
+  = @admin_subscription.start_date
+p
+  strong End date:
+  = @admin_subscription.end_date
+p
+  strong User:
+  = @admin_subscription.user
+
+= link_to 'Edit', edit_admin_subscription_path(@admin_subscription)
+'  |
+= link_to 'Back', admin_subscriptions_path

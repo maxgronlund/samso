@@ -1,0 +1,25 @@
+h1 Listing admin_subscription_modules
+
+table
+  thead
+    tr
+      th Name
+      th Body
+      th Layout
+      th
+      th
+      th
+
+  tbody
+    - @admin_subscription_modules.each do |admin_subscription_module|
+      tr
+        td = admin_subscription_module.name
+        td = admin_subscription_module.body
+        td = admin_subscription_module.layout
+        td = link_to 'Show', admin_subscription_module
+        td = link_to 'Edit', edit_admin_subscription_module_path(admin_subscription_module)
+        td = link_to 'Destroy', admin_subscription_module, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Subscription module', new_admin_subscription_module_path

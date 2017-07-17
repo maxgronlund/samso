@@ -9,7 +9,7 @@ en:
         active: Aktive
         locale: Language
         user_id: Created by
-
+        require_subscription: Only access for subscribers
 
     models:
       page: Page
