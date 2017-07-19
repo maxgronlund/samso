@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-
     if session[:after_sign_in_path]
       after_sign_in_path = session[:after_sign_in_path]
       session.delete :after_sign_in_path

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
   before_action :set_locale
@@ -37,14 +38,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
-  # end
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :name) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password, :name) }
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
-
 
   def set_default_page
     @page ||= Admin::SystemSetup.landing_page

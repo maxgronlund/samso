@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+subscription_module_one:
   name: MyString
   body: MyString
   layout: MyString
 
-two:
+subscription_module_two:
   name: MyString
   body: MyString
   layout: MyString

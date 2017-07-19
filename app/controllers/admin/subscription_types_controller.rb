@@ -27,28 +27,20 @@ class Admin::SubscriptionTypesController < AdminController
   def create
     @admin_subscription_type = Admin::SubscriptionType.new(admin_subscription_type_params)
 
-    respond_to do |format|
-      if @admin_subscription_type.save
-        format.html { redirect_to @admin_subscription_type }
-        format.json { render :show, status: :created, location: @admin_subscription_type }
-      else
-        format.html { render :new }
-        format.json { render json: @admin_subscription_type.errors, status: :unprocessable_entity }
-      end
+    if @admin_subscription_type.save
+      redirect_to @admin_subscription_type
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /admin/subscription_types/1
   # PATCH/PUT /admin/subscription_types/1.json
   def update
-    respond_to do |format|
-      if @admin_subscription_type.update(admin_subscription_type_params)
-        format.html { redirect_to @admin_subscription_type}
-        format.json { render :show, status: :ok, location: @admin_subscription_type }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_subscription_type.errors, status: :unprocessable_entity }
-      end
+    if @admin_subscription_type.update(admin_subscription_type_params)
+      redirect_to @admin_subscription_type
+    else
+      render :edit
     end
   end
 
@@ -56,10 +48,7 @@ class Admin::SubscriptionTypesController < AdminController
   # DELETE /admin/subscription_types/1.json
   def destroy
     @admin_subscription_type.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_subscription_types_url }
-      format.json { head :no_content }
-    end
+    redirect_to admin_subscription_types_url
   end
 
   private

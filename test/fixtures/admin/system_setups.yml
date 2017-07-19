@@ -2,5 +2,6 @@
 
 one:
   maintenance: false
+  da_subscription_page_id: payment_page
 
 

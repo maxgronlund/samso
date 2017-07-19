@@ -1,3 +1,4 @@
+# Synamic subscriptions types
 class CreateAdminSubscriptionTypes < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_subscription_types do |t|

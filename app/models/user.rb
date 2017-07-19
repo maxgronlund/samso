@@ -53,8 +53,7 @@ class User < ApplicationRecord
 
   def access_to_subscribed_content?
     return false unless subscriptions.any?
-    return subscriptions.where("end_date >= :today", {today: Date.today}).any?
-    false
+    subscriptions.where('end_date >= :today', today: Date.today).any?
   end
 
   def self.super_admin

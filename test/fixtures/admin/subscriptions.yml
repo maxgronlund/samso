@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  admin_subscription_type_id: 1
+  subscription_type_id: subscription_type_one
   duration: MyString
   start_date: 2017-07-10
   end_date: 2017-07-10
   user: one
 
 two:
-  admin_subscription_type_id: 2
+  subscription_type_id: subscription_type_two
   duration: MyString
   start_date: 2017-07-10
   end_date: 2017-07-10

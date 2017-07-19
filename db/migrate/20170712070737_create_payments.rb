@@ -1,3 +1,4 @@
+# papertrail for payments, might be subject to changes
 class CreatePayments < ActiveRecord::Migration[5.1]
   def change
     create_table :payments do |t|

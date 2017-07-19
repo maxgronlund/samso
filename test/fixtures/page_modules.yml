@@ -13,3 +13,10 @@ two:
   moduleable_type: "Admin::CarouselModule"
   slot_id: 1
   position: 2
+
+three:
+  page: subscription_page
+  moduleable: subscription_module_one
+  moduleable_type: "Admin::SubscriptionModule"
+  slot_id: 1
+  position: 2

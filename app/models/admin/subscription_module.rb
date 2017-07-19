@@ -1,5 +1,5 @@
+# module for selection subscription
 class Admin::SubscriptionModule < ApplicationRecord
-
   attr_accessor :position
 
   def admin_page
@@ -7,14 +7,17 @@ class Admin::SubscriptionModule < ApplicationRecord
   end
 
   def page_module
-    PageModule.find_by(
+    @page_module ||= PageModule.find_by(
       moduleable_type: 'Admin::SubscriptionModule',
       moduleable_id: id
     )
   end
 
   def position
-    page_module.position
+    page_module ? page_module.position : 0
   end
 
+  def page
+    page_module ? page_module.page : nil
+  end
 end

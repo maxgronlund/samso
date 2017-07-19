@@ -32,12 +32,10 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-
     ActiveRecord::Base.transaction do
       create_subscription
       create_payment
-
-      if @subscription.nil? ||  @payment.nil?
+      if @subscription.nil? || @payment.nil?
         raise ActiveRecord::Rollback, 'something went wrong'
       end
     end
@@ -70,30 +68,6 @@ class PaymentsController < ApplicationController
     @payment.save
   end
 
-  # PATCH/PUT /payments/1
-  # PATCH/PUT /payments/1.json
-  #def update
-  #  respond_to do |format|
-  #    if @payment.update(payment_params)
-  #      format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
-  #      format.json { render :show, status: :ok, location: @payment }
-  #    else
-  #      format.html { render :edit }
-  #      format.json { render json: @payment.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
-  # DELETE /payments/1
-  # DELETE /payments/1.json
-  # def destroy
-  #   @payment.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
   private
 
   def valid_payment_params
@@ -101,7 +75,6 @@ class PaymentsController < ApplicationController
     params_copy.delete :subscription_type_id
     params_copy
   end
-
 
   def payment_params_with_user_id
     params_copy = payment_params.dup
@@ -125,6 +98,7 @@ class PaymentsController < ApplicationController
       :password_confirmation,
       :news_letter,
       :subscription_type_id,
-      :user_id)
+      :user_id
+    )
   end
 end

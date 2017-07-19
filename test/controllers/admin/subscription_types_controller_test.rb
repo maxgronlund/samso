@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::SubscriptionTypesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @admin_subscription_type = admin_subscription_types(:one)
+    @admin_subscription_type = admin_subscription_types(:subscription_type_one)
     @user = users(:one)
     Warden.test_mode!
     sign_in(@user)
@@ -12,17 +12,17 @@ class Admin::SubscriptionTypesControllerTest < ActionDispatch::IntegrationTest
     Warden.test_reset!
   end
 
-  test "should get index" do
+  test 'should get index' do
     get admin_subscription_types_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_admin_subscription_type_url
     assert_response :success
   end
 
-  test "should create admin_subscription_type" do
+  test 'should create admin_subscription_type' do
     assert_difference('Admin::SubscriptionType.count') do
       post admin_subscription_types_url, params: {
         admin_subscription_type: {
@@ -40,18 +40,18 @@ class Admin::SubscriptionTypesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_subscription_type_url(Admin::SubscriptionType.last, locale: 'da')
   end
 
-  test "should show admin_subscription_type" do
-    get admin_subscription_type_url(@admin_subscription_type)
+  test 'should show admin_subscription_type' do
+    get admin_subscription_type_url(@admin_subscription_type, locale: 'da')
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_admin_subscription_type_url(@admin_subscription_type)
+  test 'should get edit' do
+    get edit_admin_subscription_type_url(@admin_subscription_type, locale: 'da')
     assert_response :success
   end
 
-  test "should update admin_subscription_type" do
-    patch admin_subscription_type_url(@admin_subscription_type), params: {
+  test 'should update admin_subscription_type' do
+    patch admin_subscription_type_url(@admin_subscription_type, locale: 'da'), params: {
       admin_subscription_type: {
         active: @admin_subscription_type.active,
         body: @admin_subscription_type.body,
@@ -65,9 +65,9 @@ class Admin::SubscriptionTypesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_subscription_type_url(@admin_subscription_type, locale: 'da')
   end
 
-  test "should destroy admin_subscription_type" do
+  test 'should destroy admin_subscription_type' do
     assert_difference('Admin::SubscriptionType.count', -1) do
-      delete admin_subscription_type_url(@admin_subscription_type)
+      delete admin_subscription_type_url(@admin_subscription_type, locale: 'da')
     end
 
     assert_redirected_to admin_subscription_types_url(locale: 'da')

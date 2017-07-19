@@ -34,6 +34,11 @@ class Admin::SystemSetupsController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_system_setup_params
-    params.require(:admin_system_setup).permit(:maintenance)
+    params.require(:admin_system_setup).permit(
+      :da_landing_page_id,
+      :da_subscription_page_id,
+      :en_landing_page_id,
+      :en_subscription_page_id
+    )
   end
 end

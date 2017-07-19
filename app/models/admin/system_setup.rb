@@ -29,7 +29,6 @@ class Admin::SystemSetup < ApplicationRecord
     end
   end
 
-
   # usage Admin::SystemSetup.current
   def self.current
     Admin::SystemSetup.first_or_create(

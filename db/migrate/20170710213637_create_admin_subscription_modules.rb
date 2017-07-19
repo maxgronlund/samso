@@ -1,3 +1,4 @@
+# module for selecting subscriptions
 class CreateAdminSubscriptionModules < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_subscription_modules do |t|
