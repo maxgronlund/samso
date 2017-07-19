@@ -1,0 +1,21 @@
+- if @admin_namespace
+  = render 'blog_modules/links', blog_module: blog_module, page: page
+
+= render 'blog_modules/layouts/' + blog_module.layout, blog_module: blog_module
+/- case blog_module.layout
+/- when 'the_beatles'
+/ p#notice = notice
+/
+/ p
+/   strong Name:
+/   = @admin_blog_module.name
+/ p
+/   strong Body:
+/   = @admin_blog_module.body
+/ p
+/   strong Layout:
+/   = @admin_blog_module.layout
+/
+/ = link_to 'Edit', edit_admin_blog_module_path(@admin_blog_module)
+/ '  |
+/ = link_to 'Back', admin_blog_modules_path

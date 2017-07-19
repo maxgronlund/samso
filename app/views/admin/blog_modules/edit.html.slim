@@ -1,0 +1,14 @@
+h3 = t('edit_model', model_name: @admin_blog_module.model_name.human)
+= simple_form_for [:admin, @page, @admin_blog_module], url: url_for(action: 'update', controller: 'admin/blog_modules'), method: 'patch' do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :body
+    = f.input :position, as: :integer
+    = f.input :layout,
+      collection: Admin::BlogModule.layouts,
+      include_blank: false
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'

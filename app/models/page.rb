@@ -29,7 +29,8 @@ class Page < ApplicationRecord
     [
       [I18n.t('page_module.text_module'), 'TextModule'],
       [I18n.t('page_module.carousel_module'), 'Admin::CarouselModule'],
-      [I18n.t('page_module.subscription_module'), 'Admin::SubscriptionModule']
+      [I18n.t('page_module.subscription_module'), 'Admin::SubscriptionModule'],
+      [I18n.t('page_module.blog_module'), 'Admin::BlogModule']
     ]
   end
 

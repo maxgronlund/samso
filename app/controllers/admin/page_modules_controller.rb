@@ -51,6 +51,8 @@ class Admin::PageModulesController < AdminController
       edit_admin_page_carousel_module_path(@page, @page_module.moduleable_id)
     when 'Admin::SubscriptionModule'
       edit_admin_page_subscription_module_path(@page, @page_module.moduleable_id)
+    when 'Admin::BlogModule'
+      edit_admin_page_blog_module_path(@page, @page_module.moduleable_id)
     end
   end
 
@@ -62,6 +64,8 @@ class Admin::PageModulesController < AdminController
       Admin::CarouselModule.find(@page_module.moduleable_id).destroy
     when 'Admin::SubscriptionModule'
       Admin::SubscriptionModule.find(@page_module.moduleable_id).destroy
+    when 'Admin::BlogModule'
+      Admin::BlogModule.find(@page_module.moduleable_id).destroy
     end
   end
 
@@ -81,6 +85,8 @@ class Admin::PageModulesController < AdminController
       @moduleable = Admin::CarouselModule.create
     when 'Admin::SubscriptionModule'
       @moduleable = Admin::SubscriptionModule.create
+    when 'Admin::BlogModule'
+      @moduleable = Admin::BlogModule.create
     end
   end
 

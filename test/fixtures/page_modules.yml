@@ -20,3 +20,10 @@ three:
   moduleable_type: "Admin::SubscriptionModule"
   slot_id: 1
   position: 2
+
+blog_page_module:
+  page: news_page
+  moduleable: blog_module_one
+  moduleable_type: "Admin::BlogModule"
+  slot_id: 1
+  position: 2

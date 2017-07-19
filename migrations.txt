@@ -37,6 +37,8 @@ rails g scaffold payment name email address postal_code_and_city password passwo
 rails g migration add_login_required_title_to_admin_subscriptions login_required_title login_required_body:text
 
 
+rails g scaffold admin/blog_module name body layout --no-helper --no-assets --no-controller-specs
+
 Page
   has_one :page_layout
 
