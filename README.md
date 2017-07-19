@@ -23,6 +23,10 @@ Things you may want to cover:
   $ heroku run --app samso rake db:migrate
   $ heroku logs --tail --app samso
 
+* Tasks
+  $ heroku run --app samso rake page:build_subscription_pages
+  $ heroku run --app samso rake page:build_front_pages
+
 * How to run the test suite
   $ rake
 

@@ -18,7 +18,7 @@ namespace :page do
   end
 
   # usage
-  # rake page:build_subscription_pages
+  # rake page:build_front_pages
   desc 'build default front pages'
   task build_front_pages: :environment do
     user = User.super_admin
