@@ -1,5 +1,6 @@
 # dynamic blog to add on a page
 class Admin::BlogModule < ApplicationRecord
+  has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
   attr_accessor :position
   def admin_page
     page_module.page

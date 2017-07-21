@@ -1,7 +1,9 @@
 - if @admin_namespace
-  = render 'blog_modules/links', blog_module: blog_module, page: page
+  = render 'blog/links', blog_module: blog_module, page: page
 
-= render 'blog_modules/layouts/' + blog_module.layout, blog_module: blog_module
+
+
+= render 'blog/layouts/' + blog_module.layout, blog_module: blog_module
 /- case blog_module.layout
 /- when 'the_beatles'
 / p#notice = notice

@@ -1,12 +1,19 @@
-= simple_form_for(@post) do |f|
-  = f.error_notification
+.form-inputs
+  = f.input :title
+  = f.input :teaser
+  = f.input :body
+  /= f.input :position
+  = f.input :image, as: :file
 
-  .form-inputs
-    = f.input :title
-    = f.input :body
-    = f.input :identifier
-    = f.input :position
-    = f.association :postable
+.form-actions
+  = f.submit t('save'), class: 'btn btn-primary'
 
-  .form-actions
-    = f.button :submit
+javascript:
+  $('selector').froalaEditor();
+  $(function() {
+    $('#admin_blog_post_body').froalaEditor({toolbarInline: false})
+  });
+
+  $('.selector').froalaEditor({
+    fontFamilySelection: true
+  });

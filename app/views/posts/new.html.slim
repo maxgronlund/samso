@@ -1,5 +1,7 @@
-h1 New content
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.mt-80
+  h3 = t('blog_post.new')
 
-== render 'form'
-
-= link_to 'Back', contents_path
+  = simple_form_for [:admin, @blog, @post], multipart: true, url: url_for(action: 'create', controller: 'posts'), method: 'post' do |f|
+    = f.error_notification
+    == render 'form', f: f

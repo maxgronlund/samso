@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719063916) do
+ActiveRecord::Schema.define(version: 20170721085546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,21 @@ ActiveRecord::Schema.define(version: 20170719063916) do
     t.string "layout"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_blog_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "position"
+    t.integer "blog_module_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.text "teaser"
+    t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
   end
 
   create_table "admin_carousel_modules", force: :cascade do |t|
@@ -87,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170719063916) do
     t.integer "en_landing_page_id"
     t.integer "da_subscription_page_id"
     t.integer "en_subscription_page_id"
+    t.integer "da_post_page_id"
+    t.integer "en_post_page_id"
   end
 
   create_table "page_modules", force: :cascade do |t|

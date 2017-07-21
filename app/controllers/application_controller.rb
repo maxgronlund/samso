@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :admin?
 
+  def editor?
+    current_user && current_user.editor?
+  end
+  helper_method :editor?
+
   def current_url?(current_url, request_url)
     current_url == request_url
   end

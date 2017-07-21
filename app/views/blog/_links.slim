@@ -4,6 +4,9 @@
     = blog_module.position
 
   .edit-links
+    /= link_to t('blog_module.add_post'),
+    /  new_admin_page_blog_module_blog_post_path(page, blog_module)
+    /' |
     = link_to t('edit'),
       edit_admin_page_blog_module_path(page, blog_module)
     ' |

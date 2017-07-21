@@ -16,8 +16,4 @@
 //= require bootstrap
 //= require turbolinks
 //= require carousel
-// require jquery_ujs
 //= require rails-ujs
-// require popper
-// require bootstrap-sprockets
-

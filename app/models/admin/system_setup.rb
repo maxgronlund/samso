@@ -15,6 +15,19 @@ class Admin::SystemSetup < ApplicationRecord
     end
   end
 
+  def self.post_page
+    system_setup = current
+    I18n.locale
+    case I18n.locale
+    when :da
+      page_id = system_setup.da_post_page_id
+      return Page.find_by(id: page_id)
+    when :en
+      page_id = system_setup.en_post_page_id
+      return Page.find_by(id: page_id)
+    end
+  end
+
   # usage Admin::SystemSetup.subscription_page
   def self.subscription_page
     system_setup = current

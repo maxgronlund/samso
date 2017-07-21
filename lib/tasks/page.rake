@@ -34,4 +34,22 @@ namespace :page do
       )
     end
   end
+
+  # usage
+  # rake page:build_post_pages
+  desc 'build post pages'
+  task build_post_pages: :environment do
+    user = User.super_admin
+    pages_params = [
+      { title: 'Artikel', menu_title: 'Artikel', menu_id: 'Ingen', locale: 'da', layout: 'alabama', active: true, user_id: user.id },
+      { title: 'Article', menu_title: 'Article', menu_id: 'None', locale: 'en', layout: 'alabama', active: true, user_id: user.id }
+    ]
+
+    pages_params.each do |page_params|
+      page = Page.where(page_params).first_or_create(page_params)
+      Admin::SystemSetup.current.update_attributes(
+        "#{page_params[:locale]}_post_page_id".to_sym => page.id
+      )
+    end
+  end
 end
