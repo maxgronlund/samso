@@ -2,8 +2,9 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/posts/1
-  def show
-  end
+  # def show
+  #   @page = Admin::SystemSetup.post_page
+  # end
 
   # GET /admin/posts/new
   def new

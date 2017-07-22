@@ -1,0 +1,14 @@
+
+- if @admin_namespace
+  = render 'posts/links', post_module: post_module, page: page
+
+- if @post.nil?
+  h3 Keffiyeh polaroid pug 90's edison bulb kombucha
+  b Scenester gluten-free polaroid flexitarian synth vape wayfarers everyday carry irony gochujang. Tattooed air plant listicle kombucha master cleanse neutra, pop-up whatever celiac roof party raclette cred taiyaki vaporware
+  p Keffiyeh polaroid pug 90's edison bulb kombucha hell of microdosing mustache tote bag blog banjo offal squid affogato. +1 pabst etsy letterpress, brooklyn pug chicharrones ramps chia artisan actually yuccie. Pabst poutine PBR&B beard. Cray chartreuse master cleanse try-hard keytar. Semiotics normcore chia keytar mlkshk tattooed squid 3 wolf moon hammock jianbing subway tile asymmetrical. Taiyaki succulents waistcoat church-key truffaut everyday carry edison bulb synth photo booth godard you probably haven't heard of them. Salvia bespoke everyday carry thundercats vinyl, banjo air plant vexillologist twee tousled yr pitchfork cray locavore. Skateboard cray sustainable, tousled activated charcoal occupy irony leggings poutine fingerstache vape celiac hashtag pok pok. Photo booth copper mug bicycle rights scenester chillwave cred kombucha. Cornhole hell of beard, +1 meh mumblecore actually fam. Mumblecore sustainable air plant YOLO edison bulb, skateboard irony sartorial kickstarter scenester VHS poutine portland affogato.
+
+
+- else
+  h3 = @post.title
+  = @post.teaser
+  = raw(@post.body)

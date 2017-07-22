@@ -32,21 +32,23 @@
 
 h3 = blog_module.name
 = blog_module.body
-hr
 - if editor?
   .module-editor-header
     .float-right-button-container
       = link_to t('blog_post.new'), new_blog_post_path(blog_module), class: 'btn btn-outline-success btn-sm'
+hr
 - blog_module.posts.order('created_at DESC').each do |post|
-  .media
-    img.d-flex.mr-3 alt=("Generic placeholder image") src=post.image_url(:thumb)
-    .media-body
-      h5.mt-0
-        = link_to post.title, page_post_path(@page, post)
-      .created-at
-        = l post.created_at
-      /= raw(post.body)
-      = post.teaser
+  .blog_post
+    = link_to page_path(Admin::SystemSetup.post_page, post_id: post.id) do
+      .media
+        = image_tag post.image_url(:thumb), class: ' d-flex mr-3'
+        .media-body
+          h5.mt-0
+            = post.title
+          .created-at
+            = l post.created_at
+          /= raw(post.body)
+          = post.teaser
   - if editor?
     .module-editor-header
       .float-right-button-container

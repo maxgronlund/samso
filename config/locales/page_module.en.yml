@@ -10,3 +10,5 @@ en:
     text_module: Text section
     carousel_module: Image carousel
     subscription_module: 'Subscription section'
+    blog_module: 'Blog section'
+    post_module: 'Post section'

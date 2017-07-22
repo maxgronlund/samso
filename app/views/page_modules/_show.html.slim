@@ -8,3 +8,5 @@
     = render 'subscription_modules/show', page: page_module.page, subscription_module: page_module.moduleable
   -when 'Admin::BlogModule'
     = render 'blog/show', page: page_module.page, blog_module: page_module.moduleable
+  -when 'Admin::PostModule'
+    = render 'posts/show', page: page_module.page, post_module: page_module.moduleable

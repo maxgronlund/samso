@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
+      resources :carousel_modules, only: [] do
+        resources :carousel_slides
+      end
       resources :pages do
+        resources :post_modules, only: [:edit, :update]
         resources :blog_modules, only: [:edit, :update] do
           resources :blog_posts, only: [:edit, :update, :new, :create]
         end
@@ -9,9 +14,6 @@ Rails.application.routes.draw do
         resources :page_modules, only: [:new, :create, :destroy]
         resources :subscription_modules, only: [:edit, :update]
         resources :text_modules, only: [:edit, :update]
-      end
-      resources :carousel_modules, only: [] do
-        resources :carousel_slides
       end
       resources :subscriptions
       resources :subscription_types
@@ -21,11 +23,9 @@ Rails.application.routes.draw do
     resources :blog, only: [] do
       resources :posts, only: [:new, :create]
     end
-    resources :posts, only: [:edit, :update, :destroy]
+    resources :posts, only: [:show, :edit, :update, :destroy]
     resources :admin, only: [:index]
-    resources :pages, only: [:show] do
-      resources :posts, only: [:show]
-    end
+    resources :pages, only: [:show]
     resources :payments
     resources :subscriptions
     devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }

@@ -45,6 +45,8 @@ rails g migration AddImageToBlogPost
 
 rails g migration AddPostPageToAdminSystemSetup da_post_page_id:integer en_post_page_id:integer
 
+rails g scaffold admin/post_module name --no-helper --no-assets --no-controller-specs
+
 Page
   has_one :page_layout
 

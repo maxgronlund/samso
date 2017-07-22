@@ -15,6 +15,7 @@ class Admin::SystemSetup < ApplicationRecord
     end
   end
 
+  # usage Admin::SystemSetup.post_page
   def self.post_page
     system_setup = current
     I18n.locale
