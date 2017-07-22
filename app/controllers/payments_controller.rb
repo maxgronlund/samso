@@ -49,7 +49,7 @@ class PaymentsController < ApplicationController
 
   def page_with_post_path
     if session[:post_id].nil?
-      path =  page_path(session[:page_id])
+      path = page_path(session[:page_id])
     else
       path = page_path(session[:page_id], post_id: session[:post_id])
       session.delete :post_id

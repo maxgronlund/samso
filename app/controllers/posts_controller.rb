@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   def create
     @blog = Admin::BlogModule.find(params[:blog_id])
     @page = @blog.page
-    @post    = @blog.posts.new(post_params)
+    @post = @blog.posts.new(post_params)
     if @post.save
       redirect_to page_path(@page)
     else

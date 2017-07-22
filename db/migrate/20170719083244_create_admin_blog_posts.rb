@@ -1,3 +1,4 @@
+# Post for the blog
 class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_blog_posts do |t|

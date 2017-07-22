@@ -21,10 +21,9 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def page_with_post_path(resource)
-    return super(resources)  if session[:page_id].nil?
-
+    return super(resource) if session[:page_id].nil?
     if session[:post_id].nil?
-      path =  page_path(session[:page_id])
+      path = page_path(session[:page_id])
     else
       path = page_path(session[:page_id], post_id: session[:post_id])
       session.delete :post_id

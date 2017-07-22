@@ -1,3 +1,4 @@
+# module for showning a post from the blog on a page
 class Admin::PostModule < ApplicationRecord
   attr_accessor :position
   def admin_page

@@ -2,7 +2,6 @@ class Admin::PostModulesController < AdminController
   before_action :set_admin_post_module, only: [:edit, :update, :destroy]
 
   def show
-
   end
 
   # GET /admin/post_modules/1/edit
@@ -28,13 +27,14 @@ class Admin::PostModulesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_post_module
-      @admin_post_module = Admin::PostModule.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_post_module_params
-      params.require(:admin_post_module).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_post_module
+    @admin_post_module = Admin::PostModule.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def admin_post_module_params
+    params.require(:admin_post_module).permit(:name)
+  end
 end

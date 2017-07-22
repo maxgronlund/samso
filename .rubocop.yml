@@ -180,3 +180,6 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Exclude:
     - 'bin/yarn'
+
+Metrics/AbcSize:
+  Enabled: false
