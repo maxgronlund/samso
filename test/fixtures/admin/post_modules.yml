@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+post_module_one:
+  name: MyString
+
+post_module_two:
+  name: MyString

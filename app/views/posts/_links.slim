@@ -1,0 +1,13 @@
+.module-admin-header
+  .layout
+    = post_module.page_module.position
+
+  .edit-links
+    /= link_to t('edit'),
+    /  admin_page_carousel_module_path(page, carousel_module)
+    /' |
+    = link_to t('delete'),
+      admin_page_page_module_path(page, post_module.page_module),
+      method: :delete,
+      data: { confirm: t('are_you_sure') }
+    '&nbsp;

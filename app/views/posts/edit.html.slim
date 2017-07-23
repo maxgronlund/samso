@@ -1,8 +1,12 @@
-h1 Editing content
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.mt-80
+  h3 = t('blog_post.edit')
 
-== render 'form'
+  = simple_form_for [@post], multipart: true, url: url_for(action: 'update', controller: 'posts'), method: 'patch' do |f|
+    = f.error_notification
+    == render 'form', f: f
 
-= link_to 'Show', @content
-'  |
-= link_to 'Back', contents_path
-
+/= link_to 'Show', @admin_blog_post
+/'  |
+/= link_to 'Back', admin_blog_posts_path
+/

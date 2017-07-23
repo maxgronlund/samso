@@ -12,12 +12,20 @@
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
+    = f.input :da_post_page_id,
+    collection: Page.where(locale: I18n.locale),
+    include_blank: false
+
   - when :en
     = f.input :en_landing_page_id,
       collection: Page.where(locale: I18n.locale),
       include_blank: false
 
     = f.input :en_subscription_page_id,
+      collection: Page.where(locale: I18n.locale),
+      include_blank: false
+
+    = f.input :en_post_page_id,
       collection: Page.where(locale: I18n.locale),
       include_blank: false
 

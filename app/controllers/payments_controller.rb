@@ -41,10 +41,21 @@ class PaymentsController < ApplicationController
     end
 
     if session[:page_id]
-      redirect_to page_path(session[:page_id])
+      redirect_to page_with_post_path
     else
       redirect_to root_path
     end
+  end
+
+  def page_with_post_path
+    if session[:post_id].nil?
+      path = page_path(session[:page_id])
+    else
+      path = page_path(session[:page_id], post_id: session[:post_id])
+      session.delete :post_id
+    end
+    session.delete :page_id
+    path
   end
 
   def create_subscription

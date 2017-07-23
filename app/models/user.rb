@@ -30,9 +30,18 @@ class User < ApplicationRecord
     roles.where(permission: Role::ADMIN).any?
   end
 
+  def editor?
+    return true if roles.where(permission: Role::EDITOR).any?
+    return true if admin?
+    return true if super_admin?
+    false
+  end
+
   def can_edit?(user)
-    return true unless user.persisted?
-    super_admin? && user != self
+    if super_admin? || admin?
+      return true unless user == self
+    end
+    false
   end
 
   def role_names
@@ -52,6 +61,7 @@ class User < ApplicationRecord
   end
 
   def access_to_subscribed_content?
+    return true if editor?
     return false unless subscriptions.any?
     subscriptions.where('end_date >= :today', today: Date.today).any?
   end

@@ -1,0 +1,12 @@
+da:
+  activerecord:
+    models:
+    attributes:
+      admin/blog_post:
+        title: Overskrift
+        teaser: Manchet
+        body: Brødtekst
+
+  blog_post:
+    new: 'Nyt indlæg'
+    edit: 'Rediger indlæg'

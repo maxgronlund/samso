@@ -8,7 +8,6 @@ class Admin::PagesController < AdminController
   end
 
   # GET /pages/1
-  # GET /pages/1.json
   def show
     @page = Page.find(params[:id])
     @admin_namespace = true
@@ -24,44 +23,29 @@ class Admin::PagesController < AdminController
   end
 
   # POST /pages
-  # POST /pages.json
   def create
     @page      = Page.new
     @page.user = current_user
-
-    respond_to do |format|
-      if @page.save
-        format.html { redirect_to admin_page_path(@page) }
-        format.json { render :show, status: :created, location: @page }
-      else
-        format.html { render :new }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-      end
+    if @page.save
+      redirect_to admin_page_path(@page)
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /pages/1
-  # PATCH/PUT /pages/1.json
   def update
-    respond_to do |format|
-      if @page.update(page_params)
-        format.html { redirect_to admin_page_path(@page) }
-        format.json { render :show, status: :ok, location: @page }
-      else
-        format.html { render :edit }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-      end
+    if @page.update(page_params)
+      redirect_to admin_page_path(@page)
+    else
+      render :edit
     end
   end
 
   # DELETE /pages/1
-  # DELETE /pages/1.json
   def destroy
     @page.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_pages_url }
-      format.json { head :no_content }
-    end
+    redirect_to admin_pages_url
   end
 
   private

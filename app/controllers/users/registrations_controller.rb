@@ -40,6 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
+    assign_role(resource)
     if session[:new_payment_path]
       path = session[:new_payment_path]
       session.delete :new_payment_path
@@ -50,5 +51,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     user_path(resource)
+  end
+
+  private
+
+  def assign_role(user)
+    user.roles.create(permission: Role::MEMBER)
   end
 end

@@ -1,0 +1,9 @@
+upload default billeder til amazon
+- blog_posts
+- avatar
+- carousel
+
+
+payment
+
+pagination

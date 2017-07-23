@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716182827) do
+ActiveRecord::Schema.define(version: 20170721101916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin_blog_modules", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "layout"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_blog_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "position"
+    t.integer "blog_module_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.text "teaser"
+    t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
+  end
 
   create_table "admin_carousel_modules", force: :cascade do |t|
     t.string "name"
@@ -35,6 +58,12 @@ ActiveRecord::Schema.define(version: 20170716182827) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
+  end
+
+  create_table "admin_post_modules", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_subscription_modules", force: :cascade do |t|
@@ -79,6 +108,8 @@ ActiveRecord::Schema.define(version: 20170716182827) do
     t.integer "en_landing_page_id"
     t.integer "da_subscription_page_id"
     t.integer "en_subscription_page_id"
+    t.integer "da_post_page_id"
+    t.integer "en_post_page_id"
   end
 
   create_table "page_modules", force: :cascade do |t|

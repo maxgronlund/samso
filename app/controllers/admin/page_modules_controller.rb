@@ -33,12 +33,10 @@ class Admin::PageModulesController < AdminController
   # DELETE /page_modules/1
   # DELETE /page_modules/1.json
   def destroy
+    destroy_moduleable
     @page = Page.find(params[:page_id])
     @page_module.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_page_path(@page) }
-      format.json { head :no_content }
-    end
+    redirect_to admin_page_path(@page)
   end
 
   private
@@ -51,6 +49,10 @@ class Admin::PageModulesController < AdminController
       edit_admin_page_carousel_module_path(@page, @page_module.moduleable_id)
     when 'Admin::SubscriptionModule'
       edit_admin_page_subscription_module_path(@page, @page_module.moduleable_id)
+    when 'Admin::BlogModule'
+      edit_admin_page_blog_module_path(@page, @page_module.moduleable_id)
+    when 'Admin::PostModule'
+      edit_admin_page_post_module_path(@page, @page_module.moduleable_id)
     end
   end
 
@@ -62,6 +64,10 @@ class Admin::PageModulesController < AdminController
       Admin::CarouselModule.find(@page_module.moduleable_id).destroy
     when 'Admin::SubscriptionModule'
       Admin::SubscriptionModule.find(@page_module.moduleable_id).destroy
+    when 'Admin::BlogModule'
+      Admin::BlogModule.find(@page_module.moduleable_id).destroy
+    when 'Admin::PostModule'
+      Admin::PostModule.find(@page_module.moduleable_id).destroy
     end
   end
 
@@ -81,6 +87,10 @@ class Admin::PageModulesController < AdminController
       @moduleable = Admin::CarouselModule.create
     when 'Admin::SubscriptionModule'
       @moduleable = Admin::SubscriptionModule.create
+    when 'Admin::BlogModule'
+      @moduleable = Admin::BlogModule.create
+    when 'Admin::PostModule'
+      @moduleable = Admin::PostModule.create
     end
   end
 

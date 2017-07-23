@@ -1,0 +1,58 @@
+/- if editor?
+/  .module-admin-header
+/    .layout
+/      /= carousel_module.layout
+/      = blog_module.position
+/
+/    .edit-links
+/      /= link_to t('blog_module.add_post'),
+/      /  new_admin_page_blog_module_blog_post_path(page, blog_module)
+/      /' |
+/      = link_to t('edit'),
+/        edit_admin_page_blog_module_path(page, blog_module)
+/      ' |
+/      = link_to t('delete'),
+/        admin_page_page_module_path(page, blog_module.page_module),
+/        method: :delete,
+/        data: { confirm: t('are_you_sure') }
+/      '&nbsp;
+/
+/
+/
+/- if editor?
+/  .row
+/    .col-sm-10
+/      h3 = blog_module.name
+/    .col-sm-2
+/      .float-right-button-container
+/        = link_to t('blog_post.new'), new_blog_post_path(blog_module), class: 'btn btn-outline-success btn-sm'
+/- else
+/  h3 = blog_module.name
+/
+
+h3 = blog_module.name
+= blog_module.body
+- if editor?
+  .module-editor-header
+    .float-right-button-container
+      = link_to t('blog_post.new'), new_blog_post_path(blog_module), class: 'btn btn-outline-success btn-sm'
+hr
+- blog_module.posts.order('created_at DESC').each do |post|
+  .blog_post
+    = link_to page_path(Admin::SystemSetup.post_page, post_id: post.id) do
+      .media
+        = image_tag post.image_url(:thumb), class: ' d-flex mr-3'
+        .media-body
+          h5.mt-0
+            = post.title
+          .created-at
+            = l post.created_at
+          /= raw(post.body)
+          = post.teaser
+  - if editor?
+    .module-editor-header
+      .float-right-button-container
+        = link_to t('edit'), edit_post_path(post), class: 'btn btn-outline-success btn-sm'
+        = link_to t('delete'), post_path(post), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-outline-danger btn-sm'
+
+  hr
