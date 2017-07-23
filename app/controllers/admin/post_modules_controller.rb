@@ -1,9 +1,6 @@
 class Admin::PostModulesController < AdminController
   before_action :set_admin_post_module, only: [:edit, :update, :destroy]
 
-  def show
-  end
-
   # GET /admin/post_modules/1/edit
   def edit
     @page = Page.find(params[:page_id])

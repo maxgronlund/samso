@@ -27,3 +27,20 @@ blog_page_module:
   moduleable_type: "Admin::BlogModule"
   slot_id: 1
   position: 2
+
+blog_post_module:
+  page: news_page
+  moduleable: blog_module_one
+  moduleable_type: "Admin::BlogModule"
+  slot_id: 1
+  position: 2
+
+post_module:
+  page: post_page
+  moduleable: post_module_one
+  moduleable_type: "Admin::PostModule"
+  slot_id: 1
+  position: 2
+
+
+

@@ -33,12 +33,10 @@ class Admin::PageModulesController < AdminController
   # DELETE /page_modules/1
   # DELETE /page_modules/1.json
   def destroy
+    destroy_moduleable
     @page = Page.find(params[:page_id])
     @page_module.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_page_path(@page) }
-      format.json { head :no_content }
-    end
+    redirect_to admin_page_path(@page)
   end
 
   private
