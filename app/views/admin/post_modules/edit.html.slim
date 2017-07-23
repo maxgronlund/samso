@@ -1,9 +1,11 @@
-= simple_form_for [:admin, @page, @admin_post_module] , url: url_for(action: 'update', controller: 'admin/post_modules'), method: 'put' do  |f|
+= simple_form_for [:admin, @page, @post_module] , url: url_for(action: 'update', controller: 'admin/post_modules'), method: 'put' do  |f|
 
   = f.error_notification
 
   .form-inputs
     = f.input :name
+    = f.input :position, as: :integer
+    = f.input :slot_id, as: :integer
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

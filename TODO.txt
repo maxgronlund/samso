@@ -28,3 +28,7 @@ Wether
 
 PageModule
   - postition an all modules
+  - visibality (when logged in, when not logged in, always)
+
+PostModule
+  - show image

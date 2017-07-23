@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+dmi_module_one:
   forecast_duration: MyString
 
-two:
+dmi_module_two:
   forecast_duration: MyString

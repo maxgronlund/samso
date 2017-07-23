@@ -1,30 +1,13 @@
 # dynamic blog to add on a page
 class Admin::BlogModule < ApplicationRecord
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
-  attr_accessor :position
-  attr_accessor :slot_id
-
-  def admin_page
-    page_module.page
-  end
+  include SectionPlugin
 
   def page_module
     PageModule.find_by(
       moduleable_type: 'Admin::BlogModule',
       moduleable_id: id
     )
-  end
-
-  def page
-    page_module.page
-  end
-
-  def position
-    page_module.position
-  end
-
-  def slot_id
-    page_module.slot_id
   end
 
   # find names here: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/da.yml

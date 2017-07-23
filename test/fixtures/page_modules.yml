@@ -42,5 +42,12 @@ post_module:
   slot_id: 1
   position: 2
 
+dmi_module:
+  page: post_page
+  moduleable: dmi_module_one
+  moduleable_type: "Admin::DmiModule"
+  slot_id: 200
+  position: 20
+
 
 

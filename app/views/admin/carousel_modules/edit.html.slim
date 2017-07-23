@@ -14,7 +14,7 @@
 
   .form-inputs
     = f.input :position, as: :integer
-
+    = f.input :slot_id, as: :integer
     = f.input :layout,
       collection: Admin::CarouselModule.image_sizes,
       include_blank: false
