@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      admin/dmi_module:
+        one: Weather forecast
+        other: Weather forecasts
+    attributes:
+      admin/dmi_module:
+        forecast_duration:  Period
+
+  dmi_module:
+    days_two_forecast: '2 days forecast'
+    days_three_forecast: '3 to 9 days forecast'
+    days10to15forecast: '10 to 15 days forecast'

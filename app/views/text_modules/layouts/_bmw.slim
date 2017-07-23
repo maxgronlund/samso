@@ -1,10 +1,16 @@
 .text-module
   .bmw
     .card.card-inverse.mb-10
-      = link_to text_module.url do
-        - if umage_url = text_module.image_url(text_module.image_size)
-          = image_tag(umage_url, class: "img-fluid")
-        .card-img-overlay
-          h4.card-title = text_module.title
-          p.card-text = raw(text_module.body)
-          p.card-text
+      - path = nil
+      - if !text_module.page_id.blank?
+        - path = page_url(text_module.page_id)
+      - elsif !text_module.url.blank?
+        - path = text_module.url
+      - if path
+        = link_to path do
+          - if umage_url = text_module.image_url(text_module.image_size)
+            = image_tag(umage_url, class: "img-fluid")
+          .card-img-overlay
+            h4.card-title = text_module.title
+            p.card-text = raw(text_module.body)
+            p.card-text

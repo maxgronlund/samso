@@ -17,3 +17,4 @@
 //= require turbolinks
 //= require carousel
 //= require rails-ujs
+//= require jquery.fancybox

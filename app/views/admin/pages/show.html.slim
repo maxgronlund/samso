@@ -9,6 +9,35 @@
 
 hr
 = render 'pages/show', page: @page
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    table.table.table-striped.table-bordered.table-hover.table-sm
+      thead.thead-inverse
+        tr
+          th Module name
+          th Slot id
+          th
 
-
-
+      - @page.page_modules.each do |page_module|
+        tbody
+          tr
+            td = page_module.moduleable.class.name
+            td = page_module.slot_id
+            td
+              .float-right
+                - case page_module.moduleable.class.name
+                - when 'TextModule'
+                  = link_to t('edit'),
+                    edit_admin_page_text_module_path(@page, page_module.moduleable)
+                - when 'Admin::CarouselModule'
+                  = link_to t('edit'),
+                    edit_admin_page_carousel_module_path(@page, page_module.moduleable)
+                -when 'Admin::SubscriptionModule'
+                  = link_to t('edit'),
+                    edit_admin_page_subscription_module_path(@page, page_module.moduleable)
+                -when 'Admin::BlogModule'
+                  = link_to t('edit'),
+                    edit_admin_page_blog_module_path(@page, page_module.moduleable)
+                -when 'Admin::PostModule'
+                  = link_to t('edit'),
+                    edit_admin_page_post_module_path(@page, page_module.moduleable)

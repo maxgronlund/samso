@@ -10,3 +10,5 @@
     = render 'blog/show', page: page_module.page, blog_module: page_module.moduleable
   -when 'Admin::PostModule'
     = render 'posts/show', page: page_module.page, post_module: page_module.moduleable
+  -when 'Admin::DmiModule'
+    = render 'dmi_modules/show', page: page_module.page, dmi_module: page_module.moduleable

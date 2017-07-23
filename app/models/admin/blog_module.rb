@@ -2,6 +2,8 @@
 class Admin::BlogModule < ApplicationRecord
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
   attr_accessor :position
+  attr_accessor :slot_id
+
   def admin_page
     page_module.page
   end
@@ -19,6 +21,10 @@ class Admin::BlogModule < ApplicationRecord
 
   def position
     page_module.position
+  end
+
+  def slot_id
+    page_module.slot_id
   end
 
   # find names here: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/da.yml

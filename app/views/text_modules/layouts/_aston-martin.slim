@@ -6,5 +6,7 @@
         h4.card-title = text_module.title
         p.card-text = raw(text_module.body)
         p.card-text
-        - unless text_module.url.empty?
+        - if !text_module.page_id.blank?
+          = link_to text_module.url_text, page_path(text_module.page_id)
+        - elsif !text_module.urlblank?
           = link_to text_module.url_text, text_module.url
