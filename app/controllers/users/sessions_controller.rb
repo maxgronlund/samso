@@ -2,10 +2,12 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   def after_sign_in_path_for(resource)
+    session.delete :page_id
     if session[:new_payment_path]
       session[:after_sign_in_path] = session[:new_payment_path]
       session.delete :new_payment_path
     end
+    return super(resource) if session[:page_id].nil?
     page_with_post_path(resource)
   end
 
@@ -21,7 +23,6 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def page_with_post_path(resource)
-    return super(resource) if session[:page_id].nil?
     if session[:post_id].nil?
       path = page_path(session[:page_id])
     else
