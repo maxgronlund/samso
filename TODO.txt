@@ -32,3 +32,5 @@ PageModule
 
 PostModule
   - show image
+
+Breadcrumbs
