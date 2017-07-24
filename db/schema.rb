@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20170723115405) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
+    t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
   end
 
   create_table "admin_dmi_modules", force: :cascade do |t|

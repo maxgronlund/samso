@@ -72,7 +72,7 @@ class PaymentsController < ApplicationController
   end
 
   def create_payment
-    ap valid_payment_params
+    valid_payment_params
     @payment = Payment.new(valid_payment_params)
     @payment.subscription_id = @subscription.id
     @payment.name = @subscription_type.title
