@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+dmi_module_one:
+  forecast_duration: MyString
+
+dmi_module_two:
+  forecast_duration: MyString

@@ -5,5 +5,30 @@ upload default billeder til amazon
 
 
 payment
+  - integrate with dips
 
 pagination
+  - users
+  - posts
+
+TextModule
+  - more layouts
+  - bmw(with dark fonts)
+
+Users
+  - admin/search
+  - admin/info: subscribtions, payments, activity
+  - posts, comments, galery
+
+Galery
+
+Calendar
+
+Wether
+
+PageModule
+  - postition an all modules
+  - visibality (when logged in, when not logged in, always)
+
+PostModule
+  - show image

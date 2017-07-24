@@ -2,4 +2,7 @@
   = render 'page_modules/show', page_module: page_module
 - if @admin_namespace
   = link_to t('page.add_content'), new_admin_page_page_module_path(page, slot_id: slot_id), class: 'btn btn-primary btn-sm'
+  .float-right
+    'slot_id:&nbsp;
+    = slot_id
 

@@ -6,6 +6,7 @@ h3 = t('edit_model', model_name: @admin_blog_module.model_name.human)
     = f.input :name
     = f.input :body
     = f.input :position, as: :integer
+    = f.input :slot_id, as: :integer
     = f.input :layout,
       collection: Admin::BlogModule.layouts,
       include_blank: false

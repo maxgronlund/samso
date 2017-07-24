@@ -1,5 +1,7 @@
 # raw text to place on a page
 class TextModule < ApplicationRecord
+  include SectionPlugin
+
   belongs_to :page, optional: true
   has_attached_file :image, styles: {
     size_640_240: '640x240#',
@@ -10,8 +12,6 @@ class TextModule < ApplicationRecord
     '8_coll_high'.to_sym => '769x430#',
     default_url: 'style/missing_squarde_image.jpg'
   }
-
-  attr_accessor :position
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
@@ -31,10 +31,6 @@ class TextModule < ApplicationRecord
     fiat
     ford
   ).freeze
-
-  def admin_page
-    page_module.page
-  end
 
   def page_module
     PageModule.find_by(
@@ -61,9 +57,5 @@ class TextModule < ApplicationRecord
       ['8 col medium', '8_coll_medium'],
       ['8 col high', '8_coll_high']
     ]
-  end
-
-  def position
-    page_module.position
   end
 end

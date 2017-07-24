@@ -8,7 +8,9 @@ class Admin::BlogModulesController < AdminController
   # PATCH/PUT /admin/blog_modules/1
   def update
     if @admin_blog_module.update(admin_blog_module_params)
-      @admin_blog_module.page_module.update_attributes(position: admin_blog_module_params[:position])
+      PageModule::Service
+        .new(@admin_blog_module)
+        .update_page_module(admin_blog_module_params)
       redirect_to admin_page_path(@admin_blog_module.page)
     else
       render :edit
@@ -29,7 +31,8 @@ class Admin::BlogModulesController < AdminController
       :name,
       :body,
       :layout,
-      :position
+      :position,
+      :slot_id
     )
   end
 end

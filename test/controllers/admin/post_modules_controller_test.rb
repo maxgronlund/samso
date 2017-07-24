@@ -27,15 +27,6 @@ class Admin::PostModulesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_page_url(@post_module.page, locale: 'da')
   end
 
-  #test 'should update admin_post_module' do
-  #  patch admin_page_post_module_url(@page, @post_module, locale: 'da'), params: {
-  #    admin_post_module: {
-  #      name: @post_module.name
-  #    }
-  #  }
-  #  assert_redirected_to admin_page_url(@page, locale: 'da')
-  #end
-
   test 'should destroy admin_post_module' do
     assert_difference('Admin::PostModule.count', -1) do
       delete admin_page_page_module_url(@page, @post_module.page_module, locale: 'da')
@@ -43,11 +34,3 @@ class Admin::PostModulesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to admin_page_url(@page, locale: 'da')
   end
 end
-
-
-# do
-#     assert_difference('Admin::SubscriptionModule.count', -1) do
-#       delete admin_page_page_module_url(@page, @admin_page_module, locale: 'da')
-#     end
-#     assert_redirected_to admin_page_url(@page, locale: 'da')
-#   end

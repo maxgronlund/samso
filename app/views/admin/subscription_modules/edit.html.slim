@@ -1,15 +1,16 @@
-h3 = t('edit_model', model_name: @admin_subscription_module.model_name.human)
-= simple_form_for [:admin, @page, @admin_subscription_module], url: url_for(action: 'update', controller: 'admin/subscription_modules'), method: 'patch' do |f|
+h3 = t('edit_model', model_name: @subscription_module.model_name.human)
+= simple_form_for [:admin, @page, @subscription_module], url: url_for(action: 'update', controller: 'admin/subscription_modules'), method: 'patch' do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
     = f.input :body
-    = f.input :position
-    = f.input :layout
+    = f.input :position, as: :integer
+    = f.input :slot_id, as: :integer
+    /= f.input :layout
 
   .form-actions
-    = f.button :submit
+    = f.submit t('save'), class: 'btn btn-primary'
 
 /h1 Editing admin_subscription_module
 /

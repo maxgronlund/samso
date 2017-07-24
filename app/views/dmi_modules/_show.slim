@@ -1,0 +1,47 @@
+- if @admin_namespace
+  .module-admin-header
+    .layout
+
+      = dmi_module.position
+
+    .edit-links
+      = link_to t('edit'),
+        edit_admin_page_dmi_module_path(page, dmi_module)
+      ' |
+      = link_to t('delete'),
+        admin_page_page_module_path(page, dmi_module.page_module),
+        method: :delete,
+        data: { confirm: t('are_you_sure') }
+      '&nbsp;
+
+h4 Vejeret
+- case dmi_module.forecast_duration
+- when 'days_two_forecast'
+  p = t('dmi_module.days_two_forecast')
+  a data-fancybox="gallery" href="http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=8305&mode=long"
+    = image_tag("http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=8305&mode=long", class: "img-fluid")
+- when'days_three_forecast'
+  p = t('dmi_module.days_three_forecast')
+  a data-fancybox="gallery" href="http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=8305&mode=long"
+    = image_tag("http://servlet.dmi.dk/byvejr/servlet/byvejr?by=8305&tabel=dag3_9", class: "img-fluid")
+- when 'days10to15forecast'
+  p = t('dmi_module.days10to15forecast')
+  a data-fancybox="gallery" href="http://servlet.dmi.dk/byvejr/servlet/byvejr?by=8305&tabel=dag10_15"
+    = image_tag("http://servlet.dmi.dk/byvejr/servlet/byvejr?by=8305&tabel=dag10_15", class: "img-fluid")
+
+.dmi_module
+  a data-fancybox="gallery" href="http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=8305&mode=long"
+    br
+    i.fa.fa-thermometer-full
+    '&nbsp;
+    = t('dmi_module.days_two_forecast')
+  a data-fancybox="gallery" href="http://servlet.dmi.dk/byvejr/servlet/byvejr?by=8305&tabel=dag3_9"
+    br
+    i.fa.fa-thermometer-full
+    '&nbsp;
+    = t('dmi_module.days_three_forecast')
+  a data-fancybox="gallery" href="http://servlet.dmi.dk/byvejr/servlet/byvejr?by=8305&tabel=dag10_15"
+    br
+    i.fa.fa-thermometer-full
+    '&nbsp;
+    = t('dmi_module.days10to15forecast')

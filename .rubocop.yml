@@ -48,6 +48,8 @@ Style/AccessModifierIndentation:
   Exclude:
     - 'app/controllers/application_controller.rb'
 
+Style/CyclomaticComplexity:
+  Enabled: false
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedHashRocketStyle, SupportedHashRocketStyles, EnforcedColonStyle, SupportedColonStyles, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.

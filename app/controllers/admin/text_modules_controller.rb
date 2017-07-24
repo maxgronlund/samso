@@ -4,34 +4,17 @@ class Admin::TextModulesController < AdminController
   # GET /text_modules/1/edit
   def edit
     @page = Page.find(params[:page_id])
-    # @alfa_romeo_mock = {
-    #   title: DummyData::TITLE,
-    #   body: DummyData::LIPSUM,
-    #   image: 'text_module/640x240.png',
-    #   url: 'https://google.com',
-    #   url_text: 'google'}
-    #   @aston_martin_mock = @alfa_romeo_mock
-    #   @aston_martin_mock[:image] = 'text_module/size_480_480.png'
   end
 
   # PATCH/PUT /text_modules/1
-  # PATCH/PUT /text_modules/1.json
   def update
     if @text_module.update(text_module_params)
-      @text_module.page_module.update_attributes(position: text_module_params[:position])
-      redirect_to admin_page_path(@text_module.admin_page)
+      PageModule::Service
+        .new(@text_module)
+        .update_page_module(text_module_params)
+      redirect_to admin_page_path(@text_module.page)
     else
       render :edit
-    end
-  end
-
-  # DELETE /text_modules/1
-  # DELETE /text_modules/1.json
-  def destroy
-    @text_module.destroy
-    respond_to do |format|
-      format.html { redirect_to text_modules_url }
-      format.json { head :no_content }
     end
   end
 
@@ -53,7 +36,8 @@ class Admin::TextModulesController < AdminController
       :url,
       :url_text,
       :position,
-      :page_id
+      :page_id,
+      :slot_id
     )
   end
 end
