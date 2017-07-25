@@ -37,7 +37,8 @@ class Admin::TextModulesController < AdminController
       :url_text,
       :position,
       :page_id,
-      :slot_id
+      :slot_id,
+      :show_to
     )
   end
 end

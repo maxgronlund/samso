@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170723115405) do
+ActiveRecord::Schema.define(version: 20170725155902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20170723115405) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
-    t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
   end
 
   create_table "admin_dmi_modules", force: :cascade do |t|
@@ -198,6 +197,7 @@ ActiveRecord::Schema.define(version: 20170723115405) do
     t.datetime "image_updated_at"
     t.string "image_size"
     t.integer "page_id"
+    t.string "show_to"
     t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 

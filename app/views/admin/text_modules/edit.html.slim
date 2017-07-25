@@ -18,6 +18,10 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         collection: TextModule::image_sizes,
         include_blank: false
 
+      = f.input :show_to,
+        collection: TextModule::show_to,
+        include_blank: false
+
     .col-sm-6
       = f.input :slot_id, as: :integer
       = f.association :page, collection: Page.active().where(locale: I18n.locale)
