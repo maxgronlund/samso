@@ -32,7 +32,8 @@ class Admin::BlogModulesController < AdminController
       :body,
       :layout,
       :position,
-      :slot_id
+      :slot_id,
+      :post_page_id
     )
   end
 end

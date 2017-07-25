@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725155902) do
+ActiveRecord::Schema.define(version: 20170725165427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20170725155902) do
     t.string "layout"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "post_page_id"
+    t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end
 
   create_table "admin_blog_posts", force: :cascade do |t|

@@ -5,6 +5,7 @@ h3 = t('edit_model', model_name: @admin_blog_module.model_name.human)
   .form-inputs
     = f.input :name
     = f.input :body
+    = f.input :post_page_id, collection: Page.where(locale: I18n.locale)
     = f.input :position, as: :integer
     = f.input :slot_id, as: :integer
     = f.input :layout,
