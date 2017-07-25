@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
       session.delete :new_payment_path
     end
     return super(resource) if session[:page_id].nil?
-    page_with_post_path(resource)
+    page_with_post_path
   end
 
   # DELETE /resource/sign_out
@@ -21,7 +21,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-  def page_with_post_path(resource)
+  def page_with_post_path
     if session[:post_id].nil?
       path = page_path(session[:page_id])
     else
