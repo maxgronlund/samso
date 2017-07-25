@@ -17,4 +17,11 @@ class Admin::BlogModule < ApplicationRecord
       [I18n.t('blog_module.elvis_presley'), 'elvis_presley']
     ]
   end
+
+  def posts_page
+    page = Page.find_by(id: post_page_id)
+    return page if page
+    return Admin::SystemSetup.post_page if Admin::SystemSetup.post_page
+    nil
+  end
 end

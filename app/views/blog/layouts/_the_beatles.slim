@@ -7,7 +7,7 @@ h3 = blog_module.name
 hr
 - blog_module.posts.order('created_at DESC').each do |post|
   .blog_post
-    = link_to page_path(Admin::SystemSetup.post_page, post_id: post.id) do
+    = link_to page_path(blog_module.posts_page, post_id: post.id) do
       .media
         = image_tag post.image_url(:thumb), class: ' d-flex mr-3'
         .media-body

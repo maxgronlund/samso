@@ -24,8 +24,9 @@ class Admin::PagesController < AdminController
 
   # POST /pages
   def create
-    @page      = Page.new(page_params)
-    @page.user = current_user
+    @page        = Page.new(page_params)
+    @page.locale = I18n.locale
+    @page.user   = current_user
     if @page.save
       redirect_to admin_page_path(@page)
     else
