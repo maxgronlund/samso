@@ -58,4 +58,12 @@ class TextModule < ApplicationRecord
       ['8 col high', '8_coll_high']
     ]
   end
+
+  def self.show_to
+    [
+      [I18n.t('text_module.show_to.all'), 'all'],
+      [I18n.t('text_module.show_to.guests'), 'guests'],
+      [I18n.t('text_module.show_to.members'), 'members']
+    ]
+  end
 end

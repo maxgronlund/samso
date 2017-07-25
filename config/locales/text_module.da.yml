@@ -1,9 +1,15 @@
 da:
   activerecord:
     attributes:
-      text_section:
+      text_module:
         title: Overskrift
         layout: Layout
+        show_to: Visning
+        url: Link
+        url_text: Navn på link
+        page: Link til side
+        slot_id: Side sektion
+        image_size: Billed størelse
 
     models:
       text_module: Tekst sektion
@@ -16,3 +22,7 @@ da:
       url_text: Tekst til knappe og link, vises ikke hvis feltet er tomt
     placeholders:
       url: http://samso.dk
+    show_to:
+      all: Altid
+      guests:  Kun når man ikke er logget ind
+      members: Kun når man er logget ind
