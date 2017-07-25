@@ -34,3 +34,7 @@ PostModule
   - show image
 
 Breadcrumbs
+
+
+Error pages
+  - oversæt beskeder
