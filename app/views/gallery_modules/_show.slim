@@ -1,0 +1,17 @@
+- if @admin_namespace
+  = render 'gallery_modules/links', gallery_module: gallery_module, page: page
+
+h3 = gallery_module.name
+= gallery_module.body
+- if user_signed_in?
+  .module-editor-header
+    .float-right-button-container
+      = link_to t('gallery_module.upload_immage'), new_gallery_module_gallery_image_path(gallery_module), class: 'btn btn-outline-success btn-sm'
+
+- gallery_module.images.each do |image|
+  hr
+  a data-fancybox="gallery" href="#{image.image_url('12_col_4x1')}"
+    = image_tag(image.image_url('thumb'), class: 'img-fluid')
+  h4 = image.title
+  = image.body
+  = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, image)

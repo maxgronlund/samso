@@ -5,12 +5,13 @@ Rails.application.routes.draw do
         resources :carousel_slides
       end
       resources :pages do
-        resources :dmi_modules, only: [:edit, :update]
-        resources :post_modules, only: [:edit, :update]
         resources :blog_modules, only: [:edit, :update] do
           resources :blog_posts, only: [:edit, :update, :new, :create]
         end
         resources :carousel_modules, only: [:edit, :update, :show]
+        resources :dmi_modules, only: [:edit, :update]
+        resources :gallery_modules, only: [:edit, :update]
+        resources :post_modules, only: [:edit, :update]
         resources :page_modules, only: [:new, :create, :destroy]
         resources :subscription_modules, only: [:edit, :update]
         resources :text_modules, only: [:edit, :update]
@@ -22,6 +23,9 @@ Rails.application.routes.draw do
     end
     resources :blog, only: [] do
       resources :posts, only: [:new, :create]
+    end
+    resources :gallery_modules, only: [] do
+      resources :gallery_images
     end
     resources :posts, only: [:show, :edit, :update, :destroy]
     resources :admin, only: [:index]

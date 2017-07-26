@@ -13,6 +13,7 @@ da:
     blog_module: 'Blog sektion'
     post_module: 'Post sektion'
     dmi_module: 'DMI vejr sektion'
+    gallery_module: Galleri sektion
 
 
 

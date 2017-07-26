@@ -1,0 +1,16 @@
+da:
+  activerecord:
+    models:
+      admin/gallery_image:
+        one: Galleri sektion
+        other: Galleri sektioner
+    attributes:
+      admin/gallery_image:
+        name: Navn
+        body: Beskrivelse
+        layout: Layout
+
+  gallery_image:
+    new: 'Nyt billed'
+    back_to_slides: 'Tilbage til slides'
+    upload_immage: 'Upload billed'

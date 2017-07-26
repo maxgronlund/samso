@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :gallery_images, class_name: 'Admin::GalleryImage'
 
   accepts_nested_attributes_for :roles
 

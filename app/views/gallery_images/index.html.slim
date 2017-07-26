@@ -1,0 +1,27 @@
+h1 Listing admin_gallery_images
+
+table
+  thead
+    tr
+      th Title
+      th Body
+      th Admin/gallery module
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @admin_gallery_images.each do |admin_gallery_image|
+      tr
+        td = admin_gallery_image.title
+        td = admin_gallery_image.body
+        td = admin_gallery_image.admin/gallery_module
+        td = admin_gallery_image.user
+        td = link_to 'Show', admin_gallery_image
+        td = link_to 'Edit', edit_admin_gallery_image_path(admin_gallery_image)
+        td = link_to 'Destroy', admin_gallery_image, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Gallery image', new_admin_gallery_image_path

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @admin_gallery_image.title
+p
+  strong Body:
+  = @admin_gallery_image.body
+p
+  strong Admin/gallery module:
+  = @admin_gallery_image.admin/gallery_module
+p
+  strong User:
+  = @admin_gallery_image.user
+
+= link_to 'Edit', edit_admin_gallery_image_path(@admin_gallery_image)
+'  |
+= link_to 'Back', admin_gallery_images_path

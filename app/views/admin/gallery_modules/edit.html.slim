@@ -1,0 +1,19 @@
+.row
+  .col-sm-8
+    h3 = t('edit_model', model_name: @admin_gallery_module.model_name.human)
+
+
+= simple_form_for [:admin, @page, @admin_gallery_module], url: url_for(action: 'update', controller: 'admin/gallery_modules'), method: 'put' do |f|
+
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :body
+    = f.input :layout
+    = f.input :slot_id, as: :integer
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+
+

@@ -32,7 +32,8 @@ class Page < ApplicationRecord
       [I18n.t('page_module.subscription_module'), 'Admin::SubscriptionModule'],
       [I18n.t('page_module.blog_module'), 'Admin::BlogModule'],
       [I18n.t('page_module.post_module'), 'Admin::PostModule'],
-      [I18n.t('page_module.dmi_module'), 'Admin::DmiModule']
+      [I18n.t('page_module.dmi_module'), 'Admin::DmiModule'],
+      [I18n.t('page_module.gallery_module'), 'Admin::GalleryModule']
     ]
   end
 
