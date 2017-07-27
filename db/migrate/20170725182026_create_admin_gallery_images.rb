@@ -1,3 +1,4 @@
+# Image for the galery
 class CreateAdminGalleryImages < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_gallery_images do |t|

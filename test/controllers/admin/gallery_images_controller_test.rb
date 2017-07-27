@@ -2,47 +2,66 @@ require 'test_helper'
 
 class Admin::GalleryImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @admin_gallery_image = admin_gallery_images(:one)
+    @gallery_image = admin_gallery_images(:gallery_image_one)
+    @gallery_module = admin_gallery_modules(:gallery_module_one)
+    @page = @gallery_module.page
+    @user = users(:one)
+    Warden.test_mode!
+    sign_in(@user)
   end
 
-  test "should get index" do
-    get admin_gallery_images_url
-    assert_response :success
+  teardown do
+    Warden.test_reset!
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_admin_gallery_image_url
     assert_response :success
   end
 
-  test "should create admin_gallery_image" do
+  test 'should create admin_gallery_image' do
     assert_difference('Admin::GalleryImage.count') do
-      post admin_gallery_images_url, params: { admin_gallery_image: { admin/gallery_module_id: @admin_gallery_image.admin/gallery_module_id, body: @admin_gallery_image.body, title: @admin_gallery_image.title, user_id: @admin_gallery_image.user_id } }
+      post gallery_module_gallery_images_url(@gallery_module, locale: 'da'), params: {
+        admin_gallery_image: {
+          gallery_module_id: @gallery_image.gallery_module_id,
+          body: @gallery_image.body,
+          title: @gallery_image.title,
+          user_id: @gallery_image.user_id
+        }
+      }
     end
-
-    assert_redirected_to admin_gallery_image_url(Admin::GalleryImage.last)
+    assert_redirected_to page_url(@page, locale: 'da')
   end
 
-  test "should show admin_gallery_image" do
-    get admin_gallery_image_url(@admin_gallery_image)
+  test 'should get edit' do
+    get edit_admin_gallery_image_url(@gallery_image)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_admin_gallery_image_url(@admin_gallery_image)
-    assert_response :success
+  test 'should update admin_gallery_image' do
+    patch gallery_module_gallery_image_url(@gallery_module, @gallery_image, locale: 'da'), params: {
+      admin_gallery_image: {
+        gallery_module_id: @gallery_image.gallery_module_id,
+        body: @gallery_image.body,
+        title: @gallery_image.title,
+        user_id: @gallery_image.user_id
+      }
+    }
+    assert_redirected_to page_url(@gallery_module.page)
   end
 
-  test "should update admin_gallery_image" do
-    patch admin_gallery_image_url(@admin_gallery_image), params: { admin_gallery_image: { admin/gallery_module_id: @admin_gallery_image.admin/gallery_module_id, body: @admin_gallery_image.body, title: @admin_gallery_image.title, user_id: @admin_gallery_image.user_id } }
-    assert_redirected_to admin_gallery_image_url(@admin_gallery_image)
-  end
+  # test 'should destroy admin_gallery_image' do
+  #   assert_difference('Admin::GalleryImage.count', -1) do
+  #     delete admin_gallery_image_url(@gallery_image)
+  #   end
+  #   assert_redirected_to admin_gallery_images_url
+  # end
 
-  test "should destroy admin_gallery_image" do
+  test 'should destroy admin_gallery_image' do
     assert_difference('Admin::GalleryImage.count', -1) do
-      delete admin_gallery_image_url(@admin_gallery_image)
+      delete gallery_module_gallery_image_url(@gallery_module, @gallery_image, locale: 'da')
     end
-
-    assert_redirected_to admin_gallery_images_url
+    assert_redirected_to page_url(@page, locale: 'da')
   end
+
 end

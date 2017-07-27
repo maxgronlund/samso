@@ -1,3 +1,4 @@
+# Image for the gallery
 class Admin::GalleryImage < ApplicationRecord
   belongs_to :gallery_module, class_name: 'Admin::GalleryModule'
   belongs_to :user
@@ -21,4 +22,7 @@ class Admin::GalleryImage < ApplicationRecord
     source
   end
 
+  def page
+    gallery_module.page
+  end
 end

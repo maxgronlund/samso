@@ -1,3 +1,4 @@
+# Gallery module
 class CreateAdminGalleryModules < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_gallery_modules do |t|

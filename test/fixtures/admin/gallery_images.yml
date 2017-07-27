@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+gallery_image_one:
   title: MyString
   body: MyText
-  admin/gallery_module: one
+  gallery_module: gallery_module_one
   user: one
 
-two:
+gallery_image_two:
   title: MyString
   body: MyText
-  admin/gallery_module: two
+  gallery_module: gallery_module_two
   user: two

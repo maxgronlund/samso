@@ -15,3 +15,5 @@ h3 = gallery_module.name
   h4 = image.title
   = image.body
   = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, image)
+  ' |
+  = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, image), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-danger btn-sm'

@@ -1,35 +1,25 @@
 class GalleryImagesController < ApplicationController
-  before_action :set_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_image, only: [:edit, :update, :destroy]
+  before_action :set_gallery, only: [:new, :create, :edit, :destroy]
 
-  # GET /admin/gallery_images
-  def index
-    @admin_gallery_images = Admin::GalleryImage.all
-  end
-
-  # GET /admin/gallery_images/1
-  def show
-  end
 
   # GET /admin/gallery_images/new
   def new
-    @gallery = Admin::GalleryModule.find(params[:gallery_module_id])
     @image = @gallery.images.new(position: @gallery.images.count * 10)
   end
 
   # GET /admin/gallery_images/1/edit
   def edit
-     @gallery       = @image.gallery_module
+    @gallery       = @image.gallery_module
   end
 
   # POST /admin/gallery_images
   def create
-    @gallery       = Admin::GalleryModule.find(params[:gallery_module_id])
     @image         = @gallery.images.new(image_params)
     @image.user_id = current_user.id
-    @page          = @gallery.page
 
     if @image.save
-      redirect_to @page
+      redirect_to @image.page
     else
       render :new
     end
@@ -37,10 +27,8 @@ class GalleryImagesController < ApplicationController
 
   # PATCH/PUT /admin/gallery_images/1
   def update
-    @gallery = @image.gallery_module
-    @page    = @gallery.page
     if @image.update(image_params)
-      redirect_to @page
+      redirect_to @image.page
     else
       render :edit
     end
@@ -48,13 +36,16 @@ class GalleryImagesController < ApplicationController
 
   # DELETE /admin/gallery_images/1
   def destroy
-    @admin_gallery_image.destroy
-
-    redirect_to admin_gallery_images_url
-
+    @image.destroy
+    redirect_to @gallery.page
   end
 
   private
+
+  def set_gallery
+    @gallery = Admin::GalleryModule.find(params[:gallery_module_id])
+
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_image

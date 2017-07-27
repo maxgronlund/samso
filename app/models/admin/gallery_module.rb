@@ -1,3 +1,4 @@
+# Gallery module
 class Admin::GalleryModule < ApplicationRecord
   include SectionPlugin
   has_many :images, class_name: 'Admin::GalleryImage', dependent: :destroy, foreign_key: 'gallery_module_id'
