@@ -53,3 +53,12 @@ post_page:
   active: true
   locale: alabama
   user: one
+
+gallery_page:
+  title: MyString
+  menu_title: MyString
+  menu_id: menu_bar
+  menu_position: 10
+  active: true
+  locale: alabama
+  user: one

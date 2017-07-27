@@ -8,12 +8,22 @@ h3 = gallery_module.name
     .float-right-button-container
       = link_to t('gallery_module.upload_immage'), new_gallery_module_gallery_image_path(gallery_module), class: 'btn btn-outline-success btn-sm'
 
-- gallery_module.images.each do |image|
-  hr
-  a data-fancybox="gallery" href="#{image.image_url('12_col_4x1')}"
-    = image_tag(image.image_url('thumb'), class: 'img-fluid')
-  h4 = image.title
-  = image.body
-  = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, image)
-  ' |
-  = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, image), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-danger btn-sm'
+.row
+  - gallery_module.images.each do |image|
+    .col-12.col-sm-6.col-md-4.col-lg-3.mb-9
+      .card style="min-height: 320px"
+        a data-fancybox="gallery" href="#{image.image_url('default')}"
+          = image_tag(image.image_url('squared'), class: 'img-fluid card-img-top')
+
+        .card-block
+          h5.card-title = image.title.truncate(22)
+          p.card-text = image.body.truncate(40)
+          /a.btn.btn-primary href="#"  Go somewhere
+
+          = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, image)
+          ' |
+          = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, image),
+            data: { confirm: t('are_you_sure') },
+            method: :delete
+        .card-footer.text-muted
+          = l image.created_at

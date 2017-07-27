@@ -2,8 +2,8 @@ require 'test_helper'
 
 class Admin::GalleryImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @gallery_image = admin_gallery_images(:gallery_image_one)
-    @gallery_module = admin_gallery_modules(:gallery_module_one)
+    @gallery_image  = admin_gallery_images(:gallery_image_one)
+    @gallery_module = @gallery_image.gallery_module
     @page = @gallery_module.page
     @user = users(:one)
     Warden.test_mode!
@@ -15,7 +15,7 @@ class Admin::GalleryImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_admin_gallery_image_url
+    get new_gallery_module_gallery_image_url(@gallery_module, locale: 'da')
     assert_response :success
   end
 
@@ -34,7 +34,7 @@ class Admin::GalleryImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get edit' do
-    get edit_admin_gallery_image_url(@gallery_image)
+    get edit_gallery_module_gallery_image_url(@gallery_module, @gallery_image, locale: 'da')
     assert_response :success
   end
 
@@ -63,5 +63,4 @@ class Admin::GalleryImagesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to page_url(@page, locale: 'da')
   end
-
 end

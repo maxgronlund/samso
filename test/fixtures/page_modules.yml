@@ -50,7 +50,7 @@ dmi_module:
   position: 20
 
 gallery_module:
-  page: post_page
+  page: gallery_page
   moduleable: gallery_module_one
   moduleable_type: "Admin::GalleryModule"
   slot_id: 200
