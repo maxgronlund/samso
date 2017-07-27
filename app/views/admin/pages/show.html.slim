@@ -41,3 +41,7 @@ hr
                 -when 'Admin::PostModule'
                   = link_to t('edit'),
                     edit_admin_page_post_module_path(@page, page_module.moduleable)
+                -when 'Admin::GalleryModule'
+                  = link_to t('edit'),
+                    edit_admin_page_gallery_module_path(@page, page_module.moduleable)
+

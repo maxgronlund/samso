@@ -1,0 +1,7 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.mt-80
+  h3 = t('gallery_image.edit')
+
+  = simple_form_for [ @gallery, @image], multipart: true, url: url_for(action: 'update', controller: 'gallery_images'), method: 'PATCH' do |f|
+    = f.error_notification
+    == render 'form', f: f

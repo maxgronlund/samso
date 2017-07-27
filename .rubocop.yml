@@ -39,9 +39,16 @@ Metrics/LineLength:
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
   Max: 15
+  Exclude:
+    - 'app/controllers/admin/page_modules_controller.rb'
 
 Metrics/CyclomaticComplexity:
   Enabled: false
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/admin/page_modules_controller.rb'
+  #Max: 300
 
 # Offense count: 1
 # Cop supports --auto-correct.

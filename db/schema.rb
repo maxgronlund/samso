@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725165427) do
+ActiveRecord::Schema.define(version: 20170725201932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,10 +60,35 @@ ActiveRecord::Schema.define(version: 20170725165427) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
+    t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
   end
 
   create_table "admin_dmi_modules", force: :cascade do |t|
     t.string "forecast_duration", default: "days_two_forecast"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_gallery_images", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "gallery_module_id"
+    t.bigint "user_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["gallery_module_id"], name: "index_admin_gallery_images_on_gallery_module_id"
+    t.index ["user_id"], name: "index_admin_gallery_images_on_user_id"
+  end
+
+  create_table "admin_gallery_modules", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "layout"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

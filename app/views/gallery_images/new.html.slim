@@ -1,0 +1,16 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.mt-80
+  h3 = t('gallery_image.new')
+
+  = simple_form_for [ @gallery, @image], multipart: true, url: url_for(action: 'create', controller: 'gallery_images'), method: 'post' do |f|
+    = f.error_notification
+    == render 'form', f: f
+
+
+
+
+/h1 New admin_gallery_image
+/
+/== render 'form'
+/
+/= link_to 'Back', admin_gallery_images_path

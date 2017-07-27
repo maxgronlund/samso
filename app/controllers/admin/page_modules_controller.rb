@@ -55,6 +55,8 @@ class Admin::PageModulesController < AdminController
       edit_admin_page_post_module_path(@page, @page_module.moduleable_id)
     when 'Admin::DmiModule'
       edit_admin_page_dmi_module_path(@page, @page_module.moduleable_id)
+    when 'Admin::GalleryModule'
+      edit_admin_page_gallery_module_path(@page, @page_module.moduleable_id)
     end
   end
 
@@ -72,6 +74,8 @@ class Admin::PageModulesController < AdminController
       Admin::PostModule.find(@page_module.moduleable_id).destroy
     when 'Admin::DmiModule'
       Admin::DmiModule.find(@page_module.moduleable_id).destroy
+    when 'Admin::GalleryModule'
+      Admin::GalleryModule.find(@page_module.moduleable_id).destroy
     end
   end
 
@@ -97,6 +101,8 @@ class Admin::PageModulesController < AdminController
       @moduleable = Admin::PostModule.create
     when 'Admin::DmiModule'
       @moduleable = Admin::DmiModule.create
+    when 'Admin::GalleryModule'
+      @moduleable = Admin::GalleryModule.create
     end
   end
 

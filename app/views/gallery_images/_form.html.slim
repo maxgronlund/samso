@@ -1,0 +1,11 @@
+
+.form-inputs
+  = f.input :image
+  = f.input :title
+  = f.input :body
+  = f.input :position
+  = f.hidden_field :gallery_module_id, value: @gallery.id
+  /= f.association :user
+
+.form-actions
+  = f.submit t('save'), class: 'btn btn-primary'
