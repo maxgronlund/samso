@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
+
   # GET /pages/1
-  # GET /pages/1.json
   def show
     @page            = Page.find(params[:id])
+    @footer          = @page.footer
     @admin_namespace = false
     set_post if post_page?
     store_page_in_session if @page.require_subscription
@@ -26,4 +27,5 @@ class PagesController < ApplicationController
     session[:post_id] = @post.id if @post
     @page = Admin::SystemSetup.subscription_page
   end
+
 end

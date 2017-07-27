@@ -71,7 +71,8 @@ class Admin::PagesController < AdminController
       :locale,
       :user_id,
       :layout,
-      :require_subscription
+      :require_subscription,
+      :footer_id
     )
   end
 end

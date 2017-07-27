@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725201932) do
+ActiveRecord::Schema.define(version: 20170727153122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,21 @@ ActiveRecord::Schema.define(version: 20170725201932) do
 
   create_table "admin_dmi_modules", force: :cascade do |t|
     t.string "forecast_duration", default: "days_two_forecast"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_footers", force: :cascade do |t|
+    t.string "title"
+    t.string "locale"
+    t.string "about_link"
+    t.string "about_link_name"
+    t.string "email"
+    t.string "email_name"
+    t.string "terms_of_usage_link"
+    t.string "terms_of_usage_link_name"
+    t.string "info"
+    t.string "copyright"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -169,6 +184,8 @@ ActiveRecord::Schema.define(version: 20170725201932) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "require_subscription", default: false
+    t.integer "footer_id"
+    t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 

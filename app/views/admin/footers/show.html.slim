@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @admin_footer.title
+p
+  strong Locale:
+  = @admin_footer.locale
+p
+  strong About link:
+  = @admin_footer.about_link
+p
+  strong About link name:
+  = @admin_footer.about_link_name
+p
+  strong Email:
+  = @admin_footer.email
+p
+  strong Email name:
+  = @admin_footer.email_name
+p
+  strong Terms of usage link:
+  = @admin_footer.terms_of_usage_link
+p
+  strong Terms of usage link name:
+  = @admin_footer.terms_of_usage_link_name
+p
+  strong Info:
+  = @admin_footer.info
+p
+  strong Copyright:
+  = @admin_footer.copyright
+
+= link_to 'Edit', edit_admin_footer_path(@admin_footer)
+'  |
+= link_to 'Back', admin_footers_path

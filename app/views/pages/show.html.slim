@@ -1,5 +1,5 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
-.container.mt-80
+.container
   - if @admin
     .row
       .col-sm-12
@@ -8,5 +8,15 @@
 
   = render 'pages/show', page: @page
 
-/ .fixed-bottom
-/   h1 fo
+
+- if @footer
+  .fixed-bottom
+    .footer
+      .container
+        .row
+          .col-sm-4
+            - unless @footer.about_link.empty?
+              = link_to @footer.about_link_name, @footer.about_link
+          .col-sm-4
+            - unless @footer.terms_of_usage_link.empty?
+              = link_to @footer.terms_of_usage_link_name, @footer.terms_of_usage_link

@@ -1,0 +1,17 @@
+= simple_form_for(@admin_footer) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :locale
+    = f.input :about_link
+    = f.input :about_link_name
+    = f.input :email
+    = f.input :email_name
+    = f.input :terms_of_usage_link
+    = f.input :terms_of_usage_link_name
+    = f.input :info
+    = f.input :copyright
+
+  .form-actions
+    = f.button :submit

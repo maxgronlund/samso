@@ -56,4 +56,8 @@ class Page < ApplicationRecord
     page_id = Admin::SystemSetup.landing_page_id
     Page.where(id: page_id)
   end
+
+  def footer
+    @footer = Admin::Footer.find_by(id: footer_id)
+  end
 end
