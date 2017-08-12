@@ -2,6 +2,7 @@
 class Admin::GalleryModule < ApplicationRecord
   include SectionPlugin
   has_many :images, class_name: 'Admin::GalleryImage', dependent: :destroy, foreign_key: 'gallery_module_id'
+  belongs_to :page, optional: true
 
   #scope :latest_images, ->  { order('created_at DESC') }
   # scope :latest_images, -> { order('created_at DESC') }
@@ -17,4 +18,7 @@ class Admin::GalleryModule < ApplicationRecord
     images.order('created_at DESC')
   end
 
+  def show_on_page
+    Page.find_by(id: page_id)
+  end
 end

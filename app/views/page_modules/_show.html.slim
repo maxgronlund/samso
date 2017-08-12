@@ -14,3 +14,5 @@
     = render 'dmi_modules/show', page: page_module.page, dmi_module: page_module.moduleable
   -when 'Admin::GalleryModule'
     = render 'gallery_modules/show', page: page_module.page, gallery_module: page_module.moduleable
+  -when 'Admin::ImageModule'
+    = render 'image_modules/show', page: page_module.page, image_module: page_module.moduleable

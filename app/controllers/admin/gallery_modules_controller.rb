@@ -30,6 +30,7 @@ class Admin::GalleryModulesController < AdminController
     params.require(:admin_gallery_module).permit(
       :name,
       :body,
+      :page_id,
       :layout,
       :position,
       :slot_id

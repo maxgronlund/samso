@@ -4,6 +4,7 @@ class Page < ApplicationRecord
   has_many :page_modules, dependent: :destroy
   has_many :admin_carousel_slide
   has_many :text_modules
+  has_many :gallery_modules
 
   LOCALES = %w(da en).freeze
 
@@ -33,7 +34,8 @@ class Page < ApplicationRecord
       [I18n.t('page_module.blog_module'), 'Admin::BlogModule'],
       [I18n.t('page_module.post_module'), 'Admin::PostModule'],
       [I18n.t('page_module.dmi_module'), 'Admin::DmiModule'],
-      [I18n.t('page_module.gallery_module'), 'Admin::GalleryModule']
+      [I18n.t('page_module.gallery_module'), 'Admin::GalleryModule'],
+      [I18n.t('page_module.image_module'), 'Admin::ImageModule']
     ]
   end
 

@@ -72,13 +72,14 @@ h4 Layouts
     = image_tag('text_module/bmw.png', class: "img-fluid")
 = image_tag('text_module/fiat.png', class: "img-fluid")
 
-
+/ toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
 javascript:
-  $('selector').froalaEditor();
+
   $(function() {
-    $('#text_module_body').froalaEditor({toolbarInline: false})
+    $('#text_module_body').froalaEditor(
+      {
+        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+      }
+    )
   });
 
-  $('.selector').froalaEditor({
-    fontFamilySelection: true
-  });

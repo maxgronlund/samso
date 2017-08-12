@@ -11,7 +11,9 @@
     = f.input :name
     = f.input :body
     = f.input :layout
+    = f.association :page, collection: Page.active().where(locale: I18n.locale)
     = f.input :slot_id, as: :integer
+    = f.input :position, as: :integer
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'
