@@ -27,5 +27,4 @@ class PagesController < ApplicationController
     session[:post_id] = @post.id if @post
     @page = Admin::SystemSetup.subscription_page
   end
-
 end

@@ -62,13 +62,14 @@ class Admin::FootersController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_footer
-      @admin_footer = Admin::Footer.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_footer_params
-      params.require(:admin_footer).permit(:title, :locale, :about_link, :about_link_name, :email, :email_name, :terms_of_usage_link, :terms_of_usage_link_name, :info, :copyright)
-    end
+ # Use callbacks to share common setup or constraints between actions.
+ def set_admin_footer
+   @admin_footer = Admin::Footer.find(params[:id])
+ end
+
+ # Never trust parameters from the scary internet, only allow the white list through.
+ def admin_footer_params
+   params.require(:admin_footer).permit(:title, :locale, :about_link, :about_link_name, :email, :email_name, :terms_of_usage_link, :terms_of_usage_link_name, :info, :copyright)
+ end
 end

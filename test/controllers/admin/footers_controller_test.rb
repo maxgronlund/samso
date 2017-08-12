@@ -42,7 +42,6 @@ class Admin::FootersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Admin::Footer.count', -1) do
       delete admin_footer_url(@admin_footer)
     end
-
     assert_redirected_to admin_footers_url
   end
 end
