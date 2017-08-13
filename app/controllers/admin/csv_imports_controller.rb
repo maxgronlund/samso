@@ -46,13 +46,14 @@ class Admin::CsvImportsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_csv_import
-      @admin_csv_import = Admin::CsvImport.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def admin_csv_import_params
-      params.require(:admin_csv_import).permit(:csv_file, :name, :import_type, :comments, :summary)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_csv_import
+    @admin_csv_import = Admin::CsvImport.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def admin_csv_import_params
+    params.require(:admin_csv_import).permit(:csv_file, :name, :import_type, :comments, :summary)
+  end
 end

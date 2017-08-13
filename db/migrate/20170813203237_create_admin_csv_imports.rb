@@ -1,3 +1,4 @@
+# import of csv file
 class CreateAdminCsvImports < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_csv_imports do |t|
