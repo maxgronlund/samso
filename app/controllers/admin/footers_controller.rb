@@ -25,15 +25,11 @@ class Admin::FootersController < AdminController
   # POST /admin/footers.json
   def create
     @admin_footer = Admin::Footer.new(admin_footer_params)
-
-    respond_to do |format|
-      if @admin_footer.save
-        format.html { redirect_to @admin_footer, notice: 'Footer was successfully created.' }
-        format.json { render :show, status: :created, location: @admin_footer }
-      else
-        format.html { render :new }
-        format.json { render json: @admin_footer.errors, status: :unprocessable_entity }
-      end
+    @admin_footer.locale = I18n.locale
+    if @admin_footer.save
+      redirect_to @admin_footer
+    else
+      render :new
     end
   end
 
@@ -63,13 +59,24 @@ class Admin::FootersController < AdminController
 
   private
 
- # Use callbacks to share common setup or constraints between actions.
- def set_admin_footer
-   @admin_footer = Admin::Footer.find(params[:id])
- end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_footer
+    @admin_footer = Admin::Footer.find(params[:id])
+  end
 
- # Never trust parameters from the scary internet, only allow the white list through.
- def admin_footer_params
-   params.require(:admin_footer).permit(:title, :locale, :about_link, :about_link_name, :email, :email_name, :terms_of_usage_link, :terms_of_usage_link_name, :info, :copyright)
- end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def admin_footer_params
+    params.require(:admin_footer).permit(
+      :title,
+      :locale,
+      :about_link,
+      :about_link_name,
+      :email,
+      :email_name,
+      :terms_of_usage_link,
+      :terms_of_usage_link_name,
+      :info,
+      :copyright
+    )
+  end
 end

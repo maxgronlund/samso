@@ -1,0 +1,18 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/footer:
+          attributes:
+            title:
+              blank: Mangler
+            image:
+              blank: Billed mangler
+    attributes:
+      admin/footer:
+        title: Overskrift
+        body: Tekst
+        page: Link til side
+
+    models:
+      admin/footer: Footer

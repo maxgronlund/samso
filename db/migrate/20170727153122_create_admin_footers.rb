@@ -1,3 +1,4 @@
+# footers to show on multiply pages
 class CreateAdminFooters < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_footers do |t|

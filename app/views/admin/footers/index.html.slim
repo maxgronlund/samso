@@ -1,0 +1,56 @@
+h3 = t('footers')
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th = t(Admin::Footer.human_attribute_name('title'))
+        th colspan=3
+    tbody
+      - @admin_footers.each do |admin_footer|
+        tr
+          td = admin_footer.title
+          td.float-right-button-container
+            = link_to 'Edit', edit_admin_footer_path(admin_footer), class: 'btn btn-primary btn-sm'
+            = link_to 'Destroy', admin_footer, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
+
+
+/ h1 Listing admin_footers
+
+/ table
+/   thead
+/     tr
+/       th Title
+/       th Locale
+/       th About link
+/       th About link name
+/       th Email
+/       th Email name
+/       th Terms of usage link
+/       th Terms of usage link name
+/       th Info
+/       th Copyright
+/       th
+/       th
+/       th
+
+/   tbody
+/     - @admin_footers.each do |admin_footer|
+/       tr
+/         td = admin_footer.title
+/         td = admin_footer.locale
+/         td = admin_footer.about_link
+/         td = admin_footer.about_link_name
+/         td = admin_footer.email
+/         td = admin_footer.email_name
+/         td = admin_footer.terms_of_usage_link
+/         td = admin_footer.terms_of_usage_link_name
+/         td = admin_footer.info
+/         td = admin_footer.copyright
+/         td = link_to 'Show', admin_footer
+/         td = link_to 'Edit', edit_admin_footer_path(admin_footer)
+/         td = link_to 'Destroy', admin_footer, data: { confirm: 'Are you sure?' }, method: :delete
+
+/ br
+
+/ = link_to 'New Footer', new_admin_footer_path

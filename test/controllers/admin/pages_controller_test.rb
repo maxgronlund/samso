@@ -1,14 +1,21 @@
 require 'test_helper'
 
 class Admin::PagesControllerTest < ActionDispatch::IntegrationTest
-  # setup do
-  #   @page = pages(:one)
-  # end
+  setup do
+    @page = pages(:one)
+  @user = users(:one)
+    Warden.test_mode!
+    sign_in(@user)
+  end
 
-  # test 'should get index' do
-  #   get admin_pages_url
-  #   assert_response :success
-  # end
+  teardown do
+    Warden.test_reset!
+  end
+
+  test 'should get index' do
+    get admin_pages_url
+    assert_response :success
+  end
   #
   # test 'should get new' do
   #   get new_admin_page_url
