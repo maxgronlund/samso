@@ -1,5 +1,5 @@
 class Admin::PagesController < AdminController
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_page, only: %i[show edit update destroy]
   before_action :set_selected
   # GET /pages
   # GET /pages.json

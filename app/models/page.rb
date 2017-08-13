@@ -5,9 +5,9 @@ class Page < ApplicationRecord
   has_many :admin_carousel_slide
   has_many :text_modules
 
-  LOCALES = %w(da en).freeze
+  LOCALES = %w[da en].freeze
 
-  LAYOUTS = %w(
+  LAYOUTS = %w[
     alabama
     alaska
     arizona
@@ -17,7 +17,7 @@ class Page < ApplicationRecord
     connecticut
     delaware
     florida
-  ).freeze
+  ].freeze
 
   scope :active, -> { where(active: true) }
 

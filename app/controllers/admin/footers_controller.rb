@@ -1,5 +1,5 @@
 class Admin::FootersController < AdminController
-  before_action :set_admin_footer, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_footer, only: %i[show edit update destroy]
 
   # GET /admin/footers
   # GET /admin/footers.json

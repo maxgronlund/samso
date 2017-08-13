@@ -1,5 +1,5 @@
 class Admin::CarouselModulesController < AdminController
-  before_action :set_admin_carousel_module, only: [:edit, :update, :destroy, :show]
+  before_action :set_admin_carousel_module, only: %i[edit update destroy show]
 
   def show
     @admin_carousel_slides = @carousel_module.slides.order(:position)

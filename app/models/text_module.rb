@@ -16,7 +16,7 @@ class TextModule < ApplicationRecord
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
-  LAYOUTS = %w(
+  LAYOUTS = %w[
     alfa-romeo
     aston-martin
     audi
@@ -30,7 +30,7 @@ class TextModule < ApplicationRecord
     dodge
     fiat
     ford
-  ).freeze
+  ].freeze
 
   def page_module
     PageModule.find_by(

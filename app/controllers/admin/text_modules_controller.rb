@@ -1,5 +1,5 @@
 class Admin::TextModulesController < AdminController
-  before_action :set_text_module, only: [:show, :edit, :update, :destroy]
+  before_action :set_text_module, only: %i[show edit update destroy]
 
   # GET /text_modules/1/edit
   def edit

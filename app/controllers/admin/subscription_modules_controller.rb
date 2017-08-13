@@ -1,5 +1,5 @@
 class Admin::SubscriptionModulesController < AdminController
-  before_action :set_admin_subscription_module, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_subscription_module, only: %i[show edit update destroy]
 
   def edit
     @page = Page.find(params[:page_id])

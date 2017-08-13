@@ -1,5 +1,5 @@
 class Admin::DmiModulesController < AdminController
-  before_action :set_admin_dmi_module, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_dmi_module, only: %i[show edit update destroy]
 
   # GET /admin/dmi_modules/1/edit
   def edit

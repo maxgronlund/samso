@@ -70,4 +70,14 @@ class User < ApplicationRecord
   def self.super_admin
     Role.find_by(permission: Role::SUPER_ADMIN).user
   end
+
+  def can_manage_resource?(resource)
+    case resource.class.name
+
+    when 'Admin::GalleryImage'
+      return resource.user_id == id
+    end
+
+    false
+  end
 end

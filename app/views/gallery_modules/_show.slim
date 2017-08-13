@@ -20,10 +20,11 @@ h3 = gallery_module.name
           p.card-text = image.body.truncate(40)
           /a.btn.btn-primary href="#"  Go somewhere
 
-          = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, image)
-          ' |
-          = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, image),
-            data: { confirm: t('are_you_sure') },
-            method: :delete
+          - if can_manage_resource?(image)
+            = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, image)
+            ' |
+            = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, image),
+              data: { confirm: t('are_you_sure') },
+              method: :delete
         .card-footer.text-muted
           = l image.created_at

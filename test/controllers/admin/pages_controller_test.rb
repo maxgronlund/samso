@@ -3,7 +3,7 @@ require 'test_helper'
 class Admin::PagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @page = pages(:one)
-  @user = users(:one)
+    @user = users(:one)
     Warden.test_mode!
     sign_in(@user)
   end
