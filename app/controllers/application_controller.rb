@@ -41,6 +41,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :access_to_subscribed_content?
 
+  def can_manage_resource?(resource)
+    return true if editor?
+    current_user && current_user.can_manage_resource?(resource)
+  end
+  helper_method :can_manage_resource?
+
   protected
 
   def configure_permitted_parameters

@@ -1,5 +1,5 @@
 class Admin::BlogPostsController < AdminController
-  before_action :set_admin_blog_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_blog_post, only: %i[show edit update destroy]
 
   # GET /admin/blog_posts
   # GET /admin/blog_posts.json

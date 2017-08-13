@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   def show
     @page            = Page.find(params[:id])
+    @footer          = @page.footer
     @admin_namespace = false
     set_post if post_page?
     set_image if params[:gallery_image_id]

@@ -1,5 +1,5 @@
 class Admin::BlogModulesController < AdminController
-  before_action :set_admin_blog_module, only: [:edit, :update]
+  before_action :set_admin_blog_module, only: %i[edit update]
 
   # GET /admin/blog_modules/1/edit
   def edit

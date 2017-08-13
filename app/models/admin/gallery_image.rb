@@ -26,6 +26,6 @@ class Admin::GalleryImage < ApplicationRecord
   end
 
   def user_name
-    user ? user.name : ""
+    user ? user.name : ''
   end
 end

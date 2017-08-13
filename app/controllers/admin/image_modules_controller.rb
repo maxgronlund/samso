@@ -1,6 +1,5 @@
 class Admin::ImageModulesController < AdminController
-  before_action :set_admin_image_module, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_admin_image_module, only: %i[show edit update destroy]
 
   # GET /admin/image_modules/1/edit
   def edit

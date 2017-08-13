@@ -4,9 +4,6 @@ class Admin::GalleryModule < ApplicationRecord
   has_many :images, class_name: 'Admin::GalleryImage', dependent: :destroy, foreign_key: 'gallery_module_id'
   belongs_to :page, optional: true
 
-  #scope :latest_images, ->  { order('created_at DESC') }
-  # scope :latest_images, -> { order('created_at DESC') }
-
   def page_module
     PageModule.find_by(
       moduleable_type: 'Admin::GalleryModule',

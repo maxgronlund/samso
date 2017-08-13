@@ -1,5 +1,5 @@
 class Admin::CarouselSlidesController < AdminController
-  before_action :set_admin_carousel_slide, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_carousel_slide, only: %i[show edit update destroy]
 
   # GET /admin/carousel_slides
   # GET /admin/carousel_slides.json

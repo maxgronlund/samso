@@ -1,5 +1,5 @@
 class Admin::SubscriptionsController < AdminController
-  before_action :set_admin_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_subscription, only: %i[show edit update destroy]
 
   # GET /admin/subscriptions
   # GET /admin/subscriptions.json

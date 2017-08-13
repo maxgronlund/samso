@@ -1,5 +1,5 @@
 class Admin::PostModulesController < AdminController
-  before_action :set_admin_post_module, only: [:edit, :update, :destroy]
+  before_action :set_admin_post_module, only: %i[edit update destroy]
 
   # GET /admin/post_modules/1/edit
   def edit

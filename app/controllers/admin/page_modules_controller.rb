@@ -1,5 +1,5 @@
 class Admin::PageModulesController < AdminController
-  before_action :set_page_module, only: [:show, :edit, :update, :destroy]
+  before_action :set_page_module, only: %i[show edit update destroy]
   before_action :new_page_with_page_module, only: [:create]
 
   # GET /page_modules/new

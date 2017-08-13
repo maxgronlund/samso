@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :carousel_modules, only: [] do
         resources :carousel_slides
       end
+      resources :footers
       resources :pages do
         resources :blog_modules, only: [:edit, :update] do
           resources :blog_posts, only: [:edit, :update, :new, :create]

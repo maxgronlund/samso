@@ -35,6 +35,10 @@ aside.sidebar
           = link_to admin_pages_path
             i.fa.fa-list
             | Sider
+        li class="#{@selected == 'footers' ? 'active' : ''}"
+          = link_to admin_footers_path
+            i.fa.fa-list
+            | Footers
         / li class="#{@selected == 'contents' ? 'active' : ''}"
         /   a href=""
         /     i.fa.fa-th-large

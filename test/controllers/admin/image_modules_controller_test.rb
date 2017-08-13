@@ -2,47 +2,36 @@ require 'test_helper'
 
 class Admin::ImageModulesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @admin_image_module = admin_image_modules(:one)
+    @admin_image_module = admin_image_modules(:image_module_one)
+    @page_module = page_modules(:image_module)
+    @page        = @page_module.page
+    @user = users(:one)
+    Warden.test_mode!
+    sign_in(@user)
   end
 
-  test "should get index" do
-    get admin_image_modules_url
+  teardown do
+    Warden.test_reset!
+  end
+
+  test 'should get edit' do
+    get edit_admin_page_image_module_url(@page, @admin_image_module, locale: 'da')
     assert_response :success
   end
 
-  test "should get new" do
-    get new_admin_image_module_url
-    assert_response :success
+  test 'should update admin_image_module' do
+    patch admin_page_image_module_url(@page, @admin_image_module, locale: 'da'), params: {
+      admin_image_module: {
+        layout: @admin_image_module.layout
+      }
+    }
+    assert_redirected_to admin_page_url(@admin_image_module.page, locale: 'da')
   end
 
-  test "should create admin_image_module" do
-    assert_difference('Admin::ImageModule.count') do
-      post admin_image_modules_url, params: { admin_image_module: { layout: @admin_image_module.layout } }
-    end
-
-    assert_redirected_to admin_image_module_url(Admin::ImageModule.last)
-  end
-
-  test "should show admin_image_module" do
-    get admin_image_module_url(@admin_image_module)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_admin_image_module_url(@admin_image_module)
-    assert_response :success
-  end
-
-  test "should update admin_image_module" do
-    patch admin_image_module_url(@admin_image_module), params: { admin_image_module: { layout: @admin_image_module.layout } }
-    assert_redirected_to admin_image_module_url(@admin_image_module)
-  end
-
-  test "should destroy admin_image_module" do
+  test 'should destroy admin_image_module' do
     assert_difference('Admin::ImageModule.count', -1) do
-      delete admin_image_module_url(@admin_image_module)
+      delete admin_page_page_module_url(@page, @page_module, locale: 'da')
     end
-
-    assert_redirected_to admin_image_modules_url
+    assert_redirected_to admin_page_url(@page, locale: 'da')
   end
 end

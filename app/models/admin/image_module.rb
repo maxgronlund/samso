@@ -1,3 +1,4 @@
+# show one image from the GGallery
 class Admin::ImageModule < ApplicationRecord
   include SectionPlugin
 

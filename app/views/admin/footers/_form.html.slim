@@ -1,0 +1,28 @@
+= simple_form_for(@admin_footer) do |f|
+  = f.error_notification
+  .form-inputs
+    .row
+      .col-sm-6
+        = f.input :title
+    .row
+      .col-sm-6
+        = f.input :about_link
+      .col-sm-6
+        = f.input :about_link_name
+    .row
+      .col-sm-6
+        = f.input :email
+      .col-sm-6
+        = f.input :email_name
+    .row
+      .col-sm-6
+        = f.input :terms_of_usage_link
+      .col-sm-6
+        = f.input :terms_of_usage_link_name
+    .row
+      .col-sm-6
+        = f.input :info
+        = f.input :copyright
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'

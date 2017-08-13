@@ -6,9 +6,9 @@ class Page < ApplicationRecord
   has_many :text_modules
   has_many :gallery_modules
 
-  LOCALES = %w(da en).freeze
+  LOCALES = %w[da en].freeze
 
-  LAYOUTS = %w(
+  LAYOUTS = %w[
     alabama
     alaska
     arizona
@@ -18,7 +18,7 @@ class Page < ApplicationRecord
     connecticut
     delaware
     florida
-  ).freeze
+  ].freeze
 
   scope :active, -> { where(active: true) }
 
@@ -57,5 +57,9 @@ class Page < ApplicationRecord
   def self.front_page
     page_id = Admin::SystemSetup.landing_page_id
     Page.where(id: page_id)
+  end
+
+  def footer
+    @footer = Admin::Footer.find_by(id: footer_id)
   end
 end
