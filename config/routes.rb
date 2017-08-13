@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :carousel_modules, only: [] do
         resources :carousel_slides
       end
+      resources :csv_imports
       resources :footers
       resources :pages do
         resources :blog_modules, only: [:edit, :update] do

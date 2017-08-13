@@ -1,0 +1,12 @@
+= simple_form_for [@admin_csv_import], multipart: true do |f|
+  = f.error_notification
+
+  .form-inputs
+  	= f.file_field :csv_file
+    = f.input :name
+    = f.input :import_type
+    = f.input :comments
+    = f.input :summary
+
+  .form-actions
+    = f.button :submit
