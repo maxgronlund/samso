@@ -6,7 +6,7 @@
 
   .form-inputs
     = f.input :slot_id, as: :integer
-    = f.input :position
+    = f.input :position, as: :integer
     = f.input :forecast_duration,
       collection: Admin::DmiModule.forecasts,
       include_blank: false

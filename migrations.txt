@@ -52,7 +52,13 @@ rails g scaffold admin/gallery_module name body:text layout --no-helper --no-ass
 rails g scaffold admin/gallery_image title body:text admin/gallery_module:belongs_to user:belongs_to --no-helper --no-assets --no-controller-specs
 rails g migration add_image_to_admin_gallery_images
 
+
+rails g scaffold admin/image_module layout --no-helper --no-assets --no-controller-specs
+
+rails g scaffold admin/vide_module layout snippet --no-helper --no-assets --no-controller-specs
+
 rails g scaffold admin/footer title locale about_link about_link_name email email_name terms_of_usage_link terms_of_usage_link_name info copyright  --no-helper --no-assets --no-controller-specs
+
 
 
 Page

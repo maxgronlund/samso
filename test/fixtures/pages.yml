@@ -6,7 +6,7 @@ news_page:
   menu_id: menu_bar
   menu_position: 1
   active: true
-  locale: alabama
+  locale: da
   user: one
 
 front_page:
@@ -15,7 +15,7 @@ front_page:
   menu_id: menu_bar
   menu_position: 1
   active: true
-  locale: alabama
+  locale: da
   user: one
 
 about_page:
@@ -24,41 +24,50 @@ about_page:
   menu_id: menu_bar
   menu_position: 10
   active: true
-  locale: alabama
+  locale: da
   user: two
 
 subscription_page:
   title: MyString
   menu_title: MyString
   menu_id: menu_bar
-  menu_position: 10
+  menu_position: 20
   active: true
-  locale: alabama
+  locale: da
   user: one
 
 payment_page:
   title: MyString
   menu_title: MyString
   menu_id: menu_bar
-  menu_position: 10
+  menu_position: 30
   active: true
-  locale: alabama
+  locale: da
   user: one
 
 post_page:
   title: MyString
   menu_title: MyString
   menu_id: menu_bar
-  menu_position: 10
+  menu_position: 40
   active: true
-  locale: alabama
+  locale: da
   user: one
 
 gallery_page:
   title: MyString
   menu_title: MyString
   menu_id: menu_bar
-  menu_position: 10
+  menu_position: 50
   active: true
-  locale: alabama
+  locale: da
+  user: one
+
+image_page:
+  title: MyString
+  menu_title: MyString
+  menu_id: menu_bar
+  menu_position: 60
+  active: true
+  locale: da
   user: one

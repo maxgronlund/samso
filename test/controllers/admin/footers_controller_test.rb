@@ -13,7 +13,7 @@ class Admin::FootersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    get admin_footers_url
+    get admin_footers_url(locale: 'da')
     assert_response :success
   end
 
@@ -40,21 +40,16 @@ class Admin::FootersControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to admin_footer_url(Admin::Footer.last)
-  end
-
-  test 'should show admin_footer' do
-    get admin_footer_url(@admin_footer)
-    assert_response :success
+    assert_redirected_to admin_footers_url(locale: 'da')
   end
 
   test 'should get edit' do
-    get edit_admin_footer_url(@admin_footer)
+    get edit_admin_footer_url(@admin_footer, locale: 'da')
     assert_response :success
   end
 
   test 'should update admin_footer' do
-    patch admin_footer_url(@admin_footer), params: {
+    patch admin_footer_url(@admin_footer, locale: 'da'), params: {
       admin_footer: {
         about_link: @admin_footer.about_link,
         about_link_name: @admin_footer.about_link_name,
@@ -68,13 +63,13 @@ class Admin::FootersControllerTest < ActionDispatch::IntegrationTest
         title: @admin_footer.title
       }
     }
-    assert_redirected_to admin_footer_url(@admin_footer)
+    assert_redirected_to admin_footers_url(locale: 'da')
   end
 
   test 'should destroy admin_footer' do
     assert_difference('Admin::Footer.count', -1) do
-      delete admin_footer_url(@admin_footer)
+      delete admin_footer_url(@admin_footer, locale: 'da')
     end
-    assert_redirected_to admin_footers_url
+    assert_redirected_to admin_footers_url(locale: 'da')
   end
 end

@@ -31,6 +31,10 @@ class User < ApplicationRecord
     roles.where(permission: Role::ADMIN).any?
   end
 
+  def administrator?
+    admin? || super_admin?
+  end
+
   def editor?
     return true if roles.where(permission: Role::EDITOR).any?
     return true if admin?

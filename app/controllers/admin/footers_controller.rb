@@ -7,11 +7,6 @@ class Admin::FootersController < AdminController
     @admin_footers = Admin::Footer.all
   end
 
-  # GET /admin/footers/1
-  # GET /admin/footers/1.json
-  def show
-  end
-
   # GET /admin/footers/new
   def new
     @admin_footer = Admin::Footer.new
@@ -27,7 +22,7 @@ class Admin::FootersController < AdminController
     @admin_footer = Admin::Footer.new(admin_footer_params)
     @admin_footer.locale = I18n.locale
     if @admin_footer.save
-      redirect_to @admin_footer
+      redirect_to admin_footers_path
     else
       render :new
     end
@@ -36,14 +31,10 @@ class Admin::FootersController < AdminController
   # PATCH/PUT /admin/footers/1
   # PATCH/PUT /admin/footers/1.json
   def update
-    respond_to do |format|
-      if @admin_footer.update(admin_footer_params)
-        format.html { redirect_to @admin_footer, notice: 'Footer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_footer }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_footer.errors, status: :unprocessable_entity }
-      end
+    if @admin_footer.update(admin_footer_params)
+      redirect_to admin_footers_path
+    else
+      render :edit
     end
   end
 
@@ -51,10 +42,7 @@ class Admin::FootersController < AdminController
   # DELETE /admin/footers/1.json
   def destroy
     @admin_footer.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_footers_url, notice: 'Footer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to admin_footers_path
   end
 
   private

@@ -6,6 +6,7 @@ class Admin::GalleryImage < ApplicationRecord
   has_attached_file :image, styles: {
     default: '640x640>',
     squared: '526x526#',
+    full_size: '1110x1110>',
     default_url: 'style/missing_squarde_image.jpg'
   }
 
@@ -22,5 +23,9 @@ class Admin::GalleryImage < ApplicationRecord
 
   def page
     gallery_module.page
+  end
+
+  def user_name
+    user ? user.name : ''
   end
 end
