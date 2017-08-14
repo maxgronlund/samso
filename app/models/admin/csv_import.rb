@@ -20,10 +20,11 @@ class Admin::CsvImport < ApplicationRecord
   end
 
   def import_csv
+    import_service = Admin::CsvImport::Service.new
     csv = open(file_url)
     CSV.parse(csv, headers: false).each do |row|
       user_data = row.map { |i| CGI.unescape(i.to_s) }
-      ap user_data
+      import_service.import_user(user_data)
     end
   end
 end
