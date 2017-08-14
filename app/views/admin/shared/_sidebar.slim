@@ -37,8 +37,12 @@ aside.sidebar
             | Sider
         li class="#{@selected == 'footers' ? 'active' : ''}"
           = link_to admin_footers_path
-            i.fa.fa-list
+            i.fa.fa-address-card
             | Footers
+        li class="#{@selected == 'csv_imports' ? 'active' : ''}"
+          = link_to admin_csv_imports_path
+            i.fa.fa-file-text
+            | CSV Imports
         / li class="#{@selected == 'contents' ? 'active' : ''}"
         /   a href=""
         /     i.fa.fa-th-large

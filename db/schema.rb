@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801185713) do
+ActiveRecord::Schema.define(version: 20170813203614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,32 @@ ActiveRecord::Schema.define(version: 20170801185713) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
+  end
+
+  create_table "admin_csv_impors", force: :cascade do |t|
+    t.string "name"
+    t.string "import_type"
+    t.text "comments"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_csv_imports", force: :cascade do |t|
+    t.string "name"
+    t.string "import_type"
+    t.text "comments"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "csv_file_file_name"
+    t.string "csv_file_content_type"
+    t.integer "csv_file_file_size"
+    t.datetime "csv_file_updated_at"
+    t.string "string_file_name"
+    t.string "string_content_type"
+    t.integer "string_file_size"
+    t.datetime "string_updated_at"
   end
 
   create_table "admin_dmi_modules", force: :cascade do |t|

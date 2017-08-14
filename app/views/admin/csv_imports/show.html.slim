@@ -1,0 +1,20 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @admin_csv_import.name
+p
+  strong Import type:
+  = @admin_csv_import.import_type
+p
+  strong Comments:
+  = @admin_csv_import.comments
+p
+  strong Summary:
+  = @admin_csv_import.summary
+
+= @admin_csv_import.csv_file
+
+= link_to 'Edit', edit_admin_csv_import_path(@admin_csv_import)
+'  |
+= link_to 'Back', admin_csv_imports_path
