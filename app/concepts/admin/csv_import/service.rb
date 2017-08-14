@@ -2,7 +2,6 @@
 class Admin::CsvImport < ApplicationRecord
   # services for Admin::CsvImport
   class Service
-
     # usage
     # Admin:CsvImport::Service.new.import(row)
     def import_user(row)
@@ -31,7 +30,7 @@ class Admin::CsvImport < ApplicationRecord
         UpdateFriabon: row[21] == '0',
         UpdateAbon: row[22] == '0',
         BestilAbonavis: row[23] == '0',
-        passivAbon: row[24] == '0' 
+        passivAbon: row[24] == '0'
       }
       ap user_params
     end
