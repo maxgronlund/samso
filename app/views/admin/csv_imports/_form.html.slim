@@ -4,9 +4,10 @@
   .form-inputs
   	= f.file_field :csv_file
     = f.input :name
-    = f.input :import_type
+    / = f.input :import_type
+    = f.input :import_type, collection: Admin::CsvImport.import_type_collection, include_blank: false
     = f.input :comments
-    = f.input :summary
+    /= f.input :summary
 
   .form-actions
-    = f.button :submit
+    = f.submit t('save'), class: 'btn btn-primary'

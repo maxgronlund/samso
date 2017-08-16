@@ -5,6 +5,8 @@ class Admin::CsvImport < ApplicationRecord
   has_attached_file :csv_file
   validates_attachment_content_type :csv_file, content_type: %r{\Atext\/.*\Z}
 
+  # usega
+  # Admin::CsvImport.import_type_collection
   def self.import_type_collection
     [
       [User.model_name.human, User.name]
@@ -19,12 +21,12 @@ class Admin::CsvImport < ApplicationRecord
     source
   end
 
-  def import_csv
+  def parse_file
     import_service = Admin::CsvImport::Service.new
     csv = open(file_url)
     CSV.parse(csv, headers: false).each do |row|
-      user_data = row.map { |i| CGI.unescape(i.to_s) }
-      import_service.import_user(user_data)
+      unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
+      import_service.import(import_type, unescaped_row)
     end
   end
 end

@@ -61,6 +61,8 @@ rails g scaffold admin/footer title locale about_link about_link_name email emai
 
 rails g scaffold admin/csv_import name import_type comments:text summary:text --no-helper --no-assets --no-controller-specs
 
+rails g migration add_legazy_id_to_users legacy_id:integer
+
 
 
 Page
