@@ -73,22 +73,20 @@ class Admin::CsvImport < ApplicationRecord
     def create_or_update_subscription(options = {})
       # action here
       return unless options[:abonnr]
-      Admin::Subscription.create
-      (
-        user_id: options[:user_id]
-      )
-      end
+      # subscription = Admin::Subscription.new
+      # (
+      #   user_id: options[:user_id]
+      # )
     end
 
-                          :id => :integer,
-    :subscription_type_id => :integer,
-                :duration => :string,
-              :start_date => :date,
-                :end_date => :date,
-                 :user_id => :integer,
-              :created_at => :datetime,
-              :updated_at => :datetime
-
+    #                       :id => :integer,
+    # :subscription_type_id => :integer,
+    #             :duration => :string,
+    #           :start_date => :date,
+    #             :end_date => :date,
+    #              :user_id => :integer,
+    #           :created_at => :datetime,
+    #           :updated_at => :datetime
 
     def collect_user_import_stat(user)
       if user.persisted?
