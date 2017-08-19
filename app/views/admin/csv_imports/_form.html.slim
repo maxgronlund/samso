@@ -2,11 +2,19 @@
   = f.error_notification
 
   .form-inputs
-  	= f.file_field :csv_file
-    = f.input :name
+    .row
+      .col-sm-6
+        = f.input :name
+      .col-sm-6
+        = f.input :import_type, collection: Admin::CsvImport.import_type_collection, include_blank: false
+    .row
+      .col-sm-6
+        = f.input :comments
+      .col-sm-6
+        = label_tag t('csv_file.select_csv_file')
+        br
+        = f.file_field :csv_file
     / = f.input :import_type
-    = f.input :import_type, collection: Admin::CsvImport.import_type_collection, include_blank: false
-    = f.input :comments
     /= f.input :summary
 
   .form-actions

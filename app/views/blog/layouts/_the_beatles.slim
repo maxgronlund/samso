@@ -2,7 +2,7 @@ h3 = blog_module.name
 = blog_module.body
 - if editor?
   .module-editor-header
-    .float-right-button-container
+    .pull-right
       = link_to t('blog_post.new'), new_blog_post_path(blog_module), class: 'btn btn-outline-success btn-sm'
 hr
 - blog_module.posts.order('created_at DESC').each do |post|
@@ -19,8 +19,13 @@ hr
           = post.teaser
   - if editor?
     .module-editor-header
-      .float-right-button-container
-        = link_to t('edit'), edit_post_path(post), class: 'btn btn-outline-success btn-sm'
-        = link_to t('delete'), post_path(post), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-outline-danger btn-sm'
+      .pull-right
+          .btn-group
+            = link_to t('edit'), edit_post_path(post), class: 'btn btn-outline-success btn-sm'
+            = link_to t('delete'),
+              post_path(post),
+              data: { confirm: t('are_you_sure') },
+              method: :delete,
+              class: 'btn btn-outline-danger btn-sm'
 
   hr

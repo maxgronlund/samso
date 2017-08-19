@@ -1,0 +1,17 @@
+da:
+  views:
+    pagination:
+      first: "&laquo; Første"
+      last: "Sidste &raquo;"
+      previous: "&lsaquo; Forige"
+      next: "Næste &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Ingen %{entry_name} fundet"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"

@@ -9,8 +9,10 @@ end
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+gem 'pg_search'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -38,6 +40,7 @@ gem 'devise-i18n'
 gem 'font-awesome-sass'
 gem 'glyphicons-rails'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'sendgrid-ruby'
 gem 'slim-rails'
 gem 'simple_form'
@@ -52,7 +55,6 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'rubocop', require: false
   gem 'awesome_print'
 end
 
@@ -63,6 +65,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

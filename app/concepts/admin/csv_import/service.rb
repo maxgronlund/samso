@@ -2,6 +2,14 @@
 class Admin::CsvImport < ApplicationRecord
   # services for Admin::CsvImport
   class Service
+    def initialize
+      @summary = ''
+      @users_created = 0
+      @users_updated = 0
+      @subscribtions_created = 0
+      @subscribtions_updated = 0
+    end
+
     # usage
     # Admin:CsvImport::Service.new.import(row)
     def import(import_type, row)
@@ -9,7 +17,11 @@ class Admin::CsvImport < ApplicationRecord
 
       when 'User'
         import_user(row)
+        @summary =
+          "Users created: #{@users_created}\
+          Users updated: #{@users_updated}"
       end
+      @summary
     end
 
     private
@@ -18,7 +30,7 @@ class Admin::CsvImport < ApplicationRecord
     def import_user(row)
       options = {
         legacy_id: row[0] == '' ? nil : row[0].to_i,
-        Abonnr: row[1] == '' ? nil : row[1].to_i,
+        abonnr: row[1] == '' ? nil : row[1].to_i,
         navn: row[2].downcase.titleize,
         Adresse: row[3].downcase.titleize,
         Stednavn: row[4] == '' ? nil : row[4].downcase.titleize,
@@ -51,12 +63,48 @@ class Admin::CsvImport < ApplicationRecord
       user.name         = options[:navn]
       user.email        = options[:email]
       user.password     = options[:password] unless options[:password].nil?
+      collect_user_import_stat(user)
+      user.save(validate: false)
+      attach_role(user)
       options[:user_id] = user.id
       create_or_update_subscription(options)
     end
 
     def create_or_update_subscription(options = {})
-      return if options[:abon_periode]
+      # action here
+      return unless options[:abonnr]
+      Admin::Subscription.create
+      (
+        user_id: options[:user_id]
+      )
+      end
+    end
+
+                          :id => :integer,
+    :subscription_type_id => :integer,
+                :duration => :string,
+              :start_date => :date,
+                :end_date => :date,
+                 :user_id => :integer,
+              :created_at => :datetime,
+              :updated_at => :datetime
+
+
+    def collect_user_import_stat(user)
+      if user.persisted?
+        @users_updated += 1
+      else
+        @users_created += 1
+      end
+    end
+
+    def attach_role(user)
+      return if user.roles.any?
+      Role.create(
+        user_id: user.id,
+        permission: Role::MEMBER,
+        active: true
+      )
     end
   end
 end

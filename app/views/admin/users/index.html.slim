@@ -1,4 +1,15 @@
 h3 = t('user.pluralized')
+
+= form_tag admin_users_path, :method => 'get' do 
+  .row
+    .col-sm-6
+      = text_field_tag :search, params[:search], class: 'form-control' 
+    .col-sm-6
+      .btn-group
+        = submit_tag "Search", :name => nil, class: 'btn btn-secondary'
+        = link_to "Reset", admin_users_path, class: 'btn btn-secondary'
+
+hr
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
@@ -15,15 +26,23 @@ h3 = t('user.pluralized')
           td = user.name
           td = user.email
           td = user.role_names
-          td.float-right-button-container
-            = link_to t('show'), admin_user_path(user), class: 'btn btn-primary btn-sm'
-            - if current_user.can_edit?(user)
-              = link_to t('edit'), edit_admin_user_path(user), class: 'btn btn-secondary btn-sm'
-              = link_to t('delete'), admin_user_path(user), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-danger btn-sm'
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'), admin_user_path(user), class: 'btn btn-primary btn-sm'
+                - if current_user.can_edit?(user)
+                  = link_to t('edit'), edit_admin_user_path(user), class: 'btn btn-secondary btn-sm'
+                  = link_to t('delete'),
+                    admin_user_path(user),
+                    data: { confirm: t('are_you_sure') },
+                    method: :delete,
+                    class: 'btn btn-danger btn-sm'
 
 
 
 = link_to 'Opret bruger', new_admin_user_path, class: 'btn btn-primary'
+br
+= paginate @users
 
 
 

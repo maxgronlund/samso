@@ -25,10 +25,11 @@ h2 = I18n.t('activerecord.models.admin/subscription_type', count: 2)
           td = number_to_currency(admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
           /td = admin_subscription_type.locale
           td = admin_subscription_type.active ? '√' : ''
-          td.float-right-button-container
-            = link_to t('show'), admin_subscription_type, class: 'btn btn-primary btn-sm'
-            = link_to t('edit'), edit_admin_subscription_type_path(admin_subscription_type), class: 'btn btn-secondary btn-sm'
-            = link_to t('delete'), admin_subscription_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
+          td
+            .pull-right
+              = link_to t('show'), admin_subscription_type, class: 'btn btn-primary btn-sm'
+              = link_to t('edit'), edit_admin_subscription_type_path(admin_subscription_type), class: 'btn btn-secondary btn-sm'
+              = link_to t('delete'), admin_subscription_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
 
 br
 

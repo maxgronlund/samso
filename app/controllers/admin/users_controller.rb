@@ -3,14 +3,17 @@ class Admin::UsersController < AdminController
   before_action :set_selected
 
   # GET /users
-  # GET /users.json
   def index
-    @users = User.all
+    @users =
+      if params[:search]
+        User.search_by_name_or_emai(params[:search]).order(:name).page params[:page]
+      else
+        User.order(:name).page params[:page]
+      end
     @selected = 'users'
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /admin/users/1
   def show
   end
 
@@ -20,12 +23,11 @@ class Admin::UsersController < AdminController
     @user.roles.build
   end
 
-  # GET /users/1/edit
+  # GET /admin/users/1/edit
   def edit
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 
@@ -36,8 +38,7 @@ class Admin::UsersController < AdminController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
+  # PATCH/PUT /admin/users/1
   def update
     if @user.update(updated_params)
       redirect_to admin_users_path
@@ -46,14 +47,10 @@ class Admin::UsersController < AdminController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /admin/users/1
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_users_url }
-      format.json { head :no_content }
-    end
+    redirect_to admin_users_url
   end
 
   private
@@ -75,6 +72,7 @@ class Admin::UsersController < AdminController
       :password,
       :avatar,
       :password_confirmation,
+      :search,
       roles_attributes: %i[permission id]
     )
   end
