@@ -37,5 +37,6 @@ da:
     admin: 'Administrator'
     super_admin: Super administrator
     member: Bruger
+    editor: Redaktør
 
 

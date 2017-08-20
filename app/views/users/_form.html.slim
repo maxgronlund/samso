@@ -1,9 +1,14 @@
 = simple_form_for [@user], multipart: true do |f|
   = f.error_notification
-
   .form-inputs
-    = f.input :name
-    = f.input :email
+  	.row
+			.col-sm-6
+			  = f.input :name
+			  = f.input :email
+			.col-sm-6
+				= f.input :password, placeholder: '••••••••'
+				= f.input :password_confirmation, placeholder: '••••••••'
+
     = f.label :avatar
     = f.file_field :avatar
 

@@ -26,6 +26,9 @@ class User < ApplicationRecord
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
   validates :email, presence: true
+  validates_confirmation_of :password
+
+  FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?
@@ -87,5 +90,13 @@ class User < ApplicationRecord
     end
 
     false
+  end
+
+  def fake_email?
+    email.include?(FAKE_EMAIL)
+  end
+
+  def sanitized_email
+    fake_email? ? '' : email
   end
 end

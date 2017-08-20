@@ -42,7 +42,6 @@ Things you may want to cover:
   $ heroku run rails console --app samso
   $ PgSearch::Multisearch.rebuild(User)
 
-  rake pg_search:multisearch:rebuild[BlogPost,my_schema]
 
 * Huray ported
 

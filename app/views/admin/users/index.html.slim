@@ -1,4 +1,7 @@
-h3 = t('user.pluralized')
+h3
+  = @user_count
+  |:&nbsp
+  = t('user.pluralized')
 
 = form_tag admin_users_path, :method => 'get' do 
   .row
@@ -6,8 +9,8 @@ h3 = t('user.pluralized')
       = text_field_tag :search, params[:search], class: 'form-control' 
     .col-sm-6
       .btn-group
-        = submit_tag "Search", :name => nil, class: 'btn btn-secondary'
-        = link_to "Reset", admin_users_path, class: 'btn btn-secondary'
+        = submit_tag "Søg", :name => nil, class: 'btn btn-secondary'
+        = link_to "Vis alle", admin_users_path, class: 'btn btn-secondary'
 
 hr
 .table-responsive
@@ -24,7 +27,7 @@ hr
 
         tr
           td = user.name
-          td = user.email
+          td = user.sanitized_email
           td = user.role_names
           td
             .pull-right

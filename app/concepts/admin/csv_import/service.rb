@@ -38,7 +38,7 @@ class Admin::CsvImport < ApplicationRecord
         Telefon: row[6] == '' ? nil : row[6].downcase,
         Mobil: row[7] == '' ? nil : row[7].downcase,
         Nyhedsbrev: row[8] == '0' ? true : false,
-        email: row[9] == '' ? nil : row[9].downcase,
+        email: row[9] == '' ? fake_email : row[9].downcase,
         Brugernavn: row[10] == '' ? nil : row[10],
         password: row[11] == '' ? nil : row[11],
         abon_periode: row[12],
@@ -58,11 +58,15 @@ class Admin::CsvImport < ApplicationRecord
       create_or_update_user(options) unless options[:legacy_id].nil?
     end
 
+    def fake_email
+      SecureRandom.uuid + User::FAKE_EMAIL
+    end
+
     def create_or_update_user(options = {})
-      user              = User.where(legacy_id: options[:legacy_id]).first_or_initialize
-      user.name         = options[:navn]
-      user.email        = options[:email]
-      user.password     = options[:password] unless options[:password].nil?
+      user          = find_or_create_user(options)
+      user.name     = options[:navn]
+      user.email    = options[:email]
+      user.password = options[:password] unless options[:password].nil?
       collect_user_import_stat(user)
       user.save(validate: false)
       attach_role(user)
@@ -70,13 +74,21 @@ class Admin::CsvImport < ApplicationRecord
       create_or_update_subscription(options)
     end
 
-    def create_or_update_subscription(options = {})
+    def find_or_create_subscription(options = {})
       # action here
       return unless options[:abonnr]
       # subscription = Admin::Subscription.new
       # (
       #   user_id: options[:user_id]
       # )
+    end
+
+    def find_or_create_user(options = {})
+      user = User.find_by(email: options[:email])
+      return user unless user.nil?
+      User
+        .where(legacy_id: options[:legacy_id])
+        .first_or_initialize
     end
 
     #                       :id => :integer,

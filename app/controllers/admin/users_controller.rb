@@ -5,12 +5,13 @@ class Admin::UsersController < AdminController
   # GET /users
   def index
     @users =
-      if params[:search]
+      if params[:search] && !params[:search].empty?
         User.search_by_name_or_emai(params[:search]).order(:name).page params[:page]
       else
         User.order(:name).page params[:page]
       end
     @selected = 'users'
+    @user_count = User.count
   end
 
   # GET /admin/users/1

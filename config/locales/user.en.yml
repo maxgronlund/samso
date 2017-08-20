@@ -9,3 +9,4 @@ en:
     password:
       hint: 'Only fill to change password'
     pluralized: Users
+    editor: Editor
