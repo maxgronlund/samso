@@ -3,6 +3,11 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    if current_user.nil?
+      redirect_to new_session_path
+    elsif @user.nil? || current_user != @user
+      render_404
+    end
   end
 
   # GET /users/new
@@ -22,8 +27,11 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    @user.reset_password_token = SecureRandom.hex(32)
+    @user.reset_password_sent_at = Time.zone.now
     if @user.save
-      redirect_to @user
+      UserNotifierMailer.send_signup_email(@user.id).deliver
+      redirect_to confirm_signups_path
     else
       render :new
     end

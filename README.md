@@ -41,6 +41,7 @@ Things you may want to cover:
 * console on production
   $ heroku run rails console --app samso
   $ PgSearch::Multisearch.rebuild(User)
+  $ UserNotifierMailer.send_signup_email(user).deliver
 
 
 * Huray ported

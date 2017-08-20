@@ -1,0 +1,24 @@
+.container.pt-60
+  .row.justify-content-center
+    .col-lg-4.col-sm-8.col-xs-9
+      .card
+        .card-header
+           h2 = t('.login')
+
+        .card-block
+          = form_tag sessions_path, method: 'post' do |f|
+            .form-inputs
+							= label_tag :email
+							br
+							= text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
+							br
+							= label_tag :password
+							br
+							= password_field_tag :password, '', class: 'form-control' 
+							br
+            .form-actions
+            	.pull-right
+								= submit_tag 'Log In', class: 'btn btn-primary'
+
+				= link_to 'no axxount', new_user_path
+          

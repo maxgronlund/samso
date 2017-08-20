@@ -9,7 +9,6 @@ class Admin::SystemSetupsController < AdminController
   # PATCH/PUT /admin/system_setups/1
   # PATCH/PUT /admin/system_setups/1.json
   def update
-    # UserNotifierMailer.send_signup_email(User.find_by(email: 'max@synthmax.dk')).deliver
     respond_to do |format|
       if @admin_system_setup.update(admin_system_setup_params)
         format.html { redirect_to admin_index_path, notice: 'System setup er opdateret.' }

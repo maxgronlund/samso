@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters
   protect_from_forgery with: :exception
 
   before_action :set_locale
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    # devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
   def set_default_page
@@ -71,5 +71,14 @@ class ApplicationController < ActionController::Base
       format.xml  { head :not_found }
       format.any  { head :not_found }
     end
+  end
+
+  def current_user
+    @currnet_user ||= User.find_by(id: session[:user_id])
+    # User.first
+  end
+
+  def user_signed_in?
+    !current_user.nil?
   end
 end
