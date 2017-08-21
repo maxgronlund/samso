@@ -8,5 +8,5 @@
         p.card-text
         - if !text_module.page_id.blank?
           = link_to text_module.url_text, page_path(text_module.page_id)
-        - elsif !text_module.urlblank?
+        - elsif !text_module.url.blank?
           = link_to text_module.url_text, text_module.url

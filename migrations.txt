@@ -65,4 +65,6 @@ rails g migration add_legazy_id_to_users legacy_id:integer
 
 rails g migration add_page_id_to_text_moduels page_id:integer
 
+rails g migration add_colors_to_page_modules color_row_1 color_row_2 color_row_3
+
 rails g controller session new  --no-helper --no-assets --no-controller-specs

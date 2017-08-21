@@ -18,6 +18,7 @@ class Page < ApplicationRecord
     connecticut
     delaware
     florida
+    georgia
   ].freeze
 
   scope :active, -> { where(active: true) }

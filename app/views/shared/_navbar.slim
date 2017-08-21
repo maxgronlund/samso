@@ -30,6 +30,10 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
     .my-2.my-lg-0
       ul.navbar-nav
         - if  admin?
+          li.nav-item
+            = render 'shared/navbar_link',
+              link_name: t('page.edit'),
+              link_url: admin_page_path(@page)
 
           li.nav-item
             = render 'shared/navbar_link',
