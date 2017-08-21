@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    ap session_params
     params[:email] = session_params[:email]
   end
 

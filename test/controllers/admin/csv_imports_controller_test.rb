@@ -4,12 +4,6 @@ class Admin::CsvImportsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @admin_csv_import = admin_csv_imports(:one)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get index' do

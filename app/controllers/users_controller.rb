@@ -17,11 +17,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if current_user.nil?
-      redirect_to new_user_session_path
-    elsif @user.nil? || current_user != @user
-      render_404
-    end
+    render_403 if current_user.nil? || current_user != @user
   end
 
   # POST /users

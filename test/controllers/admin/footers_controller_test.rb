@@ -4,12 +4,6 @@ class Admin::FootersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @admin_footer = admin_footers(:one)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get index' do

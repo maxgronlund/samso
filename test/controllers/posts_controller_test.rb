@@ -4,14 +4,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @admin_blog_post = admin_blog_posts(:blog_post_one)
     @admin_blog_module = admin_blog_modules(:blog_module_one)
-
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get new' do

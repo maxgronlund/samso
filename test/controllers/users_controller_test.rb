@@ -32,9 +32,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_user_url(@user, locale: 'en')
-    assert_response :success
+  test "should get forbidden when not signed in" do
+    get edit_user_url(
+      @user,
+      locale: 'en'
+    ), params: { sig: { user_id: @user.id } }
+    assert_response :forbidden
   end
 
   test "should update user" do

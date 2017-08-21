@@ -6,12 +6,6 @@ class Admin::SubscriptionModulesControllerTest < ActionDispatch::IntegrationTest
     @admin_page_module = page_modules(:three)
     @page = pages(:subscription_page)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get edit' do

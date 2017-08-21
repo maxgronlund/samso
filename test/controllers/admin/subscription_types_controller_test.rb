@@ -4,12 +4,6 @@ class Admin::SubscriptionTypesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @admin_subscription_type = admin_subscription_types(:subscription_type_one)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get index' do

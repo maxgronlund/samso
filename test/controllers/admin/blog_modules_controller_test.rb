@@ -6,12 +6,6 @@ class Admin::BlogModulesControllerTest < ActionDispatch::IntegrationTest
     @admin_page_module = page_modules(:blog_page_module)
     @page = pages(:news_page)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get edit' do

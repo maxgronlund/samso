@@ -4,15 +4,9 @@ class PaymentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @payment = payments(:one)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
     @subscription_type  = admin_subscription_types(:subscription_type_one)
     @subscription       = admin_subscriptions(:one)
     @admin_system_setup = admin_system_setups(:one)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get index' do

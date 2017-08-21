@@ -5,12 +5,6 @@ class Admin::PostModulesControllerTest < ActionDispatch::IntegrationTest
     @post_module = admin_post_modules(:post_module_one)
     @page = pages(:post_page)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get edit' do

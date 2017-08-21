@@ -4,12 +4,6 @@ class Admin::PagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @page = pages(:front_page)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get index' do
