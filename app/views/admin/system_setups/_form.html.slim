@@ -2,31 +2,23 @@
   = f.error_notification
 
   /= f.input :maintenance, as: :boolean, label: 'Sitet er under opdatering', hint: 'Når dette er valgt bliver der vist en anden side end forsiden'
-  - case I18n.locale
-  - when :da
-    = f.input :da_landing_page_id,
-      collection: Page.where(locale: I18n.locale),
-      include_blank: false
 
-    = f.input :da_subscription_page_id,
+  = f.input :landing_page_id,
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
-    = f.input :da_post_page_id,
+  = f.input :subscription_page_id,
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
-  - when :en
-    = f.input :en_landing_page_id,
-      collection: Page.where(locale: I18n.locale),
-      include_blank: false
+  = f.input :post_page_id,
+    collection: Page.where(locale: I18n.locale),
+    include_blank: false
 
-    = f.input :en_subscription_page_id,
-      collection: Page.where(locale: I18n.locale),
-      include_blank: false
+  = f.input :welcome_page_id,
+    collection: Page.where(locale: I18n.locale),
+    include_blank: false
 
-    = f.input :en_post_page_id,
-      collection: Page.where(locale: I18n.locale),
-      include_blank: false
+ 
 
   = f.submit t('save'), class: 'btn btn-primary'

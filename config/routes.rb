@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
- 
 
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
@@ -26,6 +25,8 @@ Rails.application.routes.draw do
       resources :system_setups, only: [:edit, :update]
       resources :users
     end
+
+    resources :admin, only: [:index]
     resources :blog, only: [] do
       resources :posts, only: [:new, :create]
     end
@@ -33,8 +34,8 @@ Rails.application.routes.draw do
     resources :gallery_modules, only: [] do
       resources :gallery_images
     end
-    resources :posts, only: [:show, :edit, :update, :destroy]
-    resources :admin, only: [:index]
+    resources :posts, only: %i[show edit update destroy]
+    resources :reset_password, only: %i[index create]
     resources :pages, only: [:show]
     resources :payments
     resources :sessions, only: %i[new destroy create]

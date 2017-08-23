@@ -5,4 +5,4 @@ p
   | Thanks for joining and have a great day! Now sign in and do
   | awesome things!
 p
-  = @token
+  = link_to 'confirm', confirm_signup_path(@token)

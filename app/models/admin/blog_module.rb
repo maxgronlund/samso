@@ -21,7 +21,13 @@ class Admin::BlogModule < ApplicationRecord
   def posts_page
     page = Page.find_by(id: post_page_id)
     return page if page
-    return Admin::SystemSetup.post_page if Admin::SystemSetup.post_page
+    return admin_system_setup.post_page if admin_system_setup.post_page
     nil
+  end
+
+  private
+
+  def admin_system_setup
+    Admin::SystemSetup.find_by(locale: I18n.locale)
   end
 end

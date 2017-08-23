@@ -1,0 +1,22 @@
+.container.pt-60
+  - if @password_resend_message.nil?
+    .row.justify-content-center
+      .col-lg-4.col-sm-8.col-xs-9
+        .card
+          .card-header
+             h2 = t('user.reset_password')
+
+          .card-block
+            = form_tag reset_password_index_path, method: 'post' do |f|
+              .form-inputs
+  							= label_tag :email
+  							br
+  							= text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
+  							br
+              .form-actions
+              	.pull-right
+  								= submit_tag 'Log In', class: 'btn btn-primary'
+
+  				= link_to 'no axxount', new_user_path
+  - else
+    = @password_resend_message

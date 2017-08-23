@@ -11,9 +11,8 @@ namespace :page do
 
     pages_params.each do |page_params|
       page = Page.where(page_params).first_or_create(page_params)
-      Admin::SystemSetup.current.update_attributes(
-        "#{page_params[:locale]}_subscription_page_id".to_sym => page.id
-      )
+      admin_system_setup = Admin::SystemSetup.find_by(locale: page_params[:locale])
+      admin_system_setup.update_attributes(subscription_page_id: page.id)
     end
   end
 
@@ -29,9 +28,8 @@ namespace :page do
 
     pages_params.each do |page_params|
       page = Page.where(page_params).first_or_create(page_params)
-      Admin::SystemSetup.current.update_attributes(
-        "#{page_params[:locale]}_landing_page_id".to_sym => page.id
-      )
+      admin_system_setup = Admin::SystemSetup.find_by(locale: page_params[:locale])
+      admin_system_setup.update_attributes(landing_page_id: page.id)
     end
   end
 
@@ -47,9 +45,24 @@ namespace :page do
 
     pages_params.each do |page_params|
       page = Page.where(page_params).first_or_create(page_params)
-      Admin::SystemSetup.current.update_attributes(
-        "#{page_params[:locale]}_post_page_id".to_sym => page.id
-      )
+      admin_system_setup = Admin::SystemSetup.find_by(locale: page_params[:locale])
+      admin_system_setup.update_attributes(post_page_id: page.id)
+    end
+  end
+
+  # usage
+  # rake page:build_welcome_pages
+  desc 'build welcome pages'
+  task build_welcome_pages: :environment do
+    user = User.super_admin
+    pages_params = [
+      { title: 'Velkommen', menu_title: '', menu_id: 'Ingen', locale: 'da', layout: 'alabama', active: true, user_id: user.id },
+      { title: 'Welcome', menu_title: '', menu_id: 'None', locale: 'en', layout: 'alabama', active: true, user_id: user.id }
+    ]
+    pages_params.each do |page_params|
+      page = Page.where(page_params).first_or_create(page_params)
+      admin_system_setup = Admin::SystemSetup.find_by(locale: page_params[:locale])
+      admin_system_setup.update_attributes(welcome_page_id: page.id)
     end
   end
 end

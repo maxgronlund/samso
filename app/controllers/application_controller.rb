@@ -47,6 +47,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :can_manage_resource?
 
+  def admin_system_setup
+    @admin_system_setup ||= Admin::SystemSetup.find_by(locale: I18n.locale)
+  end
+  helper_method :admin_system_setup
+
   protected
 
   def configure_permitted_parameters
@@ -54,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_default_page
-    @page ||= Admin::SystemSetup.landing_page
+    @page ||= admin_system_setup.landing_page_id
   end
 
   def set_admin

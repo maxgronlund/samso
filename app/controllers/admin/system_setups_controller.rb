@@ -28,7 +28,7 @@ class Admin::SystemSetupsController < AdminController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_system_setup
-    @admin_system_setup = Admin::SystemSetup.find(params[:id])
+    @admin_system_setup = Admin::SystemSetup.find_by(locale: I18n.locale)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
