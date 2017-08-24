@@ -13,6 +13,11 @@ class Page < ApplicationRecord
   validates_attachment_content_type :row_2_background, content_type: %r{\Aimage\/.*\Z}
   validates_attachment_content_type :row_3_background, content_type: %r{\Aimage\/.*\Z}
 
+  before_validation { row_1_background.clear if delete_row_1_background == '1' }
+  before_validation { row_2_background.clear if delete_row_2_background == '1' }
+  before_validation { row_3_background.clear if delete_row_3_background == '1' }
+  attr_accessor :delete_row_1_background, :delete_row_2_background, :delete_row_3_background
+
   LOCALES = %w[da en].freeze
 
   LAYOUTS = %w[

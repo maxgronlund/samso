@@ -76,12 +76,15 @@ class Admin::PagesController < AdminController
       :color_row_1,
       :height_row_1,
       :row_1_background,
+      :delete_row_1_background,
       :color_row_2,
       :height_row_2,
       :row_2_background,
+      :delete_row_2_background,
       :color_row_3,
       :height_row_3,
       :row_3_background,
+      :delete_row_3_background,
     )
   end
 end
