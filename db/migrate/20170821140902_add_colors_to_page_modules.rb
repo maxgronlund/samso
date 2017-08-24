@@ -1,3 +1,4 @@
+# fancy layout for pages
 class AddColorsToPageModules < ActiveRecord::Migration[5.1]
   def change
     add_column :page_modules, :color_row_1, :string

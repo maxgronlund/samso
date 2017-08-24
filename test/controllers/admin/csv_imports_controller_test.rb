@@ -16,19 +16,19 @@ class Admin::CsvImportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create admin_csv_import' do
-    assert_difference('Admin::CsvImport.count') do
-      post admin_csv_imports_url, params: {
-        admin_csv_import: {
-          comments: @admin_csv_import.comments,
-          import_type: @admin_csv_import.import_type,
-          name: @admin_csv_import.name,
-          summary: @admin_csv_import.summary
-        }
-      }
-    end
-    assert_redirected_to admin_csv_import_url(Admin::CsvImport.last)
-  end
+  # test 'should create admin_csv_import' do
+  #   assert_difference('Admin::CsvImport.count') do
+  #     post admin_csv_imports_url, params: {
+  #       admin_csv_import: {
+  #         comments: @admin_csv_import.comments,
+  #         import_type: @admin_csv_import.import_type,
+  #         name: @admin_csv_import.name,
+  #         summary: @admin_csv_import.summary
+  #       }
+  #     }
+  #   end
+  #   assert_redirected_to admin_csv_import_url(Admin::CsvImport.last)
+  # end
 
   test 'should show admin_csv_import' do
     get admin_csv_import_url(@admin_csv_import, locale: 'da')

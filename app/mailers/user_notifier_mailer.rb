@@ -7,12 +7,13 @@ class UserNotifierMailer < ApplicationMailer
     @user = User.find_by(id: user_id)
     return if @user.nil?
     @token = @user.reset_password_token
+    @name = @user.name
     # mail(
     #   to: @user.email,
     #   subject: 'Thanks for signing up for our amazing app'
     # )
     mail(
-      to: 'max@synthmax.dk',
+      to: @user.email,
       subject: 'Thanks for signing up for our amazing app'
     )
   end

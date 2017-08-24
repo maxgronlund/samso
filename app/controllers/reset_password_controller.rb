@@ -1,15 +1,14 @@
 class ResetPasswordController < ApplicationController
   def index
-  	ap resend_password_params
-  	@password_resend_message = resend_password_params[:password_resend]
+    @password_resend_message = resend_password_params[:password_resend]
   end
 
   def create
-  	message = 'password is on its way'
-  	redirect_to reset_password_index_path(password_resend: message)
+    message = 'password is on its way'
+    redirect_to reset_password_index_path(password_resend: message)
   end
 
   def resend_password_params
-  	params.permit!
+    params.permit!
   end
 end

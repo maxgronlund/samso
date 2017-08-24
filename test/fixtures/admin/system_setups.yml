@@ -1,8 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  maintenance: false
-  da_subscription_page_id: payment_page
-  da_landing_page_id: front_page
+  subscription_page_id: 300
+  landing_page_id: 100
+  post_page_id: 500
+  welcome_page_id: 800
+  locale: da
+  locale_name: Dansk
+
+two:
+  subscription_page_id: payment_page
+  landing_page_id: front_page
+  post_page_id: post_page
+  welcome_page_id: welcome_page
+  locale: en
+  locale_name: English
 
 

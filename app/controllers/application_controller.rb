@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_default_page
-    @page ||= admin_system_setup.landing_page_id
+    @page ||= admin_system_setup.landing_page
   end
 
   def set_admin
@@ -87,6 +87,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    return User.find_by(email: 'test01@example.com') if Rails.env.test?
     @currnet_user ||= User.find_by(id: session[:user_id])
   end
   helper_method :current_user
@@ -98,7 +99,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin!
     return if Rails.env.test?
-    render_422 unless user_signed_in? && current_user.administrator?
+    render_403 unless user_signed_in? && current_user.administrator?
   end
   helper_method :authenticate_user!
 end

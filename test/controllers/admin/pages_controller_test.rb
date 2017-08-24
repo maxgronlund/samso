@@ -4,6 +4,7 @@ class Admin::PagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @page = pages(:front_page)
     @user = users(:one)
+    @admin_system_setup = admin_system_setups(:one)
   end
 
   test 'should get index' do
