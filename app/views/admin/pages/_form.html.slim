@@ -1,4 +1,4 @@
-= simple_form_for [:admin, @page] do |f|
+= simple_form_for [:admin, @page], multipart: true do  |f|
   = f.error_notification
 
   .row
@@ -22,14 +22,40 @@
         collection: Admin::Footer.where(locale: I18n.locale)
 
 
-      = f.input :menu_title
+      
   .row
-    /.col-sm-6
-    /  = f.input :locale,
-    /    collection: Page.locales,
-    /    include_blank: false
     .col-sm-6
+      = f.input :menu_title
       = f.input :menu_position
+    .col-sm-6
+      .row
+        .col-sm-4
+          = f.input :color_row_1,
+            placeholder: t('page.hint.collor_format')
+        .col-sm-4
+          = f.input :height_row_1
+        .col-sm-4
+          = f.label :row_1_background
+          = f.file_field :row_1_background
+      .row
+        .col-sm-4
+          = f.input :color_row_2,
+            placeholder: t('page.hint.collor_format')
+        .col-sm-4
+          = f.input :height_row_2
+        .col-sm-4
+          = f.label :row_2_background
+          = f.file_field :row_2_background
+      .row
+        .col-sm-4
+          = f.input :color_row_3,
+            placeholder: t('page.hint.collor_format')
+        .col-sm-4
+          = f.input :height_row_3
+        .col-sm-4
+          = f.label :row_3_background
+          = f.file_field :row_3background
+
 
   = f.submit t('save'), class: 'btn btn-primary'
 

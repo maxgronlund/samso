@@ -37,6 +37,7 @@ en:
   edit_model: "Editing %{model_name}"
   edit: Edit
   save: Save
+  cancel: Cancel
   delete: Delete
   site_name: SAMSO
   not_in_any_menus: None

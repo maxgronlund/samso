@@ -6,6 +6,13 @@ class Page < ApplicationRecord
   has_many :text_modules
   has_many :gallery_modules
 
+  has_attached_file :row_1_background
+  has_attached_file :row_2_background
+  has_attached_file :row_3_background
+  validates_attachment_content_type :row_1_background, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment_content_type :row_2_background, content_type: %r{\Aimage\/.*\Z}
+  validates_attachment_content_type :row_3_background, content_type: %r{\Aimage\/.*\Z}
+
   LOCALES = %w[da en].freeze
 
   LAYOUTS = %w[
@@ -70,5 +77,48 @@ class Page < ApplicationRecord
     return false if Admin::SystemSetup.where(locale: locale, post_page_id: id).any?
     return false if Admin::SystemSetup.where(locale: locale, welcome_page_id: id).any?
     true
+  end
+
+  def image1_url
+    source = 'https://s3.eu-central-1.amazonaws.com' + row_1_background.url.gsub('//s3.amazonaws.com', '')
+    if source == 'https://s3.eu-central-1.amazonaws.com/row_1_background/missing.png'
+      source = nil
+    end
+    source
+  end
+
+  def image2_url
+    source = 'https://s3.eu-central-1.amazonaws.com' + row_2_background.url.gsub('//s3.amazonaws.com', '')
+    if source == 'https://s3.eu-central-1.amazonaws.com/row_1_background/missing.png'
+      source = nil
+    end
+    source
+  end
+
+  def image3_url
+    source = 'https://s3.eu-central-1.amazonaws.com' + row_3_background.url.gsub('//s3.amazonaws.com', '')
+    if source == 'https://s3.eu-central-1.amazonaws.com/row_1_background/missing.png'
+      source = nil
+    end
+    source
+  end
+
+  def row1_style
+    style = "background-image: url(#{image1_url});"
+    style += 'margin-top: 54px;'
+    style += "padding: #{height_row_1}px 0;"
+    style + "background-color: #{color_row_1}"
+  end
+
+  def row2_style
+    style = "background-image: url(#{image2_url});"
+    style += "padding: #{height_row_2}px 0;"
+    style + "background-color: #{color_row_2}"
+  end
+
+  def row3_style
+    style = "background-image: url(#{image3_url});"
+    style += "padding: #{height_row_3}px 0;"
+    style + "background-color: #{color_row_3}"
   end
 end
