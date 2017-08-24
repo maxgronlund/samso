@@ -1,4 +1,5 @@
 # Dynamic page to hold content
+# rubocop:disable Style/ClassLength
 class Page < ApplicationRecord
   belongs_to :user
   has_many :page_modules, dependent: :destroy
