@@ -1,9 +1,9 @@
 nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
   button.navbar-toggler.navbar-toggler-right aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarsExampleDefault" data-toggle="collapse" type="button"
     span.navbar-toggler-icon
-  - landing_page = Admin::SystemSetup.landing_page
-  - if landing_page
-    = link_to landing_page.menu_title, page_path(landing_page), class: 'navbar-brand'
+  /- landing_page = Admin::SystemSetup.landing_page
+  - if @landing_page
+    = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
   #navbarsExampleDefault.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
       - menu.each do |page|
@@ -30,6 +30,10 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
     .my-2.my-lg-0
       ul.navbar-nav
         - if  admin?
+          li.nav-item
+            = render 'shared/navbar_link',
+              link_name: t('page.edit'),
+              link_url: admin_page_path(@page)
 
           li.nav-item
             = render 'shared/navbar_link',
@@ -39,12 +43,12 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
           a#dropdown01.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="http://example.com"  Min Konto
           .dropdown-menu.dropdown-menu-right aria-labelledby="dropdown01"
             - if user_signed_in?
-              = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+              = link_to 'Logout', session_path(1), method: :delete, class: 'dropdown-item'
               = link_to 'Min profil', user_path(current_user), class: 'dropdown-item'
 
             - else
-              = link_to 'Login', new_user_session_path, class: 'dropdown-item'
-              = link_to t(".sign_up"), new_registration_path('user'), class: 'dropdown-item'
+              = link_to 'Login', new_session_path, class: 'dropdown-item'
+              / = link_to t(".sign_up"), new_registration_path('user'), class: 'dropdown-item'
             /a.dropdown-item href="#"  Action
             /a.dropdown-item href="#"  Another action
             /a.dropdown-item href="#"  Something else here

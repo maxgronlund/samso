@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 news_page:
-  title: MyString
+  id: 0
+  title: News Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 1
@@ -10,7 +11,8 @@ news_page:
   user: one
 
 front_page:
-  title: MyString
+  id: 100
+  title: Front Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 1
@@ -19,7 +21,8 @@ front_page:
   user: one
 
 about_page:
-  title: MyString
+  id: 200
+  title: About Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 10
@@ -28,7 +31,8 @@ about_page:
   user: two
 
 subscription_page:
-  title: MyString
+  id: 300
+  title: Subscription Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 20
@@ -37,6 +41,7 @@ subscription_page:
   user: one
 
 payment_page:
+  id: 400
   title: MyString
   menu_title: MyString
   menu_id: menu_bar
@@ -46,7 +51,8 @@ payment_page:
   user: one
 
 post_page:
-  title: MyString
+  id: 500
+  title: Payment Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 40
@@ -55,7 +61,8 @@ post_page:
   user: one
 
 gallery_page:
-  title: MyString
+  id: 600
+  title: Gallery Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 50
@@ -64,7 +71,18 @@ gallery_page:
   user: one
 
 image_page:
-  title: MyString
+  id: 700
+  title: Image Page
+  menu_title: MyString
+  menu_id: menu_bar
+  menu_position: 60
+  active: true
+  locale: da
+  user: one
+
+welcome_page:
+  id: 800
+  title: Welcome Page
   menu_title: MyString
   menu_id: menu_bar
   menu_position: 60

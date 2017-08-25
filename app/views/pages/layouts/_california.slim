@@ -1,17 +1,16 @@
-.row.page-layout-row
-  .col-sm-12.page-layout-col
-    .section-slot
-      = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 100), page: page, slot_id: 100
-.row.page-layout-row
-  .col-sm-4.page-layout-col
-    .section-slot
-      = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 200), page: page, slot_id: 200
-  .col-sm-8.page-layout-col
-    .section-slot
-      = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 201), page: page, slot_id: 201
-.row.page-layout-row
-  .col-sm-12.page-layout-col
-    .section-slot
-      = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 300), page: page, slot_id: 300
-
-
+.container
+  .row.page-layout-row
+    .col-sm-12.page-layout-col
+      .section-slot
+        = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 100), page: page, slot_id: 100
+  .row.page-layout-row
+    .col-sm-4.page-layout-col
+      .section-slot
+        = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 200), page: page, slot_id: 200
+    .col-sm-8.page-layout-col
+      .section-slot
+        = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 201), page: page, slot_id: 201
+  .row.page-layout-row
+    .col-sm-12.page-layout-col
+      .section-slot
+        = render 'page_modules/index', page_modules: page.page_modules.where(slot_id: 300), page: page, slot_id: 300

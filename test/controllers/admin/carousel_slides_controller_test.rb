@@ -5,12 +5,6 @@ class Admin::CarouselSlidesControllerTest < ActionDispatch::IntegrationTest
     @admin_carousel_slide = admin_carousel_slides(:slide_one)
     @carousel_module      = admin_carousel_modules(:carousel_one)
     @user = users(:one)
-    Warden.test_mode!
-    sign_in(@user)
-  end
-
-  teardown do
-    Warden.test_reset!
   end
 
   test 'should get new' do

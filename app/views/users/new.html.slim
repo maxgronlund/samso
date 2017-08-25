@@ -1,5 +1,8 @@
-h1 New user
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-70
+  p#notice = notice
+  h1 New user
 
-== render 'form'
+  == render 'form'
 
-= link_to t('back'), users_path
+  = link_to t('back'), users_path

@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    errors:
+      models:
+        admin/system_setup: System configuration
+    attributes:
+      admin/system_setup:
+        landing_page_id: Frontpage
+        subscription_page_id: Create subscription page
+        post_page_id: Read post page
+        welcome_page_id: Welcome page
+        locale: Language
+    models:
+      admin/system_setup: System configuration

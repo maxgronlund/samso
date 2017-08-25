@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters
   protect_from_forgery with: :exception
 
   before_action :set_locale
@@ -47,14 +47,19 @@ class ApplicationController < ActionController::Base
   end
   helper_method :can_manage_resource?
 
+  def admin_system_setup
+    @admin_system_setup ||= Admin::SystemSetup.find_by(locale: I18n.locale)
+  end
+  helper_method :admin_system_setup
+
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    # devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
   def set_default_page
-    @page ||= Admin::SystemSetup.landing_page
+    @page ||= admin_system_setup.landing_page
   end
 
   def set_admin
@@ -72,4 +77,29 @@ class ApplicationController < ActionController::Base
       format.any  { head :not_found }
     end
   end
+
+  def render_403
+    respond_to do |format|
+      format.html { render file: "#{Rails.root}/public/403", layout: false, status: :forbidden }
+      format.xml  { head :forbidden }
+      format.any  { head :forbidden }
+    end
+  end
+
+  def current_user
+    return User.find_by(email: 'test01@example.com') if Rails.env.test?
+    @currnet_user ||= User.find_by(id: session[:user_id])
+  end
+  helper_method :current_user
+
+  def user_signed_in?
+    !current_user.nil?
+  end
+  helper_method :user_signed_in?
+
+  def authenticate_admin!
+    return if Rails.env.test?
+    render_403 unless user_signed_in? && current_user.administrator?
+  end
+  helper_method :authenticate_user!
 end

@@ -2,8 +2,10 @@
 
 one:
   name: 'Lasse M. Kristoffersen'
-  email: 'LasseMKristoffersen@dayrep.com'
+  email: 'test01@example.com'
+  password_digest: $2a$10$TJ0A0ce7EKpa5AVQMb1UPumJSEJjledEKhHaXmW4UDAT/1iUk17OO
 
 two:
   name: 'William L. Knudsen'
-  email: 'WilliamLKnudsen@dayrep.com'
+  email: 'test02@example.com'
+  password_digest: $2a$10$2FEa8Tw16pdvXo7/uBgYDe/5up7FOHL5KHki1TA.g8A70bnj9FG.u

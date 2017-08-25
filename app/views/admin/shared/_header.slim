@@ -4,10 +4,14 @@ header.header
       i.fa.fa-bars
 
   .header-block.header-block-nav
-    = link_to_unless I18n.locale == :en, "English", locale: :en
-    '&nbsp;|&nbsp;
-    = link_to_unless I18n.locale == :da, "Dansk", locale: :da
-    '&nbsp;|&nbsp;
+    - Admin::SystemSetup.find_each do |system_setup|
+      = link_to system_setup.locale_name,  locale: system_setup.locale.to_sym
+      ' | 
+
+    / = link_to_unless I18n.locale == :en, "English", locale: :en
+    / '&nbsp;|&nbsp;
+    / = link_to_unless I18n.locale == :da, "Dansk", locale: :da
+    / '&nbsp;|&nbsp;
     = render 'shared/login_links'
 
   /.header-block.header-block-nav

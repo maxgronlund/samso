@@ -29,14 +29,14 @@ gem 'turbolinks', '~> 5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # gem 'bootstrap', '~> 4.0.0.alpha6'
 # gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
-gem 'devise'
-gem 'devise-i18n'
+# gem 'devise'
+# gem 'devise-i18n'
 gem 'font-awesome-sass'
 gem 'glyphicons-rails'
 gem 'jquery-rails'

@@ -39,6 +39,8 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         label: false
 
   = f.submit t('save'), class: 'btn btn-primary'
+  '&nbsp
+  = link_to t('cancel'), admin_page_path(@page), class: 'btn btn-secondary'
 
 hr
 h4 Layouts
@@ -64,7 +66,7 @@ h4 Layouts
 
 
 .row.mb-20
-  .col-sm-8
+  .col-sm-6
     .module-admin-header
       .layout
         strong bmw

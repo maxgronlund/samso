@@ -1,13 +1,9 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   paginates_per 50
   include PgSearch
   multisearchable against: %i[name email]
   pg_search_scope :search_by_name_or_emai, against: %i[name email]
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  has_secure_password
 
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
@@ -25,6 +21,7 @@ class User < ApplicationRecord
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
+  validates :email, uniqueness: true
   validates :email, presence: true
   validates_confirmation_of :password
 

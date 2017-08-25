@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :carousel_modules, only: [] do
@@ -24,18 +25,21 @@ Rails.application.routes.draw do
       resources :system_setups, only: [:edit, :update]
       resources :users
     end
+
+    resources :admin, only: [:index]
     resources :blog, only: [] do
       resources :posts, only: [:new, :create]
     end
+    resources :confirm_signups, only: %i[show index]
     resources :gallery_modules, only: [] do
       resources :gallery_images
     end
-    resources :posts, only: [:show, :edit, :update, :destroy]
-    resources :admin, only: [:index]
+    resources :posts, only: %i[show edit update destroy]
+    resources :reset_password, only: %i[index create]
     resources :pages, only: [:show]
     resources :payments
+    resources :sessions, only: %i[new destroy create]
     resources :subscriptions
-    devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
     get '/:locale' => 'home#index'
     root to: "home#index"
     resources :users, except: [:index]

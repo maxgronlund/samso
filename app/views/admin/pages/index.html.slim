@@ -26,11 +26,10 @@ h3 = t('pages')
                 = link_to t('show'), page, class: 'btn btn-secondary btn-sm'
                 = link_to t('manage_content'), admin_page_path(page), class: 'btn btn-secondary btn-sm'
                 = link_to t('edit'), edit_admin_page_path(page), class: 'btn btn-primary btn-sm'
-                - if page == Admin::SystemSetup.subscription_page || page == Admin::SystemSetup.landing_page || page == Admin::SystemSetup.post_page
-                  = link_to t('delete'), '#', data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-danger btn-sm disabled'
-                - else
+                - if page.deletable?
                   = link_to t('delete'), admin_page_path(page), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-danger btn-sm'
-
+                - else
+                  = link_to t('delete'), '#', class: 'btn btn-danger btn-sm disabled'
 br
 
 = link_to 'Opret side', new_admin_page_path, class: 'btn btn-primary'

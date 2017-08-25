@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819085527) do
+ActiveRecord::Schema.define(version: 20170823192230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,15 +182,14 @@ ActiveRecord::Schema.define(version: 20170819085527) do
   end
 
   create_table "admin_system_setups", force: :cascade do |t|
-    t.boolean "maintenance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "da_landing_page_id"
-    t.integer "en_landing_page_id"
-    t.integer "da_subscription_page_id"
-    t.integer "en_subscription_page_id"
-    t.integer "da_post_page_id"
-    t.integer "en_post_page_id"
+    t.integer "landing_page_id"
+    t.integer "subscription_page_id"
+    t.integer "post_page_id"
+    t.string "locale"
+    t.string "locale_name"
+    t.string "welcome_page_id"
   end
 
   create_table "page_modules", force: :cascade do |t|
@@ -218,6 +217,24 @@ ActiveRecord::Schema.define(version: 20170819085527) do
     t.datetime "updated_at", null: false
     t.boolean "require_subscription", default: false
     t.integer "footer_id"
+    t.string "color_row_1"
+    t.integer "height_row_1"
+    t.string "color_row_2"
+    t.integer "height_row_2"
+    t.string "color_row_3"
+    t.integer "height_row_3"
+    t.string "row_1_background_file_name"
+    t.string "row_1_background_content_type"
+    t.integer "row_1_background_file_size"
+    t.datetime "row_1_background_updated_at"
+    t.string "row_2_background_file_name"
+    t.string "row_2_background_content_type"
+    t.integer "row_2_background_file_size"
+    t.datetime "row_2_background_updated_at"
+    t.string "row_3_background_file_name"
+    t.string "row_3_background_content_type"
+    t.integer "row_3_background_file_size"
+    t.datetime "row_3_background_updated_at"
     t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
@@ -292,7 +309,7 @@ ActiveRecord::Schema.define(version: 20170819085527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "password_digest", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

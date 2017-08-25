@@ -1,0 +1,8 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container
+  - if @invalid_token
+  	| Invalid token
+  - elsif @user
+    | Welcome
+  - else
+    | Invalid token
