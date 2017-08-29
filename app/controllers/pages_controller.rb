@@ -8,6 +8,8 @@ class PagesController < ApplicationController
     set_post if post_page?
     set_image if params[:gallery_image_id]
     store_page_in_session if @page.require_subscription
+  rescue
+    render_404
   end
 
   private

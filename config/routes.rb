@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       resources :gallery_images
     end
     resources :posts, only: %i[show edit update destroy]
-    resources :reset_password, only: %i[index create]
+    resources :reset_password, except: %i[destroy]
     resources :pages, only: [:show]
     resources :payments
     resources :sessions, only: %i[new destroy create]

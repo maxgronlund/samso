@@ -1,6 +1,7 @@
 da:
   activerecord:
     models:
+      admin/blog_post: Blog indlæg
     attributes:
       admin/blog_post:
         title: Overskrift

@@ -39,5 +39,4 @@ da:
     super_admin: Super administrator
     member: Bruger
     editor: Redaktør
-
-
+    new_password: Indtast nyt password

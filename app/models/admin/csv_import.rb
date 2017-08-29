@@ -1,7 +1,7 @@
 # Import of legacy data
 class Admin::CsvImport < ApplicationRecord
-  require 'csv'
-  require 'cgi'
+  # require 'csv'
+  # require 'cgi'
   has_attached_file :csv_file
   validates_attachment_content_type :csv_file, content_type: %r{\Atext\/.*\Z}
 
@@ -9,7 +9,8 @@ class Admin::CsvImport < ApplicationRecord
   # Admin::CsvImport.import_type_collection
   def self.import_type_collection
     [
-      [User.model_name.human, User.name]
+      [User.model_name.human, User.name],
+      [Admin::BlogPost.model_name.human, Admin::BlogPost.name]
     ]
   end
 
@@ -21,12 +22,8 @@ class Admin::CsvImport < ApplicationRecord
     source
   end
 
-  def parse_file
-    import_service = Admin::CsvImport::Service.new
-    csv = open(file_url)
-    CSV.parse(csv, headers: false).each do |row|
-      unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-      import_service.import(import_type, unescaped_row)
-    end
+  def parse_file(current_user)
+    import_service = Admin::CsvImport::Service.new(current_user)
+    import_service.import(self)
   end
 end

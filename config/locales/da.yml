@@ -52,6 +52,7 @@ da:
   forgot_password: 'Glemt password?'
   signup: 'Opret konto'
   send: Send
+  login: Logind
 
   activerecord:
     errors:
