@@ -70,3 +70,5 @@ rails g migration add_colors_to_page_modules color_row_1 color_row_2 color_row_3
 rails g controller session new  --no-helper --no-assets --no-controller-specs
 
 rails g controller reset_passwords index --no-helper --no-assets --no-controller-specs
+
+rails g scaffold admin/system_messages title body:text identifier locale --no-helper --no-assets --no-controller-specs

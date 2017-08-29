@@ -15,8 +15,8 @@
   							br
               .form-actions
               	.pull-right
-  								= submit_tag 'Log In', class: 'btn btn-primary'
+  								= submit_tag t('send'), class: 'btn btn-primary'
 
-  				= link_to 'no axxount', new_user_path
+  				= link_to t('signup'), new_user_path
   - else
     = @password_resend_message

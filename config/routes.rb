@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :carousel_modules, only: [] do
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
       end
       resources :subscriptions
       resources :subscription_types
+      resources :system_messages, only: [:index, :edit, :update]
       resources :system_setups, only: [:edit, :update]
       resources :users
     end

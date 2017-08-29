@@ -1,0 +1,19 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/system_message:
+          attributes:
+            title:
+              blank: Mangler
+            body:
+              blank: Inhold mangler
+    attributes:
+      admin/system_message:
+        title: Overskrift
+        body: Inhold
+
+
+    models:
+      admin/system_message: System beskeder
+  system_messages: System beskeder

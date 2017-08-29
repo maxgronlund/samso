@@ -43,6 +43,10 @@ aside.sidebar
           = link_to admin_csv_imports_path
             i.fa.fa-file-text
             | CSV Imports
+        li class="#{@selected == 'csv_imports' ? 'active' : ''}"
+          = link_to admin_system_messages_path
+            i.fa.fa-file-text
+            = t('system_messages')
         / li class="#{@selected == 'contents' ? 'active' : ''}"
         /   a href=""
         /     i.fa.fa-th-large

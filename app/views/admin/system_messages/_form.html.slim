@@ -1,0 +1,9 @@
+= simple_form_for [ @admin_system_message ] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :body
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'

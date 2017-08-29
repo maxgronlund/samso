@@ -51,6 +51,7 @@ da:
   currency_name: 'KR '
   forgot_password: 'Glemt password?'
   signup: 'Opret konto'
+  send: Send
 
   activerecord:
     errors:

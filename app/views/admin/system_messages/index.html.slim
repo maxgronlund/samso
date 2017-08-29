@@ -1,0 +1,18 @@
+h1 = t('system_messages')
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+
+    thead
+      tr
+        th = t(Admin::SystemMessage.human_attribute_name('title'))
+        th
+
+    tbody
+      - @admin_system_messages.each do |admin_system_message|
+        tr
+          td = admin_system_message.title
+          td
+            .pull-right
+              .btn-group 
+                = link_to t('edit'), edit_admin_system_message_path(admin_system_message), class: 'btn btn-sm btn-primary'
+
