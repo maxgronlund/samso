@@ -49,3 +49,5 @@ en:
   medium: Medium
   smal: Small
   currency_name: 'DKK '
+  forgot_password: 'Forgot password?'
+  signup: 'Create account'

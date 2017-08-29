@@ -20,5 +20,8 @@
             	.pull-right
 								= submit_tag 'Log In', class: 'btn btn-primary'
 
-				= link_to 'no axxount', new_user_path
+				= link_to t('forgot_password'), reset_password_index_path
+				br
+				= link_to t('signup'), new_user_path
+
           

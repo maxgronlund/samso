@@ -49,6 +49,8 @@ da:
   medium: Mellem
   small: Lille
   currency_name: 'KR '
+  forgot_password: 'Glemt password?'
+  signup: 'Opret konto'
 
   activerecord:
     errors:
