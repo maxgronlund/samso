@@ -14,7 +14,7 @@
 AllCops:
   Exclude:
     - 'db/schema.rb'
-    - 'config/routes.rb'
+
 
 Bundler/OrderedGems:
   Exclude:
@@ -42,9 +42,10 @@ Metrics/MethodLength:
   Max: 15
   Exclude:
     - 'app/controllers/admin/page_modules_controller.rb'
-
-Metrics/CyclomaticComplexity:
-  Enabled: false
+    - 'config/routes.rb'
+    
+# Metrics/CyclomaticComplexity:
+#   Enabled: false
 
 Metrics/ClassLength:
   Exclude:

@@ -26,6 +26,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
+  FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?
@@ -87,6 +88,10 @@ class User < ApplicationRecord
     end
 
     false
+  end
+
+  def fake_password?
+    password_digest.include?(FAKE_PASSWORD)
   end
 
   def fake_email?

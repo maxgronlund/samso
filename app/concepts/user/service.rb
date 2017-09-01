@@ -42,5 +42,28 @@ class User < ApplicationRecord
       end
       @user.save
     end
+
+    def self.titleize_name(options)
+      return if options[:name].nil?
+      options[:name] = options[:name].downcase.titleize
+    end
+
+    def self.sanitize_email(options)
+      options[:email].downcase!
+    end
+
+    def self.sanitize_password(options)
+      return unless options[:password].empty?
+      options.delete :password
+      options.delete :password_confirmation
+    end
+
+    def self.fake_email
+      SecureRandom.uuid + User::FAKE_EMAIL
+    end
+
+    def self.fake_password
+      SecureRandom.uuid + User::FAKE_PASSWORD
+    end
   end
 end

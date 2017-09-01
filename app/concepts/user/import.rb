@@ -1,12 +1,15 @@
 # namespace to confine service class to Admin:CsvImport::Service
-class Admin::User < ApplicationRecord
+class User < ApplicationRecord
   require 'csv'
   require 'cgi'
   # services for Admin::CsvImport
   class Import
     
-    def initialize(current_user, csv_import)
+    def initialize(current_user)
       @current_user = current_user
+    end
+
+    def import(csv_import)
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
@@ -14,31 +17,33 @@ class Admin::User < ApplicationRecord
       end
     end
 
+    private
+
     # rubocop:disable Metrics/PerceivedComplexity
     # rubocop:disable Style/MethodLength
     def import_user(row)
       options = {
-        legacy_id: row[0] == '' ? nil : row[0].to_i,
-        abonnr: row[1] == '' ? nil : row[1].to_i,
+        legacy_id: row[0].empty? ? nil : row[0].to_i,
+        abonnr: row[1].empty? ? nil : row[1].to_i,
         navn: row[2].downcase.titleize,
         Adresse: row[3].downcase.titleize,
-        Stednavn: row[4] == '' ? nil : row[4].downcase.titleize,
-        Postnr_by: row[5] == '' ? nil : row[5].downcase.titleize,
-        Telefon: row[6] == '' ? nil : row[6].downcase,
-        Mobil: row[7] == '' ? nil : row[7].downcase,
+        Stednavn: row[4].empty? ? nil : row[4].downcase.titleize,
+        Postnr_by: row[5].empty? ? nil : row[5].downcase.titleize,
+        Telefon: row[6].empty? ? nil : row[6].downcase,
+        Mobil: row[7].empty? ? nil : row[7].downcase,
         Nyhedsbrev: row[8] == '0' ? true : false,
-        email: row[9] == '' ? fake_email : row[9].downcase,
-        Brugernavn: row[10] == '' ? nil : row[10],
-        password: row[11] == '' ? nil : row[11],
+        email: row[9].empty? ? fake_email : row[9].downcase,
+        Brugernavn: row[10].empty? ? nil : row[10],
+        password: row[11].empty? ? nil : row[11],
         abon_periode: row[12],
-        Oprettet: row[13] == '' ? nil : row[13],
+        Oprettet: row[13].empty? ? nil : row[13],
         Aktiv: row[14] == '0',
-        UdloebsDato: row[15] == '' ? nil : row[15],
+        UdloebsDato: row[15].empty? ? nil : row[15],
         SessionId: row[16],
         Friabon: row[17] == '0',
-        Transact: row[18] == '' ? nil : row[18].to_i,
-        Amount: row[19] == '' ? nil : row[15].to_i,
-        TransactOpdateret: row[20] == '' ? nil : row[20],
+        Transact: row[18].empty? ? nil : row[18].to_i,
+        Amount: row[19].empty? ? nil : row[15].to_i,
+        TransactOpdateret: row[20].empty? ? nil : row[20],
         UpdateFriabon: row[21] == '0',
         UpdateAbon: row[22] == '0',
         BestilAbonavis: row[23] == '0',
@@ -55,7 +60,12 @@ class Admin::User < ApplicationRecord
       user          = find_or_create_user(options)
       user.name     = options[:navn]
       user.email    = options[:email]
-      user.password = options[:password] unless options[:password].nil?
+      if options[:password].nil?
+        user.password_digest = User::Service.fake_password
+      else
+        user.password = options[:password]
+      end
+
       user.save(validate: false)
       attach_role(user)
       options[:user_id] = user.id

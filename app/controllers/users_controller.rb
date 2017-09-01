@@ -35,6 +35,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    ap user_params
     if @user.update(user_params)
       redirect_to @user
     else
@@ -52,19 +53,29 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(
-        :name,
-        :email,
-        :avatar,
-        :password,
-        :password_confirmation
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    sanitized_params = permitted_user_params.dup
+    User::Service.titleize_name(sanitized_params)
+    User::Service.sanitize_email(sanitized_params)
+    User::Service.sanitize_password(sanitized_params)
+
+    sanitized_params
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def permitted_user_params
+    params.require(:user).permit(
+      :name,
+      :email,
+      :avatar,
+      :password,
+      :password_confirmation
+    )
+  end
 end

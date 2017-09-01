@@ -24,8 +24,7 @@ class Admin::CsvImportsController < AdminController
     @admin_csv_import = Admin::CsvImport.new(admin_csv_import_params)
 
     if @admin_csv_import.save
-      @admin_csv_import.parse_file(current_user)
-      redirect_to @admin_csv_import
+      redirect_to admin_csv_imports_url
     else
       render :new
     end

@@ -21,9 +21,4 @@ class Admin::CsvImport < ApplicationRecord
     end
     source
   end
-
-  def parse_file(current_user)
-    import_service = Admin::CsvImport::Service.new(current_user)
-    import_service.import(self)
-  end
 end

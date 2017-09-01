@@ -26,6 +26,7 @@ class Admin::UsersController < AdminController
 
   # GET /admin/users/1/edit
   def edit
+    @user.password = nil
   end
 
   # POST /users
@@ -41,7 +42,7 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
-    if @user.update(updated_params)
+    if @user.update(user_params)
       redirect_to admin_users_path
     else
       render :edit
@@ -65,25 +66,33 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
+    sanitized_params = permitted_user_params.dup
+    User::Service.titleize_name(sanitized_params)
+    User::Service.sanitize_email(sanitized_params)
+    User::Service.sanitize_password(sanitized_params)
+    ap sanitized_params
+    sanitized_params
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def permitted_user_params
     params.require(:user).permit(
       :name,
       :email,
       :password,
       :avatar,
       :password_confirmation,
-      :search,
       roles_attributes: %i[permission id]
     )
   end
 
-  def updated_params
-    params_copy = user_params.dup
-    if params_copy[:password].empty?
-      params_copy.delete :password
-      params_copy.delete :password_confirmation
-    end
-    params_copy
-  end
+  # def updated_params
+  #   params_copy = permitted_user_params.dup
+  #   if params_copy[:password].empty?
+  #     params_copy.delete :password
+  #     params_copy.delete :password_confirmation
+  #   end
+  #   params_copy
+  # end
 end
