@@ -3,6 +3,7 @@ class Admin::UsersController < AdminController
   before_action :set_selected
 
   # GET /users
+  # rubocop:disable Style/AbcSize
   def index
     @users =
       if params[:search] && !params[:search].empty?
@@ -71,7 +72,6 @@ class Admin::UsersController < AdminController
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_email(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
-    ap sanitized_params
     sanitized_params
   end
 

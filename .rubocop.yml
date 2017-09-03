@@ -193,5 +193,5 @@ Style/StringLiteralsInInterpolation:
   Exclude:
     - 'bin/yarn'
 
-Metrics/AbcSize:
-  Enabled: false
+# Metrics/AbcSize:
+#   Enabled: false

@@ -30,7 +30,6 @@ class PaymentsController < ApplicationController
   end
 
   # POST /payments
-  # POST /payments.json
   def create
     ActiveRecord::Base.transaction do
       create_subscription
@@ -47,6 +46,7 @@ class PaymentsController < ApplicationController
     end
   end
 
+  # rubocop:disable Style/AbcSize
   def page_with_post_path
     if session[:post_id].nil?
       path = page_path(session[:page_id])
@@ -57,6 +57,7 @@ class PaymentsController < ApplicationController
     session.delete :page_id
     path
   end
+  # rubocop:enable Style/AbcSize
 
   def create_subscription
     @subscription_type =

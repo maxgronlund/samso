@@ -35,7 +35,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    ap user_params
     if @user.update(user_params)
       redirect_to @user
     else

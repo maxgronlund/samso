@@ -1,3 +1,4 @@
+# translation of system messages
 class CreateAdminSystemMessages < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_system_messages do |t|

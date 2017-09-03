@@ -1,4 +1,4 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 
 class Admin::SystemMessagesTest < ApplicationSystemTestCase
   # test "visiting the index" do

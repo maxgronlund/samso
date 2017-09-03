@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-
   def index
     redirect_to new_session_path
   end
+
   def new
     params[:email] = session_params[:email]
   end
@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to root_url, notice: t('signed_in')
+      signin_user(user)
     else
       flash.now.alert = t('invalid_email_or_password')
       render 'new'
@@ -24,6 +23,11 @@ class SessionsController < ApplicationController
   end
 
   protected
+
+  def signin_user(user)
+    session[:user_id] = user.id
+    redirect_to root_url, notice: t('signed_in')
+  end
 
   def session_params
     params.permit!

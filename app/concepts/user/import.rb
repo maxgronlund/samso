@@ -4,7 +4,6 @@ class User < ApplicationRecord
   require 'cgi'
   # services for Admin::CsvImport
   class Import
-    
     def initialize(current_user)
       @current_user = current_user
     end

@@ -53,7 +53,7 @@ class User < ApplicationRecord
     end
 
     def self.sanitize_password(options)
-      return unless options[:password].empty?
+      return unless options[:password].to_s.empty?
       options.delete :password
       options.delete :password_confirmation
     end

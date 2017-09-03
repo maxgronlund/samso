@@ -1,5 +1,5 @@
 class Admin::SystemMessagesController < AdminController
-  before_action :set_admin_system_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_system_message, only: %i[show edit update destroy]
 
   # GET /admin/system_messages
   def index

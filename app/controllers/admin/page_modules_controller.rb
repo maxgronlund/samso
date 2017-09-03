@@ -91,6 +91,7 @@ class Admin::PageModulesController < AdminController
     page_module_params_copy
   end
 
+  # rubocop:disable Style/AbcSize
   def create_moduleable
     case page_module_params[:moduleable_type]
     when 'TextModule'
