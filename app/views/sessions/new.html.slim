@@ -7,6 +7,9 @@
 
         .card-block
           = form_tag sessions_path, method: 'post' do |f|
+            - unless flash.alert.nil?
+              .alert.alert-danger
+                = flash.alert
             .form-inputs
 							= label_tag :email
 							br
@@ -18,8 +21,10 @@
 							br
             .form-actions
             	.pull-right
-								= submit_tag t('login'), class: 'btn btn-primary'
+								= submit_tag 'Log In', class: 'btn btn-primary'
 
 				= link_to t('forgot_password'), reset_password_index_path
 				br
 				= link_to t('signup'), new_user_path
+
+         

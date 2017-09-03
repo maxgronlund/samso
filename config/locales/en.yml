@@ -50,6 +50,10 @@ en:
   smal: Small
   currency_name: 'DKK '
   forgot_password: 'Forgot password?'
+  invalid_email_or_password: Invalid email or password
   signup: 'Create account'
   send: Send
   login: Login
+  signed_in: Logged in!
+  signed_out: Signed out!
+

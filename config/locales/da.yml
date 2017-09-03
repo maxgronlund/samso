@@ -50,9 +50,12 @@ da:
   small: Lille
   currency_name: 'KR '
   forgot_password: 'Glemt password?'
+  invalid_email_or_password: Ugyldig email eller password
   signup: 'Opret konto'
   send: Send
   login: Logind
+  signed_in: Logget ind
+  signed_out: Logged ud
 
   activerecord:
     errors:

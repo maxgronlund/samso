@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :reset_password, except: %i[destroy]
     resources :pages, only: %i[show]
     resources :payments
-    resources :sessions, only: %i[new destroy create]
+    resources :sessions, only: %i[new destroy create index]
     resources :subscriptions
     get '/:locale' => 'home#index'
     root to: "home#index"
