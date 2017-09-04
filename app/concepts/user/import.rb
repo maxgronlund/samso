@@ -85,7 +85,7 @@ class User < ApplicationRecord
       return unless options[:abonnr]
       return if options[:abon_periode].to_i.zero?
       subscription = find_or_create_subscription(options)
-      subscription.subscription.user_id = @current_user.id
+      subscription.user_id = @current_user.id
       subscription.subscription_type_id = subscription_type_id(options)
       subscription.save
     end
