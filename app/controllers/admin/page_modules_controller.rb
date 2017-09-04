@@ -41,6 +41,8 @@ class Admin::PageModulesController < AdminController
 
   private
 
+  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
   def edit_moduleable_path
     case @page_module.moduleable_type
     when 'TextModule'
@@ -82,6 +84,8 @@ class Admin::PageModulesController < AdminController
       Admin::ImageModule.find(@page_module.moduleable_id).destroy
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Style/AbcSize
 
   def params_with_module
     create_moduleable
@@ -92,6 +96,7 @@ class Admin::PageModulesController < AdminController
   end
 
   # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
   def create_moduleable
     case page_module_params[:moduleable_type]
     when 'TextModule'
@@ -112,6 +117,7 @@ class Admin::PageModulesController < AdminController
       @moduleable = Admin::ImageModule.create
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   # Use callbacks to share common setup or constraints between actions.
   def set_page_module

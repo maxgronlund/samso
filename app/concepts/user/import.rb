@@ -3,6 +3,7 @@ class User < ApplicationRecord
   require 'csv'
   require 'cgi'
   # services for Admin::CsvImport
+  # rubocop:disable Metrics/ClassLength
   class Import
     def initialize(current_user)
       @current_user = current_user
@@ -21,8 +22,10 @@ class User < ApplicationRecord
 
     # rubocop:disable Metrics/PerceivedComplexity
     # rubocop:disable Style/MethodLength
+    # rubocop:disable Style/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
     def build_options(row)
-      options = {
+      {
         legacy_id: row[0].empty? ? nil : row[0].to_i,
         abonnr: row[1].empty? ? nil : row[1].to_i,
         navn: row[2].downcase.titleize,
@@ -57,8 +60,9 @@ class User < ApplicationRecord
       SecureRandom.uuid + User::FAKE_EMAIL
     end
 
+    # rubocop:disable Style/MethodLength
     def create_or_update_user(options = {})
-      user          = find_or_create_user(options)
+      user = find_or_create_user(options)
       User::Service.sanitize_email(options)
       unless User::Service.valid_email?(options)
         options[:email] = User::Service.fake_email
@@ -70,20 +74,19 @@ class User < ApplicationRecord
       else
         user.password = options[:password]
       end
-
       user.save(validate: false)
       attach_role(user)
       options[:user_id] = user.id
       create_or_update_subscription(options)
     end
+    # rubocop:enable Style/MethodLength
 
     def create_or_update_subscription(options = {})
-      
       return unless options[:abonnr]
-      return if options[:abon_periode].to_i == 0
+      return if options[:abon_periode].zero?
       subscription = find_or_create_subscription(options)
-      subscription.user_id = @current_user.id
-      subscription_type_id = subscription_type_id(options)
+      subscription.subscription.user_id = @current_user.id
+      subscription.subscription_type_id = subscription_type_id(options)
       subscription.save
     end
 
