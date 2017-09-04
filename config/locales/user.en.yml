@@ -6,7 +6,18 @@ en:
         permission: 'Access permissions'
 
   user:
+    create: 'Create user'
     password:
-      hint: 'Only fill to change password'
+      hint: Only fill to change password
+      send_me_reset_password_instructions: 'Send reset password link'
+    reset_password: Send nyt password
     pluralized: Users
+    admin: Administrator
+    super_admin: Super administrator
+    member: User
     editor: Editor
+    new_password: New password
+    access_as: Access as
+    search:
+      show_all: Show all
+      submit: Search

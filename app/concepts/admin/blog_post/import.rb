@@ -8,21 +8,22 @@ class Admin::BlogPost < ApplicationRecord
       @current_user = current_user
     end
 
-    def import_blog_posts(csv)
+    def import(csv_import)
+      csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-        formated_blog_post = format_blog_post(unescaped_row)
-        import_blog_post(formated_blog_post(row))
+        options = build_options(unescaped_row)
+        import_blog_post(options)
       end
     end
 
     # rubocop:disable Style/MethodLength,
-    def formated_blog_post(row)
+    def build_options(row)
       {
         legacy_id:                row[0].to_i,
         kategori_id:              row[1].to_i,
-        startdato:                str_to_date_time(row[2]),
-        slutdato:                 str_to_date_time(row[3]),
+        startdato:                row[2].samso_import_to_datetime,
+        slutdato:                 row[3].samso_import_to_datetime,
         topstory:                 row[4],
         titel:                    row[5],
         trompet:                  row[6],
@@ -36,7 +37,7 @@ class Admin::BlogPost < ApplicationRecord
         email:                    row[14],
         comments:                 row[15],
         polls:                    row[16],
-        opdateret_frontpagestory: str_to_date_time(row[17]),
+        opdateret_frontpagestory: row[17].samso_import_to_datetime,
         visning:                  row[18],
         notes:                    row[19],
         teaser:                   row[20],
@@ -49,6 +50,7 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def import_blog_post(options = {})
+      ap options
       # page        = setup_page(options)
       # blog_module = setup_blog_module(page, options)
       # blog_module.blog_posts.new

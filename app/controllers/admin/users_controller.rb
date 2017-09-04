@@ -28,6 +28,7 @@ class Admin::UsersController < AdminController
   # GET /admin/users/1/edit
   def edit
     @user.password = nil
+    @user.email = nil if @user.fake_email?
   end
 
   # POST /users

@@ -7,7 +7,7 @@ h3 = t('pages')
         th Name
         th Import type
         th Summary
-        th colspan=3
+        th style='min-width:175px;'
         
 
     tbody
@@ -17,10 +17,24 @@ h3 = t('pages')
           td = admin_csv_import.import_type
           td = admin_csv_import.summary
           td 
-            = link_to 'import', new_admin_csv_import_parse_csv_path(admin_csv_import)
-            = link_to 'Show', admin_csv_import
-            = link_to 'Edit', edit_admin_csv_import_path(admin_csv_import)
-            = link_to 'Destroy', admin_csv_import, data: { confirm: t('are_you_sure') }, method: :delete
+            .pull-right
+              .btn-group
+                = link_to 'import',
+                  new_admin_csv_import_parse_csv_path(admin_csv_import),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to t('show'),
+                  admin_csv_import_path(admin_csv_import),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to t('edit'),
+                  edit_admin_csv_import_path(admin_csv_import),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to 'X',
+                  admin_csv_import,
+                  data: { confirm: t('are_you_sure') },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'
 br
 
-= link_to t('csv_file.new'), new_admin_csv_import_path, class: 'btn btn-primary'
+= link_to t('csv_file.new'),
+  new_admin_csv_import_path,
+  class: 'btn btn-primary'

@@ -30,13 +30,18 @@ da:
         permission: 'Adgangs rettigheder'
 
   user:
+    create: 'Opret bruger'
     password:
       hint: 'Udfyldes kun hvis password skal skiftes'
       send_me_reset_password_instructions: 'Send reset password link'
     reset_password: Send nyt password
     pluralized: Brugere
-    admin: 'Administrator'
+    admin: Administrator
     super_admin: Super administrator
     member: Bruger
     editor: Redaktør
     new_password: Indtast nyt password
+    access_as: Adgang som
+    search:
+      show_all: Vis alle
+      submit: Søg

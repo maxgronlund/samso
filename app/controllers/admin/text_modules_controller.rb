@@ -38,7 +38,9 @@ class Admin::TextModulesController < AdminController
       :position,
       :page_id,
       :slot_id,
-      :show_to
+      :show_to,
+      :color,
+      :background_color
     )
   end
 end

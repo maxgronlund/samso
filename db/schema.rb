@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829090105) do
+ActiveRecord::Schema.define(version: 20170904112211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,8 @@ ActiveRecord::Schema.define(version: 20170829090105) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "subscription_id"
+    t.datetime "on_hold_date"
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end
@@ -300,6 +302,8 @@ ActiveRecord::Schema.define(version: 20170829090105) do
     t.string "image_size"
     t.integer "page_id"
     t.string "show_to"
+    t.string "color", default: "#000000"
+    t.string "background_color", default: "#FFFFFF"
     t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 

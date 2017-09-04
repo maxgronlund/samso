@@ -30,6 +30,11 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         placeholder: t('text_module.placeholders.url')
       = f.input :url_text,
         hint: t('text_module.hints.url_text')
+      .row
+        .col-sm-6
+          = f.input :color
+        .col-sm-6
+          = f.input :background_color
 
   .row
     .col-sm-12

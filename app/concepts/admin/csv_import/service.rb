@@ -17,7 +17,7 @@ class Admin::CsvImport < ApplicationRecord
           .new(@current_user)
           .import(csv_import)
       when Admin::BlogPost.name
-        Admin:BlogModule::Import
+        ::Admin::BlogPost::Import
           .new(@current_user)
           .import(csv_import)
       end

@@ -49,6 +49,7 @@ class User < ApplicationRecord
     end
 
     def self.sanitize_email(options)
+      options[:email] = fake_email if options[:email].empty?
       options[:email].downcase!
     end
 
@@ -64,6 +65,10 @@ class User < ApplicationRecord
 
     def self.fake_password
       SecureRandom.uuid + User::FAKE_PASSWORD
+    end
+
+    def self.valid_email?(options)
+      options[:email].include?('@') && options[:email].include?('.')
     end
   end
 end
