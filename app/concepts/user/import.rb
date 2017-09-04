@@ -21,8 +21,8 @@ class User < ApplicationRecord
     private
 
     # rubocop:disable Metrics/PerceivedComplexity
-    # rubocop:disable Style/MethodLength
-    # rubocop:disable Style/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/CyclomaticComplexity
     def build_options(row)
       {
@@ -54,13 +54,13 @@ class User < ApplicationRecord
       }
     end
     # rubocop:enable Metrics/PerceivedComplexity
-    # rubocop:enable Style/MethodLength
+    # rubocop:enable Metrics/MethodLength
 
     def fake_email
       SecureRandom.uuid + User::FAKE_EMAIL
     end
 
-    # rubocop:disable Style/MethodLength
+    # rubocop:disable Metrics/MethodLength
     def create_or_update_user(options = {})
       user = find_or_create_user(options)
       User::Service.sanitize_email(options)
@@ -79,7 +79,7 @@ class User < ApplicationRecord
       options[:user_id] = user.id
       create_or_update_subscription(options)
     end
-    # rubocop:enable Style/MethodLength
+    # rubocop:enable Metrics/MethodLength
 
     def create_or_update_subscription(options = {})
       return unless options[:abonnr]

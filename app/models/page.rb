@@ -1,5 +1,5 @@
 # Dynamic page to hold content
-# rubocop:disable Style/ClassLength
+# rubocop:disable Metrics/ClassLength
 class Page < ApplicationRecord
   belongs_to :user
   has_many :page_modules, dependent: :destroy
@@ -77,7 +77,7 @@ class Page < ApplicationRecord
     @footer = Admin::Footer.find_by(id: footer_id)
   end
 
-  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/AbcSize
   def deletable?
     return false if Admin::SystemSetup.where(locale: locale, landing_page_id: id).any?
     return false if Admin::SystemSetup.where(locale: locale, subscription_page_id: id).any?

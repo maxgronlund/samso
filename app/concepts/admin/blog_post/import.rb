@@ -17,8 +17,8 @@ class Admin::BlogPost < ApplicationRecord
       end
     end
 
-    # rubocop:disable Style/MethodLength,
-    # rubocop:disable Style/AbcSize
+    # rubocop:disable Metrics/MethodLength,
+    # rubocop:disable Metrics/AbcSize
     def build_options(row)
       {
         legacy_id:                row[0].to_i,

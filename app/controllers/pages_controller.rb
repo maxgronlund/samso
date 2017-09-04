@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   # GET /pages/1
-  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/AbcSize
   def show
     @page            = Page.find(params[:id])
     @landing_page    = admin_system_setup.landing_page
@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   rescue
     render_404
   end
-  # rubocop:enable Style/AbcSize
+  # rubocop:enable Metrics/AbcSize
 
   private
 

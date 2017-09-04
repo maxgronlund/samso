@@ -61,7 +61,7 @@ class Admin::PagesController < AdminController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  # rubocop:disable Style/MethodLength
+  # rubocop:disable Metrics/MethodLength
   def page_params
     params.require(:page).permit(
       :title,

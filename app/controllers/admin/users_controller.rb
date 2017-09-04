@@ -3,7 +3,7 @@ class Admin::UsersController < AdminController
   before_action :set_selected
 
   # GET /users
-  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/AbcSize
   def index
     @users =
       if params[:search] && !params[:search].empty?

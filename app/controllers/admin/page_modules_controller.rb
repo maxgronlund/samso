@@ -41,7 +41,7 @@ class Admin::PageModulesController < AdminController
 
   private
 
-  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/CyclomaticComplexity
   def edit_moduleable_path
     case @page_module.moduleable_type
@@ -85,7 +85,7 @@ class Admin::PageModulesController < AdminController
     end
   end
   # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Style/AbcSize
+  # rubocop:enable Metrics/AbcSize
 
   def params_with_module
     create_moduleable
@@ -95,7 +95,7 @@ class Admin::PageModulesController < AdminController
     page_module_params_copy
   end
 
-  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/CyclomaticComplexity
   def create_moduleable
     case page_module_params[:moduleable_type]

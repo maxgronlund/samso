@@ -46,7 +46,7 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # rubocop:disable Style/AbcSize
+  # rubocop:disable Metrics/AbcSize
   def page_with_post_path
     if session[:post_id].nil?
       path = page_path(session[:page_id])
@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
     session.delete :page_id
     path
   end
-  # rubocop:enable Style/AbcSize
+  # rubocop:enable Metrics/AbcSize
 
   def create_subscription
     @subscription_type =
