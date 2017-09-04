@@ -61,7 +61,15 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
-    t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
+  end
+
+  create_table "admin_csv_impors", force: :cascade do |t|
+    t.string "name"
+    t.string "import_type"
+    t.text "comments"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_csv_imports", force: :cascade do |t|
@@ -204,21 +212,6 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "color_row_1"
-    t.string "color_row_2"
-    t.string "color_row_3"
-    t.string "row_1_background_file_name"
-    t.string "row_1_background_content_type"
-    t.integer "row_1_background_file_size"
-    t.datetime "row_1_background_updated_at"
-    t.string "row_2_background_file_name"
-    t.string "row_2_background_content_type"
-    t.integer "row_2_background_file_size"
-    t.datetime "row_2_background_updated_at"
-    t.string "row_3_background_file_name"
-    t.string "row_3_background_content_type"
-    t.integer "row_3_background_file_size"
-    t.datetime "row_3_background_updated_at"
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_modules_on_moduleable_type_and_moduleable_id"
     t.index ["page_id"], name: "index_page_modules_on_page_id"
   end
@@ -236,6 +229,24 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "updated_at", null: false
     t.boolean "require_subscription", default: false
     t.integer "footer_id"
+    t.string "color_row_1"
+    t.integer "height_row_1"
+    t.string "color_row_2"
+    t.integer "height_row_2"
+    t.string "color_row_3"
+    t.integer "height_row_3"
+    t.string "row_1_background_file_name"
+    t.string "row_1_background_content_type"
+    t.integer "row_1_background_file_size"
+    t.datetime "row_1_background_updated_at"
+    t.string "row_2_background_file_name"
+    t.string "row_2_background_content_type"
+    t.integer "row_2_background_file_size"
+    t.datetime "row_2_background_updated_at"
+    t.string "row_3_background_file_name"
+    t.string "row_3_background_content_type"
+    t.integer "row_3_background_file_size"
+    t.datetime "row_3_background_updated_at"
     t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end

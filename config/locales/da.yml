@@ -37,6 +37,7 @@ da:
   edit_model: "Rediger %{model_name}"
   edit: Rediger
   save: Gem
+  cancel: Fortryd
   delete: Slet
   site_name: SAMSØ
   not_in_any_menus: Ingen

@@ -1,0 +1,14 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/system_setup: System opsætning
+    attributes:
+      admin/system_setup:
+        landing_page_id: Forside
+        subscription_page_id: Opred abonnement side
+        post_page_id: Læs artikkel side
+        welcome_page_id: Velkommen side
+        locale: Sprog
+    models:
+      admin/system_setup: System opsætning

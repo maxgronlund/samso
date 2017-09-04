@@ -25,8 +25,10 @@ Things you may want to cover:
 
 * Tasks
   $ heroku run --app samso rake page:build_subscription_pages
+  $ heroku run --app samso rake page:build_welcome_pages
   $ heroku run --app samso rake page:build_front_pages
   $ heroku run --app samso rake page:build_post_pages
+  $ heroku run --app samso rake system_setup:build_defaults
 
 
 * How to run the test suite
