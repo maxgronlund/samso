@@ -1,5 +1,6 @@
 # additional custom functions
 class String
+  # rubocop:disable Metrics/AbcSize
   def samso_import_to_datetime
     return if empty?
     date_time = split(' ')
