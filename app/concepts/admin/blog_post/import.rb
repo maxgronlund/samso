@@ -51,37 +51,60 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def import_blog_post(options = {})
-      ap options
-      # page        = setup_page(options)
-      # blog_module = setup_blog_module(page, options)
-      # blog_module.blog_posts.new
-      # ap blog_module_id(options)
+      page        = setup_page(options)
+      blog_module = setup_blog_module(page, options)
+      setup_blog_post(blog_module, options)
     end
 
-    # def blog_module_id(options = {})
-    #   blog_module_options = {
-    #     page_id: page_id(options)
-    #   }
-    #   # BlogModule.wherepage_id(options)
-    # end
+    def setup_blog_post(blog_module, options = {})
+      params = {
+        
+      }
+      blog_module.posts.where(
 
-    # def setup_page(options = {})
-    #   page_options = {
-    #     title: options[:topstory],
-    #     locale: 'da'
-    #   }
-    #   page = Page.first_or_initialize(page_options)
-    #   initialize_page(page)
-    # end
+      )
+        
+    end
 
-    # def setup_blog_module(page, options = {})
-    #   blog_module_options = {
-    #     name: options[:topstory]
-    #   }
-    #   blog_module
-    #     .where(blog_module_options)
-    #     .first_or_initialize(blog_module_options)
-    # end
+    def last_blog_post_possition(blog_module)
+      return 100 if blog_module.blog_posts.empty?
+      blog_module.blog_posts.count * 100 + 100
+    end
+
+    def setup_page(options = {})
+      page_options = {
+        title: options[:topstory],
+        locale: 'da'
+      }
+      page = Page.first_or_crete(page_options)
+    end
+
+    def setup_blog_module(page, options = {})
+      blog_module_options = {
+        name: options[:topstory]
+      }
+      blog_module =
+        BlogModule
+        .where(blog_module_options)
+        .first_or_initialize(blog_module_options)
+
+      populate_blog_module(blog_module, options)
+      
+      page_module_options =
+      {
+        page_id: page.id,
+        moduleable_type: blog_module.class.name,
+        moduleable_id: blog_module.id
+      }
+      PageModule
+      .where(page_module_options)
+      .first_or_create(page_module_options)
+    end
+
+    def populate_blog_module(blog_module, options = {})
+      return unless blog_module.persisted?
+      blog_module.title
+    end
 
     # def initialize_page(page)
     #   return page if page.persisted?

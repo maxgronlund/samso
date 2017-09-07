@@ -10,6 +10,18 @@ en:
         locale: Language
         user_id: Created by
         require_subscription: Only access for subscribers
+        color_row_1: Background color
+        color_row_2: Background color
+        color_row_3: Background color
+        row_1_padding_top: Margin top
+        row_2_padding_top: Margin top
+        row_3_padding_top: Margin top
+        row_1_padding_bottom: Margin bottom
+        row_2_padding_bottom: Margin bottom
+        row_3_padding_bottom: Margin bottom
+        row_1_background: Image
+        row_2_background: Image
+        row_3_background: Image
 
     models:
       page: Page
@@ -20,6 +32,11 @@ en:
     add_content: 'Add section'
     section_types: Section types
     show: Show page
-    edit_layout: Page setup
+    edit_layout: Layout
     edit: Edit page
     back: Back to page
+    hint:
+      collor_format: "HEX #888888"
+    row_1: Row 1
+    row_2: Row 2
+    row_3: Row 3

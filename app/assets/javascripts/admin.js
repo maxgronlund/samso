@@ -19,3 +19,4 @@
 //= require admin/modular_admin
 //= require admin/metisMenu
 //= require admin/init-metismenu
+//= require admin/page

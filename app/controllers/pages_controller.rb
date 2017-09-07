@@ -9,6 +9,7 @@ class PagesController < ApplicationController
     set_post if post_page?
     set_image if params[:gallery_image_id]
     store_page_in_session if @page.require_subscription
+    @body_style = @page.body_style
   rescue
     render_404
   end

@@ -5,6 +5,7 @@ da:
     attributes:
       admin/blog_post:
         title: Overskrift
+        subtitle: Trompet
         teaser: Manchet
         body: Brødtekst
 
