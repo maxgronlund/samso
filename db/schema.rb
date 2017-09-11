@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907090826) do
+ActiveRecord::Schema.define(version: 20170911073510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20170907090826) do
     t.text "teaser"
     t.integer "legacy_id"
     t.text "subtitle"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
   end
 

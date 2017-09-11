@@ -5,7 +5,7 @@ h3 = blog_module.name
     .pull-right
       = link_to t('blog_post.new'), new_blog_post_path(blog_module), class: 'btn btn-outline-success btn-sm'
 hr
-- blog_module.posts.order('created_at DESC').each do |post|
+- blog_module.paginated_posts.each do |post|
   .blog_post
     = link_to page_path(blog_module.posts_page, post_id: post.id) do
       .media
@@ -14,7 +14,7 @@ hr
           h5.mt-0
             = post.title
           .created-at
-            = l post.created_at
+            = l post.start_date
           /= raw(post.body)
           = post.teaser
   - if editor?

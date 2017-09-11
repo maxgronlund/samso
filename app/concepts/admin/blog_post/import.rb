@@ -53,17 +53,38 @@ class Admin::BlogPost < ApplicationRecord
     def import_blog_post(options = {})
       page        = setup_page(options)
       blog_module = setup_blog_module(page, options)
-      setup_blog_post(blog_module, options)
+      setup_page_module(page, blog_module)
+      post = setup_blog_post(blog_module, options)
+      attach_image(post, options)
     end
 
     def setup_blog_post(blog_module, options = {})
-      params = {
-        
-      }
-      blog_module.posts.where(
+      
 
-      )
-        
+      params = {
+        title: options[:titel],
+        subtitle: options[:trompet],
+        teaser: options[:manchet],
+        body: options[:body],
+        start_date: options[:startdato],
+        end_date: options[:slutdato]
+      }
+
+      blog_module.posts.where(
+        params
+      ).first_or_create(
+        params
+      ) 
+    end
+
+    def attach_image(post, options = {})
+      image_1_url = 'http://samso.dk/'
+      image_1_url += options[:pix_mappe]
+      image_1_url += options[:pix]
+      image_1_url.delete(' ')
+      return if image_1_url == "http://samso.dk/"
+      post.image = URI.parse(image_1_url)
+      post.save
     end
 
     def last_blog_post_possition(blog_module)
@@ -72,50 +93,40 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def setup_page(options = {})
-      page_options = {
+      params = {
         title: options[:topstory],
-        locale: 'da'
+        locale: 'da',
+        user_id: User.super_admin.id,
+        layout: 'arkansas'
       }
-      page = Page.first_or_crete(page_options)
+      Page
+        .where(params)
+        .first_or_create(params)
     end
 
     def setup_blog_module(page, options = {})
-      blog_module_options = {
+      params = {
         name: options[:topstory]
       }
-      blog_module =
-        BlogModule
-        .where(blog_module_options)
-        .first_or_initialize(blog_module_options)
+      Admin::BlogModule
+        .where(params)
+        .first_or_create(params)
 
-      populate_blog_module(blog_module, options)
-      
-      page_module_options =
+    end
+
+    def setup_page_module(page, blog_module)
+      params =
       {
         page_id: page.id,
         moduleable_type: blog_module.class.name,
-        moduleable_id: blog_module.id
+        moduleable_id: blog_module.id,
+        slot_id: 200
       }
       PageModule
-      .where(page_module_options)
-      .first_or_create(page_module_options)
+        .where(params)
+        .first_or_create(params)
     end
 
-    def populate_blog_module(blog_module, options = {})
-      return unless blog_module.persisted?
-      blog_module.title
-    end
 
-    # def initialize_page(page)
-    #   return page if page.persisted?
-    #   page.layout = 'arkansans'
-    #   page.menu_id = 'Ingen'
-    #   page.menu_position = Page.last.id * 10
-    #   page.active = false
-    #   page.user_id = @current_user.id
-    #   page.require_subscription = true
-    #   page.save
-    #   page
-    # end
   end
 end

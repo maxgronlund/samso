@@ -22,6 +22,11 @@ en:
         row_1_background: Image
         row_2_background: Image
         row_3_background: Image
+        delete_row_1_background: Remove image
+        delete_row_2_background: Remove image
+        delete_row_3_background: Remove image
+        body_background: Backgrounds image
+        delete_body_background: Remove image
 
     models:
       page: Page

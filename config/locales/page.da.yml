@@ -22,9 +22,14 @@ da:
         row_1_padding_bottom: Margin bund
         row_2_padding_bottom: Margin bund
         row_3_padding_bottom: Margin bund
-        row_1_background: Billed
-        row_2_background: Billed
-        row_3_background: Billed
+        row_1_background: Vælg billed
+        row_2_background: Vælg billed
+        row_3_background: Vælg billed
+        delete_row_1_background: Fjern billed
+        delete_row_2_background: Fjern billed
+        delete_row_3_background: Fjern billed
+        body_background: Baggrundsbilled
+        delete_body_background: Fjern baggrundsbilled
     models:
       page: Side
 
