@@ -1,0 +1,10 @@
+= simple_form_for(@page_row) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :page
+    = f.input :name
+    = f.input :type
+
+  .form-actions
+    = f.button :submit

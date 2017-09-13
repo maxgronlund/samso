@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911073510) do
+ActiveRecord::Schema.define(version: 20170913105005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,6 +211,31 @@ ActiveRecord::Schema.define(version: 20170911073510) do
     t.index ["page_id"], name: "index_page_modules_on_page_id"
   end
 
+  create_table "page_row_modules", force: :cascade do |t|
+    t.bigint "page_row_id"
+    t.string "moduleable_type"
+    t.bigint "moduleable_id"
+    t.integer "slot_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moduleable_type", "moduleable_id"], name: "index_page_row_modules_on_moduleable_type_and_moduleable_id"
+    t.index ["page_row_id"], name: "index_page_row_modules_on_page_row_id"
+  end
+
+  create_table "page_rows", force: :cascade do |t|
+    t.bigint "page_id"
+    t.string "name"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "background_image_file_name"
+    t.string "background_image_content_type"
+    t.integer "background_image_file_size"
+    t.datetime "background_image_updated_at"
+    t.index ["page_id"], name: "index_page_rows_on_page_id"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title"
     t.string "menu_title"
@@ -345,6 +370,8 @@ ActiveRecord::Schema.define(version: 20170911073510) do
 
   add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "page_modules", "pages"
+  add_foreign_key "page_row_modules", "page_rows"
+  add_foreign_key "page_rows", "pages"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"
 end

@@ -1,0 +1,27 @@
+h1 Listing page_row_modules
+
+table
+  thead
+    tr
+      th Page row
+      th Moduleable
+      th Slot
+      th Position
+      th
+      th
+      th
+
+  tbody
+    - @page_row_modules.each do |page_row_module|
+      tr
+        td = page_row_module.page_row
+        td = page_row_module.moduleable
+        td = page_row_module.slot_id
+        td = page_row_module.position
+        td = link_to 'Show', page_row_module
+        td = link_to 'Edit', edit_page_row_module_path(page_row_module)
+        td = link_to 'Destroy', page_row_module, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Page row module', new_page_row_module_path

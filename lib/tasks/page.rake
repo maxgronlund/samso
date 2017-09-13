@@ -5,8 +5,8 @@ namespace :page do
   task build_subscription_pages: :environment do
     user = User.super_admin
     pages_params = [
-      { title: 'Abonnere', menu_title: 'Abonnere', menu_id: 'None', locale: 'da', layout: 'alabama', active: true, user_id: user.id },
-      { title: 'Subscribe', menu_title: 'Subscribe', menu_id: 'None', locale: 'en', layout: 'alabama', active: true, user_id: user.id }
+      { title: 'Abonnere', menu_title: 'Abonnere', menu_id: 'None', locale: 'da', active: true, user_id: user.id },
+      { title: 'Subscribe', menu_title: 'Subscribe', menu_id: 'None', locale: 'en', active: true, user_id: user.id }
     ]
 
     pages_params.each do |page_params|
@@ -22,8 +22,8 @@ namespace :page do
   task build_front_pages: :environment do
     user = User.super_admin
     pages_params = [
-      { title: 'Forside', menu_title: 'SAMSØ', menu_id: 'Ingen', locale: 'da', layout: 'alabama', active: true, user_id: user.id },
-      { title: 'Front page', menu_title: 'SAMSØ', menu_id: 'None', locale: 'en', layout: 'alabama', active: true, user_id: user.id }
+      { title: 'Forside', menu_title: 'SAMSØ', menu_id: 'Ingen', locale: 'da', active: true, user_id: user.id },
+      { title: 'Front page', menu_title: 'SAMSØ', menu_id: 'None', locale: 'en', active: true, user_id: user.id }
     ]
 
     pages_params.each do |page_params|
@@ -39,8 +39,8 @@ namespace :page do
   task build_post_pages: :environment do
     user = User.super_admin
     pages_params = [
-      { title: 'Artikel', menu_title: 'Artikel', menu_id: 'Ingen', locale: 'da', layout: 'alabama', active: true, user_id: user.id },
-      { title: 'Article', menu_title: 'Article', menu_id: 'None', locale: 'en', layout: 'alabama', active: true, user_id: user.id }
+      { title: 'Artikel', menu_title: 'Artikel', menu_id: 'Ingen', locale: 'da', active: true, user_id: user.id },
+      { title: 'Article', menu_title: 'Article', menu_id: 'None', locale: 'en', active: true, user_id: user.id }
     ]
 
     pages_params.each do |page_params|
@@ -56,8 +56,8 @@ namespace :page do
   task build_welcome_pages: :environment do
     user = User.super_admin
     pages_params = [
-      { title: 'Velkommen', menu_title: '', menu_id: 'Ingen', locale: 'da', layout: 'alabama', active: true, user_id: user.id },
-      { title: 'Welcome', menu_title: '', menu_id: 'None', locale: 'en', layout: 'alabama', active: true, user_id: user.id }
+      { title: 'Velkommen', menu_title: '', menu_id: 'Ingen', locale: 'da', lactive: true, user_id: user.id },
+      { title: 'Welcome', menu_title: '', menu_id: 'None', locale: 'en', active: true, user_id: user.id }
     ]
     pages_params.each do |page_params|
       page = Page.where(page_params).first_or_create(page_params)

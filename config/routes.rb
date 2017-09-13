@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :page_row_modules
+  resources :page_rows
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :carousel_modules, only: [] do

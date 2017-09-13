@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Page:
+  = @page_row.page
+p
+  strong Name:
+  = @page_row.name
+p
+  strong Type:
+  = @page_row.type
+
+= link_to 'Edit', edit_page_row_path(@page_row)
+'  |
+= link_to 'Back', page_rows_path

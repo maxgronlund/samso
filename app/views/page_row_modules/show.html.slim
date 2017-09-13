@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Page row:
+  = @page_row_module.page_row
+p
+  strong Moduleable:
+  = @page_row_module.moduleable
+p
+  strong Slot:
+  = @page_row_module.slot_id
+p
+  strong Position:
+  = @page_row_module.position
+
+= link_to 'Edit', edit_page_row_module_path(@page_row_module)
+'  |
+= link_to 'Back', page_row_modules_path
