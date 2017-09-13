@@ -13,9 +13,8 @@ class Page < ApplicationRecord
   has_attached_file :body_background
 
   has_attached_file :body_background, styles: {
-    thumb: '90x100>',
+    thumb: '90x100>'
   }
-
 
   validates_attachment_content_type :row_1_background, content_type: %r{\Aimage\/.*\Z}
   validates_attachment_content_type :row_2_background, content_type: %r{\Aimage\/.*\Z}
@@ -31,7 +30,7 @@ class Page < ApplicationRecord
     :delete_row_2_background,
     :delete_row_3_background,
     :delete_body_background
-  ) 
+  )
 
   LOCALES = %w[da en].freeze
 
@@ -157,12 +156,12 @@ class Page < ApplicationRecord
 
   def body_style
     style =
-    case layout
-    when 'hawaii', 'georgia', 'idaho', 'illinois', 'iowa'
-      "background: url(#{background_url});background-size: cover;"
-    else
-      ""
-    end
+      case layout
+      when 'hawaii', 'georgia', 'idaho', 'illinois', 'iowa'
+        "background: url(#{background_url});background-size: cover;"
+      else
+        ''
+      end
     style
   end
 end

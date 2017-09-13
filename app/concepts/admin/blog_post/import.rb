@@ -1,4 +1,5 @@
 # namespace to confine service class to Admin:BlogPost::Import
+# rubocop:disable Metrics/ClassLength
 class Admin::BlogPost < ApplicationRecord
   require 'csv'
   require 'cgi'
@@ -52,15 +53,13 @@ class Admin::BlogPost < ApplicationRecord
 
     def import_blog_post(options = {})
       page        = setup_page(options)
-      blog_module = setup_blog_module(page, options)
+      blog_module = setup_blog_module(options)
       setup_page_module(page, blog_module)
       post = setup_blog_post(blog_module, options)
       attach_image(post, options)
     end
 
     def setup_blog_post(blog_module, options = {})
-      
-
       params = {
         title: options[:titel],
         subtitle: options[:trompet],
@@ -74,7 +73,7 @@ class Admin::BlogPost < ApplicationRecord
         params
       ).first_or_create(
         params
-      ) 
+      )
     end
 
     def attach_image(post, options = {})
@@ -82,7 +81,7 @@ class Admin::BlogPost < ApplicationRecord
       image_1_url += options[:pix_mappe]
       image_1_url += options[:pix]
       image_1_url.delete(' ')
-      return if image_1_url == "http://samso.dk/"
+      return if image_1_url == 'http://samso.dk/'
       post.image = URI.parse(image_1_url)
       post.save
     end
@@ -104,19 +103,17 @@ class Admin::BlogPost < ApplicationRecord
         .first_or_create(params)
     end
 
-    def setup_blog_module(page, options = {})
+    def setup_blog_module(options = {})
       params = {
         name: options[:topstory]
       }
       Admin::BlogModule
         .where(params)
         .first_or_create(params)
-
     end
 
     def setup_page_module(page, blog_module)
-      params =
-      {
+      params = {
         page_id: page.id,
         moduleable_type: blog_module.class.name,
         moduleable_id: blog_module.id,
@@ -126,7 +123,5 @@ class Admin::BlogPost < ApplicationRecord
         .where(params)
         .first_or_create(params)
     end
-
-
   end
 end

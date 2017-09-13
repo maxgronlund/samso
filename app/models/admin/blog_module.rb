@@ -27,10 +27,10 @@ class Admin::BlogModule < ApplicationRecord
     nil
   end
 
-  def paginated_posts( start = 0 , finish = 100 )
+  def paginated_posts(start = 0, finish = 100)
     posts
       .offset(start)
-      .order("start_date DESC")
+      .order('start_date DESC')
       .last(finish - start)
   end
 
