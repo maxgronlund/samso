@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904112211) do
+ActiveRecord::Schema.define(version: 20170911073510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "image_updated_at"
     t.text "teaser"
     t.integer "legacy_id"
+    t.text "subtitle"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
   end
 
@@ -222,11 +225,11 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.boolean "require_subscription", default: false
     t.integer "footer_id"
     t.string "color_row_1"
-    t.integer "height_row_1"
+    t.integer "row_1_padding_top", default: 0
     t.string "color_row_2"
-    t.integer "height_row_2"
+    t.integer "row_2_padding_top", default: 0
     t.string "color_row_3"
-    t.integer "height_row_3"
+    t.integer "row_3_padding_top", default: 0
     t.string "row_1_background_file_name"
     t.string "row_1_background_content_type"
     t.integer "row_1_background_file_size"
@@ -239,6 +242,13 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.string "row_3_background_content_type"
     t.integer "row_3_background_file_size"
     t.datetime "row_3_background_updated_at"
+    t.integer "row_1_padding_bottom", default: 0
+    t.integer "row_2_padding_bottom", default: 0
+    t.integer "row_3_padding_bottom", default: 0
+    t.string "body_background_file_name"
+    t.string "body_background_content_type"
+    t.integer "body_background_file_size"
+    t.datetime "body_background_updated_at"
     t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end

@@ -75,17 +75,22 @@ class Admin::PagesController < AdminController
       :require_subscription,
       :footer_id,
       :color_row_1,
-      :height_row_1,
+      :row_1_padding_top,
+      :row_1_padding_bottom,
       :row_1_background,
       :delete_row_1_background,
       :color_row_2,
-      :height_row_2,
+      :row_2_padding_top,
+      :row_2_padding_bottom,
       :row_2_background,
       :delete_row_2_background,
       :color_row_3,
-      :height_row_3,
+      :row_3_padding_top,
+      :row_3_padding_bottom,
       :row_3_background,
-      :delete_row_3_background
+      :delete_row_3_background,
+      :body_background,
+      :delete_body_background
     )
   end
 end

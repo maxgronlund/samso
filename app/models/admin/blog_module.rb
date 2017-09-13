@@ -3,6 +3,8 @@ class Admin::BlogModule < ApplicationRecord
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
   include SectionPlugin
 
+  scope :ordered, -> { order('start_date DESC') }
+
   def page_module
     PageModule.find_by(
       moduleable_type: 'Admin::BlogModule',
@@ -23,6 +25,13 @@ class Admin::BlogModule < ApplicationRecord
     return page if page
     return admin_system_setup.post_page if admin_system_setup.post_page
     nil
+  end
+
+  def paginated_posts(start = 0, finish = 100)
+    posts
+      .offset(start)
+      .order('start_date DESC')
+      .last(finish - start)
   end
 
   private

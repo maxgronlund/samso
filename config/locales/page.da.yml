@@ -13,20 +13,37 @@ da:
         locale: Sprog
         user_id: Oprettet af
         require_subscription: Kun adgang for abonnenter
-        color_row_1: Farve 1
-        color_row_2: Farve 2
-        color_row_3: Farve 3
+        color_row_1: Baggrunds farve
+        color_row_2: Baggrunds farve
+        color_row_3: Baggrunds farve
+        row_1_padding_top: Margin top
+        row_2_padding_top: Margin top
+        row_3_padding_top: Margin top
+        row_1_padding_bottom: Margin bund
+        row_2_padding_bottom: Margin bund
+        row_3_padding_bottom: Margin bund
+        row_1_background: Vælg billed
+        row_2_background: Vælg billed
+        row_3_background: Vælg billed
+        delete_row_1_background: Fjern billed
+        delete_row_2_background: Fjern billed
+        delete_row_3_background: Fjern billed
+        body_background: Baggrundsbilled
+        delete_body_background: Fjern baggrundsbilled
     models:
       page: Side
 
   pages: Sider
   page:
-    edit_content: Rediger inhold
+    edit_content: Rediger side
     add_content: Tilføj sektion
     section_types: Sektion typer
     show: Vis side
-    edit_layout: Side opsætning
+    edit_layout: Layout
     edit: Rediger side
     back: Tilbage til side
     hint:
       collor_format: "HEX #888888"
+    row_1: Række 1
+    row_2: Række 2
+    row_3: Række 3
