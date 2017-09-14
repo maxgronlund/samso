@@ -14,9 +14,11 @@
   .row
     .col-sm-6
       = f.input :title
-      = f.input :layout,
-        collection: Page::LAYOUTS,
-        include_blank: false
+      
+      = f.label :body_background
+      br
+      = f.file_field :body_background
+      = f.input :delete_body_background, as: :boolean
     .col-sm-6
       = f.input :menu_id,
         collection: Page.menu_collection,
@@ -26,119 +28,13 @@
       = f.input :footer_id,
         collection: Admin::Footer.where(locale: I18n.locale)
 
-  .row
-    .col-sm-4
-      = f.label :body_background
-      = f.file_field :body_background
-      = f.input :delete_body_background, as: :boolean
-
-  #advanced-layout.collapse
-    .row
-      .col-sm-12
-        h5 = t('page.row_1')
-    .row
-      .col-sm-4
-        = f.input :color_row_1,
-          placeholder: t('page.hint.collor_format')
-      .col-sm-4
-        .row
-          .col-sm-6
-            = f.input :row_1_padding_top
-          .col-sm-6
-            = f.input :row_1_padding_bottom
-      .col-sm-4
-        = f.label :row_1_background
-        = f.file_field :row_1_background
-        = f.input :delete_row_1_background, as: :boolean
-    
-    .row
-      .col-sm-12
-        h5 = t('page.row_2')
-    .row
-      .col-sm-4
-        = f.input :color_row_2,
-          placeholder: t('page.hint.collor_format')
-      .col-sm-4
-        .row
-          .col-sm-6
-            = f.input :row_2_padding_top
-          .col-sm-6
-            = f.input :row_2_padding_bottom
-      .col-sm-4
-        = f.label :row_2_background
-        = f.file_field :row_2_background
-        = f.input :delete_row_2_background, as: :boolean
-    
-    .row
-      .col-sm-12
-        h5 = t('page.row_3')
-    .row
-      .col-sm-4
-        = f.input :color_row_3,
-          placeholder: t('page.hint.collor_format')
-      .col-sm-4
-        .row
-          .col-sm-6
-            = f.input :row_3_padding_top
-          .col-sm-6
-            = f.input :row_3_padding_bottom
-      .col-sm-4
-        = f.label :row_3_background
-        = f.file_field :row_3_background
-        = f.input :delete_row_3_background, as: :boolean
-
-
   = f.submit t('save'), class: 'btn btn-primary'
 
 hr
-h4 Layouts
-.row
-  .col-sm-2.mb-12
-    h6 Alabama
-    = image_tag('layouts/alabama.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Alaska
-    = image_tag('layouts/alaska.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Arizona
-    = image_tag('layouts/arizona.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Arkansas
-    = image_tag('layouts/arkansas.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 California
-    = image_tag('layouts/california.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Colorado
-    = image_tag('layouts/colorado.png', class: "img-fluid")
-.row
-  .col-sm-2.mb-12
-    h6 Connecticut
-    = image_tag('layouts/connecticutx.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Delaware
-    = image_tag('layouts/delaware.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Florida
-    = image_tag('layouts/florida.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Hawaii
-    = image_tag('layouts/hawaii.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Idaho
-    = image_tag('layouts/idaho.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Illinois
-    = image_tag('layouts/illinois.png', class: "img-fluid")
-.row
-  .col-sm-2.mb-12
-    h6 Iowa
-    = image_tag('layouts/iowa.png', class: "img-fluid")
+h3 = t('rows')
 
-coffee:
-  $('#page_layout').change ->
-    switvh_advanced_layout()
-  $(document).ready ->
-    switvh_advanced_layout()
-    
+- @page.rows.each do |row|
+  = row.position
 
+= link_to t('page_row.new'), new_admin_page_page_row_path(@page), class: 'btn btn-secondary'
+br

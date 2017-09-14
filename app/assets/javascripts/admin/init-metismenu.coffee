@@ -10,9 +10,3 @@ document.addEventListener 'turbolinks:load', ->
     $('#app').removeClass 'sidebar-open'
     return
   return
-
-
-
-
-
-

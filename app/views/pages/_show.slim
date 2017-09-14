@@ -1,1 +1,3 @@
-= render "pages/layouts/#{page.layout}", page: page
+/ = render "pages/layouts/#{page.layout}", page: page
+- page.rows.each_with_index do |page_row, index|
+  = render "page_rows/layouts/#{page_row.layout}", index: index

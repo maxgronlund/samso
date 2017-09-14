@@ -1,0 +1,9 @@
+.full-row style="#{page_row.style}"
+  .container
+    .row.page-layout-row
+      .col-sm-12.page-layout-col
+        .section-slot
+          = render 'page_modules/index',
+            page_modules: page_row.page_row_modules.where(slot_id: 1),
+            page_row: page_row,
+            slot_id: 1

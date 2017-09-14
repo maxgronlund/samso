@@ -1,0 +1,17 @@
+= simple_form_for [:admin, @page, @page_row] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :page
+    = f.input :layout,
+      collection: PageRow::LAYOUTS,
+      include_blank: false
+
+  .form-actions
+    = f.button :submit
+
+
+  = f.collection_radio_buttons(:layout, PageRow::LAYOUTS,
+   :first, :last,
+   :item_wrapper_class => 'horizontal',
+   ) { |layout| layout.label { image_tag("#{layout.text}.png") + layout.radio_button + layout.text } }

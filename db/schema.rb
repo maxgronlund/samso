@@ -64,7 +64,15 @@ ActiveRecord::Schema.define(version: 20170913105005) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
-    t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
+  end
+
+  create_table "admin_csv_impors", force: :cascade do |t|
+    t.string "name"
+    t.string "import_type"
+    t.text "comments"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_csv_imports", force: :cascade do |t|
@@ -225,8 +233,11 @@ ActiveRecord::Schema.define(version: 20170913105005) do
 
   create_table "page_rows", force: :cascade do |t|
     t.bigint "page_id"
-    t.string "name"
-    t.string "type"
+    t.string "layout", default: "12"
+    t.string "background_color", default: "none"
+    t.integer "padding_top", default: 50
+    t.integer "padding_bottom", default: 50
+    t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "background_image_file_name"

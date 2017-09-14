@@ -12,7 +12,7 @@ class Page < ApplicationRecord
   # has_attached_file :row_1_background
   # has_attached_file :row_2_background
   # has_attached_file :row_3_background
-  # has_attached_file :body_background
+  has_attached_file :body_background
 
   has_attached_file :body_background, styles: {
     thumb: '90x100>'
@@ -27,12 +27,9 @@ class Page < ApplicationRecord
   # before_validation { row_2_background.clear if delete_row_2_background == '1' }
   # before_validation { row_3_background.clear if delete_row_3_background == '1' }
   before_validation { body_background.clear if delete_body_background == '1' }
-  # attr_accessor(
-  #   :delete_row_1_background,
-  #   :delete_row_2_background,
-  #   :delete_row_3_background,
-  #   :delete_body_background
-  # )
+  attr_accessor(
+    :delete_body_background
+  )
 
   LOCALES = %w[da en].freeze
 
@@ -54,6 +51,10 @@ class Page < ApplicationRecord
   # ].freeze
 
   scope :active, -> { where(active: true) }
+
+  def rows
+    page_rows.order('position DESC')
+  end
 
   def self.locales
     LOCALES.map { |locale| [I18n.t(locale), locale] }

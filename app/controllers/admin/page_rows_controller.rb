@@ -1,4 +1,4 @@
-class PageRowsController < ApplicationController
+class Admin::PageRowsController < AdminController
   before_action :set_page_row, only: [:show, :edit, :update, :destroy]
 
   # GET /page_rows
@@ -12,7 +12,8 @@ class PageRowsController < ApplicationController
 
   # GET /page_rows/new
   def new
-    @page_row = PageRow.new
+    @page = Page.find(params[:page_id])
+    @page_row = @page.page_rows.new
   end
 
   # GET /page_rows/1/edit
@@ -53,6 +54,16 @@ class PageRowsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def page_row_params
-      params.require(:page_row).permit(:page_id, :name, :type)
+      params
+        .require(:page_row)
+        .permit(
+          :page_id,
+          :layout,
+          :background_color,
+          :padding_top,
+          :padding_bottom,
+          :position,
+          :background_image
+        )
     end
 end
