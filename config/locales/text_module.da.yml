@@ -7,7 +7,7 @@ da:
         show_to: Visning
         url: Link
         url_text: Navn på link
-        page: Link til side
+        page_id: Link til side
         slot_id: Side sektion
         image_size: Billed størelse
 

@@ -52,8 +52,12 @@ class Page < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
-  def rows
-    page_rows.order('position DESC')
+  def ordered_page_rows
+    page_rows.order('position ASC')
+  end
+
+  def first_page_row
+    ordered_page_rows.first
   end
 
   def self.locales

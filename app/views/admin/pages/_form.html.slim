@@ -30,11 +30,3 @@
 
   = f.submit t('save'), class: 'btn btn-primary'
 
-hr
-h3 = t('rows')
-
-- @page.rows.each do |row|
-  = row.position
-
-= link_to t('page_row.new'), new_admin_page_page_row_path(@page), class: 'btn btn-secondary'
-br

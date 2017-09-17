@@ -1,52 +1,55 @@
+# a horizontal collections of columns
 class PageRow < ApplicationRecord
-  belongs_to :page
-
-  has_attached_file :background_image
+  attr_accessor :preset, :delete_background_image, :nr_cols
+  belongs_to :page, counter_cache: true
+  has_many :page_cols, dependent: :destroy
 
   has_attached_file :background_image, styles: {
     thumb: '160x40>'
   }
 
+  validates_attachment_content_type :background_image, content_type: %r{\Aimage\/.*\Z}
+  before_validation { background_image.clear if delete_background_image == '1' }
+
   LAYOUTS = [
-    %w[12 12],
-    %w[2-10 2_10]
-    # 3_9
-    # 4_8
-    # 5_7
-    # 6_6
-    # 7_5
-    # 8_4
-    # 9_3
-    # 10_2
-    # 2_2_8
-    # 2_3_7
-    # 2_4_6
-    # 2_5_5
-    # 2_6_4
-    # 2_7_3
-    # 2_8_2
-    # 3_3_6
-    # 3_4_5
-    # 3_5_5
-    # 3_6_3
-    # 4_2_6
-    # 4_3_5
-    # 4_4_4
-    # 4_5_3
-    # 4_6_2
-    # 3_3_3_3
-    # 3_2_2_2_3
-    # 2_2_2_2_2_2
+    %w[Normal row],
+    ['align-items-start', 'row align-items-start'],
+    ['align-items-center', 'row align-items-center'],
+    ['align-items-end', 'row align-items-end'],
+    ['justify-content-start', 'row justify-content-start'],
+    ['justify-content-center', 'justify-content-center'],
+    ['justify-content-end', 'justify-content-end'],
+    ['justify-content-around', 'row justify-content-around'],
+    ['justify-content-between', 'row justify-content-between']
   ].freeze
 
-  def style(index)
-    style = "background-image: url(#{background_image_url});"
-    style += 'margin-top: 54px;' if index.zero?
-    style += "padding: #{padding_top}px 0 #{padding_bottom}px;"
-    style + "background-color: #{background_color}"
+  PRESETS = [
+    %w[12 12],
+    %w[6-6 6_6],
+    %w[8-4 8_4],
+    %w[9-3 9_3],
+    %w[3-9 3_9],
+    %w[4-4-4 4_4_4],
+    %w[3-6-3 3_6_3],
+    %w[3-3-3-3 3_3_3_3],
+    %w[2-2-2-2-2-2 2_2_2_2_2_2]
+  ].freeze
+
+  def style
+    page_style = "background-image: url(#{background_image_url});"
+    page_style += "padding: #{padding_top}px 0 #{padding_bottom}px;"
+    page_style + "background-color: #{background_color}"
+  end
+
+  def ordered_page_cols
+    page_cols.order(:index)
   end
 
   private
+
+  def first_page_row?
+    page.first_page_row == self
+  end
 
   def background_image_url
     source = 'https://s3.eu-central-1.amazonaws.com' + background_image.url.gsub('//s3.amazonaws.com', '')

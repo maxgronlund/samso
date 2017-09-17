@@ -9,15 +9,20 @@
 
 hr
 div style="#{@page.body_style}"
-  = render 'pages/show', page: @page
-.table-responsive
-  table.table.table-striped.table-bordered.table-hover
-    table.table.table-striped.table-bordered.table-hover.table-sm
-      thead.thead-inverse
-        tr
-          th Module name
-          th Slot id
-          th
+  - @page.ordered_page_rows.each do |page_row|
+    = render 'admin/page_rows/show', page_row: page_row
+  / = render 'pages/show', page: @page
+/ .table-responsive
+/   table.table.table-striped.table-bordered.table-hover
+/     table.table.table-striped.table-bordered.table-hover.table-sm
+/       thead.thead-inverse
+/         tr
+/           th Module name
+/           th Slot id
+/           th
+hr
+
+= link_to t('page_row.new'), new_admin_page_page_row_path(@page), class: 'btn btn-primary'
 
       / - @page.page_modules.each do |page_module|
       /   tbody

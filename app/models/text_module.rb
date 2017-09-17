@@ -1,8 +1,10 @@
 # raw text to place on a page
 class TextModule < ApplicationRecord
-  include SectionPlugin
+  # include SectionPlugin
 
-  belongs_to :page, optional: true
+  has_many :page_col_modules, as: :moduleable
+  # belongs_to :page
+
   has_attached_file :image, styles: {
     size_640_240: '640x240#',
     '4_coll_squared'.to_sym => '400x400#',
@@ -32,11 +34,16 @@ class TextModule < ApplicationRecord
     ford
   ].freeze
 
-  def page_module
-    PageModule.find_by(
-      moduleable_type: 'TextModule',
-      moduleable_id: id
-    )
+  def page
+    page_col.page
+  end
+
+  def page_col
+    page_col_module.page_col
+  end
+
+  def page_col_module
+    page_col_modules.first
   end
 
   def image_url(size)

@@ -3,15 +3,14 @@ class Admin::TextModulesController < AdminController
 
   # GET /text_modules/1/edit
   def edit
-    @page = Page.find(params[:page_id])
   end
 
   # PATCH/PUT /text_modules/1
   def update
     if @text_module.update(text_module_params)
-      PageModule::Service
-        .new(@text_module)
-        .update_page_module(text_module_params)
+      # PageModule::Service
+      #   .new(@text_module)
+      #   .update_page_module(text_module_params)
       redirect_to admin_page_path(@text_module.page)
     else
       render :edit

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
       resources :carousel_modules, only: [] do
@@ -10,16 +9,10 @@ Rails.application.routes.draw do
       end
       resources :footers
       resources :pages do
-
-        resources :page_rows do
-          resources :page_row_modules
-        end
-
-
-
         resources :blog_modules, only: %i[edit update] do
           resources :blog_posts, only: %i[edit update new create]
         end
+        resources :page_rows
         resources :carousel_modules, only: %i[edit update show]
         resources :dmi_modules, only: %i[edit update]
         resources :gallery_modules, only: %i[edit update]
@@ -27,12 +20,19 @@ Rails.application.routes.draw do
         resources :post_modules, only: %i[edit update]
         resources :page_modules, only: %i[new create destroy]
         resources :subscription_modules, only: %i[edit update]
-        resources :text_modules, only: %i[edit update]
+        # resources :text_modules, only: %i[edit update]
+      end
+      resources :page_rows do
+        resources :page_cols
+      end
+      resources :page_cols, only: [] do
+        resources :page_col_modules
       end
       resources :subscriptions
       resources :subscription_types
       resources :system_messages, only: %i[index edit update]
       resources :system_setups, only: %i[edit update]
+      resources :text_modules
       resources :users
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913105005) do
+ActiveRecord::Schema.define(version: 20170917155202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,26 @@ ActiveRecord::Schema.define(version: 20170913105005) do
     t.string "welcome_page_id"
   end
 
+  create_table "page_col_modules", force: :cascade do |t|
+    t.bigint "page_col_id"
+    t.string "moduleable_type"
+    t.bigint "moduleable_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
+    t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
+  end
+
+  create_table "page_cols", force: :cascade do |t|
+    t.bigint "page_row_id"
+    t.string "layout"
+    t.integer "index", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_row_id"], name: "index_page_cols_on_page_row_id"
+  end
+
   create_table "page_modules", force: :cascade do |t|
     t.bigint "page_id"
     t.string "moduleable_type"
@@ -219,24 +239,12 @@ ActiveRecord::Schema.define(version: 20170913105005) do
     t.index ["page_id"], name: "index_page_modules_on_page_id"
   end
 
-  create_table "page_row_modules", force: :cascade do |t|
-    t.bigint "page_row_id"
-    t.string "moduleable_type"
-    t.bigint "moduleable_id"
-    t.integer "slot_id"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["moduleable_type", "moduleable_id"], name: "index_page_row_modules_on_moduleable_type_and_moduleable_id"
-    t.index ["page_row_id"], name: "index_page_row_modules_on_page_row_id"
-  end
-
   create_table "page_rows", force: :cascade do |t|
     t.bigint "page_id"
     t.string "layout", default: "12"
     t.string "background_color", default: "none"
-    t.integer "padding_top", default: 50
-    t.integer "padding_bottom", default: 50
+    t.integer "padding_top", default: 0
+    t.integer "padding_bottom", default: 0
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -244,6 +252,7 @@ ActiveRecord::Schema.define(version: 20170913105005) do
     t.string "background_image_content_type"
     t.integer "background_image_file_size"
     t.datetime "background_image_updated_at"
+    t.integer "page_cols_count", default: 0
     t.index ["page_id"], name: "index_page_rows_on_page_id"
   end
 
@@ -285,6 +294,7 @@ ActiveRecord::Schema.define(version: 20170913105005) do
     t.string "body_background_content_type"
     t.integer "body_background_file_size"
     t.datetime "body_background_updated_at"
+    t.integer "page_rows_count", default: 0
     t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
@@ -380,8 +390,9 @@ ActiveRecord::Schema.define(version: 20170913105005) do
   end
 
   add_foreign_key "admin_subscriptions", "users"
+  add_foreign_key "page_col_modules", "page_cols"
+  add_foreign_key "page_cols", "page_rows"
   add_foreign_key "page_modules", "pages"
-  add_foreign_key "page_row_modules", "page_rows"
   add_foreign_key "page_rows", "pages"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"

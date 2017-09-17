@@ -1,0 +1,5 @@
+.full-row style="#{page_row.style}"
+  .container
+    div class="#{page_row.layout}"
+      - page_row.ordered_page_cols.each do |page_col|
+        = render 'page_cols/show', page_col: page_col

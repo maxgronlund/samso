@@ -1,13 +1,12 @@
-.text-module
-  .alfa-romeo
-    .card.mb-10
-      = render 'text_modules/image', text_module: text_module, image_size: text_module.image_size.to_sym
-      .card-block
-        h4.card-title = text_module.title
-        p.card-text = raw(text_module.body)
-        p.card-text
-        - if !text_module.page_id.blank?
-          = link_to text_module.url_text, page_path(text_module.page_id)
-        - elsif !text_module.url.blank?
-          = link_to text_module.url_text, text_module.url
+.card
+  = render 'text_modules/image', text_module: text_module, image_size: text_module.image_size.to_sym
+  .card-body style=("color: #{text_module.color}")
+    h4 = text_module.title
+    .justify
+      = raw(text_module.body)
+
+    - if !text_module.page_id.blank?
+      = link_to text_module.url_text, page_path(text_module.page_id)
+    - elsif !text_module.url.blank?
+      = link_to text_module.url_text, text_module.url
 

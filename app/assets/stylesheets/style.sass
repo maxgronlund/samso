@@ -1686,7 +1686,7 @@ video.fullvideo
 
 .module-admin-header
   padding: 5px
-  background-color: rgba(232, 232, 232, 1)
+  background-color: rgba(232, 232, 232, 0.75)
   width: 100%
   min-height: 2em
   .layout
@@ -1695,8 +1695,24 @@ video.fullvideo
     float: right
     text-align: right
 
+.col-admin-header
+  background-color: rgba(232, 232, 232, 0.75)
+  min-height: 2em
+  margin: 0 -15px 0 -15px
+  padding: 0 5px 0 5px
+  .layout
+    font-size: 0.75em
+
+.col-admin-footer
+  background-color: rgba(232, 232, 232, 0.75)
+  min-height: 2em
+  margin: 0 -15px 0 -15px
+  padding: 0 5px 0 5px
+  display: block
+
+
 .module-editor-header
-  background-color: rgba(255, 255, 255, 1)
+  background-color: rgba(255, 255, 255, 0.5)
   width: 100%
   min-height: 2em
 
@@ -1738,11 +1754,9 @@ video.fullvideo
 .thumb
   margin-bottom: 30px
 
-
 body > .container
   padding: 56px 15px 0
-  h1, h2, h3, h4, h5, h6
-    margin-top: 0.5rem
+
 
 .footer
   background-color: #f5f5f5
@@ -1755,3 +1769,9 @@ body > .container
   background: no-repeat center
   background-size: cover
 
+.card
+  background-color: transparent
+
+.card-text
+  .justify
+    text-align: justify

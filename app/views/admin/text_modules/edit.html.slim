@@ -1,5 +1,5 @@
 h3 = t('edit_model', model_name: @text_module.model_name.human)
-= simple_form_for [:admin, @page, @text_module], multipart: true do |f|
+= simple_form_for [:admin, @text_module], multipart: true do |f|
   = f.error_notification
   .row
     .col-sm-6
@@ -7,7 +7,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         collection: TextModule::LAYOUTS,
         include_blank: false
 
-      = f.input :position, as: :integer
+      /= f.input :position, as: :integer
 
       = label_tag 'billed'
       = f.input :image,
@@ -23,8 +23,8 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         include_blank: false
 
     .col-sm-6
-      = f.input :slot_id, as: :integer
-      = f.association :page, collection: Page.active().where(locale: I18n.locale)
+      / = f.input :slot_id, as: :integer
+      = f.input :page_id, collection: Page.active().where(locale: I18n.locale)
       = f.input :url,
         hint: t('text_module.hints.url'),
         placeholder: t('text_module.placeholders.url')

@@ -1,0 +1,9 @@
+= simple_form_for(@page_col) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :page_row
+    = f.input :layout
+
+  .form-actions
+    = f.button :submit

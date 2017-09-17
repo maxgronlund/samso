@@ -1,8 +1,17 @@
 h1 Editing page_row
+= simple_form_for [:admin, @page, @page_row], multipart: true  do |f|
+  == render 'form', f: f
+  = f.input :nr_cols,
+    as: :integer,
+    label: t('page_row.nr_cols'),
+    input_html: {value: @page_row.page_cols_count}
 
-== render 'form'
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+    '&nbsp
+    = link_to t('cancel'), admin_page_path(@page_row.page), class: 'btn btn-secondary'
 
-= link_to 'Show', @page_row
-'  |
-= link_to 'Back', page_rows_path
+
+
+
 

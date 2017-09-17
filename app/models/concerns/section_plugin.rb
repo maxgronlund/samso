@@ -9,10 +9,10 @@ module SectionPlugin
   end
 
   def slot_id
-    page_module.slot_id
+    #page_module.slot_id
   end
 
   def page
-    page_module.page
+    #page_module.page
   end
 end
