@@ -18,21 +18,6 @@ class TextModule < ApplicationRecord
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
-  LAYOUTS = %w[
-    alfa-romeo
-    aston-martin
-    audi
-    bmw
-    bugatti
-    buick
-    cadillac
-    chevron
-    citroen
-    daihatsu
-    dodge
-    fiat
-    ford
-  ].freeze
 
   def page
     page_col.page
@@ -56,6 +41,14 @@ class TextModule < ApplicationRecord
     !url.to_s.empty?
   end
 
+  def self.image_styles
+    [
+      [I18n.t('text_module.full_width'), 'full-width'],
+      [I18n.t('text_module.bordered'), 'bordered'],
+      [I18n.t('text_module.circle'), 'circle']
+    ]
+  end
+
   def self.image_sizes
     [
       ['4 coll squared', '4_coll_squared'],
@@ -65,6 +58,16 @@ class TextModule < ApplicationRecord
       ['8 col high', '8_coll_high']
     ]
   end
+
+  # def self.image_sizes
+  #   [
+  #     [I18n.t('text_module.image.1_1'), '1_1'],
+  #     [I18n.t('text_module.image.4_3'), '4_3'],
+  #     [I18n.t('text_module.image.2_1'), '1_2'],
+  #     [I18n.t('text_module.image.3_4'), '3_4'],
+  #     [I18n.t('text_module.image.1_2'), '1_2'],
+  #   ]
+  # end
 
   def self.show_to
     [

@@ -10,6 +10,7 @@ da:
         page_id: Link til side
         slot_id: Side sektion
         image_size: Billed størelse
+        image_style: Billed beskæring
 
     models:
       text_module: Tekst sektion
@@ -26,3 +27,6 @@ da:
       all: Altid
       guests:  Kun når man ikke er logget ind
       members: Kun når man er logget ind
+    full_width: Til kant
+    bordered: Med ramme
+    circle: Rundt

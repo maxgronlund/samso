@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917155202) do
+ActiveRecord::Schema.define(version: 20170918193230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -351,7 +351,6 @@ ActiveRecord::Schema.define(version: 20170917155202) do
     t.text "body", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "layout"
     t.string "url"
     t.string "url_text"
     t.string "image_file_name"
@@ -363,6 +362,8 @@ ActiveRecord::Schema.define(version: 20170917155202) do
     t.string "show_to"
     t.string "color", default: "#000000"
     t.string "background_color", default: "#FFFFFF"
+    t.boolean "border"
+    t.string "image_style"
     t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 

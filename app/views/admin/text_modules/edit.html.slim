@@ -3,9 +3,6 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
   = f.error_notification
   .row
     .col-sm-6
-      = f.input :layout,
-        collection: TextModule::LAYOUTS,
-        include_blank: false
 
       /= f.input :position, as: :integer
 
@@ -13,6 +10,10 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
       = f.input :image,
         label: false,
         hint: t('text_module.hints.image')
+        
+      = f.input :image_style,
+        collection: TextModule.image_styles,
+        include_blank: false
 
       = f.input :image_size,
         collection: TextModule::image_sizes,
