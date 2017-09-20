@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :blog, only: [] do
       resources :posts, only: %i[new create]
     end
+    resources :blogs, only: [:show]
     resources :confirm_signups, only: %i[show index]
     resources :gallery_modules, only: [] do
       resources :gallery_images

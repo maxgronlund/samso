@@ -2,9 +2,10 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   # GET /admin/posts/1
-  # def show
-  #   @page = Admin::SystemSetup.post_page
-  # end
+  def show
+    @page = Admin::SystemSetup.post_page
+    @post = Admin::BlogPost.find(params[:id])
+  end
 
   # GET /admin/posts/new
   def new
