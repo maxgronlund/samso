@@ -65,8 +65,12 @@ class Page < ApplicationRecord
     body_background.url
   end
 
+  def background?
+    !body_background_file_size.nil?
+  end
+
   def body_style
-    return '' if body_background_file_size.nil?
+    return '' unless background?
     "background: url(#{background_url});background-size: cover; background-repeat: no-repeat;"
   end
 end

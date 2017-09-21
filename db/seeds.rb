@@ -42,3 +42,4 @@ Rake::Task['page:build_front_pages'].invoke
 Rake::Task['page:build_post_pages'].invoke
 Rake::Task['page:build_welcome_pages'].invoke
 Rake::Task['system_messages:build_defaults'].invoke
+Rake::Task['admin/module_names:build_defaults'].invoke

@@ -2,20 +2,5 @@
   = render 'text_modules/layouts/border', text_module: text_module
 - else
   = render 'text_modules/layouts/no_border', text_module: text_module
-/ .card
-/   /= render 'text_modules/image', text_module: text_module, image_size: text_module.image_size.to_sym
-/   - case text_module.image_style
-/   - when 'circle'
-/     = render 'text_modules/layouts/round_image', text_module: text_module
-    
-  
-/   .card-body style=("color: #{text_module.color}")
-/     h4 = text_module.title
-/     .justify
-/       = raw(text_module.body)
 
-/     - if !text_module.page_id.blank?
-/       = link_to text_module.url_text, page_path(text_module.page_id)
-/     - elsif !text_module.url.blank?
-/       = link_to text_module.url_text, text_module.url
 

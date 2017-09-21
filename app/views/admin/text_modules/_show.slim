@@ -9,12 +9,10 @@
 .mb-10
   '&nbsp;
   .pull-right
-    = link_to t('edit'), edit_admin_text_module_path(text_module), class: 'btn btn-secondary btn-sm'
-    = link_to t('delete'), 
-      admin_page_col_page_col_module_path( text_module.page_col, text_module.page_col_module),
-      data: { confirm: t('are_you_sure') },
-      method: :delete,
-      class: 'btn btn-danger btn-sm'
-
-
-
+    .btn-group
+      = link_to t('edit'), edit_admin_text_module_path(text_module), class: 'btn btn-secondary btn-sm'
+      = link_to t('delete'), 
+        admin_page_col_page_col_module_path( text_module.page_col, text_module.page_col_module),
+        data: { confirm: t('are_you_sure') },
+        method: :delete,
+        class: 'btn btn-danger btn-sm'

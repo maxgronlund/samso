@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
-      resources :carousel_modules, only: [] do
+      resources :carousel_modules, only: %i[edit update show] do
         resources :carousel_slides
       end
       resources :csv_imports do
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
           resources :blog_posts, only: %i[edit update new create]
         end
         resources :page_rows
-        resources :carousel_modules, only: %i[edit update show]
+        
         resources :dmi_modules, only: %i[edit update]
         resources :gallery_modules, only: %i[edit update]
         resources :image_modules, only: %i[edit update]

@@ -52,10 +52,11 @@ class PageRow < ApplicationRecord
   end
 
   def background_image_url
-    source = 'https://s3.eu-central-1.amazonaws.com' + background_image.url.gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/page_row/background_image/missing.png'
-      source = nil
-    end
-    source
+    return '' unless background?
+    background_image.url
+  end
+
+  def background?
+    !background_image_file_size.nil?
   end
 end

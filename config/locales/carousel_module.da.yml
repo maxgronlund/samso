@@ -9,5 +9,9 @@ da:
         name: Navn
 
   carousel_module:
-    edit: 'Redig layout'
-    back_to_slides: 'Tilbage til slides'
+    edit: Redig layout
+    back_to_slides: Tilbage til slides
+    edit_slides: Rediger billeder
+
+  admin/carousel_module:
+    name: Karrusle modul

@@ -16,14 +16,10 @@ class Admin::CarouselSlide < ApplicationRecord
   validates :carousel_module, :image, :title, presence: true
 
   def parrent_page
-    carousel_module.page_module.page
+    carousel_module.page
   end
 
-  def image_url(size)
-    source = 'https://s3.eu-central-1.amazonaws.com' + image.url(size).gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/image/square/missing.png'
-      source = 'https://s3.eu-central-1.amazonaws.com/samso-files/admin_carousel_slides/images/missing/#{size.to_s}/missing.png'
-    end
-    source
+  def image_url
+    image.url(carousel_module.layout.to_sym)
   end
 end

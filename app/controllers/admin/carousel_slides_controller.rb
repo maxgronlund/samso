@@ -60,7 +60,8 @@ class Admin::CarouselSlidesController < AdminController
   private
 
   def show_carousel_path
-    admin_page_carousel_module_path(@admin_carousel_slide.parrent_page, @admin_carousel_slide.carousel_module)
+    # admin_carousel_module_path(@admin_carousel_slide.parrent_page, @admin_carousel_slide.carousel_module)
+    root_path
   end
 
   # Use callbacks to share common setup or constraints between actions.

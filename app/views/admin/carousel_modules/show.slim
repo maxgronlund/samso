@@ -3,7 +3,7 @@
     h3 = t('carousel_module.slides')
   .col-sm-4
     .edit-page-links
-      = link_to t('carousel_module.edit'), edit_admin_page_carousel_module_path(@page, @carousel_module)
+      = link_to t('carousel_module.edit'), edit_admin_carousel_module_path(@carousel_module)
       '  |
       = link_to t('page.back'), admin_page_path(@page)
 
@@ -20,7 +20,7 @@
     tbody
       - @admin_carousel_slides.each do |admin_carousel_slide|
         tr
-          td = image_tag(admin_carousel_slide.image_url(:thumb))
+          td = image_tag(admin_carousel_slide.image.url(:thumb))
           td = admin_carousel_slide.title
           td = admin_carousel_slide.position
           td

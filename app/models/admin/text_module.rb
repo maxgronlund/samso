@@ -35,6 +35,10 @@ class Admin::TextModule < ApplicationRecord
     image.url(image_ratio.to_sym)
   end
 
+  def image?
+    !image_file_size.nil?
+  end
+
   def show_link?
     !url.to_s.empty?
   end
@@ -70,16 +74,6 @@ class Admin::TextModule < ApplicationRecord
     ]
   end
 
-  # def self.image_sizes
-  #   [
-  #     [I18n.t('text_module.image.1_1'), '1_1'],
-  #     [I18n.t('text_module.image.4_3'), '4_3'],
-  #     [I18n.t('text_module.image.2_1'), '1_2'],
-  #     [I18n.t('text_module.image.3_4'), '3_4'],
-  #     [I18n.t('text_module.image.1_2'), '1_2'],
-  #   ]
-  # end
-
   def self.show_to
     [
       [I18n.t('admin/text_module.show_to.all'), 'all'],
@@ -98,5 +92,9 @@ class Admin::TextModule < ApplicationRecord
 
   def link_with_text?
     link? && !url_text.blank?
+  end
+
+  def title_style
+
   end
 end
