@@ -32,11 +32,7 @@ class Admin::TextModule < ApplicationRecord
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   def image_url
-    ap image.url(image_ratio.to_sym)
     image.url(image_ratio.to_sym)
-    # source = 'https://s3.eu-central-1.amazonaws.com' + image.url(size).gsub('//s3.amazonaws.com', '')
-    # return false if source.ends_with?('/missing.png')
-    # source
   end
 
   def show_link?

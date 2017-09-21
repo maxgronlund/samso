@@ -62,21 +62,11 @@ class Page < ApplicationRecord
   end
 
   def background_url
-    source = 'https://s3.eu-central-1.amazonaws.com' + body_background.url.gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/row_1_background/missing.png'
-      source = nil
-    end
-    source
+    body_background.url
   end
 
   def body_style
-    style =
-      case layout
-      when 'hawaii', 'georgia', 'idaho', 'illinois', 'iowa'
-        "background: url(#{background_url});background-size: cover;"
-      else
-        ''
-      end
-    style
+    return '' if body_background_file_size.nil?
+    "background: url(#{background_url});background-size: cover; background-repeat: no-repeat;"
   end
 end
