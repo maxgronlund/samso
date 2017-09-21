@@ -1,5 +1,6 @@
 .card
-  = render 'text_modules/image', text_module: text_module, image_size: text_module.image_size.to_sym
+  /= render 'text_modules/image', text_module: text_module, image_size: text_module.image_size.to_sym
+  = image_tag text_module.image_url, class: "img-fluid"
   .card-body style=("color: #{text_module.color}")
     h4 = text_module.title
     .justify

@@ -29,4 +29,5 @@
         collection: Admin::Footer.where(locale: I18n.locale)
 
   = f.submit t('save'), class: 'btn btn-primary'
-
+  '&nbsp;
+  == link_to t('cancel'), admin_pages_path, class: 'btn btn-secondary'

@@ -35,6 +35,7 @@ if user
   user.password_confirmation = 'ChangeMe1337'
   user.save
 end
+
 Rake::Task['system_setup:build_defaults'].invoke
 Rake::Task['page:build_subscription_pages'].invoke
 Rake::Task['page:build_front_pages'].invoke

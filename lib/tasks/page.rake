@@ -56,7 +56,7 @@ namespace :page do
   task build_welcome_pages: :environment do
     user = User.super_admin
     pages_params = [
-      { title: 'Velkommen', menu_title: '', menu_id: 'Ingen', locale: 'da', lactive: true, user_id: user.id },
+      { title: 'Velkommen', menu_title: '', menu_id: 'Ingen', locale: 'da', active: true, user_id: user.id },
       { title: 'Welcome', menu_title: '', menu_id: 'None', locale: 'en', active: true, user_id: user.id }
     ]
     pages_params.each do |page_params|

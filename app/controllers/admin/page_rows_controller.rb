@@ -1,6 +1,6 @@
 class Admin::PageRowsController < AdminController
-  before_action :set_page_row, only: %i[show edit update  destroy]
-  before_action :set_page, only: %i[new edit update  destroy]
+  before_action :set_page_row, only: %i[show edit update destroy]
+  before_action :set_page, only: %i[new edit update destroy]
 
   # GET /page_rows
   def index
@@ -56,6 +56,7 @@ class Admin::PageRowsController < AdminController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_page_row
     @page_row = PageRow.find(params[:id])

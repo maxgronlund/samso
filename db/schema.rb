@@ -64,15 +64,7 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.datetime "image_updated_at"
     t.integer "page_id"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
-  end
-
-  create_table "admin_csv_impors", force: :cascade do |t|
-    t.string "name"
-    t.string "import_type"
-    t.text "comments"
-    t.text "summary"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
   end
 
   create_table "admin_csv_imports", force: :cascade do |t|
@@ -227,18 +219,6 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.index ["page_row_id"], name: "index_page_cols_on_page_row_id"
   end
 
-  create_table "page_modules", force: :cascade do |t|
-    t.bigint "page_id"
-    t.string "moduleable_type"
-    t.bigint "moduleable_id"
-    t.integer "slot_id"
-    t.integer "position", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["moduleable_type", "moduleable_id"], name: "index_page_modules_on_moduleable_type_and_moduleable_id"
-    t.index ["page_id"], name: "index_page_modules_on_page_id"
-  end
-
   create_table "page_rows", force: :cascade do |t|
     t.bigint "page_id"
     t.string "layout", default: "12"
@@ -324,19 +304,6 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.text "identifier"
-    t.integer "position"
-    t.string "locale", default: "da"
-    t.string "postable_type"
-    t.bigint "postable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "permission", default: "member"
@@ -362,8 +329,8 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.string "show_to"
     t.string "color", default: "#000000"
     t.string "background_color", default: "#FFFFFF"
-    t.boolean "border"
-    t.string "image_style"
+    t.boolean "border", default: false
+    t.string "image_style", default: "full-width"
     t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 
@@ -393,7 +360,6 @@ ActiveRecord::Schema.define(version: 20170918193230) do
   add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "page_col_modules", "page_cols"
   add_foreign_key "page_cols", "page_rows"
-  add_foreign_key "page_modules", "pages"
   add_foreign_key "page_rows", "pages"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"

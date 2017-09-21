@@ -16,7 +16,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         include_blank: false
 
       = f.input :image_size,
-        collection: TextModule::image_sizes,
+        collection: TextModule::image_ratio,
         include_blank: false
 
       = f.input :show_to,
@@ -48,37 +48,6 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
   '&nbsp
   = link_to t('cancel'), admin_page_path(@page), class: 'btn btn-secondary'
 
-hr
-h4 Layouts
-.row.mb-20
-  .col-sm-4
-    .module-admin-header
-      .layout
-        strong alfa-romeo
-        '&nbsp;1-8 coll
-    = image_tag('text_module/alfa-romeo.png', class: "img-fluid")
-  .col-sm-4
-    .module-admin-header
-      .layout
-        strong aston-martin
-        '&nbsp; 3 coll
-    = image_tag('text_module/aston-martin.png', class: "img-fluid")
-  .col-sm-4
-    .module-admin-header
-      .layout
-        strong audi
-        '&nbsp; 3 coll
-    = image_tag('text_module/audi.png', class: "img-fluid")
-
-
-.row.mb-20
-  .col-sm-6
-    .module-admin-header
-      .layout
-        strong bmw
-        '&nbsp;6-8 coll
-    = image_tag('text_module/bmw.png', class: "img-fluid")
-= image_tag('text_module/fiat.png', class: "img-fluid")
 
 / toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
 javascript:

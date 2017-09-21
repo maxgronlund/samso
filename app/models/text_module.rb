@@ -6,13 +6,35 @@ class TextModule < ApplicationRecord
   # belongs_to :page
 
   has_attached_file :image, styles: {
-    size_640_240: '640x240#',
-    '4_coll_squared'.to_sym => '400x400#',
-    '4_coll_16_9'.to_sym => '400x225#',
-    '8_coll_low'.to_sym => '769x180#',
-    '8_coll_medium'.to_sym => '769x270#',
-    '8_coll_high'.to_sym => '769x430#',
-    default_url: 'style/missing_squarde_image.jpg'
+    thumb: '64x64#',
+    small_1_1: '540x540#',
+    large_1_1: '960x960#',
+    small_4_3: '540x405#',
+    large_4_3: '960x720#',
+    small_2_1: '540x270#',
+    large_2_1: '960x480#',
+    small_3_1: '540x180#',
+    large_3_1: '960x320#',
+    small_3_4: '540x720#',
+    large_3_4: '960x1280#',
+    small_original: '540x540>',
+    large_original: '960x960>',
+
+    convert_options: {
+      thumb: '-quality 75 -strip',
+      small_1_1: '-quality 75 -strip',
+      large_1_1: '-quality 75 -strip',
+      small_4_3: '-quality 75 -strip',
+      large_4_3: '-quality 75 -strip',
+      small_2_1: '-quality 75 -strip',
+      large_2_1: '-quality 75 -strip',
+      small_3_1: '-quality 75 -strip',
+      large_3_1: '-quality 75 -strip',
+      small_1_4: '-quality 75 -strip',
+      large_1_4: '-quality 75 -strip',
+      small_original: '-quality 75 -strip',
+      large_original: '-quality 75 -strip'
+    }
   }
 
   # Validate the attached image is image/jpg, image/png, etc
@@ -31,10 +53,14 @@ class TextModule < ApplicationRecord
     page_col_modules.first
   end
 
-  def image_url(size)
-    source = 'https://s3.eu-central-1.amazonaws.com' + image.url(size).gsub('//s3.amazonaws.com', '')
-    return false if source.ends_with?('/missing.png')
-    source
+  def image_url
+    size = 'small_' + image_size
+    ap size.to_sym
+    image.url(size.to_sym)
+    # source = 'https://s3.eu-central-1.amazonaws.com' + image.url(size).gsub('//s3.amazonaws.com', '')
+    # return false if source.ends_with?('/missing.png')
+    # source
+
   end
 
   def show_link?
@@ -49,13 +75,14 @@ class TextModule < ApplicationRecord
     ]
   end
 
-  def self.image_sizes
+  def self.image_ratio
     [
-      ['4 coll squared', '4_coll_squared'],
-      ['4 coll 16/9', '4_coll_16_9'],
-      ['8 coll low', '8_coll_low'],
-      ['8 col medium', '8_coll_medium'],
-      ['8 col high', '8_coll_high']
+      ['1:1', '1_1'],
+      ['4:3', '4_3'],
+      ['2:1', '2_1'],
+      ['4:1', '4_1'],
+      ['3:4', '3_4'],
+      ['original', 'original']
     ]
   end
 

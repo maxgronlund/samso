@@ -17,6 +17,7 @@ da:
   page_row: Rækker
 
   page_row:
+    new: Opret række
     edit: Rediger række
     nr_cols: Kolonner
     layout_hint: Ret kun hvis du ved hvad du gør
