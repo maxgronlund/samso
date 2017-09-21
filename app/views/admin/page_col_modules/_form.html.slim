@@ -2,8 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :position
-    = f.input :moduleable_type
+    = f.input :moduleable_type,
+      collection: @module_types,
+      include_blank: false
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

@@ -6,7 +6,7 @@ div class="section-slot #{page_col.layout}"
         = link_to 'e', edit_admin_page_row_page_col_path(page_col.page_row, page_col)
   
   - page_col.page_col_modules.each do |page_col_module|
-    = render 'admin/' + page_col_module.modulable_path, modulable: page_col_module.moduleable
+    = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
   
   .col-admin-footer
     = link_to 'add module',

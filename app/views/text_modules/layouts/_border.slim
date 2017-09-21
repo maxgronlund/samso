@@ -1,0 +1,17 @@
+.card
+  .card-body style=("color: #{text_module.color}")
+    - case text_module.image_style
+    - when 'circle'
+      = render 'text_modules/layouts/round_image', text_module: text_module
+    -when 'full-width'
+      = render 'text_modules/layouts/full_width_image', text_module: text_module
+    .mb-15
+    h4 = text_module.title
+    .justify
+      = raw(text_module.body)
+
+    - if !text_module.page_id.blank?
+      = link_to text_module.url_text, page_path(text_module.page_id)
+    - elsif !text_module.url.blank?
+      = link_to text_module.url_text, text_module.url
+

@@ -4,10 +4,14 @@ class PageColModule < ApplicationRecord
   belongs_to :moduleable, polymorphic: true
 
   def modulable_path
-    moduleable.class.name.underscore + 's/show'
+    moduleable.class.name.underscore.gsub('admin/', '') + 's/show'
   end
 
   def modulable_edit_path
     'admin/' + moduleable.class.name.underscore + 's/edit'
+  end
+
+  def admin_modulable_path
+    'admin/' + moduleable.class.name.underscore.gsub('admin/', '') + 's/show'
   end
 end

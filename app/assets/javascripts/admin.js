@@ -13,7 +13,6 @@
 //= require tether.min
 //= require jquery
 //= require rails-ujs
-//= require bootstrap
 //= require turbolinks
 //= require admin/Sortable
 //= require admin/modular_admin

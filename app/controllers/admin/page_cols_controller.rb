@@ -15,10 +15,6 @@ class Admin::PageColsController < AdminController
     @page_col = PageCol.new
   end
 
-  # GET /page_cols/1/edit
-  def edit
-  end
-
   # POST /page_cols
   def create
     @page_col = PageCol.new(page_col_params)

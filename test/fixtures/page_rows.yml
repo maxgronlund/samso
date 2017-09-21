@@ -2,10 +2,12 @@
 
 one:
   page: one
-  name: MyString
-  type: 
+  layout: row
+  padding_top: 10
+  position: 0
 
 two:
   page: two
-  name: MyString
-  type: 
+  layout: row
+  padding_top: 20
+  position: 10

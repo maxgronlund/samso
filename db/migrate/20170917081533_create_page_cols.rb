@@ -1,3 +1,4 @@
+# Column for a page
 class CreatePageCols < ActiveRecord::Migration[5.1]
   def change
     create_table :page_cols do |t|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918193230) do
+ActiveRecord::Schema.define(version: 20170921125605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,12 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admin_module_names", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "admin_post_modules", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -199,11 +205,33 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.string "welcome_page_id"
   end
 
+  create_table "admin_text_modules", force: :cascade do |t|
+    t.string "title", default: ""
+    t.text "body", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.string "url_text"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer "page_id"
+    t.string "show_to"
+    t.string "color", default: "#000000"
+    t.string "background_color", default: "#FFFFFF"
+    t.boolean "border", default: false
+    t.string "image_style", default: "full-width"
+    t.string "link_layout", default: "text"
+    t.string "image_ratio", default: "2_1"
+    t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
+  end
+
   create_table "page_col_modules", force: :cascade do |t|
     t.bigint "page_col_id"
     t.string "moduleable_type"
     t.bigint "moduleable_id"
-    t.integer "position"
+    t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
@@ -311,27 +339,6 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_roles_on_user_id"
-  end
-
-  create_table "text_modules", force: :cascade do |t|
-    t.string "title", default: ""
-    t.text "body", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "url"
-    t.string "url_text"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.string "image_size"
-    t.integer "page_id"
-    t.string "show_to"
-    t.string "color", default: "#000000"
-    t.string "background_color", default: "#FFFFFF"
-    t.boolean "border", default: false
-    t.string "image_style", default: "full-width"
-    t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 
   create_table "users", force: :cascade do |t|

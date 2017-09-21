@@ -13,10 +13,12 @@ class Admin::PageColModulesController < AdminController
 
   # GET /page_col_modules/new
   def new
+    @page_col.next_page_col_module_position
     @page_col_module = @page_col.page_col_modules.new(
-      position: 10,
-      moduleable_type: 'TextModule'
+      position: @page_col.next_page_col_module_position,
+      moduleable_type: Admin::ModuleName.first.name
     )
+    @module_types = Admin::ModuleName.module_names
   end
 
   # GET /page_col_modules/1/edit
@@ -30,7 +32,8 @@ class Admin::PageColModulesController < AdminController
       .page_col_modules
       .new(page_col_module_params)
     @page_col_module.moduleable_id = new_module.id
-    if @page_col_module.save
+    @page_col_module.position = @page_col.next_page_col_module_position
+    if @page_col_module.save!
       redirect_to edit_path
     else
       render :new
@@ -64,6 +67,7 @@ class Admin::PageColModulesController < AdminController
       .moduleable
       .class
       .name
+      .gsub('Admin::', '')
       .underscore
     eval("edit_admin_#{name}_path(#{moduleable.id})")
   end
@@ -92,6 +96,8 @@ class Admin::PageColModulesController < AdminController
   end
 
   def new_module
-    params[:page_col_module][:moduleable_type].constantize.create
+    ap params[:page_col_module][:moduleable_type]
+    ap params[:page_col_module][:moduleable_type].constantize.create!
+    params[:page_col_module][:moduleable_type].constantize.create!
   end
 end
