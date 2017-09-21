@@ -17,6 +17,7 @@ class Admin::PageColModulesController < AdminController
       position: 10,
       moduleable_type: 'TextModule'
     )
+    @module_types = Admin::ModuleName.module_names
   end
 
   # GET /page_col_modules/1/edit

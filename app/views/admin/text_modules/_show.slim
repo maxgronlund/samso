@@ -1,10 +1,10 @@
 - text_module = modulable
 - if text_module.show_to == 'all'
-  = render "text_modules/layouts/#{text_module.layout}", text_module: text_module
+  = render "text_modules/layouts/show", text_module: text_module
 - elsif text_module.show_to == 'members' && user_signed_in?
-  = render "text_modules/layouts/#{text_module.layout}", text_module: text_module
+  = render "text_modules/layouts/show", text_module: text_module
 - elsif text_module.show_to == 'guests' && !user_signed_in?
-  = render "text_modules/layouts/#{text_module.layout}", text_module: text_module
+  = render "text_modules/layouts/show", text_module: text_module
 
 .mb-10
   '&nbsp;

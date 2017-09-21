@@ -6,18 +6,19 @@ class TextModule < ApplicationRecord
   # belongs_to :page
 
   has_attached_file :image, styles: {
-    size_640_240: '640x240#',
-    '4_coll_squared'.to_sym => '400x400#',
-    '4_coll_16_9'.to_sym => '400x225#',
-    '8_coll_low'.to_sym => '769x180#',
-    '8_coll_medium'.to_sym => '769x270#',
-    '8_coll_high'.to_sym => '769x430#',
+    thumb: '64x64#',
+    aspect_ratio_1_1: '400x400#',
+    aspect_ratio_2_1: '400x225#',
+    aspect_ratio_3_1: '769x180#',
+    aspect_ratio_4_1: '769x270#',
+    aspect_ratio_4_3: '769x270#',
+    aspect_ratio_3_4: '769x270#',
+    aspect_ratio_original: '769x430#',
     default_url: 'style/missing_squarde_image.jpg'
   }
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
-
 
   def page
     page_col.page
@@ -51,11 +52,30 @@ class TextModule < ApplicationRecord
 
   def self.image_sizes
     [
-      ['4 coll squared', '4_coll_squared'],
-      ['4 coll 16/9', '4_coll_16_9'],
-      ['8 coll low', '8_coll_low'],
-      ['8 col medium', '8_coll_medium'],
-      ['8 col high', '8_coll_high']
+      [I18n.t('text_module.image.aspect_ratio_1_1'), '1_1'],
+      [I18n.t('text_module.image.aspect_ratio_2_1'), '2_1'],
+      [I18n.t('text_module.image.aspect_ratio_3_1'), '3_1'],
+      [I18n.t('text_module.image.aspect_ratio_4_1'), '4_1'],
+      [I18n.t('text_module.image.aspect_ratio_4_3'), '4_3'],
+      [I18n.t('text_module.image.aspect_ratio_3_4'), '3_4'],
+      [I18n.t('text_module.image.size.aspect_ratio_original'), 'original'],
+    ]
+
+    # [
+    #   ['4 coll squared', '4_coll_squared'],
+    #   ['4 coll 16/9', '4_coll_16_9'],
+    #   ['8 coll low', '8_coll_low'],
+    #   ['8 col medium', '8_coll_medium'],
+    #   ['8 col high', '8_coll_high']
+    # ]
+  end
+
+  def self.link_layouts
+    [
+      [I18n.t('text_module.link_layouts.text'), 'text'],
+      [I18n.t('text_module.link_layouts.button_left'), 'button_left'],
+      [I18n.t('text_module.link_layouts.button_center'), 'button_center'],
+      [I18n.t('text_module.link_layouts.button_right'), 'button_right']
     ]
   end
 

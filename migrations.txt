@@ -83,4 +83,4 @@ rails g scaffold page_col page_row:belongs_to layout --no-helper --no-assets --n
 
 rails g scaffold PageColModule page_col:belongs_to moduleable:references{polymorphic} position:integer --no-helper --no-assets --no-controller-specs
 
-rails g model module_names name --no-helper --no-assets --no-controller-specs system_setups
+rails g model admin/module_names name

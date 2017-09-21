@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918193230) do
+ActiveRecord::Schema.define(version: 20170920195706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,12 @@ ActiveRecord::Schema.define(version: 20170918193230) do
 
   create_table "admin_image_modules", force: :cascade do |t|
     t.string "layout"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_module_names", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -364,6 +370,7 @@ ActiveRecord::Schema.define(version: 20170918193230) do
     t.string "background_color", default: "#FFFFFF"
     t.boolean "border"
     t.string "image_style"
+    t.string "link_layout", default: "text"
     t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 
