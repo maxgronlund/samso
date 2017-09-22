@@ -1,6 +1,6 @@
 = simple_form_for [:admin, @page], multipart: true do  |f|
   = f.error_notification
-
+  = f.hidden_field :page_id, value: @page.id
   .row
     .col-sm-6
       = f.input :active
@@ -14,11 +14,17 @@
   .row
     .col-sm-6
       = f.input :title
-      
-      = f.label :body_background
+      .row
+        .col-sm-6
+          
+          = f.label :body_background
+          = f.file_field :body_background
+        .col-sm-6
+          - unless @page.body_background_file_size.nil?
+            = image_tag(@page.body_background.url(:thumb))
+            br
+            = f.input :delete_body_background, as: :boolean
       br
-      = f.file_field :body_background
-      = f.input :delete_body_background, as: :boolean
     .col-sm-6
       = f.input :menu_id,
         collection: Page.menu_collection,

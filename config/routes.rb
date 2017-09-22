@@ -7,13 +7,14 @@ Rails.application.routes.draw do
       resources :csv_imports do
         resources :parse_csv, only: %i[new]
       end
+      resources :blog_modules, only: %i[edit update] do
+        resources :blog_posts, only: %i[edit update new create]
+      end
+
       resources :footers
       resources :pages do
-        resources :blog_modules, only: %i[edit update] do
-          resources :blog_posts, only: %i[edit update new create]
-        end
         resources :page_rows
-        
+
         resources :dmi_modules, only: %i[edit update]
         resources :gallery_modules, only: %i[edit update]
         resources :image_modules, only: %i[edit update]

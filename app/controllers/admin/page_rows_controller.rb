@@ -1,6 +1,6 @@
 class Admin::PageRowsController < AdminController
   before_action :set_page_row, only: %i[show edit update destroy]
-  before_action :set_page, only: %i[new edit update destroy]
+  before_action :set_page, only: %i[new create edit update destroy]
 
   # GET /page_rows
   def index
@@ -30,7 +30,7 @@ class Admin::PageRowsController < AdminController
 
   # POST /page_rows
   def create
-    @page_row = PageRow.new(page_row_params)
+    @page_row = @page.page_rows.new(page_row_params)
     if @page_row.save
       page_row_service = PageRow::Service.new(@page_row)
       page_row_service.create_page_cols(page_row_params[:preset])

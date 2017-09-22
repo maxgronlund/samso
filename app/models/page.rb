@@ -1,7 +1,7 @@
 # Dynamic page to hold content
 class Page < ApplicationRecord
   belongs_to :user
-  has_many :page_rows
+  has_many :page_rows, dependent: :destroy
   has_attached_file :body_background
   has_attached_file :body_background, styles: {
     thumb: '90x100>'

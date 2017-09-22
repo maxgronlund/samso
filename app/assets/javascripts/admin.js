@@ -15,6 +15,8 @@
 //= require rails-ujs
 //= require turbolinks
 //= require admin/Sortable
+//= require admin/tinycolor
+//= require admin/responsive-bootstrap
 //= require admin/modular_admin/app
 //= require admin/modular_admin/vendor
 //= require admin/metisMenu

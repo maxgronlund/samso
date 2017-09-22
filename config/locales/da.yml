@@ -57,6 +57,7 @@ da:
   login: Logind
   signed_in: Logget ind
   signed_out: Logged ud
+  create_module: Opret modul
 
   activerecord:
     errors:

@@ -44,6 +44,6 @@ da:
     back: Tilbage til side
     hint:
       collor_format: "HEX #888888"
-    row_1: Række 1
-    row_2: Række 2
-    row_3: Række 3
+    menu:
+      not_in_any_menus: '-'
+      menu_bar: Menu bjælke

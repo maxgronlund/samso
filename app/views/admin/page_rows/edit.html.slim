@@ -1,6 +1,7 @@
-h1 Editing page_row
+h3 = t('edit_model', model_name: @page_row.model_name.human)
+
 = simple_form_for [:admin, @page, @page_row], multipart: true  do |f|
-  == render 'form', f: f
+  == render 'form', f: f, page_row: @page_row
   = f.input :nr_cols,
     as: :integer,
     label: t('page_row.nr_cols'),

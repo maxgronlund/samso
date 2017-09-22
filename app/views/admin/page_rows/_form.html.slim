@@ -2,18 +2,9 @@
 .form-inputs
   .row
     .col-sm-4
-      = f.association :page
-    .col-sm-4
       = f.input :position
     .col-sm-4
       = f.input :background_color
-  .row
-    .col-sm-4
-      = f.input :padding_top
-      = f.input :padding_bottom
-    .col-sm-4
-      = f.input :background_image
-      = f.input :delete_background_image, as: :boolean
     .col-sm-4
       = f.input :layout,
         collection: PageRow::LAYOUTS,
@@ -22,3 +13,14 @@
       = link_to 'Bootstrap documentation',
         'https://getbootstrap.com/docs/4.0/layout/grid/',
         target: :_blank
+  .row
+    .col-sm-4
+      = f.input :padding_top
+      = f.input :padding_bottom
+    .col-sm-4
+      - unless page_row.background_image_file_size.nil?
+        = image_tag(page_row.background_image.url(:thumb))
+        br
+        = f.input :delete_background_image, as: :boolean
+
+      = f.input :background_image

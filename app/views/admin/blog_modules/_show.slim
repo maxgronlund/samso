@@ -1,0 +1,21 @@
+- blog_module = modulable
+= render 'blog_modules/show', blog_module: blog_module
+
+
+.pb-10.pt-5
+  '&nbsp;
+  .pull-right
+    .btn-group
+      = link_to t('carousel_module.edit_slides'),
+        admin_blog_module_path(blog_module),
+        class: 'btn btn-sm btn-secondary'
+
+      = link_to t('edit'),
+        edit_admin_blog_module_path(blog_module),
+        class: 'btn btn-sm btn-secondary'
+
+      = link_to t('delete'), 
+        admin_page_col_page_col_module_path( blog_module.page_col, blog_module.page_col_module),
+        data: { confirm: t('are_you_sure') },
+        method: :delete,
+        class: 'btn btn-danger btn-sm'

@@ -28343,7 +28343,7 @@ mocha.run = function(fn){
 
 Mocha.process = process;
 })();
-/* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogress
+/* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogresshttp://ricostacruz.com/nprogress
  * @license MIT */
 
 ;(function(root, factory) {

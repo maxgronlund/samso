@@ -5,7 +5,7 @@ class PageRow < ApplicationRecord
   has_many :page_cols, dependent: :destroy
 
   has_attached_file :background_image, styles: {
-    thumb: '160x40>'
+    thumb: '160x40#'
   }
 
   validates_attachment_content_type :background_image, content_type: %r{\Aimage\/.*\Z}

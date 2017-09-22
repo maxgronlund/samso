@@ -1,0 +1,15 @@
+da:
+  activerecord:
+    attributes:
+      page_col_module:
+        moduleable_type: Type
+    models:
+      page_col_module: Modul type
+
+
+
+
+
+
+
+

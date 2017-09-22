@@ -1,7 +1,8 @@
 # dynamic blog to add on a page
 class Admin::BlogModule < ApplicationRecord
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
-  include SectionPlugin
+  has_many :page_col_modules, as: :moduleable
+  include PageColConcerns
 
   scope :ordered, -> { order('start_date DESC') }
 
