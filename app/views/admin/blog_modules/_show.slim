@@ -1,15 +1,11 @@
-- blog_module = modulable
-= render 'blog_modules/show', blog_module: blog_module
 
+= render 'blog_modules/show', modulable: modulable
+- blog_module = modulable
 
 .pb-10.pt-5
   '&nbsp;
   .pull-right
     .btn-group
-      = link_to t('carousel_module.edit_slides'),
-        admin_blog_module_path(blog_module),
-        class: 'btn btn-sm btn-secondary'
-
       = link_to t('edit'),
         edit_admin_blog_module_path(blog_module),
         class: 'btn btn-sm btn-secondary'
