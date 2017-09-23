@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921125605) do
+ActiveRecord::Schema.define(version: 20170923053244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,32 +272,10 @@ ActiveRecord::Schema.define(version: 20170921125605) do
     t.boolean "active"
     t.string "locale"
     t.bigint "user_id"
-    t.string "layout", default: "alabama"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "require_subscription", default: false
     t.integer "footer_id"
-    t.string "color_row_1"
-    t.integer "row_1_padding_top", default: 0
-    t.string "color_row_2"
-    t.integer "row_2_padding_top", default: 0
-    t.string "color_row_3"
-    t.integer "row_3_padding_top", default: 0
-    t.string "row_1_background_file_name"
-    t.string "row_1_background_content_type"
-    t.integer "row_1_background_file_size"
-    t.datetime "row_1_background_updated_at"
-    t.string "row_2_background_file_name"
-    t.string "row_2_background_content_type"
-    t.integer "row_2_background_file_size"
-    t.datetime "row_2_background_updated_at"
-    t.string "row_3_background_file_name"
-    t.string "row_3_background_content_type"
-    t.integer "row_3_background_file_size"
-    t.datetime "row_3_background_updated_at"
-    t.integer "row_1_padding_bottom", default: 0
-    t.integer "row_2_padding_bottom", default: 0
-    t.integer "row_3_padding_bottom", default: 0
     t.string "body_background_file_name"
     t.string "body_background_content_type"
     t.integer "body_background_file_size"
