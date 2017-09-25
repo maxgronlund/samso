@@ -41,11 +41,12 @@ Rails.application.routes.draw do
       resources :posts, only: %i[new create]
     end
     resources :blogs, only: [:show]
+    resources :blog_posts, only: %i[show edit update destroy]
     resources :confirm_signups, only: %i[show index]
     resources :gallery_modules, only: [] do
       resources :gallery_images
     end
-    resources :posts, only: %i[show edit update destroy]
+    
     resources :reset_password, except: %i[destroy]
     resources :pages, only: %i[show]
     resources :payments

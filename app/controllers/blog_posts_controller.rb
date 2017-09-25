@@ -1,16 +1,18 @@
-class PostsController < ApplicationController
+class BlogPostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   # GET /admin/posts/1
   def show
-    @page = Admin::SystemSetup.post_page
-    @post = Admin::BlogPost.find(params[:id])
+    @blog_post = Admin::BlogPost.find(params[:id])
+    @page = @blog_post.post_page
+    @landing_page = landing_page
+    render 'pages/show'
   end
 
   # GET /admin/posts/new
   def new
     @blog = Admin::BlogModule.find(params[:blog_id])
-    ap @page = @blog.page
+    @page = @blog.page
     @post =
       Admin::BlogPost.new(
         end_date: Time.zone.now + 1.year

@@ -5,9 +5,6 @@ class PagesController < ApplicationController
     @landing_page    = admin_system_setup.landing_page
     @footer          = @page.footer
 
-    ap page_params
-    # set_post if post_page?
-    #set_image if params[:gallery_image_id]
     store_page_in_session if @page.require_subscription
     @body_style = @page.body_style
   rescue

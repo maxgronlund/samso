@@ -7,7 +7,7 @@
 hr
 - blog_module.paginated_posts.each do |post|
   .blog_post
-    = link_to page_path(blog_module.posts_page, post_id: post.id) do
+    = link_to blog_post_path(id: post.id) do
       .media
         = image_tag post.image_url(:thumb), class: ' d-flex mr-3'
         .media-body
@@ -17,15 +17,15 @@ hr
             /= l post.start_date
           = raw(post.body)
           = post.teaser
-  - if editor?
-    .module-editor-header
-      .pull-right
-          .btn-group
-            = link_to t('edit'), edit_post_path(post), class: 'btn btn-outline-success btn-sm'
-            = link_to t('delete'),
-              post_path(post),
-              data: { confirm: t('are_you_sure') },
-              method: :delete,
-              class: 'btn btn-outline-danger btn-sm'
+  / - if editor?
+  /   .module-editor-header
+  /     .pull-right
+  /         .btn-group
+  /           = link_to t('edit'), edit_post_path(post), class: 'btn btn-outline-success btn-sm'
+  /           = link_to t('delete'),
+  /             post_path(post),
+  /             data: { confirm: t('are_you_sure') },
+  /             method: :delete,
+  /             class: 'btn btn-outline-danger btn-sm'
 
-  hr
+  / hr

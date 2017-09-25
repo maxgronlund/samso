@@ -23,4 +23,8 @@ class Admin::BlogPost < ApplicationRecord
     source
     image.url(size)
   end
+
+  def post_page
+    blog_module.show_on_page
+  end
 end

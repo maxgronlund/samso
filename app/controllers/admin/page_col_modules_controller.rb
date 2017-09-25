@@ -97,8 +97,6 @@ class Admin::PageColModulesController < AdminController
   end
 
   def new_module
-    ap params[:page_col_module][:moduleable_type]
-    ap params[:page_col_module][:moduleable_type].constantize.create!
     params[:page_col_module][:moduleable_type].constantize.create!
   end
 end

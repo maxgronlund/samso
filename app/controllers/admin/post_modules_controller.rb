@@ -3,7 +3,6 @@ class Admin::PostModulesController < AdminController
 
   # GET /admin/post_modules/1/edit
   def edit
-    @page = Page.find(params[:page_id])
   end
 
   # PATCH/PUT /admin/post_modules/1

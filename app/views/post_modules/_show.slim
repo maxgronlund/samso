@@ -1,0 +1,5 @@
+
+- post_module = modulable
+h3 = post_module.title(params[:id])
+/= post.teaser
+= raw(post_module.body(params[:id]))

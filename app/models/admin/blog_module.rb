@@ -6,13 +6,6 @@ class Admin::BlogModule < ApplicationRecord
 
   scope :ordered, -> { order('start_date DESC') }
 
-  def page_module
-    PageModule.find_by(
-      moduleable_type: 'Admin::BlogModule',
-      moduleable_id: id
-    )
-  end
-
   # find names here: https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/da.yml
   def self.layouts
     [
@@ -21,12 +14,12 @@ class Admin::BlogModule < ApplicationRecord
     ]
   end
 
-  def posts_page
-    page = Page.find_by(id: post_page_id)
-    return page if page
-    return admin_system_setup.post_page if admin_system_setup.post_page
-    nil
-  end
+  # def posts_page
+  #   page = Page.find_by(id: post_page_id)
+  #   return page if page
+  #   return admin_system_setup.post_page if admin_system_setup.post_page
+  #   nil
+  # end
 
   def paginated_posts(start = 0, finish = 100)
     posts
@@ -35,9 +28,13 @@ class Admin::BlogModule < ApplicationRecord
       .last(finish - start)
   end
 
+  def show_on_page
+    Page.find_by(id: post_page_id)
+  end
+
   private
 
-  def admin_system_setup
-    Admin::SystemSetup.find_by(locale: I18n.locale)
-  end
+  # def admin_system_setup
+  #   Admin::SystemSetup.find_by(locale: I18n.locale)
+  # end
 end

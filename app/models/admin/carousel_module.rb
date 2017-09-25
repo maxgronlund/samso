@@ -2,7 +2,6 @@
 class Admin::CarouselModule < ApplicationRecord
   include PageColConcerns
   has_many :page_col_modules, as: :moduleable
-
   has_many :slides, class_name: 'Admin::CarouselSlide', dependent: :destroy
 
   def self.image_sizes

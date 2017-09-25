@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    models:
+      admin/post_module: Blog post module
+
+  admin/post_module:
+    name: Blog post module
