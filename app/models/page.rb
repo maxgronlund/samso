@@ -2,7 +2,7 @@
 class Page < ApplicationRecord
   belongs_to :user
   has_many :page_rows, dependent: :destroy
-  has_attached_file :body_background
+
   has_attached_file :body_background, styles: {
     thumb: '90x100>'
   }
@@ -69,8 +69,12 @@ class Page < ApplicationRecord
     !body_background_file_size.nil?
   end
 
+  def background_color?
+    background_color != 'none'
+  end
+
   def body_style
-    return '' unless background?
-    "background: url(#{background_url});background-size: cover; background-repeat: no-repeat;"
+    return '' unless background? || background_color?
+    "background: url(#{background_url});background-size: cover; background-repeat: no-repeat; background-color: #{background_color}"
   end
 end

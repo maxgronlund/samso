@@ -17,8 +17,8 @@ en:
     models:
       text_module: Text module
 
-  text_module:
-    name: Text module
+  admin/text_module:
+    name: Texst module
     hints:
       title: As shown on the index page
       image: Optional

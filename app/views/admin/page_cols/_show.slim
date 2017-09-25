@@ -9,8 +9,9 @@ div class="section-slot #{page_col.layout}"
     = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
   
   .col-admin-footer
-    = link_to 'add module',
-      new_admin_page_col_page_col_module_path(page_col),
-      class: 'btn btn-primary btn-sm'
+    .pull-right
+      = link_to t('page_col_module.add_module'),
+        new_admin_page_col_page_col_module_path(page_col),
+        class: 'btn btn-primary btn-sm'
   
   

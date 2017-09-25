@@ -1,6 +1,6 @@
 # module for showning a post from the blog on a page
 class Admin::PostModule < ApplicationRecord
-  include SectionPlugin
+  include PageColConcerns
 
   def page_module
     PageModule.find_by(

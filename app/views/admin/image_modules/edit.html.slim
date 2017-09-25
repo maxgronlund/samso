@@ -8,9 +8,11 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :layout
-    = f.input :slot_id, as: :integer
-    = f.input :position, as: :integer
+    .row
+      .col-sm-6
+        = f.input :layout
+      .col-sm-6
+        = f.input :position, as: :integer
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

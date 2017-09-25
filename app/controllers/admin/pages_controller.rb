@@ -73,7 +73,8 @@ class Admin::PagesController < AdminController
       :require_subscription,
       :footer_id,
       :body_background,
-      :delete_body_background
+      :delete_body_background,
+      :background_color
     )
   end
 end

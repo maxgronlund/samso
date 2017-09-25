@@ -1,18 +1,17 @@
-- text_module = modulable
-- if text_module.show_to == 'all'
-  = render "text_modules/layouts/show", text_module: text_module
-- elsif text_module.show_to == 'members' && user_signed_in?
-  = render "text_modules/layouts/show", text_module: text_module
-- elsif text_module.show_to == 'guests' && !user_signed_in?
-  = render "text_modules/layouts/show", text_module: text_module
+- if modulable.show_to == 'all'
+  = render "text_modules/layouts/show", text_module: modulable
+- elsif modulable.show_to == 'members' && user_signed_in?
+  = render "text_modules/layouts/show", text_module: modulable
+- elsif modulable.show_to == 'guests' && !user_signed_in?
+  = render "text_modules/layouts/show", text_module: modulable
 
 .mb-10
   '&nbsp;
   .pull-right
     .btn-group
-      = link_to t('edit'), edit_admin_text_module_path(text_module), class: 'btn btn-secondary btn-sm'
+      = link_to t('edit'), edit_admin_text_module_path(modulable), class: 'btn btn-secondary btn-sm'
       = link_to t('delete'), 
-        admin_page_col_page_col_module_path( text_module.page_col, text_module.page_col_module),
+        admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
         data: { confirm: t('are_you_sure') },
         method: :delete,
         class: 'btn btn-danger btn-sm'

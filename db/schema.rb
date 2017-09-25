@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923053244) do
+ActiveRecord::Schema.define(version: 20170924073631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 20170923053244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "page_id"
+    t.integer "gallery_images_count", default: 0
+    t.integer "images_pr_page", default: 16
     t.index ["page_id"], name: "index_admin_gallery_modules_on_page_id"
   end
 
@@ -141,6 +143,8 @@ ActiveRecord::Schema.define(version: 20170923053244) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "locale"
+    t.integer "position"
   end
 
   create_table "admin_post_modules", force: :cascade do |t|
@@ -169,6 +173,7 @@ ActiveRecord::Schema.define(version: 20170923053244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position", default: 0
+    t.integer "subscriptions_count"
   end
 
   create_table "admin_subscriptions", force: :cascade do |t|
@@ -281,6 +286,7 @@ ActiveRecord::Schema.define(version: 20170923053244) do
     t.integer "body_background_file_size"
     t.datetime "body_background_updated_at"
     t.integer "page_rows_count", default: 0
+    t.string "background_color", default: "none"
     t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end

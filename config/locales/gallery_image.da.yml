@@ -2,8 +2,8 @@ da:
   activerecord:
     models:
       admin/gallery_image:
-        one: Galleri sektion
-        other: Galleri sektioner
+        one: Galleri billed modul
+        other: Galleri billed moduler
     attributes:
       admin/gallery_image:
         name: Navn
@@ -11,6 +11,8 @@ da:
         layout: Layout
 
   gallery_image:
-    new: 'Nyt billed'
-    back_to_slides: 'Tilbage til slides'
+    new: 'Nyt billed til galleri'
     upload_immage: 'Upload billed'
+
+  admin/gallery_image:
+    name: Galleri billed modul

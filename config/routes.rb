@@ -10,18 +10,14 @@ Rails.application.routes.draw do
       resources :blog_modules, only: %i[edit update] do
         resources :blog_posts, only: %i[edit update new create]
       end
+      resources :dmi_modules, only: %i[edit update]
 
       resources :footers
+      resources :gallery_images, only: %i[edit update]
+      resources :gallery_modules, only: %i[edit update]
+      resources :image_modules, only: %i[edit update]
       resources :pages do
         resources :page_rows
-
-        resources :dmi_modules, only: %i[edit update]
-        resources :gallery_modules, only: %i[edit update]
-        resources :image_modules, only: %i[edit update]
-        resources :post_modules, only: %i[edit update]
-        resources :page_modules, only: %i[new create destroy]
-        resources :subscription_modules, only: %i[edit update]
-        # resources :text_modules, only: %i[edit update]
       end
       resources :page_rows do
         resources :page_cols
@@ -29,7 +25,9 @@ Rails.application.routes.draw do
       resources :page_cols, only: [] do
         resources :page_col_modules
       end
+      resources :post_modules, only: %i[edit update]
       resources :subscriptions
+      resources :subscription_modules, only: %i[edit update]
       resources :subscription_types
       resources :system_messages, only: %i[index edit update]
       resources :system_setups, only: %i[edit update]
@@ -38,6 +36,7 @@ Rails.application.routes.draw do
     end
 
     resources :admin, only: %i[index]
+    resources :gallery_images, only: %i[show]
     resources :blog, only: [] do
       resources :posts, only: %i[new create]
     end

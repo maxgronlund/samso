@@ -35,7 +35,7 @@ class User < ApplicationRecord
         Telefon: row[6].empty? ? nil : row[6].downcase,
         Mobil: row[7].empty? ? nil : row[7].downcase,
         Nyhedsbrev: row[8] == '0' ? true : false,
-        email: row[9].empty? ? fake_email : row[9].downcase,
+        email: row[9].empty? ? fake_email : row[9].downcase.delete(' '),
         Brugernavn: row[10].empty? ? nil : row[10],
         password: row[11].empty? ? nil : row[11],
         abon_periode: row[12],
@@ -63,6 +63,7 @@ class User < ApplicationRecord
     # rubocop:disable Metrics/MethodLength
     def create_or_update_user(options = {})
       user = find_or_create_user(options)
+      return if user.nil?
       User::Service.sanitize_email(options)
       unless User::Service.valid_email?(options)
         options[:email] = User::Service.fake_email
@@ -111,6 +112,7 @@ class User < ApplicationRecord
     end
 
     def find_or_create_user(options = {})
+
       user = User.find_by(email: options[:email])
       return user unless user.nil?
       User

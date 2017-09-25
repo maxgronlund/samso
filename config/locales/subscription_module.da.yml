@@ -1,0 +1,24 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/subscription_module: Abonnement modul
+    attributes:
+      admin/subscription_module:
+        name: Navn
+        body: Beskrivelse
+        duration: Varighed i dage
+        locale: Sprog
+        print_version: Trykt
+        internet_version: WWW
+        price: Pris i DKK
+        active: Aktiv
+        subscriptions_count: Abonnenter
+    
+    models:
+      admin/subscription_module:
+        one: Abonnement modul
+        other: Abonnement moduler
+
+  admin/subscription_module:
+    name: Abonnoment module

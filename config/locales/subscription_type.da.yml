@@ -9,10 +9,11 @@ da:
         body: Beskrivelse
         duration: Varighed i dage
         locale: Sprog
-        print_version: Papirudgave
-        internet_version: Internet adgang
+        print_version: Trykt
+        internet_version: WWW
         price: Pris i DKK
         active: Aktiv
+        subscriptions_count: Abonnementer
     models:
       admin/subscription_type:
         one: Abonnementstype

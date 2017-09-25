@@ -1,13 +1,13 @@
 class PagesController < ApplicationController
   # GET /pages/1
-  # rubocop:disable Metrics/AbcSize
   def show
     @page            = Page.find(params[:id])
     @landing_page    = admin_system_setup.landing_page
     @footer          = @page.footer
-    @admin_namespace = false
-    set_post if post_page?
-    set_image if params[:gallery_image_id]
+
+    ap page_params
+    # set_post if post_page?
+    #set_image if params[:gallery_image_id]
     store_page_in_session if @page.require_subscription
     @body_style = @page.body_style
   rescue
@@ -26,8 +26,12 @@ class PagesController < ApplicationController
     session[:post_id] = @post.id if @post
   end
 
-  def set_image
-    @gallery_image = Admin::GalleryImage.find_by(id: params[:gallery_image_id])
+  # def set_image
+  #   @gallery_image = Admin::GalleryImage.find_by(id: params[:gallery_image_id])
+  # end
+
+  def page_params
+    params.permit!
   end
 
   # store the page in a session so we can bounce to it after sign up / login

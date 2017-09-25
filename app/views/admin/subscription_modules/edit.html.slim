@@ -6,17 +6,17 @@ h3 = t('edit_model', model_name: @subscription_module.model_name.human)
     = f.input :name
     = f.input :body
     = f.input :position, as: :integer
-    = f.input :slot_id, as: :integer
-    /= f.input :layout
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+    .pull-right
+      = f.submit t('save'), class: 'btn btn-primary'
 
-/h1 Editing admin_subscription_module
-/
-/== render 'form'
-/
-/= link_to 'Show', @admin_subscription_module
-/'  |
-/= link_to 'Back', admin_subscription_modules_path
+javascript:
+  $(function() {
+    $('#admin_subscription_module_body').froalaEditor(
+      {
+        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+      }
+    )
+  });
 

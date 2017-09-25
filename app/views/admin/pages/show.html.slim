@@ -1,7 +1,10 @@
 
 .row
   .col-sm-8
-    h3 = t('page.edit_content')
+    h3 
+      = t('edit')
+      '&nbsp:&nbsp;
+      = @page.title
   .col-sm-4
     .edit-page-links
       = link_to t('page.show'), page_path(@page)
@@ -11,17 +14,10 @@
 . style="#{@page.body_style}"
   - @page.ordered_page_rows.each do |page_row|
     = render 'admin/page_rows/show', page_row: page_row
-  / = render 'pages/show', page: @page
-/ .table-responsive
-/   table.table.table-striped.table-bordered.table-hover
-/     table.table.table-striped.table-bordered.table-hover.table-sm
-/       thead.thead-inverse
-/         tr
-/           th Module name
-/           th Slot id
-/           th
 
-.row.mt-10
-  .col
-    = link_to t('page_row.new'), new_admin_page_page_row_path(@page), class: 'btn btn-primary'
+.container
+  .row.mt-10
+    .col-sm-12
+      .pull-right
+        = link_to t('page_row.new'), new_admin_page_page_row_path(@page), class: 'btn btn-primary'
 

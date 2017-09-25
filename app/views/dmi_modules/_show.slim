@@ -1,18 +1,4 @@
-- if @admin_namespace
-  .module-admin-header
-    .layout
-
-      = dmi_module.position
-
-    .edit-links
-      = link_to t('edit'),
-        edit_admin_page_dmi_module_path(page, dmi_module)
-      ' |
-      = link_to t('delete'),
-        admin_page_page_module_path(page, dmi_module.page_module),
-        method: :delete,
-        data: { confirm: t('are_you_sure') }
-      '&nbsp;
+- dmi_module = modulable
 
 h4 Vejeret
 - case dmi_module.forecast_duration

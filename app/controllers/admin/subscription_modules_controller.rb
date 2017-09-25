@@ -2,14 +2,11 @@ class Admin::SubscriptionModulesController < AdminController
   before_action :set_admin_subscription_module, only: %i[show edit update destroy]
 
   def edit
-    @page = Page.find(params[:page_id])
   end
 
   def update
     if @subscription_module.update(subscription_module_params)
-      PageModule::Service
-        .new(@subscription_module)
-        .update_page_module(subscription_module_params)
+      @subscription_module.update_position(subscription_module_params[:position])
       redirect_to admin_page_path(@subscription_module.page)
     else
       render :edit
@@ -21,7 +18,7 @@ class Admin::SubscriptionModulesController < AdminController
   def destroy
     @subscription_module.destroy
     respond_to do |format|
-      format.html { redirect_to admin_subscription_modules_url, notice: 'Subscription module was successfully destroyed.' }
+      format.html { redirect_to admin_subscription_modules_url }
       format.json { head :no_content }
     end
   end

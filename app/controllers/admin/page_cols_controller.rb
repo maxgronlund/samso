@@ -37,8 +37,9 @@ class Admin::PageColsController < AdminController
 
   # DELETE /page_cols/1
   def destroy
+    page = @page_col.page
     @page_col.destroy
-    redirect_to page_cols_url, notice: 'Page col was successfully destroyed.'
+    redirect_to admin_page_path(page)
   end
 
   private

@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/blog_module:
+        one: Blog moduls
+        other: Blog modules
+    attributes:
+      admin/blog_module:
+        name: Overskrift
+        body: Introduktion
+
+  blog_module:
+    the_beatles: 'The Beatles'
+    elvis_presley: 'Elvis Presley'
+
+  admin/blog_module:
+    name: Blog module

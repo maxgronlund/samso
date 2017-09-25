@@ -4,9 +4,9 @@ class Admin::ModuleName < ApplicationRecord
   # List of module class names and translations
   # usage Admin::ModuleName.module_names
   def self.module_names
-    Admin::ModuleName.all.map do |module_name|
+    Admin::ModuleName.order('position ASC').map do |module_name|
       [
-        I18n.t(module_name.name.underscore + '.name'),
+        I18n.t(module_name.locale),
         module_name.name
       ]
     end

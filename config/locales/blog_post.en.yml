@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/blog_post: Blog post module
+    attributes:
+      admin/blog_post:
+        title: Overskrift
+        subtitle: Trompet
+        teaser: Manchet
+        body: Brødtekst
+
+  blog_post:
+    new: 'New post'
+    edit: 'Edit post'
+
+  admin/blog_post:
+    name: Blog post module

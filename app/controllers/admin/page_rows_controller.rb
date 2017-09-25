@@ -51,11 +51,18 @@ class Admin::PageRowsController < AdminController
 
   # DELETE /page_rows/1
   def destroy
+    destroy_page_col_modules
     @page_row.destroy
     redirect_to admin_page_url(@page)
   end
 
   private
+
+  def destroy_page_col_modules
+    @page_row.page_cols.each do |page_col|
+      page_col.page_col_modules.delete_all
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_page_row

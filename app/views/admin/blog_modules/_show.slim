@@ -1,17 +1,16 @@
 
 = render 'blog_modules/show', modulable: modulable
-- blog_module = modulable
 
 .pb-10.pt-5
   '&nbsp;
   .pull-right
     .btn-group
       = link_to t('edit'),
-        edit_admin_blog_module_path(blog_module),
+        edit_admin_blog_module_path(modulable),
         class: 'btn btn-sm btn-secondary'
 
       = link_to t('delete'), 
-        admin_page_col_page_col_module_path( blog_module.page_col, blog_module.page_col_module),
+        admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
         data: { confirm: t('are_you_sure') },
         method: :delete,
         class: 'btn btn-danger btn-sm'

@@ -1,18 +1,21 @@
-p#notice = notice
+.col-12.col-sm-6.col-md-4.col-lg-3.mb-9
+  .card style="min-height: 451px"
+    .card-img-top
+      a data-fancybox="gallery" href="#{gallery_image.image_url('default')}"
+        = image_tag(gallery_image.image_url('squared'), class: 'img-fluid card-img-top')
 
-p
-  strong Title:
-  = @admin_gallery_image.title
-p
-  strong Body:
-  = @admin_gallery_image.body
-p
-  strong Admin/gallery module:
-  = @admin_gallery_image.admin/gallery_module
-p
-  strong User:
-  = @admin_gallery_image.user
-
-= link_to 'Edit', edit_admin_gallery_image_path(@admin_gallery_image)
-'  |
-= link_to 'Back', admin_gallery_images_path
+    .card-body
+      h5.card-title = gallery_image.title.truncate(22)
+      p.card-text = gallery_image.body.truncate(40)
+      
+    .card-footer.text-muted
+      = l gallery_image.created_at
+      br
+      = link_to t('show'), gallery_image_path(gallery_image)
+      - if can_manage_resource?(gallery_image)
+        '&nbsp;|&nbsp;
+        = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, gallery_image)
+        '&nbsp;|&nbsp;
+        = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, gallery_image),
+          data: { confirm: t('are_you_sure') },
+          method: :delete

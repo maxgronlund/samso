@@ -1,5 +1,8 @@
 en:
   activerecord:
+    errors:
+      models:
+        page: Side
     attributes:
       page:
         title: Title
@@ -10,24 +13,9 @@ en:
         locale: Language
         user_id: Created by
         require_subscription: Only access for subscribers
-        color_row_1: Background color
-        color_row_2: Background color
-        color_row_3: Background color
-        row_1_padding_top: Margin top
-        row_2_padding_top: Margin top
-        row_3_padding_top: Margin top
-        row_1_padding_bottom: Margin bottom
-        row_2_padding_bottom: Margin bottom
-        row_3_padding_bottom: Margin bottom
-        row_1_background: Image
-        row_2_background: Image
-        row_3_background: Image
-        delete_row_1_background: Remove image
-        delete_row_2_background: Remove image
-        delete_row_3_background: Remove image
+        background_color: Baggrd color
         body_background: Backgrounds image
         delete_body_background: Remove image
-
     models:
       page: Page
 
@@ -40,8 +28,8 @@ en:
     edit_layout: Layout
     edit: Edit page
     back: Back to page
-    hint:
-      collor_format: "HEX #888888"
-    row_1: Row 1
-    row_2: Row 2
-    row_3: Row 3
+    background_color:
+      hint: "Use valid CSS values, E.G. #888888"
+    menu:
+      not_in_any_menus: '-'
+      menu_bar: Menu bar

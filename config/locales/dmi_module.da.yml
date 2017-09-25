@@ -12,3 +12,6 @@ da:
     days_two_forecast: '2-døgnsudsigt'
     days_three_forecast: '3 til 9-døgnsudsigt'
     days10to15forecast: '10 til 15-døgnsudsigt'
+
+  admin/dmi_module:
+    name: DMI modul

@@ -1,26 +1,36 @@
-- if @admin_namespace
-  .module-admin-header
-    .layout
+/ - if @admin_namespace
+/   .module-admin-header
+/     .layout
 
-      = image_module.position
+/       = image_module.position
 
-    .edit-links
-      = link_to t('edit'),
-        edit_admin_page_image_module_path(page, image_module)
-      ' |
-      = link_to t('delete'),
-        admin_page_page_module_path(page, image_module.page_module),
-        method: :delete,
-        data: { confirm: t('are_you_sure') }
-      '&nbsp;
+/     .edit-links
+/       = link_to t('edit'),
+/         edit_admin_page_image_module_path(page, image_module)
+/       ' |
+/       = link_to t('delete'),
+/         admin_page_page_module_path(page, image_module.page_module),
+/         method: :delete,
+/         data: { confirm: t('are_you_sure') }
+/       '&nbsp;
 
-- if @gallery_image
-  h4 = @gallery_image.title
-  i = @gallery_image.user_name
-  i = l @gallery_image.created_at
-  br
-  = image_tag(@gallery_image.image_url('full_size'), class: 'img-fluid')
-  br
-  = @gallery_image.body
-- else
-  'some dummy content
+/ - if @gallery_image
+/   h4 = @gallery_image.title
+/   i = @gallery_image.user_name
+/   i = l @gallery_image.created_at
+/   br
+/   = image_tag(@gallery_image.image_url('full_size'), class: 'img-fluid')
+/   br
+/   = @gallery_image.body
+/ - else
+/   'some dummy content
+
+
+- gallery_image = modulable
+h4 = gallery_image.title(params[:id])
+
+.mb-10
+  = image_tag(gallery_image.image_url(params[:id]), class: 'img-fluid')
+
+= gallery_image.body(params[:id])
+

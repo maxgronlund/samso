@@ -52,6 +52,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :admin_system_setup
 
+  def landing_page
+    @landing_page ||= admin_system_setup.landing_page
+  end
+
   protected
 
   def configure_permitted_parameters

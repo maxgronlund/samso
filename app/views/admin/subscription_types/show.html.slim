@@ -25,6 +25,10 @@ p
   strong Position:
   = @admin_subscription_type.position
 
+p
+  strong Subscriptions:
+  = @admin_subscription_type.subscriptions_count
+
 = link_to 'Edit', edit_admin_subscription_type_path(@admin_subscription_type)
 '  |
 = link_to 'Back', admin_subscription_types_path

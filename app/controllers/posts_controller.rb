@@ -10,8 +10,11 @@ class PostsController < ApplicationController
   # GET /admin/posts/new
   def new
     @blog = Admin::BlogModule.find(params[:blog_id])
-    @page = @blog.page
-    @post = Admin::BlogPost.new
+    ap @page = @blog.page
+    @post =
+      Admin::BlogPost.new(
+        end_date: Time.zone.now + 1.year
+      )
   end
 
   # GET /admin/posts/1/edit
@@ -57,6 +60,16 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:admin_blog_post).permit(:title, :body, :position, :image, :teaser)
+    params
+      .require(:admin_blog_post)
+      .permit(
+        :title,
+        :body,
+        :position,
+        :image,
+        :teaser,
+        :subtitle,
+        :image
+      )
   end
 end

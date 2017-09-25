@@ -51,6 +51,7 @@ class Admin::PageColModulesController < AdminController
 
   # DELETE /page_col_modules/1
   def destroy
+    @page_col_module.moduleable.destroy
     @page_col_module.destroy
     redirect_to page_path
   end

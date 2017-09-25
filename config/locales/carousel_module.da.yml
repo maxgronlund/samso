@@ -2,8 +2,8 @@ da:
   activerecord:
     models:
       admin/carousel_module:
-        one: Karrusle sektion
-        other: Karrusle sektioner
+        one: Karrusel modul
+        other: Karrusel modul
     attributes:
       admin/carousel_module:
         name: Navn
@@ -14,4 +14,4 @@ da:
     edit_slides: Rediger billeder
 
   admin/carousel_module:
-    name: Karrusle modul
+    name: Karrusel modul

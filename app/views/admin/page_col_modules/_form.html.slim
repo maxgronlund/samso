@@ -7,4 +7,9 @@
       include_blank: false
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+    .pull-right
+      = link_to t('cancel'),
+        admin_page_path(@page_col.page),
+        class: 'btn btn-secondary'
+      '&nbsp;
+      = f.submit t('save'), class: 'btn btn-primary'

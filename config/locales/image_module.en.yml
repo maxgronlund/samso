@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      admin/image_module:
+        one: Image module
+        other: Image modules
+    attributes:
+      admin/image_module:
+        layout: Layout
+
+  image_module:
+    new: 'Nyt billed'
+    upload_image: 'Upload billed'
+
+  admin/image_module:
+    name: Billed modul

@@ -1,7 +1,17 @@
 .form-inputs
-  = f.input :title
-  = f.input :subtitle
-  = f.input :teaser
+  .row
+    .col-sm-8
+      = f.input :title
+  .row
+    .col-sm-4
+      = f.input :start_date
+    .col-sm-4
+      = f.input :end_date
+  .row
+    .col-sm-6
+      = f.input :subtitle
+    .col-sm-6
+      = f.input :teaser
   = f.input :body
   /= f.input :position
   = f.input :image, as: :file
@@ -18,3 +28,5 @@ javascript:
   $('.selector').froalaEditor({
     fontFamilySelection: true
   });
+
+

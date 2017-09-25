@@ -3,37 +3,47 @@
   = f.hidden_field :page_id, value: @page.id
   .row
     .col-sm-6
-      = f.input :active
-    .col-sm-6
-      = f.input :require_subscription
-  .row
-    .col-sm-6
-      = f.input :menu_title
-    .col-sm-6
-      = f.input :menu_position
-  .row
-    .col-sm-6
       = f.input :title
-      .row
-        .col-sm-6
-          
-          = f.label :body_background
-          = f.file_field :body_background
-        .col-sm-6
-          - unless @page.body_background_file_size.nil?
-            = image_tag(@page.body_background.url(:thumb))
-            br
-            = f.input :delete_body_background, as: :boolean
-      br
-    .col-sm-6
-      = f.input :menu_id,
-        collection: Page.menu_collection,
-        include_blank: false
-
+      
+      = f.input :body_background, as: :file
+      - unless @page.body_background_file_size.nil?
+          = image_tag(@page.body_background.url(:thumb))
+          br
+          = f.input :delete_body_background, as: :boolean
+      
+      = f.input :background_color,
+        hint: t('page.background_color.hint')
 
       = f.input :footer_id,
         collection: Admin::Footer.where(locale: I18n.locale)
 
-  = f.submit t('save'), class: 'btn btn-primary'
-  '&nbsp;
-  == link_to t('cancel'), admin_pages_path, class: 'btn btn-secondary'
+    .col-sm-6
+      = f.input :menu_title,
+        placeholder: 'leave blank to hide'
+      = f.input :menu_position
+
+      = f.input :menu_id,
+        collection: Page.menu_collection,
+        include_blank: false
+      = f.input :footer_id,
+        collection: Admin::Footer.where(locale: I18n.locale)
+      = f.input :active
+      = f.input :require_subscription
+
+
+      
+
+      
+
+
+  .row
+    .col-12
+      .pull-right
+        = link_to t('cancel'), admin_pages_path, class: 'btn btn-secondary'
+        '&nbsp;
+        = f.submit t('save'), class: 'btn btn-primary'
+
+
+
+
+

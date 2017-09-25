@@ -10,9 +10,7 @@ class Admin::PostModulesController < AdminController
   # PATCH/PUT /admin/post_modules/1.json
   def update
     if @post_module.update(post_module_params)
-      PageModule::Service
-        .new(@post_module)
-        .update_page_module(post_module_params)
+      @post_module.update_position(post_module_params[:position])
       redirect_to admin_page_path(@post_module.page)
     else
       format.html { render :edit }
