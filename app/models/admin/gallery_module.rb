@@ -25,7 +25,6 @@ class Admin::GalleryModule < ApplicationRecord
   end
 
   def next_page(request_path, current_page)
-    ap gallery_images_count
     page = current_page.to_i + 1
     return false if page * images_pr_page >= gallery_images_count
     "#{request_path}?page=#{page}"

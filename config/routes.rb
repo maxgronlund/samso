@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
     resources :admin, only: %i[index]
     resources :gallery_images, only: %i[show]
-    resources :blogs, only: [] do
+    resources :blogs, only: [:show] do
       resources :posts
     end
     # resources :blogs, only: [:show]

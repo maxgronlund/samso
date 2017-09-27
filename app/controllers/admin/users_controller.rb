@@ -87,13 +87,4 @@ class Admin::UsersController < AdminController
       roles_attributes: %i[permission id]
     )
   end
-
-  # def updated_params
-  #   params_copy = permitted_user_params.dup
-  #   if params_copy[:password].empty?
-  #     params_copy.delete :password
-  #     params_copy.delete :password_confirmation
-  #   end
-  #   params_copy
-  # end
 end

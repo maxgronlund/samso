@@ -27,7 +27,8 @@ class Admin::BlogModulesController < AdminController
     params.require(:admin_blog_module).permit(
       :layout,
       :position,
-      :post_page_id
+      :post_page_id,
+      :posts_pr_page
     )
   end
 end

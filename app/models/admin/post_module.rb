@@ -19,7 +19,9 @@ class Admin::PostModule < ApplicationRecord
   end
 
   def blog_module_page(blog_post_id)
-    blog_module = blog_post(blog_post_id).blog_module
+    blog_post = blog_post(blog_post_id)
+    return Page.first if blog_post.nil?
+    blog_module = blog_post.blog_module
     blog_module.page
   end
 

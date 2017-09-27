@@ -20,9 +20,9 @@ class GalleryImagesController < ApplicationController
   end
 
   def show
-    ap @gallery_image = Admin::GalleryImage.find(params[:id])
-    ap @page = @gallery_image.image_page
-    ap @landing_page = landing_page
+    @gallery_image = Admin::GalleryImage.find(params[:id])
+    @page = @gallery_image.image_page
+    @landing_page = landing_page
     render 'pages/show'
   end
 
