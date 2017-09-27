@@ -1,8 +1,17 @@
-= render 'shared/navbar', menu: @menu, top_page: @page
+/= render 'shared/navbar', menu: @menu, top_page: @page
 .container
   - if @invalid_token
   	| Invalid token
   - elsif @user
-    | Welcome
+    .alert.alert-success
+      h3 
+        = @user.name
+        ',&nbsp;
+        = Admin::SystemMessage.welcome.title
+      = Admin::SystemMessage.welcome.body
+      .row
+        .col-12.mt-8
+          .pull-right
+            = link_to t('get_started'), root_path, class: 'btn btn-secondary'
   - else
     | Invalid token

@@ -1,37 +1,49 @@
-class BlogPostsController < ApplicationController
+class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   # GET /admin/posts/1
   def show
     @blog_post = Admin::BlogPost.find(params[:id])
-    @page = @blog_post.post_page
+    @page      = @blog_post.post_page
     @landing_page = landing_page
+    if @page.require_subscription
+      unless current_user && current_user.access_to_subscribed_content?
+        store_page_in_session
+        @page = admin_system_setup.subscription_page
+      end
+    end
     render 'pages/show'
   end
 
   # GET /admin/posts/new
   def new
-    @blog = Admin::BlogModule.find(params[:blog_id])
-    @page = @blog.page
-    @post =
-      Admin::BlogPost.new(
+    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @blog_post =
+      @blog_module
+      .posts
+      .new(
         end_date: Time.zone.now + 1.year
       )
   end
 
   # GET /admin/posts/1/edit
   def edit
-    @post = Admin::BlogPost.find(params[:id])
-    @page = @post.page
+    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @blog_post = Admin::BlogPost.find(params[:id])
   end
 
   # POST /admin/posts
   def create
-    @blog = Admin::BlogModule.find(params[:blog_id])
-    @page = @blog.page
-    @post = @blog.posts.new(post_params)
-    if @post.save
-      redirect_to page_path(@page)
+    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @blog_post =
+      @blog_module
+      .posts
+      .new(
+        post_params
+      )
+
+    if @blog_post.save
+      redirect_to page_path(@blog_post.post_page)
     else
       render :new
     end
@@ -42,7 +54,8 @@ class BlogPostsController < ApplicationController
     if @post.update(post_params)
       redirect_to page_path(@post.page)
     else
-      format.html { render :edit }
+      @blog_module = Admin::BlogModule.find(params[:blog_id])
+      render :edit
     end
   end
 
@@ -60,6 +73,11 @@ class BlogPostsController < ApplicationController
     @post = Admin::BlogPost.find(params[:id])
   end
 
+   # store the page in a session so we can bounce to it after sign up / login
+  def store_page_in_session
+    ap session[:go_to_after_signup] = blog_post_path(@blog_post.blog, @blog_post)
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params
@@ -71,7 +89,8 @@ class BlogPostsController < ApplicationController
         :image,
         :teaser,
         :subtitle,
-        :image
+        :image,
+        :blog_module_id
       )
   end
 end

@@ -1,5 +1,6 @@
-
 - post_module = modulable
 h3 = post_module.title(params[:id])
-/= post.teaser
 = raw(post_module.body(params[:id]))
+.mt-18
+
+  = link_to t('back'), post_module.blog_module_page(params[:id]), class: 'btn btn-secondary'

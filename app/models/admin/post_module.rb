@@ -4,15 +4,23 @@ class Admin::PostModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
 
   def title(blog_post_id)
+    return 'No posts' unless blog_post(blog_post_id)
     blog_post(blog_post_id).title
   end
 
   def body(blog_post_id)
+    return '' unless blog_post(blog_post_id)
     blog_post(blog_post_id).body
   end
 
   def image_url(blog_post_id)
+    return '' unless blog_post(blog_post_id)
     blog_post(blog_post_id).image.url(:medium)
+  end
+
+  def blog_module_page(blog_post_id)
+    blog_module = blog_post(blog_post_id).blog_module
+    blog_module.page
   end
 
   private

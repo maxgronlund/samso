@@ -29,7 +29,7 @@ class Admin::PageColsController < AdminController
   # PATCH/PUT /page_cols/1
   def update
     if @page_col.update(page_col_params)
-      redirect_to @page_col, notice: 'Page col was successfully updated.'
+      redirect_to admin_page_path(@page_col.page)
     else
       render :edit
     end

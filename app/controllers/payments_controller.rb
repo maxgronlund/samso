@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
       session[:new_payment_path] = new_payment_path(
         subscription_type_id: params[:subscription_type_id]
       )
-      redirect_to new_user_registration_path
+      redirect_to new_session_path
     end
   end
 

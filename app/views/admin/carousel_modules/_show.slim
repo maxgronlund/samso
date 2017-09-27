@@ -1,23 +1,23 @@
-/ - if @admin_namespace
-/  = render 'carousel_modules/links', carousel_module: carousel_module, page: page
-
-= render 'carousel_modules/show', modulable: modulable
-- carousel_module = modulable
-
-.pb-10.pt-5
-  '&nbsp;
+.mt-10
   .pull-right
     .btn-group
       = link_to t('carousel_module.edit_slides'),
-        admin_carousel_module_path(carousel_module),
+        admin_carousel_module_path(modulable),
         class: 'btn btn-sm btn-secondary'
 
       = link_to t('edit'),
-        edit_admin_carousel_module_path(carousel_module),
+        edit_admin_carousel_module_path(modulable),
         class: 'btn btn-sm btn-secondary'
 
       = link_to t('delete'), 
-        admin_page_col_page_col_module_path( carousel_module.page_col, carousel_module.page_col_module),
+        admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
         data: { confirm: t('are_you_sure') },
         method: :delete,
         class: 'btn btn-danger btn-sm'
+.row
+  .col-sm-12
+    .mb-40
+= render 'carousel_modules/show', modulable: modulable
+br
+
+

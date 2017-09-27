@@ -33,11 +33,12 @@ class Admin::SubscriptionModulesController < AdminController
   # Never trust parameters from the scary internet, only allow the white list through.
   def subscription_module_params
     params.require(:admin_subscription_module).permit(
-      :name,
+      :title,
       :body,
       :layout,
       :position,
-      :slot_id
+      :expired_title,
+      :expired_body
     )
   end
 end

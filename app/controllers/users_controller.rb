@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    set_menu
+    @landing_page =  admin_system_setup.landing_page
     if current_user.nil?
       redirect_to new_session_path
     elsif @user.nil? || current_user != @user
@@ -23,6 +25,22 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    if session[:go_to_after_signup]
+      create_with_subscription
+    else
+      create_as_without_subscription
+    end
+  end
+
+  def create_with_subscription
+    if @user.save
+      redirect_to new_subscription_path
+    else
+      render :new
+    end
+  end
+
+  def create_as_without_subscription
     @user.reset_password_token = SecureRandom.hex(32)
     @user.reset_password_sent_at = Time.zone.now
     if @user.save
@@ -61,9 +79,8 @@ class UsersController < ApplicationController
   def user_params
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
-    User::Service.sanitize_email(sanitized_params)
+    #User::Service.sanitize_email(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
-
     sanitized_params
   end
 

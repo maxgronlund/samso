@@ -23,6 +23,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
   validates :email, uniqueness: true
   validates :email, presence: true
+  validates :name, presence: true
   validates_confirmation_of :password
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
@@ -63,11 +64,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url(size)
-    source = 'https://s3.eu-central-1.amazonaws.com' + avatar.url(size).gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/avatars/square/missing.png'
-      source = 'https://s3.eu-central-1.amazonaws.com/samso-files/users/avatars/missing/#{size.to_s}/missing.png'
-    end
-    source
+    avatar.url(size)
   end
 
   def access_to_subscribed_content?

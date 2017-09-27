@@ -12,6 +12,7 @@ da:
   blog_post:
     new: 'Nyt indlæg'
     edit: 'Rediger indlæg'
+    read_more: Læs mere
 
   admin/blog_post:
     name: Blog post modul

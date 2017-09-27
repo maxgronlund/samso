@@ -37,11 +37,12 @@ Rails.application.routes.draw do
 
     resources :admin, only: %i[index]
     resources :gallery_images, only: %i[show]
-    resources :blog, only: [] do
-      resources :posts, only: %i[new create]
+    resources :blogs, only: [] do
+      resources :posts
     end
-    resources :blogs, only: [:show]
-    resources :blog_posts, only: %i[show edit update destroy]
+    # resources :blogs, only: [:show]
+    # resources :blog_posts, only: %i[show edit update destroy]
+
     resources :confirm_signups, only: %i[show index]
     resources :gallery_modules, only: [] do
       resources :gallery_images

@@ -1,0 +1,11 @@
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h3.card-header = t('post.new')
+
+
+        .card-body
+          = simple_form_for [ @blog_module, @blog_post], multipart: true, url: url_for(action: 'update', controller: 'posts'), method: 'PUT' do |f|
+            = f.error_notification
+            = render 'form', f: f

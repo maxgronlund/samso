@@ -13,7 +13,7 @@
     .row
       .col-sm-6
         = f.input :layout
-        = f.association :page, collection: Page.active().where(locale: I18n.locale)
+        = f.association :page, collection: Page.where(locale: I18n.locale), include_blank: false
       .col-sm-6
         = f.input :position, as: :integer
         = f.input :images_pr_page

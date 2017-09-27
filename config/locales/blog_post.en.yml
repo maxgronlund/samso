@@ -12,6 +12,7 @@ en:
   blog_post:
     new: 'New post'
     edit: 'Edit post'
+    read_more: Read more
 
   admin/blog_post:
     name: Blog post module

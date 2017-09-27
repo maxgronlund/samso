@@ -4,7 +4,7 @@ class Admin::PagesController < AdminController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.where(locale: I18n.locale)
+    @pages = Page.order(:title).where(locale: I18n.locale)
   end
 
   # GET /pages/1

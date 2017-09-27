@@ -1,0 +1,13 @@
+.blog_post
+  = link_to blog_post_path(blog, post) do
+    h5 = post.title
+
+    = truncate(post.body, length: 125)
+.row
+  .col-12
+    .pull-right
+      .btn-group
+        - if editor?
+          = link_to t('edit'), edit_blog_post_path(blog, post), class: 'btn btn-secondary btn-sm'
+        = link_to t('blog_post.read_more'), blog_post_path(blog, post), class: 'btn btn-info btn-sm'
+hr

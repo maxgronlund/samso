@@ -1,6 +1,6 @@
 class GalleryImagesController < ApplicationController
   before_action :set_image, only: %i[edit update destroy]
-  before_action :set_gallery, only: %i[new create edit destroy]
+  before_action :set_gallery_module, only: %i[new create edit destroy]
 
     # GET /admin/gallery_images/new
   def new
@@ -20,9 +20,9 @@ class GalleryImagesController < ApplicationController
   end
 
   def show
-    @gallery_image = Admin::GalleryImage.find(params[:id])
-    @page = @gallery_image.image_page
-    @landing_page = landing_page
+    ap @gallery_image = Admin::GalleryImage.find(params[:id])
+    ap @page = @gallery_image.image_page
+    ap @landing_page = landing_page
     render 'pages/show'
   end
 
@@ -37,9 +37,8 @@ class GalleryImagesController < ApplicationController
 
   private
 
-  def set_gallery
+  def set_gallery_module
     @gallery = Admin::GalleryModule.find(params[:gallery_module_id])
-    @page    = @gallery.page
   end
 
   # Use callbacks to share common setup or constraints between actions.

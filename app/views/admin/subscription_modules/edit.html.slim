@@ -3,8 +3,10 @@ h3 = t('edit_model', model_name: @subscription_module.model_name.human)
   = f.error_notification
 
   .form-inputs
-    = f.input :name
+    = f.input :title
+    = f.input :expired_title
     = f.input :body
+    = f.input :expired_body
     = f.input :position, as: :integer
 
   .form-actions

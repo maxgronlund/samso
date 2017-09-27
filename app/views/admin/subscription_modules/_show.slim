@@ -1,6 +1,5 @@
-= render 'subscription_modules/show', modulable: modulable
 
-.mb-10
+.mt-10
   '&nbsp;
   .pull-right
     .btn-group
@@ -10,3 +9,5 @@
         data: { confirm: t('are_you_sure') },
         method: :delete,
         class: 'btn btn-danger btn-sm'
+
+= render 'subscription_modules/show', modulable: modulable

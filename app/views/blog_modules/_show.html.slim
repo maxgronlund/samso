@@ -1,2 +1,3 @@
 - blog_module = modulable
-= render "blog_modules/layouts/#{blog_module.layout}", blog_module: blog_module
+- blog_module.paginated_posts.each do |post|
+  = render 'blog_modules/simple_blog_post', blog: blog_module, post: post

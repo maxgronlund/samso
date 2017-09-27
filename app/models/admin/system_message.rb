@@ -1,7 +1,8 @@
 # System messages
 class Admin::SystemMessage < ApplicationRecord
   def self.welcome
-    Admin::SystemMessage
+    @welcome ||=
+      Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'welcome')
       .first_or_create(
         locale: I18n.locale,
@@ -11,7 +12,8 @@ class Admin::SystemMessage < ApplicationRecord
   end
 
   def self.resend_password
-    Admin::SystemMessage
+    @resend_password ||=
+      Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'resend_password')
       .first_or_create(
         locale: I18n.locale,
@@ -21,7 +23,8 @@ class Admin::SystemMessage < ApplicationRecord
   end
 
   def self.new_password_email
-    Admin::SystemMessage
+    @new_password_email ||=
+      Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'new_password_email')
       .first_or_create(
         locale: I18n.locale,
@@ -30,13 +33,29 @@ class Admin::SystemMessage < ApplicationRecord
       )
   end
 
-  def self.confirm_email_email
-    Admin::SystemMessage
-      .where(locale: I18n.locale, identifier: 'new_password_email')
+  # usage Admin::SystemMessage.confirm_email_email
+  def self.confirm_email
+    @confirm_email ||=
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'confirm_email')
       .first_or_create(
         locale: I18n.locale,
-        identifier: 'confirm_email_email',
-        title: 'confirm_email_email'
+        identifier: 'confirm_email',
+        title: 'Confirm email',
+        body: 'You will receive a confirmation email in within a few minutes'
+      )
+  end
+
+  # usage Admin::SystemMessage.confirm_email_email
+  def self.thanks_for_signing_up_email
+    @confirm_email ||=
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'thanks_for_signing_up_email')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'thanks_for_signing_up_email',
+        title: 'Thanks for signing up',
+        body: 'Please click on the link belove to confirm you email'
       )
   end
 end

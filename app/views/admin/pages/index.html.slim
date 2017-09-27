@@ -14,7 +14,7 @@ h3 = t('pages')
     tbody
       - @pages.each do |page|
         tr
-          td = page.title
+          td = link_to page.title, page
           td
             - unless page.menu_id == 'not_in_any_menus'
               = page.menu_position

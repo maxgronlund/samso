@@ -36,6 +36,7 @@ da:
   new_model: "Opret %{model_name}"
   edit_model: "Rediger %{model_name}"
   edit: Rediger
+  edit_module: Rediger modul
   save: Gem
   cancel: Fortryd
   delete: Slet
@@ -58,6 +59,8 @@ da:
   signed_in: Logget ind
   signed_out: Logged ud
   create_module: Opret modul
+  back: Tilbage
+  thanks_for_signing_up: Tak for at oprette en konto hos samsø posten
 
   activerecord:
     errors:

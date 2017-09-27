@@ -1,11 +1,4 @@
-- if modulable.show_to == 'all'
-  = render "text_modules/layouts/show", text_module: modulable
-- elsif modulable.show_to == 'members' && user_signed_in?
-  = render "text_modules/layouts/show", text_module: modulable
-- elsif modulable.show_to == 'guests' && !user_signed_in?
-  = render "text_modules/layouts/show", text_module: modulable
-
-.mb-10
+.mt-10
   '&nbsp;
   .pull-right
     .btn-group
@@ -15,3 +8,6 @@
         data: { confirm: t('are_you_sure') },
         method: :delete,
         class: 'btn btn-danger btn-sm'
+
+
+= render "text_modules/layouts/show", text_module: modulable

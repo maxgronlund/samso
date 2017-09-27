@@ -1,8 +1,9 @@
 - subscription_module = modulable
 
-h3 = subscription_module.name
-= subscription_module.body
+h3 = subscription_module.title
+= raw subscription_module.body
 hr
+
 = form_tag('/subscriptions', method: :post)
   - Admin::SubscriptionType.for_subscription.each_with_index do |subscription_type, index|
     = label_tag do
@@ -13,8 +14,10 @@ hr
 
       '&nbsp
       b = subscription_type.title
-      br = subscription_type.body
+    br = subscription_type.body
 
-    hr
-  = submit_tag "Fortsæt", class: "btn btn-primary"
-/ touched
+  .row
+    .col-12
+      .pull-right
+        = submit_tag "Fortsæt", class: "btn btn-primary"
+
