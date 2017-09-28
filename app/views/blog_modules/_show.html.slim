@@ -16,7 +16,7 @@
     .col-sm-6
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
-        = link_to t('user.search.show_all'), blog_path(blog_module), class: 'btn btn-outline-secondary'
+        = link_to t('user.search.show_all'), page_path(blog_module.page), class: 'btn btn-outline-secondary'
 
 
 - if user_signed_in?
@@ -30,8 +30,12 @@
 
 
 - if params[:search] && !params[:search].empty?
-  - blog_module.posts.search_by_title_or_body(params[:search]).each do |post|
-    = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
+  - found_posts = blog_module.posts.search_by_title_or_body(params[:search])
+  - if found_posts.empty?
+    'Nothing found
+  - else
+    - found_posts.each do |post|
+      = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
 - else
   - blog_module.paginated_posts(params[:page]).each do |post|
     = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
