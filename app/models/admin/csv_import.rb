@@ -15,10 +15,6 @@ class Admin::CsvImport < ApplicationRecord
   end
 
   def file_url
-    source = 'https://s3.eu-central-1.amazonaws.com' + csv_file.url.gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/avatars/square/missing.png'
-      source = 'https://s3.eu-central-1.amazonaws.com/samso-files/users/avatars/missing/#{size.to_s}/missing.png'
-    end
-    source
+    'https:' + csv_file.url
   end
 end

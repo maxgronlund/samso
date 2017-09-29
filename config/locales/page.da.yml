@@ -13,20 +13,23 @@ da:
         locale: Sprog
         user_id: Oprettet af
         require_subscription: Kun adgang for abonnenter
-        color_row_1: Farve 1
-        color_row_2: Farve 2
-        color_row_3: Farve 3
+        background_color: Baggrundsfarve
+        body_background: Baggrundsbilled
+        delete_body_background: Fjern baggrundsbilled
     models:
       page: Side
 
   pages: Sider
   page:
-    edit_content: Rediger inhold
+    edit_content: Rediger side
     add_content: Tilføj sektion
     section_types: Sektion typer
     show: Vis side
-    edit_layout: Side opsætning
+    edit_layout: Layout
     edit: Rediger side
     back: Tilbage til side
-    hint:
-      collor_format: "HEX #888888"
+    background_color:
+      hint: "Brug valide css værdier, f.eks. #888888"
+    menu:
+      not_in_any_menus: '-'
+      menu_bar: Menu bjælke

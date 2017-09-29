@@ -68,6 +68,14 @@ class Admin::BlogPostsController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_blog_post_params
-    params.require(:admin_blog_post).permit(:title, :body, :position, :teaser)
+    params
+      .require(:admin_blog_post)
+      .permit(
+        :title,
+        :subtitle,
+        :body,
+        :position,
+        :teaser
+      )
   end
 end

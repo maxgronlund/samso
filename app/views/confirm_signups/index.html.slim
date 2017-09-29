@@ -1,3 +1,13 @@
-= render 'shared/navbar', menu: @menu, top_page: @page
+/= render 'shared/navbar', menu: @menu, top_page: @page
 .container
-   |Please check your email for confirmation link
+  .row.justify-content-md-center
+    .col-sm-6
+      .alert.alert-success.pb-20
+        .row
+          .col-12
+            h5 = Admin::SystemMessage.confirm_email.title
+            = Admin::SystemMessage.confirm_email.body
+        .row
+          .col-12
+            .pull-right
+              = link_to t('back'), (session[:go_to_after_signup] || root_path), class: 'btn btn-secondary'

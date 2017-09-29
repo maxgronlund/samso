@@ -1,0 +1,15 @@
+
+. style=("color: #{text_module.color}")
+  - if text_module.image?
+    = render 'text_modules/layouts/image', text_module: text_module
+
+  .mb-15
+
+  h4 style=("#{text_module.title_style}")
+    = text_module.title_style
+    = text_module.title
+  .justify
+    = raw(text_module.body)
+
+  - if text_module.link_with_text?
+    = render 'text_modules/layouts/link', text_module: text_module

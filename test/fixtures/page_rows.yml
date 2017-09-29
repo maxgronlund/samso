@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  page: one
+  layout: row
+  padding_top: 10
+  position: 0
+
+two:
+  page: two
+  layout: row
+  padding_top: 20
+  position: 10

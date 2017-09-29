@@ -1,15 +1,8 @@
 # Module for carousel
 class Admin::CarouselModule < ApplicationRecord
-  include SectionPlugin
-
+  include PageColConcerns
+  has_many :page_col_modules, as: :moduleable
   has_many :slides, class_name: 'Admin::CarouselSlide', dependent: :destroy
-
-  def page_module
-    PageModule.find_by(
-      moduleable_type: 'Admin::CarouselModule',
-      moduleable_id: id
-    )
-  end
 
   def self.image_sizes
     [

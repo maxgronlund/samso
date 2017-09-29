@@ -11,10 +11,9 @@
 // about supported directives.
 //
 
-//= require tether.min
+
 //= require jquery3
 //= require bootstrap
 //= require turbolinks
-//= require carousel
 //= require rails-ujs
 //= require jquery.fancybox

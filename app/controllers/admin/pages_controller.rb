@@ -4,7 +4,7 @@ class Admin::PagesController < AdminController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.where(locale: I18n.locale)
+    @pages = Page.order(:title).where(locale: I18n.locale)
   end
 
   # GET /pages/1
@@ -61,7 +61,6 @@ class Admin::PagesController < AdminController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  # rubocop:disable Metrics/MethodLength
   def page_params
     params.require(:page).permit(
       :title,
@@ -71,21 +70,11 @@ class Admin::PagesController < AdminController
       :active,
       :locale,
       :user_id,
-      :layout,
       :require_subscription,
       :footer_id,
-      :color_row_1,
-      :height_row_1,
-      :row_1_background,
-      :delete_row_1_background,
-      :color_row_2,
-      :height_row_2,
-      :row_2_background,
-      :delete_row_2_background,
-      :color_row_3,
-      :height_row_3,
-      :row_3_background,
-      :delete_row_3_background
+      :body_background,
+      :delete_body_background,
+      :background_color
     )
   end
 end

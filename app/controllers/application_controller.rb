@@ -52,6 +52,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :admin_system_setup
 
+  def landing_page
+    @landing_page ||= admin_system_setup.landing_page
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -59,6 +63,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_default_page
+    @body_style = ''
     @page ||= admin_system_setup.landing_page
   end
 

@@ -1,0 +1,23 @@
+da:
+  activerecord:
+    errors:
+      models:
+        page_row: Række
+    attributes:
+      page_row:
+        padding_top: Padding top
+        padding_bottom: Padding bund
+        background_image: Baggrunds billed
+        delete_background_image: Slet baggrunds billed
+        background_color: Baggrunds farve
+        layout: Expert indstilling
+    models:
+      page_row: Række
+
+  page_row: Rækker
+
+  page_row:
+    new: Opret række
+    edit: Rediger række
+    nr_cols: Kolonner
+    layout_hint: Ret kun hvis du ved hvad du gør

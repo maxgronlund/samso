@@ -1,0 +1,25 @@
+h1 Listing page_rows
+
+table
+  thead
+    tr
+      th Page
+      th Name
+      th Type
+      th
+      th
+      th
+
+  tbody
+    - @page_rows.each do |page_row|
+      tr
+        td = page_row.page
+        td = page_row.name
+        td = page_row.type
+        td = link_to 'Show', page_row
+        td = link_to 'Edit', edit_page_row_path(page_row)
+        td = link_to 'Destroy', page_row, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Page row', new_page_row_path

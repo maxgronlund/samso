@@ -1,0 +1,16 @@
+da:
+  activerecord:
+    models:
+      admin/image_module:
+        one: Billede modul
+        other: Billed moduler
+    attributes:
+      admin/image_module:
+        name: Navn
+        
+  image_module:
+    new: 'Nyt billed'
+    upload_immage: 'Upload billed'
+
+  admin/image_module:
+    name: Galleri billed modul

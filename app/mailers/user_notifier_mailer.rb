@@ -1,17 +1,23 @@
 # notifications to users
 class UserNotifierMailer < ApplicationMailer
   default from: 'max@example.com'
+  layout 'user_notifier_mailer'
 
   # send a signup email to the user, pass in the user object that
   # contains the user's email address
+  # usage UserNotifierMailer.send_signup_email(5).deliver_now
   def send_signup_email(user_id)
-    @user = User.find_by(id: user_id)
+    ap @user = User.find_by(id: user_id)
     return if @user.nil?
     @token = @user.reset_password_token
     @name = @user.name
+    message = Admin::SystemMessage.thanks_for_signing_up_email
+    @title  = message.title
+    @body = message.body
+    @link = confirm_signup_url(I18n.locale, @token)
     mail(
       to: @user.email,
-      subject: 'Thanks for signing up for our amazing app'
+      subject: I18n.t('thanks_for_signing_up')
     )
   end
 
@@ -28,4 +34,4 @@ class UserNotifierMailer < ApplicationMailer
       subject: @message.title
     )
   end
-end
+end 

@@ -1,30 +1,31 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
 .container.pt-60
-  .row.justify-content-center
-    .col-lg-4.col-sm-8.col-xs-9
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
       .card
-        .card-header
-           h2 = t('.login')
+        h4.card-header = t('.login')
 
-        .card-block
+        .card-body
+          / h4.card-title Special title treatment
+          / p.card-text With supporting text below as a natural lead-in to additional content.
+
           = form_tag sessions_path, method: 'post' do |f|
             - unless flash.alert.nil?
               .alert.alert-danger
                 = flash.alert
             .form-inputs
-							= label_tag :email
-							br
-							= text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
-							br
-							= label_tag :password
-							br
-							= password_field_tag :password, '', class: 'form-control' 
-							br
+              = label_tag :email
+              br
+              = text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
+              br
+              = label_tag :password
+              br
+              = password_field_tag :password, '', class: 'form-control' 
+              br
             .form-actions
-            	.pull-right
-								= submit_tag 'Log In', class: 'btn btn-primary'
+              .pull-right
+                = submit_tag 'Log In', class: 'btn btn-primary'
 
-				= link_to t('forgot_password'), reset_password_index_path
-				br
-				= link_to t('signup'), new_user_path
-
-         
+          = link_to t('forgot_password'), reset_password_index_path
+          br
+          = link_to t('signup'), new_user_path

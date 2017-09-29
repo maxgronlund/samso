@@ -1,4 +1,5 @@
 # namespace to confine service class to Admin:BlogPost::Import
+# rubocop:disable Metrics/ClassLength
 class Admin::BlogPost < ApplicationRecord
   require 'csv'
   require 'cgi'
@@ -51,48 +52,76 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def import_blog_post(options = {})
-      ap options
-      # page        = setup_page(options)
-      # blog_module = setup_blog_module(page, options)
-      # blog_module.blog_posts.new
-      # ap blog_module_id(options)
+      page        = setup_page(options)
+      blog_module = setup_blog_module(options)
+      setup_page_module(page, blog_module)
+      post = setup_blog_post(blog_module, options)
+      attach_image(post, options)
     end
 
-    # def blog_module_id(options = {})
-    #   blog_module_options = {
-    #     page_id: page_id(options)
-    #   }
-    #   # BlogModule.wherepage_id(options)
-    # end
+    def setup_blog_post(blog_module, options = {})
+      params = {
+        title: options[:titel],
+        subtitle: options[:trompet],
+        teaser: options[:manchet],
+        body: options[:body],
+        start_date: options[:startdato],
+        end_date: options[:slutdato]
+      }
 
-    # def setup_page(options = {})
-    #   page_options = {
-    #     title: options[:topstory],
-    #     locale: 'da'
-    #   }
-    #   page = Page.first_or_initialize(page_options)
-    #   initialize_page(page)
-    # end
+      blog_module.posts.where(
+        params
+      ).first_or_create(
+        params
+      )
+    end
 
-    # def setup_blog_module(page, options = {})
-    #   blog_module_options = {
-    #     name: options[:topstory]
-    #   }
-    #   blog_module
-    #     .where(blog_module_options)
-    #     .first_or_initialize(blog_module_options)
-    # end
+    def attach_image(post, options = {})
+      image_1_url = 'http://samso.dk/'
+      image_1_url += options[:pix_mappe]
+      image_1_url += options[:pix]
+      image_1_url.delete(' ')
+      return if image_1_url == 'http://samso.dk/'
+      post.image = URI.parse(image_1_url)
+      post.save
+    end
 
-    # def initialize_page(page)
-    #   return page if page.persisted?
-    #   page.layout = 'arkansans'
-    #   page.menu_id = 'Ingen'
-    #   page.menu_position = Page.last.id * 10
-    #   page.active = false
-    #   page.user_id = @current_user.id
-    #   page.require_subscription = true
-    #   page.save
-    #   page
-    # end
+    def last_blog_post_possition(blog_module)
+      return 100 if blog_module.blog_posts.empty?
+      blog_module.blog_posts.count * 100 + 100
+    end
+
+    def setup_page(options = {})
+      params = {
+        title: options[:topstory],
+        locale: 'da',
+        user_id: User.super_admin.id,
+        layout: 'arkansas'
+      }
+      Page
+        .where(params)
+        .first_or_create(params)
+    end
+
+    def setup_blog_module(options = {})
+      params = {
+        name: options[:topstory]
+      }
+      Admin::BlogModule
+        .where(params)
+        .first_or_create(params)
+    end
+
+    def setup_page_module(page, blog_module)
+      params = {
+        page_id: page.id,
+        moduleable_type: blog_module.class.name,
+        moduleable_id: blog_module.id,
+        slot_id: 200
+      }
+      PageModule
+        .where(params)
+        .first_or_create(params)
+    end
   end
 end

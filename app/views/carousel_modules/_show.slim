@@ -1,6 +1,6 @@
-- if @admin_namespace
-  = render 'carousel_modules/links', carousel_module: carousel_module, page: page
-
+/ - if @admin_namespace
+/  = render 'carousel_modules/links', carousel_module: carousel_module, page: page
+- carousel_module = modulable
 #carouselExampleIndicators data-ride="carousel" class="carousel slide #{dom_id(carousel_module)}"
   ol.carousel-indicators
     - carousel_module.slides.order(:position).each_with_index do |slide, index|
@@ -9,7 +9,7 @@
   .carousel-inner role="listbox"
     - carousel_module.slides.order(:position).each_with_index do |slide, index|
       div class="#{index == 0 ? 'carousel-item active' : 'carousel-item'}"
-        = image_tag(slide.image_url(carousel_module.layout.to_sym), class: 'img-fluid')
+        = image_tag(slide.image_url, class: 'img-fluid')
         .carousel-caption.d-none.d-md-block
           - if slide.page
             = link_to page_path(slide.page)

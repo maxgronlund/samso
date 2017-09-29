@@ -1,6 +1,7 @@
 # show weather from DMI
 class Admin::DmiModule < ApplicationRecord
-  include SectionPlugin
+  has_many :page_col_modules, as: :moduleable
+  include PageColConcerns
 
   def page_module
     PageModule.find_by(

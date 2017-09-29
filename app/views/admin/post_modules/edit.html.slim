@@ -3,9 +3,10 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :position, as: :integer
-    = f.input :slot_id, as: :integer
+    .row
+      .col-sm-4
+        = f.input :name
+        = f.input :position, as: :integer
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

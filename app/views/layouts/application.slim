@@ -7,16 +7,18 @@ html
 
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/css/froala_editor.min.css'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/css/froala_style.min.css'
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag  "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700"
 
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/js/froala_editor.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/js/plugins/paragraph_format.min.js'
 
     meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"
 
-  body
+  body style="#{@body_style}"
     = yield
     /= render 'shared/login_links'
 

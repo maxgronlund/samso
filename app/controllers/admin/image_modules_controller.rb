@@ -8,9 +8,7 @@ class Admin::ImageModulesController < AdminController
   # PATCH/PUT /admin/image_modules/1
   def update
     if @admin_image_module.update(admin_image_module_params)
-      PageModule::Service
-        .new(@admin_image_module)
-        .update_page_module(admin_image_module_params)
+      @admin_image_module.update_position(admin_image_module_params[:position])
       redirect_to admin_page_path(@admin_image_module.page)
     else
       render :edit

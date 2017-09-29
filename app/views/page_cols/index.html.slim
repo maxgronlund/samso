@@ -1,0 +1,23 @@
+h1 Listing page_cols
+
+table
+  thead
+    tr
+      th Page row
+      th Layout
+      th
+      th
+      th
+
+  tbody
+    - @page_cols.each do |page_col|
+      tr
+        td = page_col.page_row
+        td = page_col.layout
+        td = link_to 'Show', page_col
+        td = link_to 'Edit', edit_page_col_path(page_col)
+        td = link_to 'Destroy', page_col, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Page col', new_page_col_path

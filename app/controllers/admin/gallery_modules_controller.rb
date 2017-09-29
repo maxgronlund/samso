@@ -9,9 +9,7 @@ class Admin::GalleryModulesController < AdminController
   # PATCH/PUT /admin/gallery_modules/1.json
   def update
     if @admin_gallery_module.update(admin_gallery_module_params)
-      PageModule::Service
-        .new(@admin_gallery_module)
-        .update_page_module(admin_gallery_module_params)
+      @admin_gallery_module.update_position(admin_gallery_module_params[:position])
       redirect_to admin_page_path(@admin_gallery_module.page)
     else
       render :edit
@@ -33,7 +31,7 @@ class Admin::GalleryModulesController < AdminController
       :page_id,
       :layout,
       :position,
-      :slot_id
+      :images_pr_page
     )
   end
 end

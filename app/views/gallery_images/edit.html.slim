@@ -1,7 +1,11 @@
-= render 'shared/navbar', menu: @menu, top_page: @page
-.container.mt-80
-  h3 = t('gallery_image.edit')
+/ = render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-6
+      .card
+        h3.card-header = t('gallery_image.edit')
+        .card-body
+          = simple_form_for [ @gallery, @image], multipart: true, url: url_for(action: 'update', controller: 'gallery_images'), method: 'PATCH' do |f|
+            = f.error_notification
+            == render 'form', f: f
 
-  = simple_form_for [ @gallery, @image], multipart: true, url: url_for(action: 'update', controller: 'gallery_images'), method: 'PATCH' do |f|
-    = f.error_notification
-    == render 'form', f: f

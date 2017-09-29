@@ -1,0 +1,18 @@
+h3 = t('new_model', model_name: @page_row.model_name.human)
+
+= simple_form_for [:admin, @page, @page_row], multipart: true  do |f|
+  == render 'form', f: f, page_row: @page_row
+  = f.label 'Preset'
+  = f.collection_radio_buttons(:preset, PageRow::PRESETS,
+   :first, :last,
+   :item_wrapper_class => 'horizontal',
+   ) { |layout| layout.label { image_tag("#{layout.text}.png") + layout.radio_button } }
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+    '&nbsp
+    = link_to t('cancel'), admin_page_path(@page_row.page), class: 'btn btn-secondary'
+
+
+
+/= link_to 'Back', page_rows_path

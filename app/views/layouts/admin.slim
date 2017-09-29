@@ -8,6 +8,7 @@ html
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/css/froala_style.min.css'
 
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/js/froala_editor.pkgd.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/js/plugins/paragraph_format.min.js'
 
@@ -24,3 +25,5 @@ html
               = notice
           = yield
         = render 'admin/shared/footer'
+
+  

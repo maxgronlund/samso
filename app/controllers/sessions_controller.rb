@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def new
+    set_menu
+    @landing_page = admin_system_setup.landing_page
     params[:email] = session_params[:email]
   end
 
@@ -12,6 +14,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       signin_user(user)
     else
+      set_menu
+      @landing_page = admin_system_setup.landing_page
       flash.now.alert = t('invalid_email_or_password')
       render 'new'
     end

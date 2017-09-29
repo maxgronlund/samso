@@ -1,0 +1,23 @@
+.mt-10
+  .pull-right
+    .btn-group
+      = link_to t('carousel_module.edit_slides'),
+        admin_carousel_module_path(modulable),
+        class: 'btn btn-sm btn-secondary'
+
+      = link_to t('edit'),
+        edit_admin_carousel_module_path(modulable),
+        class: 'btn btn-sm btn-secondary'
+
+      = link_to t('delete'), 
+        admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
+        data: { confirm: t('are_you_sure') },
+        method: :delete,
+        class: 'btn btn-danger btn-sm'
+.row
+  .col-sm-12
+    .mb-40
+= render 'carousel_modules/show', modulable: modulable
+br
+
+

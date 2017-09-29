@@ -72,3 +72,15 @@ rails g controller session new  --no-helper --no-assets --no-controller-specs
 rails g controller reset_passwords index --no-helper --no-assets --no-controller-specs
 
 rails g scaffold admin/system_messages title body:text identifier locale --no-helper --no-assets --no-controller-specs
+
+rails g scaffold page_row page:belongs_to name type --no-helper --no-assets --no-controller-specs
+rails g migration add_background_image_to_page_rows 
+add_attachment :page_row, :body_background
+
+rails g scaffold page_col page_row:belongs_to layout --no-helper --no-assets --no-controller-specs
+
+
+
+rails g scaffold PageColModule page_col:belongs_to moduleable:references{polymorphic} position:integer --no-helper --no-assets --no-controller-specs
+
+rails g model admin/module_names name

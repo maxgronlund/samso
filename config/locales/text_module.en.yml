@@ -1,18 +1,42 @@
 en:
   activerecord:
     attributes:
-      text_section:
-        title: Title
+      admin/text_module:
+        title: Headline
         layout: Layout
+        show_to: When to show
+        url: Link
+        url_text: Name on link
+        page_id: Link to page
+        image_size: Image aspect ratio
+        image_style: Image layout
+        link_layout: Link layout
+        background_color: Background color
+        color: Text color
 
     models:
-      text_module: Text section
+      text_module: Text module
 
-  text_module:
+  admin/text_module:
+    name: Texst module
     hints:
       title: As shown on the index page
-      image: Only shown if the selected layout supports it
-      url: Immage / Link / Button uses this url
-      url_text: Text for link / button, not shown if field is left blank
+      image: Optional
+      url: Image / Link / Button uses this link
+      url_text: Text on link
     placeholders:
       url: http://samso.dk
+    show_to:
+      all: Always
+      guests:  Only when not logged in
+      members: Only when logged in
+    full_width: To the edge
+    bordered: With border
+    circle: Circle
+    link_layouts:
+      text_left: Text left alligned
+      text_center: Text Center alligned
+      text_right: Text Right alligned
+      button_left: Button left
+      button_center: Button center
+      button_right: Button right

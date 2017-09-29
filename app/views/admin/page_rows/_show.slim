@@ -1,0 +1,20 @@
+.full-row style="#{page_row.style}"
+  .container
+    div class="#{page_row.layout}"
+      .module-admin-header
+        'position: 
+        = page_row.position
+        .pull-right
+          .btn-group
+            = link_to t('page_row.edit'),
+              edit_admin_page_page_row_path(page_row.page, page_row),
+              class: 'btn btn-secondary btn-sm'
+            
+            = link_to t('delete'),
+              admin_page_page_row_path(page_row.page, page_row),
+              data: { confirm: t('are_you_sure') },
+              method: :delete,
+              class: 'btn btn-danger btn-sm'
+
+      - page_row.ordered_page_cols.each do |page_col|
+        = render 'admin/page_cols/show', page_col: page_col

@@ -1,0 +1,18 @@
+h3 = t('edit_model', model_name: @page_row.model_name.human)
+
+= simple_form_for [:admin, @page, @page_row], multipart: true  do |f|
+  == render 'form', f: f, page_row: @page_row
+  = f.input :nr_cols,
+    as: :integer,
+    label: t('page_row.nr_cols'),
+    input_html: {value: @page_row.page_cols_count}
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+    '&nbsp
+    = link_to t('cancel'), admin_page_path(@page_row.page), class: 'btn btn-secondary'
+
+
+
+
+

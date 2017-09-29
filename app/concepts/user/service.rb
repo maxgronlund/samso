@@ -28,6 +28,7 @@ class User < ApplicationRecord
 
     def invalid_token
       @user.nil? ||
+        @user.reset_password_sent_at.nil? ||
         @user.reset_password_token.nil? ||
         @user.reset_password_sent_at < Time.zone.now - 2.days
     end

@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      admin/gallery_image:
+        one: Galleri module
+        other: Galleri modules
+    attributes:
+      admin/gallery_image:
+        name: Name
+        body: Description
+        layout: Layout
+
+  gallery_image:
+    new: New immage
+    back_to_slides: Back to immages
+    upload_immage: Uploade immage
+
+  admin/gallery_image:
+    name: Image modul

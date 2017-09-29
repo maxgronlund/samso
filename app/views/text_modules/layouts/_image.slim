@@ -1,0 +1,7 @@
+  - case text_module.image_style
+  - when 'circle'
+    = render 'text_modules/layouts/round_image', text_module: text_module
+  - when 'full-width'
+    = render 'text_modules/layouts/full_width_image', text_module: text_module
+  - when 'bordered'
+    = render 'text_modules/layouts/bordered_image', text_module: text_module

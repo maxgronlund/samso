@@ -1,6 +1,6 @@
 # Image for the gallery
 class Admin::GalleryImage < ApplicationRecord
-  belongs_to :gallery_module, class_name: 'Admin::GalleryModule'
+  belongs_to :gallery_module, class_name: 'Admin::GalleryModule', counter_cache: true
   belongs_to :user
 
   has_attached_file :image, styles: {
@@ -14,11 +14,7 @@ class Admin::GalleryImage < ApplicationRecord
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
   def image_url(size)
-    source = 'https://s3.eu-central-1.amazonaws.com' + image.url(size).gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/image/square/missing.png'
-      source = 'https://s3.eu-central-1.amazonaws.com/samso-files/admin_gellery_images/images/missing/#{size.to_s}/missing.png'
-    end
-    source
+    image.url(size)
   end
 
   def page
@@ -27,5 +23,9 @@ class Admin::GalleryImage < ApplicationRecord
 
   def user_name
     user ? user.name : ''
+  end
+
+  def image_page
+    gallery_module.show_on_page
   end
 end

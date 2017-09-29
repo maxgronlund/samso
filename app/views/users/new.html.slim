@@ -1,8 +1,14 @@
-= render 'shared/navbar', menu: @menu, top_page: @page
-.container.pt-70
-  p#notice = notice
-  h1 New user
+/ = render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header = t('.new')
 
-  == render 'form'
+        .card-body
+          = render 'form'
+          = link_to t('forgot_password'), reset_password_index_path
+          br
+          /= link_to t('signup'), new_user_path
 
-  = link_to t('back'), users_path
+

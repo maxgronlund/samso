@@ -1,47 +1,23 @@
+
 .row
   .col-sm-8
-    h3 = t('page.edit_content')
+    h3 
+      = t('edit')
+      '&nbsp:&nbsp;
+      = @page.title
   .col-sm-4
     .edit-page-links
       = link_to t('page.show'), page_path(@page)
       '  |
       = link_to t('page.edit_layout'), edit_admin_page_path(@page)
 
-hr
-= render 'pages/show', page: @page
-.table-responsive
-  table.table.table-striped.table-bordered.table-hover
-    table.table.table-striped.table-bordered.table-hover.table-sm
-      thead.thead-inverse
-        tr
-          th Module name
-          th Slot id
-          th
+. style="#{@page.body_style}"
+  - @page.ordered_page_rows.each do |page_row|
+    = render 'admin/page_rows/show', page_row: page_row
 
-      - @page.page_modules.each do |page_module|
-        tbody
-          tr
-            td = page_module.moduleable.class.name
-            td = page_module.slot_id
-            td
-              .float-right
-                - case page_module.moduleable.class.name
-                - when 'TextModule'
-                  = link_to t('edit'),
-                    edit_admin_page_text_module_path(@page, page_module.moduleable)
-                - when 'Admin::CarouselModule'
-                  = link_to t('edit'),
-                    edit_admin_page_carousel_module_path(@page, page_module.moduleable)
-                -when 'Admin::SubscriptionModule'
-                  = link_to t('edit'),
-                    edit_admin_page_subscription_module_path(@page, page_module.moduleable)
-                -when 'Admin::BlogModule'
-                  = link_to t('edit'),
-                    edit_admin_page_blog_module_path(@page, page_module.moduleable)
-                -when 'Admin::PostModule'
-                  = link_to t('edit'),
-                    edit_admin_page_post_module_path(@page, page_module.moduleable)
-                -when 'Admin::GalleryModule'
-                  = link_to t('edit'),
-                    edit_admin_page_gallery_module_path(@page, page_module.moduleable)
+.container
+  .row.mt-10
+    .col-sm-12
+      .pull-right
+        = link_to t('page_row.new'), new_admin_page_page_row_path(@page), class: 'btn btn-primary'
 

@@ -1,89 +1,71 @@
 h3 = t('edit_model', model_name: @text_module.model_name.human)
-= simple_form_for [:admin, @page, @text_module], multipart: true do |f|
+= simple_form_for [@text_module], multipart: true do |f|
   = f.error_notification
   .row
     .col-sm-6
-      = f.input :layout,
-        collection: TextModule::LAYOUTS,
-        include_blank: false
-
-      = f.input :position, as: :integer
-
       = label_tag 'billed'
       = f.input :image,
         label: false,
-        hint: t('text_module.hints.image')
+        hint: t('admin/text_module.hints.image')
+        
+      = f.input :image_style,
+        collection: Admin::TextModule.image_styles,
+        include_blank: false
 
-      = f.input :image_size,
-        collection: TextModule::image_sizes,
+      = f.input :image_ratio,
+        collection: Admin::TextModule::image_ratio,
         include_blank: false
 
       = f.input :show_to,
-        collection: TextModule::show_to,
+        collection: Admin::TextModule::show_to,
         include_blank: false
 
+      = f.input :border
+
     .col-sm-6
-      = f.input :slot_id, as: :integer
-      = f.association :page, collection: Page.active().where(locale: I18n.locale)
-      = f.input :url,
-        hint: t('text_module.hints.url'),
-        placeholder: t('text_module.placeholders.url')
-      = f.input :url_text,
-        hint: t('text_module.hints.url_text')
+      .row
+        .col-sm-6
+          = f.input :page_id, collection: Page.active().where(locale: I18n.locale)
+        .col-sm-6
+          = f.input :url,
+            placeholder: t('admin/text_module.placeholders.url')
+      .row
+        .col-sm-6
+          = f.input :url_text
+
+        .col-sm-6
+          = f.input :link_layout,
+            collection: Admin::TextModule::link_layouts,
+            include_blank: false
+
       .row
         .col-sm-6
           = f.input :color
         .col-sm-6
           = f.input :background_color
+      .row
+        .col-sm-6
+          = f.input :position, value: @text_module.position
+        .col-sm-6
 
   .row
     .col-sm-12
-      = f.input :title,
-        hint: t('text_module.hints.title')
+      = f.input :title
+
       = f.input :body,
         label: false
+  .row
+    .col-12
+      .pull-right
+        = f.submit t('save'), class: 'btn btn-primary'
+        '&nbsp
+        = link_to t('cancel'), admin_page_path(@page), class: 'btn btn-secondary'
 
-  = f.submit t('save'), class: 'btn btn-primary'
-  '&nbsp
-  = link_to t('cancel'), admin_page_path(@page), class: 'btn btn-secondary'
-
-hr
-h4 Layouts
-.row.mb-20
-  .col-sm-4
-    .module-admin-header
-      .layout
-        strong alfa-romeo
-        '&nbsp;1-8 coll
-    = image_tag('text_module/alfa-romeo.png', class: "img-fluid")
-  .col-sm-4
-    .module-admin-header
-      .layout
-        strong aston-martin
-        '&nbsp; 3 coll
-    = image_tag('text_module/aston-martin.png', class: "img-fluid")
-  .col-sm-4
-    .module-admin-header
-      .layout
-        strong audi
-        '&nbsp; 3 coll
-    = image_tag('text_module/audi.png', class: "img-fluid")
-
-
-.row.mb-20
-  .col-sm-6
-    .module-admin-header
-      .layout
-        strong bmw
-        '&nbsp;6-8 coll
-    = image_tag('text_module/bmw.png', class: "img-fluid")
-= image_tag('text_module/fiat.png', class: "img-fluid")
 
 / toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
 javascript:
-
   $(function() {
-    $('#text_module_body').froalaEditor(
+    $('#admin_text_module_body').froalaEditor(
       {
         toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
       }

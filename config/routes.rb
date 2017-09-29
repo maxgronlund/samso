@@ -1,42 +1,53 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
-      resources :carousel_modules, only: [] do
+      resources :carousel_modules, only: %i[edit update show] do
         resources :carousel_slides
       end
       resources :csv_imports do
         resources :parse_csv, only: %i[new]
       end
-      resources :footers
-      resources :pages do
-        resources :blog_modules, only: %i[edit update] do
-          resources :blog_posts, only: %i[edit update new create]
-        end
-        resources :carousel_modules, only: %i[edit update show]
-        resources :dmi_modules, only: %i[edit update]
-        resources :gallery_modules, only: %i[edit update]
-        resources :image_modules, only: %i[edit update]
-        resources :post_modules, only: %i[edit update]
-        resources :page_modules, only: %i[new create destroy]
-        resources :subscription_modules, only: %i[edit update]
-        resources :text_modules, only: %i[edit update]
+      resources :blog_modules, only: %i[edit update] do
+        resources :blog_posts, only: %i[edit update new create]
       end
+      resources :dmi_modules, only: %i[edit update]
+
+      resources :footers
+      resources :gallery_images, only: %i[edit update]
+      resources :gallery_modules, only: %i[edit update]
+      resources :image_modules, only: %i[edit update]
+      resources :pages do
+        resources :page_rows
+      end
+      resources :page_rows do
+        resources :page_cols
+      end
+      resources :page_cols, only: [] do
+        resources :page_col_modules
+      end
+      resources :post_modules, only: %i[edit update]
       resources :subscriptions
+      resources :subscription_modules, only: %i[edit update]
       resources :subscription_types
       resources :system_messages, only: %i[index edit update]
       resources :system_setups, only: %i[edit update]
+      resources :text_modules
       resources :users
     end
 
     resources :admin, only: %i[index]
-    resources :blog, only: [] do
-      resources :posts, only: %i[new create]
+    resources :gallery_images, only: %i[show]
+    resources :blogs, only: [:show] do
+      resources :posts
     end
+    # resources :blogs, only: [:show]
+    # resources :blog_posts, only: %i[show edit update destroy]
+
     resources :confirm_signups, only: %i[show index]
     resources :gallery_modules, only: [] do
       resources :gallery_images
     end
-    resources :posts, only: %i[show edit update destroy]
+    
     resources :reset_password, except: %i[destroy]
     resources :pages, only: %i[show]
     resources :payments

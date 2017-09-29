@@ -2,12 +2,16 @@ da:
   activerecord:
     models:
       admin/carousel_module:
-        one: Karrusle sektion
-        other: Karrusle sektioner
+        one: Karrusel modul
+        other: Karrusel modul
     attributes:
       admin/carousel_module:
         name: Navn
 
   carousel_module:
-    edit: 'Redig layout'
-    back_to_slides: 'Tilbage til slides'
+    edit: Redig layout
+    back_to_slides: Tilbage til slides
+    edit_slides: Rediger billeder
+
+  admin/carousel_module:
+    name: Karrusel modul

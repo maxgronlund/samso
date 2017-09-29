@@ -5,9 +5,11 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :slot_id, as: :integer
-    = f.input :position, as: :integer
-    = f.input :forecast_duration,
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+      .col-sm-3
+        = f.input :forecast_duration,
       collection: Admin::DmiModule.forecasts,
       include_blank: false
 

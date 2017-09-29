@@ -1,16 +1,15 @@
 = simple_form_for [@user], multipart: true do |f|
   = f.error_notification
+  
   .form-inputs
-  	.row
-			.col-sm-6
-			  = f.input :name
-			  = f.input :email
-			.col-sm-6
-				= f.input :password, placeholder: '••••••••'
-				= f.input :password_confirmation, placeholder: '••••••••'
 
-    = f.label :avatar
-    = f.file_field :avatar
+    = f.input :name
+    = f.input :email
+
+    = f.input :password, placeholder: '••••••••'
+    = f.input :password_confirmation, placeholder: '••••••••'
+    = f.input :avatar, as: :file
 
   .form-actions
-    = f.button :submit, class: 'btn btn-primary'
+    .pull-right
+      = f.button :submit, class: 'btn btn-primary'

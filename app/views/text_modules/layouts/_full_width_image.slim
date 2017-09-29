@@ -1,0 +1,4 @@
+- if text_module.link?
+	= link_to image_tag(text_module.image_url, class: "img-fluid"), text_module_link_helper(text_module)
+- else
+	= image_tag(text_module.image_url, class: "img-fluid")

@@ -3,19 +3,17 @@
     h3 = t('edit_model', model_name: @carousel_module.model_name.human)
   .col-sm-4
     .edit-page-links
-      = link_to t('carousel_module.back_to_slides'), admin_page_carousel_module_path(@carousel_module.page, @carousel_module)
-
-
-
-
+      = link_to t('carousel_module.back_to_slides'), admin_carousel_module_path(@carousel_module)
 
 = simple_form_for [:admin, @page, @carousel_module], url: url_for(action: 'update', controller: 'admin/carousel_modules'), method: 'put' do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :position, as: :integer
-    = f.input :slot_id, as: :integer
-    = f.input :layout,
+    .row
+      .col-sm-6
+        = f.input :position, as: :integer
+      .col-sm-6
+        = f.input :layout,
       collection: Admin::CarouselModule.image_sizes,
       include_blank: false
 

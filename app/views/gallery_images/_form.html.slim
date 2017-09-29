@@ -1,9 +1,8 @@
-
 .form-inputs
   = f.input :image
   = f.input :title
-  = f.input :body
-  = f.input :position
+  = f.input :body, :input_html => { rows: 10}
+  = f.hidden_field :position, value: @image.position
   = f.hidden_field :gallery_module_id, value: @gallery.id
   /= f.association :user
 

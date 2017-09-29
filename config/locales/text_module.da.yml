@@ -1,28 +1,50 @@
 da:
   activerecord:
     attributes:
-      text_module:
+      admin/text_module:
         title: Overskrift
         layout: Layout
         show_to: Visning
         url: Link
         url_text: Navn på link
-        page: Link til side
-        slot_id: Side sektion
-        image_size: Billed størelse
+        page_id: Link til side
+        image_ratio: Billed proportioner
+        image_style: Billed layout
+        link_layout: Link layout
+        background_color: Baggrundsfarve
+        color: Tekstfarve
 
-    models:
+    admin/models:
       text_module: Tekst sektion
 
-  text_module:
+  admin/text_module:
+    name: Tekst modul
     hints:
       title: Som den bliver vist på oversigts side
-      image: Vises kun hvis det valgte layout understøtter det
+      image: Valgfrit
       url: Billed / Link / Knap bruger denne url
-      url_text: Tekst til knappe og link, vises ikke hvis feltet er tomt
+      url_text: Link/knap vises kun hvis udfyldt
     placeholders:
       url: http://samso.dk
     show_to:
       all: Altid
       guests:  Kun når man ikke er logget ind
       members: Kun når man er logget ind
+    full_width: Til kant
+    bordered: Med ramme
+    circle: Rund
+    link_layouts:
+      text_left: Tekst venstrestillet
+      text_center: Tekst centreret
+      text_right: Tekst højrestillet
+      button_left: Venstrestillet knap
+      button_center: Centreret knap
+      button_right: Højrestillet knap
+    image:
+      aspect_ratio_1_1: '1:1'
+      aspect_ratio_2_1: '2:1'
+      aspect_ratio_3_1: '3:1'
+      aspect_ratio_4_1: '4:1'
+      aspect_ratio_4_3: '4:3'
+      aspect_ratio_3_4: '3:4'
+      aspect_ratio_original: 'original'

@@ -1,11 +1,8 @@
 # module for selection subscription
 class Admin::SubscriptionModule < ApplicationRecord
-  include SectionPlugin
+  has_many :page_col_modules, as: :moduleable
+  include PageColConcerns
 
-  def page_module
-    @page_module ||= PageModule.find_by(
-      moduleable_type: 'Admin::SubscriptionModule',
-      moduleable_id: id
-    )
-  end
+  validates :title, presence: true
+  validates :expired_title, presence: true
 end

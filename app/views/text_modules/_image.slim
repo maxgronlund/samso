@@ -1,5 +1,6 @@
-- if umage_url = text_module.image_url(image_size)
-  - if text_module.url.empty?
-    = image_tag(umage_url, class: "img-fluid")
-  - else
-    = link_to image_tag(umage_url, class: "img-fluid"),  text_module.url
+- if text_module.image?
+  - case text_module.image_style
+  - when 'circle'
+    = render 'text_modules/layouts/round_image', text_module: text_module
+  - when 'full-width'
+    = render 'text_modules/layouts/full_width_image', text_module: text_module

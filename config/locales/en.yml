@@ -36,6 +36,7 @@ en:
   new_model: "Create %{model_name}"
   edit_model: "Editing %{model_name}"
   edit: Edit
+  edit_module: Edit module
   save: Save
   cancel: Cancel
   delete: Delete
@@ -57,4 +58,7 @@ en:
   login: Login
   signed_in: Logged in!
   signed_out: Signed out!
+  create_module: Create module
+  back: Back
+  thanks_for_signing_up: Thanks for signing up
 

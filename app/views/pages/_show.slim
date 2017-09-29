@@ -1,1 +1,8 @@
-= render "pages/layouts/#{page.layout}", page: page
+/ = render "pages/layouts/#{page.layout}", page: page
+- page.ordered_page_rows.each do |page_row|
+  = render 'page_rows/show', page_row: page_row
+  
+
+
+
+  /= render "page_rows/layouts/#{page_row.layout}", index: index

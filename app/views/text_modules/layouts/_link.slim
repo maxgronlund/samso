@@ -1,0 +1,17 @@
+- case text_module.link_layout
+- when 'text_left'
+  = link_to text_module.url_text, text_module_link_helper(text_module)
+- when 'text_center'
+  .text-center
+    = link_to text_module.url_text, text_module_link_helper(text_module)
+- when 'text_right'
+  .text-right
+    = link_to text_module.url_text, text_module_link_helper(text_module)
+- when 'button_left'
+  = link_to text_module.url_text, text_module_link_helper(text_module), class: 'btn btn-primary'
+- when 'button_center'
+  .text-center
+    = link_to text_module.url_text, text_module_link_helper(text_module), class: 'btn btn-primary'
+- when 'button_right'
+  .text-right
+    = link_to text_module.url_text, text_module_link_helper(text_module), class: 'btn btn-primary'

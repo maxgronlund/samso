@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904112211) do
+ActiveRecord::Schema.define(version: 20170927205108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "post_page_id"
+    t.integer "blog_posts_count", default: 0
+    t.integer "posts_pr_page", default: 12
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end
 
@@ -38,6 +40,9 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "image_updated_at"
     t.text "teaser"
     t.integer "legacy_id"
+    t.text "subtitle"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
   end
 
@@ -125,6 +130,8 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "page_id"
+    t.integer "gallery_images_count", default: 0
+    t.integer "images_pr_page", default: 16
     t.index ["page_id"], name: "index_admin_gallery_modules_on_page_id"
   end
 
@@ -134,6 +141,14 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admin_module_names", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "locale"
+    t.integer "position"
+  end
+
   create_table "admin_post_modules", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -141,11 +156,13 @@ ActiveRecord::Schema.define(version: 20170904112211) do
   end
 
   create_table "admin_subscription_modules", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.text "body"
     t.string "layout"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "expired_title"
+    t.text "expired_body"
   end
 
   create_table "admin_subscription_types", force: :cascade do |t|
@@ -160,6 +177,7 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position", default: 0
+    t.integer "subscriptions_count"
   end
 
   create_table "admin_subscriptions", force: :cascade do |t|
@@ -196,16 +214,63 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.string "welcome_page_id"
   end
 
-  create_table "page_modules", force: :cascade do |t|
-    t.bigint "page_id"
+  create_table "admin_text_modules", force: :cascade do |t|
+    t.string "title", default: ""
+    t.text "body", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.string "url_text"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer "page_id"
+    t.string "show_to"
+    t.string "color", default: "#000000"
+    t.string "background_color", default: "#FFFFFF"
+    t.boolean "border", default: false
+    t.string "image_style", default: "full-width"
+    t.string "link_layout", default: "text"
+    t.string "image_ratio", default: "2_1"
+    t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
+  end
+
+  create_table "page_col_modules", force: :cascade do |t|
+    t.bigint "page_col_id"
     t.string "moduleable_type"
     t.bigint "moduleable_id"
-    t.integer "slot_id"
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["moduleable_type", "moduleable_id"], name: "index_page_modules_on_moduleable_type_and_moduleable_id"
-    t.index ["page_id"], name: "index_page_modules_on_page_id"
+    t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
+    t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
+  end
+
+  create_table "page_cols", force: :cascade do |t|
+    t.bigint "page_row_id"
+    t.string "layout"
+    t.integer "index", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_row_id"], name: "index_page_cols_on_page_row_id"
+  end
+
+  create_table "page_rows", force: :cascade do |t|
+    t.bigint "page_id"
+    t.string "layout", default: "12"
+    t.string "background_color", default: "none"
+    t.integer "padding_top", default: 0
+    t.integer "padding_bottom", default: 0
+    t.integer "position", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "background_image_file_name"
+    t.string "background_image_content_type"
+    t.integer "background_image_file_size"
+    t.datetime "background_image_updated_at"
+    t.integer "page_cols_count", default: 0
+    t.index ["page_id"], name: "index_page_rows_on_page_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -216,29 +281,16 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.boolean "active"
     t.string "locale"
     t.bigint "user_id"
-    t.string "layout", default: "alabama"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "require_subscription", default: false
     t.integer "footer_id"
-    t.string "color_row_1"
-    t.integer "height_row_1"
-    t.string "color_row_2"
-    t.integer "height_row_2"
-    t.string "color_row_3"
-    t.integer "height_row_3"
-    t.string "row_1_background_file_name"
-    t.string "row_1_background_content_type"
-    t.integer "row_1_background_file_size"
-    t.datetime "row_1_background_updated_at"
-    t.string "row_2_background_file_name"
-    t.string "row_2_background_content_type"
-    t.integer "row_2_background_file_size"
-    t.datetime "row_2_background_updated_at"
-    t.string "row_3_background_file_name"
-    t.string "row_3_background_content_type"
-    t.integer "row_3_background_file_size"
-    t.datetime "row_3_background_updated_at"
+    t.string "body_background_file_name"
+    t.string "body_background_content_type"
+    t.integer "body_background_file_size"
+    t.datetime "body_background_updated_at"
+    t.integer "page_rows_count", default: 0
+    t.string "background_color", default: "none"
     t.index ["footer_id"], name: "index_pages_on_footer_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
@@ -268,19 +320,6 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.text "identifier"
-    t.integer "position"
-    t.string "locale", default: "da"
-    t.string "postable_type"
-    t.bigint "postable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "permission", default: "member"
@@ -288,26 +327,6 @@ ActiveRecord::Schema.define(version: 20170904112211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_roles_on_user_id"
-  end
-
-  create_table "text_modules", force: :cascade do |t|
-    t.string "title", default: ""
-    t.text "body", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "layout"
-    t.string "url"
-    t.string "url_text"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.string "image_size"
-    t.integer "page_id"
-    t.string "show_to"
-    t.string "color", default: "#000000"
-    t.string "background_color", default: "#FFFFFF"
-    t.index ["page_id"], name: "index_text_modules_on_page_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -334,7 +353,9 @@ ActiveRecord::Schema.define(version: 20170904112211) do
   end
 
   add_foreign_key "admin_subscriptions", "users"
-  add_foreign_key "page_modules", "pages"
+  add_foreign_key "page_col_modules", "page_cols"
+  add_foreign_key "page_cols", "page_rows"
+  add_foreign_key "page_rows", "pages"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"
 end

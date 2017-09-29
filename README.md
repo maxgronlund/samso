@@ -1,7 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Shoe-lace
+
+A framework for building custom web-app.
+it trades explicity over implicity
+It's based on Bootstrap
+It supports five role
+
+Guests
+Members
+Editors
+Managers
+Administrators
+Super administrator
+
+Aa user can be granded one or many roles
+
+As a developer you will find no magic code no DSL to learn 
+it's easy to understand and expand, you deside what features
+to include so ther is no dead code to make noice.
+
+As a administrator you can build pages in a minimalistic wordpress / drupal style
+Theme the layout without any CSS/ HTML skils, and create subscriptions models that
+fits the buisness needs out of the box
+
+As an editor you can add / edit content without accessing the admin backend
+
+
 
 Things you may want to cover:
 

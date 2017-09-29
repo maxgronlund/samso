@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    errors:
+      models:
+        admin/subscription_module: Subscription module
+    attributes:
+      admin/subscription_module:
+        title: Name
+        body: Description
+        duration: Duration in days
+        locale: Language
+        print_version: Print
+        internet_version: WWW
+        price: Price i DKK
+        active: Active
+        subscriptions_count: Subscriptions
+    
+    models:
+      admin/subscription_module:
+        one: Abonnementstype
+        other: Abonnementstyper
+
+  admin/subscription_module:
+    name: Subscription module

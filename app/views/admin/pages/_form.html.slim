@@ -1,93 +1,49 @@
 = simple_form_for [:admin, @page], multipart: true do  |f|
   = f.error_notification
-
-  .row
-    .col-sm-6
-      = f.input :active
-    .col-sm-6
-      = f.input :require_subscription
+  = f.hidden_field :page_id, value: @page.id
   .row
     .col-sm-6
       = f.input :title
-      = f.input :layout,
-        collection: Page::LAYOUTS,
-        include_blank: false
-    .col-sm-6
-      = f.input :menu_id,
-        collection: Page.menu_collection,
-        include_blank: false
-
+      
+      = f.input :body_background, as: :file
+      - unless @page.body_background_file_size.nil?
+          = image_tag(@page.body_background.url(:thumb))
+          br
+          = f.input :delete_body_background, as: :boolean
+      
+      = f.input :background_color,
+        hint: t('page.background_color.hint')
 
       = f.input :footer_id,
         collection: Admin::Footer.where(locale: I18n.locale)
 
+    .col-sm-6
+      = f.input :menu_title,
+        placeholder: 'leave blank to hide'
+      = f.input :menu_position
+
+      = f.input :menu_id,
+        collection: Page.menu_collection,
+        include_blank: false
+      = f.input :footer_id,
+        collection: Admin::Footer.where(locale: I18n.locale)
+      = f.input :active
+      = f.input :require_subscription
+
 
       
+
+      
+
+
   .row
-    .col-sm-6
-      = f.input :menu_title
-      = f.input :menu_position
-    .col-sm-6
-      .row
-        .col-sm-4
-          = f.input :color_row_1,
-            placeholder: t('page.hint.collor_format')
-        .col-sm-4
-          = f.input :height_row_1
-        .col-sm-4
-          = f.label :row_1_background
-          = f.file_field :row_1_background
-          = f.input :delete_row_1_background, as: :boolean
-      .row
-        .col-sm-4
-          = f.input :color_row_2,
-            placeholder: t('page.hint.collor_format')
-        .col-sm-4
-          = f.input :height_row_2
-        .col-sm-4
-          = f.label :row_2_background
-          = f.file_field :row_2_background
-          = f.input :delete_row_2_background, as: :boolean
-      .row
-        .col-sm-4
-          = f.input :color_row_3,
-            placeholder: t('page.hint.collor_format')
-        .col-sm-4
-          = f.input :height_row_3
-        .col-sm-4
-          = f.label :row_3_background
-          = f.file_field :row_3_background
-          = f.input :delete_row_3_background, as: :boolean
+    .col-12
+      .pull-right
+        = link_to t('cancel'), admin_pages_path, class: 'btn btn-secondary'
+        '&nbsp;
+        = f.submit t('save'), class: 'btn btn-primary'
 
 
-  = f.submit t('save'), class: 'btn btn-primary'
 
-hr
-h4 Layouts
-.row
-  .col-sm-2.mb-12
-    h6 Alabama
-    = image_tag('layouts/alabama.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Alaska
-    = image_tag('layouts/alaska.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Arizona
-    = image_tag('layouts/arizona.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Arkansas
-    = image_tag('layouts/arkansas.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 California
-    = image_tag('layouts/california.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Colorado
-    = image_tag('layouts/colorado.png', class: "img-fluid")
-.row
-  .col-sm-2.mb-12
-    h6 Connecticut
-    = image_tag('layouts/connecticutx.png', class: "img-fluid")
-  .col-sm-2.mb-12
-    h6 Delaware
-    = image_tag('layouts/delaware.png', class: "img-fluid")
+
 

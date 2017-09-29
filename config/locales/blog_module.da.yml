@@ -2,8 +2,8 @@ da:
   activerecord:
     models:
       admin/blog_module:
-        one: Blog sektion
-        other: Blog sektioner
+        one: Blog modul
+        other: Blog moduler
     attributes:
       admin/blog_module:
         name: Overskrift
@@ -12,3 +12,6 @@ da:
   blog_module:
     the_beatles: 'The Beatles'
     elvis_presley: 'Elvis Presley'
+
+  admin/blog_module:
+    name: Blog modul

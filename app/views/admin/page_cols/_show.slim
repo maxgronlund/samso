@@ -1,0 +1,17 @@
+div class="section-slot #{page_col.layout}"
+  .col-admin-header
+    .layout
+      = page_col.layout
+      .pull-right
+        = link_to 'e', edit_admin_page_row_page_col_path(page_col.page_row, page_col)
+  
+  - page_col.page_col_modules.each do |page_col_module|
+    = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
+  
+  .col-admin-footer
+    .pull-right
+      = link_to t('page_col_module.add_module'),
+        new_admin_page_col_page_col_module_path(page_col),
+        class: 'btn btn-primary btn-sm'
+  
+  

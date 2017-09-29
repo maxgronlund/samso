@@ -1,0 +1,54 @@
+- blog_module = modulable
+
+
+.row
+  .col-sm-6
+    h3 = blog_module.name
+  .col-sm-6
+    .pull-right
+      = blog_module.blog_posts_count
+
+= form_tag blog_path(@page), method: 'get' do 
+  = hidden_field_tag 'blog_module_id', blog_module.id
+  .row
+    .col-sm-6
+      = text_field_tag :search, params[:search], class: 'form-control' 
+    .col-sm-6
+      .btn-group
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
+        = link_to t('user.search.show_all'), page_path(blog_module.page), class: 'btn btn-outline-secondary'
+
+
+- if user_signed_in?
+  .module-editor-header
+    .pull-right
+      = link_to 'new post',
+        new_blog_post_path(blog_module),
+        class: 'btn btn-primary'
+
+
+
+
+- if params[:search] && !params[:search].empty?
+  - found_posts = blog_module.posts.search_by_title_or_body(params[:search])
+  - if found_posts.empty?
+    'Nothing found
+  - else
+    - found_posts.each do |post|
+      = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
+- else
+  - blog_module.paginated_posts(params[:page]).each do |post|
+    = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
+
+
+  .row
+    .col-sm-12
+      - prev_url = blog_module.prev_page(request.path, params[:page])
+      - next_url = blog_module.next_page(request.path, params[:page])
+      .d-flex.justify-content-center
+        .btn-group
+          - if params[:page]
+            = link_to t('blog_module.prev'), prev_url, class: 'btn btn-outline-secondary btn-sm'
+          - if next_url
+            = link_to t('blog_module.next'), next_url, class: 'btn btn-outline-secondary btn-sm'
+

@@ -1,5 +1,8 @@
 en:
   activerecord:
+    errors:
+      models:
+        page: Side
     attributes:
       page:
         title: Title
@@ -10,7 +13,9 @@ en:
         locale: Language
         user_id: Created by
         require_subscription: Only access for subscribers
-
+        background_color: Baggrd color
+        body_background: Backgrounds image
+        delete_body_background: Remove image
     models:
       page: Page
 
@@ -20,6 +25,11 @@ en:
     add_content: 'Add section'
     section_types: Section types
     show: Show page
-    edit_layout: Page setup
+    edit_layout: Layout
     edit: Edit page
     back: Back to page
+    background_color:
+      hint: "Use valid CSS values, E.G. #888888"
+    menu:
+      not_in_any_menus: '-'
+      menu_bar: Menu bar

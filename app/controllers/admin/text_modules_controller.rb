@@ -3,16 +3,13 @@ class Admin::TextModulesController < AdminController
 
   # GET /text_modules/1/edit
   def edit
-    @page = Page.find(params[:page_id])
   end
 
   # PATCH/PUT /text_modules/1
   def update
     if @text_module.update(text_module_params)
-      PageModule::Service
-        .new(@text_module)
-        .update_page_module(text_module_params)
       redirect_to admin_page_path(@text_module.page)
+      @text_module.update_position(text_module_params[:position])
     else
       render :edit
     end
@@ -22,25 +19,27 @@ class Admin::TextModulesController < AdminController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_text_module
-    @text_module = TextModule.find(params[:id])
+    @text_module = Admin::TextModule.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
+  # rubocop:disable Metrics/MethodLength
   def text_module_params
-    params.require(:text_module).permit(
+    params.require(:admin_text_module).permit(
       :title,
       :body,
-      :layout,
       :image,
-      :image_size,
-      :url,
-      :url_text,
+      :image_ratio,
+      :image_style,
       :position,
-      :page_id,
-      :slot_id,
       :show_to,
       :color,
-      :background_color
+      :background_color,
+      :link_layout,
+      :url,
+      :url_text,
+      :page_id,
+      :border
     )
   end
 end

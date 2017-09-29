@@ -9,9 +9,7 @@ class Admin::DmiModulesController < AdminController
   # PATCH/PUT /admin/dmi_modules/1.json
   def update
     if @dmi_module.update(dmi_module_params)
-      PageModule::Service
-        .new(@dmi_module)
-        .update_page_module(dmi_module_params)
+      @dmi_module.update_position(dmi_module_params[:position])
       redirect_to admin_page_path(@dmi_module.page)
     else
       render :edit
@@ -28,7 +26,6 @@ class Admin::DmiModulesController < AdminController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_dmi_module
-    @page = Page.find(params[:page_id])
     @dmi_module = Admin::DmiModule.find(params[:id])
   end
 
