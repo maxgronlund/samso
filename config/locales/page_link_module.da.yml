@@ -1,0 +1,17 @@
+da:
+  activerecord:
+    models:
+      admin/page_link_module:
+        one: page_link
+        other: page_links
+    attributes:
+      admin/page_link_module:
+        name:  Navn
+
+  page_link_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/page_link_module:
+    name: Side Link module

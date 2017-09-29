@@ -1,0 +1,17 @@
+.row
+  h3 = t('edit_model', model_name: @page_link_module.model_name.human)
+
+= simple_form_for [:admin, @page_link_module], url: url_for(action: 'update', controller: 'admin/page_link_modules'), method: 'put' do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+      .col-sm-3
+        = f.input :name
+
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+
