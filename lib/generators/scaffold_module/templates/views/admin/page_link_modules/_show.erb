@@ -1,12 +1,11 @@
-= render 'page_link_modules/show', modulable: modulable
-
+= render '<%= file_name %>_modules/show', modulable: modulable
 
 .pb-10.pt-5
   '&nbsp;
   .pull-right
     .btn-group
       = link_to t('edit'),
-        edit_admin_dmi_module_path(modulable),
+        edit_admin_<%= file_name %>_module_path(modulable),
         class: 'btn btn-sm btn-secondary'
 
       = link_to t('delete'), 

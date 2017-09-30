@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :pages do
         resources :page_rows
       end
+      resources :page_link_modules
+
       resources :page_rows do
         resources :page_cols
       end

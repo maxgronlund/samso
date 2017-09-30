@@ -33,8 +33,7 @@ class Admin::DmiModulesController < AdminController
   def dmi_module_params
     params.require(:admin_dmi_module).permit(
       :forecast_duration,
-      :position,
-      :slot_id
+      :position
     )
   end
 end
