@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/vertical_menu_module:
+        one: vertical_menu
+        other: vertical_menus
+    attributes:
+      admin/vertical_menu_module:
+        name:  Name
+
+  vertical_menu_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/vertical_menu_module:
+    name: VerticalMenu module

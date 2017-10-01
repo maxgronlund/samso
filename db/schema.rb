@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001102913) do
+ActiveRecord::Schema.define(version: 20171001200010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,19 @@ ActiveRecord::Schema.define(version: 20171001102913) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admin_page_links", force: :cascade do |t|
+    t.string "name"
+    t.integer "position", default: 0
+    t.string "page_id"
+    t.string "background_color", default: "none"
+    t.string "color", default: "#000"
+    t.integer "page_link_module_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_admin_page_links_on_page_id"
+    t.index ["page_link_module_id"], name: "index_admin_page_links_on_page_link_module_id"
+  end
+
   create_table "admin_post_modules", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -231,6 +244,33 @@ ActiveRecord::Schema.define(version: 20171001102913) do
     t.datetime "image_updated_at"
     t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
     t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
+  end
+
+  create_table "admin_vertical_menu_contents", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_vertical_menu_links", force: :cascade do |t|
+    t.string "title", default: ""
+    t.integer "page_id"
+    t.string "url", default: ""
+    t.boolean "active", default: true
+    t.string "color", default: "#000"
+    t.string "background_color", default: "#FFF"
+    t.integer "vertical_menu_content_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vertical_menu_content_id"], name: "index_admin_vertical_menu_links_on_vertical_menu_content_id"
+  end
+
+  create_table "admin_vertical_menu_modules", force: :cascade do |t|
+    t.string "name"
+    t.integer "vertical_menu_content_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vertical_menu_content_id"], name: "index_admin_vertical_menu_modules_on_vertical_menu_content_id"
   end
 
   create_table "page_col_modules", force: :cascade do |t|

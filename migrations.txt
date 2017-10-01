@@ -78,4 +78,8 @@ rails g scaffold PageColModule page_col:belongs_to moduleable:references{polymor
 rails g model admin/module_names name
 
 
-$ bin/rails generate generator scaffold_module
+$ bin/rails g scaffold admin/page_link name page_id background_color color  --no-helper --no-assets --no-controller-specs
+
+rails g scaffold admin/vertical_menu_content name  --no-helper --no-assets --no-controller-specs
+
+rails g scaffold admin/vertical_menu_link title page_id:integer url active:boolean color background_color admin_vertical_menu_content:belongs_to --no-helper --no-assets --no-controller-specs

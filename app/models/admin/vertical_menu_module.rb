@@ -1,13 +1,12 @@
 # show weather from DMI
-class Admin::PageLinkModule < ApplicationRecord
+class Admin::VerticalMenuModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
+  has_one :vertical_menu_content, class_name: 'Admin::VerticalMenuContent'
   include PageColConcerns
-
-  has_many :page_links, class_name: 'Admin::PageLink', dependent: :destroy
 
   def page_module
     PageModule.find_by(
-      moduleable_type: 'Admin::PageLinkModule',
+      moduleable_type: 'Admin::VerticalMenuModule',
       moduleable_id: id
     )
   end

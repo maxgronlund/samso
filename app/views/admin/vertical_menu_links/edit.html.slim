@@ -1,0 +1,14 @@
+h1 Editing admin_vertical_menu_link
+
+
+
+= simple_form_for [:admin, @admin_vertical_menu_content, @admin_vertical_menu_link],
+  url: url_for(action: 'update', controller: 'admin/vertical_menu_links'),
+  method: 'put' do |f|
+
+  == render 'form', f: f
+
+/ = link_to 'Show', @admin_vertical_menu_link
+/ '  |
+/ = link_to 'Back', admin_vertical_menu_links_path
+

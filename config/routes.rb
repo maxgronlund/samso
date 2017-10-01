@@ -19,7 +19,9 @@ Rails.application.routes.draw do
       resources :pages do
         resources :page_rows
       end
-      resources :page_link_modules
+      resources :page_link_modules, only: %i[edit update] do
+        resources :page_links
+      end
 
       resources :page_rows do
         resources :page_cols
@@ -35,6 +37,10 @@ Rails.application.routes.draw do
       resources :system_setups, only: %i[edit update]
       resources :text_modules
       resources :users
+      resources :vertical_menu_contents do
+        resources :vertical_menu_links
+      end
+      resources :vertical_menu_modules
     end
 
     resources :admin, only: %i[index]

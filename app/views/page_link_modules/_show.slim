@@ -1,2 +1,9 @@
 - page_link = modulable
 h3 = page_link.name
+.page-links
+  - page_link.page_links.each do |page_link|
+    = link_to page_url(page_link.page) do
+      . style="#{page_link.style}"
+        . style="#{page_link.link_style}"
+          = page_link.name
+  

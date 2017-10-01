@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @admin_vertical_menu_link.title
+p
+  strong Page:
+  = @admin_vertical_menu_link.page_id
+p
+  strong Url:
+  = @admin_vertical_menu_link.url
+p
+  strong Active:
+  = @admin_vertical_menu_link.active
+p
+  strong Color:
+  = @admin_vertical_menu_link.color
+p
+  strong Background color:
+  = @admin_vertical_menu_link.background_color
+p
+  strong Admin vertical menu content:
+  = @admin_vertical_menu_link.admin_vertical_menu_content
+
+= link_to 'Edit', edit_admin_vertical_menu_link_path(@admin_vertical_menu_link)
+'  |
+= link_to 'Back', admin_vertical_menu_links_path
