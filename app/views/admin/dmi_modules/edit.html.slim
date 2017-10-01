@@ -1,7 +1,7 @@
 .row
   h3 = t('edit_model', model_name: @dmi_module.model_name.human)
 
-= simple_form_for [:admin, @page, @dmi_module], url: url_for(action: 'update', controller: 'admin/dmi_modules'), method: 'put' do |f|
+= simple_form_for [:admin, @dmi_module], url: url_for(action: 'update', controller: 'admin/dmi_modules'), method: 'put' do |f|
   = f.error_notification
 
   .form-inputs
