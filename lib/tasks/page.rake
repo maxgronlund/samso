@@ -18,8 +18,8 @@ namespace :page do
 
   # usage
   # rake page:build_front_pages
-  desc 'build default front pages'
-  task build_front_pages: :environment do
+  desc 'build default landing pages'
+  task build_landing_pages: :environment do
     user = User.super_admin
     pages_params = [
       { title: 'Forside', menu_title: 'SAMSØ', menu_id: 'not_in_any_menus', locale: 'da', active: true, user_id: user.id },

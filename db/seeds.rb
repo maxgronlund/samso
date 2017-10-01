@@ -11,7 +11,8 @@ user = User.where(
   email: "admin@example.com"
 ).first_or_create(
   name: "admin",
-  email: "admin@example.com"
+  email: "admin@example.com",
+  password: 'ChangeMe1337'
 )
 
 role = Role.where(
@@ -30,16 +31,16 @@ role = Role.where(
   permission: Role::SUPER_ADMIN
 )
 
-if user
-  user.password = 'ChangeMe1337'
-  user.password_confirmation = 'ChangeMe1337'
-  user.save
-end
+# if user
+#   user.password = 'ChangeMe1337'
+#   user.password_confirmation = 'ChangeMe1337'
+#   user.save
+# end
 
-Rake::Task['system_setup:build_defaults'].invoke
-Rake::Task['page:build_subscription_pages'].invoke
-Rake::Task['page:build_front_pages'].invoke
-Rake::Task['page:build_post_pages'].invoke
-Rake::Task['page:build_welcome_pages'].invoke
-Rake::Task['system_messages:build_defaults'].invoke
-Rake::Task['admin/module_names:build_defaults'].invoke
+# Rake::Task['system_setup:build_defaults'].invoke
+# Rake::Task['page:build_subscription_pages'].invoke
+# Rake::Task['page:build_front_pages'].invoke
+# Rake::Task['page:build_post_pages'].invoke
+# Rake::Task['page:build_welcome_pages'].invoke
+# Rake::Task['system_messages:build_defaults'].invoke
+# Rake::Task['admin/module_names:build_defaults'].invoke

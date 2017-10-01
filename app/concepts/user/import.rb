@@ -112,7 +112,6 @@ class User < ApplicationRecord
     end
 
     def find_or_create_user(options = {})
-
       user = User.find_by(email: options[:email])
       return user unless user.nil?
       User

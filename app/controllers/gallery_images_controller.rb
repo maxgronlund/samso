@@ -2,12 +2,12 @@ class GalleryImagesController < ApplicationController
   before_action :set_image, only: %i[edit update destroy]
   before_action :set_gallery_module, only: %i[new create edit destroy]
 
-    # GET /admin/gallery_images/new
+  # GET /admin/gallery_images/new
   def new
     @image = @gallery.images.new(position: @gallery.images.count * 10)
   end
 
-    # POST /admin/gallery_images
+  # POST /admin/gallery_images
   def create
     @image         = @gallery.images.new(image_params)
     @image.user_id = current_user.id
@@ -26,7 +26,7 @@ class GalleryImagesController < ApplicationController
     render 'pages/show'
   end
 
-    # PATCH/PUT /admin/gallery_images/1
+  # PATCH/PUT /admin/gallery_images/1
   def update
     if @image.update(image_params)
       redirect_to @image.page

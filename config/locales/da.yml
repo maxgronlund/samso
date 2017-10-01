@@ -61,6 +61,7 @@ da:
   create_module: Opret modul
   back: Tilbage
   thanks_for_signing_up: Tak for at oprette en konto hos samsø posten
+  confirm: Er du sikker?
 
   activerecord:
     errors:

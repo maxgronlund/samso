@@ -1,6 +1,7 @@
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
   belongs_to :blog_module, class_name: 'Admin::BlogModule', counter_cache: true
+  belongs_to :user, class_name: 'User', counter_cache: true
   has_attached_file :image, styles: {
     medium: '300x300>',
     thumb: '100x100>'
@@ -20,11 +21,6 @@ class Admin::BlogPost < ApplicationRecord
   end
 
   def image_url(size)
-    source = 'https://s3.eu-central-1.amazonaws.com' + image.url(size).gsub('//s3.amazonaws.com', '')
-    if source == 'https://s3.eu-central-1.amazonaws.com/avatars/square/missing.png'
-      source = 'https://s3.eu-central-1.amazonaws.com/samso-files/users/avatars/missing/#{size.to_s}/missing.png'
-    end
-    source
     image.url(size)
   end
 

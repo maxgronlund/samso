@@ -24,15 +24,16 @@ class Admin::BlogPostsController < AdminController
 
   # POST /admin/blog_posts
   # POST /admin/blog_posts.json
-  def create
-    @admin_blog_module  = Admin::BlogModule.find(params[:blog_module_id])
-    @admin_blog_post    = @admin_blog_module.posts.new(admin_blog_post_params)
-    if @admin_blog_post.save
-      redirect_to admin_page_path(@admin_blog_module.page)
-    else
-      render :new
-    end
-  end
+  # def create
+  #   @admin_blog_module       = Admin::BlogModule.find(params[:blog_module_id])
+  #   @admin_blog_post         = @admin_blog_module.posts.new(admin_blog_post_params)
+  #   @admin_blog_post.user_id = current_user.id
+  #   if @admin_blog_post.save
+  #     redirect_to admin_page_path(@admin_blog_module.page)
+  #   else
+  #     render :new
+  #   end
+  # end
 
   # PATCH/PUT /admin/blog_posts/1
   # PATCH/PUT /admin/blog_posts/1.json

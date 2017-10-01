@@ -1,13 +1,14 @@
-.mt-10
-  '&nbsp;
-  .pull-right
-    .btn-group
-      = link_to t('edit'), edit_admin_text_module_path(modulable), class: 'btn btn-secondary btn-sm'
-      = link_to t('delete'), 
-        admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
-        data: { confirm: t('are_you_sure') },
-        method: :delete,
-        class: 'btn btn-danger btn-sm'
-
+.row
+  .col-12
+    .mb-10.mt-4
+      '&nbsp;
+      .pull-right
+        .btn-group
+          = link_to t('edit'), edit_admin_text_module_path(modulable), class: 'btn btn-secondary btn-sm'
+          = link_to t('delete'), 
+            admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
+            data: { confirm: t('are_you_sure') },
+            method: :delete,
+            class: 'btn btn-danger btn-sm'
 
 = render "text_modules/layouts/show", text_module: modulable

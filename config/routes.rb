@@ -49,7 +49,6 @@ Rails.application.routes.draw do
     resources :gallery_modules, only: [] do
       resources :gallery_images
     end
-    
     resources :reset_password, except: %i[destroy]
     resources :pages, only: %i[show]
     resources :payments
