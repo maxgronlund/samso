@@ -10,7 +10,7 @@ class CreateAdmin<%= file_name.classify %>Modules < ActiveRecord::Migration[5.1]
       .where(name: 'Admin::<%= file_name.classify %>')
       .first_or_create(
         name: 'Admin::<%= file_name.classify %>Module',
-        locale: 'admin/<%= file_name %>.name'
+        locale: 'admin/<%= file_name %>_module.name'
       )
   end
 

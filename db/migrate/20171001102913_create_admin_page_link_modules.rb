@@ -10,7 +10,7 @@ class CreateAdminPageLinkModules < ActiveRecord::Migration[5.1]
       .where(name: 'Admin::PageLink')
       .first_or_create(
         name: 'Admin::PageLinkModule',
-        locale: 'admin/page_link.name'
+        locale: 'admin/page_link_module.name'
       )
   end
 

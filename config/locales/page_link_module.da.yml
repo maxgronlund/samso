@@ -6,12 +6,11 @@ da:
         other: page_links
     attributes:
       admin/page_link_module:
-        name:  Navn
+        name:  Name
 
   page_link_module:
     fo: Fo
     bar: Bar
 
-  
   admin/page_link_module:
-    name: Side Link module
+    name: PageLink module
