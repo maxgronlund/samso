@@ -49,7 +49,7 @@ class Page < ApplicationRecord
   end
 
   def footer
-    @footer = Admin::Footer.find_by(id: footer_id)
+    @footer = Admin::Footer.find_by(id: admin_footer_id)
   end
 
   # rubocop:disable Metrics/AbcSize

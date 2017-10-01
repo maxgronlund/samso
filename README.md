@@ -6,6 +6,7 @@ A framework for building custom web-app.
 it trades explicity over implicity
 It's based on Bootstrap
 It supports five role
+It's easy to expand
 
 Guests
 Members
@@ -14,8 +15,12 @@ Managers
 Administrators
 Super administrator
 
-Aa user can be granded one or many roles
+An user can be granded one or many roles
 
+For developers
+The core is super simple and easy to understand.
+There is no hidden framework to understand.
+All that's happens is a set of files is installed 
 As a developer you will find no magic code no DSL to learn 
 it's easy to understand and expand, you deside what features
 to include so ther is no dead code to make noice.

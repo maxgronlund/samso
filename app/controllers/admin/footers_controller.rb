@@ -4,7 +4,7 @@ class Admin::FootersController < AdminController
   # GET /admin/footers
   # GET /admin/footers.json
   def index
-    @admin_footers = Admin::Footer.all
+    @admin_footers = Admin::Footer.where(locale: I18n.locale)
   end
 
   # GET /admin/footers/new

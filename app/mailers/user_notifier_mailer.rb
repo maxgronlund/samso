@@ -34,4 +34,4 @@ class UserNotifierMailer < ApplicationMailer
       subject: @message.title
     )
   end
-end 
+end

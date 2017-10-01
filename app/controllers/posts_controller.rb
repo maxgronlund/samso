@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /admin/posts/1
   def show
     @blog_post = Admin::BlogPost.find(params[:id])
-    @page      = @blog_post.post_page
+    @page = @blog_post.post_page
     @landing_page = landing_page
     if @page.require_subscription
       unless current_user && current_user.access_to_subscribed_content?
@@ -35,14 +35,10 @@ class PostsController < ApplicationController
   # POST /admin/posts
   def create
     @blog_module = Admin::BlogModule.find(params[:blog_id])
-    @blog_post =
-      @blog_module
-      .posts
-      .new(
-        post_params
-      )
-
-    if @blog_post.save
+    @blog_post = @blog_module.posts.new(post_params)
+    current_user
+    @blog_post.user = current_user
+    if @blog_post.save!
       redirect_to page_path(@blog_post.post_page)
     else
       render :new
@@ -73,7 +69,7 @@ class PostsController < ApplicationController
     @post = Admin::BlogPost.find(params[:id])
   end
 
-   # store the page in a session so we can bounce to it after sign up / login
+  # store the page in a session so we can bounce to it after sign up / login
   def store_page_in_session
     ap session[:go_to_after_signup] = blog_post_path(@blog_post.blog, @blog_post)
   end

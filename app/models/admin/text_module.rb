@@ -95,6 +95,5 @@ class Admin::TextModule < ApplicationRecord
   end
 
   def title_style
-
   end
 end

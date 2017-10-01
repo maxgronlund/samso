@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     set_menu
-    @landing_page =  admin_system_setup.landing_page
+    @landing_page = admin_system_setup.landing_page
     if current_user.nil?
       redirect_to new_session_path
     elsif @user.nil? || current_user != @user
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   def user_params
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
-    #User::Service.sanitize_email(sanitized_params)
+    # User::Service.sanitize_email(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
     sanitized_params
   end
