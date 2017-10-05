@@ -13,7 +13,6 @@ class Admin::VerticalMenuModulesController < AdminController
     end
   end
 
-
   def destroy
     @vertical_menu.destroy
     redirect_to admin_vertical_menu_modules_url
