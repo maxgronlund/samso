@@ -13,6 +13,7 @@ class GalleryImagesController < ApplicationController
     @image.user_id = current_user.id
 
     if @image.save
+      @gallery.clear_page_cache
       redirect_to @image.page
     else
       render :new
@@ -29,6 +30,7 @@ class GalleryImagesController < ApplicationController
   # PATCH/PUT /admin/gallery_images/1
   def update
     if @image.update(image_params)
+      @gallery.clear_page_cache
       redirect_to @image.page
     else
       render :edit
@@ -46,7 +48,7 @@ class GalleryImagesController < ApplicationController
     @image = Admin::GalleryImage.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary Internet, only allow the white list through.
   def image_params
     params.require(:admin_gallery_image).permit(
       :title,

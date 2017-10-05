@@ -1,15 +1,17 @@
-= simple_form_for [:admin, @page_col, @page_col_module] do |f|
-  = f.error_notification
+.row
+  .col-md-6
+    = simple_form_for [:admin, @page_col, @page_col_module] do |f|
+      = f.error_notification
 
-  .form-inputs
-    = f.input :moduleable_type,
-      collection: @module_types,
-      include_blank: false
+      .form-inputs
+        = f.input :moduleable_type,
+          collection: @module_types,
+          include_blank: false
 
-  .form-actions
-    .pull-right
-      = link_to t('cancel'),
-        admin_page_path(@page_col.page),
-        class: 'btn btn-secondary'
-      '&nbsp;
-      = f.submit t('save'), class: 'btn btn-primary'
+      .form-actions
+        .pull-right
+          = link_to t('cancel'),
+            admin_page_path(@page_col.page),
+            class: 'btn btn-secondary'
+          '&nbsp;
+          = f.submit t('save'), class: 'btn btn-primary'
