@@ -13,7 +13,7 @@ class Admin::CarouselSlide < ApplicationRecord
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
-  validates :carousel_module, :image, :title, presence: true
+  validates :carousel_module, :image, presence: true
 
   def parrent_page
     carousel_module.page

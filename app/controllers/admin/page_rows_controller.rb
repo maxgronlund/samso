@@ -32,6 +32,7 @@ class Admin::PageRowsController < AdminController
   def create
     @page_row = @page.page_rows.new(page_row_params)
     if @page_row.save
+      @page.touch
       page_row_service = PageRow::Service.new(@page_row)
       page_row_service.create_page_cols(page_row_params[:preset])
       redirect_to admin_page_path(@page_row.page)
@@ -43,6 +44,7 @@ class Admin::PageRowsController < AdminController
   # PATCH/PUT /page_rows/1
   def update
     if @page_row.update(page_row_params)
+      @page.touch
       redirect_to admin_page_url(@page)
     else
       render :edit
@@ -53,6 +55,7 @@ class Admin::PageRowsController < AdminController
   def destroy
     destroy_page_col_modules
     @page_row.destroy
+    @page.touch
     redirect_to admin_page_url(@page)
   end
 

@@ -28,4 +28,8 @@ class Admin::GalleryImage < ApplicationRecord
   def image_page
     gallery_module.show_on_page
   end
+
+  def clear_page_cache
+    gallery_module.clear_page_cache
+  end
 end

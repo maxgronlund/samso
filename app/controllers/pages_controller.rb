@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   # GET /pages/1
   def show
-    @page            = Page.find(params[:id])
+    @page = Page.find(params[:id])
     @landing_page    = admin_system_setup.landing_page
     @footer          = @page.footer
 
@@ -13,23 +13,6 @@ class PagesController < ApplicationController
   # rubocop:enable Metrics/AbcSize
 
   private
-
-  def post_page?
-    admin_system_setup.post_page_id == @page.id
-  end
-
-  def set_post
-    @post = Admin::BlogPost.find_by(id: params[:post_id])
-    session[:post_id] = @post.id if @post
-  end
-
-  # def set_image
-  #   @gallery_image = Admin::GalleryImage.find_by(id: params[:gallery_image_id])
-  # end
-
-  def page_params
-    params.permit!
-  end
 
   # store the page in a session so we can bounce to it after sign up / login
   def store_page_in_session

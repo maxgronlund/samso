@@ -32,6 +32,7 @@ class Admin::CarouselSlidesController < AdminController
     @admin_carousel_module = Admin::CarouselModule.find(params[:carousel_module_id])
     @admin_carousel_slide  = @admin_carousel_module.slides.new(admin_carousel_slide_params)
     if @admin_carousel_slide.save
+      @admin_carousel_module.clear_page_cache
       redirect_to show_carousel_path
     else
       render :new
@@ -43,6 +44,7 @@ class Admin::CarouselSlidesController < AdminController
   def update
     @admin_carousel_module = Admin::CarouselModule.find(params[:carousel_module_id])
     if @admin_carousel_slide.update(admin_carousel_slide_params)
+      @admin_carousel_module.clear_page_cache
       redirect_to show_carousel_path
     else
       render :edit

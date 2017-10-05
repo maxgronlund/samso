@@ -24,5 +24,11 @@ module PageColConcerns
 
   def update_position(new_position)
     page_col_module.update_attributes(position: new_position)
+    clear_page_cache
+  end
+
+  # usage Admin::SystemSetup.clear_page_cache
+  def clear_page_cache
+    page.touch
   end
 end

@@ -1,0 +1,48 @@
+p#notice = notice
+
+h3
+  = @admin_vertical_menu_content.name
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+
+    thead
+      tr
+        th Title
+        th Page
+        th Url
+        th Active
+        th Color
+        th Background color
+        th  colspan=3
+
+
+    tbody
+      - @admin_vertical_menu_content.vertical_menu_links.each do |vertical_menu_link|
+        tr
+          td = vertical_menu_link.title
+          td = vertical_menu_link.page_title
+          td = vertical_menu_link.url
+          td = vertical_menu_link.active
+          td = vertical_menu_link.color
+          td = vertical_menu_link.background_color
+          td
+            .pull-right
+              .btn-group
+                = link_to t('edit'),
+                  edit_admin_vertical_menu_content_vertical_menu_link_path(@admin_vertical_menu_content, vertical_menu_link),
+                  class: 'btn btn-sm btn-secondary'
+
+                = link_to t('delete'),
+                  admin_vertical_menu_content_vertical_menu_link_path(@admin_vertical_menu_content, vertical_menu_link),
+                  data: { confirm: 'Are you sure?' },
+                  method: :delete,
+                  class: 'btn btn-sm btn-danger'
+
+.pull-right
+  = link_to t('admin/vertical_menu_module.new_link'),
+    new_admin_vertical_menu_content_vertical_menu_link_path(@admin_vertical_menu_content),
+    class: 'btn btn-primary'
+
+
+= link_to 'Back', admin_vertical_menu_contents_path

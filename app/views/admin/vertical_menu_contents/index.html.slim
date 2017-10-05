@@ -1,0 +1,34 @@
+h1 = t('vertical_menu_content')
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+
+    thead
+      tr
+        th Name
+        th Links
+        th  colspan=3
+
+
+    tbody
+      - @admin_vertical_menu_contents.each do |admin_vertical_menu_content|
+        tr
+          td = admin_vertical_menu_content.name
+          td = admin_vertical_menu_content.vertical_menu_links.count
+          td
+            .pull-right
+              .btn-group
+                = link_to t('admin/vertical_menu_module.edit_links'),
+                  admin_vertical_menu_content,
+                  class: 'btn btn-sm btn-primary'
+                = link_to t('admin/vertical_menu_module.edit_name'),
+                  edit_admin_vertical_menu_content_path(admin_vertical_menu_content),
+                  class: 'btn btn-sm btn-secondary'
+                = link_to t('delete'),
+                  admin_vertical_menu_content, data: { confirm: 'Are you sure?' }, method: :delete,
+                  class: 'btn btn-sm btn-danger'
+
+br
+.pull-right
+  = link_to t('new'),
+    new_admin_vertical_menu_content_path,
+    class: 'btn btn-primary'

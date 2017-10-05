@@ -1,14 +1,7 @@
 class Admin::BlogPostsController < AdminController
   before_action :set_admin_blog_post, only: %i[show edit update destroy]
 
-  # GET /admin/blog_posts
-  # GET /admin/blog_posts.json
-  # def index
-  #   @admin_blog_posts = Admin::BlogPost.all
-  # end
-
   # GET /admin/blog_posts/1
-  # GET /admin/blog_posts/1.json
   def show
   end
 
@@ -22,41 +15,19 @@ class Admin::BlogPostsController < AdminController
   def edit
   end
 
-  # POST /admin/blog_posts
-  # POST /admin/blog_posts.json
-  # def create
-  #   @admin_blog_module       = Admin::BlogModule.find(params[:blog_module_id])
-  #   @admin_blog_post         = @admin_blog_module.posts.new(admin_blog_post_params)
-  #   @admin_blog_post.user_id = current_user.id
-  #   if @admin_blog_post.save
-  #     redirect_to admin_page_path(@admin_blog_module.page)
-  #   else
-  #     render :new
-  #   end
-  # end
-
   # PATCH/PUT /admin/blog_posts/1
-  # PATCH/PUT /admin/blog_posts/1.json
   def update
-    respond_to do |format|
-      if @admin_blog_post.update(admin_blog_post_params)
-        format.html { redirect_to @admin_blog_post, notice: 'Blog post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_blog_post }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_blog_post.errors, status: :unprocessable_entity }
-      end
+    if @admin_blog_post.update(admin_blog_post_params)
+      redirect_to @admin_blog_post
+    else
+      render :edit
     end
   end
 
   # DELETE /admin/blog_posts/1
-  # DELETE /admin/blog_posts/1.json
   def destroy
     @admin_blog_post.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_blog_posts_url, notice: 'Blog post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to admin_blog_posts_url
   end
 
   private

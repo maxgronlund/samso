@@ -5,14 +5,20 @@ class PostsController < ApplicationController
   def show
     @blog_post = Admin::BlogPost.find(params[:id])
     @page = @blog_post.post_page
-    @landing_page = landing_page
-    if @page.require_subscription
-      unless current_user && current_user.access_to_subscribed_content?
-        store_page_in_session
-        @page = admin_system_setup.subscription_page
-      end
+    if @page.nil?
+      render_404
+      return
     end
+    @landing_page = landing_page
+    confirm_page
     render 'pages/show'
+  end
+
+  def confirm_page
+    return unless @page.require_subscription
+    return if current_user && current_user.access_to_subscribed_content?
+    store_page_in_session
+    @page = admin_system_setup.subscription_page
   end
 
   # GET /admin/posts/new
@@ -39,7 +45,8 @@ class PostsController < ApplicationController
     current_user
     @blog_post.user = current_user
     if @blog_post.save!
-      redirect_to page_path(@blog_post.post_page)
+      @blog_module.clear_page_cache
+      redirect_to page_path(@blog_module.page)
     else
       render :new
     end
@@ -47,8 +54,10 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /admin/posts/1
   def update
+    @blog_module = Admin::BlogModule.find(params[:blog_id])
     if @post.update(post_params)
-      redirect_to page_path(@post.page)
+      @post.clear_page_cache
+      redirect_to page_path(@blog_module.page)
     else
       @blog_module = Admin::BlogModule.find(params[:blog_id])
       render :edit

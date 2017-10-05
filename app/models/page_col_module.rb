@@ -2,6 +2,7 @@
 class PageColModule < ApplicationRecord
   belongs_to :page_col
   belongs_to :moduleable, polymorphic: true
+  scope :ordered, -> { order('position ASC') }
 
   def modulable_path
     moduleable.class.name.underscore.gsub('admin/', '') + 's/show'
