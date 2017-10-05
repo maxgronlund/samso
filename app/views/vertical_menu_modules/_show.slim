@@ -1,2 +1,9 @@
 - vertical_menu = modulable
-h3 = vertical_menu.name
+- vertical_menu_content = vertical_menu.vertical_menu_content
+-if vertical_menu_content
+  .page-links
+    - vertical_menu_content.vertical_menu_links.each do |vertical_menu_link|
+      = link_to page_url(vertical_menu_link.page_id) do
+        . style="#{vertical_menu_link.style}"
+          . style="#{vertical_menu_link.link_style}"
+            = vertical_menu_link.title

@@ -1,11 +1,16 @@
-.row
-  .col-12
-    .mb-10.mt-4
-      '&nbsp;
-      .pull-right
-        .btn-group
+.col-admin-header.mb-5
+  .pb-10.pt-5
+    = t('admin/dmi_module.name')
+    .pull-right
+      .btn-group
           = link_to t('edit'),
             edit_admin_dmi_module_path(modulable),
             class: 'btn btn-sm btn-secondary'
 
-= render 'page_link_modules/show', modulable: modulable
+          = link_to t('delete'), 
+            admin_page_col_page_col_module_path( modulable.page_col, modulable.page_col_module),
+            data: { confirm: t('are_you_sure') },
+            method: :delete,
+            class: 'btn btn-danger btn-sm'
+
+= render 'dmi_modules/show', modulable: modulable

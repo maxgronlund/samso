@@ -147,25 +147,6 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "admin_page_link_modules", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "admin_page_links", force: :cascade do |t|
-    t.string "name"
-    t.integer "position", default: 0
-    t.string "page_id"
-    t.string "background_color", default: "none"
-    t.string "color", default: "#000"
-    t.integer "page_link_module_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["page_id"], name: "index_admin_page_links_on_page_id"
-    t.index ["page_link_module_id"], name: "index_admin_page_links_on_page_link_module_id"
-  end
-
   create_table "admin_post_modules", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false

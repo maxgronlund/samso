@@ -15,3 +15,6 @@ da:
   
   admin/vertical_menu_module:
     name: Vertikal menu module
+
+  admin/vertical_menu_content:
+    new: Opret inhold for vertical menu

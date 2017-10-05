@@ -1,6 +1,6 @@
 div class="section-slot #{page_col.layout}"
   - page_col.page_col_modules.each do |page_col_module|
     .mb-20
-      = render page_col_module.modulable_path, modulable: page_col_module.moduleable
+      = render "/#{page_col_module.modulable_path}", modulable: page_col_module.moduleable
 
 

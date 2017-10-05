@@ -1,7 +1,6 @@
-- cache @page.cache_key do
-  = render 'shared/navbar', menu: @menu, top_page: @page
+= render 'shared/navbar', menu: @menu, top_page: @page
+- cache @page do
   = render 'pages/show', page: @page
-
   - if @footer
     .fixed-bottom
       .footer

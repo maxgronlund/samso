@@ -31,6 +31,7 @@ class Admin::VerticalMenuLinksController < AdminController
       .vertical_menu_links.new(admin_vertical_menu_link_params)
 
     if @admin_vertical_menu_link.save
+      @admin_vertical_menu_link.clear_page_cache
       redirect_to @admin_vertical_menu_content
     else
       render :new
@@ -40,6 +41,7 @@ class Admin::VerticalMenuLinksController < AdminController
   # PATCH/PUT /admin/vertical_menu_links/1
   def update
     if @admin_vertical_menu_link.update(admin_vertical_menu_link_params)
+      @admin_vertical_menu_link.clear_page_cache
       redirect_to @admin_vertical_menu_content
     else
       render :edit

@@ -1,13 +1,8 @@
 class PagesController < ApplicationController
   # GET /pages/1
   def show
-    set_menu
-    ap '==================='
-    @page =
-      Page
-      .includes(page_rows: [page_cols: [:page_col_modules]])
-      .find(params[:id])
-    # @page = Page.find(params[:id])
+    ap '======================='
+    @page = Page.find(params[:id])
     @landing_page    = admin_system_setup.landing_page
     @footer          = @page.footer
 

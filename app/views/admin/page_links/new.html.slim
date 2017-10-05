@@ -1,4 +1,0 @@
-h3 = t('new_model', model_name: Admin::PageLink.model_name.human)
-hr
-= simple_form_for [:admin, @admin_page_link_module, @admin_page_link], url: url_for(action: 'create', controller: 'admin/page_links'), method: 'post' do |f|
-  == render 'form', f: f

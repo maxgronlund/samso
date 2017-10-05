@@ -15,4 +15,9 @@ class Admin::SystemSetup < ApplicationRecord
   def welcome_page
     Page.find_by(locale: locale, id: welcome_page_id)
   end
+
+  # usage Admin::SystemSetup.clear_page_cache
+  def self.clear_page_cache
+    Page.find_each(&:touch)
+  end
 end

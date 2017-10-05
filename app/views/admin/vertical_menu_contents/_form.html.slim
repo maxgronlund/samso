@@ -1,8 +1,10 @@
 = simple_form_for(@admin_vertical_menu_content) do |f|
   = f.error_notification
-
   .form-inputs
     = f.input :name
 
   .form-actions
-    = f.button :submit
+    .pull-right
+      .btn-group
+        = link_to t('cancel'), admin_vertical_menu_contents_path, class: 'btn btn-secondary'
+        = f.submit t('save'), class: 'btn btn-primary'

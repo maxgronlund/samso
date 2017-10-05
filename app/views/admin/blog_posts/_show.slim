@@ -1,5 +1,3 @@
-= render 'post/show', modulable: modulable
-
 .pb-10.pt-5
   '&nbsp;
   .pull-right
@@ -13,6 +11,10 @@
         data: { confirm: t('are_you_sure') },
         method: :delete,
         class: 'btn btn-danger btn-sm'
+        
+= render 'post/show', modulable: modulable
+
+
 
 
 

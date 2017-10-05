@@ -27,4 +27,8 @@ class Admin::BlogPost < ApplicationRecord
   def post_page
     blog_module.show_on_page
   end
+
+  def clear_page_cache
+    blog_module.clear_page_cache
+  end
 end
