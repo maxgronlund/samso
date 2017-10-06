@@ -20,8 +20,8 @@ An user can be granded one or many roles
 For developers
 The core is super simple and easy to understand.
 There is no hidden framework to understand.
-All that's happens is a set of files is installed 
-As a developer you will find no magic code no DSL to learn 
+All that's happens is a set of files is installed
+As a developer you will find no magic code no DSL to learn
 it's easy to understand and expand, you deside what features
 to include so ther is no dead code to make noice.
 
@@ -62,7 +62,15 @@ Things you may want to cover:
 
 
 * How to run the test suite
-  $ rake
+  # Run only model specs
+  $ bundle exec rspec spec/models
+
+  # Run only specs for AccountsController
+  $ bundle exec rspec spec/controllers/accounts_controller_spec.rb
+
+  # Run only spec on line 8 of AccountsController
+  $ bundle exec rspec spec/controllers/accounts_controller_spec.rb:8
+
 
 * Services (job queues, cache servers, search engines, etc.)
   $ heroku logs --tail --app samso
