@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Admin calendar:
+  = @admin_calendar_event.admin_calendar
+p
+  strong Title:
+  = @admin_calendar_event.title
+
+= link_to 'Edit', edit_admin_calendar_event_path(@admin_calendar_event)
+'  |
+= link_to 'Back', admin_calendar_events_path

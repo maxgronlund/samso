@@ -1,0 +1,9 @@
+= simple_form_for [@admin_calendar, @admin_calendar_event] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.hidden_field :admin_calendar_id, value: @admin_calendar.id
+    = f.input :title
+
+  .form-actions
+    = f.button :submit

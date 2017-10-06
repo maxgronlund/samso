@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001200010) do
+ActiveRecord::Schema.define(version: 20171006161248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,28 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.datetime "image_updated_at"
     t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
+  end
+
+  create_table "admin_calendar_events", force: :cascade do |t|
+    t.bigint "admin_calendar_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_calendar_id"], name: "index_admin_calendar_events_on_admin_calendar_id"
+  end
+
+  create_table "admin_calendar_modules", force: :cascade do |t|
+    t.string "name"
+    t.bigint "admin_calendar_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_calendar_id"], name: "index_admin_calendar_modules_on_admin_calendar_id"
+  end
+
+  create_table "admin_calendars", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_carousel_modules", force: :cascade do |t|
@@ -370,6 +392,7 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admin_calendar_events", "admin_calendars"
   add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "page_col_modules", "page_cols"
   add_foreign_key "page_cols", "page_rows"

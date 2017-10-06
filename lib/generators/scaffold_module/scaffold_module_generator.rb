@@ -2,9 +2,9 @@
 class ScaffoldModuleGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
-  def create_views_directory
-    empty_directory "app/views/admin/#{file_name}"
-  end
+  # def create_views_directory
+  #   empty_directory "app/views/admin/#{file_name}"
+  # end
 
   def generate_views
     template 'views/admin/_show.erb', "app/views/admin/#{file_name}_modules/_show.slim"

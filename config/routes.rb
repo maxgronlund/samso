@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
+
+      resources :calendars do
+        resources :calendar_events
+      end
+      resources :calendar_modules, only: %i[edit update show]
       resources :carousel_modules, only: %i[edit update show] do
         resources :carousel_slides
       end

@@ -1,0 +1,17 @@
+da:
+  activerecord:
+    models:
+      admin/calendar_module:
+        one: Kalender
+        other: Kalenderer
+    attributes:
+      admin/calendar_module:
+        name:  Navn
+
+  calendar_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/calendar_module:
+    name: Kalender modul

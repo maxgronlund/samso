@@ -51,6 +51,13 @@ aside.sidebar
           = link_to admin_vertical_menu_contents_path
             i.fa.fa-list
             = t('vertical_menus')
+        li class="#{@selected == 'calendars' ? 'active' : ''}"
+          = link_to admin_calendars_path
+            i.fa.fa-list
+            = t('calendars')
+
+        
+
 
 
         / li class="#{@selected == 'contents' ? 'active' : ''}"

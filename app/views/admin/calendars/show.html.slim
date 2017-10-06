@@ -1,0 +1,16 @@
+p#notice = notice
+
+p
+  strong Admin calendar module:
+  = @admin_calendar.admin_calendar_module
+p
+  strong Title:
+  = @admin_calendar.title
+
+
+= link_to t('calendar.new_event'), new_admin_calendar_calendar_event_path(@admin_calendar), class: 'btn btn-success'
+br
+
+= link_to 'Edit', edit_admin_calendar_path(@admin_calendar)
+'  |
+= link_to 'Back', admin_calendars_path

@@ -1,0 +1,23 @@
+h1 Listing admin_calendars
+
+table
+  thead
+    tr
+      th Admin calendar module
+      th Title
+      th
+      th
+      th
+
+  tbody
+    - @admin_calendars.each do |admin_calendar|
+      tr
+        td = admin_calendar.admin_calendar_module
+        td = admin_calendar.title
+        td = link_to 'Show', admin_calendar
+        td = link_to 'Edit', edit_admin_calendar_path(admin_calendar)
+        td = link_to 'Destroy', admin_calendar, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Calendar', new_admin_calendar_path
