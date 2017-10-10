@@ -45,3 +45,8 @@ da:
     search:
       show_all: Vis alle
       submit: Søg
+    sign_in_count: 'Gange logget ind: '
+    last_sign_in_at: 'Sidst logget ind: '
+    current_sign_in_at: 'Logget ind: '
+    last_sign_in_ip: 'Sidst logget ind fra IP: '
+    current_sign_in_ip: 'Logget ind fra IP: '

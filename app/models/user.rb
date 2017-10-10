@@ -4,7 +4,7 @@ class User < ApplicationRecord
   multisearchable against: %i[name email]
   pg_search_scope :search_by_name_or_emai, against: %i[name email]
   has_secure_password
-
+  attr_accessor :delete_avatar
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :payments, dependent: :destroy
@@ -16,12 +16,16 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
     square: '200x200#',
-    medium: '300x300>',
-    default_url: ':style/missing_avatar.jpg'
-  }
+    medium: '300x300>'
+  }, default_url: 'https://s3.amazonaws.com/samso-images/users/avatars/defaults/:style/missing.png'
+
+
+  # http://s3.amazonaws.com/samso-images/avatars/defaults/square/missing.png
+  # https://s3.amazonaws.com/samso-images/users/avatars/defaults/square/missing.png
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
+  before_validation { avatar.clear if delete_avatar == '1' }
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :name, presence: true

@@ -1,8 +1,7 @@
 h1 Editing admin_calendar_event
 
-== render 'form'
 
-= link_to 'Show', @admin_calendar_event
-'  |
-= link_to 'Back', admin_calendar_events_path
+/= debug @admin_calendar_event
+= simple_form_for [ @admin_calendar, @admin_calendar_event], url: url_for(action: 'update', controller: 'admin/calendar_events'), method: 'put' do |f|
+  == render 'form', f: f, admin_calendar: @admin_calendar
 

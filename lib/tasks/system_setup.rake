@@ -6,14 +6,14 @@ namespace :system_setup do
     @result = { status: :ok, reason: '' }
     locales =
       [
-        { locale: 'en', translation: 'English', name: 'frone page' },
+        { locale: 'en', translation: 'English', name: 'Front page' },
         { locale: 'da', translation: 'Dansk', name: 'Forside' }
       ]
     ActiveRecord::Base.transaction do
       locales.each do |locale|
         footer = build_footer(locale)
-        page = build_landing_page(locale, footer.id) unless @result[:status] == :error
-        build_system_setup(locale, page.id) unless @result[:status] == :error
+        landing_page = build_landing_page(locale, footer.id) unless @result[:status] == :error
+        build_system_setup(locale, landing_page.id) unless @result[:status] == :error
       end
       raise ActiveRecord::Rollback if @result[:status] == :error
     end
@@ -28,13 +28,10 @@ namespace :system_setup do
         locale: locale[:locale]
       }
     Admin::Footer.where(params).first_or_create(params)
-  rescue => e
-    ap e.message
-    ap e.backtrace
+  rescue
     @result = { status: :error, reason: 'Unable to build footer' }
   end
 
-  # rubocop:disable Metrics/MethodLength
   def build_landing_page(locale, footer_id)
     user = User.super_admin
     params =
@@ -48,9 +45,7 @@ namespace :system_setup do
         admin_footer_id: footer_id
       }
     Page.where(params).first_or_create(params)
-  rescue => e
-    ap e.message
-    ap e.backtrace
+  rescue
     @result = { status: :error, reason: 'Unable to build landing page' }
   end
 
@@ -63,9 +58,7 @@ namespace :system_setup do
         maintenance: false
       }
     Admin::SystemSetup.where(params).first_or_create(params)
-  rescue => e
-    ap e.message
-    ap e.backtrace
+  rescue
     @result = { status: :error, reason: 'Unable to  build system setup' }
   end
 end

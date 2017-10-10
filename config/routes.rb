@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       resources :gallery_images, only: %i[edit update]
       resources :gallery_modules, only: %i[edit update]
       resources :image_modules, only: %i[edit update]
+      resources :menu_contents do
+        resources :menu_links
+      end
+      resources :menu_modules
       resources :pages do
         resources :page_rows
       end
@@ -43,10 +47,6 @@ Rails.application.routes.draw do
       resources :system_setups, only: %i[edit update]
       resources :text_modules
       resources :users
-      resources :vertical_menu_contents do
-        resources :vertical_menu_links
-      end
-      resources :vertical_menu_modules
     end
 
     resources :admin, only: %i[index]

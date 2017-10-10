@@ -1,5 +1,8 @@
+
 h1 New admin_calendar_event
+/= debug @admin_calendar_event
+= simple_form_for [ @admin_calendar, @admin_calendar_event], url: url_for(action: 'create', controller: 'admin/calendar_events'), method: 'post' do |f|
+  == render 'form', f: f, admin_calendar: @admin_calendar
 
-== render 'form'
-
-= link_to 'Back', admin_calendar_events_path
+/= link_to 'Back', admin_calendar_events_path
+/ = simple_form_for [:admin, @admin_carousel_module, @admin_carousel_slide], multipart: true, url: url_for(action: 'create', controller: 'admin/carousel_slides'), method: 'post' do |f|

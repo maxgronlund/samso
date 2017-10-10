@@ -60,27 +60,38 @@ class User < ApplicationRecord
       SecureRandom.uuid + User::FAKE_EMAIL
     end
 
-    # rubocop:disable Metrics/MethodLength
     def create_or_update_user(options = {})
       user = find_or_create_user(options)
       return if user.nil?
+      secure_email(user, options)
+      secure_password(user, options)
+
+      user.save(validate: false)
+      attach_role(user)
+      options[:user_id] = user.id
+      create_or_update_subscription(options)
+    rescue
+      Rails.logger.info '===================== unable to import user ====================='
+      Rails.logger.info options
+      Rails.logger.info '================================================================='
+    end
+
+    def secure_email(user, options)
       User::Service.sanitize_email(options)
       unless User::Service.valid_email?(options)
         options[:email] = User::Service.fake_email
       end
       user.name     = options[:navn]
       user.email    = options[:email]
+    end
+
+    def secure_password(user, options)
       if options[:password].nil?
         user.password_digest = User::Service.fake_password
       else
         user.password = options[:password]
       end
-      user.save(validate: false)
-      attach_role(user)
-      options[:user_id] = user.id
-      create_or_update_subscription(options)
     end
-    # rubocop:enable Metrics/MethodLength
 
     def create_or_update_subscription(options = {})
       return unless options[:abonnr]

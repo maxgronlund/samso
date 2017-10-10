@@ -19,6 +19,7 @@ class CreatePages < ActiveRecord::Migration[5.1]
       t.integer :page_rows_count, default: 0
       t.string :background_color, default: 'none'
       t.belongs_to :admin_footer, foreign_key: true
+      t.boolean :cache_page, default: false
 
       t.timestamps
     end

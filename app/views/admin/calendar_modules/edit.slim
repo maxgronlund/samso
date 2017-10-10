@@ -10,6 +10,11 @@
         = f.input :position, as: :integer
       .col-sm-3
         = f.input :name
+        = f.input :admin_calendar_id, collection: Admin::Calendar.all
+
+
+
+
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

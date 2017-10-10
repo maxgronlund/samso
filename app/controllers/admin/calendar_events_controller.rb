@@ -1,6 +1,6 @@
-class Admin::CalendarEventsController < ApplicationController
-  before_action :set_admin_calendar_event, only: [:show, :edit, :update, :destroy]
-   before_action :set_admin_calendar, only: %i[show new edit update destroy]
+class Admin::CalendarEventsController < AdminController
+  before_action :set_admin_calendar_event, only: %i[show edit update destroy]
+  before_action :set_admin_calendar, only: %i[index show new edit update destroy create]
 
   # GET /admin/calendar_events
   def index
@@ -13,7 +13,8 @@ class Admin::CalendarEventsController < ApplicationController
 
   # GET /admin/calendar_events/new
   def new
-    @admin_calendar_event = Admin::CalendarEvent.new
+    @admin_calendar_event =
+      @admin_calendar.events.new
   end
 
   # GET /admin/calendar_events/1/edit
@@ -22,10 +23,11 @@ class Admin::CalendarEventsController < ApplicationController
 
   # POST /admin/calendar_events
   def create
-    @admin_calendar_event = Admin::CalendarEvent.new(admin_calendar_event_params)
+    @admin_calendar_event =
+      @admin_calendar.events.new(admin_calendar_event_params)
 
     if @admin_calendar_event.save
-      redirect_to @admin_calendar_event, notice: 'Calendar event was successfully created.'
+      redirect_to @admin_calendar, notice: 'Event was successfully created.'
     else
       render :new
     end
@@ -34,7 +36,7 @@ class Admin::CalendarEventsController < ApplicationController
   # PATCH/PUT /admin/calendar_events/1
   def update
     if @admin_calendar_event.update(admin_calendar_event_params)
-      redirect_to @admin_calendar_event, notice: 'Calendar event was successfully updated.'
+      redirect_to @admin_calendar, notice: 'Calendar event was successfully updated.'
     else
       render :edit
     end
@@ -54,13 +56,20 @@ class Admin::CalendarEventsController < ApplicationController
   end
 
   def set_admin_calendar
-    ap @admin_calendar = Admin::Calendar.find(params[:calendar_id])
+    @admin_calendar = Admin::Calendar.find(params[:calendar_id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def admin_calendar_event_params
     params
-    require(:admin_calendar_event)
-      .permit(:admin_calendar_id, :title)
+      .require(:admin_calendar_event)
+      .permit(
+        :calendar_id,
+        :title,
+        :body,
+        :start_time,
+        :end_time,
+        :gmap
+      )
   end
 end

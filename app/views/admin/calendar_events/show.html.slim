@@ -2,11 +2,21 @@ p#notice = notice
 
 p
   strong Admin calendar:
-  = @admin_calendar_event.admin_calendar
+  = @admin_calendar_event.calendar.title
 p
   strong Title:
   = @admin_calendar_event.title
 
-= link_to 'Edit', edit_admin_calendar_event_path(@admin_calendar_event)
+p
+  strong Start tid:
+
+  = l @admin_calendar_event.start_time
+
+p
+  strong GMap:
+  br
+  = raw @admin_calendar_event.gmap
+
+= link_to 'Edit', edit_admin_calendar_calendar_event_path(@admin_calendar, @admin_calendar_event)
 '  |
-= link_to 'Back', admin_calendar_events_path
+= link_to 'Back', @admin_calendar

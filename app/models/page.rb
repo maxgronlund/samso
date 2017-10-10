@@ -56,8 +56,6 @@ class Page < ApplicationRecord
   def deletable?
     return false if Admin::SystemSetup.where(locale: locale, landing_page_id: id).any?
     return false if Admin::SystemSetup.where(locale: locale, subscription_page_id: id).any?
-    return false if Admin::SystemSetup.where(locale: locale, post_page_id: id).any?
-    return false if Admin::SystemSetup.where(locale: locale, welcome_page_id: id).any?
     true
   end
 

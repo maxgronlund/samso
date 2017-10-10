@@ -1,7 +1,10 @@
 class PagesController < ApplicationController
   # GET /pages/1
   def show
-    @page = Page.find(params[:id])
+    @page =
+      Page
+      .includes(page_rows: [page_cols: [:page_col_modules]])
+      .find(params[:id])
     @landing_page    = admin_system_setup.landing_page
     @footer          = @page.footer
 
@@ -10,7 +13,6 @@ class PagesController < ApplicationController
   rescue
     render_404
   end
-  # rubocop:enable Metrics/AbcSize
 
   private
 

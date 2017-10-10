@@ -1,9 +1,6 @@
 p#notice = notice
 
-p
-  strong Admin calendar module:
-  = @admin_calendar.admin_calendar_module
-p
+
   strong Title:
   = @admin_calendar.title
 
@@ -14,3 +11,37 @@ br
 = link_to 'Edit', edit_admin_calendar_path(@admin_calendar)
 '  |
 = link_to 'Back', admin_calendars_path
+
+
+h1 Listing admin_calendar_events
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+
+        th Title
+        th Start time
+        th End time
+        th
+
+
+    tbody
+      - @admin_calendar.events.each do |event|
+        tr
+
+          td = event.title
+          td = l event.start_time
+          td = l event.end_time
+          td
+            .pull-right
+              .btn-group
+                = link_to 'Show',
+                  admin_calendar_calendar_event_path(@admin_calendar, event),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to 'Edit',
+                  edit_admin_calendar_calendar_event_path(@admin_calendar, event),
+                  class: 'btn btn-primary btn-sm'
+                = link_to 'Destroy',
+                  admin_calendar_calendar_event_path(@admin_calendar, event), data: { confirm: 'Are you sure?' }, method: :delete,
+                  class: 'btn btn-danger btn-sm'

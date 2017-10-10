@@ -18,7 +18,7 @@ h3 = t('pages')
           td
             - unless page.menu_id == 'not_in_any_menus'
               = page.menu_position
-              ' : 
+              ' :
               = t('page.menu.' + page.menu_id)
           td = page.active ? '√' : ''
           td = page.author_name
@@ -33,5 +33,5 @@ h3 = t('pages')
                 - else
                   = link_to t('delete'), '#', class: 'btn btn-danger btn-sm disabled'
 br
-
-= link_to 'Opret side', new_admin_page_path, class: 'btn btn-primary'
+.pull-right
+  = link_to 'Opret side', new_admin_page_path, class: 'btn btn-primary'

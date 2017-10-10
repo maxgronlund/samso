@@ -3,7 +3,7 @@ h1 Listing admin_calendar_events
 table
   thead
     tr
-      th Admin calendar
+      th Calendar
       th Title
       th
       th
@@ -12,12 +12,13 @@ table
   tbody
     - @admin_calendar_events.each do |admin_calendar_event|
       tr
-        td = admin_calendar_event.admin_calendar
+        td = admin_calendar_event.calendar.title
         td = admin_calendar_event.title
-        td = link_to 'Show', admin_calendar_event
-        td = link_to 'Edit', edit_admin_calendar_event_path(admin_calendar_event)
-        td = link_to 'Destroy', admin_calendar_event, data: { confirm: 'Are you sure?' }, method: :delete
+        td
+          = link_to 'Show', admin_calendar_calendar_event_path(admin_calendar_event.calendar, admin_calendar_event)
+          = link_to 'Edit', edit_admin_calendar_calendar_event_path(admin_calendar_event.calendar, admin_calendar_event)
+          = link_to 'Destroy', admin_calendar_calendar_event_path(admin_calendar_event.calendar, admin_calendar_event), data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
-= link_to 'New Calendar event', new_admin_calendar_event_path
+/= link_to 'New Calendar event', new_admin_calendar_event_path

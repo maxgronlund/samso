@@ -1,0 +1,19 @@
+.row
+  h3 = t('edit_model', model_name: @menu_module.model_name.human)
+
+= simple_form_for [:admin, @menu_module], url: url_for(action: 'update', controller: 'admin/menu_modules'), method: 'put' do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+        = f.input :layout , collection: Admin::MenuModule::LAYOUTS
+        = f.input :margin_bottom, as: :integer
+      .col-sm-3
+        = f.input :name
+        = f.input :menu_content_id, collection: Admin::MenuContent.all
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+

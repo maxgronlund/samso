@@ -1,2 +1,5 @@
-- calendar = modulable
-h3 = calendar.name
+- calendar_module = modulable
+h3 = calendar_module.name
+- calendar_module.events.each do |event|
+  = event.title
+  br

@@ -3,7 +3,6 @@ h1 Listing admin_calendars
 table
   thead
     tr
-      th Admin calendar module
       th Title
       th
       th
@@ -12,7 +11,6 @@ table
   tbody
     - @admin_calendars.each do |admin_calendar|
       tr
-        td = admin_calendar.admin_calendar_module
         td = admin_calendar.title
         td = link_to 'Show', admin_calendar
         td = link_to 'Edit', edit_admin_calendar_path(admin_calendar)

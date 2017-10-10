@@ -30,7 +30,8 @@ class Admin::CalendarModulesController < AdminController
   def calendar_module_params
     params.require(:admin_calendar_module).permit(
       :position,
-      :name
+      :name,
+      :admin_calendar_id
     )
   end
 end

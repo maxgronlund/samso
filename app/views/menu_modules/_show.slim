@@ -1,0 +1,5 @@
+- menu_module = modulable
+- menu_content = menu_module.menu_content
+- unless menu_content.nil?
+  == render "menu_modules/layouts/#{menu_module.layout}",
+    menu_content: menu_module.menu_content

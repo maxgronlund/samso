@@ -48,15 +48,15 @@ aside.sidebar
             i.fa.fa-file-text
             = t('system_messages')
         li class="#{@selected == 'csv_imports' ? 'active' : ''}"
-          = link_to admin_vertical_menu_contents_path
+          = link_to admin_menu_contents_path
             i.fa.fa-list
-            = t('vertical_menus')
+            = t('menus')
         li class="#{@selected == 'calendars' ? 'active' : ''}"
           = link_to admin_calendars_path
             i.fa.fa-list
             = t('calendars')
 
-        
+
 
 
 
