@@ -8,10 +8,27 @@ da:
       admin/calendar_module:
         name:  Navn
 
+      admin/calendar_event:
+        title:  Navn
+        body:  beskrivelse
+        start_time:  Start tidspunkt
+        end_time:  Slut tidspunkt
+        gmap:  Google map
+
   calendar_module:
     fo: Fo
     bar: Bar
 
-  
   admin/calendar_module:
     name: Kalender modul
+
+
+
+  admin/calendar:
+    index: Kalenderer
+    new: Opret kalender
+    title: Navn
+    start_time: Start tidspunkt
+    end_time: Slut tidspunkt
+    new_event: Opret begivenhed
+

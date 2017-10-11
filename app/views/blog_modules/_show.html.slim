@@ -1,10 +1,10 @@
 - blog_module = modulable
 
-= form_tag blog_path(@page), method: 'get' do 
+= form_tag blog_path(@page), method: 'get' do
   = hidden_field_tag 'blog_module_id', blog_module.id
   .row
     .col-sm-6.mt-5
-      = text_field_tag :search, params[:search], class: 'form-control' 
+      = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6.mt-5
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
@@ -23,10 +23,10 @@
     'Nothing found
   - else
     - found_posts.each do |post|
-      = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
+      = render 'blog_modules/simple_blog_post', blog_module: blog_module, post: post
 - else
   - blog_module.paginated_posts(params[:page]).each do |post|
-    = render 'blog_modules/simple_blog_post', blog: blog_module, post: post
+    = render 'blog_modules/simple_blog_post', blog_module: blog_module, post: post
 
   .row
     .col-sm-12

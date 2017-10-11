@@ -1,6 +1,6 @@
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
-  belongs_to :blog_module, class_name: 'Admin::BlogModule', counter_cache: true
+  belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true
   belongs_to :user, class_name: 'User', counter_cache: true
   has_attached_file :image, styles: {
     medium: '300x300>',
@@ -16,19 +16,11 @@ class Admin::BlogPost < ApplicationRecord
     blog_module.page
   end
 
-  def blog
-    blog_module
-  end
-
   def image_url(size)
     image.url(size)
   end
 
-  def post_page
-    blog_module.show_on_page
-  end
-
   def clear_page_cache
-    blog_module.clear_page_cache
+    blog.clear_cache_on_pages
   end
 end

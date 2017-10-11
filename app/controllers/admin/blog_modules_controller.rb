@@ -28,7 +28,8 @@ class Admin::BlogModulesController < AdminController
       :layout,
       :position,
       :post_page_id,
-      :posts_pr_page
+      :posts_pr_page,
+      :admin_blog_id
     )
   end
 end

@@ -1,0 +1,18 @@
+da:
+  activerecord:
+    models:
+      admin/youtube_module:
+        one: youtube
+        other: youtubes
+    attributes:
+      admin/youtube_module:
+        name:  Name
+        snippet: Embed video kode
+
+  youtube_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/youtube_module:
+    name: Youtube modul

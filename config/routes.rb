@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
-
       resources :calendars do
         resources :calendar_events
       end
@@ -13,9 +11,10 @@ Rails.application.routes.draw do
       resources :csv_imports do
         resources :parse_csv, only: %i[new]
       end
-      resources :blog_modules, only: %i[edit update] do
-        resources :blog_posts, only: %i[edit update new create]
+      resources :blogs do
+        resources :blog_posts
       end
+      resources :blog_modules, only: %i[edit update]
       resources :dmi_modules, only: %i[edit update]
 
       resources :footers
@@ -46,6 +45,7 @@ Rails.application.routes.draw do
       resources :system_messages, only: %i[index edit update]
       resources :system_setups, only: %i[edit update]
       resources :text_modules
+      resources :youtube_modules, only: %i[edit update]
       resources :users
     end
 

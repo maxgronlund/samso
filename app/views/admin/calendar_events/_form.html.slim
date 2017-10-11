@@ -6,9 +6,9 @@
     .form-inputs
       = f.hidden_field :calendar_id, value: admin_calendar.id
       = f.input :title
-      = f.input :body
+      = f.input :body, :input_html => { rows: 10}
       = f.input :start_time
-      = f.input :end_time
+      /= f.input :end_time
       = f.input :gmap
 
     .form-actions

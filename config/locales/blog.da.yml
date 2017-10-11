@@ -1,0 +1,10 @@
+da:
+  activerecord:
+    models:
+      admin/post: Blog
+    attributes:
+      admin/blog:
+        title: Navn
+
+  admin/blog:
+    new: Opret blog

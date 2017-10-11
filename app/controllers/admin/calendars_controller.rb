@@ -1,5 +1,6 @@
 class Admin::CalendarsController < AdminController
   before_action :set_admin_calendar, only: [:show, :edit, :update, :destroy]
+  before_action :set_selected
 
   # GET /admin/calendars
   def index
@@ -22,7 +23,7 @@ class Admin::CalendarsController < AdminController
   # POST /admin/calendars
   def create
     @admin_calendar = Admin::Calendar.new(admin_calendar_params)
-
+    @admin_calendar.locale = I18n.locale
     if @admin_calendar.save
       redirect_to @admin_calendar, notice: 'Calendar was successfully created.'
     else
@@ -46,13 +47,18 @@ class Admin::CalendarsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_calendar
-      @admin_calendar = Admin::Calendar.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def admin_calendar_params
-      params.require(:admin_calendar).permit(:admin_calendar_module_id, :title)
-    end
+  def set_selected
+    @selected = 'calendars'
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_calendar
+    @admin_calendar = Admin::Calendar.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def admin_calendar_params
+    params.require(:admin_calendar).permit(:admin_calendar_module_id, :title)
+  end
 end

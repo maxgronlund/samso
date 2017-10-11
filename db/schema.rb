@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006161248) do
+ActiveRecord::Schema.define(version: 20171011195027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20171006161248) do
     t.integer "post_page_id"
     t.integer "blog_posts_count", default: 0
     t.integer "posts_pr_page", default: 10
+    t.integer "admin_blog_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end
 
@@ -34,7 +36,7 @@ ActiveRecord::Schema.define(version: 20171006161248) do
     t.text "teaser"
     t.text "body"
     t.integer "position"
-    t.integer "blog_module_id"
+    t.integer "blog_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "user_id"
@@ -44,8 +46,16 @@ ActiveRecord::Schema.define(version: 20171006161248) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
+    t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
+  end
+
+  create_table "admin_blogs", force: :cascade do |t|
+    t.string "title"
+    t.string "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "blog_posts_count", default: 0
   end
 
   create_table "admin_calendar_events", force: :cascade do |t|
@@ -71,6 +81,8 @@ ActiveRecord::Schema.define(version: 20171006161248) do
 
   create_table "admin_calendars", force: :cascade do |t|
     t.string "title"
+    t.integer "calendar_events_count"
+    t.string "locale"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -280,14 +292,21 @@ ActiveRecord::Schema.define(version: 20171006161248) do
     t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
   end
 
+  create_table "admin_youtube_modules", force: :cascade do |t|
+    t.string "name"
+    t.text "snippet"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "page_col_modules", force: :cascade do |t|
     t.bigint "page_col_id"
     t.string "moduleable_type"
     t.bigint "moduleable_id"
     t.integer "position", default: 0
+    t.integer "margin_bottom", default: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "margin_bottom", default: 20
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
     t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
   end

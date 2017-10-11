@@ -1,5 +1,6 @@
 class Admin::MenuContentsController < AdminController
   before_action :set_admin_menu_content, only: %i[show edit update destroy]
+  before_action :set_selected
 
   # GET /admin/menu_contents
   def index
@@ -46,6 +47,10 @@ class Admin::MenuContentsController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'menu_contents'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_menu_content

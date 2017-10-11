@@ -1,0 +1,21 @@
+h1 Listing admin_blogs
+
+table
+  thead
+    tr
+      th Title
+      th
+      th
+      th
+
+  tbody
+    - @admin_blogs.each do |admin_blog|
+      tr
+        td = admin_blog.title
+        td = link_to 'Show', admin_blog
+        td = link_to 'Edit', edit_admin_blog_path(admin_blog)
+        td = link_to 'Destroy', admin_blog, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Blog', new_admin_blog_path

@@ -13,7 +13,6 @@ class Admin::<%= plural_name.classify %>ModulesController < AdminController
     end
   end
 
-
   def destroy
     @<%= file_name %>.destroy
     redirect_to admin_<%= file_name %>_modules_url

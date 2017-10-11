@@ -1,8 +1,8 @@
-namespace :system_setup do
+namespace :system do
   # usage
   # $ rake system_setup:essentials
-  desc 'build essentials'
-  task essentials: :environment do
+  desc 'build essential pages'
+  task setup: :environment do
     @result = { status: :ok, reason: '' }
     locales =
       [
@@ -15,6 +15,7 @@ namespace :system_setup do
         landing_page = build_landing_page(locale, footer.id) unless @result[:status] == :error
         build_system_setup(locale, landing_page.id) unless @result[:status] == :error
       end
+      create_system_messages
       raise ActiveRecord::Rollback if @result[:status] == :error
     end
   end
@@ -60,5 +61,23 @@ namespace :system_setup do
     Admin::SystemSetup.where(params).first_or_create(params)
   rescue
     @result = { status: :error, reason: 'Unable to  build system setup' }
+  end
+
+  def create_system_messages
+    messages = [
+      { title: 'velkommen', body: '', identifier: 'welcome', locale: 'da' },
+      { title: 'welcome', body: '', identifier: 'welcome', locale: 'en' },
+      { title: 'Reset password link er sendt', body: '', identifier: 'resend_password', locale: 'da' },
+      { title: 'Reset password link is send', body: '', identifier: 'resend_password', locale: 'en' },
+      { title: 'Nyt password', body: '', identifier: 'new_password_email', locale: 'da' },
+      { title: 'New password', body: '', identifier: 'new_password_email', locale: 'en' },
+      { title: 'Bekræfte email', body: '', identifier: 'confirm_email_email', locale: 'da' },
+      { title: 'Confirm email', body: '', identifier: 'confirm_email_email', locale: 'en' }
+    ]
+    messages.each do |message|
+      Admin::SystemMessage
+        .where(identifier: message[:identifier], locale: message[:localt])
+        .first_or_create(message)
+    end
   end
 end

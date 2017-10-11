@@ -19,10 +19,6 @@ class User < ApplicationRecord
     medium: '300x300>'
   }, default_url: 'https://s3.amazonaws.com/samso-images/users/avatars/defaults/:style/missing.png'
 
-
-  # http://s3.amazonaws.com/samso-images/avatars/defaults/square/missing.png
-  # https://s3.amazonaws.com/samso-images/users/avatars/defaults/square/missing.png
-
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
   before_validation { avatar.clear if delete_avatar == '1' }
@@ -69,7 +65,9 @@ class User < ApplicationRecord
   end
 
   def avatar_url(size)
-    avatar.url(size)
+    default_url = avatar.url(size)
+    gravatar_id = Digest::MD5.hexdigest(email.downcase)
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=182&d=#{CGI.escape(default_url)}"
   end
 
   def access_to_subscribed_content?

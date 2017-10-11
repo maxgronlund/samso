@@ -7,8 +7,22 @@ class Admin::BlogPostsController < AdminController
 
   # GET /admin/blog_posts/new
   def new
-    @admin_blog_module = Admin::BlogModule.find(params[:blog_module_id])
+    @admin_blog = Admin::Blog.find(params[:blog_id])
     @admin_blog_post = Admin::BlogPost.new
+  end
+
+  # POST /admin/posts
+  def create
+    @admin_blog = Admin::Blog.find(params[:blog_id])
+    @blog_post = @admin_blog.posts.new(admin_blog_post_params)
+    @blog_post.user = current_user
+    if @blog_post.save!
+      @admin_blog.clear_cache_on_pages
+      # @blog_module.clear_page_cache
+      redirect_to admin_blog_path(@admin_blog)
+    else
+      render :new
+    end
   end
 
   # GET /admin/blog_posts/1/edit
@@ -18,7 +32,8 @@ class Admin::BlogPostsController < AdminController
   # PATCH/PUT /admin/blog_posts/1
   def update
     if @admin_blog_post.update(admin_blog_post_params)
-      redirect_to @admin_blog_post
+      @admin_blog.clear_cache_on_pages
+      redirect_to admin_blog_path(@admin_blog)
     else
       render :edit
     end
@@ -27,14 +42,14 @@ class Admin::BlogPostsController < AdminController
   # DELETE /admin/blog_posts/1
   def destroy
     @admin_blog_post.destroy
-    redirect_to admin_blog_posts_url
+    redirect_to admin_blog_url(@admin_blog)
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_blog_post
-    @page = Page.find(params[:page_id])
+    @admin_blog = Admin::Blog.find(params[:blog_id])
     @admin_blog_post = Admin::BlogPost.find(params[:id])
   end
 

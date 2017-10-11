@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   # GET /admin/posts/1
   def show
     @blog_post = Admin::BlogPost.find(params[:id])
-    @page = @blog_post.post_page
+    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @page = @blog_module.show_on_page
     if @page.nil?
       render_404
       return
@@ -42,7 +43,6 @@ class PostsController < ApplicationController
   def create
     @blog_module = Admin::BlogModule.find(params[:blog_id])
     @blog_post = @blog_module.posts.new(post_params)
-    current_user
     @blog_post.user = current_user
     if @blog_post.save!
       @blog_module.clear_page_cache

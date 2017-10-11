@@ -1,0 +1,11 @@
+= f.input :title
+= f.input :body, :input_html => { rows: 10}
+
+= f.hidden_field :blog_id, value: @admin_blog.id
+/= f.association :user
+
+.form-actions
+  .pull-right
+    = f.submit t('save'), class: 'btn btn-primary'
+
+

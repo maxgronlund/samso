@@ -1,38 +1,37 @@
-p#notice = notice
+.row
+  .col-sm-6
+    h3 = @admin_calendar.title
+  .col-sm-6
+    .pull-right
+      .btn-group
+        = link_to t('back'), admin_calendars_path, class: 'btn btn-secondary'
+        = link_to t('edit'), edit_admin_calendar_path(@admin_calendar), class: 'btn btn-secondary'
 
 
-  strong Title:
-  = @admin_calendar.title
-
-
-= link_to t('calendar.new_event'), new_admin_calendar_calendar_event_path(@admin_calendar), class: 'btn btn-success'
-br
-
-= link_to 'Edit', edit_admin_calendar_path(@admin_calendar)
-'  |
-= link_to 'Back', admin_calendars_path
-
-
-h1 Listing admin_calendar_events
+hr
+.row
+  .col-sm-6
+    h5 Events
+  .col-md-6
+    .pull-right
+      = link_to t('admin/calendar.new_event'), new_admin_calendar_calendar_event_path(@admin_calendar), class: 'btn btn-success'
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
       tr
 
-        th Title
-        th Start time
-        th End time
+        th = t('admin/calendar.title')
+        th = t('admin/calendar.start_time')
+        / th = t('admin/calendar.end_time')
         th
-
-
     tbody
       - @admin_calendar.events.each do |event|
         tr
 
           td = event.title
           td = l event.start_time
-          td = l event.end_time
+          / td = l event.end_time
           td
             .pull-right
               .btn-group

@@ -52,26 +52,25 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def import_blog_post(options = {})
-      page        = setup_page(options)
-      blog_module = setup_blog_module(options)
-      setup_page_module(page, blog_module)
-      post = setup_blog_post(blog_module, options)
+      blog = find_or_create_blog
+      post = setup_blog_post(blog, options)
       attach_image(post, options)
     end
 
-    def setup_blog_post(blog_module, options = {})
+    def setup_blog_post(blog, options = {})
       params = {
         title: options[:titel],
         subtitle: options[:trompet],
         teaser: options[:manchet],
         body: options[:body],
         start_date: options[:startdato],
-        end_date: options[:slutdato]
+        end_date: options[:slutdato],
+        user_id: User.super_admin.id
       }
 
-      blog_module.posts.where(
+      ap blog.posts.where(
         params
-      ).first_or_create(
+      ).first_or_create!(
         params
       )
     end
@@ -84,6 +83,7 @@ class Admin::BlogPost < ApplicationRecord
       return if image_1_url == 'http://samso.dk/'
       post.image = URI.parse(image_1_url)
       post.save
+    rescue
     end
 
     def last_blog_post_possition(blog_module)
@@ -91,37 +91,45 @@ class Admin::BlogPost < ApplicationRecord
       blog_module.blog_posts.count * 100 + 100
     end
 
-    def setup_page(options = {})
-      params = {
-        title: options[:topstory],
-        locale: 'da',
-        user_id: User.super_admin.id,
-        layout: 'arkansas'
-      }
-      Page
+    def find_or_create_blog
+      params = {title: 'import', locale: 'da'}
+      @blog ||=
+        Admin::Blog
         .where(params)
         .first_or_create(params)
     end
 
-    def setup_blog_module(options = {})
-      params = {
-        name: options[:topstory]
-      }
-      Admin::BlogModule
-        .where(params)
-        .first_or_create(params)
-    end
+    # def setup_page(options = {})
+    #   params = {
+    #     title: options[:topstory],
+    #     locale: 'da',
+    #     user_id: User.super_admin.id,
+    #     layout: 'arkansas'
+    #   }
+    #   Page
+    #     .where(params)
+    #     .first_or_create(params)
+    # end
 
-    def setup_page_module(page, blog_module)
-      params = {
-        page_id: page.id,
-        moduleable_type: blog_module.class.name,
-        moduleable_id: blog_module.id,
-        slot_id: 200
-      }
-      PageModule
-        .where(params)
-        .first_or_create(params)
-    end
+    # def setup_blog_module(options = {})
+    #   params = {
+    #     name: options[:topstory]
+    #   }
+    #   Admin::BlogModule
+    #     .where(params)
+    #     .first_or_create(params)
+    # end
+
+    # def setup_page_module(page, blog_module)
+    #   params = {
+    #     page_id: page.id,
+    #     moduleable_type: blog_module.class.name,
+    #     moduleable_id: blog_module.id,
+    #     slot_id: 200
+    #   }
+    #   PageModule
+    #     .where(params)
+    #     .first_or_create(params)
+    # end
   end
 end
