@@ -1,0 +1,33 @@
+h1 Listing admin_menu_links
+
+table
+  thead
+    tr
+      th Title
+      th Page
+      th Url
+      th Active
+      th Color
+      th Background color
+      th Admin menu content
+      th
+      th
+      th
+
+  tbody
+    - @admin_menu_links.each do |admin_menu_link|
+      tr
+        td = admin_menu_link.title
+        td = admin_menu_link.page_id
+        td = admin_menu_link.url
+        td = admin_menu_link.active
+        td = admin_menu_link.color
+        td = admin_menu_link.background_color
+        td = admin_menu_link.admin_menu_content
+        td = link_to 'Show', admin_menu_link
+        td = link_to 'Edit', edit_admin_menu_link_path(admin_menu_link)
+        td = link_to 'Destroy', admin_menu_link, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New menu link', new_admin_menu_link_path

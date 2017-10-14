@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/calendar_module:
+        one: calendar
+        other: calendars
+    attributes:
+      admin/calendar_module:
+        name:  Name
+
+  calendar_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/calendar_module:
+    name: Calendar module

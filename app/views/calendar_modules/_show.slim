@@ -1,0 +1,16 @@
+- calendar_module = modulable
+h3 = calendar_module.name
+- if calendar_module.events.empty?
+  'no calender selected
+- else
+  - this_month = DateTime.new( Date.today.at_beginning_of_month.year, Date.today.at_beginning_of_month.month, 1)
+  - next_month = DateTime.new( Date.today.at_end_of_month.year, Date.today.at_beginning_of_month.month, Date.today.at_end_of_month.day, 23, 59)
+  - calendar_module.events.where("start_time >= :this_month AND start_time <= :next_month", this_month: this_month, next_month: next_month).each do |event|
+    h5 = event.title
+    i = l event.start_time
+    = simple_format event.body
+    br
+    = this_month.strftime("%B")
+    /=  l Date.today.at_beginning_of_month
+
+

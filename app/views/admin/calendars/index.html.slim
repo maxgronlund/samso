@@ -1,0 +1,27 @@
+h3 = t('admin/calendar.index')
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Title
+        th colspan=3
+
+
+    tbody
+      - @admin_calendars.each do |admin_calendar|
+        tr
+          td = admin_calendar.title
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'), admin_calendar, class: 'btn btn-secondary btn-sm'
+                = link_to t('edit'), edit_admin_calendar_path(admin_calendar), class: 'btn btn-secondary btn-sm'
+                = link_to t('delete'),
+                  admin_calendar,
+                  data: { confirm: t('confirm') }, method: :delete,
+                  class: 'btn btn-danger btn-sm'
+
+br
+.pull-right
+  = link_to t('admin/calendar.new'), new_admin_calendar_path, class: 'btn btn-primary'

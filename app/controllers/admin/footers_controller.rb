@@ -1,5 +1,6 @@
 class Admin::FootersController < AdminController
   before_action :set_admin_footer, only: %i[show edit update destroy]
+  before_action :set_selected
 
   # GET /admin/footers
   # GET /admin/footers.json
@@ -46,6 +47,10 @@ class Admin::FootersController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'footers'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_footer

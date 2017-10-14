@@ -1,6 +1,6 @@
 class GalleryImagesController < ApplicationController
   before_action :set_image, only: %i[edit update destroy]
-  before_action :set_gallery_module, only: %i[new create edit destroy]
+  before_action :set_gallery_module, only: %i[new create edit update destroy]
 
   # GET /admin/gallery_images/new
   def new

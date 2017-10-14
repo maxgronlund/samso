@@ -74,7 +74,8 @@ class Admin::PagesController < AdminController
       :footer_id,
       :body_background,
       :delete_body_background,
-      :background_color
+      :background_color,
+      :cache_page
     )
   end
 end

@@ -21,3 +21,8 @@ en:
     search:
       show_all: Show all
       submit: Search
+    sign_in_count: 'Login count: '
+    last_sign_in_at: 'Last sign in at: '
+    current_sign_in_at: 'Current sign in at: '
+    last_sign_in_ip: 'Last sign in IP: '
+    current_sign_in_ip: 'Current sign in IP: '

@@ -15,4 +15,8 @@ class PageColModule < ApplicationRecord
   def admin_modulable_path
     'admin/' + moduleable.class.name.underscore.gsub('admin/', '') + 's/show'
   end
+
+  def style
+    "margin-bottom: #{margin_bottom}px;"
+  end
 end

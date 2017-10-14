@@ -1,0 +1,28 @@
+en:
+  activerecord:
+    models:
+      admin/menu_module:
+        one: menu
+        other: menus
+    attributes:
+      admin/menu_module:
+        name:  Name
+
+  menu_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/menu_module:
+    name: Menu module
+    edit_links: Edit links
+    edit_name: Edit name
+    new_link: Add link
+
+  admin/menu_content:
+    name: Menu
+    new: Create menu
+    index: Menus
+    layouts:
+      horizontal: Horizontal
+      vertical: Vertical

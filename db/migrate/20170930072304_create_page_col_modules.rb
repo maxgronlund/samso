@@ -5,6 +5,7 @@ class CreatePageColModules < ActiveRecord::Migration[5.1]
       t.belongs_to :page_col, foreign_key: true
       t.references :moduleable, polymorphic: true
       t.integer :position, default: 0
+      t.integer :margin_bottom, default: 20
 
       t.timestamps
     end

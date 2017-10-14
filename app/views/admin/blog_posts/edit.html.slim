@@ -1,8 +1,11 @@
-h1 Editing admin_blog_post
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        .card-body
 
-== render 'form'
-
-= link_to 'Show', @admin_blog_post
-'  |
-= link_to 'Back', admin_blog_posts_path
+          h3 = t('new_model', model_name: Admin::BlogPost.model_name.human)
+          = simple_form_for [:admin, @admin_blog, @admin_blog_post], multipart: true, url: url_for(action: 'update', controller: 'admin/blog_posts'), method: 'put' do |f|
+            = f.error_notification
+            == render 'form', f: f
 

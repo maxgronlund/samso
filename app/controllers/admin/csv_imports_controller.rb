@@ -1,5 +1,6 @@
 class Admin::CsvImportsController < AdminController
   before_action :set_admin_csv_import, only: %i[show edit update destroy]
+  before_action :set_selected
 
   # GET /admin/csv_imports
   def index
@@ -46,6 +47,10 @@ class Admin::CsvImportsController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'csv_imports'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_csv_import

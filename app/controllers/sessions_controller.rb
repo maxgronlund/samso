@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
+      store_stats(user)
       signin_user(user)
     else
       set_menu
@@ -35,5 +36,15 @@ class SessionsController < ApplicationController
 
   def session_params
     params.permit!
+  end
+
+  def store_stats(user)
+    user.update_attributes(
+      sign_in_count: user.sign_in_count + 1,
+      last_sign_in_at: user.current_sign_in_at,
+      current_sign_in_at: Time.zone.now.to_datetime,
+      last_sign_in_ip: user.current_sign_in_ip,
+      current_sign_in_ip: request.remote_ip
+    )
   end
 end

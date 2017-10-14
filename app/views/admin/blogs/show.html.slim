@@ -1,0 +1,46 @@
+.row
+  .col-md-6
+    h3 = @admin_blog.title
+  .col-md-6
+    .pull-right
+      .btn-group
+        = link_to 'Back', admin_blogs_path, class: 'btn btn-secondary'
+        = link_to 'Edit', edit_admin_blog_path(@admin_blog), class: 'btn btn-primary'
+
+.row.mt-10
+  .col-md-12
+    .pull-right
+      = link_to t('blog_post.new'),
+        new_admin_blog_blog_post_path(@admin_blog),
+        class: 'btn btn-primary btn-sm'
+
+
+
+
+.row.mt-10
+  .col-md-12
+    .table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Title
+        th date
+        th colspan=3
+    tbody
+      - @admin_blog.posts.each do |post|
+        tr
+          td = post.title
+          td = l post.created_at
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'),
+                  admin_blog_blog_post_path(@admin_blog, post),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to t('edit'),
+                  edit_admin_blog_blog_post_path(@admin_blog, post),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to t('delete'),
+                  admin_blog_blog_post_path(@admin_blog, post),
+                  data: { confirm: t('confirm') }, method: :delete,
+                  class: 'btn btn-danger btn-sm'

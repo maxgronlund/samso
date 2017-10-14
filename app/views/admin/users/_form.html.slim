@@ -1,18 +1,29 @@
 = simple_form_for [:admin, @user], multipart: true do |f|
   = f.error_notification
-
-  = f.input :name
-  = f.input :email
-  = f.input :password,
-    hint: t('user.password.hint'),
-    placeholder: '••••••••••'
-  = f.input :password_confirmation,
-    placeholder: '••••••••••'
-  - if current_user.can_edit?(@user)
-    = f.simple_fields_for :roles do |roles_form|
-      = roles_form.input :permission, collection: Role::ROLES, include_blank: false
-
-  = f.label :avatar
-  = f.file_field :avatar
-
-  = f.submit t('save'), class: 'btn btn-primary'
+  .row
+    .col-md-6
+      = f.input :name
+      = f.input :email
+    .col-md-6
+      = f.input :password,
+        placeholder: '••••••••••'
+      = f.input :password_confirmation,
+        placeholder: '••••••••••'
+  .row
+    - if current_user.can_edit?(@user)
+      .col-md-6
+        = f.simple_fields_for :roles do |roles_form|
+          = roles_form.input :permission, collection: Role::ROLES, include_blank: false
+    .col-md-6
+      .mb-5
+        = image_tag @user.avatar.url(:square)
+      = f.label :avatar
+      br
+      = f.file_field :avatar
+      - if @user.persisted? && @user.avatar?
+        br
+        = f.input :delete_avatar, as: :boolean
+  .row
+    .col-md-12
+      .pull-right
+        = f.submit t('save'), class: 'btn btn-primary'

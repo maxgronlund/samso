@@ -11,14 +11,14 @@
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
-  = f.input :post_page_id,
-    collection: Page.where(locale: I18n.locale),
-    include_blank: false
+  /= f.input :post_page_id,
+  /  collection: Page.where(locale: I18n.locale),
+  /  include_blank: false
 
-  = f.input :welcome_page_id,
-    collection: Page.where(locale: I18n.locale),
-    include_blank: false
+  /= f.input :welcome_page_id,
+  /  collection: Page.where(locale: I18n.locale),
+  /  include_blank: false
 
- 
+
 
   = f.submit t('save'), class: 'btn btn-primary'

@@ -1,0 +1,12 @@
+.row
+  .col-md-6
+    = simple_form_for [@admin_calendar] do |f|
+      = f.error_notification
+
+      .form-inputs
+        
+        = f.input :title
+
+      .form-actions
+        .pull-right
+          = f.submit t('save'), class: 'btn btn-primary'

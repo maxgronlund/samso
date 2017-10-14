@@ -18,13 +18,6 @@ class Admin::PostModule < ApplicationRecord
     blog_post(blog_post_id).image.url(:medium)
   end
 
-  def blog_module_page(blog_post_id)
-    blog_post = blog_post(blog_post_id)
-    return Page.first if blog_post.nil?
-    blog_module = blog_post.blog_module
-    blog_module.page
-  end
-
   private
 
   def blog_post(blog_post_id)

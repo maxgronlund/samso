@@ -1,0 +1,28 @@
+da:
+  activerecord:
+    models:
+      admin/menu_module:
+        one: menu
+        other: menus
+    attributes:
+      admin/menu_module:
+        name:  Name
+
+  menu_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/menu_module:
+    name: Menu module
+    edit_links: Rediger links
+    edit_name: Rediger navn
+    new_link: Tilføj link
+    layouts:
+      horizontal: Horisontalt
+      vertical: Vertikalt
+
+  admin/menu_content:
+    name: Menu
+    new: Opret menu
+    index: Menuer

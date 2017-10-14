@@ -5,10 +5,10 @@
     .pull-right
       = @user_count
 
-= form_tag admin_users_path, method: 'get' do 
+= form_tag admin_users_path, method: 'get' do
   .row
     .col-sm-6
-      = text_field_tag :search, params[:search], class: 'form-control' 
+      = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-secondary'
@@ -48,8 +48,8 @@ br
                     class: 'btn btn-danger btn-sm'
 
 
-
-= link_to t('user.create'), new_admin_user_path, class: 'btn btn-primary'
+.pull-right
+  = link_to t('user.create'), new_admin_user_path, class: 'btn btn-primary'
 br
 = paginate @users
 

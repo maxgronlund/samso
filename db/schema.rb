@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001200010) do
+ActiveRecord::Schema.define(version: 20171011195027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.integer "post_page_id"
     t.integer "blog_posts_count", default: 0
     t.integer "posts_pr_page", default: 10
+    t.integer "admin_blog_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end
 
@@ -34,7 +36,7 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.text "teaser"
     t.text "body"
     t.integer "position"
-    t.integer "blog_module_id"
+    t.integer "blog_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "user_id"
@@ -44,8 +46,45 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["blog_module_id"], name: "index_admin_blog_posts_on_blog_module_id"
+    t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
+  end
+
+  create_table "admin_blogs", force: :cascade do |t|
+    t.string "title"
+    t.string "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "blog_posts_count", default: 0
+  end
+
+  create_table "admin_calendar_events", force: :cascade do |t|
+    t.integer "calendar_id"
+    t.string "title"
+    t.text "body"
+    t.text "location"
+    t.string "gmap"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_admin_calendar_events_on_calendar_id"
+  end
+
+  create_table "admin_calendar_modules", force: :cascade do |t|
+    t.string "name"
+    t.bigint "admin_calendar_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_calendar_id"], name: "index_admin_calendar_modules_on_admin_calendar_id"
+  end
+
+  create_table "admin_calendars", force: :cascade do |t|
+    t.string "title"
+    t.integer "calendar_events_count"
+    t.string "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_carousel_modules", force: :cascade do |t|
@@ -139,6 +178,34 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admin_menu_contents", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_menu_links", force: :cascade do |t|
+    t.string "title", default: ""
+    t.integer "page_id"
+    t.string "url", default: ""
+    t.boolean "active", default: true
+    t.string "color", default: "#000"
+    t.string "background_color", default: "#FFF"
+    t.integer "menu_content_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_content_id"], name: "index_admin_menu_links_on_menu_content_id"
+  end
+
+  create_table "admin_menu_modules", force: :cascade do |t|
+    t.string "name"
+    t.integer "menu_content_id"
+    t.string "layout", default: "vertical"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_content_id"], name: "index_admin_menu_modules_on_menu_content_id"
+  end
+
   create_table "admin_module_names", force: :cascade do |t|
     t.string "name"
     t.string "locale"
@@ -195,10 +262,8 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.boolean "maintenance"
     t.integer "landing_page_id"
     t.integer "subscription_page_id"
-    t.integer "post_page_id"
     t.string "locale"
     t.string "locale_name"
-    t.string "welcome_page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -227,31 +292,11 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
   end
 
-  create_table "admin_vertical_menu_contents", force: :cascade do |t|
+  create_table "admin_youtube_modules", force: :cascade do |t|
     t.string "name"
+    t.text "snippet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "admin_vertical_menu_links", force: :cascade do |t|
-    t.string "title", default: ""
-    t.integer "page_id"
-    t.string "url", default: ""
-    t.boolean "active", default: true
-    t.string "color", default: "#000"
-    t.string "background_color", default: "#FFF"
-    t.integer "vertical_menu_content_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["vertical_menu_content_id"], name: "index_admin_vertical_menu_links_on_vertical_menu_content_id"
-  end
-
-  create_table "admin_vertical_menu_modules", force: :cascade do |t|
-    t.string "name"
-    t.integer "vertical_menu_content_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["vertical_menu_content_id"], name: "index_admin_vertical_menu_modules_on_vertical_menu_content_id"
   end
 
   create_table "page_col_modules", force: :cascade do |t|
@@ -259,6 +304,7 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.string "moduleable_type"
     t.bigint "moduleable_id"
     t.integer "position", default: 0
+    t.integer "margin_bottom", default: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
@@ -307,6 +353,7 @@ ActiveRecord::Schema.define(version: 20171001200010) do
     t.integer "page_rows_count", default: 0
     t.string "background_color", default: "none"
     t.bigint "admin_footer_id"
+    t.boolean "cache_page", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_footer_id"], name: "index_pages_on_admin_footer_id"

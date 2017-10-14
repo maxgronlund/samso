@@ -4,15 +4,16 @@
   .row
     .col-sm-6
       = f.input :title
-      
+
       = f.input :body_background, as: :file
       - unless @page.body_background_file_size.nil?
           = image_tag(@page.body_background.url(:thumb))
           br
           = f.input :delete_body_background, as: :boolean
-      
+
       = f.input :background_color,
         hint: t('page.background_color.hint')
+      = f.input :cache_page
 
     .col-sm-6
       = f.input :menu_title,

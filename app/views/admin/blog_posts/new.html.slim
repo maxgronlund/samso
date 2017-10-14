@@ -1,6 +1,10 @@
-h3 = t('edit_model', model_name: Admin::BlogPost.model_name.human)
-hr
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        .card-body
 
-= simple_form_for [:admin, @admin_blog_module, @admin_blog_post], multipart: true, url: url_for(action: 'create', controller: 'admin/blog_posts'), method: 'post' do |f|
-  = f.error_notification
-  == render 'form', f: f
+          h3 = t('new_model', model_name: Admin::BlogPost.model_name.human)
+          = simple_form_for [:admin, @admin_blog, @admin_blog_post], multipart: true, url: url_for(action: 'create', controller: 'admin/blog_posts'), method: 'post' do |f|
+            = f.error_notification
+            == render 'form', f: f

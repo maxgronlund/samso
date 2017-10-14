@@ -1,7 +1,7 @@
 = f.input :title
 = f.input :body, :input_html => { rows: 10}
 
-= f.hidden_field :blog_module_id, value: @blog_module.id
+/= f.hidden_field :blog_id, value: @blog.id
 /= f.association :user
 
 .form-actions

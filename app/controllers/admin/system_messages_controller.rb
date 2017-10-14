@@ -1,5 +1,6 @@
 class Admin::SystemMessagesController < AdminController
   before_action :set_admin_system_message, only: %i[show edit update destroy]
+  before_action :set_selected
 
   # GET /admin/system_messages
   def index
@@ -20,6 +21,10 @@ class Admin::SystemMessagesController < AdminController
   end
 
   private
+
+  def set_selected
+    @selected = 'system_messages'
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_system_message

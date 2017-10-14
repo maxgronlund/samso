@@ -1,0 +1,7 @@
+h1 Editing admin_calendar_event
+
+
+/= debug @admin_calendar_event
+= simple_form_for [ @admin_calendar, @admin_calendar_event], url: url_for(action: 'update', controller: 'admin/calendar_events'), method: 'put' do |f|
+  == render 'form', f: f, admin_calendar: @admin_calendar
+

@@ -1,0 +1,14 @@
+h1 Editing admin_menu_link
+
+
+
+= simple_form_for [:admin, @admin_menu_content, @admin_menu_link],
+  url: url_for(action: 'update', controller: 'admin/menu_links'),
+  method: 'put' do |f|
+
+  == render 'form', f: f
+
+/ = link_to 'Show', @admin_menu_link
+/ '  |
+/ = link_to 'Back', admin_menu_links_path
+

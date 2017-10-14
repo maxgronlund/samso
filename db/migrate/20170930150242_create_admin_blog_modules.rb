@@ -8,10 +8,12 @@ class CreateAdminBlogModules < ActiveRecord::Migration[5.1]
       t.integer :post_page_id
       t.integer :blog_posts_count, default: 0
       t.integer :posts_pr_page, default: 10
+      t.integer :admin_blog_id
 
       t.timestamps
     end
     add_index :admin_blog_modules, :post_page_id
+    add_index :admin_blog_modules, :admin_blog_id
     add_module_name
   end
 

@@ -28,7 +28,7 @@ class Admin::ImageModulesController < AdminController
       :layout,
       :page_id,
       :position,
-      :slot_id
+      :margin_bottom
     )
   end
 end

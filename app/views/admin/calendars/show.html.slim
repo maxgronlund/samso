@@ -1,0 +1,46 @@
+.row
+  .col-sm-6
+    h3 = @admin_calendar.title
+  .col-sm-6
+    .pull-right
+      .btn-group
+        = link_to t('back'), admin_calendars_path, class: 'btn btn-secondary'
+        = link_to t('edit'), edit_admin_calendar_path(@admin_calendar), class: 'btn btn-secondary'
+
+
+hr
+.row
+  .col-sm-6
+    h5 Events
+  .col-md-6
+    .pull-right
+      = link_to t('admin/calendar.new_event'), new_admin_calendar_calendar_event_path(@admin_calendar), class: 'btn btn-success'
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+
+        th = t('admin/calendar.title')
+        th = t('admin/calendar.start_time')
+        / th = t('admin/calendar.end_time')
+        th
+    tbody
+      - @admin_calendar.events.each do |event|
+        tr
+
+          td = event.title
+          td = l event.start_time
+          / td = l event.end_time
+          td
+            .pull-right
+              .btn-group
+                = link_to 'Show',
+                  admin_calendar_calendar_event_path(@admin_calendar, event),
+                  class: 'btn btn-secondary btn-sm'
+                = link_to 'Edit',
+                  edit_admin_calendar_calendar_event_path(@admin_calendar, event),
+                  class: 'btn btn-primary btn-sm'
+                = link_to 'Destroy',
+                  admin_calendar_calendar_event_path(@admin_calendar, event), data: { confirm: 'Are you sure?' }, method: :delete,
+                  class: 'btn btn-danger btn-sm'

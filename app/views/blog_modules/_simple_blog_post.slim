@@ -1,6 +1,8 @@
 .blog_post
-  = link_to blog_post_path(blog, post) do
+  = link_to blog_post_path(blog_module, post, page_id: params[:id]) do
     h5 = post.title
+    i = l post.start_date
+    br
 
     = truncate(post.body, length: 125)
 .row
@@ -8,6 +10,6 @@
     .pull-right
       .btn-group
         - if editor?
-          = link_to t('edit'), edit_blog_post_path(blog, post), class: 'btn btn-outline-secondary btn-sm'
-        = link_to t('blog_post.read_more'), blog_post_path(blog, post), class: 'btn btn-outline-info btn-sm'
+          = link_to t('edit'), edit_blog_post_path(blog_module.blog, post), class: 'btn btn-outline-secondary btn-sm'
+        = link_to t('blog_post.read_more'), blog_post_path(blog_module, post, page_id: params[:id]), class: 'btn btn-outline-info btn-sm'
 hr

@@ -1,0 +1,7 @@
+
+h3 = t('admin/calendar.new_event')
+/= debug @admin_calendar_event
+= simple_form_for [ @admin_calendar, @admin_calendar_event], url: url_for(action: 'create', controller: 'admin/calendar_events'), method: 'post' do |f|
+  == render 'form', f: f, admin_calendar: @admin_calendar
+
+

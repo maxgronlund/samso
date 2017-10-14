@@ -1,0 +1,15 @@
+
+.row
+  .col-md-6
+    = f.error_notification
+
+    .form-inputs
+      = f.hidden_field :calendar_id, value: admin_calendar.id
+      = f.input :title
+      = f.input :body, :input_html => { rows: 10}
+      = f.input :start_time
+      /= f.input :end_time
+      = f.input :gmap
+
+    .form-actions
+      = f.submit t('save'), class: 'btn btn-success'
