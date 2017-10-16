@@ -56,7 +56,15 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'awesome_print'
-  gem 'rspec-rails', '~> 3.6'
+  gem 'database_cleaner'
+  gem 'factory_girl'
+end
+
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'cucumber'
+  gem 'rspec-rails'
+  gem 'faker'
 end
 
 group :development do
