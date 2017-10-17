@@ -76,6 +76,7 @@ Things you may want to cover:
 
 * Deployment instructions
   $ git push origin master
+  Make sure to edit a config/secrets.yml file
 
 * console on production
   $ heroku run rails console --app samso
