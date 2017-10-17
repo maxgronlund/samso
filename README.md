@@ -54,11 +54,10 @@ Things you may want to cover:
   $ heroku logs --tail --app samso
 
 * Tasks
-  $ heroku run --app samso rake page:build_subscription_pages
-  $ heroku run --app samso rake page:build_welcome_pages
-  $ heroku run --app samso rake page:build_front_pages
-  $ heroku run --app samso rake page:build_post_pages
-  $ heroku run --app samso rake system_setup:build_defaults
+
+  $ heroku run --app samso rake db:migrate
+  $ heroku run --app samso rake db:seed
+  $ heroku run --app samso rake system:setup
 
 
 * How to run the test suite
