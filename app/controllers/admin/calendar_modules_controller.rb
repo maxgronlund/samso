@@ -13,7 +13,6 @@ class Admin::CalendarModulesController < AdminController
     end
   end
 
-
   def destroy
     @calendar.destroy
     redirect_to admin_calendar_modules_url

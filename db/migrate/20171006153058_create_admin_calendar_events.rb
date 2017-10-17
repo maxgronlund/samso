@@ -1,3 +1,4 @@
+# Event for the calendar
 class CreateAdminCalendarEvents < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_calendar_events do |t|

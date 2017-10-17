@@ -1,5 +1,5 @@
 class Admin::BlogsController < AdminController
-  before_action :set_admin_blog, only: %i[show edit update, destroy]
+  before_action :set_admin_blog, only: %i[show edit update destroy]
   before_action :set_selected
 
   # GET /admin/blogs

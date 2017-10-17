@@ -1,3 +1,4 @@
+# Persist knowledge of users
 module KnowUsersHelper
   def super_user
     @super_user ||=

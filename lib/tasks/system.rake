@@ -63,6 +63,8 @@ namespace :system do
     @result = { status: :error, reason: 'Unable to  build system setup' }
   end
 
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/LineLength
   def create_system_messages
     messages = [
       { title: 'velkommen', body: '', identifier: 'welcome', locale: 'da' },

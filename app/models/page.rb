@@ -52,7 +52,6 @@ class Page < ApplicationRecord
     @footer = Admin::Footer.find_by(id: admin_footer_id)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def deletable?
     return false if Admin::SystemSetup.where(locale: locale, landing_page_id: id).any?
     return false if Admin::SystemSetup.where(locale: locale, subscription_page_id: id).any?
