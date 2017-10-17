@@ -1,0 +1,21 @@
+da:
+  activerecord:
+    models:
+      payment: Betaling
+    attributes:
+      payment:
+        name: Navn
+        email: Email
+        address: Adresse
+        postal_code_and_city: By og postnummer
+        news_letter: Tilmeld nyhedsbrev
+
+
+  payment:
+    new: Opret betaling
+    continue: Fortsæt
+    admin: Administrator
+    super_admin: Super administrator
+    subscriber: Abonnent
+
+

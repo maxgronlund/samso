@@ -1,7 +1,10 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
-.container.mt-80
-  h1 New payment
+.full-row
+  .container
+    .row.mt-20
+      .col-md-12
+        h3 = t('payment.new')
 
-  == render 'form'
+        == render 'form'
 
-  = link_to 'Back', payments_path
+    /= link_to 'Back', payments_path

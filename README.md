@@ -62,6 +62,12 @@ Things you may want to cover:
   $ heroku restart -a samso
 
 
+  $ heroku addons:create heroku-postgresql:hobby-basic --app samso
+
+  heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_MAUVE_URL --app samso
+  heroku pg:promote HEROKU_POSTGRESQL_MAUVE_URL --app samso
+
+
 * How to run the test suite
   # Run only model specs
   $ bundle exec rspec spec/models

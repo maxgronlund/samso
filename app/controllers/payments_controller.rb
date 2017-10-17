@@ -14,6 +14,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
+    @landing_page    = admin_system_setup.landing_page
     if user_signed_in?
       @payment = Payment.new(name: current_user.name)
       @subscription_type_id = params[:subscription_type_id]
