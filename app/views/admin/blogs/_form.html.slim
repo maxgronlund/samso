@@ -1,8 +1,13 @@
+.row
 = simple_form_for(@admin_blog) do |f|
   = f.error_notification
+  .row
+    .col-md-6
+      .form-inputs
+        = f.input :title
 
-  .form-inputs
-    = f.input :title
-
-  .form-actions
-    = f.button :submit
+      .form-actions
+        .pull-right
+          .btn-group
+            = link_to t('cancel'), admin_blogs_path, class: 'btn btn-secondary'
+            = f.submit t('save'), class: 'btn btn-primary'

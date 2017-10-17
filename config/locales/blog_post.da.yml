@@ -13,6 +13,11 @@ da:
     new: 'Nyt indlæg'
     edit: 'Rediger indlæg'
     read_more: Læs mere
+    next: Næste
+    prev: Forige
 
   admin/blog_post:
     name: Blog post modul
+
+  admin/blog:
+    index: Blogs

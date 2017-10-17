@@ -30,6 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 da:
-  csv_file: 
+  csv_file:
     select_csv_file: Vælg CSV dokument
     new: Nyt CSV import
+    index: CSV filer

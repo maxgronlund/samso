@@ -1,5 +1,6 @@
 - post_module = modulable
 h3 = post_module.title(params[:id])
 = raw(post_module.body(params[:id]))
-.mt-18
-  = link_to t('back'), page_path(params[:page_id]), class: 'btn btn-secondary'
+- unless params[:page_id].nil?
+  .mt-18
+    = link_to t('back'), page_path(params[:page_id]), class: 'btn btn-secondary'

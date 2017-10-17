@@ -15,3 +15,7 @@ da:
 
   admin/blog_module:
     name: Blog modul
+
+  admin/blog:
+    index: Blogs
+    new: Opret ny blog

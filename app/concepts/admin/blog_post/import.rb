@@ -98,38 +98,5 @@ class Admin::BlogPost < ApplicationRecord
         .where(params)
         .first_or_create(params)
     end
-
-    # def setup_page(options = {})
-    #   params = {
-    #     title: options[:topstory],
-    #     locale: 'da',
-    #     user_id: User.super_admin.id,
-    #     layout: 'arkansas'
-    #   }
-    #   Page
-    #     .where(params)
-    #     .first_or_create(params)
-    # end
-
-    # def setup_blog_module(options = {})
-    #   params = {
-    #     name: options[:topstory]
-    #   }
-    #   Admin::BlogModule
-    #     .where(params)
-    #     .first_or_create(params)
-    # end
-
-    # def setup_page_module(page, blog_module)
-    #   params = {
-    #     page_id: page.id,
-    #     moduleable_type: blog_module.class.name,
-    #     moduleable_id: blog_module.id,
-    #     slot_id: 200
-    #   }
-    #   PageModule
-    #     .where(params)
-    #     .first_or_create(params)
-    # end
   end
 end

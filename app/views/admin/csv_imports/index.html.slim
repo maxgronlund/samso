@@ -1,4 +1,4 @@
-h3 = t('pages')
+h3 = t('csv_file.index')
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -8,7 +8,7 @@ h3 = t('pages')
         th Import type
         th Summary
         th style='min-width:175px;'
-        
+
 
     tbody
       - @admin_csv_imports.each do |admin_csv_import|
@@ -16,7 +16,7 @@ h3 = t('pages')
           td = admin_csv_import.name
           td = admin_csv_import.import_type
           td = admin_csv_import.summary
-          td 
+          td
             .pull-right
               .btn-group
                 = link_to 'import',
@@ -34,7 +34,7 @@ h3 = t('pages')
                   method: :delete,
                   class: 'btn btn-danger btn-sm'
 br
-
-= link_to t('csv_file.new'),
-  new_admin_csv_import_path,
-  class: 'btn btn-primary'
+.pull-right
+  = link_to t('csv_file.new'),
+    new_admin_csv_import_path,
+    class: 'btn btn-primary'
