@@ -23,4 +23,10 @@ FactoryGirl.define do
     f.locale 'en'
     f.locale_name 'English'
   end
+
+  factory :system_message, class: Admin::SystemMessage do |f|
+    f.title 'welcome'
+    f.locale 'en'
+    f.identifier 'welcome'
+  end
 end

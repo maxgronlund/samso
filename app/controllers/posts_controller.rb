@@ -80,7 +80,7 @@ class PostsController < ApplicationController
 
   # store the page in a session so we can bounce to it after sign up / login
   def store_page_in_session
-    ap session[:go_to_after_signup] = blog_post_path(@blog_post.blog, @blog_post)
+    session[:go_to_after_signup] = blog_post_path(@blog_post.blog, @blog_post)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

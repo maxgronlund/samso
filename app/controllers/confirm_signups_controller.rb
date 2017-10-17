@@ -2,11 +2,11 @@
 class ConfirmSignupsController < ApplicationController
   def show
     redirect_to current_user if current_user
-    @user = User.find_by(reset_password_token: params[:id])
+    @user = User.find_by(confirmation_token: params[:id])
     return if @user.nil?
     user_service = User::Service.new(@user)
-    if user_service.valid_token?
-      user_service.reset_user
+    if user_service.valid_confirmation_token?
+      user_service.initialize_user
       session[:user_id] = @user.id
     else
       @user = nil

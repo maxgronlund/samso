@@ -68,7 +68,7 @@ class Admin::BlogPost < ApplicationRecord
         user_id: User.super_admin.id
       }
 
-      ap blog.posts.where(
+      blog.posts.where(
         params
       ).first_or_create!(
         params

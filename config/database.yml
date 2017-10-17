@@ -83,5 +83,6 @@ production:
   database: samso_production
   username: maxgronlund
   password: <%= ENV['SAMSO_DATABASE_PASSWORD'] %>
+
 cucumber:
   <<: *test

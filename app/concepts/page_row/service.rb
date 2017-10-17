@@ -8,9 +8,9 @@ class PageRow < ApplicationRecord
     end
 
     def create_page_cols(preset)
-      ap preset.gsub!('col-', '')
+      preset.gsub!('col-', '')
       preset.split('-').each_with_index do |page_col_layout, index|
-        ap @page_row
+        @page_row
           .page_cols
           .create(
             layout: 'col-sm-' + page_col_layout,

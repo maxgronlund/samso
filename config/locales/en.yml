@@ -56,8 +56,10 @@ en:
   signup: 'Create account'
   send: Send
   login: Login
+  sign_out: Sign out
   signed_in: Logged in!
   signed_out: Signed out!
+  please_confirm_your_account: Please check your email for a confirmation link
   create_module: Create module
   back: Back
   thanks_for_signing_up: Thanks for signing up

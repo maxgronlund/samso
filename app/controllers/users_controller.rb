@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if session[:go_to_after_signup]
       create_with_subscription
     else
-      create_as_without_subscription
+      create_without_subscription
     end
   end
 
@@ -40,9 +40,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def create_as_without_subscription
-    @user.reset_password_token = SecureRandom.hex(32)
-    @user.reset_password_sent_at = Time.zone.now
+  def create_without_subscription
+    @user.confirmation_token = SecureRandom.hex(32)
+    @user.confirmation_sent_at = Time.zone.now
     if @user.save
       UserNotifierMailer.send_signup_email(@user.id).deliver
       redirect_to confirm_signups_path

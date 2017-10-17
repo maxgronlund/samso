@@ -20,11 +20,11 @@
               br
               = label_tag :password
               br
-              = password_field_tag :password, '', class: 'form-control' 
+              = password_field_tag :password, '', class: 'form-control'
               br
             .form-actions
               .pull-right
-                = submit_tag 'Log In', class: 'btn btn-primary'
+                = submit_tag t('login'), class: 'btn btn-primary', id: 'log-in'
 
           = link_to t('forgot_password'), reset_password_index_path
           br

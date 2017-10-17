@@ -10,7 +10,7 @@ class Admin::TextModulesController < AdminController
     if @text_module.update(text_module_params)
       redirect_to admin_page_path(@text_module.page)
       @text_module.update_position(text_module_params[:position])
-      ap @text_module.page.touch
+      @text_module.page.touch
     else
       render :edit
     end

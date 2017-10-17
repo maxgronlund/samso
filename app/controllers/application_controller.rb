@@ -92,7 +92,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return User.find_by(email: 'test01@example.com') if Rails.env.test?
     @currnet_user ||= User.find_by(id: session[:user_id])
   end
   helper_method :current_user

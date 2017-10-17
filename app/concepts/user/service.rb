@@ -22,11 +22,22 @@ class User < ApplicationRecord
       role.destroy
     end
 
-    def valid_token?
-      !invalid_token
+    def valid_confirmation_token?
+      !invalid_confirmation_token?
     end
 
-    def invalid_token
+    def invalid_confirmation_token?
+      @user.nil? ||
+        @user.confirmation_token.nil? ||
+        @user.confirmation_sent_at.nil? ||
+        @user.confirmation_sent_at < Time.zone.now - 2.days
+    end
+
+    def valid_token?
+      !invalid_token?
+    end
+
+    def invalid_token?
       @user.nil? ||
         @user.reset_password_sent_at.nil? ||
         @user.reset_password_token.nil? ||
@@ -41,6 +52,12 @@ class User < ApplicationRecord
         @user.password = password_params[:password]
         @user.password_confirmation = password_params[:password_confirmation]
       end
+      @user.save
+    end
+
+    def initialize_user
+      @user.confirmation_token = nil
+      @user.confirmed_at = Time.zone.now
       @user.save
     end
 
