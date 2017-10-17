@@ -1,6 +1,6 @@
 namespace :system do
   # usage
-  # $ rake system_setup:essentials
+  # $ rake system:setup
   desc 'build essential pages'
   task setup: :environment do
     @result = { status: :ok, reason: '' }
@@ -63,6 +63,8 @@ namespace :system do
     @result = { status: :error, reason: 'Unable to  build system setup' }
   end
 
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/LineLength
   def create_system_messages
     messages = [
       { title: 'velkommen', body: '', identifier: 'welcome', locale: 'da' },
@@ -72,7 +74,9 @@ namespace :system do
       { title: 'Nyt password', body: '', identifier: 'new_password_email', locale: 'da' },
       { title: 'New password', body: '', identifier: 'new_password_email', locale: 'en' },
       { title: 'Bekræfte email', body: '', identifier: 'confirm_email_email', locale: 'da' },
-      { title: 'Confirm email', body: '', identifier: 'confirm_email_email', locale: 'en' }
+      { title: 'Confirm email', body: '', identifier: 'confirm_email_email', locale: 'en' },
+      { title: 'Din konto er oprettet', body: 'Der er blevet sendt en konfirmations link til din email', identifier: 'thanks_for_signing_up', locale: 'da' },
+      { title: 'Your account is created', body: 'A confirmation email is send to your email', identifier: 'thanks_for_signing_up', locale: 'en' }
     ]
     messages.each do |message|
       Admin::SystemMessage

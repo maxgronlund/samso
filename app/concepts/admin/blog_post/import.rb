@@ -1,5 +1,4 @@
 # namespace to confine service class to Admin:BlogPost::Import
-# rubocop:disable Metrics/ClassLength
 class Admin::BlogPost < ApplicationRecord
   require 'csv'
   require 'cgi'
@@ -68,7 +67,7 @@ class Admin::BlogPost < ApplicationRecord
         user_id: User.super_admin.id
       }
 
-      ap blog.posts.where(
+      blog.posts.where(
         params
       ).first_or_create!(
         params
@@ -84,6 +83,7 @@ class Admin::BlogPost < ApplicationRecord
       post.image = URI.parse(image_1_url)
       post.save
     rescue
+      nil
     end
 
     def last_blog_post_possition(blog_module)
@@ -92,7 +92,7 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def find_or_create_blog
-      params = {title: 'import', locale: 'da'}
+      params = { title: 'import', locale: 'da' }
       @blog ||=
         Admin::Blog
         .where(params)

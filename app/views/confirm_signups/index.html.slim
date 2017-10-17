@@ -1,12 +1,11 @@
-/= render 'shared/navbar', menu: @menu, top_page: @page
 .container
   .row.justify-content-md-center
     .col-sm-6
       .alert.alert-success.pb-20
         .row
           .col-12
-            h5 = Admin::SystemMessage.confirm_email.title
-            = Admin::SystemMessage.confirm_email.body
+            h5 = Admin::SystemMessage.thanks_for_signing_up.title
+            = Admin::SystemMessage.thanks_for_signing_up.body
         .row
           .col-12
             .pull-right

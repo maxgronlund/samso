@@ -1,6 +1,6 @@
 = simple_form_for [@user], multipart: true do |f|
   = f.error_notification
-  
+
   .form-inputs
 
     = f.input :name
@@ -12,4 +12,4 @@
 
   .form-actions
     .pull-right
-      = f.button :submit, class: 'btn btn-primary'
+      = f.button :submit, class: 'btn btn-primary', id: 'submit'

@@ -55,9 +55,11 @@ da:
   invalid_email_or_password: Ugyldig email eller password
   signup: 'Opret konto'
   send: Send
-  login: Logind
+  login: Log ind
+  sign_out: Log ud
   signed_in: Logget ind
   signed_out: Logged ud
+  please_confirm_your_account: Kontroler venligst din email for en konfirmations email
   create_module: Opret modul
   back: Tilbage
   thanks_for_signing_up: Tak for at oprette en konto hos samsø posten

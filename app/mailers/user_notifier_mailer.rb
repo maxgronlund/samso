@@ -7,9 +7,9 @@ class UserNotifierMailer < ApplicationMailer
   # contains the user's email address
   # usage UserNotifierMailer.send_signup_email(5).deliver_now
   def send_signup_email(user_id)
-    ap @user = User.find_by(id: user_id)
+    @user = User.find_by(id: user_id)
     return if @user.nil?
-    @token = @user.reset_password_token
+    @token = @user.confirmation_token
     @name = @user.name
     message = Admin::SystemMessage.thanks_for_signing_up_email
     @title  = message.title

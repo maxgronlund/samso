@@ -58,4 +58,17 @@ class Admin::SystemMessage < ApplicationRecord
         body: 'Please click on the link belove to confirm you email'
       )
   end
+
+  # usage Admin::SystemMessage.thanks_for_signing_up
+  def self.thanks_for_signing_up
+    @signed_up_message ||=
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'thanks_for_signing_up')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'thanks_for_signing_up',
+        title: 'Thanks for signing up',
+        body: 'An confirmation email is send to your account'
+      )
+  end
 end

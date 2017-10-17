@@ -9,9 +9,15 @@ class SessionsController < ApplicationController
     params[:email] = session_params[:email]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if user && user.confirmed_at.nil?
+      set_menu
+      @landing_page = admin_system_setup.landing_page
+      flash.now.alert = t('please_confirm_your_account')
+      render 'new'
+    elsif user && user.authenticate(params[:password])
       store_stats(user)
       signin_user(user)
     else

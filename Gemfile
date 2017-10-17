@@ -52,11 +52,20 @@ gem 'aws-sdk', '~> 2.3'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'awesome_print'
+end
+
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'cucumber'
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'factory_girl'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
-  gem 'awesome_print'
-  gem 'rspec-rails', '~> 3.6'
+  gem 'chromedriver-helper'
 end
 
 group :development do

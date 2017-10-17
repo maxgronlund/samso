@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# This file contain all the record creation needed to seed the database with its default values.
 
 user = User.where(
   name: "admin",
@@ -12,7 +6,8 @@ user = User.where(
 ).first_or_create(
   name: "admin",
   email: "admin@example.com",
-  password: 'ChangeMe1337'
+  password: 'ChangeMe1337',
+  confirmed_at: Time.zone.now
 )
 
 role = Role.where(
@@ -30,17 +25,3 @@ role = Role.where(
   user_id: user.id,
   permission: Role::SUPER_ADMIN
 )
-
-# if user
-#   user.password = 'ChangeMe1337'
-#   user.password_confirmation = 'ChangeMe1337'
-#   user.save
-# end
-
-# Rake::Task['system_setup:build_defaults'].invoke
-# Rake::Task['page:build_subscription_pages'].invoke
-# Rake::Task['page:build_front_pages'].invoke
-# Rake::Task['page:build_post_pages'].invoke
-# Rake::Task['page:build_welcome_pages'].invoke
-# Rake::Task['system_messages:build_defaults'].invoke
-# Rake::Task['admin/module_names:build_defaults'].invoke

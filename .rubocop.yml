@@ -14,6 +14,7 @@
 AllCops:
   Exclude:
     - 'db/schema.rb'
+    - 'lib/tasks/cucumber.rake'
 
 
 Bundler/OrderedGems:
@@ -43,7 +44,7 @@ Metrics/MethodLength:
   Exclude:
     - 'app/controllers/admin/page_modules_controller.rb'
     - 'config/routes.rb'
-    
+
 # Metrics/CyclomaticComplexity:
 #   Enabled: false
 
