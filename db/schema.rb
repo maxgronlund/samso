@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017163431) do
+ActiveRecord::Schema.define(version: 20171018145207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,7 +248,6 @@ ActiveRecord::Schema.define(version: 20171017163431) do
   create_table "admin_subscriptions", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "subscription_type_id"
-    t.string "duration"
     t.date "start_date"
     t.date "end_date"
     t.datetime "on_hold_date"
@@ -317,6 +316,7 @@ ActiveRecord::Schema.define(version: 20171017163431) do
     t.integer "margin_bottom", default: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_to", default: "all"
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
     t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
   end
@@ -354,7 +354,6 @@ ActiveRecord::Schema.define(version: 20171017163431) do
     t.integer "menu_position", default: 0
     t.boolean "active"
     t.string "locale"
-    t.bigint "user_id"
     t.boolean "require_subscription", default: false
     t.string "body_background_file_name"
     t.string "body_background_content_type"

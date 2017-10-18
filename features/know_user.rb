@@ -1,5 +1,5 @@
 # Persist knowledge of users
-module KnowUsersHelper
+module KnowUserHelper
   def super_user
     @super_user ||=
       FactoryGirl
@@ -13,8 +13,7 @@ module KnowUsersHelper
   end
 
   def member(email = 'member', password = 'ComeOnIn123')
-    @member ||=
-      FactoryGirl
+    FactoryGirl
       .create(
         :user,
         name: 'member',
@@ -38,4 +37,4 @@ module KnowUsersHelper
   end
 end
 
-World(KnowUsersHelper)
+World(KnowUserHelper)

@@ -3,7 +3,6 @@ Given('the site is ready') do
     FactoryGirl
     .create(
       :page,
-      user_id: super_user.id,
       title: 'Front page',
       menu_title: 'Front page'
     )

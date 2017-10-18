@@ -1,18 +1,17 @@
-en:
+da:
   activerecord:
     attributes:
       page_col_module:
         moduleable_type: Type
+        show: Vis til
     models:
-      page_col_module: Module type
+      page_col_module: Modul type
 
   page_col_module:
-    add_module: Add module
-
-
-
-
-
-
-
-
+    add_module: Tilføj module
+    show:
+      all: Alle besøgende
+      guests_only: Besøgende der ikke er logget ind
+      members_only: Medlemmer der er logget ind
+      subscribers_only: Medlemmer med et gyldigt abonnement
+      expired_subscribers: Medlemmer med et udløbet abonnement

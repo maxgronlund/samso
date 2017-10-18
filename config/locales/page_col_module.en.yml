@@ -1,18 +1,18 @@
-da:
+en:
   activerecord:
     attributes:
       page_col_module:
         moduleable_type: Type
+        show: Show to
     models:
-      page_col_module: Modul type
+      page_col_module: Module type
 
   page_col_module:
-    add_module: Tilføj modul
-
-
-
-
-
-
-
-
+    add_module: Add module
+    show:
+    show:
+      all: Alle guests
+      guests_only: Only when not logged in
+      members_only: When logged in
+      subscribers_only: When logged in with a valid subscriptions
+      expired_subscribers: When logged and subscription is expired

@@ -6,8 +6,11 @@ en:
         other: Blog modules
     attributes:
       admin/blog_module:
-        name: Overskrift
-        body: Introduktion
+        show: Show to
+        position: Position
+        post_page_id: Page for full view of posts
+        posts_pr_page: Number of posts to show
+        admin_blog_id: Select blog
 
   blog_module:
     the_beatles: 'The Beatles'
@@ -15,8 +18,8 @@ en:
 
   admin/blog_module:
     name: Blog module
-    next: Næste
-    prev: Forige
+    next: Next
+    prev: Prev
 
   admin/blog:
     index: Blogs

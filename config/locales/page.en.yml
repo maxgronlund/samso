@@ -11,7 +11,6 @@ en:
         menu_id: Select menu
         active: Aktive
         locale: Language
-        user_id: Created by
         require_subscription: Only access for subscribers
         background_color: Baggrd color
         body_background: Backgrounds image

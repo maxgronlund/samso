@@ -6,8 +6,11 @@ da:
         other: Blog moduler
     attributes:
       admin/blog_module:
-        name: Overskrift
-        body: Introduktion
+        show: Vis til
+        position: Position
+        post_page_id: Side til visning af post
+        posts_pr_page: Antal af poster til visning
+        admin_blog_id: Vælg blog
 
   blog_module:
     the_beatles: 'The Beatles'

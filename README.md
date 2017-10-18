@@ -51,6 +51,8 @@ Things you may want to cover:
 
 * Database migration
   $ heroku run --app samso rake db:migrate
+
+* Logging
   $ heroku logs --tail --app samso
 
 * Tasks

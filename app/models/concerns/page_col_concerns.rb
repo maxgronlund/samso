@@ -1,11 +1,21 @@
 # Shared functionalith between page_col_modules
 module PageColConcerns
   extend ActiveSupport::Concern
-  attr_accessor :position, :margin_bottom
+  attr_accessor :position, :margin_bottom, :access_to
 
   def position
     return nil if page_col_module.nil?
     page_col_module.position
+  end
+
+  def access_to
+    return nil if page_col_module.nil?
+    page_col_module.access_to
+  end
+
+  def show
+    return nil if page_col_module.nil?
+    page_col_module.show
   end
 
   def page_col_module
@@ -23,8 +33,19 @@ module PageColConcerns
   end
 
   def update_position(new_position)
-    page_col_module.update_attributes(position: new_position)
+    page_col_module
+      .update_attributes(position: new_position)
     clear_page_cache
+  end
+
+  def update_page_col_module(params)
+    ap params
+    page_col_module
+      .update_attributes(
+        position: params[:position],
+        access_to: params[:access_to]
+      )
+    ap page_col_module
   end
 
   def update_margin_bottom(margin_bottom)

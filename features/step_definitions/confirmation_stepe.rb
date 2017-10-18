@@ -28,3 +28,11 @@ Then('the user can confirm the account') do
   expect(page).to have_content(message.title)
   expect(page).to have_content(message.body)
 end
+
+Then('I can not see the blog') do
+  expect(page).to_not have_content('Blog post')
+end
+
+Then('I can see the blog') do
+  expect(page).to have_content('Blog post')
+end

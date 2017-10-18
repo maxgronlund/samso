@@ -11,7 +11,6 @@ da:
         menu_id: Vælg menu
         active: Aktiveret
         locale: Sprog
-        user_id: Oprettet af
         require_subscription: Kun adgang for abonnenter
         background_color: Baggrundsfarve
         body_background: Baggrundsbilled

@@ -8,3 +8,8 @@ When('I visit the {string} page') do |page|
     visit new_user_path
   end
 end
+
+When('I visit the blog_page page with access to {string}') do |title|
+  page = Page.find_by(title: title)
+  visit page_path(I18n.locale, page)
+end

@@ -76,6 +76,13 @@ class User < ApplicationRecord
     subscriptions.where('end_date >= :today', today: Date.today).any?
   end
 
+  def expired_subscriber?
+    return true if editor?
+    return false unless subscriptions.any?
+    return false if access_to_subscribed_content?
+    subscriptions.where('end_date < :today', today: Date.today).any?
+  end
+
   def self.super_admin
     Role.find_by(permission: Role::SUPER_ADMIN).user
   end

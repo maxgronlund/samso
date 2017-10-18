@@ -96,4 +96,8 @@ class Admin::TextModule < ApplicationRecord
 
   def title_style
   end
+
+  def page_col_module
+    page_col_modules.first
+  end
 end

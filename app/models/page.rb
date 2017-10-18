@@ -1,6 +1,5 @@
 # Dynamic page to hold content
 class Page < ApplicationRecord
-  belongs_to :user
   has_many :page_rows, dependent: :destroy
 
   has_attached_file :body_background, styles: {
@@ -26,10 +25,6 @@ class Page < ApplicationRecord
 
   def self.locales
     LOCALES.map { |locale| [I18n.t(locale), locale] }
-  end
-
-  def author_name
-    user.nil? ? '' : user.name
   end
 
   def self.menu_collection

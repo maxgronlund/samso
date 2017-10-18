@@ -11,7 +11,7 @@ class PostsController < ApplicationController
       return
     end
     @landing_page = landing_page
-    confirm_page
+    # confirm_page
     render 'pages/show'
   end
 

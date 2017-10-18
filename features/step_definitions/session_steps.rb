@@ -2,7 +2,6 @@ Then('I submit the login form with the email {string} and the password {string}'
   fill_in 'email', with: email
   fill_in 'password', with: password
   find_by_id('log-in').click
-  # ask('does that look right?')
 end
 
 Then('I submit the signup form with {string}, {string}, {string}') do |name, email, password|
