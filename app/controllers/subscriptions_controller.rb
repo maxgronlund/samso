@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   def new
-    ap subscription_params
+    subscription_params
   end
 
   # rubocop:disable Metrics/AbcSize

@@ -39,13 +39,11 @@ module PageColConcerns
   end
 
   def update_page_col_module(params)
-    ap params
     page_col_module
       .update_attributes(
         position: params[:position],
         access_to: params[:access_to]
       )
-    ap page_col_module
   end
 
   def update_margin_bottom(margin_bottom)
