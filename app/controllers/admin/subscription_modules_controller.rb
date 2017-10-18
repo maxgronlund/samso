@@ -6,7 +6,10 @@ class Admin::SubscriptionModulesController < AdminController
 
   def update
     if @subscription_module.update(subscription_module_params)
-      @subscription_module.update_position(subscription_module_params[:position])
+      @subscription_module
+        .update_page_col_module(
+          subscription_module_params
+        )
       redirect_to admin_page_path(@subscription_module.page)
     else
       render :edit
@@ -37,8 +40,7 @@ class Admin::SubscriptionModulesController < AdminController
       :body,
       :layout,
       :position,
-      :expired_title,
-      :expired_body
+      :access_to
     )
   end
 end

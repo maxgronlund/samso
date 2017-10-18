@@ -85,6 +85,7 @@ class Admin::UsersController < AdminController
       :avatar,
       :password_confirmation,
       :delete_avatar,
+      :free_subscription,
       roles_attributes: %i[permission id]
     )
   end

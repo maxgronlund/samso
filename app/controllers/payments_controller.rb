@@ -14,16 +14,10 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
-    @landing_page    = admin_system_setup.landing_page
-    if user_signed_in?
-      @payment = Payment.new(name: current_user.name)
-      @subscription_type_id = params[:subscription_type_id]
-    else
-      session[:new_payment_path] = new_payment_path(
-        subscription_type_id: params[:subscription_type_id]
-      )
-      redirect_to new_session_path
-    end
+    @landing_page = admin_system_setup.landing_page
+    @subscription_type = Admin::SubscriptionType.find(params[:subscription_type_id])
+    @user = User.find(params[:user_id])
+    @payment = Payment.new(name: @user.name)
   end
 
   # GET /payments/1/edit
@@ -32,6 +26,7 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   def create
+    @user = User.find(params[:user_id])
     ActiveRecord::Base.transaction do
       create_subscription
       create_payment
@@ -39,61 +34,44 @@ class PaymentsController < ApplicationController
         raise ActiveRecord::Rollback, 'something went wrong'
       end
     end
+    go_to_page
+  end
 
-    if session[:page_id]
-      redirect_to page_with_post_path
-    else
+  def go_to_page
+    url = session[:redirect_to]
+    if url.nil?
       redirect_to root_path
+    else
+      session.delete :redirect_to
+      redirect_to url
     end
   end
 
-  # rubocop:disable Metrics/AbcSize
-  def page_with_post_path
-    if session[:post_id].nil?
-      path = page_path(session[:page_id])
-    else
-      path = page_path(session[:page_id], post_id: session[:post_id])
-      session.delete :post_id
-    end
-    session.delete :page_id
-    path
+  def create_subscription
+    subscription_type =
+      Admin::SubscriptionType.find(session[:subscription_type_id])
+    @subscription = subscription_type.subscriptions.create!(
+      user_id: @user.id,
+      start_date: Date.today,
+      end_date:   Date.today + subscription_type.duration.to_i.days
+    )
+    session.delete :subscription_type_id
   end
   # rubocop:enable Metrics/AbcSize
 
-  def create_subscription
-    @subscription_type =
-      Admin::SubscriptionType.find(
-        payment_params_with_user_id[:subscription_type_id]
-      )
-    @subscription = @subscription_type.subscriptions.create(
-      user_id:    current_user.id,
-      duration:   @subscription_type.duration,
-      start_date: Date.today,
-      end_date:   Date.today + @subscription_type.duration.to_i.days
-    )
-  end
-
   def create_payment
-    valid_payment_params
-    @payment = Payment.new(valid_payment_params)
-    @payment.subscription_id = @subscription.id
-    @payment.name = @subscription_type.title
-    @payment.save
+    @payment =
+      @user
+      .payments
+      .create!(
+        name: @user.name,
+        address: payment_params[:address],
+        postal_code_and_city: payment_params[:postal_code_and_city],
+        subscription_id: @subscription.id
+      )
   end
 
   private
-
-  def valid_payment_params
-    params_copy = payment_params_with_user_id.dup
-    params_copy.delete :subscription_type_id
-    params_copy
-  end
-
-  def payment_params_with_user_id
-    params_copy = payment_params.dup
-    params_copy[:user_id] = current_user.id
-    params_copy
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_payment
@@ -104,12 +82,8 @@ class PaymentsController < ApplicationController
   def payment_params
     params.require(:payment).permit(
       :name,
-      :email,
       :address,
       :postal_code_and_city,
-      :password,
-      :password_confirmation,
-      :news_letter,
       :subscription_type_id,
       :user_id
     )

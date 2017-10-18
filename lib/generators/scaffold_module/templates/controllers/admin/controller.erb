@@ -6,7 +6,10 @@ class Admin::<%= plural_name.classify %>ModulesController < AdminController
 
   def update
     if @<%= file_name %>_module.update(<%= file_name %>_module_params)
-      @<%= file_name %>_module.update_position(<%= file_name %>_module_params[:position])
+      @<%= file_name %>_module.
+        .update_page_col_module(
+          <%= file_name %>_module_params
+        )
       redirect_to admin_page_path(@<%= file_name %>_module.page)
     else
       render :edit
@@ -29,7 +32,8 @@ class Admin::<%= plural_name.classify %>ModulesController < AdminController
   def <%= file_name %>_module_params
     params.require(:admin_<%= file_name %>_module).permit(
       :position,
-      :name
+      :name,
+      :access_to
     )
   end
 end

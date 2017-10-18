@@ -16,7 +16,10 @@ class Admin::CarouselModulesController < AdminController
   # PATCH/PUT /admin/carousel_modules/1.json
   def update
     if @carousel_module.update(carousel_module_params)
-      @carousel_module.update_position(carousel_module_params[:position])
+      @carousel_module
+        .update_page_col_module(
+          carousel_module_params
+        )
       redirect_to admin_carousel_module_path(@carousel_module)
     else
       render :edit
@@ -36,7 +39,7 @@ class Admin::CarouselModulesController < AdminController
       :name,
       :layout,
       :position,
-      :slot_id
+      :access_to
     )
   end
 end

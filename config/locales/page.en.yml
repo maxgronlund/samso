@@ -11,7 +11,6 @@ en:
         menu_id: Select menu
         active: Aktive
         locale: Language
-        require_subscription: Only access for subscribers
         background_color: Baggrd color
         body_background: Backgrounds image
         delete_body_background: Remove image
@@ -24,7 +23,7 @@ en:
     add_content: 'Add section'
     section_types: Section types
     show: Show page
-    edit_layout: Layout
+    edit_layout: Page properties
     edit: Edit page
     back: Back to page
     background_color:

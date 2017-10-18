@@ -23,6 +23,7 @@ class PageColModule < ApplicationRecord
   def self.permissions
     [
       [I18n.t('page_col_module.show.all'), 'all'],
+      [I18n.t('page_col_module.show.all_without_valid_subscription'), 'all_without_valid_subscription'],
       [I18n.t('page_col_module.show.guests_only'), 'guests_only'],
       [I18n.t('page_col_module.show.members_only'), 'members_only'],
       [I18n.t('page_col_module.show.subscribers_only'), 'subscribers_only'],
@@ -32,6 +33,7 @@ class PageColModule < ApplicationRecord
 
   def permit?(current_user)
     return true if access_to_all?
+    return true if all_without_valid_subscription?(current_user)
     return true if access_to_members_only?(current_user)
     return true if access_to_guests_only?(current_user)
     return true if access_to_subscribers_only?(current_user)
@@ -63,5 +65,12 @@ class PageColModule < ApplicationRecord
     return false if current_user.nil?
     return false unless access_to == 'expired_subscribers'
     current_user.expired_subscriber?
+  end
+
+  def all_without_valid_subscription?(current_user)
+    return false unless access_to == 'all_without_valid_subscription'
+    return true if current_user.nil?
+    return false if current_user.access_to_subscribed_content?
+    true
   end
 end

@@ -8,7 +8,8 @@
 
     = f.input :password, placeholder: '••••••••'
     = f.input :password_confirmation, placeholder: '••••••••'
-    = f.input :avatar, as: :file
+    = label_tag :avatar
+    = f.input :avatar, as: :file, label: false
 
   .form-actions
     .pull-right

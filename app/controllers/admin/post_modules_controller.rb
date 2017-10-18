@@ -9,7 +9,10 @@ class Admin::PostModulesController < AdminController
   # PATCH/PUT /admin/post_modules/1.json
   def update
     if @post_module.update(post_module_params)
-      @post_module.update_position(post_module_params[:position])
+      @post_module
+        .update_page_col_module(
+          post_module_params
+        )
       redirect_to admin_page_path(@post_module.page)
     else
       format.html { render :edit }
@@ -35,7 +38,7 @@ class Admin::PostModulesController < AdminController
     params.require(:admin_post_module).permit(
       :name,
       :position,
-      :slot_id
+      :access_to
     )
   end
 end

@@ -63,12 +63,14 @@ Rails.application.routes.draw do
     end
     resources :reset_password, except: %i[destroy]
     resources :pages, only: %i[show]
-    resources :payments
+
     resources :sessions, only: %i[new destroy create index]
     resources :subscriptions
     get '/:locale' => 'home#index'
     root to: "home#index"
-    resources :users, except: %i[index]
+    resources :users, except: %i[index] do
+      resources :payments
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -6,7 +6,7 @@ en:
         permission: 'Access permissions'
 
   user:
-    create: 'Create user'
+    create: 'Create account'
     password:
       hint: Only fill to change password
       send_me_reset_password_instructions: 'Send reset password link'

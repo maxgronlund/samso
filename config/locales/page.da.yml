@@ -11,7 +11,6 @@ da:
         menu_id: Vælg menu
         active: Aktiveret
         locale: Sprog
-        require_subscription: Kun adgang for abonnenter
         background_color: Baggrundsfarve
         body_background: Baggrundsbilled
         delete_body_background: Fjern baggrundsbilled
@@ -24,7 +23,7 @@ da:
     add_content: Tilføj sektion
     section_types: Sektion typer
     show: Vis side
-    edit_layout: Layout
+    edit_layout: Side egenskaber
     edit: Rediger side
     back: Tilbage til side
     background_color:

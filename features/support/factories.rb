@@ -11,7 +11,6 @@ FactoryGirl.define do
     f.menu_position 0
     f.active true
     f.locale 'en'
-    f.require_subscription false
     f.background_color 'none'
     f.cache_page false
     f.body_background_file_name nil
@@ -85,7 +84,3 @@ FactoryGirl.define do
     f.admin_blog_id nil
   end
 end
-
-
-
-

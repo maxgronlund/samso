@@ -30,7 +30,7 @@ da:
         permission: 'Adgangs rettigheder'
 
   user:
-    create: 'Opret bruger'
+    create: 'Opret konto'
     password:
       hint: 'Udfyldes kun hvis password skal skiftes'
       send_me_reset_password_instructions: 'Send reset password link'
