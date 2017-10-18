@@ -25,29 +25,33 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    if session[:go_to_after_signup]
-      create_with_subscription
-    else
-      create_without_subscription
-    end
-  end
-
-  def create_with_subscription
-    if @user.save
-      redirect_to new_subscription_path
-    else
-      render :new
-    end
-  end
-
-  def create_without_subscription
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
     if @user.save
       UserNotifierMailer.send_signup_email(@user.id).deliver
-      redirect_to confirm_signups_path
+      redirect_user
     else
       render :new
+    end
+
+    # if session[:subscription_type_id]
+    #   create_with_subscription
+    # else
+    #   create_without_subscription
+    # end
+  end
+
+  def redirect_user
+    if session[:subscription_type_id]
+      initialize_user
+      redirect_to(
+        new_user_payment_path(
+          user_id: @user.id,
+          subscription_type_id: session[:subscription_type_id]
+        )
+      )
+    else
+      redirect_to confirm_signups_path
     end
   end
 
@@ -70,6 +74,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def initialize_user
+    User::Service.new(@user).initialize_user
+    session[:user_id] = @user.id
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user

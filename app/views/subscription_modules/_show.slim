@@ -1,6 +1,6 @@
 - subscription_module = modulable
 
-h3 = subscription_module.title
+h4 = subscription_module.title
 = raw subscription_module.body
 hr
 
@@ -19,5 +19,9 @@ hr
   .row
     .col-12
       .pull-right
-        = submit_tag "Fortsæt", class: "btn btn-primary"
+        - if current_user.nil?
+          = link_to t('login'), new_session_path, class: 'btn btn-secondary'
+          '&nbsp;
+        = submit_tag t('create_subscription'), class: "btn btn-primary"
+- session[:redirect_to] = request.url
 

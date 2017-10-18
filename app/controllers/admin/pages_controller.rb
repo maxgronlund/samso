@@ -26,7 +26,6 @@ class Admin::PagesController < AdminController
   def create
     @page        = Page.new(page_params)
     @page.locale = I18n.locale
-    @page.user   = current_user
     if @page.save
       redirect_to admin_page_path(@page)
     else
@@ -70,7 +69,6 @@ class Admin::PagesController < AdminController
       :active,
       :locale,
       :user_id,
-      :require_subscription,
       :footer_id,
       :body_background,
       :delete_body_background,

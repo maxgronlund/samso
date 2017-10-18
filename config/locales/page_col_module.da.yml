@@ -13,5 +13,7 @@ da:
       all: Alle besøgende
       guests_only: Besøgende der ikke er logget ind
       members_only: Medlemmer der er logget ind
-      subscribers_only: Medlemmer med et gyldigt abonnement
-      expired_subscribers: Medlemmer med et udløbet abonnement
+      subscribers_only: Medlemmer med gyldigt abonnement
+      expired_subscribers: Medlemmer med udløbet abonnement
+      all_without_valid_subscription: Alle uden et gyldigt abonnement
+    access_to: Vises til

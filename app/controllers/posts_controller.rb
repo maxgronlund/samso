@@ -11,15 +11,7 @@ class PostsController < ApplicationController
       return
     end
     @landing_page = landing_page
-    # confirm_page
     render 'pages/show'
-  end
-
-  def confirm_page
-    return unless @page.require_subscription
-    return if current_user && current_user.access_to_subscribed_content?
-    store_page_in_session
-    @page = admin_system_setup.subscription_page
   end
 
   # GET /admin/posts/new

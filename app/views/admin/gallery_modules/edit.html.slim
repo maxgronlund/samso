@@ -16,6 +16,7 @@
         = f.association :page, collection: Page.where(locale: I18n.locale), include_blank: false
       .col-sm-6
         = f.input :position, as: :integer
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
         = f.input :images_pr_page
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

@@ -40,6 +40,8 @@ en:
   save: Save
   cancel: Cancel
   delete: Delete
+  continue: Continue
+  create_subscription: Create subscription
   site_name: SAMSO
   not_in_any_menus: None
   menu_bar: The menu bar

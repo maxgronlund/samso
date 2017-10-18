@@ -4,10 +4,9 @@ h3 = t('edit_model', model_name: @subscription_module.model_name.human)
 
   .form-inputs
     = f.input :title
-    = f.input :expired_title
     = f.input :body
-    = f.input :expired_body
     = f.input :position, as: :integer
+    = f.input :access_to, collection: PageColModule.permissions, include_blank: false
 
   .form-actions
     .pull-right

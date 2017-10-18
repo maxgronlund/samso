@@ -6,7 +6,10 @@ class Admin::CalendarModulesController < AdminController
 
   def update
     if @calendar_module.update(calendar_module_params)
-      @calendar_module.update_position(calendar_module_params[:position])
+      @calendar_module
+        .update_page_col_module(
+          calendar_module_params
+        )
       redirect_to admin_page_path(@calendar_module.page)
     else
       render :edit
@@ -30,7 +33,8 @@ class Admin::CalendarModulesController < AdminController
     params.require(:admin_calendar_module).permit(
       :position,
       :name,
-      :admin_calendar_id
+      :admin_calendar_id,
+      :access_to
     )
   end
 end

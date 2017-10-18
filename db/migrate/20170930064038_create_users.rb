@@ -41,6 +41,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
 
       # when importing users from a legacy system
       t.integer :legacy_id
+      t.boolean :free_subscription, default: false
 
       t.timestamps
     end

@@ -2,7 +2,7 @@ Given('there there is a user with the email {string} and the password {string}')
   member(email, password)
 end
 
-Given("there there is a {string} with the email {string} and the password {string}") do |role, email, password|
+Given('there there is a {string} with the email {string} and the password {string}') do |role, email, password|
   user = member(email, password)
   subscription_type = internet_subscription_type('Online access')
   case role

@@ -6,7 +6,10 @@ class Admin::MenuModulesController < AdminController
 
   def update
     if @menu_module.update(menu_module_params)
-      @menu_module.update_position(menu_module_params[:position])
+      @menu_module
+        .update_page_col_module(
+          menu_module_params
+        )
       @menu_module.update_margin_bottom(menu_module_params[:margin_bottom])
       redirect_to admin_page_path(@menu_module.page)
     else
@@ -33,7 +36,8 @@ class Admin::MenuModulesController < AdminController
       :name,
       :menu_content_id,
       :layout,
-      :margin_bottom
+      :margin_bottom,
+      :access_to
     )
   end
 end

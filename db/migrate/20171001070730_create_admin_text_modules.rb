@@ -9,7 +9,6 @@ class CreateAdminTextModules < ActiveRecord::Migration[5.1]
       t.string :url
       t.string :url_text
       t.integer :page_id
-      t.string :show_to
       t.string :color, default: '#000000'
       t.string :background_color, default: '#FFFFFF'
       t.boolean :border, default: false

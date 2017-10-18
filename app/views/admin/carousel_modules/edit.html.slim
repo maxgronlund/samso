@@ -12,6 +12,7 @@
     .row
       .col-sm-6
         = f.input :position, as: :integer
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
       .col-sm-6
         = f.input :layout,
       collection: Admin::CarouselModule.image_sizes,

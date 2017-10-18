@@ -7,7 +7,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
       = f.input :image,
         label: false,
         hint: t('admin/text_module.hints.image')
-        
+
       = f.input :image_style,
         collection: Admin::TextModule.image_styles,
         include_blank: false
@@ -16,9 +16,7 @@ h3 = t('edit_model', model_name: @text_module.model_name.human)
         collection: Admin::TextModule::image_ratio,
         include_blank: false
 
-      = f.input :show_to,
-        collection: Admin::TextModule::show_to,
-        include_blank: false
+      = f.input :access_to, collection: PageColModule.permissions, include_blank: false
 
       = f.input :border
 

@@ -7,6 +7,10 @@
 
   - page_col.page_col_modules.ordered.each do |page_col_module|
     = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
+    .fs-12
+      = t('page_col_module.access_to')
+      '&nbsp;
+      = t('page_col_module.show.' + page_col_module.access_to)
 
   .col-admin-footer
     .pull-right

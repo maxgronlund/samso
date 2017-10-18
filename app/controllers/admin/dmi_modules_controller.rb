@@ -9,7 +9,10 @@ class Admin::DmiModulesController < AdminController
   # PATCH/PUT /admin/dmi_modules/1.json
   def update
     if @dmi_module.update(dmi_module_params)
-      @dmi_module.update_position(dmi_module_params[:position])
+      @dmi_module
+        .update_page_col_module(
+          dmi_module_params
+        )
       redirect_to admin_page_path(@dmi_module.page)
     else
       render :edit
@@ -33,7 +36,8 @@ class Admin::DmiModulesController < AdminController
   def dmi_module_params
     params.require(:admin_dmi_module).permit(
       :forecast_duration,
-      :position
+      :position,
+      :access_to
     )
   end
 end

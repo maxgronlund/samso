@@ -92,7 +92,8 @@ class Admin::PageColModulesController < AdminController
       .require(:page_col_module)
       .permit(
         :moduleable_type,
-        :position
+        :position,
+        :access_to
       )
   end
 

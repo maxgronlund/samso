@@ -10,7 +10,6 @@ class CreatePages < ActiveRecord::Migration[5.1]
       t.integer :menu_position, default: 0
       t.boolean :active
       t.string :locale
-      t.boolean :require_subscription, default: false
       t.string :body_background_file_name
       t.string :body_background_content_type
       t.integer :body_background_file_size

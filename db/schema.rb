@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018145207) do
+ActiveRecord::Schema.define(version: 20171018210516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,14 +283,12 @@ ActiveRecord::Schema.define(version: 20171018145207) do
     t.string "url"
     t.string "url_text"
     t.integer "page_id"
-    t.string "show_to"
     t.string "color", default: "#000000"
     t.string "background_color", default: "#FFFFFF"
     t.boolean "border", default: false
     t.string "image_style", default: "full-width"
     t.string "link_layout", default: "text"
     t.string "image_ratio", default: "2_1"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -298,7 +296,6 @@ ActiveRecord::Schema.define(version: 20171018145207) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
-    t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
   end
 
   create_table "admin_youtube_modules", force: :cascade do |t|
@@ -354,7 +351,6 @@ ActiveRecord::Schema.define(version: 20171018145207) do
     t.integer "menu_position", default: 0
     t.boolean "active"
     t.string "locale"
-    t.boolean "require_subscription", default: false
     t.string "body_background_file_name"
     t.string "body_background_content_type"
     t.integer "body_background_file_size"
@@ -370,12 +366,8 @@ ActiveRecord::Schema.define(version: 20171018145207) do
 
   create_table "payments", force: :cascade do |t|
     t.string "name"
-    t.string "email"
     t.string "address"
     t.string "postal_code_and_city"
-    t.string "password"
-    t.string "password_confirmation"
-    t.boolean "news_letter"
     t.integer "subscription_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -425,6 +417,7 @@ ActiveRecord::Schema.define(version: 20171018145207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
+    t.boolean "free_subscription", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

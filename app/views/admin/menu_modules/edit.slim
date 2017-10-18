@@ -8,6 +8,7 @@
     .row
       .col-sm-3
         = f.input :position, as: :integer
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
         = f.input :layout , collection: Admin::MenuModule::LAYOUTS
         = f.input :margin_bottom, as: :integer
       .col-sm-3

@@ -6,8 +6,7 @@ module KnowPageHelper
         :page,
         title: title,
         menu_title: title,
-        menu_id: 'menu_bar',
-        require_subscription: false
+        menu_id: 'menu_bar'
       )
   end
 end
