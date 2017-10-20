@@ -15,9 +15,10 @@ namespace :system do
         landing_page = build_landing_page(locale, footer.id) unless @result[:status] == :error
         build_system_setup(locale, landing_page.id) unless @result[:status] == :error
       end
-      create_system_messages
+      create_system_messages unless @result[:status] == :error
       raise ActiveRecord::Rollback if @result[:status] == :error
     end
+    ap @result[:reason] if @result[:status] == :error
   end
 
   private
@@ -34,15 +35,13 @@ namespace :system do
   end
 
   def build_landing_page(locale, footer_id)
-    user = User.super_admin
     params =
       {
-        locale: locale[:locale],
         title: locale[:name],
         menu_title: locale[:name],
         menu_id: 'not_in_any_menus',
         active: true,
-        user_id: user.id,
+        locale: locale[:locale],
         admin_footer_id: footer_id
       }
     Page.where(params).first_or_create(params)
@@ -80,7 +79,7 @@ namespace :system do
     ]
     messages.each do |message|
       Admin::SystemMessage
-        .where(identifier: message[:identifier], locale: message[:localt])
+        .where(identifier: message[:identifier], locale: message[:locale])
         .first_or_create(message)
     end
   end

@@ -36,3 +36,7 @@ end
 Then('I can see the blog') do
   expect(page).to have_content('Blog post')
 end
+
+Then("I can see the subscription module") do
+  pending # Write code here that turns the phrase above into concrete actions
+end

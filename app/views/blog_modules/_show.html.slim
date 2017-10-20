@@ -9,7 +9,7 @@
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
         = link_to t('user.search.show_all'), page_path(blog_module.page), class: 'btn btn-outline-secondary'
-  - if user_signed_in?
+  - if user_signed_in? && !blog_module.blog.nil?
     .row.mt-5
       .col-sm-12
         .pull-right

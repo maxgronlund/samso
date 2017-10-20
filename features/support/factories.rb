@@ -83,4 +83,8 @@ FactoryGirl.define do
     f.posts_pr_page 10
     f.admin_blog_id nil
   end
+
+  factory :subscription_module, class: Admin::SubscriptionModule do |f|
+
+  end
 end
