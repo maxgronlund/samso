@@ -1,29 +1,22 @@
 .container.pt-60
   - if @message.nil?
-    .row.justify-content-center
-      .col-lg-4.col-sm-8.col-xs-9
+    .row.justify-content-md-center
+      .col-md-auto.col-md-8
         .card
-          .card-header
-             h2 = t('user.reset_password')
+          h4.card-header = t('user.reset_password')
 
-          .card-block
+          .card-body
             = form_tag reset_password_index_path, method: 'post' do |f|
               .form-inputs
-  							= label_tag :email
-  							br
-  							= text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
-  							br
+                = label_tag :email
+                br
+                = text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
+                br
               .form-actions
-              	.pull-right
-  								= submit_tag t('send'), class: 'btn btn-primary'
-
-  				= link_to t('signup'), new_user_path
+                .pull-right
+                  = submit_tag t('send'), class: 'btn btn-primary'
   - else
-    .row.justify-content-center
-      .col-lg-7.col-sm-9.col-xs-12
-        h3 = @message.title
-        = @message.body
-        hr
-        .float-right
-          = link_to t('ok'), root_path, class: 'btn btn-primary'
-
+    h4 = @message.title
+    = @message.body
+    hr
+    = link_to t('ok'), root_path, class: 'btn btn-primary'

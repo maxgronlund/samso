@@ -52,6 +52,11 @@ FactoryGirl.define do
     f.end_date Time.zone.now.to_datetime + 13.days
   end
 
+  factory :subscription_module, class: Admin::SubscriptionModule do |f|
+    f.title 'Subscripe'
+    f.body 'Subscribe to this funky content'
+  end
+
   factory :blog, class: Admin::Blog do |f|
     f.title 'Blog'
     f.locale 'en'
@@ -84,7 +89,21 @@ FactoryGirl.define do
     f.admin_blog_id nil
   end
 
-  factory :subscription_module, class: Admin::SubscriptionModule do |f|
-
+  factory :text_module, class: Admin::TextModule do |f|
+    title Faker::Hipster.sentence(3)
+    body Faker::Hipster.sentence(16)
+    url ''
+    url_text nil
+    page_id nil
+    color '#000000'
+    background_color '#FFFFFF'
+    border false
+    image_style 'full-width'
+    link_layout 'text'
+    image_ratio '2_1'
+    image_file_name nil
+    image_content_type nil
+    image_file_size nil
+    image_updated_at nil
   end
 end

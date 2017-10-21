@@ -6,7 +6,8 @@ module KnowPageHelper
         :page,
         title: title,
         menu_title: title,
-        menu_id: menu_id
+        menu_id: menu_id,
+        locale: I18n.locale
       )
   end
 end

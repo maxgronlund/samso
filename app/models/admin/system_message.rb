@@ -12,7 +12,7 @@ class Admin::SystemMessage < ApplicationRecord
   end
 
   def self.resend_password
-    @resend_password ||=
+    @resend_password =
       Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'resend_password')
       .first_or_create(
@@ -23,7 +23,7 @@ class Admin::SystemMessage < ApplicationRecord
   end
 
   def self.new_password_email
-    @new_password_email ||=
+    @new_password_email =
       Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'new_password_email')
       .first_or_create(
@@ -35,7 +35,7 @@ class Admin::SystemMessage < ApplicationRecord
 
   # usage Admin::SystemMessage.confirm_email_email
   def self.confirm_email
-    @confirm_email ||=
+    @confirm_email =
       Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'confirm_email')
       .first_or_create(
@@ -48,7 +48,7 @@ class Admin::SystemMessage < ApplicationRecord
 
   # usage Admin::SystemMessage.confirm_email_email
   def self.thanks_for_signing_up_email
-    @confirm_email ||=
+    @confirm_email =
       Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'thanks_for_signing_up_email')
       .first_or_create(
@@ -61,7 +61,7 @@ class Admin::SystemMessage < ApplicationRecord
 
   # usage Admin::SystemMessage.thanks_for_signing_up
   def self.thanks_for_signing_up
-    @signed_up_message ||=
+    @signed_up_message =
       Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'thanks_for_signing_up')
       .first_or_create(

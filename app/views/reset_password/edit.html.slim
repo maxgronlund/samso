@@ -1,20 +1,21 @@
 .container.pt-60
   - if @user.nil?
-    'Invalid token
-  - else
-    .row.justify-content-center
-      .col-lg-6.col-sm-9
+    = @message
+  -else
+    .row.justify-content-md-center
+      .col-md-auto.col-md-8
         .card
-          .card-header
-             h2 = t('user.new_password')
+          h4.card-header = t('user.new_password')
 
-          .card-block
+          .card-body
             = simple_form_for [@user], url: url_for(action: 'update', controller: 'reset_password'), method: 'put' do |f|
               = f.error_notification
               .form-inputs
                 = f.hidden_field :reset_password_token, value: @user.reset_password_token
                 = f.input :password, placeholder: '••••••••'
                 = f.input :password_confirmation, placeholder: '••••••••'
+              .pull-right
+                .form-actions
+                  = f.submit t('user.password.update'), class: 'btn btn-primary'
 
-              .form-actions
-                = f.button :submit, class: 'btn btn-primary'
+

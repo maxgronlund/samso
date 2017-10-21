@@ -1,6 +1,6 @@
 # notifications to users
 class UserNotifierMailer < ApplicationMailer
-  default from: 'max@example.com'
+  default from: 'no-reply@example.com'
   layout 'user_notifier_mailer'
 
   # send a signup email to the user, pass in the user object that

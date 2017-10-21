@@ -32,6 +32,9 @@ da:
   user:
     create: 'Opret konto'
     password:
+      update: Opdater password
+      updated: Password opdateret
+      invalid_link: Linket til opdatering af password er ikke længere gyldigt
       hint: 'Udfyldes kun hvis password skal skiftes'
       send_me_reset_password_instructions: 'Send reset password link'
     reset_password: Send nyt password

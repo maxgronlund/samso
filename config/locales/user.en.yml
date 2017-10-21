@@ -8,6 +8,9 @@ en:
   user:
     create: 'Create account'
     password:
+      update: Update password
+      updated: Password updated
+      invalid_link: The reset password link is not valid
       hint: Only fill to change password
       send_me_reset_password_instructions: 'Send reset password link'
     reset_password: Send nyt password

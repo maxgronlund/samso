@@ -6,6 +6,7 @@ class ResetPasswordController < ApplicationController
 
   def edit
     @user = User.find_by(reset_password_token: params[:id])
+    ap @message = I18n.t('user.password.invalid_link')
   end
 
   def update
@@ -14,10 +15,10 @@ class ResetPasswordController < ApplicationController
     user_service = User::Service.new(@user)
     if user_service.valid_token? && user_service.reset_user(user_params)
       session[:user_id] = @user.id
-      redirect_to @user, notice: 'Password updated'
+      redirect_to @user, notice: t('user.password.updated')
     else
       @user = nil
-      redirect_to edit_reset_password_path(token), notice: 'Autch'
+      redirect_to edit_reset_password_path(token)
     end
   end
 
