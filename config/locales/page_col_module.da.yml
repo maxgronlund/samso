@@ -3,11 +3,12 @@ da:
     attributes:
       page_col_module:
         moduleable_type: Type
-        show: Vis til
+        access_to: Vis til
     models:
       page_col_module: Modul type
 
   page_col_module:
+    access_to: Vis til
     add_module: Tilføj module
     show:
       all: Alle besøgende

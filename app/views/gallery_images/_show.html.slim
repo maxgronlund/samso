@@ -1,21 +1,26 @@
 .col-12.col-sm-6.col-md-4.col-lg-3.mb-9
-  .card style="min-height: 451px"
+  .card style="#{gallery_module.style}"
     .card-img-top
       a data-fancybox="gallery" href="#{gallery_image.image_url('default')}"
         = image_tag(gallery_image.image_url('squared'), class: 'img-fluid card-img-top')
 
-    .card-body
+    .card-body style=("color: #{gallery_module.color}")
       h5.card-title = gallery_image.title.truncate(22)
       p.card-text = gallery_image.body.truncate(40)
       
     .card-footer.text-muted
       = l gallery_image.created_at
       br
-      = link_to t('show'), gallery_image_path(gallery_image)
+      .pull-right
+        = link_to t('show'),
+          gallery_image_path(gallery_image),
+          class: 'btn btn-secondary btn-sm'
       - if can_manage_resource?(gallery_image)
-        '&nbsp;|&nbsp;
-        = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, gallery_image)
-        '&nbsp;|&nbsp;
-        = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, gallery_image),
-          data: { confirm: t('are_you_sure') },
-          method: :delete
+        br
+        hr
+        .pull-right
+          = link_to t('edit'), edit_gallery_module_gallery_image_path(gallery_module, gallery_image)
+          '&nbsp;|&nbsp;
+          = link_to t('delete'), gallery_module_gallery_image_path(gallery_module, gallery_image),
+            data: { confirm: t('are_you_sure') },
+            method: :delete

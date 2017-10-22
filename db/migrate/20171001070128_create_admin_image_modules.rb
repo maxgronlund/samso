@@ -3,7 +3,8 @@ class CreateAdminImageModules < ActiveRecord::Migration[5.1]
   def up
     create_table :admin_image_modules do |t|
       t.string :layout
-
+      t.string :color, default: '#000000'
+      t.string :background_color, default: '#FFFFFF'
       t.timestamps
     end
     add_module_name

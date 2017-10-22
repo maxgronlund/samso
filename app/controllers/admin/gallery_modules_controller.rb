@@ -35,7 +35,9 @@ class Admin::GalleryModulesController < AdminController
       :layout,
       :position,
       :images_pr_page,
-      :access_to
+      :access_to,
+      :color,
+      :background_color
     )
   end
 end

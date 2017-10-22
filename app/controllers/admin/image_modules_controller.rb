@@ -32,7 +32,9 @@ class Admin::ImageModulesController < AdminController
       :page_id,
       :position,
       :margin_bottom,
-      :show_to
+      :show_to,
+      :color,
+      :background_color
     )
   end
 end

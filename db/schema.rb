@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017163431) do
+ActiveRecord::Schema.define(version: 20171021150139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20171017163431) do
     t.integer "images_pr_page", default: 16
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "color", default: "#000000"
+    t.string "background_color", default: "#FFFFFF"
     t.index ["page_id"], name: "index_admin_gallery_modules_on_page_id"
   end
 
@@ -176,6 +178,8 @@ ActiveRecord::Schema.define(version: 20171017163431) do
     t.string "layout"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "color", default: "#000000"
+    t.string "background_color", default: "#FFFFFF"
   end
 
   create_table "admin_menu_contents", force: :cascade do |t|

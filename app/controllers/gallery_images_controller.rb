@@ -23,6 +23,7 @@ class GalleryImagesController < ApplicationController
   def show
     @gallery_image = Admin::GalleryImage.find(params[:id])
     @page = @gallery_image.image_page
+    @body_style = @page.body_style
     @landing_page = landing_page
     render 'pages/show'
   end
@@ -55,7 +56,9 @@ class GalleryImagesController < ApplicationController
       :body,
       :position,
       :gallery_module_id,
-      :image
+      :image,
+      :color,
+      :background_color
     )
   end
 end

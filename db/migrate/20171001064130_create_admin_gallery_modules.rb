@@ -6,6 +6,8 @@ class CreateAdminGalleryModules < ActiveRecord::Migration[5.1]
       t.text :body
       t.string :layout
       t.integer :page_id
+      t.string :color, default: '#000000'
+      t.string :background_color, default: '#FFFFFF'
       t.integer :gallery_images_count, default: 0
       t.integer :images_pr_page, default: 16
 

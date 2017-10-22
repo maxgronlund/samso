@@ -3,7 +3,7 @@ en:
     attributes:
       page_col_module:
         moduleable_type: Type
-        show: Show to
+        access_to: Show to
     models:
       page_col_module: Module type
 

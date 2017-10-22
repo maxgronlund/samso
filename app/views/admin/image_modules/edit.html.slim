@@ -14,6 +14,11 @@
       .col-sm-6
         = f.input :position, as: :integer
         = f.input :access_to, collection: PageColModule.permissions, include_blank: false
+    .row
+      .col-sm-6
+        = f.input :color
+      .col-sm-6
+        = f.input :background_color
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

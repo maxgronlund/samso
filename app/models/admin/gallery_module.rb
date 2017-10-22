@@ -29,4 +29,8 @@ class Admin::GalleryModule < ApplicationRecord
     return false if page * images_pr_page >= gallery_images_count
     "#{request_path}?page=#{page}"
   end
+
+  def style
+    "background-color: #{background_color};min-height: 451px;"
+  end
 end

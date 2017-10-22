@@ -1,6 +1,8 @@
 - gallery_module = modulable
-h3 = gallery_module.name
-= gallery_module.body
+
+. style=("color: #{gallery_module.color}")
+  h3 = gallery_module.name
+  = gallery_module.body
 
 - if user_signed_in?
   .row.mb-5
@@ -10,7 +12,8 @@ h3 = gallery_module.name
 
 .row
   - gallery_module.paginated_images(params[:page]).each do |gallery_image|
-    = render 'gallery_images/show', gallery_module: gallery_module, gallery_image: gallery_image
+    = render 'gallery_images/show', gallery_module: gallery_module, gallery_image: gallery_image,
+      gallery_module: gallery_module
 
 .row
   .col-sm-12
