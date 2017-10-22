@@ -29,3 +29,6 @@ en:
     current_sign_in_at: 'Current sign in at: '
     last_sign_in_ip: 'Last sign in IP: '
     current_sign_in_ip: 'Current sign in IP: '
+    confirm_email: Confirm email
+    errors:
+      account_confirmed: Account already confirmed

@@ -58,6 +58,7 @@ class User < ApplicationRecord
     def initialize_user
       @user.confirmation_token = nil
       @user.confirmed_at = Time.zone.now
+      @user.confirmation_sent_at = nil
       @user.save
     end
 

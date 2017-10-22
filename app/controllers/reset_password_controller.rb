@@ -6,7 +6,7 @@ class ResetPasswordController < ApplicationController
 
   def edit
     @user = User.find_by(reset_password_token: params[:id])
-    ap @message = I18n.t('user.password.invalid_link')
+    @message = I18n.t('user.password.invalid_link')
   end
 
   def update

@@ -1,7 +1,6 @@
 
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container.pt-70
-  p#notice = notice
   = image_tag( @user.avatar_url(:square))
 
   p
@@ -12,4 +11,3 @@
     = @user.email
 
   = link_to t('edit'), edit_user_path(@user)
-

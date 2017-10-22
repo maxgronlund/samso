@@ -1,6 +1,24 @@
 .container.pt-60
   - if @user.nil?
-    = @message
+    .container
+      .row.justify-content-md-center
+        .col.col-lg-2
+        .col-md-auto
+          .alert.alert-danger
+            b = @message
+            hr
+            .row
+              .col-md-12
+                .pull-right
+                  = link_to t('user.reset_password'),
+                    reset_password_index_path,
+                    class: 'btn btn-light'
+
+        .col.col-lg-2
+
+
+
+
   -else
     .row.justify-content-md-center
       .col-md-auto.col-md-8

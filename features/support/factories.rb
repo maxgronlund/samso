@@ -90,20 +90,20 @@ FactoryGirl.define do
   end
 
   factory :text_module, class: Admin::TextModule do |f|
-    title Faker::Hipster.sentence(3)
-    body Faker::Hipster.sentence(16)
-    url ''
-    url_text nil
-    page_id nil
-    color '#000000'
-    background_color '#FFFFFF'
-    border false
-    image_style 'full-width'
-    link_layout 'text'
-    image_ratio '2_1'
-    image_file_name nil
-    image_content_type nil
-    image_file_size nil
-    image_updated_at nil
+    f.title Faker::Hipster.sentence(3)
+    f.body Faker::Hipster.sentence(16)
+    f.url ''
+    f.url_text nil
+    f.page_id nil
+    f.color '#000000'
+    f.background_color '#FFFFFF'
+    f.border false
+    f.image_style 'full-width'
+    f.link_layout 'text'
+    f.image_ratio '2_1'
+    f.image_file_name nil
+    f.image_content_type nil
+    f.image_file_size nil
+    f.image_updated_at nil
   end
 end

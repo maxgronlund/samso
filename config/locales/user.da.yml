@@ -53,3 +53,6 @@ da:
     current_sign_in_at: 'Logget ind: '
     last_sign_in_ip: 'Sidst logget ind fra IP: '
     current_sign_in_ip: 'Logget ind fra IP: '
+    confirm_email: Bekræft email
+    errors:
+      account_confirmed: Konto er allerde bekræftet

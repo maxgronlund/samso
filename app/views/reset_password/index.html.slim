@@ -16,7 +16,17 @@
                 .pull-right
                   = submit_tag t('send'), class: 'btn btn-primary'
   - else
-    h4 = @message.title
-    = @message.body
-    hr
-    = link_to t('ok'), root_path, class: 'btn btn-primary'
+    .row.justify-content-md-center
+      .col.col-lg-2
+      .col-md-auto
+        .alert.alert-info
+
+          h4 = @message.title
+          = @message.body
+          hr
+          .row
+            .col-md-12
+              .pull-right
+
+                = link_to t('ok'), root_path, class: 'btn btn-primary'
+      .col.col-lg-2

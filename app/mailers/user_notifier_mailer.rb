@@ -10,6 +10,7 @@ class UserNotifierMailer < ApplicationMailer
     @user = User.find_by(id: user_id)
     return if @user.nil?
     @token = @user.confirmation_token
+    return if @token.nil?
     @name = @user.name
     message = Admin::SystemMessage.thanks_for_signing_up_email
     @title  = message.title

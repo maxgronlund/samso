@@ -1,16 +1,18 @@
 - calendar_module = modulable
 h3 = calendar_module.name
 - if calendar_module.events.empty?
-  'no calender selected
+  .alert.alert-danger
+    'No calender selected
 - else
-  - this_month = DateTime.new( Date.today.at_beginning_of_month.year, Date.today.at_beginning_of_month.month, 1)
-  - next_month = DateTime.new( Date.today.at_end_of_month.year, Date.today.at_beginning_of_month.month, Date.today.at_end_of_month.day, 23, 59)
-  - calendar_module.events.where("start_time >= :this_month AND start_time <= :next_month", this_month: this_month, next_month: next_month).each do |event|
+  .row.justify-content-md-center
+    .col-md-auto
+      = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}"
+      '&nbsp;
+      = this_month_name(params[:from_date])
+      '&nbsp;
+      = link_to '>>',  "?from_date=#{next_month(params[:from_date])}"
+  br
+  - calendar_module_events(calendar_module, params[:from_date]).each do |event|
     h5 = event.title
     i = l event.start_time
     = simple_format event.body
-    br
-    = this_month.strftime("%B")
-    /=  l Date.today.at_beginning_of_month
-
-
