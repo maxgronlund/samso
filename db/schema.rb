@@ -293,7 +293,6 @@ ActiveRecord::Schema.define(version: 20171021150139) do
     t.string "image_style", default: "full-width"
     t.string "link_layout", default: "text"
     t.string "image_ratio", default: "2_1"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -301,7 +300,6 @@ ActiveRecord::Schema.define(version: 20171021150139) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
-    t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
   end
 
   create_table "admin_youtube_modules", force: :cascade do |t|
@@ -317,9 +315,9 @@ ActiveRecord::Schema.define(version: 20171021150139) do
     t.bigint "moduleable_id"
     t.integer "position", default: 0
     t.integer "margin_bottom", default: 20
-    t.string "access_to", default: "all"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_to", default: "all"
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
     t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
   end
@@ -420,10 +418,10 @@ ActiveRecord::Schema.define(version: 20171021150139) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer "legacy_id"
-    t.boolean "free_subscription", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
+    t.boolean "free_subscription", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
