@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @landing_page = admin_system_setup.landing_page
-    @subscription_type = Admin::SubscriptionType.find(params[:subscription_type_id])
+    @subscription_type = Admin::SubscriptionType.find(session[:subscription_type_id])
     @user = User.find(params[:user_id])
     @payment = Payment.new(name: @user.name)
   end

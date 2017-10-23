@@ -24,3 +24,4 @@ class Admin::BlogPost < ApplicationRecord
     blog.clear_cache_on_pages
   end
 end
+
