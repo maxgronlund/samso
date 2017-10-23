@@ -1,0 +1,14 @@
+.row.justify-content-md-center
+  .col-md-auto
+    .btn-group
+      = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}", class: 'btn btn-light'
+      .btn.btn-light
+        = this_month_name(params[:from_date])
+      = link_to '>>',  "?from_date=#{next_month(params[:from_date])}", class: 'btn btn-light'
+
+br
+- calendar_module_events(calendar_module, params[:from_date]).each do |event|
+  h5 = event.title
+  i = l event.start_time
+  = simple_format event.body
+

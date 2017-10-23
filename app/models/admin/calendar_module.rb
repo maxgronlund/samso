@@ -7,10 +7,10 @@ class Admin::CalendarModule < ApplicationRecord
 
   LAYOUTS =
     [
-      [I18n.t('admin/calendar_module.layout.today-overview'), 'today-overview'],
-      [I18n.t('admin/calendar_module.layout.today-detailed'), 'today-detailed'],
-      [I18n.t('admin/calendar_module.layout.month-overview'), 'month-overview'],
-      [I18n.t('admin/calendar_module.layout.month-detailed'), 'month-detailed']
+      [I18n.t('admin/calendar_module.layout.today-overview'), 'today_overview'],
+      [I18n.t('admin/calendar_module.layout.today-detailed'), 'today_detailed'],
+      [I18n.t('admin/calendar_module.layout.month-overview'), 'month_overview'],
+      [I18n.t('admin/calendar_module.layout.month-detailed'), 'month_detailed']
     ].freeze
 
   def page_module
