@@ -70,13 +70,15 @@ FactoryGirl.define do
     f.body "Calm down, Marty. I didn't disintegrate anything. The molecular structure of both Einstein and the car are completely intact."
     f.position nil
     f.blog_id 1
-    f.start_date nil
+    f.start_date DateTime.now
     f.end_date nil
     f.user_id 1
     f.image_file_name nil
     f.image_content_type nil
     f.image_file_size nil
     f.image_updated_at nil
+    f.free_content false
+    f.layout 'image_top'
   end
 
   factory :blog_module, class: Admin::BlogModule do |f|

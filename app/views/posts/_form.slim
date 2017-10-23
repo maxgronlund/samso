@@ -1,19 +1,30 @@
 = f.hidden_field :page_id, value: params[:page_id]
 = f.input :title
-= f.input :free_content
+
+.row
+  .col-md-6
+    = f.label :image
+    br
+    = f.file_field :image
+  .col-md-6
+    - if @post.image.exists?
+      = image_tag @post.image.url(:thumb)
+      = f.input :delete_image, as: :boolean
 = f.input :subtitle
 = f.input :teaser
 .row
   .col-md-6
     = f.input :admin_blog_post_category_id, collection: Admin::BlogPostCategory.where(locale: I18n.locale)
   .col-md-6
-    = f.label :image
-    br
-    = f.file_field :image
+
+    = f.input :layout,
+      collection: Admin::BlogPost::LAYOUTS,
+      include_blank: false
 
 = f.input :start_date
 
 = f.input :body, :input_html => { rows: 15}
+= f.input :free_content
 
 /= f.hidden_field :blog_id, value: @blog.id
 /= f.association :user

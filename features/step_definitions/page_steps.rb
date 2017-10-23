@@ -17,7 +17,8 @@ Given('there is a page where the blog is given access to {string}') do |access_t
       :blog_post,
       blog_id: blog.id,
       title: 'Blog post',
-      user_id: super_user.id
+      user_id: super_user.id,
+      free_content: true
     )
 
   blog_module =

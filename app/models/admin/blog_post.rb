@@ -1,5 +1,6 @@
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
+  attr_accessor :delete_image
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true
   belongs_to :user, class_name: 'User', counter_cache: true, optional: true
   has_attached_file :image, styles: {
@@ -13,6 +14,16 @@ class Admin::BlogPost < ApplicationRecord
   pg_search_scope :search_by_title_or_body, against: %i[title body]
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
+  before_validation { image.clear if delete_image == '1' }
+
+  LAYOUTS =
+    [
+      ['image_top', 'image_top'],
+      ['image_left', 'image_left'],
+      ['image_right', 'image_right'],
+    ].freeze
+
+  
 
   def page
     blog_module.page

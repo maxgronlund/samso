@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   # GET /admin/posts/1
   def show
     @blog_post = Admin::BlogPost.find(params[:id])
-    @blog_module = Admin::BlogModule.find(params[:blog_id])
-    @page = @blog_module.show_on_page
+    @blog = Admin::Blog.find(params[:blog_id])
+    @page = Page.find(params[:page_id])
     if @page.nil?
       render_404
       return
@@ -16,9 +16,9 @@ class PostsController < ApplicationController
 
   # GET /admin/posts/new
   def new
-    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @blog = Admin::Blog.find(params[:blog_id])
     @blog_post =
-      @blog_module
+      @blog
       .posts
       .new(
         end_date: Time.zone.now + 1.year
@@ -97,7 +97,9 @@ class PostsController < ApplicationController
         :page_id,
         :admin_blog_post_category_id,
         :start_date,
-        :free_content
+        :free_content,
+        :layout,
+        :delete_image
       )
   end
 end

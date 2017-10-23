@@ -6,6 +6,7 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
     create_table :admin_blog_posts do |t|
       t.integer :legacy_id
       t.string :title
+      t.string :layout, default: 'image_top'
       t.text :subtitle
       t.text :teaser
       t.text :body
