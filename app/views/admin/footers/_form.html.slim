@@ -6,23 +6,29 @@
         = f.input :title
     .row
       .col-sm-6
-        = f.input :about_link
+        = f.input :about_page_id, collection: Page.where(locale: I18n.locale)
       .col-sm-6
-        = f.input :about_link_name
+        = f.input :about_page_link_name
     .row
+      .col-sm-6
+        = f.input :copyright_page_id, collection: Page.where(locale: I18n.locale)
+      .col-sm-6
+        = f.input :copyright_page_link_name
+    .row
+      .col-sm-6
+        = f.input :term_of_usage_page_id, collection: Page.where(locale: I18n.locale)
+      .col-sm-6
+        = f.input :term_of_usage_page_link_name
+    .row
+      .col-sm-6
+        = f.input :company_name
       .col-sm-6
         = f.input :email
-      .col-sm-6
-        = f.input :email_name
     .row
       .col-sm-6
-        = f.input :terms_of_usage_link
+        = f.input :phone
       .col-sm-6
-        = f.input :terms_of_usage_link_name
-    .row
-      .col-sm-6
-        = f.input :info
-        = f.input :copyright
+        = f.input :vat_nr
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

@@ -62,14 +62,16 @@ class Admin::FootersController < AdminController
     params.require(:admin_footer).permit(
       :title,
       :locale,
-      :about_link,
-      :about_link_name,
+      :about_page_id,
+      :about_page_link_name,
       :email,
-      :email_name,
-      :terms_of_usage_link,
-      :terms_of_usage_link_name,
-      :info,
-      :copyright
+      :term_of_usage_page_id,
+      :term_of_usage_page_link_name,
+      :copyright_page_id,
+      :copyright_page_link_name,
+      :company_name,
+      :phone,
+      :vat_nr
     )
   end
 end

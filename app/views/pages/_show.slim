@@ -1,14 +1,15 @@
 - page.ordered_page_rows.each do |page_row|
   = render 'page_rows/show', page_row: page_row
 - if @footer
-  .fixed-bottom
-    .footer
-      .container
-        .row
-          .col-sm-4
-            - unless @footer.about_link.empty?
-              = link_to @footer.about_link_name, @footer.about_link
-          .col-sm-4
-            - unless @footer.terms_of_usage_link.empty?
-              = link_to @footer.terms_of_usage_link_name, @footer.terms_of_usage_link
+
+  /.fixed-bottom
+  /  .footer
+  / .container.footer
+  /   .row
+  /     .col-sm-4
+  /       - unless @footer.about_link.empty?
+  /         = link_to @footer.about_link_name, @footer.about_link
+  /     .col-sm-4
+  /       - unless @footer.terms_of_usage_link.empty?
+  /         = link_to @footer.terms_of_usage_link_name, @footer.terms_of_usage_link
 

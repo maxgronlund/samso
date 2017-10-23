@@ -4,14 +4,16 @@ class CreateAdminFooters < ActiveRecord::Migration[5.1]
     create_table :admin_footers do |t|
       t.string :title, default: ''
       t.string :locale
-      t.string :about_link, default: ''
-      t.string :about_link_name, default: ''
+      f.integer :about_page_id
+      f.string :about_page_link_name, default: ''
+      f.integer :copyright_page_id, :integer
+      f.string :copyright_page_link_name, default: ''
+      f.integer :term_of_usage_page_id, :integer
+      f.string :term_of_usage_page_link_name, derault: ''
       t.string :email, default: ''
-      t.string :email_name, default: ''
-      t.string :terms_of_usage_link, default: ''
-      t.string :terms_of_usage_link_name, default: ''
-      t.string :info, default: ''
-      t.string :copyright, default: ''
+      t.string :company_name, default: ''
+      t.string :phone, default: ''
+      t.string :vat_nr, default: ''
       t.timestamps
     end
   end
