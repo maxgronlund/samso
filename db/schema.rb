@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023101635) do
+ActiveRecord::Schema.define(version: 20171023114010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,9 +133,9 @@ ActiveRecord::Schema.define(version: 20171023101635) do
   create_table "admin_footers", force: :cascade do |t|
     t.string "title", default: ""
     t.string "locale"
+    t.string "email", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
     t.integer "about_page_id"
     t.string "about_page_link_name", default: ""
     t.integer "copyright_page_id"
@@ -296,7 +296,6 @@ ActiveRecord::Schema.define(version: 20171023101635) do
     t.string "image_style", default: "full-width"
     t.string "link_layout", default: "text"
     t.string "image_ratio", default: "2_1"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -304,7 +303,6 @@ ActiveRecord::Schema.define(version: 20171023101635) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
-    t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
   end
 
   create_table "admin_youtube_modules", force: :cascade do |t|
@@ -320,9 +318,9 @@ ActiveRecord::Schema.define(version: 20171023101635) do
     t.bigint "moduleable_id"
     t.integer "position", default: 0
     t.integer "margin_bottom", default: 20
-    t.string "access_to", default: "all"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_to", default: "all"
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
     t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
   end
@@ -423,10 +421,10 @@ ActiveRecord::Schema.define(version: 20171023101635) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer "legacy_id"
-    t.boolean "free_subscription", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
+    t.boolean "free_subscription", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

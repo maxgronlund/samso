@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
     if @user.save
+      @user.roles.create(permission: 'member')
       UserNotifierMailer.send_signup_email(@user.id).deliver
       redirect_user
     else
