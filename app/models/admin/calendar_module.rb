@@ -5,6 +5,14 @@ class Admin::CalendarModule < ApplicationRecord
 
   belongs_to :admin_calendar, class_name: 'Admin::Calendar', optional: true
 
+  LAYOUTS =
+    [
+      ['today overview', 'today-overview'],
+      ['today detailed', 'today-detailed'],
+      ['month overview', 'month-overview'],
+      ['month detailed', 'month-detailed']
+    ]
+
   def page_module
     PageModule.find_by(
       moduleable_type: 'Admin::CalendarModule',
