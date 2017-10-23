@@ -23,11 +23,16 @@ class Admin::CalendarEventsController < AdminController
 
   # POST /admin/calendar_events
   def create
+    page_id = calendar_event_params[:page_id]
     @admin_calendar_event =
       @admin_calendar.events.new(admin_calendar_event_params)
 
     if @admin_calendar_event.save
-      redirect_to @admin_calendar, notice: 'Event was successfully created.'
+      if page_id.nil?
+        redirect_to @admin_calendar, notice: 'Event was successfully created.'
+      else
+        redirect_to page_url(page_id)
+      end
     else
       render :new
     end
@@ -59,8 +64,14 @@ class Admin::CalendarEventsController < AdminController
     @admin_calendar = Admin::Calendar.find(params[:calendar_id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def admin_calendar_event_params
+    new_params = calendar_event_params.dup
+    new_params.delete :page_id
+    new_params
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def calendar_event_params
     params
       .require(:admin_calendar_event)
       .permit(
@@ -69,7 +80,8 @@ class Admin::CalendarEventsController < AdminController
         :body,
         :start_time,
         :end_time,
-        :gmap
+        :gmap,
+        :page_id
       )
   end
 end

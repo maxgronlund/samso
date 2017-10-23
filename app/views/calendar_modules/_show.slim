@@ -6,11 +6,17 @@ h3 = calendar_module.name
 - else
   .row.justify-content-md-center
     .col-md-auto
-      = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}"
-      '&nbsp;
-      = this_month_name(params[:from_date])
-      '&nbsp;
-      = link_to '>>',  "?from_date=#{next_month(params[:from_date])}"
+      .btn-group
+        = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}", class: 'btn btn-light'
+        .btn.btn-light
+          = this_month_name(params[:from_date])
+        = link_to '>>',  "?from_date=#{next_month(params[:from_date])}", class: 'btn btn-light'
+  / - if editor?
+  /   br
+  /   .pull-right
+  /     = link_to t('admin/calendar.new_event'),
+  /       new_admin_calendar_calendar_event_path(calendar_module.admin_calendar, page_id: params[:id]),
+  /       class: 'btn btn-outline-success'
   br
   - calendar_module_events(calendar_module, params[:from_date]).each do |event|
     h5 = event.title

@@ -1,17 +1,19 @@
 # helpers for the CalendarHelper
 module Admin::CalendarModuleHelper
   def prev_month(current_month = nil)
-    current_month = Date.today.to_s if current_month.nil?
+    current_month = Date.today.at_beginning_of_month.to_s if current_month.nil?
     (Date.parse(current_month) - 1.month).to_s
   end
 
   def next_month(current_month = nil)
-    current_month = Date.today.to_s if current_month.nil?
+    current_month = Date.today.at_beginning_of_month.to_s if current_month.nil?
     (Date.parse(current_month) + 1.month).to_s
   end
 
   def calendar_module_events(calendar_module, from_date = nil)
-    from_date = from_date.nil? ? Date.today : Date.parse(from_date)
+    from_date = from_date.nil? ? Date.today.at_beginning_of_month : Date.parse(from_date)
+
+    puts from_date
 
     calendar_module
       .events
