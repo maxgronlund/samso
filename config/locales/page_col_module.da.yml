@@ -3,7 +3,7 @@ da:
     attributes:
       page_col_module:
         moduleable_type: Type
-        access_to: Vis til
+        access_to: Vises til
     models:
       page_col_module: Modul type
 

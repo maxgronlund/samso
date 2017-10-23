@@ -12,6 +12,7 @@
         = f.input :access_to, collection: PageColModule.permissions, include_blank: false
       .col-sm-6
         = f.input :admin_calendar_id, collection: Admin::Calendar.all
+        = f.input :layout, collection: Admin::CalendarModule::LAYOUTS, include_blank: false
 
 
 

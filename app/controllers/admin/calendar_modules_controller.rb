@@ -34,7 +34,8 @@ class Admin::CalendarModulesController < AdminController
       :position,
       :name,
       :admin_calendar_id,
-      :access_to
+      :access_to,
+      :layout
     )
   end
 end

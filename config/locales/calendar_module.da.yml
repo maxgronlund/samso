@@ -8,6 +8,8 @@ da:
       admin/calendar_module:
         name:  Navn
         admin_calendar_id: Vælg kalender
+        layout: Layout
+        access_to: Vises til
 
       admin/calendar_event:
         title:  Navn
@@ -22,8 +24,11 @@ da:
 
   admin/calendar_module:
     name: Kalender modul
-
-
+    layout:
+      today-overview: I dag overblik
+      today-detailed: I dag detalieret
+      month-overview: Måned overblik
+      month-detailed: Måned detaileret
 
   admin/calendar:
     index: Kalenderer
@@ -32,4 +37,3 @@ da:
     start_time: Start tidspunkt
     end_time: Slut tidspunkt
     new_event: Opret begivenhed
-

@@ -7,11 +7,27 @@ en:
     attributes:
       admin/calendar_module:
         name:  Name
+        admin_calendar_id: Select calendar
+        layout: Layout
+        access_to: Show til
 
   calendar_module:
     fo: Fo
     bar: Bar
 
-  
+
   admin/calendar_module:
     name: Calendar module
+    layout:
+      today-overview: I dag overblik
+      today-detailed: I dag detalieret
+      month-overview: Måned overblik
+      month-detailed: Måned detaileret
+
+  admin/calendar:
+    index: Calendars
+    new: Creat calendar
+    title: Navn
+    start_time: Start time
+    end_time: End time
+    new_event: New event

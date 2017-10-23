@@ -2,23 +2,45 @@
 h3 = calendar_module.name
 - if calendar_module.events.empty?
   .alert.alert-danger
-    'No calender selected
+    'No calender selected! Please select a calendar from admin section
 - else
-  .row.justify-content-md-center
-    .col-md-auto
-      .btn-group
-        = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}", class: 'btn btn-light'
-        .btn.btn-light
-          = this_month_name(params[:from_date])
-        = link_to '>>',  "?from_date=#{next_month(params[:from_date])}", class: 'btn btn-light'
-  / - if editor?
-  /   br
-  /   .pull-right
-  /     = link_to t('admin/calendar.new_event'),
-  /       new_admin_calendar_calendar_event_path(calendar_module.admin_calendar, page_id: params[:id]),
-  /       class: 'btn btn-outline-success'
-  br
-  - calendar_module_events(calendar_module, params[:from_date]).each do |event|
-    h5 = event.title
-    i = l event.start_time
-    = simple_format event.body
+  - case calendar_module.layout
+  - when 'today-overview'
+    - calendar_module_events_today(calendar_module).each do |event|
+      h5 = event.title
+      i = l event.start_time
+
+  - when 'today-detailed'
+    - calendar_module_events_today(calendar_module).each do |event|
+      h5 = event.title
+      i = l event.start_time
+      = simple_format event.body
+
+  - when 'month-overview'
+    .row.justify-content-md-center
+      .col-md-auto
+        .btn-group
+          = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}", class: 'btn btn-light'
+          .btn.btn-light
+            = this_month_name(params[:from_date])
+          = link_to '>>',  "?from_date=#{next_month(params[:from_date])}", class: 'btn btn-light'
+
+    br
+    - calendar_module_events(calendar_module, params[:from_date]).each do |event|
+      h5 = event.title
+      i = l event.start_time
+
+  - when 'month-detailed'
+    .row.justify-content-md-center
+      .col-md-auto
+        .btn-group
+          = link_to '<<',  "?from_date=#{prev_month(params[:from_date])}", class: 'btn btn-light'
+          .btn.btn-light
+            = this_month_name(params[:from_date])
+          = link_to '>>',  "?from_date=#{next_month(params[:from_date])}", class: 'btn btn-light'
+
+    br
+    - calendar_module_events(calendar_module, params[:from_date]).each do |event|
+      h5 = event.title
+      i = l event.start_time
+      = simple_format event.body

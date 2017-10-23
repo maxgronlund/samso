@@ -12,9 +12,6 @@ module Admin::CalendarModuleHelper
 
   def calendar_module_events(calendar_module, from_date = nil)
     from_date = from_date.nil? ? Date.today.at_beginning_of_month : Date.parse(from_date)
-
-    puts from_date
-
     calendar_module
       .events
       .order('start_time ASC')
@@ -34,5 +31,15 @@ module Admin::CalendarModuleHelper
     end
     month_name = I18n.t('date.month_names')[month] + ' - ' + year.to_s
     month_name.capitalize
+  end
+
+  def calendar_module_events_today(calendar_module)
+    today = Date.today
+    calendar_module
+      .events
+      .order('start_time ASC')
+      .where(
+        'start_time >= :from_date AND start_time <= :to_date', from_date: today, to_date: today + 1.day
+      )
   end
 end
