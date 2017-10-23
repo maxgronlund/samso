@@ -63,8 +63,7 @@ class Admin::BlogPost < ApplicationRecord
         teaser: options[:manchet],
         body: options[:body],
         start_date: options[:startdato],
-        end_date: options[:slutdato],
-        user_id: User.super_admin.id
+        end_date: options[:slutdato]
       }
 
       blog.posts.where(

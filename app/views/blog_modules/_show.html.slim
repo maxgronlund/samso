@@ -2,16 +2,14 @@
 
 = form_tag blog_path(@page), method: 'get' do
   = hidden_field_tag 'blog_module_id', blog_module.id
-  .row
+  .row.mb-10
     .col-sm-6.mt-5
       = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6.mt-5
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
         = link_to t('user.search.show_all'), page_path(blog_module.page), class: 'btn btn-outline-secondary'
-  - if user_signed_in? && !blog_module.blog.nil?
-    .row.mt-5
-      .col-sm-12
+      - if user_signed_in? && !blog_module.blog.nil?
         .pull-right
           = link_to t('blog_post.new'),
             new_blog_post_path(blog_module),

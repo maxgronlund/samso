@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   # GET /admin/posts/1/edit
   def edit
-    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @blog = Admin::Blog.find(params[:blog_id])
     @blog_post = Admin::BlogPost.find(params[:id])
   end
 
@@ -46,12 +46,11 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /admin/posts/1
   def update
-    @blog_module = Admin::BlogModule.find(params[:blog_id])
+    @blog = @post.blog
     if @post.update(post_params)
       @post.clear_page_cache
-      redirect_to page_path(@blog_module.page)
+      redirect_to page_path(@page_id)
     else
-      @blog_module = Admin::BlogModule.find(params[:blog_id])
       render :edit
     end
   end
@@ -75,8 +74,15 @@ class PostsController < ApplicationController
     session[:go_to_after_signup] = blog_post_path(@blog_post.blog, @blog_post)
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
+    post_params_with_page_id_copy = post_params_with_page_id.dup
+    @page_id = post_params_with_page_id_copy[:page_id]
+    post_params_with_page_id_copy.delete :page_id
+    post_params_with_page_id_copy
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params_with_page_id
     params
       .require(:admin_blog_post)
       .permit(
@@ -87,7 +93,11 @@ class PostsController < ApplicationController
         :teaser,
         :subtitle,
         :image,
-        :blog_module_id
+        :blog_module_id,
+        :page_id,
+        :admin_blog_post_category_id,
+        :start_date,
+        :free_content
       )
   end
 end

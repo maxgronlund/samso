@@ -1,5 +1,19 @@
+= f.hidden_field :page_id, value: params[:page_id]
 = f.input :title
-= f.input :body, :input_html => { rows: 10}
+= f.input :free_content
+= f.input :subtitle
+= f.input :teaser
+.row
+  .col-md-6
+    = f.input :admin_blog_post_category_id, collection: Admin::BlogPostCategory.where(locale: I18n.locale)
+  .col-md-6
+    = f.label :image
+    br
+    = f.file_field :image
+
+= f.input :start_date
+
+= f.input :body, :input_html => { rows: 15}
 
 /= f.hidden_field :blog_id, value: @blog.id
 /= f.association :user
@@ -7,3 +21,12 @@
 .form-actions
   .pull-right
     = f.submit t('save'), class: 'btn btn-primary'
+
+javascript:
+  $(function() {
+    $('#admin_blog_post_body').froalaEditor(
+      {
+        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+      }
+    )
+  });

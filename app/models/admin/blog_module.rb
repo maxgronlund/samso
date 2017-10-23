@@ -34,7 +34,13 @@ class Admin::BlogModule < ApplicationRecord
 
   def posts
     return nil if blog.nil?
-    @posts ||= blog.posts.order('start_date DESC')
+    @posts ||=
+      blog
+      .posts
+      .order('start_date DESC')
+      .where(
+        'start_date <= :today', today: Date.today + 1.day
+      )
   end
 
   def blog

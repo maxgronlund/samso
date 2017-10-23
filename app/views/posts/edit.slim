@@ -6,6 +6,6 @@
 
 
         .card-body
-          = simple_form_for [ @blog_module, @blog_post], multipart: true, url: url_for(action: 'update', controller: 'posts'), method: 'PUT' do |f|
+          = simple_form_for [ @blog, @blog_post], multipart: true, url: url_for(action: 'update', controller: 'posts'), method: 'PUT' do |f|
             = f.error_notification
             = render 'form', f: f

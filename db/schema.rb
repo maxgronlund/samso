@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023114010) do
+ActiveRecord::Schema.define(version: 20171023170120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20171023114010) do
     t.datetime "updated_at", null: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
+  end
+
+  create_table "admin_blog_post_categories", force: :cascade do |t|
+    t.string "locale", default: "en"
+    t.string "name", default: ""
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_blog_posts", force: :cascade do |t|
@@ -46,6 +54,9 @@ ActiveRecord::Schema.define(version: 20171023114010) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+    t.integer "admin_blog_post_category_id"
+    t.boolean "free_content", default: false
+    t.index ["admin_blog_post_category_id"], name: "index_admin_blog_posts_on_admin_blog_post_category_id"
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
   end

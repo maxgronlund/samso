@@ -87,5 +87,7 @@ rails g scaffold admin/vertical_menu_link title page_id:integer url active:boole
 rails g scaffold admin/calendar admin_calendar_module:belongs_to title --no-helper --no-assets
 rails g scaffold admin/calendar_event admin_calendar:belongs_to title --no-helper --no-assets
 
+rails g scaffold admin/blog_post_category locale name --no-helper --no-assets
+
 
 

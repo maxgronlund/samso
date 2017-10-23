@@ -59,10 +59,17 @@ class Admin::BlogPostsController < AdminController
       .require(:admin_blog_post)
       .permit(
         :title,
-        :subtitle,
         :body,
         :position,
-        :teaser
+        :image,
+        :teaser,
+        :subtitle,
+        :image,
+        :blog_module_id,
+        :page_id,
+        :admin_blog_post_category_id,
+        :image,
+        :free_content
       )
   end
 end

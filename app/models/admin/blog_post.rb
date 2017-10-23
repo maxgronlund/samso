@@ -1,10 +1,12 @@
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true
-  belongs_to :user, class_name: 'User', counter_cache: true
+  belongs_to :user, class_name: 'User', counter_cache: true, optional: true
   has_attached_file :image, styles: {
     medium: '300x300>',
-    thumb: '100x100>'
+    thumb: '100x100>',
+    large: '770x770>',
+    full_size: '1110x1110>'
   }
   include PgSearch
   multisearchable against: %i[title body]
