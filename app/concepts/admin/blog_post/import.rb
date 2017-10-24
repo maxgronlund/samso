@@ -86,7 +86,7 @@ class Admin::BlogPost < ApplicationRecord
         params
       )
     rescue
-      ap params
+      
     end
 
     def category_id(row)
@@ -105,8 +105,6 @@ class Admin::BlogPost < ApplicationRecord
       post.image = URI.parse(image_1_url)
       post.save
     rescue => e
-      ap e.message
-      ap e.backtrace
       @errors += 1
     end
 

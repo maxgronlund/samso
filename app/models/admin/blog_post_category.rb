@@ -23,7 +23,6 @@ class Admin::BlogPostCategory < ApplicationRecord
       category.update_attributes(
         blog_post_count: Admin::BlogPost.where(admin_blog_post_category_id: category.id).count
       )
-      ap category
     end
   end
 end
