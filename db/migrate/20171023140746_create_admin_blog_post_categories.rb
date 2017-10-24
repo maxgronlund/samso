@@ -4,6 +4,8 @@ class CreateAdminBlogPostCategories < ActiveRecord::Migration[5.1]
       t.string :locale, default: 'en'
       t.string :name, default: ''
       t.boolean :active, default: true
+      t.integer :legacy_id
+      t.integer :blog_post_count
 
       t.timestamps
     end

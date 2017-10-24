@@ -6,13 +6,15 @@ h3 = t('blog_post_categories')
     thead
       tr
         th Name
+        th Artikler
         th
 
 
     tbody
-      - @admin_blog_post_categories.each do |admin_blog_post_category|
+      - @admin_blog_post_categories.order(:name).each do |admin_blog_post_category|
         tr
           td = admin_blog_post_category.name
+          td = admin_blog_post_category.blog_post_count
           td
             .pull-right
               .btn-group

@@ -15,6 +15,10 @@ aside.sidebar
           = link_to root_path do
             i.fa.fa-home
             | Forsiden
+        li class="#{@selected == 'articles' ? 'active' : ''}"
+          = link_to admin_articles_path do
+            i.fa.fa-file-text
+            | Artikler
         li class="#{@selected == 'dashboad' ? 'active' : ''}"
           = link_to admin_index_path do
             i.fa.fa-dashboard

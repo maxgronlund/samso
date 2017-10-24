@@ -10,6 +10,7 @@ class CreateAdminBlogModules < ActiveRecord::Migration[5.1]
       t.integer :posts_pr_page, default: 10
       t.integer :admin_blog_id
       t.string :locale
+      t.integer :admin_blog_post_category
 
       t.timestamps
     end
