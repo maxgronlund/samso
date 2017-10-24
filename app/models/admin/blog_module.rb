@@ -3,7 +3,7 @@ class Admin::BlogModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
   include PageColConcerns
 
-  before_create :after_create
+  #before_create :set_locale
 
   def paginated_posts(page_id)
     return [] if posts.nil?
@@ -65,9 +65,9 @@ class Admin::BlogModule < ApplicationRecord
     modules
   end
 
-  def set_locale
-    update_attributes(
-      locale: I18n.locale
-    )
-  end
+  # def set_locale
+  #   update_attributes(
+  #     locale: I18n.locale
+  #   )
+  # end
 end
