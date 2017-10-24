@@ -13,9 +13,19 @@ class Admin::PostModule < ApplicationRecord
     blog_post(blog_post_id).body
   end
 
+  def image_present?(blog_post_id)
+    return false unless blog_post(blog_post_id)
+    blog_post(blog_post_id).image.present?
+  end
+
   def image_url(blog_post_id)
     return '' unless blog_post(blog_post_id)
-    blog_post(blog_post_id).image.url(:medium)
+    blog_post(blog_post_id).image.url(:full_size)
+  end
+
+  def free_content?(blog_post_id)
+    return false unless blog_post(blog_post_id)
+    blog_post(blog_post_id).free_content
   end
 
   private

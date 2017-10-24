@@ -1,12 +1,12 @@
 da:
   activerecord:
     models:
-      admin/blog_post: Blog indlæg
+      admin/blog_post: Artikkel
     attributes:
       admin/blog_post:
         title: Overskrift
-        subtitle: Trompet
-        teaser: Manchet
+        subtitle: Undertitel
+        teaser: "Kort resumé"
         body: Brødtekst
 
   blog_post:

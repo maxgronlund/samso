@@ -7,6 +7,8 @@ class Admin::BlogModulesController < AdminController
 
   # PATCH/PUT /admin/blog_modules/1
   def update
+    ap '========================='
+    ap admin_blog_module_params[:post_page_id]
     if @admin_blog_module.update(admin_blog_module_params)
       @admin_blog_module
         .update_page_col_module(
@@ -28,6 +30,7 @@ class Admin::BlogModulesController < AdminController
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_blog_module_params
     params.require(:admin_blog_module).permit(
+      :name,
       :layout,
       :position,
       :post_page_id,

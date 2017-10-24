@@ -59,6 +59,10 @@ aside.sidebar
           = link_to admin_blogs_path
             i.fa.fa-list
             = t('blogs')
+        li class="#{@selected == 'blog_post_categories' ? 'active' : ''}"
+          = link_to admin_blog_post_categories_path
+            i.fa.fa-list
+            = t('blog_post_categories')
 
 
 

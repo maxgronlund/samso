@@ -4,10 +4,10 @@ en:
       admin/blog_post: Blog post module
     attributes:
       admin/blog_post:
-        title: Overskrift
-        subtitle: Trompet
-        teaser: Manchet
-        body: Brødtekst
+        title: Title
+        subtitle: Subtitle
+        teaser: Teaser
+        body: Body
 
   blog_post:
     new: 'New post'

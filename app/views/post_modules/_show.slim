@@ -1,6 +1,16 @@
 - post_module = modulable
-h4 = post_module.title(params[:id])
-= raw(post_module.body(params[:id]))
+
+
+
+- if post_module.free_content?(params[:id]) || access_to_subscribed_content?
+  
+  - if post_module.image_present?(params[:id])
+    .mb-8
+      = image_tag(post_module.image_url(params[:id]), class: 'img-fluid')
+  h3 = post_module.title(params[:id])
+  = simple_format (post_module.body(params[:id]))
+- else
+  == render 'subscription_modules/show', modulable: Admin::SubscriptionModule.first_or_create(title: 'default')
 - unless params[:page_id].nil?
   .mt-18
     = link_to t('back'), page_path(params[:page_id]), class: 'btn btn-secondary'

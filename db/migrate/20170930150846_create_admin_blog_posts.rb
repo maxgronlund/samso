@@ -6,12 +6,14 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
     create_table :admin_blog_posts do |t|
       t.integer :legacy_id
       t.string :title
+      t.string :layout, default: 'image_top'
       t.text :subtitle
       t.text :teaser
       t.text :body
       t.text :teaser
       t.integer :position
       t.integer :blog_id
+      t.boolean :free_content, default: false
       t.datetime :start_date
       t.datetime :end_date
       t.belongs_to :user, foreign_key: false

@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Locale:
+  = @admin_blog_post_category.locale
+p
+  strong Name:
+  = @admin_blog_post_category.name
+
+= link_to 'Edit', edit_admin_blog_post_category_path(@admin_blog_post_category)
+'  |
+= link_to 'Back', admin_blog_post_categories_path

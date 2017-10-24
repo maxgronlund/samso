@@ -1,0 +1,13 @@
+.row.mt-7
+  .col-12
+    .pull-right
+      .btn-group
+        - if editor?
+          = link_to t('edit'),
+            edit_blog_post_path(blog_module.blog,
+            post,
+            page_id: params[:id]),
+            class: 'btn btn-outline-secondary btn-sm'
+
+        / = link_to t('blog_post.read_more'), blog_post_path(blog_module.blog, post, page_id: blog_module.post_page_id), class: 'btn btn-outline-info / btn-sm'
+

@@ -1,0 +1,31 @@
+h3 = t('blog_post_categories')
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+
+    thead
+      tr
+        th Name
+        th
+
+
+    tbody
+      - @admin_blog_post_categories.each do |admin_blog_post_category|
+        tr
+          td = admin_blog_post_category.name
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'), admin_blog_post_category, class: 'btn btn-secondary btn-sm'
+                = link_to t('edit'), edit_admin_blog_post_category_path(admin_blog_post_category), class: 'btn btn-secondary btn-sm'
+                = link_to t('delete'),
+                  admin_blog_post_category,
+                  data: { confirm: 'Are you sure?' },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'
+
+  br
+.pull-right
+  = link_to t('admin/blog_post_category.new'),
+  new_admin_blog_post_category_path,
+  class: 'btn btn-primary'

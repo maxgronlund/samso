@@ -1,0 +1,14 @@
+.blog_post style="background-color: #fff; padding: 10px; margin-top: 10px;"
+  = link_to blog_post_path(blog_module.blog, post, page_id: blog_module.post_page_id) do
+    .row
+      .col-sm-6
+        h4 = post.title
+        h6 = l post.start_date unless post.start_date.nil?
+        b = post.subtitle
+        = post.teaser
+      .col-sm-6
+        / img.mr-3 alt=("Generic placeholder image") src="#{post.image.url(:large)}"
+        - if post.image.present?
+          = image_tag( post.image.url(:large), class: 'img-fluid mr-1')
+  = render 'blog_modules/layouts/links', blog_module: blog_module, post: post
+

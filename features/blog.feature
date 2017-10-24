@@ -13,6 +13,7 @@ Feature: The visibility of the blog depends on my status and the blogs accessibi
     And there is a page where the blog is given access to "expired_subscribers"
 
 
+  
   Scenario: As a guest I can visit the page with a blog accessible to all and see the blog
     When I visit the blog_page page with access to 'all'
     Then I can see the blog
