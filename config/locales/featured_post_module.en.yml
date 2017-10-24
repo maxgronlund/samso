@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/featured_post_module:
+        one: featured_post
+        other: featured_posts
+    attributes:
+      admin/featured_post_module:
+        name:  Name
+
+  featured_post_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/featured_post_module:
+    name: FeaturedPost module

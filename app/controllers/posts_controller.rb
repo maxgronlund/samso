@@ -100,7 +100,8 @@ class PostsController < ApplicationController
         :start_date,
         :free_content,
         :layout,
-        :delete_image
+        :delete_image,
+        :featured
       )
   end
 end

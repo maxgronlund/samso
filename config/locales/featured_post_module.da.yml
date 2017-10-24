@@ -1,0 +1,17 @@
+da:
+  activerecord:
+    models:
+      admin/featured_post_module:
+        one: Featured artikel
+        other: Featured artikler
+    attributes:
+      admin/featured_post_module:
+        name:  Navn
+
+  featured_post_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/featured_post_module:
+    name: Navn

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
       resources :dmi_modules, only: %i[edit update]
 
+      resources :featured_post_modules, only: %i[edit update]
       resources :footers
       resources :gallery_images, only: %i[edit update]
       resources :gallery_modules, only: %i[edit update]

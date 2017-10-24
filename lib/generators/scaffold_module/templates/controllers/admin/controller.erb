@@ -6,7 +6,7 @@ class Admin::<%= plural_name.classify %>ModulesController < AdminController
 
   def update
     if @<%= file_name %>_module.update(<%= file_name %>_module_params)
-      @<%= file_name %>_module.
+      @<%= file_name %>_module
         .update_page_col_module(
           <%= file_name %>_module_params
         )

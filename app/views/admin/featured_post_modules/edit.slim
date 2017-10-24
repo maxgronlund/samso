@@ -1,0 +1,19 @@
+.row
+  h3 = t('edit_model', model_name: @featured_post_module.model_name.human)
+
+= simple_form_for [:admin, @featured_post_module], url: url_for(action: 'update', controller: 'admin/featured_post_modules'), method: 'put' do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
+      .col-sm-3
+        = f.input :name
+        = f.input :admin_blog_module_id, collection: Admin::BlogModule.collection, include_blank: false
+
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+

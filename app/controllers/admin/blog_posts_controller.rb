@@ -70,7 +70,8 @@ class Admin::BlogPostsController < AdminController
         :page_id,
         :admin_blog_post_category_id,
         :image,
-        :free_content
+        :free_content,
+        :featured
       )
   end
 end

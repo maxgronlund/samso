@@ -3,10 +3,11 @@
     .row
       .col-sm-6
         h4 = post.title
-        i = l post.start_date unless post.start_date.nil?
-        = truncate(post.subtitle, length: 125)
+        h6 = l post.start_date unless post.start_date.nil?
+        b = post.subtitle
+        = post.teaser
       .col-sm-6
-        / img.mr-3 alt=("Generic placeholder image") src="#{post.image.url(:large)}" 
+        / img.mr-3 alt=("Generic placeholder image") src="#{post.image.url(:large)}"
         - if post.image.present?
           = image_tag( post.image.url(:large), class: 'img-fluid mr-1')
-  / = render 'blog_modules/layouts/links', blog_module: blog_module, post: post
+  = render 'blog_modules/layouts/links', blog_module: blog_module, post: post
