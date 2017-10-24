@@ -7,9 +7,9 @@
     br
     = f.file_field :image
   .col-md-6
-    - if @post.image.exists?
-      = image_tag @post.image.url(:thumb)
-      = f.input :delete_image, as: :boolean
+    / - if !@post.image.nil? && @post.image.exists?
+    /   = image_tag @post.image.url(:thumb)
+    /   = f.input :delete_image, as: :boolean
 = f.input :subtitle
 = f.input :teaser
 .row
@@ -24,7 +24,11 @@
 = f.input :start_date
 
 = f.input :body, :input_html => { rows: 15}
-= f.input :free_content
+.row
+  .col-md-6
+    = f.input :free_content
+  .col-md-6
+    = f.input :featured
 
 /= f.hidden_field :blog_id, value: @blog.id
 /= f.association :user
