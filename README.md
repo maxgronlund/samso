@@ -93,7 +93,8 @@ Things you may want to cover:
   $ PgSearch::Multisearch.rebuild(User)
   $ UserNotifierMailer.send_signup_email(user).deliver
 
-
+* building a module
+  $ rails g scaffold_module MODULE_NAME
 * Huray ported
 
 [![Build Status](https://semaphoreci.com/api/v1/synthmax/samso/branches/master/badge.svg)](https://semaphoreci.com/synthmax/samso)
