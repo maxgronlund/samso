@@ -61,6 +61,7 @@ class Admin::BlogPostsController < AdminController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
+  # rubocop:disable Metrics/MethodLength
   def admin_blog_post_params
     params
       .require(:admin_blog_post)

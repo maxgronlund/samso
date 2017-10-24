@@ -7,8 +7,6 @@ class Admin::BlogModulesController < AdminController
 
   # PATCH/PUT /admin/blog_modules/1
   def update
-    ap '========================='
-    ap admin_blog_module_params[:post_page_id]
     if @admin_blog_module.update(admin_blog_module_params)
       @admin_blog_module
         .update_page_col_module(

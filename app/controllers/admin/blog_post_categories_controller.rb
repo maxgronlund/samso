@@ -1,5 +1,5 @@
 class Admin::BlogPostCategoriesController < AdminController
-  before_action :set_admin_blog_post_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_blog_post_category, only: %i[show edit update destroy]
 
   # GET /admin/blog_post_categories
   def index
@@ -48,13 +48,14 @@ class Admin::BlogPostCategoriesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_blog_post_category
-      @admin_blog_post_category = Admin::BlogPostCategory.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def admin_blog_post_category_params
-      params.require(:admin_blog_post_category).permit(:locale, :name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_blog_post_category
+    @admin_blog_post_category = Admin::BlogPostCategory.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def admin_blog_post_category_params
+    params.require(:admin_blog_post_category).permit(:locale, :name)
+  end
 end
