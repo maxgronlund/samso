@@ -10,6 +10,7 @@
         placeholder: '••••••••••'
       = f.input :password_confirmation,
         placeholder: '••••••••••'
+      = f.input :signature
   .row
     - if current_user.can_edit?(@user)
       .col-md-6

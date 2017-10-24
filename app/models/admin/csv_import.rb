@@ -10,7 +10,8 @@ class Admin::CsvImport < ApplicationRecord
   def self.import_type_collection
     [
       [User.model_name.human, User.name],
-      [Admin::BlogPost.model_name.human, Admin::BlogPost.name]
+      [Admin::BlogPost.model_name.human, Admin::BlogPost.name],
+      [Admin::BlogPostCategory.model_name.human, Admin::BlogPostCategory.name]
     ]
   end
 

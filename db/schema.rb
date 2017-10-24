@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024085910) do
+ActiveRecord::Schema.define(version: 20171024141735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20171024085910) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "locale", default: "en"
+    t.integer "admin_blog_post_category"
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end
@@ -36,6 +37,8 @@ ActiveRecord::Schema.define(version: 20171024085910) do
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legacy_id"
+    t.integer "blog_post_count", default: 0
   end
 
   create_table "admin_blog_posts", force: :cascade do |t|
@@ -59,6 +62,7 @@ ActiveRecord::Schema.define(version: 20171024085910) do
     t.string "layout", default: "image_top"
     t.boolean "free_content", default: false
     t.boolean "featured", default: false
+    t.integer "views", default: 0
     t.index ["admin_blog_post_category_id"], name: "index_admin_blog_posts_on_admin_blog_post_category_id"
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
@@ -447,6 +451,7 @@ ActiveRecord::Schema.define(version: 20171024085910) do
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
     t.boolean "free_subscription", default: false
+    t.string "signature"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

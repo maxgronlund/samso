@@ -28,6 +28,11 @@ class Admin::PostModule < ApplicationRecord
     blog_post(blog_post_id).free_content
   end
 
+  def shown!(plog_post_id)
+    ap @blog_post ||= Admin::BlogPost.find_by(id: blog_post_id)
+    @blog_post.shown! unless @blog_post.nil?
+  end
+
   private
 
   def blog_post(blog_post_id)

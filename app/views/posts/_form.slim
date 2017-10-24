@@ -14,7 +14,9 @@
 = f.input :teaser
 .row
   .col-md-6
-    = f.input :admin_blog_post_category_id, collection: Admin::BlogPostCategory.where(locale: I18n.locale)
+    = f.input :admin_blog_post_category_id,
+      collection: Admin::BlogPostCategory.order(:name).where(locale: I18n.locale),
+      include_blank: false
   .col-md-6
 
     = f.input :layout,

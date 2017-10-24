@@ -1,0 +1,22 @@
+h3 = t('admin/articles.index')
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Title
+        th Kategori
+        th Start
+        th Visninger
+
+
+    tbody
+      - @blog_pots.each do |blog_post|
+        tr
+          td
+            = blog_post.title
+            br
+            i = "Forfatter: #{blog_post.user.name}"
+          td = blog_post.category_name
+          td = l blog_post.start_date
+          td = blog_post.views
