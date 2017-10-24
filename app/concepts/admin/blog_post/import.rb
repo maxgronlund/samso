@@ -95,18 +95,20 @@ class Admin::BlogPost < ApplicationRecord
       category.id unless category.nil?
     end
 
+    # TODO http://samso.dk/nonsec/npix/2017/hoest%202017.JPG
     def attach_image(post, options = {})
       image_1_url = 'http://samso.dk/'
       image_1_url += options[:pix_mappe]
       image_1_url += options[:pix]
-      image_1_url.delete(' ')
+      image_1_url.gsub!(' ', '%20')
       return if image_1_url == 'http://samso.dk/'
       post.image = URI.parse(image_1_url)
       post.save
-    rescue
+    rescue => e
+      ap e.message
+      ap e.backtrace
       @errors += 1
     end
-
 
     def last_blog_post_possition(blog_module)
       return 100 if blog_module.blog_posts.empty?

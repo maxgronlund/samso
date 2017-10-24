@@ -45,5 +45,8 @@ class Admin::BlogPost < ApplicationRecord
     return '' unless user
     user.name
   end
-end
 
+  def shown!
+    update_attributes(views: views + 1) unless updated_at > DateTime.now - 0.5.seconds
+  end
+end

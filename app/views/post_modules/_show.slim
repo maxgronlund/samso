@@ -3,7 +3,8 @@
 
 
 - if post_module.free_content?(params[:id]) || access_to_subscribed_content?
-  
+  - post_module.shown!(params[:id])
+
   - if post_module.image_present?(params[:id])
     .mb-8
       = image_tag(post_module.image_url(params[:id]), class: 'img-fluid')
