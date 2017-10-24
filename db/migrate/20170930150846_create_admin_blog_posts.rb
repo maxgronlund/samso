@@ -17,6 +17,7 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
       t.datetime :start_date
       t.datetime :end_date
       t.belongs_to :user, foreign_key: false
+      t.integer :views, default: 0
 
       t.timestamps
     end

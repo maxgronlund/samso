@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
+      resources :articles, only: %i[index]
       resources :blogs do
         resources :blog_posts
       end

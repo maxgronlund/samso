@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
 
   def access_to_subscribed_content?
     return false unless current_user
+    return true if editor?
     current_user.access_to_subscribed_content?
   end
   helper_method :access_to_subscribed_content?

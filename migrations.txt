@@ -91,3 +91,4 @@ rails g scaffold admin/blog_post_category locale name --no-helper --no-assets
 
 
 
+rails g controller admin/articles index --no-helper --no-assets

@@ -32,13 +32,15 @@ class PostsController < ApplicationController
   end
 
   # POST /admin/posts
+  # rubocop:disable Metrics/AbcSize
   def create
-    @blog_module = Admin::BlogModule.find(params[:blog_id])
-    @blog_post = @blog_module.posts.new(post_params)
+    @blog = Admin::Blog.find(params[:blog_id])
+    @blog_post = @blog.posts.new(post_params)
     @blog_post.user = current_user
     if @blog_post.save!
-      @blog_module.clear_page_cache
-      redirect_to page_path(@blog_module.page)
+      # @blog.clear_page_cache
+      update_blog_post_count(nil, @blog_post.admin_blog_post_category_id)
+      redirect_to page_path(post_params_with_page_id[:page_id])
     else
       render :new
     end
@@ -46,23 +48,30 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /admin/posts/1
   def update
+    old_category_id = @post.admin_blog_post_category_id
     @blog = @post.blog
     if @post.update(post_params)
-      @post.clear_page_cache
+      # @post.clear_page_cache
+      update_blog_post_count(old_category_id, @post.admin_blog_post_category_id)
       redirect_to page_path(@page_id)
     else
+      @blog = @post.blog
       render :edit
     end
   end
 
   # DELETE /admin/posts/1
   def destroy
-    page = @post.page
+    page = Page.find(params[:page_id])
     @post.destroy
     redirect_to page
   end
 
   private
+
+  def update_blog_post_count(old_category_id, new_category_id)
+    Admin::BlogPostCategory.update_blog_post_count(old_category_id, new_category_id)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
@@ -101,7 +110,9 @@ class PostsController < ApplicationController
         :free_content,
         :layout,
         :delete_image,
-        :featured
+        :featured,
+        :admin_blog_post_category_id,
+        :page_id
       )
   end
 end
