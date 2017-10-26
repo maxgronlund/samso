@@ -49,4 +49,8 @@ class Admin::BlogPost < ApplicationRecord
   def shown!
     update_attributes(views: views + 1) unless updated_at > DateTime.now - 0.5.seconds
   end
+
+  def to_param
+    "#{id} #{title}".parameterize
+  end
 end

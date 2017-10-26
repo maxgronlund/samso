@@ -2,15 +2,25 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   # GET /admin/posts/1
+  # def show
+  #   @blog_post = Admin::BlogPost.find(params[:id])
+  #   @blog = Admin::Blog.find(params[:blog_id])
+  #   @page = Page.find(params[:page_id])
+  #   if @page.nil?
+  #     render_404
+  #     return
+  #   end
+  #   @landing_page = landing_page
+  #   render 'pages/show'
+  # end
+
   def show
-    @blog_post = Admin::BlogPost.find(params[:id])
-    @blog = Admin::Blog.find(params[:blog_id])
     @page = Page.find(params[:page_id])
-    if @page.nil?
-      render_404
-      return
-    end
+    @blog_post = Admin::BlogPost.find(params[:id])
+    @blog = @blog_post.blog
     @landing_page = landing_page
+    session[:page_id]
+
     render 'pages/show'
   end
 
@@ -40,7 +50,8 @@ class PostsController < ApplicationController
     if @blog_post.save!
       # @blog.clear_page_cache
       update_blog_post_count(nil, @blog_post.admin_blog_post_category_id)
-      redirect_to page_path(post_params_with_page_id[:page_id])
+      #redirect_to page_path(post_params_with_page_id[:page_id])
+      redirect_to page_post_path(session[:page_id], @blog_post)
     else
       render :new
     end
@@ -53,7 +64,8 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       # @post.clear_page_cache
       update_blog_post_count(old_category_id, @post.admin_blog_post_category_id)
-      redirect_to page_path(@page_id)
+      #redirect_to page_path(@page_id)
+      redirect_to page_path(session[:page_id])
     else
       @blog = @post.blog
       render :edit
@@ -62,9 +74,9 @@ class PostsController < ApplicationController
 
   # DELETE /admin/posts/1
   def destroy
-    page = Page.find(params[:page_id])
+    #page = Page.find(params[:page_id])
     @post.destroy
-    redirect_to page
+    redirect_to page_path(session[:page_id])
   end
 
   private

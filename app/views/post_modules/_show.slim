@@ -1,7 +1,5 @@
 - post_module = modulable
 
-
-
 - if post_module.free_content?(params[:id]) || access_to_subscribed_content?
   - post_module.shown!(params[:id])
 
@@ -14,4 +12,4 @@
   == render 'subscription_modules/show', modulable: Admin::SubscriptionModule.first_or_create(title: 'default')
 - unless params[:page_id].nil?
   .mt-18
-    = link_to t('back'), page_path(params[:page_id]), class: 'btn btn-secondary'
+    = link_to t('back'), page_path(Page.find(session[:page_id] || @landing_page.id)), class: 'btn btn-secondary'

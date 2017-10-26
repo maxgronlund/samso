@@ -69,4 +69,8 @@ class Page < ApplicationRecord
     return '' unless background? || background_color?
     "background: url(#{background_url});background-size: cover; background-repeat: no-repeat; background-color: #{background_color}"
   end
+
+  def to_param
+    "#{id} #{title}".parameterize
+  end
 end

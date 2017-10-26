@@ -57,6 +57,10 @@ Rails.application.routes.draw do
     resources :blogs, only: [:show] do
       resources :posts
     end
+
+    resources :pages do
+      resources :posts, only: %i[show]
+    end
     # resources :blogs, only: [:show]
     # resources :blog_posts, only: %i[show edit update destroy]
 

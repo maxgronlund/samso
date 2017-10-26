@@ -29,8 +29,8 @@ class Admin::PostModule < ApplicationRecord
   end
 
   def shown!(plog_post_id)
-    @blog_post ||= Admin::BlogPost.find_by(id: blog_post_id)
-    @blog_post.shown! unless @blog_post.nil?
+    # @blog_post ||= Admin::BlogPost.find_by(id: blog_post_id)
+    # @blog_post.shown! unless @blog_post.nil?
   end
 
   private
