@@ -12,7 +12,7 @@
       - if user_signed_in? && !blog_module.blog.nil?
         .pull-right
           = link_to t('blog_post.new'),
-            new_blog_post_path(blog_module, page_id: params[:id]),
+            new_blog_post_path(blog_module.admin_blog_id, page_id: params[:id]),
             class: 'btn btn-outline-success'
 
 - if params[:search] && !params[:search].empty?
