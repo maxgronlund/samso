@@ -11,6 +11,7 @@ class Admin::BlogPost < ApplicationRecord
     full_size: '1110x1110>'
   }
   include PgSearch
+  pg_search_scope :search_by_content, against: %i[title body subtitle teaser signature]
   multisearchable against: %i[title body subtitle teaser signature]
   pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
 
@@ -41,16 +42,17 @@ class Admin::BlogPost < ApplicationRecord
     admin_blog_post_category.name
   end
 
-  def author_name
-    return '' unless user
-    user.name
-  end
-
   def shown!
     update_attributes(views: views + 1) unless updated_at > DateTime.now - 0.5.seconds
   end
 
   def to_param
     "#{id} #{title}".parameterize
+  end
+
+  def author_name
+    return signature unless signature.blank?
+    return user.name if user
+    ''
   end
 end

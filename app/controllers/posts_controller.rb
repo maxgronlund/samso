@@ -15,13 +15,14 @@ class PostsController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def new
     @blog = Admin::Blog.find(params[:blog_id])
+
     @blog_post =
       @blog
       .posts
       .new(
         start_date: Time.zone.now + 2.hours,
         end_date: Time.zone.now + 1.year,
-        signature: current_user.signature
+        signature: user_signature
       )
   end
   # rubocop:enable Metrics/AbcSize
@@ -115,5 +116,10 @@ class PostsController < ApplicationController
         :page_id,
         :signature
       )
+  end
+
+  def user_signature
+    return current_user.name if current_user.signature.blank?
+    current_user.signature
   end
 end

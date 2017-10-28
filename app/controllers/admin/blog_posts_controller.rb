@@ -32,11 +32,11 @@ class Admin::BlogPostsController < AdminController
 
   # PATCH/PUT /admin/blog_posts/1
   def update
-    old_category_id = @post.admin_blog_post_category_id
+    old_category_id = @admin_blog_post.admin_blog_post_category_id
     if @admin_blog_post.update(admin_blog_post_params)
-      update_blog_post_count(old_category_id, @post.admin_blog_post_category_id)
-      @admin_blog.clear_cache_on_pages
-      redirect_to admin_blog_path(@admin_blog)
+      update_blog_post_count(old_category_id, @admin_blog_post.admin_blog_post_category_id)
+      # @admin_blog.clear_cache_on_pages
+      redirect_to admin_articles_path
     else
       render :edit
     end

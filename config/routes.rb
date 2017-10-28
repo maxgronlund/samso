@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resources :page_cols, only: [] do
         resources :page_col_modules
       end
+
       resources :post_modules, only: %i[edit update]
       resources :subscriptions
       resources :subscription_modules, only: %i[edit update]

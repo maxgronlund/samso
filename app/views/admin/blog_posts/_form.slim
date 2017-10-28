@@ -1,30 +1,52 @@
+/= f.hidden_field :page_id, value: params[:page_id]
 = f.input :title
+
+.row
+  .col-md-6
+    = f.label :image
+    br
+    = f.file_field :image
+  .col-md-6
+    / - if !@post.image.nil? && @post.image.exists?
+    /   = image_tag @post.image.url(:thumb)
+    /   = f.input :delete_image, as: :boolean
 = f.input :subtitle
 = f.input :teaser
-= f.input :admin_blog_post_category_id, collection: Admin::BlogPostCategory.where(locale: I18n.locale)
-= f.input :start_date
+.row
+  .col-md-6
+    = f.input :admin_blog_post_category_id,
+      collection: Admin::BlogPostCategory.order(:name).where(locale: I18n.locale),
+      include_blank: false
+  .col-md-6
+
+    = f.input :layout,
+      collection: Admin::BlogPost::LAYOUTS,
+      include_blank: false
+.row
+  .col-md-7
+    = f.input :start_date
+  .col-md-5
+    = f.input :signature
+
 = f.input :body, :input_html => { rows: 15}
+.row
+  .col-md-6
+    = f.input :free_content
+  .col-md-6
+    = f.input :featured
 
-/= image_tag @user.avatar.url(:square)
-= f.label :image
-
-= f.file_field :image
-
-= f.hidden_field :blog_id, value: @admin_blog.id
+/= f.hidden_field :blog_id, value: @blog.id
 /= f.association :user
 
 .form-actions
   .pull-right
     = f.submit t('save'), class: 'btn btn-primary'
 
-
-/ TODO
-/ [x] comments
-/ Upload billed
-/ sub_title
-/ show_to på article nivue
-/ category
-/ sort on category
-/ create category
-
-/ multiple images
+javascript:
+  $(function() {
+    $('#admin_blog_post_body').froalaEditor(
+      {
+        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+      }
+    )
+  });
