@@ -14,6 +14,18 @@ module KnowBlogPostHelper
         free_content: free_content
       )
   end
+
+  def persisted_fake_blog_post_form_data
+    @persisted_fake_blog_post_form_data =
+      {
+        title: Faker::Lorem.sentence,
+        subtitle: Faker::Hipster.sentence,
+        teaser: Faker::HowIMetYourMother.quote,
+        body: Faker::Hipster.paragraph,
+        free_content: true,
+        signature: Faker::Name.name
+      }
+  end
 end
 
 World(KnowBlogPostHelper)

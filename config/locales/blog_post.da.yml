@@ -8,10 +8,13 @@ da:
         subtitle: Undertitel
         teaser: "Kort resumé"
         body: Brødtekst
+        admin_blog_post_category_id: Kategori
+        signature: Signatur
+        start_date: Start dato
 
   blog_post:
-    new: 'Nyt indlæg'
-    edit: 'Rediger indlæg'
+    new: 'Nyt artikkel'
+    edit: 'Rediger artikkel'
     read_more: Læs mere
     next: Næste
     prev: Forige
