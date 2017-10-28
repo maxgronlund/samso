@@ -1,22 +1,15 @@
 Given('there is blog page with a free and protected blog post') do
   post_module = FactoryGirl.create(:post_module)
-  post_page =
+  post_module_page =
     create_page_with_module(
       title: 'post_module_page',
       moduleable: post_module
     )
-  blog        = FactoryGirl.create(:blog)
-  blog_module =
-    FactoryGirl
-    .create(
-      :blog_module,
-      admin_blog_id: blog.id,
-      post_page_id: post_page.id
-    )
+  blog = FactoryGirl.create(:blog)
 
-  create_page_with_module(
-    title: 'blog_module_page',
-    moduleable: blog_module
+  create_blog_module_page(
+    blog_id: blog.id,
+    post_module_page_id: post_module_page.id
   )
 
   FactoryGirl

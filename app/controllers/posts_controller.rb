@@ -1,19 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
-  # GET /admin/posts/1
-  # def show
-  #   @blog_post = Admin::BlogPost.find(params[:id])
-  #   @blog = Admin::Blog.find(params[:blog_id])
-  #   @page = Page.find(params[:page_id])
-  #   if @page.nil?
-  #     render_404
-  #     return
-  #   end
-  #   @landing_page = landing_page
-  #   render 'pages/show'
-  # end
-
   def show
     @page = Page.find(params[:page_id])
     @blog_post = Admin::BlogPost.find(params[:id])
@@ -25,15 +12,19 @@ class PostsController < ApplicationController
   end
 
   # GET /admin/posts/new
+  # rubocop:disable Metrics/AbcSize
   def new
     @blog = Admin::Blog.find(params[:blog_id])
     @blog_post =
       @blog
       .posts
       .new(
-        end_date: Time.zone.now + 1.year
+        start_date: Time.zone.now + 2.hours,
+        end_date: Time.zone.now + 1.year,
+        signature: current_user.signature
       )
   end
+  # rubocop:enable Metrics/AbcSize
 
   # GET /admin/posts/1/edit
   def edit
@@ -121,7 +112,8 @@ class PostsController < ApplicationController
         :delete_image,
         :featured,
         :admin_blog_post_category_id,
-        :page_id
+        :page_id,
+        :signature
       )
   end
 end
