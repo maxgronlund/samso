@@ -5,3 +5,7 @@ end
 Then(/^Does it look right$/) do
   ask('does that look right?')
 end
+
+Then('I can click {string}') do |translation|
+  click_on I18n.t(translation)
+end

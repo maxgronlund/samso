@@ -12,10 +12,3 @@ Feature: The visibility of a blog post
   Scenario: As a guest I visit blog page and click on post with protected content
    When I visit the blog page and click on the "protected_content" blog post
    Then I can not see "protected_content"
-
-
-
-
-
-
-

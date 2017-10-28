@@ -2,9 +2,7 @@
   .row.justify-content-md-center
     .col-md-auto.col-md-8
       .card
-        h3.card-header = t('post.edit')
-
-
+        h3.card-header = t('blog_post.edit')
         .card-body
           = simple_form_for [ @blog, @blog_post], multipart: true, url: url_for(action: 'update', controller: 'posts'), method: 'PUT' do |f|
             = f.error_notification

@@ -8,6 +8,9 @@ en:
         subtitle: Subtitle
         teaser: Teaser
         body: Body
+        admin_blog_post_category_id: Category
+        signature: Signature
+        start_date: Start date
 
   blog_post:
     new: 'New post'

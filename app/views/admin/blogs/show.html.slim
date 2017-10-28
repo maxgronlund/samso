@@ -30,7 +30,7 @@
       - @admin_blog.posts.order('start_date DESC').each do |post|
         tr
           td = post.title
-          td = l post.start_date
+          td = l(post.start_date) unless post.start_date.nil?
           td
             .pull-right
               .btn-group
