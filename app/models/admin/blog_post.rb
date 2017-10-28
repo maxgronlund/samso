@@ -11,8 +11,8 @@ class Admin::BlogPost < ApplicationRecord
     full_size: '1110x1110>'
   }
   include PgSearch
-  multisearchable against: %i[title body]
-  pg_search_scope :search_by_title_or_body, against: %i[title body]
+  multisearchable against: %i[title body subtitle teaser signature]
+  pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
