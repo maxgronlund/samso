@@ -50,7 +50,6 @@ class PostsController < ApplicationController
     if @blog_post.save!
       # @blog.clear_page_cache
       update_blog_post_count(nil, @blog_post.admin_blog_post_category_id)
-      #redirect_to page_path(post_params_with_page_id[:page_id])
       redirect_to page_post_path(session[:page_id], @blog_post)
     else
       render :new
@@ -64,7 +63,6 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       # @post.clear_page_cache
       update_blog_post_count(old_category_id, @post.admin_blog_post_category_id)
-      #redirect_to page_path(@page_id)
       redirect_to page_path(session[:page_id])
     else
       @blog = @post.blog
@@ -74,7 +72,6 @@ class PostsController < ApplicationController
 
   # DELETE /admin/posts/1
   def destroy
-    #page = Page.find(params[:page_id])
     @post.destroy
     redirect_to page_path(session[:page_id])
   end

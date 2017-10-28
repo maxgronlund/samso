@@ -19,9 +19,9 @@ class Admin::BlogPost < ApplicationRecord
 
   LAYOUTS =
     [
-      ['image_top', 'image_top'],
-      ['image_left', 'image_left'],
-      ['image_right', 'image_right'],
+      [I18n.t('blog_post.image_top'), 'image_top'],
+      [I18n.t('blog_post.image_left'), 'image_left'],
+      [I18n.t('blog_post.image_right'), 'image_right']
     ].freeze
 
   def page

@@ -1,3 +1,4 @@
+# Categories for posts
 class CreateAdminBlogPostCategories < ActiveRecord::Migration[5.1]
   def up
     create_table :admin_blog_post_categories do |t|

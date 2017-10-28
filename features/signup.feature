@@ -1,4 +1,5 @@
-Feature: As a guest I can signup
+#######################################################
+Feature: Gests can signup
 
   Background:
     Given the site is ready
@@ -18,8 +19,8 @@ Feature: As a guest I can signup
     Then I can see the thanks for signing up screen
 
   Scenario: As user can confirm an account
-    When an unconfirmed user has signed up
-    Then the user can confirm the account
+    When I signup with the email "unconfirmed@example.com" and the password "ComeOnIn123"
+    Then the user with the email "unconfirmed@example.com" can confirm the account
 
 
 

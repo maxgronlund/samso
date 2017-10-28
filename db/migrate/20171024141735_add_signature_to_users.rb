@@ -1,3 +1,4 @@
+# authors name
 class AddSignatureToUsers < ActiveRecord::Migration[5.1]
   def up
     add_column :users, :signature, :string

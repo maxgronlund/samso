@@ -1,5 +1,5 @@
 .blog_post style="background-color: #fff; padding: 10px; margin-top: 10px;"
-  = link_to page_post_path(blog_module.post_page_id, post) do
+  = link_to page_post_path(blog_module.show_on_page, post) do
     .row
       .col-sm-6
         / img.mr-3 alt=("Generic placeholder image") src="#{post.image.url(:large)}"

@@ -1,3 +1,4 @@
+# permission for users
 class AddRolesToUsers < ActiveRecord::Migration[5.1]
   def up
     User.find_each do |user|

@@ -2,6 +2,7 @@
 class Admin::BlogPost < ApplicationRecord
   require 'csv'
   require 'cgi'
+  # rubocop:disable Metrics/ClassLength
   # services for Admin::CsvImport
   class Import
     def initialize(current_user)
@@ -85,8 +86,8 @@ class Admin::BlogPost < ApplicationRecord
       ).first_or_create!(
         params
       )
-    rescue
-      
+    rescue => e
+      Rails.logger.info e.message
     end
 
     def category_id(row)
@@ -95,7 +96,6 @@ class Admin::BlogPost < ApplicationRecord
       category.id unless category.nil?
     end
 
-    # TODO http://samso.dk/nonsec/npix/2017/hoest%202017.JPG
     def attach_image(post, options = {})
       image_1_url = 'http://samso.dk/'
       image_1_url += options[:pix_mappe]
@@ -105,6 +105,7 @@ class Admin::BlogPost < ApplicationRecord
       post.image = URI.parse(image_1_url)
       post.save
     rescue => e
+      Rails.logger.info e.message
       @errors += 1
     end
 

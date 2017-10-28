@@ -1,7 +1,7 @@
 # show weather from DMI
 class Admin::FeaturedPostModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
-  #belongs_to :blog_module, class_name: 'Admin::BlogModule'
+  # belongs_to :blog_module, class_name: 'Admin::BlogModule'
   include PageColConcerns
 
   def page_module

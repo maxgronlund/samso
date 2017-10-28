@@ -1,3 +1,6 @@
+# setting up the footer
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
 class AddPageLinksToFooters < ActiveRecord::Migration[5.1]
   def up
     add_column :admin_footers, :about_page_id, :integer
@@ -20,7 +23,6 @@ class AddPageLinksToFooters < ActiveRecord::Migration[5.1]
   end
 
   def down
-
     add_column :admin_footers, :about_link, :string
     add_column :admin_footers, :about_link_name, :string
     add_column :admin_footers, :email_name, :string

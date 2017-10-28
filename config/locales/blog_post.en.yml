@@ -15,6 +15,9 @@ en:
     read_more: Read more
     next: Next
     prev: Prev
+    image_top: Image over article
+    image_left: Image left
+    image_right: Image right
 
   admin/blog_post:
     name: Blog post module

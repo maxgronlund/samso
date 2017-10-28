@@ -1,5 +1,5 @@
 .blog_post style="background-color: #fff; padding: 10px; margin-top: 10px;"
-  = link_to page_post_path(blog_module.post_page_id, post) do
+  = link_to page_post_path(blog_module.show_on_page, post) do
     - if post.image.present?
       .mb-10
         = image_tag( post.image.url(:large), class: 'img-fluid')

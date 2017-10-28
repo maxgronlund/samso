@@ -3,8 +3,6 @@ class Admin::BlogModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
   include PageColConcerns
 
-  #before_create :set_locale
-
   def paginated_posts(page_id)
     return [] if posts.nil?
     page_id = 0 if page_id.nil?
@@ -14,7 +12,7 @@ class Admin::BlogModule < ApplicationRecord
   end
 
   def show_on_page
-    Page.find_by(id: post_page_id)
+    Page.find_by(id: post_page_id) || Page.find_by(locale: I18n.locale)
   end
 
   def featured_post
@@ -64,10 +62,4 @@ class Admin::BlogModule < ApplicationRecord
     end
     modules
   end
-
-  # def set_locale
-  #   update_attributes(
-  #     locale: I18n.locale
-  #   )
-  # end
 end

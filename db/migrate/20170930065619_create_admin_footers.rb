@@ -1,4 +1,5 @@
 # page footer
+# rubocop:disable Metric/AbcSize
 class CreateAdminFooters < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_footers do |t|

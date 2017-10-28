@@ -15,6 +15,9 @@ da:
     read_more: Læs mere
     next: Næste
     prev: Forige
+    image_top: Billed over artikkel
+    image_left: Billed til venstre
+    image_right: Billed til højre
 
   admin/blog_post:
     name: Blog post modul

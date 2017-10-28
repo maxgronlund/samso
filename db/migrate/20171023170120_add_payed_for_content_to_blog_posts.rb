@@ -1,3 +1,4 @@
+# permission on plogposts
 class AddPayedForContentToBlogPosts < ActiveRecord::Migration[5.1]
   def change
     add_column :admin_blog_posts, :layout, :string, default: 'image_top'
