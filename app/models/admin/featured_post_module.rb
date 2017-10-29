@@ -17,6 +17,7 @@ class Admin::FeaturedPostModule < ApplicationRecord
 
   def posts
     return [] if blog_module.nil?
+    return [] if blog_module.featured_post.nil?
     blog_module.featured_post
   end
 end
