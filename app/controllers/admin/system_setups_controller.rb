@@ -37,7 +37,10 @@ class Admin::SystemSetupsController < AdminController
       :da_landing_page_id,
       :da_subscription_page_id,
       :en_landing_page_id,
-      :en_subscription_page_id
+      :en_subscription_page_id,
+      :logo,
+      :delete_logo,
+      :background_color
     )
   end
 end

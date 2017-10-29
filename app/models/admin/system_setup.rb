@@ -1,5 +1,12 @@
 # system setup
 class Admin::SystemSetup < ApplicationRecord
+  attr_accessor :delete_logo
+  has_attached_file :logo, styles: { thumb: '222x22#' }
+
+  # Validate the attached image is image/jpg, image/png, etc
+  validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
+  before_validation { logo.clear if delete_logo == '1' }
+
   def landing_page
     Page.find_by(locale: locale, id: landing_page_id)
   end

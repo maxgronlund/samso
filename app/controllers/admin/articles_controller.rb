@@ -1,6 +1,6 @@
 class Admin::ArticlesController < AdminController
+  # rubocop:disable Metrics/AbcSize
   def index
-    #@blog_pots = Admin::BlogPost.order(:start_date)
     @blog_pots =
       if params[:search] && !params[:search].empty?
         Admin::BlogPost.search_by_content(params[:search]).order('start_date DESC').page params[:page]

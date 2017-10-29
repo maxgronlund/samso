@@ -6,7 +6,7 @@ da:
     attributes:
       admin/system_setup:
         landing_page_id: Forside
-        subscription_page_id: Opred abonnement side
+        subscription_page_id: Opret abonnoment side
         post_page_id: Læs artikkel side
         welcome_page_id: Velkommen side
         locale: Sprog
