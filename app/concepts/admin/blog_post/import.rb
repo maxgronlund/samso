@@ -59,15 +59,6 @@ class Admin::BlogPost < ApplicationRecord
       attach_image(post, options)
     end
 
-    def author_id(row)
-      signature = row[13]
-      email = row[14]
-      user = User.find_by(email: email)
-      return user.id unless user.nil?
-      user = User.find_by(signature: signature)
-      user.nil? ? nil : user.id
-    end
-
     def setup_blog_post(blog, options = {})
       params = {
         title: options[:titel],
@@ -79,7 +70,7 @@ class Admin::BlogPost < ApplicationRecord
         end_date: options[:slutdato],
         user_id: user_id(options),
         views: options[:visning],
-        signature: user_id(options)
+        signature: options[:signatur]
       }
 
       blog.posts.where(
