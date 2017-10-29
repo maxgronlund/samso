@@ -5,17 +5,30 @@ h3 = t('admin/blog.index')
     thead
       tr
         th Title
-        th
-        th
+        th Artikler
         th
 
     tbody
       - @admin_blogs.each do |admin_blog|
         tr
           td = admin_blog.title
-          td = link_to 'Show', admin_blog
-          td = link_to 'Edit', edit_admin_blog_path(admin_blog)
-          td = link_to 'Destroy', admin_blog, data: { confirm: 'Are you sure?' }, method: :delete
+          td = admin_blog.blog_posts_count
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'),
+                  admin_blog,
+                  class: 'btn btn-secondary btn-sm'
+
+                = link_to t('edit'),
+                  edit_admin_blog_path(admin_blog),
+                  class: 'btn btn-secondary btn-sm'
+
+                = link_to t('delete'),
+                  admin_blog,
+                  data: { confirm: t('are_you_sure') },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'
 
 br
 .row

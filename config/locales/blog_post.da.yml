@@ -24,6 +24,3 @@ da:
 
   admin/blog_post:
     name: Blog post modul
-
-  admin/blog:
-    index: Blogs
