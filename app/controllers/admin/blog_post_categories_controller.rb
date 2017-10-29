@@ -56,6 +56,12 @@ class Admin::BlogPostCategoriesController < AdminController
 
   # Only allow a trusted parameter "white list" through.
   def admin_blog_post_category_params
-    params.require(:admin_blog_post_category).permit(:locale, :name)
+    params
+      .require(:admin_blog_post_category)
+      .permit(
+        :locale,
+        :name,
+        :page_id
+      )
   end
 end
