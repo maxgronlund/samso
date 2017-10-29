@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   def show
     @page = Page.find(params[:page_id])
     @blog_post = Admin::BlogPost.find(params[:id])
+    @blog_post.shown!
     @blog = @blog_post.blog
     @landing_page = landing_page
     session[:page_id]
@@ -11,11 +12,8 @@ class PostsController < ApplicationController
     render 'pages/show'
   end
 
-  # GET /admin/posts/new
-  # rubocop:disable Metrics/AbcSize
   def new
     @blog = Admin::Blog.find(params[:blog_id])
-
     @blog_post =
       @blog
       .posts
@@ -25,15 +23,12 @@ class PostsController < ApplicationController
         signature: user_signature
       )
   end
-  # rubocop:enable Metrics/AbcSize
 
-  # GET /admin/posts/1/edit
   def edit
     @blog = Admin::Blog.find(params[:blog_id])
     @blog_post = Admin::BlogPost.find(params[:id])
   end
 
-  # POST /admin/posts
   # rubocop:disable Metrics/AbcSize
   def create
     @blog = Admin::Blog.find(params[:blog_id])
