@@ -1,8 +1,9 @@
-. style="background-color: #FB7422;"
-  .container
-    .row
-      .col-md-12
-        = image_tag 'logo.png', class: 'img-fluid'
+- if navbar_logo.present?
+  . style="#{navbar_style}"
+    .container
+      .row
+        .col-md-12
+          = image_tag navbar_logo, class: 'img-fluid'
 
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
   = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'

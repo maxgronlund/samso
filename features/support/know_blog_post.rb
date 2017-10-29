@@ -16,9 +16,9 @@ module KnowBlogPostHelper
   end
 
   def persisted_fake_blog_post_form_data
-    @persisted_fake_blog_post_form_data =
+    @persisted_fake_blog_post_form_data ||=
       {
-        title: Faker::Lorem.sentence,
+        title: Faker::Beer.name,
         subtitle: Faker::Hipster.sentence,
         teaser: Faker::HowIMetYourMother.quote,
         body: Faker::Hipster.paragraph,
