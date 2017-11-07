@@ -18,6 +18,25 @@ class Admin::BlogPost < ApplicationRecord
         import_blog_post(options)
       end
       Admin::BlogPostCategory.update_all_counts
+      Admin::Blog.update_all_counts
+      pritify_layouts
+    end
+
+    def pritify_layouts
+      Admin::BlogPostCategory.find_each do |blog_post_category|
+        pritify_blog_posts(
+          Admin::BlogPost.where(admin_blog_post_category_id: blog_post_category.id)
+        )
+      end
+    end
+
+    def pritify_blog_posts(blog_posts)
+      count = 1
+      blog_posts.find_each do |blog_post|
+        layout = count.even? ? 'image_left' : 'image_right'
+        blog_post.update_attributes(layout: layout)
+        count += 1
+      end
     end
 
     # rubocop:disable Metrics/MethodLength,

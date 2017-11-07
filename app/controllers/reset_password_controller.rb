@@ -28,9 +28,9 @@ class ResetPasswordController < ApplicationController
     redirect_to reset_password_index_path(send: true)
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
+  # def show
+  #   @user = User.find(params[:id])
+  # end
 
   private
 
