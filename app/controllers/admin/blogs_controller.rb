@@ -4,7 +4,7 @@ class Admin::BlogsController < AdminController
 
   # GET /admin/blogs
   def index
-    @admin_blogs = Admin::Blog.all
+    @admin_blogs = Admin::Blog.where(locale: I18n.locale)
   end
 
   # GET /admin/blogs/1

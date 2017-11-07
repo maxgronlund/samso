@@ -6,4 +6,11 @@ class Admin::Blog < ApplicationRecord
     blog_modules = Admin::BlogModule.where(admin_blog_id: id)
     blog_modules.each(&:clear_page_cache)
   end
+
+  # Admin::Blog.update_all_counts
+  def self.update_all_counts
+    all.each do |blog|
+      Admin::Blog.reset_counters(blog.id, :posts)
+    end
+  end
 end
