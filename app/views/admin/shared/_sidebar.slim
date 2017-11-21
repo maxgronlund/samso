@@ -19,10 +19,10 @@ aside.sidebar
           = link_to admin_articles_path do
             i.fa.fa-file-text
             | Artikler
-        li class="#{@selected == 'dashboad' ? 'active' : ''}"
-          = link_to admin_index_path do
-            i.fa.fa-dashboard
-            | Skrivebord
+        / li class="#{@selected == 'dashboad' ? 'active' : ''}"
+        /   = link_to admin_index_path do
+        /     i.fa.fa-dashboard
+        /     | Skrivebord
         li class="#{@selected == 'users' ? 'active' : ''}"
           = link_to admin_users_path do
             i.fa.fa-users
@@ -39,10 +39,10 @@ aside.sidebar
           = link_to admin_pages_path
             i.fa.fa-list
             | Sider
-        li class="#{@selected == 'footers' ? 'active' : ''}"
-          = link_to admin_footers_path
-            i.fa.fa-address-card
-            | Footers
+        / li class="#{@selected == 'footers' ? 'active' : ''}"
+        /   = link_to admin_footers_path
+        /     i.fa.fa-address-card
+        /     | Footers
         li class="#{@selected == 'csv_imports' ? 'active' : ''}"
           = link_to admin_csv_imports_path
             i.fa.fa-file-text

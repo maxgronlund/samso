@@ -107,4 +107,11 @@ class ApplicationController < ActionController::Base
     render_403 unless user_signed_in? && current_user.administrator?
   end
   helper_method :authenticate_user!
+
+  def default_path(path)
+    return path if session[:stored_path].nil?
+    path = session[:stored_path]
+    session.delete :stored_path
+    path
+  end
 end

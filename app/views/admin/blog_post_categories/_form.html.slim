@@ -2,8 +2,8 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :locale
     = f.input :name
 
   .form-actions
-    = f.button :submit
+    .pull-right
+      = f.submit t('save'), class: 'btn btn-primary'

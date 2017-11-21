@@ -1,4 +1,4 @@
-h1 = t('system_messages')
+h3 = t('system_messages')
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
 
@@ -13,5 +13,5 @@ h1 = t('system_messages')
           td = admin_system_message.title
           td
             .pull-right
-              .btn-group 
+              .btn-group
                 = link_to t('edit'), edit_admin_system_message_path(admin_system_message), class: 'btn btn-sm btn-primary'

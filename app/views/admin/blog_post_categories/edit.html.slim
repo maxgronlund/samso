@@ -1,8 +1,6 @@
-h1 Editing admin_blog_post_category
+h3 = t('edit_model', model_name: @admin_blog_post_category.model_name.human)
+.row
+  .col-md-6
+    == render 'form'
 
-== render 'form'
-
-= link_to 'Show', @admin_blog_post_category
-'  |
-= link_to 'Back', admin_blog_post_categories_path
-
+= link_to t('back'), admin_blog_post_categories_path, class: 'btn btn-secondary'

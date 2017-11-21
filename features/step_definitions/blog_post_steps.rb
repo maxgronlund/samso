@@ -7,10 +7,17 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
     )
   blog = FactoryGirl.create(:blog)
 
-  create_blog_module_page(
+  page = create_blog_module_page(
     blog_id: blog.id,
     post_module_page_id: post_module_page.id
   )
+
+  blog_post_category =
+    create_blog_post_category(
+      page_id: page.id,
+      name: 'default'
+    )
+
   nr_posts.times do
     FactoryGirl
       .create(
@@ -21,7 +28,8 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
         teaser: Faker::HowIMetYourMother.quote,
         body: Faker::Hipster.paragraph,
         free_content: true,
-        signature: Faker::Name.name
+        signature: Faker::Name.name,
+        admin_blog_post_category_id: blog_post_category.id
       )
   end
 end
@@ -40,6 +48,7 @@ Then('I fill the form and submit it') do
   fill_in 'admin_blog_post_title', with: blog_post_form_data[:title]
   fill_in 'admin_blog_post_subtitle', with: blog_post_form_data[:subtitle]
   fill_in 'admin_blog_post_teaser', with: blog_post_form_data[:teaser]
+  ask('does that look right?')
   click_on I18n.t('save')
 end
 

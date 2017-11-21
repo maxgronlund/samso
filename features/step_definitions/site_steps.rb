@@ -17,7 +17,7 @@ Given('the site is ready') do
     .create(
       :system_message,
       title: 'welcome',
-      locale: 'en',
+      locale: I18n.locale,
       body: 'Welcome to this awesome site'
     )
 end

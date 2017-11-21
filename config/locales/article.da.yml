@@ -1,0 +1,11 @@
+da:
+  activerecord:
+    models:
+      admin/article: Blog
+    attributes:
+      admin/article:
+        title: Navn
+
+  admin/article:
+    index: Artikler
+    views: "Visninger: %{views}"
