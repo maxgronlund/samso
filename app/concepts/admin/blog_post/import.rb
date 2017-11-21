@@ -18,6 +18,25 @@ class Admin::BlogPost < ApplicationRecord
         import_blog_post(options)
       end
       Admin::BlogPostCategory.update_all_counts
+      Admin::Blog.update_all_counts
+      pritify_layouts
+    end
+
+    def pritify_layouts
+      Admin::BlogPostCategory.find_each do |blog_post_category|
+        pritify_blog_posts(
+          Admin::BlogPost.where(admin_blog_post_category_id: blog_post_category.id)
+        )
+      end
+    end
+
+    def pritify_blog_posts(blog_posts)
+      count = 1
+      blog_posts.find_each do |blog_post|
+        layout = count.even? ? 'image_left' : 'image_right'
+        blog_post.update_attributes(layout: layout)
+        count += 1
+      end
     end
 
     # rubocop:disable Metrics/MethodLength,
@@ -25,7 +44,7 @@ class Admin::BlogPost < ApplicationRecord
     def build_options(row)
       {
         legacy_id: row[0].to_i,
-        kategori_id: category_id(row),
+        kategori_id: category_id(row[1].to_i),
         startdato: row[2].samso_import_to_datetime,
         slutdato: row[3].samso_import_to_datetime,
         topstory: row[4],
@@ -37,7 +56,7 @@ class Admin::BlogPost < ApplicationRecord
         pix_mappe: row[10],
         pix_alignment: row[11],
         pix_comment: row[12],
-        signatur: author_id(row),
+        signatur: row[13],
         email: row[14],
         comments: row[15],
         polls: row[16],
@@ -54,18 +73,9 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def import_blog_post(options = {})
-      blog = find_or_create_blog
+      blog = find_or_create_blog(options)
       post = setup_blog_post(blog, options)
       attach_image(post, options)
-    end
-
-    def author_id(row)
-      signature = row[13]
-      email = row[14]
-      user = User.find_by(email: email)
-      return user.id unless user.nil?
-      user = User.find_by(signature: signature)
-      user.nil? ? nil : user.id
     end
 
     def setup_blog_post(blog, options = {})
@@ -77,8 +87,9 @@ class Admin::BlogPost < ApplicationRecord
         admin_blog_post_category_id: options[:kategori_id],
         start_date: options[:startdato],
         end_date: options[:slutdato],
-        user_id: options[:signatur] || User.super_admin.id,
-        views: options[:visning]
+        user_id: user_id(options),
+        views: options[:visning],
+        signature: options[:signatur]
       }
 
       blog.posts.where(
@@ -90,10 +101,11 @@ class Admin::BlogPost < ApplicationRecord
       Rails.logger.info e.message
     end
 
-    def category_id(row)
-      legacy_id = row[1].to_i
-      category = Admin::BlogPostCategory.find_by(legacy_id: legacy_id)
-      category.id unless category.nil?
+    def user_id(options = {})
+      user =
+        User.find_by(signature: options[:signature]) ||
+        User.super_admin
+      user.id
     end
 
     def attach_image(post, options = {})
@@ -114,12 +126,37 @@ class Admin::BlogPost < ApplicationRecord
       blog_module.blog_posts.count * 100 + 100
     end
 
-    def find_or_create_blog
-      params = { title: 'import', locale: 'da' }
-      @blog ||=
-        Admin::Blog
+    def find_or_create_blog(options = {})
+      category =
+        Admin::BlogPostCategory
+        .find(options[:kategori_id])
+
+      params   = blog_params(category)
+      Admin::Blog
         .where(params)
         .first_or_create(params)
+    end
+
+    def category_id(legacy_id)
+      category(legacy_id).id
+    end
+
+    def category(legacy_id)
+      find_or_create_category(legacy_id)
+    end
+
+    def find_or_create_category(legacy_id)
+      Admin::BlogPostCategory
+        .where(legacy_id: legacy_id)
+        .first_or_create(name: 'default', locale: I18n.locale)
+    end
+
+    def blog_params(category)
+      {
+        title: category.name,
+        locale: 'da',
+        category_id: category.id
+      }
     end
   end
 end

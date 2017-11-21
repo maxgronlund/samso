@@ -20,6 +20,3 @@ en:
     name: Blog module
     next: Next
     prev: Prev
-
-  admin/blog:
-    index: Blogs

@@ -57,6 +57,17 @@ class ApplicationController < ActionController::Base
     @landing_page ||= admin_system_setup.landing_page
   end
 
+  def navbar_logo
+    @navbar_logo ||= admin_system_setup.logo
+  end
+  helper_method :navbar_logo
+
+  def navbar_style
+    @navbar_style =
+      "background-color: #{admin_system_setup.background_color}"
+  end
+  helper_method :navbar_style
+
   protected
 
   def configure_permitted_parameters
