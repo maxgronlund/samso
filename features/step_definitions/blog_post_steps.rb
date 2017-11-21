@@ -48,7 +48,6 @@ Then('I fill the form and submit it') do
   fill_in 'admin_blog_post_title', with: blog_post_form_data[:title]
   fill_in 'admin_blog_post_subtitle', with: blog_post_form_data[:subtitle]
   fill_in 'admin_blog_post_teaser', with: blog_post_form_data[:teaser]
-  ask('does that look right?')
   click_on I18n.t('save')
 end
 
