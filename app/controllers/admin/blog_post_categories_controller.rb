@@ -14,7 +14,9 @@ class Admin::BlogPostCategoriesController < AdminController
 
   # GET /admin/blog_post_categories/new
   def new
-    @admin_blog_post_category = Admin::BlogPostCategory.new
+    @admin_blog_post_category =
+      Admin::BlogPostCategory
+      .new(locale: I18n.locale)
   end
 
   # GET /admin/blog_post_categories/1/edit
@@ -23,10 +25,12 @@ class Admin::BlogPostCategoriesController < AdminController
 
   # POST /admin/blog_post_categories
   def create
-    @admin_blog_post_category = Admin::BlogPostCategory.new(admin_blog_post_category_params)
+    @admin_blog_post_category =
+      Admin::BlogPostCategory
+      .new(admin_blog_post_category_params)
     @admin_blog_post_category.locale = I18n.locale
     if @admin_blog_post_category.save
-      redirect_to @admin_blog_post_category, notice: 'Blog post category was successfully created.'
+      redirect_to admin_blog_post_categories_url, notice: 'Blog post category was successfully created.'
     else
       render :new
     end
@@ -35,7 +39,7 @@ class Admin::BlogPostCategoriesController < AdminController
   # PATCH/PUT /admin/blog_post_categories/1
   def update
     if @admin_blog_post_category.update(admin_blog_post_category_params)
-      redirect_to @admin_blog_post_category, notice: 'Blog post category was successfully updated.'
+      redirect_to admin_blog_post_categories_url, notice: 'Blog post category was successfully updated.'
     else
       render :edit
     end

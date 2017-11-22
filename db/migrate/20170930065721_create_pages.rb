@@ -6,7 +6,7 @@ class CreatePages < ActiveRecord::Migration[5.1]
     create_table :pages do |t|
       t.string :title
       t.string :menu_title
-      t.string :menu_id
+      t.string :menu_id, default: 'not_in_any_menus'
       t.integer :menu_position, default: 0
       t.boolean :active
       t.string :locale

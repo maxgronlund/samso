@@ -1,6 +1,7 @@
 # category
 class Admin::BlogPostCategory < ApplicationRecord
   has_many :blog_posts, class_name: 'Admin::BlogPost'
+  validates :name, presence: true
 
   # usage Admin::BlogPostCategory.update_blog_post_count(old_category_id, new_category_id)
   def self.update_blog_post_count(old_category_id, new_category_id)

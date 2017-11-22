@@ -51,7 +51,7 @@ class Admin::MenuLinksController < AdminController
   # DELETE /admin/menu_links/1
   def destroy
     @admin_menu_link.destroy
-    redirect_to admin_menu_links_url, notice: 'Menu link was successfully destroyed.'
+    redirect_to @admin_menu_content
   end
 
   private

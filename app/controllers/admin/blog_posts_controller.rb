@@ -17,35 +17,29 @@ class Admin::BlogPostsController < AdminController
     @blog_post = @admin_blog.posts.new(admin_blog_post_params)
     @blog_post.user = current_user
     if @blog_post.save!
-      # @admin_blog.clear_cache_on_pages
       update_blog_post_count(nil, @blog_post.admin_blog_post_category_id)
-      # @blog_module.clear_page_cache
       redirect_to admin_blog_path(@admin_blog)
     else
       render :new
     end
   end
 
-  # GET /admin/blog_posts/1/edit
   def edit
   end
 
-  # PATCH/PUT /admin/blog_posts/1
   def update
     old_category_id = @admin_blog_post.admin_blog_post_category_id
     if @admin_blog_post.update(admin_blog_post_params)
       update_blog_post_count(old_category_id, @admin_blog_post.admin_blog_post_category_id)
-      # @admin_blog.clear_cache_on_pages
-      redirect_to admin_articles_path
+      redirect_to default_path(admin_articles_path)
     else
       render :edit
     end
   end
 
-  # DELETE /admin/blog_posts/1
   def destroy
     @admin_blog_post.destroy
-    redirect_to admin_blog_url(@admin_blog)
+    redirect_to default_path(admin_blog_url(@admin_blog))
   end
 
   private

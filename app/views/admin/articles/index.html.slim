@@ -1,7 +1,7 @@
-
+- session[:stored_path] = request.path
 .row
   .col-sm-6
-    h3 = t('admin/articles.index')
+    h3 = t('admin/article.index')
   .col-sm-6
     .pull-right
       = @blog_pots_count
@@ -22,18 +22,32 @@ br
         th Title
         th Kategori
         th Start
-        th Visninger
+        th
 
 
     tbody
       - @blog_pots.each do |blog_post|
         tr
           td
-            = link_to blog_post.title, edit_admin_blog_blog_post_path(blog_post.blog, blog_post)
+            = blog_post.title
             br
             i = "Forfatter: #{blog_post.author_name}"
           td = blog_post.category_name
           td = l(blog_post.start_date) unless blog_post.start_date.nil?
-          td = blog_post.views
+          td
+            = t('admin/article.views', views: blog_post.views)
+            br
+            .btn-group
+              = link_to t('show'),
+                admin_blog_blog_post_path(blog_post.blog, blog_post),
+                class: 'btn btn-sm btn-secondary'
+              = link_to t('edit'),
+                edit_admin_blog_blog_post_path(blog_post.blog, blog_post),
+                class: 'btn btn-sm btn-primary'
+              = link_to t('delete'),
+                admin_blog_blog_post_path(blog_post.blog, blog_post),
+                data: { confirm: t('are_you_sure') },
+                method: :delete,
+                class: 'btn btn-danger btn-sm'
 
 = paginate @blog_pots

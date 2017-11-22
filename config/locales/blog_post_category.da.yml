@@ -4,8 +4,7 @@ da:
       admin/blog_post_category: Kategori
     attributes:
       admin/blog_post_category:
-        title: Navn
-        title: Navn
+        name: Navn
 
   admin/blog_post_category:
     new: Opret Kategori

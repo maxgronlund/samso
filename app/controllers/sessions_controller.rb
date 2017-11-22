@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
 
   def signin_user(user)
     session[:user_id] = user.id
-    redirect_to root_url, notice: t('signed_in')
+    redirect_to default_path(root_url), notice: t('signed_in')
   end
 
   def session_params
