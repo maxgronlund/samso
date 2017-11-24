@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20171029133716) do
     t.boolean "free_content", default: false
     t.integer "views", default: 0
     t.string "signature", default: ""
+    t.boolean "featured", default: false
     t.index ["admin_blog_post_category_id"], name: "index_admin_blog_posts_on_admin_blog_post_category_id"
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
