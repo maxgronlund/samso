@@ -3,6 +3,7 @@ module PageColConcerns
   extend ActiveSupport::Concern
   attr_accessor :position, :margin_bottom, :access_to
 
+  # rubocop:disable Lint/DuplicateMethods
   def position
     return nil if page_col_module.nil?
     page_col_module.position
