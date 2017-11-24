@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters
   protect_from_forgery with: :exception
