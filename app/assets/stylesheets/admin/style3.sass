@@ -1,0 +1,99 @@
+
+#sidebar
+  width: 250px
+  position: fixed
+  top: 0
+  left: -250px
+  height: 100vh
+  z-index: 999
+  background: #3a4651
+  color: #fff
+  transition: all 0.3s
+  overflow-y: scroll
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2)
+  &.active
+    left: 0
+
+#dismiss
+  width: 35px
+  height: 35px
+  line-height: 35px
+  text-align: center
+  background: #3a4651
+  position: absolute
+  top: 10px
+  right: 10px
+  cursor: pointer
+  -webkit-transition: all 0.3s
+  -o-transition: all 0.3s
+  transition: all 0.3s
+  &:hover
+    background: #fff
+    color: #3a4651
+
+.overlay
+  position: fixed
+  width: 100vw
+  height: 100vh
+  background: rgba(0, 0, 0, 0.7)
+  z-index: 998
+  display: none
+
+#sidebar
+  .fa
+    margin-right: 10px
+  a
+    color: #e9ecef
+  a:hover
+    text-decoration: none
+  .sidebar-header
+    padding: 20px
+    background: #3a4651
+  ul
+    &.components
+      padding: 20px 0
+      border-bottom: 1px solid #47748b
+    p
+      color: #fff
+      padding: 10px
+    li
+      a
+        padding: 10px
+        font-size: 1.1em
+        display: block
+        &:hover
+          color: #3a4651
+          background: #fff
+      &.active > a
+        color: #fff
+        background: #6d7fcc
+
+a
+  &[aria-expanded="true"]
+    color: #fff
+    background: #6d7fcc
+  &[data-toggle="collapse"]
+    position: relative
+  &[aria-expanded="false"]::before
+    content: '\e259'
+    display: block
+    position: absolute
+    right: 20px
+    font-family: 'Glyphicons Halflings'
+    font-size: 0.6em
+  &[aria-expanded="true"]::before
+    content: '\e259'
+    display: block
+    position: absolute
+    right: 20px
+    font-family: 'Glyphicons Halflings'
+    font-size: 0.6em
+    content: '\e260'
+
+.sidebar-toggler
+  padding: .25rem .75rem
+  font-size: 1.25rem
+  line-height: 1
+  background: 0 0
+  border: 1px solid #aaa
+  border-radius: .25rem

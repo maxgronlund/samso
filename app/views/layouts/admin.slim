@@ -6,23 +6,52 @@ html
     = stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/css/froala_editor.pkgd.min.css'
     = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/css/froala_style.min.css'
+    = stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", integrity: "sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb", crossorigin: "anonymous"
 
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'
+    /= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/js/froala_editor.pkgd.min.js'
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.2/js/plugins/paragraph_format.min.js'
 
+
+    = javascript_include_tag "https://code.jquery.com/jquery-1.12.0.min.js"
+    /= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js", integrity: "sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh", crossorigin: "anonymous"
+    = javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js", integrity: "sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ", crossorigin: "anonymous"
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
     meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"
 
   body
-    .main-wrapper
-      #app.app
-        = render 'admin/shared/header'
-        = render 'admin/shared/sidebar'
-        .content
-          - if notice
-            .alert.alert-info
-              = notice
-          = yield
-        = render 'admin/shared/footer'
+    .overlay
+    = render 'admin/shared/navbar'
+
+    = render 'admin/shared/sidebar3'
+
+    .container
+      - if notice
+        .alert.alert-info
+          = notice
+      = yield
+      /= render 'admin/shared/footer'
+
+
+
+javascript:
+  $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+          theme: "minimal"
+      });
+
+      $('#dismiss, .overlay').on('click', function () {
+          $('#sidebar').removeClass('active');
+          $('.overlay').fadeOut();
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+          $('#sidebar').addClass('active');
+          $('.overlay').fadeIn();
+          $('.collapse.in').toggleClass('in');
+          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+  });
+
 

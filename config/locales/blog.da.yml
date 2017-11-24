@@ -8,5 +8,5 @@ da:
 
   admin/blog:
     new: Opret blog
-    index: Kategori
+    index: Blogs
     new: Opret ny kategori

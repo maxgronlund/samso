@@ -12,8 +12,8 @@
       = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6
       .btn-group
-        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-secondary'
-        = link_to t('user.search.show_all'), admin_articles_path, class: 'btn btn-secondary'
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
+        = link_to t('user.search.show_all'), admin_articles_path, class: 'btn btn-outline-secondary'
 br
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -40,10 +40,10 @@ br
             .btn-group
               = link_to t('show'),
                 admin_blog_blog_post_path(blog_post.blog, blog_post),
-                class: 'btn btn-sm btn-secondary'
+                class: 'btn btn-sm btn-outline-secondary'
               = link_to t('edit'),
                 edit_admin_blog_blog_post_path(blog_post.blog, blog_post),
-                class: 'btn btn-sm btn-primary'
+                class: 'btn btn-sm btn-outline-primary'
               = link_to t('delete'),
                 admin_blog_blog_post_path(blog_post.blog, blog_post),
                 data: { confirm: t('are_you_sure') },

@@ -20,10 +20,10 @@ h3 = t('admin/menu_content.index')
               .btn-group
                 = link_to t('admin/menu_module.edit_links'),
                   admin_menu_content,
-                  class: 'btn btn-sm btn-primary'
+                  class: 'btn btn-sm btn-outline-primary'
                 = link_to t('admin/menu_module.edit_name'),
                   edit_admin_menu_content_path(admin_menu_content),
-                  class: 'btn btn-sm btn-secondary'
+                  class: 'btn btn-sm btn-outline-secondary'
                 = link_to t('delete'),
                   admin_menu_content, data: { confirm: 'Are you sure?' }, method: :delete,
                   class: 'btn btn-sm btn-danger'

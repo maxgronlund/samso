@@ -3,7 +3,7 @@
     h2 = I18n.t('activerecord.models.admin/subscription_type', count: 2)
   .col
     .pull-right
-      'Total subscriptions: 
+      'Total subscriptions:
       = Admin::SubscriptionType.sum(:subscriptions_count)
 
 
@@ -34,10 +34,10 @@
           td
             .pull-right
               .btn-group
-                = link_to t('show'), admin_subscription_type, class: 'btn btn-primary btn-sm'
-                = link_to t('edit'), edit_admin_subscription_type_path(admin_subscription_type), class: 'btn btn-secondary btn-sm'
+                = link_to t('show'), admin_subscription_type, class: 'btn btn-outline-primary btn-sm'
+                = link_to t('edit'), edit_admin_subscription_type_path(admin_subscription_type), class: 'btn btn-outline-secondary btn-sm'
                 = link_to t('delete'), admin_subscription_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
 
 br
-
-= link_to t('new_model', model_name: Admin::SubscriptionType.model_name.human), new_admin_subscription_type_path, class: 'btn btn-primary'
+.pull-right
+  = link_to t('new_model', model_name: Admin::SubscriptionType.model_name.human), new_admin_subscription_type_path, class: 'btn btn-primary'

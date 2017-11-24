@@ -11,8 +11,8 @@
       = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6
       .btn-group
-        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-secondary'
-        = link_to t('user.search.show_all'), admin_users_path, class: 'btn btn-secondary'
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
+        = link_to t('user.search.show_all'), admin_users_path, class: 'btn btn-outline-secondary'
 br
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -36,12 +36,12 @@ br
               .btn-group
                 = link_to t('show'),
                   admin_user_path(user),
-                  class: 'btn btn-secondary btn-sm'
+                  class: 'btn btn-outline-secondary btn-sm'
                 - if current_user.can_edit?(user)
                   = link_to t('edit'),
                     edit_admin_user_path(user),
-                    class: 'btn btn-secondary btn-sm'
-                  = link_to 'X',
+                    class: 'btn btn-outline-secondary btn-sm'
+                  = link_to t('delete'),
                     admin_user_path(user),
                     data: { confirm: t('are_you_sure') },
                     method: :delete,
