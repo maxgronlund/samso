@@ -12,7 +12,7 @@ module KnowPageHelper
     title = options[:title] || Faker::Name.name
     menu_title = options[:menu_title] || Faker::Name.name
     menu_id = options[:menu_id] || 'not_in_any_menus'
-    FactoryGirl
+    FactoryBot
       .create(
         :page,
         title: title,

@@ -14,6 +14,7 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
       t.integer :position
       t.integer :blog_id
       t.boolean :free_content, default: false
+      t.boolean :featured, default: false
       t.datetime :start_date
       t.datetime :end_date
       t.belongs_to :user, foreign_key: false

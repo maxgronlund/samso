@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20171029133716) do
     t.integer "blog_posts_count", default: 0
     t.integer "posts_pr_page", default: 10
     t.integer "admin_blog_id"
+    t.string "locale"
+    t.integer "admin_blog_post_category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "locale", default: "en"
-    t.integer "admin_blog_post_category"
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 20171029133716) do
     t.string "locale", default: "en"
     t.string "name", default: ""
     t.boolean "active", default: true
+    t.integer "legacy_id"
+    t.integer "blog_post_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "legacy_id"
-    t.integer "blog_post_count", default: 0
     t.integer "page_id"
     t.index ["page_id"], name: "index_admin_blog_post_categories_on_page_id"
   end
@@ -46,14 +46,18 @@ ActiveRecord::Schema.define(version: 20171029133716) do
   create_table "admin_blog_posts", force: :cascade do |t|
     t.integer "legacy_id"
     t.string "title"
+    t.string "layout", default: "image_top"
     t.text "subtitle"
     t.text "teaser"
     t.text "body"
     t.integer "position"
     t.integer "blog_id"
+    t.boolean "free_content", default: false
+    t.boolean "featured", default: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "user_id"
+    t.integer "views", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -61,9 +65,6 @@ ActiveRecord::Schema.define(version: 20171029133716) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.integer "admin_blog_post_category_id"
-    t.string "layout", default: "image_top"
-    t.boolean "free_content", default: false
-    t.integer "views", default: 0
     t.string "signature", default: ""
     t.index ["admin_blog_post_category_id"], name: "index_admin_blog_posts_on_admin_blog_post_category_id"
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
@@ -95,10 +96,10 @@ ActiveRecord::Schema.define(version: 20171029133716) do
 
   create_table "admin_calendar_modules", force: :cascade do |t|
     t.string "name"
+    t.string "layout", default: "month_detailed"
     t.bigint "admin_calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "layout", default: "month-detailed"
     t.index ["admin_calendar_id"], name: "index_admin_calendar_modules_on_admin_calendar_id"
   end
 
@@ -163,18 +164,19 @@ ActiveRecord::Schema.define(version: 20171029133716) do
   create_table "admin_footers", force: :cascade do |t|
     t.string "title", default: ""
     t.string "locale"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email"
     t.integer "about_page_id"
     t.string "about_page_link_name", default: ""
     t.integer "copyright_page_id"
+    t.integer "integer"
     t.string "copyright_page_link_name", default: ""
     t.integer "term_of_usage_page_id"
     t.string "term_of_usage_page_link_name"
-    t.string "company_name"
-    t.string "phone"
-    t.string "vat_nr"
+    t.string "email", default: ""
+    t.string "company_name", default: ""
+    t.string "phone", default: ""
+    t.string "vat_nr", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_gallery_images", force: :cascade do |t|
@@ -198,21 +200,21 @@ ActiveRecord::Schema.define(version: 20171029133716) do
     t.text "body"
     t.string "layout"
     t.integer "page_id"
+    t.string "color", default: "#000000"
+    t.string "background_color", default: "#FFFFFF"
     t.integer "gallery_images_count", default: 0
     t.integer "images_pr_page", default: 16
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "color", default: "#000000"
-    t.string "background_color", default: "#FFFFFF"
     t.index ["page_id"], name: "index_admin_gallery_modules_on_page_id"
   end
 
   create_table "admin_image_modules", force: :cascade do |t|
     t.string "layout"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "color", default: "#000000"
     t.string "background_color", default: "#FFFFFF"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_menu_contents", force: :cascade do |t|
@@ -391,7 +393,7 @@ ActiveRecord::Schema.define(version: 20171029133716) do
   create_table "pages", force: :cascade do |t|
     t.string "title"
     t.string "menu_title"
-    t.string "menu_id"
+    t.string "menu_id", default: "not_in_any_menus"
     t.integer "menu_position", default: 0
     t.boolean "active"
     t.string "locale"

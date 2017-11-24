@@ -6,7 +6,7 @@ module KnowBlogPostHelper
     user_id = options[:user_id] || User.first.id
     free_content = options[:free_content] || true
     admin_blog_post_category_id = options[:admin_blog_post_category_id]
-    FactoryGirl
+    FactoryBot
       .create(
         :blog_post,
         blog_id: blog_id,

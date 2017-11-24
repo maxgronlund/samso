@@ -1,19 +1,19 @@
 Given('the site is ready') do
   page =
-    FactoryGirl
+    FactoryBot
     .create(
       :page,
       title: 'Front page',
       menu_title: 'Front page'
     )
 
-  FactoryGirl
+  FactoryBot
     .create(
       :system_setup,
       landing_page_id: page.id
     )
 
-  FactoryGirl
+  FactoryBot
     .create(
       :system_message,
       title: 'welcome',

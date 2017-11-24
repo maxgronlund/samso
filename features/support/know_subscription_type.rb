@@ -2,7 +2,7 @@
 module KnowSubscriptionTypeHelper
   def internet_subscription_type(title)
     @internet_subscription_type ||=
-      FactoryGirl
+      FactoryBot
       .create(
         :subscription_type,
         title: title,
@@ -13,7 +13,7 @@ module KnowSubscriptionTypeHelper
 
   def print_subscription_type(title)
     @print_subscription_type ||=
-      FactoryGirl
+      FactoryBot
       .create(
         :subscription_type,
         title: title,

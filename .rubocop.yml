@@ -11,6 +11,12 @@
 # Configuration parameters: Include.
 # Include: **/Gemfile, **/gems.rb
 
+Style/DateTime:
+  Enabled: false
+
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
 AllCops:
   Exclude:
     - 'db/schema.rb'

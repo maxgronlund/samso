@@ -10,7 +10,7 @@ module KnowUserHelper
     confirmed_at         = options[:confirmed_at]
 
     user =
-      FactoryGirl
+      FactoryBot
       .create(
         :user,
         name: user_name,
@@ -26,11 +26,11 @@ module KnowUserHelper
 
   def create_role(user, options = {})
     permission = options[:permission] || Role::MEMBER
-    FactoryGirl
+    FactoryBot
       .create(:role, permission: permission, user_id: user.id)
 
     return unless permission == Role::SUPER_ADMIN
-    FactoryGirl
+    FactoryBot
       .create(:role, permission: permission, user_id: user.id)
   end
 end

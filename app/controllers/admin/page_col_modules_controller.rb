@@ -58,7 +58,7 @@ class Admin::PageColModulesController < AdminController
 
   private
 
-  # rubocop:disable Lint/Eval
+  # rubocop:disable Security/Eval
   def edit_path
     moduleable =
       @page_col_module

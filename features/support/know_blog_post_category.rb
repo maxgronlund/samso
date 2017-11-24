@@ -4,9 +4,8 @@ module KnowBlogPostCategoryHelper
     locale = options[:locale] || I18n.locale
     name = options[:name] || Faker::Name.name
     active = options[:active] || true
-    page_id = options[:page_id]
 
-    FactoryGirl
+    FactoryBot
       .create(
         :blog_post_category,
         locale: locale,

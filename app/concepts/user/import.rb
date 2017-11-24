@@ -34,7 +34,7 @@ class User < ApplicationRecord
         Postnr_by: row[5].empty? ? nil : row[5].downcase.titleize,
         Telefon: row[6].empty? ? nil : row[6].downcase,
         Mobil: row[7].empty? ? nil : row[7].downcase,
-        Nyhedsbrev: row[8] == '0' ? true : false,
+        Nyhedsbrev: row[8] == '0',
         email: row[9].empty? ? fake_email : row[9].downcase.delete(' '),
         Brugernavn: row[10].empty? ? nil : row[10],
         password: row[11].empty? ? nil : row[11],
