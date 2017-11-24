@@ -5,7 +5,7 @@ module KnowBlogPostCategoryHelper
     name = options[:name] || Faker::Name.name
     active = options[:active] || true
 
-    FactoryGirl
+    FactoryBot
       .create(
         :blog_post_category,
         locale: locale,

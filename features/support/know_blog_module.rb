@@ -4,7 +4,7 @@ module KnowBlogModuleHelper
     post_module_page_id = options[:post_module_page_id]
     blog_id = options[:blog_id]
     blog_module =
-      FactoryGirl
+      FactoryBot
       .create(
         :blog_module,
         admin_blog_id: blog_id,

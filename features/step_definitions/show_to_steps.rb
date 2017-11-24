@@ -1,6 +1,6 @@
 Given('there is a page where a text_module is visible to {string}') do |access_to|
   text_module =
-    FactoryGirl
+    FactoryBot
     .create(
       :text_module,
       title: access_to

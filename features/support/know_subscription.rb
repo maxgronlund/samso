@@ -1,7 +1,7 @@
 # Persist knowledge of users
 module KnowSubscriptionHelper
   def create_valid_subscription_for(user, subscription_type)
-    FactoryGirl
+    FactoryBot
       .create(
         :subscription,
         user_id: user.id,
@@ -10,7 +10,7 @@ module KnowSubscriptionHelper
   end
 
   def create_expired_subscription_for(user, subscription_type)
-    FactoryGirl
+    FactoryBot
       .create(
         :subscription,
         user_id: user.id,

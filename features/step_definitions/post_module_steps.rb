@@ -1,18 +1,18 @@
 Given('there is blog page with a free and protected blog post') do
-  post_module = FactoryGirl.create(:post_module)
+  post_module = FactoryBot.create(:post_module)
   post_module_page =
     create_page_with_module(
       title: 'post_module_page',
       moduleable: post_module
     )
-  blog = FactoryGirl.create(:blog)
+  blog = FactoryBot.create(:blog)
 
   create_blog_module_page(
     blog_id: blog.id,
     post_module_page_id: post_module_page.id
   )
 
-  FactoryGirl
+  FactoryBot
     .create(
       :blog_post,
       title: 'free_content',
@@ -20,7 +20,7 @@ Given('there is blog page with a free and protected blog post') do
       free_content: true
     )
 
-  FactoryGirl
+  FactoryBot
     .create(
       :blog_post,
       title: 'protected_content',

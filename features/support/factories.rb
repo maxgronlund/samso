@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :blog, class: Admin::Blog do |f|
     f.title 'Blog'
     f.locale 'en'

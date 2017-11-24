@@ -10,7 +10,7 @@ end
 
 Given('there is a page with a text module and a subscription module') do
   text_module =
-    FactoryGirl
+    FactoryBot
     .create(
       :text_module,
       title: 'subscribers_only'
@@ -21,7 +21,7 @@ Given('there is a page with a text module and a subscription module') do
     access_to: 'subscribers_only'
   )
 
-  subscription_module = FactoryGirl.create(:subscription_module)
+  subscription_module = FactoryBot.create(:subscription_module)
   add_module_to_page(
     moduleable: subscription_module,
     page: page,
