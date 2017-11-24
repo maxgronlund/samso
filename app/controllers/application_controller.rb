@@ -73,10 +73,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def configure_permitted_parameters
-    # devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-  end
-
   def set_default_page
     @body_style = ''
     @page ||= admin_system_setup.landing_page
