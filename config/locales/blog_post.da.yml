@@ -11,6 +11,7 @@ da:
         admin_blog_post_category_id: Kategori
         signature: Signatur
         start_date: Start dato
+        blog_id: Kategori
 
   blog_post:
     new: 'Nyt artikkel'
