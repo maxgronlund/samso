@@ -1,7 +1,7 @@
 # system setup
 class Admin::SystemSetup < ApplicationRecord
   attr_accessor :delete_logo
-  has_attached_file :logo, styles: { thumb: '222x22#' }
+  has_attached_file :logo, styles: { thumb: '222x22#', original: '1110x110#' }
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}

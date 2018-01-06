@@ -3,17 +3,19 @@
 = form_tag blog_path(@page), method: 'get' do
   = hidden_field_tag 'blog_module_id', blog_module.id
   .row.mb-10
-    .col-sm-6.mt-5
-      = text_field_tag :search, params[:search], class: 'form-control'
-    .col-sm-6.mt-5
+    .col-sm-7.mt-5
+      = text_field_tag :search, params[:search],
+      placeholder: 'Skriv søgeord...',
+      class: 'form-control'
+    .col-sm-5.mt-5
       .btn-group
-        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
-        = link_to t('user.search.show_all'), page_path(blog_module.page), class: 'btn btn-outline-secondary'
-      - if user_signed_in? && !blog_module.blog.nil?
-        .pull-right
-          = link_to t('blog_post.new'),
-            new_blog_post_path(blog_module.admin_blog_id, page_id: params[:id]),
-            class: 'btn btn-outline-success'
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
+        = link_to t('user.search.show_all'), page_path(blog_module.page), class: 'btn btn-light'
+      / - if user_signed_in? && !blog_module.blog.nil?
+      /   .pull-right
+      /     = link_to t('blog_post.new'),
+      /       new_blog_post_path(blog_module.admin_blog_id, page_id: params[:id]),
+      /       class: 'btn btn-outline-success'
 
 - if params[:search] && !params[:search].empty?
   - found_posts = blog_module.posts.search_by_title_or_body(params[:search])
@@ -23,16 +25,30 @@
     - found_posts.each do |post|
       = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post
 - else
-  - blog_module.paginated_posts(params[:page]).each do |post|
+  - featured_posts = blog_module.featured_posts
+  - paginated_posts = blog_module.paginated_posts(params[:page]) - featured_posts
+  - featured_posts.each do |post|
+    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post
+  - paginated_posts.each do |post|
     = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post
 
-  .row
+  .row.mt-10
     .col-sm-12
       - prev_url = blog_module.prev_page(request.path, params[:page])
       - next_url = blog_module.next_page(request.path, params[:page])
+      - last_url = blog_module.last_page(request.path, params[:page])
       .d-flex.justify-content-center
-        .btn-group
-          - if params[:page]
-            = link_to t('blog_module.prev'), prev_url, class: 'btn btn-outline-secondary btn-sm'
-          - if next_url
-            = link_to t('blog_module.next'), next_url, class: 'btn btn-outline-secondary btn-sm'
+        nav
+          ul.pagination
+            - if params[:page]
+              li.page-item
+                = link_to t('blog_module.first'), request.path, class: 'page-link'
+              li.page-item
+                = link_to t('blog_module.prev'), prev_url, class: 'page-link'
+              li.page-item.active
+                a.page-link remote="false"  = params[:page]
+            - if next_url
+              li.page-item
+                = link_to t('blog_module.next'), next_url, class: 'page-link'
+            li.page-item
+              = link_to t('blog_module.last'), last_url, class: 'page-link'

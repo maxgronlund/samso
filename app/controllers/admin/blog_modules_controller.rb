@@ -34,7 +34,9 @@ class Admin::BlogModulesController < AdminController
       :post_page_id,
       :posts_pr_page,
       :admin_blog_id,
-      :access_to
+      :access_to,
+      :show_all_categories,
+      :featured_posts_pr_page
     )
   end
 end

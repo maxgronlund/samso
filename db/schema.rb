@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029133716) do
+ActiveRecord::Schema.define(version: 20180106114039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20171029133716) do
     t.integer "admin_blog_post_category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "show_all_categories", default: false
+    t.integer "featured_posts_pr_page", default: 0
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
   end

@@ -1,5 +1,4 @@
 - post_module = modulable
-
 - if post_module.free_content?(params[:id]) || access_to_subscribed_content?
   - post_module.shown!(params[:id])
 
@@ -12,4 +11,21 @@
   == render 'subscription_modules/show', modulable: Admin::SubscriptionModule.first_or_create(title: 'default')
 - unless params[:page_id].nil?
   .mt-18
-    = link_to t('back'), page_path(Page.find(session[:page_id] || @landing_page.id)), class: 'btn btn-secondary'
+    - if editor?
+      - blog = post_module.blog(params[:id])
+      - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
+      .btn-group
+        = link_to t('back'),
+          session[:stored_path],
+          class: 'btn btn-light'
+        = link_to t('edit'),
+          edit_admin_blog_blog_post_path(blog, params[:id]),
+          class: 'btn btn-light'
+        = link_to t('delete'),
+          blog_post_path(blog, params[:id], page_id: params[:id]),
+          data: { confirm: t('confirm') }, method: :delete,
+          class: 'btn btn-danger'
+    - else
+      = link_to t('back'),
+        session[:stored_path],
+        class: 'btn btn-light'

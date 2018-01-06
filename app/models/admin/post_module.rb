@@ -33,6 +33,10 @@ class Admin::PostModule < ApplicationRecord
     # @blog_post.shown! unless @blog_post.nil?
   end
 
+  def blog(blog_post_id)
+    blog_post(blog_post_id).blog
+  end
+
   private
 
   def blog_post(blog_post_id)
