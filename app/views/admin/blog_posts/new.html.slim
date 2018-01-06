@@ -1,9 +1,8 @@
 .container.pt-60
   .row.justify-content-md-center
-    .col-md-auto.col-md-8
+    .col-md-12.col-lg-9
       .card
         .card-body
-
           h3 = t('new_model', model_name: Admin::BlogPost.model_name.human)
           = simple_form_for [:admin, @admin_blog, @admin_blog_post], multipart: true, url: url_for(action: 'create', controller: 'admin/blog_posts'), method: 'post', multipart: true  do |f|
             = f.error_notification

@@ -14,8 +14,11 @@
 = f.input :teaser
 .row
   .col-md-6
-    = f.input :admin_blog_post_category_id,
-      collection: Admin::BlogPostCategory.order(:name).where(locale: I18n.locale),
+    / = f.input :admin_blog_post_category_id,
+    /  collection: Admin::BlogPostCategory.order(:name).where(locale: I18n.locale),
+    /  include_blank: false
+    = f.input :admin_blog_id,
+      collection: Admin::Blog.order(:name).where(locale: I18n.locale),
       include_blank: false
   .col-md-6
 
@@ -23,10 +26,8 @@
       collection: Admin::BlogPost::LAYOUTS,
       include_blank: false
 .row
-  .col-md-7
+  .col-md-12
     = f.input :start_date
-  .col-md-5
-    = f.input :signature
 
 = f.input :body, :input_html => { rows: 15}
 .row
@@ -34,6 +35,9 @@
     = f.input :free_content
   .col-md-6
     = f.input :featured
+.row 
+  .col-md-5
+    = f.input :signature
 
 /= f.hidden_field :blog_id, value: @blog.id
 /= f.association :user

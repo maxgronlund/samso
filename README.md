@@ -60,7 +60,6 @@ Things you may want to cover:
   $ heroku run --app samso rake db:migrate
   $ heroku run --app samso rake db:seed
   $ heroku run --app samso rake system:setup
-  $ heroku run --app samso rake system:setup
   $ heroku restart -a samso
   $ heroku run --app samso rake pg_search:multisearch:rebuild[Admin::BlogPost]
 
