@@ -55,4 +55,8 @@ class Admin::BlogPost < ApplicationRecord
     return user.name if user
     ''
   end
+
+  def category_name
+    admin_blog_post_category.name
+  end
 end

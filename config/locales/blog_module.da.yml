@@ -2,19 +2,22 @@ da:
   activerecord:
     models:
       admin/blog_module:
-        one: Blog modul
-        other: Blog moduler
+        one: Kategori modul
+        other: Kategori moduler
     attributes:
       admin/blog_module:
         show: Vis til
         position: Position
         post_page_id: Side til visning af post
         posts_pr_page: Antal af poster til visning
-        admin_blog_id: Vælg blog
+        admin_blog_id: Vælg kategori
+        show_all_categories: Vælg alle kategorier
 
   blog_module:
-    the_beatles: 'The Beatles'
-    elvis_presley: 'Elvis Presley'
+    first: « Første
+    prev: ‹ Forige
+    next: Næste ›
+    last: Sidste »
 
   admin/blog_module:
-    name: Blog modul
+    name: Kategori modul

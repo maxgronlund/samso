@@ -40,15 +40,42 @@ class Admin::BlogModule < ApplicationRecord
     "#{request_path}?page=#{page}"
   end
 
+  def last_page(request_path, current_page)
+    return false if blog.nil?
+    page = blog.blog_posts_count / posts_pr_page
+    "#{request_path}?page=#{page}"
+  end
+
   def posts
+    return all_posts if show_all_categories
     return nil if blog.nil?
     @posts ||=
       blog
       .posts
+      .where(featured: false)
       .order('start_date DESC')
       .where(
         'start_date <= :today', today: Date.today + 1.day
       )
+  end
+
+  def all_posts
+    Admin::BlogPost
+      .order('start_date DESC')
+      .where(
+        'start_date <= :today', today: Date.today + 1.day
+      )
+      .where(featured: false)
+  end
+
+  def featured_posts
+    Admin::BlogPost
+      .order('start_date DESC')
+      .where(featured: true)
+      .where(
+        'start_date <= :today', today: Date.today + 1.day
+      )
+      .last(featured_posts_pr_page)
   end
 
   def blog

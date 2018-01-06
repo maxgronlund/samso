@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def navbar_logo
-    @navbar_logo ||= admin_system_setup.logo
+    @navbar_logo ||= admin_system_setup.logo(:original)
   end
   helper_method :navbar_logo
 

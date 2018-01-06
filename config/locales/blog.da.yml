@@ -7,6 +7,6 @@ da:
         title: Navn
 
   admin/blog:
-    new: Opret blog
-    index: Blogs
+    index: Kategorier
     new: Opret ny kategori
+    edit: Rediger kategori

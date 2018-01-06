@@ -5,15 +5,17 @@
   .col-sm-6
     .pull-right
       = @blog_pots_count
-
-= form_tag admin_articles_path, method: 'get' do
+br
+= form_tag admin_articles_path, method: 'get', class: 'md-form' do
   .row
     .col-sm-6
+      i.fa.fa-search.prefix.grey-text
+      = label_tag :search, 'Søg'
       = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6
       .btn-group
-        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-outline-secondary'
-        = link_to t('user.search.show_all'), admin_articles_path, class: 'btn btn-outline-secondary'
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-info'
+        = link_to t('user.search.show_all'), admin_articles_path, class: 'btn btn-info'
 br
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -40,10 +42,10 @@ br
             .btn-group
               = link_to t('show'),
                 admin_blog_blog_post_path(blog_post.blog, blog_post),
-                class: 'btn btn-sm btn-outline-secondary'
+                class: 'btn btn-sm btn-info'
               = link_to t('edit'),
                 edit_admin_blog_blog_post_path(blog_post.blog, blog_post),
-                class: 'btn btn-sm btn-outline-primary'
+                class: 'btn btn-sm btn-primary'
               = link_to t('delete'),
                 admin_blog_blog_post_path(blog_post.blog, blog_post),
                 data: { confirm: t('are_you_sure') },

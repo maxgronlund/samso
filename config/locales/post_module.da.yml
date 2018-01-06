@@ -1,7 +1,7 @@
 da:
   activerecord:
     models:
-      admin/post_module: Blog indlæg modul
+      admin/post_module: Læs artikkel modul
 
   admin/post_module:
-    name: Blog indlæg modul
+    name: Læs artikkel modul

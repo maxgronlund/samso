@@ -1,7 +1,7 @@
 da:
   activerecord:
     models:
-      admin/blog_post_category: Kategori
+      admin/blog_post_category: Kategori navn
     attributes:
       admin/blog_post_category:
         name: Navn
@@ -9,4 +9,4 @@ da:
   admin/blog_post_category:
     new: Opret Kategori
 
-  blog_post_categories: Kategorier
+  blog_post_categories: Kategori navne

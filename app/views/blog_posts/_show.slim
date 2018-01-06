@@ -2,5 +2,5 @@
 h5 = post.title
 i = l post.start_date
 br
-
+= image_tag(post.image_url(:original))
 = truncate(post.body, length: 125)

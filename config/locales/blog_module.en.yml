@@ -2,8 +2,8 @@ en:
   activerecord:
     models:
       admin/blog_module:
-        one: Blog moduls
-        other: Blog modules
+        one: Category module
+        other: Category modules
     attributes:
       admin/blog_module:
         show: Show to
@@ -17,6 +17,6 @@ en:
     elvis_presley: 'Elvis Presley'
 
   admin/blog_module:
-    name: Blog module
+    name: Kategori modul
     next: Next
     prev: Prev

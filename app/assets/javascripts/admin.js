@@ -11,8 +11,8 @@
 // about supported directives.
 //
 // require tether.min
-// require jquery
-// require rails-ujs
+//= require jquery
+//= require rails-ujs
 //= require turbolinks
 // require admin/Sortable
 // require admin/tinycolor
@@ -22,4 +22,4 @@
 // require admin/metisMenu
 // require admin/init-metismenu
 // require admin/page
-//
+//= require mdb
