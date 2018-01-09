@@ -11,13 +11,17 @@ class Admin::FeaturedPostModule < ApplicationRecord
     )
   end
 
-  def blog_module
-    Admin::BlogModule.find_by(id: admin_blog_module_id)
-  end
+  # def blog_module
+    # Admin::BlogModule.find_by(id: admin_blog_module_id)
+  # end
 
-  def posts
-    return [] if blog_module.nil?
-    return [] if blog_module.featured_post.nil?
-    blog_module.featured_post
+  def featured_posts
+    Admin::BlogPost
+      .order('start_date DESC')
+      .where(featured: true)
+      .where(
+        'start_date <= :today', today: Date.today + 1.day
+      )
+      .first(featured_posts_pr_page)
   end
 end

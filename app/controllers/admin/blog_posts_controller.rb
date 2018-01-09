@@ -73,7 +73,8 @@ class Admin::BlogPostsController < AdminController
         :image,
         :free_content,
         :featured,
-        :admin_blog_post_category_id
+        :admin_blog_post_category_id,
+        :layout
       )
   end
 end

@@ -65,7 +65,6 @@ class Admin::BlogModule < ApplicationRecord
       .where(
         'start_date <= :today', today: Date.today + 1.day
       )
-      .where(featured: false)
   end
 
   def featured_posts
@@ -75,7 +74,7 @@ class Admin::BlogModule < ApplicationRecord
       .where(
         'start_date <= :today', today: Date.today + 1.day
       )
-      .last(featured_posts_pr_page)
+      .first(featured_posts_pr_page)
   end
 
   def blog

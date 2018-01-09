@@ -4,14 +4,12 @@
       .mb-10
         = image_tag( post.image.url(:large), class: 'img-fluid')
     .content-center
-      - if post.featured
+      - if post.featured && featured
         .featured
           'Featured
       .category_name
         = post.category_name
       h3 = post.title
       .signature = post.signature
-      'fo'
       = post.teaser
-      i = l post.start_date unless post.start_date.nil?
       br = truncate(post.subtitle, length: 125)

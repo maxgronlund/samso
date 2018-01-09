@@ -8,6 +8,16 @@ class Admin::PostModule < ApplicationRecord
     blog_post(blog_post_id).title
   end
 
+  def start_date(blog_post_id)
+    return nil unless blog_post(blog_post_id)
+    blog_post(blog_post_id).start_date
+  end
+
+  def signature(blog_post_id)
+    return nil unless blog_post(blog_post_id)
+    blog_post(blog_post_id).signature
+  end
+
   def body(blog_post_id)
     return '' unless blog_post(blog_post_id)
     blog_post(blog_post_id).body

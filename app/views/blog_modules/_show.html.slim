@@ -23,14 +23,14 @@
     'Nothing found
   - else
     - found_posts.each do |post|
-      = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post
+      = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post, featured: true
 - else
-  - featured_posts = blog_module.featured_posts
+  - featured_posts  = blog_module.featured_posts
   - paginated_posts = blog_module.paginated_posts(params[:page]) - featured_posts
   - featured_posts.each do |post|
-    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post
+    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post, featured: true
   - paginated_posts.each do |post|
-    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post
+    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post, featured: false
 
   .row.mt-10
     .col-sm-12

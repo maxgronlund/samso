@@ -5,17 +5,25 @@ h3 = t('edit_model', model_name: @admin_blog_module.model_name.human)
     .row
       .col-sm-6
         = f.input :name
-        = f.input :post_page_id, collection: Page.where(locale: I18n.locale)
-        = f.input :posts_pr_page
-        = f.input :featured_posts_pr_page
       .col-sm-6
         = f.input :position, as: :integer
+    .row
+      .col-sm-6
+        = f.input :post_page_id, collection: Page.where(locale: I18n.locale)
+      .col-sm-6
         = f.input :access_to,
           collection: PageColModule.permissions,
           include_blank: false,
           label: t('page_col_module.access_to')
-
+    .row
+      .col-sm-6
+        = f.input :posts_pr_page
+      .col-sm-6
         = f.input :show_all_categories
+    .row
+      .col-sm-6
+        = f.input :featured_posts_pr_page
+      .col-sm-6
         = f.input :admin_blog_id,
           collection: Admin::Blog.where(locale: I18n.locale),
           prompt: 'Vælg kategori'

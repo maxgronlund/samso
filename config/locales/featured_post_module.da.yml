@@ -6,12 +6,12 @@ da:
         other: Featured artikler
     attributes:
       admin/featured_post_module:
-        name:  Featured artikler
+        title:  Overskrift
+        access_to: Vises til
 
   featured_post_module:
-    fo: Fo
-    bar: Bar
     name:  Featured artikler
+    edit: Rediger Featured artikler oversikts modul
 
 
   admin/featured_post_module:

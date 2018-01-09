@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106114039) do
+ActiveRecord::Schema.define(version: 20180108212636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,10 +156,11 @@ ActiveRecord::Schema.define(version: 20180106114039) do
   end
 
   create_table "admin_featured_post_modules", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.integer "admin_blog_module_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "featured_posts_pr_page", default: 16
     t.index ["admin_blog_module_id"], name: "index_admin_featured_post_modules_on_admin_blog_module_id"
   end
 

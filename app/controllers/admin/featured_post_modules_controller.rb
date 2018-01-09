@@ -32,9 +32,10 @@ class Admin::FeaturedPostModulesController < AdminController
   def featured_post_module_params
     params.require(:admin_featured_post_module).permit(
       :position,
-      :name,
+      :title,
       :access_to,
-      :admin_blog_module_id
+      :admin_blog_module_id,
+      :featured_posts_pr_page
     )
   end
 end
