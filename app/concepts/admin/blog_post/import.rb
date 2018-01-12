@@ -74,7 +74,6 @@ class Admin::BlogPost < ApplicationRecord
     def import_blog_post(options = {})
       blog = find_or_create_blog(options)
       page = Page.find_by(menu_title: "Kategori #{blog.title}")
-      ap page.title
       options[:post_page_id] = page.id unless page.nil?
       post = create_blog_post(blog, options)
       return if post.nil?
