@@ -21,13 +21,13 @@ h3 = t('csv_file.index')
               .btn-group
                 = link_to 'import',
                   new_admin_csv_import_parse_csv_path(admin_csv_import),
-                  class: 'btn btn-outline-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
                 = link_to t('show'),
                   admin_csv_import_path(admin_csv_import),
-                  class: 'btn btn-outline-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
                 = link_to t('edit'),
                   edit_admin_csv_import_path(admin_csv_import),
-                  class: 'btn btn-outline-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
                 = link_to t('delete'),
                   admin_csv_import,
                   data: { confirm: t('are_you_sure') },

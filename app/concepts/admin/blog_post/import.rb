@@ -17,15 +17,14 @@ class Admin::BlogPost < ApplicationRecord
         options = build_options(unescaped_row)
         import_blog_post(options)
       end
-      Admin::BlogPostCategory.update_all_counts
       Admin::Blog.update_all_counts
       pritify_layouts
     end
 
     def pritify_layouts
-      Admin::BlogPostCategory.find_each do |blog_post_category|
+      Admin::Blog.find_each do |blog|
         pritify_blog_posts(
-          Admin::BlogPost.where(admin_blog_post_category_id: blog_post_category.id)
+          blog.posts
         )
       end
     end
@@ -44,7 +43,7 @@ class Admin::BlogPost < ApplicationRecord
     def build_options(row)
       {
         legacy_id: row[0].to_i,
-        kategori_id: category_id(row[1].to_i),
+        legacy_category_id: row[1].to_i,
         startdato: row[2].samso_import_to_datetime,
         slutdato: row[3].samso_import_to_datetime,
         topstory: row[4],
@@ -74,31 +73,39 @@ class Admin::BlogPost < ApplicationRecord
 
     def import_blog_post(options = {})
       blog = find_or_create_blog(options)
-      post = setup_blog_post(blog, options)
+      page = Page.find_by(menu_title: "Kategori #{blog.title}")
+      ap page.title
+      options[:post_page_id] = page.id unless page.nil?
+      post = create_blog_post(blog, options)
+      return if post.nil?
       attach_image(post, options)
     end
 
-    def setup_blog_post(blog, options = {})
-      params = {
+    def create_blog_post(blog, options = {})
+      options = blog_post_options(options)
+      blog.posts.where(
+        options
+      ).first_or_create!(
+        options
+      )
+    rescue => e
+      Rails.logger.info e.message
+      nil
+    end
+
+    def blog_post_options(options = {})
+      {
         title: options[:titel],
         subtitle: options[:trompet],
         teaser: options[:manchet],
         body: options[:body],
-        admin_blog_post_category_id: options[:kategori_id],
         start_date: options[:startdato],
         end_date: options[:slutdato],
         user_id: user_id(options),
         views: options[:visning],
-        signature: options[:signatur]
+        signature: options[:signatur],
+        post_page_id: options[:post_page_id]
       }
-
-      blog.posts.where(
-        params
-      ).first_or_create!(
-        params
-      )
-    rescue => e
-      Rails.logger.info e.message
     end
 
     def user_id(options = {})
@@ -127,36 +134,12 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def find_or_create_blog(options = {})
-      category =
-        Admin::BlogPostCategory
-        .find(options[:kategori_id])
-
-      params   = blog_params(category)
       Admin::Blog
-        .where(params)
-        .first_or_create(params)
-    end
-
-    def category_id(legacy_id)
-      category(legacy_id).id
-    end
-
-    def category(legacy_id)
-      find_or_create_category(legacy_id)
-    end
-
-    def find_or_create_category(legacy_id)
-      Admin::BlogPostCategory
-        .where(legacy_id: legacy_id)
-        .first_or_create(name: 'default', locale: I18n.locale)
-    end
-
-    def blog_params(category)
-      {
-        title: category.name,
-        locale: 'da',
-        category_id: category.id
-      }
+        .where(legacy_category_id: options[:legacy_category_id])
+        .first_or_create(
+          legacy_category_id: options[:legacy_category_id],
+          title: 'No Name'
+        )
     end
   end
 end

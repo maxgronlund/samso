@@ -9,8 +9,6 @@ h3 = t('edit_model', model_name: @admin_blog_module.model_name.human)
         = f.input :position, as: :integer
     .row
       .col-sm-6
-        = f.input :post_page_id, collection: Page.where(locale: I18n.locale)
-      .col-sm-6
         = f.input :access_to,
           collection: PageColModule.permissions,
           include_blank: false,

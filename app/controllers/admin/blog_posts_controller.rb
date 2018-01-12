@@ -17,7 +17,6 @@ class Admin::BlogPostsController < AdminController
     @blog_post = @admin_blog.posts.new(admin_blog_post_params)
     @blog_post.user = current_user
     if @blog_post.save!
-      update_blog_post_count(nil, @blog_post.admin_blog_post_category_id)
       redirect_to admin_blog_path(@admin_blog)
     else
       render :new
@@ -28,9 +27,7 @@ class Admin::BlogPostsController < AdminController
   end
 
   def update
-    old_category_id = @admin_blog_post.admin_blog_post_category_id
     if @admin_blog_post.update(admin_blog_post_params)
-      update_blog_post_count(old_category_id, @admin_blog_post.admin_blog_post_category_id)
       redirect_to default_path(admin_articles_path)
     else
       render :edit
@@ -43,10 +40,6 @@ class Admin::BlogPostsController < AdminController
   end
 
   private
-
-  def update_blog_post_count(old_category_id, new_category_id)
-    Admin::BlogPostCategory.update_blog_post_count(old_category_id, new_category_id)
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_blog_post
@@ -63,18 +56,18 @@ class Admin::BlogPostsController < AdminController
         :title,
         :body,
         :position,
+        :post_page_id,
         :image,
         :teaser,
         :subtitle,
         :image,
         :blog_module_id,
         :page_id,
-        :admin_blog_post_category_id,
         :image,
         :free_content,
         :featured,
-        :admin_blog_post_category_id,
-        :layout
+        :layout,
+        :start_date
       )
   end
 end

@@ -5,7 +5,7 @@ class PagesController < ApplicationController
       Page
       .includes(page_rows: [page_cols: [:page_col_modules]])
       .find(params[:id])
-    @landing_page     = admin_system_setup.landing_page
+    @landing_page     = admin_system_setup.landing_page || Page.find_by(locale: I18n.locale)
     @footer           = @page.footer
     @body_style       = @page.body_style
     session[:page_id] = @page.id

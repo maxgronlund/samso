@@ -14,9 +14,6 @@
         = f.input :access_to,
           collection: PageColModule.permissions,
           include_blank: false
-        /= f.input :admin_blog_module_id, collection: Admin::BlogModule.collection, include_blank: false
-
-
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'

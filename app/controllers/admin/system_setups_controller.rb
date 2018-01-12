@@ -9,14 +9,10 @@ class Admin::SystemSetupsController < AdminController
   # PATCH/PUT /admin/system_setups/1
   # PATCH/PUT /admin/system_setups/1.json
   def update
-    respond_to do |format|
-      if @admin_system_setup.update(admin_system_setup_params)
-        format.html { redirect_to admin_index_path, notice: 'System setup er opdateret.' }
-        format.json { render :show, status: :ok, location: @admin_system_setup }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_system_setup.errors, status: :unprocessable_entity }
-      end
+    if @admin_system_setup.update(admin_system_setup_params)
+      redirect_to admin_index_path, notice: 'System setup er opdateret.'
+    else
+      render :edit
     end
   end
 
@@ -34,10 +30,8 @@ class Admin::SystemSetupsController < AdminController
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_system_setup_params
     params.require(:admin_system_setup).permit(
-      :da_landing_page_id,
-      :da_subscription_page_id,
-      :en_landing_page_id,
-      :en_subscription_page_id,
+      :landing_page_id,
+      :subscription_page_id,
       :logo,
       :delete_logo,
       :background_color

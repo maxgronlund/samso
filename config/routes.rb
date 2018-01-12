@@ -6,7 +6,6 @@ Rails.application.routes.draw do
         resources :blog_posts
       end
       resources :blog_modules, only: %i[edit update]
-      resources :blog_post_categories
       resources :calendars do
         resources :calendar_events
       end

@@ -1,15 +1,17 @@
-.blog-post
-  = link_to page_post_path(blog_module.show_on_page, post) do
-    - if post.image.present?
+- if post.image.present?
+  .blog-post
+    = link_to page_post_path(post.show_on_page, post) do
       .mb-10
         = image_tag( post.image.url(:large), class: 'img-fluid')
-    .content-center
-      - if post.featured && featured
-        .featured
-          'Featured
-      .category_name
-        = post.category_name
-      h3 = post.title
-      .signature = post.signature
-      = post.teaser
-      br = truncate(post.subtitle, length: 125)
+      .content
+        - if post.featured && featured
+          .featured
+            'Featured
+        .category-name
+          = post.category_name
+        h3 = post.title
+        .signature = post.signature
+        = post.teaser
+        br = truncate(post.subtitle, length: 125)
+- else
+  = render 'blog_modules/layouts/no_image', blog_module: blog_module, post: post, featured: featured

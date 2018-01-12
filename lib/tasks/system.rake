@@ -3,22 +3,21 @@ namespace :system do
   # $ rake system:setup
   desc 'build essential pages'
   task setup: :environment do
-    @result = { status: :ok, reason: '' }
-    locales =
+    pages =
       [
-        { locale: 'en', translation: 'English', name: 'Front page' },
-        { locale: 'da', translation: 'Dansk', name: 'Forside' }
+        { locale: 'en', translation: 'English', front_page: 'Front page', subscription: 'Subscription' },
+        { locale: 'da', translation: 'Dansk', front_page: 'Forside', subscription: 'Abonnement' }
       ]
     ActiveRecord::Base.transaction do
-      locales.each do |locale|
-        footer = build_footer(locale)
-        landing_page = build_landing_page(locale, footer.id) unless @result[:status] == :error
-        build_system_setup(locale, landing_page.id) unless @result[:status] == :error
+      pages.each do |page|
+        footer = build_footer(page)
+        landing_page = build_page(page[:front_page], footer.id, page[:locale])
+        suscription_page = build_page(page[:subscription], footer.id, page[:locale])
+
+        build_system_setup(page, landing_page, suscription_page)
       end
-      create_system_messages unless @result[:status] == :error
-      raise ActiveRecord::Rollback if @result[:status] == :error
+      create_system_messages
     end
-    ap @result[:reason] if @result[:status] == :error
   end
 
   private
@@ -30,36 +29,31 @@ namespace :system do
         locale: locale[:locale]
       }
     Admin::Footer.where(params).first_or_create(params)
-  rescue
-    @result = { status: :error, reason: 'Unable to build footer' }
   end
 
-  def build_landing_page(locale, footer_id)
+  def build_page(name, footer_id, locale)
     params =
       {
-        title: locale[:name],
-        menu_title: locale[:name],
+        title: name,
+        menu_title: name,
         menu_id: 'not_in_any_menus',
         active: true,
-        locale: locale[:locale],
+        locale: locale,
         admin_footer_id: footer_id
       }
     Page.where(params).first_or_create(params)
-  rescue
-    @result = { status: :error, reason: 'Unable to build landing page' }
   end
 
-  def build_system_setup(locale, page_id)
+  def build_system_setup(page, landing_page, suscription_page)
     params =
       {
-        locale: locale[:locale],
-        locale_name: locale[:translation],
-        landing_page_id: page_id,
+        locale: page[:locale],
+        locale_name: page[:translation],
+        landing_page_id: landing_page.id,
+        subscription_page_id: suscription_page.id,
         maintenance: false
       }
     Admin::SystemSetup.where(params).first_or_create(params)
-  rescue
-    @result = { status: :error, reason: 'Unable to  build system setup' }
   end
 
   # rubocop:disable Metrics/MethodLength

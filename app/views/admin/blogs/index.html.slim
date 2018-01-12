@@ -6,6 +6,7 @@ h3 = t('admin/blog.index')
       tr
         th Title
         th Artikler
+        th Id
         th
 
     tbody
@@ -13,16 +14,17 @@ h3 = t('admin/blog.index')
         tr
           td = admin_blog.title
           td = admin_blog.blog_posts_count
+          td = admin_blog.legacy_category_id
           td
             .pull-right
               .btn-group
                 = link_to t('show'),
                   admin_blog,
-                  class: 'btn btn-outline-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
 
                 = link_to t('edit'),
                   edit_admin_blog_path(admin_blog),
-                  class: 'btn btn-outline-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
 
                 = link_to t('delete'),
                   admin_blog,

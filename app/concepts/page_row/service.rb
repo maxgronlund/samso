@@ -13,7 +13,7 @@ class PageRow < ApplicationRecord
         @page_row
           .page_cols
           .create(
-            layout: 'col-sm-' + page_col_layout,
+            layout: 'col-md-' + page_col_layout,
             index: index
           )
       end

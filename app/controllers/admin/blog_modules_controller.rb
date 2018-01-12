@@ -31,7 +31,6 @@ class Admin::BlogModulesController < AdminController
       :name,
       :layout,
       :position,
-      :post_page_id,
       :posts_pr_page,
       :admin_blog_id,
       :access_to,

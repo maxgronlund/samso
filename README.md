@@ -48,6 +48,7 @@ Things you may want to cover:
 
 * Database initialization
   rake db:seed
+  rake system:setup
 
 * Database migration
   $ heroku run --app samso rake db:migrate

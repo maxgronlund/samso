@@ -11,10 +11,6 @@ class Admin::BlogModule < ApplicationRecord
       .offset(page_id.to_i * posts_pr_page)
   end
 
-  def show_on_page
-    Page.find_by(id: post_page_id) || Page.find_by(locale: I18n.locale)
-  end
-
   def featured_post
     return nil if blog.nil?
     @posts ||=

@@ -81,8 +81,9 @@ class User < ApplicationRecord
       unless User::Service.valid_email?(options)
         options[:email] = User::Service.fake_email
       end
-      user.name     = options[:navn]
-      user.email    = options[:email]
+      user.name      = options[:navn]
+      user.signature = options[:navn]
+      user.email     = options[:email]
     end
 
     def secure_password(user, options)

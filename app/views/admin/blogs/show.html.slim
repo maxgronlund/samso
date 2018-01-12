@@ -4,7 +4,7 @@
   .col-md-6
     .pull-right
       .btn-group
-        = link_to 'Back', admin_blogs_path, class: 'btn btn-secondary'
+        = link_to 'Back', admin_blogs_path, class: 'btn btn-light'
         = link_to 'Edit', edit_admin_blog_path(@admin_blog), class: 'btn btn-primary'
 
 .row.mt-10
@@ -36,10 +36,10 @@
               .btn-group
                 = link_to t('show'),
                   admin_blog_blog_post_path(@admin_blog, post),
-                  class: 'btn btn-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
                 = link_to t('edit'),
                   edit_admin_blog_blog_post_path(@admin_blog, post),
-                  class: 'btn btn-secondary btn-sm'
+                  class: 'btn btn-light btn-sm'
                 = link_to t('delete'),
                   admin_blog_blog_post_path(@admin_blog, post),
                   data: { confirm: t('confirm') }, method: :delete,

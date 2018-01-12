@@ -20,8 +20,8 @@ class Admin::CsvImport < ApplicationRecord
         ::Admin::BlogPost::Import
           .new(@current_user)
           .import(csv_import)
-      when Admin::BlogPostCategory.name
-        ::Admin::BlogPostCategory::Import
+      when Admin::Blog.name
+        ::Admin::Blog::Import
           .new
           .import(csv_import)
       end

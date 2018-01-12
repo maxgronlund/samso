@@ -25,6 +25,10 @@ class Admin::BlogPost < ApplicationRecord
       [I18n.t('blog_post.image_right'), 'image_right']
     ].freeze
 
+  def show_on_page
+    Page.find_by(id: post_page_id) || Page.find_by(locale: I18n.locale)
+  end
+
   def page
     blog_module.page
   end
@@ -57,6 +61,6 @@ class Admin::BlogPost < ApplicationRecord
   end
 
   def category_name
-    admin_blog_post_category.name
+    blog.title
   end
 end

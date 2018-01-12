@@ -1,5 +1,5 @@
 # namespace to confine service class to Admin:BlogPost::Import
-class Admin::BlogPostCategory < ApplicationRecord
+class Admin::Blog < ApplicationRecord
   require 'csv'
   require 'cgi'
   # services for Admin::CsvImport
@@ -16,18 +16,19 @@ class Admin::BlogPostCategory < ApplicationRecord
       end
     end
 
+    private
+
     def build_options(row)
       {
-        legacy_id: row[0].to_i,
-        name: row[2],
-        active: true,
+        legacy_category_id: row[0].to_i,
+        title: row[2].strip,
         locale: 'da'
       }
     end
 
     def import_category(options = {})
-      Admin::BlogPostCategory
-        .where(options)
+      Admin::Blog
+        .where(legacy_category_id: options[:legacy_category_id])
         .first_or_create(options)
     end
   end

@@ -19,10 +19,13 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
       t.datetime :end_date
       t.belongs_to :user, foreign_key: false
       t.integer :views, default: 0
+      t.string :signature, default: ''
+      t.integer :post_page_id
 
       t.timestamps
     end
     add_index :admin_blog_posts, :blog_id
+    add_index :admin_blog_posts, :post_page_id
     add_attachment :admin_blog_posts, :image
 
     add_column :users, :blog_posts_count, :integer, default: 0

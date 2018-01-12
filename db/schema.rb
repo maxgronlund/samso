@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180108212636) do
+ActiveRecord::Schema.define(version: 20171024085909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,30 +19,15 @@ ActiveRecord::Schema.define(version: 20180108212636) do
     t.string "name"
     t.text "body"
     t.string "layout"
-    t.integer "post_page_id"
     t.integer "blog_posts_count", default: 0
     t.integer "posts_pr_page", default: 10
     t.integer "admin_blog_id"
     t.string "locale"
-    t.integer "admin_blog_post_category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "show_all_categories", default: false
     t.integer "featured_posts_pr_page", default: 0
-    t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
-    t.index ["post_page_id"], name: "index_admin_blog_modules_on_post_page_id"
-  end
-
-  create_table "admin_blog_post_categories", force: :cascade do |t|
-    t.string "locale", default: "en"
-    t.string "name", default: ""
-    t.boolean "active", default: true
-    t.integer "legacy_id"
-    t.integer "blog_post_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "page_id"
-    t.index ["page_id"], name: "index_admin_blog_post_categories_on_page_id"
+    t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
   end
 
   create_table "admin_blog_posts", force: :cascade do |t|
@@ -60,27 +45,26 @@ ActiveRecord::Schema.define(version: 20180108212636) do
     t.datetime "end_date"
     t.bigint "user_id"
     t.integer "views", default: 0
+    t.string "signature", default: ""
+    t.integer "post_page_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.integer "admin_blog_post_category_id"
-    t.string "signature", default: ""
-    t.index ["admin_blog_post_category_id"], name: "index_admin_blog_posts_on_admin_blog_post_category_id"
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
+    t.index ["post_page_id"], name: "index_admin_blog_posts_on_post_page_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
   end
 
   create_table "admin_blogs", force: :cascade do |t|
     t.string "title"
     t.string "locale"
+    t.integer "legacy_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
-    t.integer "category_id"
-    t.index ["category_id"], name: "index_admin_blogs_on_category_id"
   end
 
   create_table "admin_calendar_events", force: :cascade do |t|
@@ -158,9 +142,9 @@ ActiveRecord::Schema.define(version: 20180108212636) do
   create_table "admin_featured_post_modules", force: :cascade do |t|
     t.string "title"
     t.integer "admin_blog_module_id"
+    t.integer "featured_posts_pr_page", default: 16
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "featured_posts_pr_page", default: 16
     t.index ["admin_blog_module_id"], name: "index_admin_featured_post_modules_on_admin_blog_module_id"
   end
 
@@ -315,9 +299,9 @@ ActiveRecord::Schema.define(version: 20180108212636) do
     t.integer "subscription_page_id"
     t.string "locale"
     t.string "locale_name"
+    t.string "background_color", default: "none"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "background_color", default: "none"
     t.string "logo_file_name"
     t.string "logo_content_type"
     t.integer "logo_file_size"
@@ -445,6 +429,7 @@ ActiveRecord::Schema.define(version: 20180108212636) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.string "signature"
     t.string "email", default: "", null: false
     t.string "password_digest", default: "", null: false
     t.string "reset_password_token"
@@ -467,7 +452,6 @@ ActiveRecord::Schema.define(version: 20180108212636) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
-    t.string "signature"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

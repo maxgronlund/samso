@@ -14,10 +14,6 @@
         = f.input :admin_calendar_id, collection: Admin::Calendar.all
         = f.input :layout, collection: Admin::CalendarModule::LAYOUTS, include_blank: false
 
-
-
-
-
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'
 
