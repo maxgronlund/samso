@@ -67,7 +67,8 @@ class Admin::BlogPostsController < AdminController
         :free_content,
         :featured,
         :layout,
-        :start_date
+        :start_date,
+        :blog_id
       )
   end
 end
