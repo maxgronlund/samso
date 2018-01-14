@@ -31,16 +31,6 @@ FactoryBot.define do
     f.image_updated_at nil
     f.free_content false
     f.layout 'image_left'
-    f.admin_blog_post_category_id 1
-  end
-
-  factory :blog_post_category, class: Admin::BlogPostCategory do |f|
-    f.locale 'en'
-    f.name 'default'
-    f.active true
-    f.legacy_id 0
-    f.blog_post_count 0
-    f.page_id 1
   end
 
   factory :page do |f|

@@ -35,7 +35,8 @@ class Admin::FeaturedPostModulesController < AdminController
       :title,
       :access_to,
       :admin_blog_module_id,
-      :featured_posts_pr_page
+      :featured_posts_pr_page,
+      :content_type
     )
   end
 end

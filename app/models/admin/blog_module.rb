@@ -19,7 +19,7 @@ class Admin::BlogModule < ApplicationRecord
       .where(featured: true)
       .order('start_date DESC')
       .where(
-        'start_date <= :today', today: Date.today + 1.day
+        'start_date <= :today', today: Time.zone.now
       )
   end
 
@@ -48,10 +48,9 @@ class Admin::BlogModule < ApplicationRecord
     @posts ||=
       blog
       .posts
-      .where(featured: false)
       .order('start_date DESC')
       .where(
-        'start_date <= :today', today: Date.today + 1.day
+        'start_date <= :today', today: Time.zone.now
       )
   end
 
@@ -59,17 +58,13 @@ class Admin::BlogModule < ApplicationRecord
     Admin::BlogPost
       .order('start_date DESC')
       .where(
-        'start_date <= :today', today: Date.today + 1.day
+        'start_date <= :today', today: Time.zone.now
       )
   end
 
   def featured_posts
-    Admin::BlogPost
-      .order('start_date DESC')
+    all_posts
       .where(featured: true)
-      .where(
-        'start_date <= :today', today: Date.today + 1.day
-      )
       .first(featured_posts_pr_page)
   end
 

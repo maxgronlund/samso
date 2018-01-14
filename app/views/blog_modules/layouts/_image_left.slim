@@ -1,17 +1,21 @@
-- if post.image.present?
-  = link_to page_post_path(post.show_on_page, post) do
-    .row.blog-post
-      .col-sm-6.no-padding
-        = image_tag( post.image.url(:large), class: 'img-fluid mr-1')
-      .col-sm-6.content
-        - if post.featured && featured
-          .featured
-            'Featured
-        .category-name
-          = post.category_name
-        h4 = post.title
-        .signature = post.signature
-        = post.teaser
-        br = truncate(post.subtitle, length: 125)
-- else
-  = render 'blog_modules/layouts/no_image', blog_module: blog_module, post: post, featured: featured
+.blog-post
+  - if post.image.present?
+    = link_to page_post_path(post.show_on_page, post) do
+      .row.blog-post-content
+        .col-sm-6.no-padding
+          = image_tag( post.image.url(:large), class: 'img-fluid mr-1')
+        .col-sm-6.content
+          - if post.featured && featured
+            .featured
+              'Featured
+          .category-name
+            = post.category_name
+          h4 = post.title
+          .signature = post.signature
+          = post.teaser
+          br = truncate(post.subtitle, length: 125)
+          - unless post.free_content?
+            .for-subscribers
+              'FOR ABONNENTER
+  - else
+    = render 'blog_modules/layouts/no_image', blog_module: blog_module, post: post, featured: featured

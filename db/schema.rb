@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20171024085909) do
     t.integer "featured_posts_pr_page", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "show_search", default: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
   end
 
@@ -143,6 +144,7 @@ ActiveRecord::Schema.define(version: 20171024085909) do
     t.string "title"
     t.integer "admin_blog_module_id"
     t.integer "featured_posts_pr_page", default: 16
+    t.string "content_type", default: "featured_posts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_blog_module_id"], name: "index_admin_featured_post_modules_on_admin_blog_module_id"

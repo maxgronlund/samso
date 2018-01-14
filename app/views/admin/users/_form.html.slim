@@ -19,9 +19,8 @@
     .col-md-6
       .mb-5
         = image_tag @user.avatar.url(:square)
-      = f.label :avatar
       br
-      = f.file_field :avatar
+      = f.input :avatar
       - if @user.persisted? && @user.avatar?
         br
         = f.input :delete_avatar, as: :boolean

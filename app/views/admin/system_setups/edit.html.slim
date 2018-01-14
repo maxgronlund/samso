@@ -1,9 +1,25 @@
 h3 = t('edit_model', model_name: 'System opsætning')
 
-== render 'form'
+= simple_form_for [@admin_system_setup], multipart: true do |f|
+  = f.error_notification
 
-/= link_to t('show'), admin_user_path(@user)
-/'  |
-/= link_to t('back'), admin_users_path
+  = f.input :landing_page_id,
+    collection: Page.where(locale: I18n.locale),
+    include_blank: false
+
+  = f.input :subscription_page_id,
+    collection: Page.where(locale: I18n.locale),
+    include_blank: false
+
+  .row
+    .col-md-6
+      = f.input :logo
 
 
+    .col-md-6
+      - unless @admin_system_setup.logo_file_size.nil?
+        = f.input :delete_logo, as: :boolean
+
+  = f.input :background_color
+
+  = f.submit t('save'), class: 'btn btn-primary'

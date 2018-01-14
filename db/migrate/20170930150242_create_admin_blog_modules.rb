@@ -11,6 +11,7 @@ class CreateAdminBlogModules < ActiveRecord::Migration[5.1]
       t.string :locale
       t.boolean :show_all_categories, default: false
       t.integer :featured_posts_pr_page, default: 0
+      t.boolean :show_search, default: false
 
       t.timestamps
     end

@@ -12,7 +12,9 @@ da:
   featured_post_module:
     name:  Featured artikler
     edit: Rediger Featured artikler oversikts modul
-
+    featured_posts: Featured artikler
+    latest_news: Sidste nyt
+    more_from: Sidste nyt
 
   admin/featured_post_module:
-    name: Featured artikler oversikts modul
+    name: Udvalgte artikler

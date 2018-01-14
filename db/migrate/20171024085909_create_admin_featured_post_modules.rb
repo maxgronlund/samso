@@ -5,6 +5,7 @@ class CreateAdminFeaturedPostModules < ActiveRecord::Migration[5.1]
       t.string :title
       t.integer :admin_blog_module_id
       t.integer :featured_posts_pr_page, default: 16
+      t.string :content_type, default: 'featured_posts'
 
       t.timestamps
     end
@@ -15,6 +16,7 @@ class CreateAdminFeaturedPostModules < ActiveRecord::Migration[5.1]
         name: 'Admin::FeaturedPostModule',
         locale: 'admin/featured_post_module.name'
       )
+    add_column :admin_blog_modules, :show_search, :boolean, default: false
   end
 
   def down
