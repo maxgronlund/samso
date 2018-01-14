@@ -3,7 +3,10 @@
     .col-md-12.col-lg-9
       .card
         .card-body
-          h3 = t('new_model', model_name: Admin::BlogPost.model_name.human)
-          = simple_form_for [:admin, @admin_blog, @admin_blog_post], multipart: true, url: url_for(action: 'create', controller: 'admin/blog_posts'), method: 'post', multipart: true  do |f|
+          h3 = t('blog_post.new')
+          = simple_form_for [:admin, @admin_blog, @admin_blog_post],
+            multipart: true,
+            url: url_for(action: 'create', controller: 'admin/blog_posts'),
+            method: 'post' do |f|
             = f.error_notification
             == render 'form', f: f

@@ -35,8 +35,6 @@ class PostsController < ApplicationController
     @blog_post = @blog.posts.new(post_params)
     @blog_post.user = current_user
     if @blog_post.save!
-      # @blog.clear_page_cache
-      update_blog_post_count(nil, @blog_post.admin_blog_post_category_id)
       redirect_to page_post_path(session[:page_id], @blog_post)
     else
       render :new
@@ -45,11 +43,8 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /admin/posts/1
   def update
-    old_category_id = @post.admin_blog_post_category_id
     @blog = @post.blog
     if @post.update(post_params)
-      # @post.clear_page_cache
-      update_blog_post_count(old_category_id, @post.admin_blog_post_category_id)
       redirect_to page_path(session[:page_id])
     else
       @blog = @post.blog
@@ -64,10 +59,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def update_blog_post_count(old_category_id, new_category_id)
-    Admin::BlogPostCategory.update_blog_post_count(old_category_id, new_category_id)
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
@@ -101,13 +92,11 @@ class PostsController < ApplicationController
         :image,
         :blog_module_id,
         :page_id,
-        :admin_blog_post_category_id,
         :start_date,
         :free_content,
         :layout,
         :delete_image,
         :featured,
-        :admin_blog_post_category_id,
         :page_id,
         :signature
       )

@@ -3,7 +3,6 @@ class Admin::BlogPost < ApplicationRecord
   attr_accessor :delete_image, :page_id
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true
   belongs_to :user, class_name: 'User', counter_cache: true, optional: true
-  belongs_to :admin_blog_post_category, class_name: 'Admin::BlogPostCategory', optional: true
   has_attached_file :image, styles: {
     medium: '300x300>',
     thumb: '100x100>',
@@ -39,11 +38,6 @@ class Admin::BlogPost < ApplicationRecord
 
   def clear_page_cache
     blog.clear_cache_on_pages
-  end
-
-  def category_name
-    return '' if admin_blog_post_category.nil?
-    admin_blog_post_category.name
   end
 
   def shown!
