@@ -20,9 +20,13 @@ br
 .row.mt-10
   .col-md-12
     .pull-right
-      = link_to t('blog_post.new'),
-        new_admin_blog_blog_post_path(Admin::Blog.first),
-        class: 'btn btn-primary btn-sm'
+      - blog = Admin::Blog.first
+      - if blog.nil?
+        'Der skal oprettes in kategori før du kan oprette en artikkel
+      - else
+        = link_to t('blog_post.new'),
+          new_admin_blog_blog_post_path(Admin::Blog.first),
+          class: 'btn btn-primary btn-sm'
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead

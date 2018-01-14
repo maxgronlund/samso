@@ -73,18 +73,21 @@ class Admin::BlogPost < ApplicationRecord
 
     def import_blog_post(options = {})
       blog = find_or_create_blog(options)
-      page = Page.find_by(menu_title: "Kategori #{blog.title}")
+      menu_title = "Kategori #{blog.title}"
+      page = Page.find_by(menu_title: menu_title)
+      return if page.nil?
       options[:post_page_id] = page.id unless page.nil?
-      post = create_blog_post(blog, options)
-      return if post.nil?
+      post = find_or_initialize_blog_post(blog, options)
+      return if post.persisted?
+      post.save
       attach_image(post, options)
     end
 
-    def create_blog_post(blog, options = {})
+    def find_or_initialize_blog_post(blog, options = {})
       options = blog_post_options(options)
       blog.posts.where(
         options
-      ).first_or_create!(
+      ).first_or_initialize(
         options
       )
     rescue => e
@@ -133,11 +136,12 @@ class Admin::BlogPost < ApplicationRecord
     end
 
     def find_or_create_blog(options = {})
+      Admin::Blog.where(legacy_category_id: options[:legacy_category_id])
       Admin::Blog
         .where(legacy_category_id: options[:legacy_category_id])
-        .first_or_create(
+        .first_or_initialize(
           legacy_category_id: options[:legacy_category_id],
-          title: 'No Name'
+          title: options[:title]
         )
     end
   end
