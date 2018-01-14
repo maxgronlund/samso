@@ -78,6 +78,7 @@ class Admin::BlogPost < ApplicationRecord
       return if page.nil?
       options[:post_page_id] = page.id unless page.nil?
       post = find_or_initialize_blog_post(blog, options)
+      return if post.nil?
       return if post.persisted?
       post.save
       attach_image(post, options)
