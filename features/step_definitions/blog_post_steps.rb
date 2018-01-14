@@ -8,15 +8,8 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
   blog = FactoryBot.create(:blog)
 
   page = create_blog_module_page(
-    blog_id: blog.id,
-    post_module_page_id: post_module_page.id
+    blog_id: blog.id
   )
-
-  blog_post_category =
-    create_blog_post_category(
-      page_id: page.id,
-      name: 'default'
-    )
 
   nr_posts.times do
     FactoryBot
@@ -28,19 +21,13 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
         teaser: Faker::HowIMetYourMother.quote,
         body: Faker::Hipster.paragraph,
         free_content: true,
-        signature: Faker::Name.name,
-        admin_blog_post_category_id: blog_post_category.id
+        signature: Faker::Name.name
       )
   end
 end
 
-Then('I visit the blog page') do
-  blog_module_page = Page.find_by(title: 'blog_module_page')
-  visit page_path(I18n.locale, blog_module_page)
-end
-
-Then('I can see the new blog post form') do
-  expect(page).to have_content(I18n.t('blog_post.new'))
+Then('I visit the articles page') do
+  visit admin_articles_path
 end
 
 Then('I fill the form and submit it') do

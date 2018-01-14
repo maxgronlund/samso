@@ -8,10 +8,10 @@ FactoryBot.define do
     f.name nil
     f.body nil
     f.layout nil
-    f.post_page_id nil
     f.blog_posts_count 0
     f.posts_pr_page 10
     f.admin_blog_id nil
+    f.show_search false
   end
 
   factory :blog_post, class: Admin::BlogPost do |f|
@@ -22,25 +22,19 @@ FactoryBot.define do
     f.body "Calm down, Marty. I didn't disintegrate anything. The molecular structure of both Einstein and the car are completely intact."
     f.position nil
     f.blog_id 1
-    f.start_date DateTime.now
+    f.free_content false
+    f.featured false
     f.end_date nil
     f.user_id 1
+    f.views 1
+    f.signature 'Jack the Penn'
+    f.post_page_id nil
     f.image_file_name nil
     f.image_content_type nil
     f.image_file_size nil
     f.image_updated_at nil
-    f.free_content false
     f.layout 'image_left'
-    f.admin_blog_post_category_id 1
-  end
-
-  factory :blog_post_category, class: Admin::BlogPostCategory do |f|
-    f.locale 'en'
-    f.name 'default'
-    f.active true
-    f.legacy_id 0
-    f.blog_post_count 0
-    f.page_id 1
+    f.start_date Time.zone.now - 1.day
   end
 
   factory :page do |f|

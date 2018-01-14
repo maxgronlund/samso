@@ -47,6 +47,7 @@ SimpleForm.setup do |config|
     b.use :label_input
     b.use :hint,  wrap_with: { tag: :span, class: :hint }
     b.use :error, wrap_with: { tag: :span, class: :error }
+    b.use :input # enable the input example from below
 
     ## full_messages_for
     # If you want to display the full error message for the attribute, you can
@@ -166,4 +167,27 @@ SimpleForm.setup do |config|
 
   # Defines which i18n scope will be used in Simple Form.
   # config.i18n_scope = 'simple_form'
+end
+
+
+module SimpleForm
+  module Inputs
+    class FileInput < Base
+      def input(wrapper_options = {})
+        idf = "#{lookup_model_names.join("_")}_#{reflection_or_attribute_name}"
+        input_html_options[:style] ||= 'display:none;'
+
+        button = template.content_tag(:div, class: 'input-append') do
+          template.tag(:input, id: "pbox_#{idf}", class: 'string input-medium', type: 'text') +
+          template.content_tag(:a, "Browse", class: 'btn btn-success', onclick: "$('input[id=#{idf}]').click();")
+        end
+
+        script = template.content_tag(:script, type: 'text/javascript') do
+          "$('input[id=#{idf}]').change(function() { s = $(this).val(); $('#pbox_#{idf}').val(s.slice(s.lastIndexOf('\\\\\\\\')+1)); });".html_safe
+        end
+
+        @builder.file_field(attribute_name, input_html_options) + button + script
+      end
+    end
+  end
 end

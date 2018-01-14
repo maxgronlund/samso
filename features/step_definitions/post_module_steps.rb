@@ -8,8 +8,7 @@ Given('there is blog page with a free and protected blog post') do
   blog = FactoryBot.create(:blog)
 
   create_blog_module_page(
-    blog_id: blog.id,
-    post_module_page_id: post_module_page.id
+    blog_id: blog.id
   )
 
   FactoryBot
@@ -17,7 +16,8 @@ Given('there is blog page with a free and protected blog post') do
       :blog_post,
       title: 'free_content',
       blog_id: blog.id,
-      free_content: true
+      free_content: true,
+      post_page_id: post_module_page.id
     )
 
   FactoryBot
@@ -25,7 +25,8 @@ Given('there is blog page with a free and protected blog post') do
       :blog_post,
       title: 'protected_content',
       blog_id: blog.id,
-      free_content: false
+      free_content: false,
+      post_page_id: post_module_page.id
     )
 end
 

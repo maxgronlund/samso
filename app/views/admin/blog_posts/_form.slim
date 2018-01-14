@@ -3,9 +3,7 @@
 
 .row
   .col-md-6
-    = f.label :image
-    br
-    = f.file_field :image
+    = f.input :image
   .col-md-6
     / - if !@post.image.nil? && @post.image.exists?
     /   = image_tag @post.image.url(:thumb)

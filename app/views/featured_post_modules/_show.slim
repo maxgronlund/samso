@@ -1,21 +1,10 @@
 - featured_post_module = modulable
-.featured= featured_post_module.title
-- featured_post_module.featured_posts.each do |post|
-  = post.title
-  hr
-/ - if blog_module.nil?
-/   .alert.alert-danger
-/     'pleae select a blog_module
-/ - else
-/   - featured_post_module.posts.each do |post|
-/     - ap post
-
-/   / .blog_post style="background-color: #fff; padding: 10px; margin-top: 10px;"
-/   /   = link_to blog_post_path(blog_module.blog, post, page_id: blog_module.post_page_id) do
-/   /     - if post.image.present?
-/   /       = image_tag( post.image.url(:large), class: 'img-fluid')
-/   /     h3 = post.title
-/   /     i = l post.start_date unless post.start_date.nil?
-/   /     br
-/   /     = truncate(post.subtitle, length: 125)
-  /   = render 'blog_modules/layouts/links', blog_module: blog_module, post: post
+h3 = featured_post_module.title
+.blog-post
+  - featured_post_module.posts.each do |post|
+    .featured-post
+      .content
+        = link_to page_post_path(post.show_on_page, post) do
+            = post.title
+            .time-ago
+              = time_ago_in_words(post.start_date)

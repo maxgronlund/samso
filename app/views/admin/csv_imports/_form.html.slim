@@ -11,9 +11,7 @@
       .col-sm-6
         = f.input :comments
       .col-sm-6
-        = label_tag t('csv_file.select_csv_file')
-        br
-        = f.file_field :csv_file
+        = f.input :csv_file, label: t('csv_file.select_csv_file')
     / = f.input :import_type
     /= f.input :summary
 

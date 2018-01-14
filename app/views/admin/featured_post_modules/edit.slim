@@ -14,6 +14,11 @@
         = f.input :access_to,
           collection: PageColModule.permissions,
           include_blank: false
+      .col-sm-3
+        = f.input :content_type,
+          collection: Admin::FeaturedPostModule::CONTENT_TYPES,
+          include_blank: false
+
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'
