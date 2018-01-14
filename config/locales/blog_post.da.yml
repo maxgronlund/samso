@@ -12,6 +12,7 @@ da:
         signature: Signatur
         start_date: Start dato
         blog_id: Kategori
+        video_url: Video snippet
 
   blog_post:
     new: 'Nyt artikkel'
