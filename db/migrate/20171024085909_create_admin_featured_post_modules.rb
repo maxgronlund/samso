@@ -16,7 +16,6 @@ class CreateAdminFeaturedPostModules < ActiveRecord::Migration[5.1]
         name: 'Admin::FeaturedPostModule',
         locale: 'admin/featured_post_module.name'
       )
-    add_column :admin_blog_modules, :show_search, :boolean, default: false
   end
 
   def down
