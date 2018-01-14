@@ -3,13 +3,18 @@
 - if post_module.free_content?(params[:id]) || access_to_subscribed_content?
   - post_module.shown!(params[:id])
 
-  - if post_module.image_present?(params[:id])
+  - video_url = post_module.video_url(params[:id])
+  - if !video_url.empty?
+    .video-container
+      =  raw video_url
+  - elsif post_module.image_present?(params[:id])
     .mb-8
       = image_tag(post_module.image_url(params[:id]), class: 'img-fluid')
   .start_date = l start_date unless start_date.nil?
   h3 = post_module.title(params[:id])
   = post_module.signature(params[:id])
   = simple_format (post_module.body(params[:id]))
+
 
 
 - else
@@ -34,3 +39,7 @@
       = link_to t('back'),
         session[:stored_path],
         class: 'btn btn-light'
+
+javascript:
+  $(".video-container").fitVids();
+  $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});

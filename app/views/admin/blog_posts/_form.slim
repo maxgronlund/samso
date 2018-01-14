@@ -2,12 +2,14 @@
 = f.input :title
 
 .row
-  .col-md-6
+  .col-md-4
     = f.input :image
-  .col-md-6
-    / - if !@post.image.nil? && @post.image.exists?
-    /   = image_tag @post.image.url(:thumb)
-    /   = f.input :delete_image, as: :boolean
+  .col-md-3
+    - if !@admin_blog_post.image.nil? && @admin_blog_post.image.exists?
+      = f.input :delete_image, as: :boolean
+      = image_tag @admin_blog_post.image.url(:thumb)
+  .col-md-5
+    = f.input :video_url
 = f.input :subtitle
 = f.input :teaser
 .row

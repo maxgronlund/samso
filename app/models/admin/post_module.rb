@@ -47,6 +47,15 @@ class Admin::PostModule < ApplicationRecord
     blog_post(blog_post_id).blog
   end
 
+  def video_url(blog_post_id)
+    return '' unless blog_post(blog_post_id)
+    blog_post(blog_post_id).video_url
+  end
+
+  def has_video(blog_post_id)
+    !blog_post(blog_post_id).video_url.empty?
+  end
+
   private
 
   def blog_post(blog_post_id)

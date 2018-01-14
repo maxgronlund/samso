@@ -3,6 +3,9 @@
     = link_to page_post_path(post.show_on_page, post) do
       .row.blog-post-content
         .col-sm-6.no-padding
+          - unless post.video_url.empty?
+            .video-symbol
+              i.fa.fa-play
           = image_tag( post.image.url(:large), class: 'img-fluid mr-1')
         .col-sm-6.content
           - if post.featured && featured

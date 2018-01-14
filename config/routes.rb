@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       resources :system_setups, only: %i[edit update]
       resources :text_modules
       resources :youtube_modules, only: %i[edit update]
+      resources :read_also_modules, only: %i[edit update]
       resources :users
     end
 
