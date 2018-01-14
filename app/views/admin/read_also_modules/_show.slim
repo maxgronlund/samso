@@ -1,9 +1,10 @@
 .col-admin-header
-  = t('admin/blog_post.name')
+  = t('admin/read_also_module.name')
+
   .pull-right
     .btn-group
       = link_to t('edit'),
-        edit_admin_post_module_path(modulable),
+        edit_admin_read_also_module_path(modulable),
         class: 'btn btn-sm btn-secondary'
 
       = link_to t('delete'),
@@ -12,4 +13,4 @@
         method: :delete,
         class: 'btn btn-danger btn-sm'
 
-= render 'post/show', modulable: modulable
+= render 'read_also_modules/show', modulable: modulable

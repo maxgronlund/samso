@@ -2,19 +2,19 @@
 = f.input :title
 
 .row
-  .col-md-6
+  .col-md-3
     = f.input :image
+  .col-md-3
+    - if !@admin_blog_post.image.nil? && @admin_blog_post.image.exists?
+      = f.input :delete_image, as: :boolean
+      = image_tag @admin_blog_post.image.url(:thumb)
   .col-md-6
-    / - if !@post.image.nil? && @post.image.exists?
-    /   = image_tag @post.image.url(:thumb)
-    /   = f.input :delete_image, as: :boolean
+    = f.input :video_url, input_html: {rows: '5'}
+
 = f.input :subtitle
 = f.input :teaser
 .row
   .col-md-6
-    / = f.input :admin_blog_post_category_id,
-    /  collection: Admin::BlogPostCategory.order(:name).where(locale: I18n.locale),
-    /  include_blank: false
     = f.input :blog_id,
       collection: Admin::Blog.order(:title).where(locale: I18n.locale),
       include_blank: false

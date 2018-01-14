@@ -68,7 +68,8 @@ class Admin::BlogPostsController < AdminController
         :featured,
         :layout,
         :start_date,
-        :blog_id
+        :blog_id,
+        :video_url
       )
   end
 end

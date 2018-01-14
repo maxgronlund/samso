@@ -1,16 +1,7 @@
 .blog-post-content
   = link_to page_post_path(post.show_on_page, post) do
     .content
-      - unless post.video_url.empty?
-        .video
-          i.fa.fa-play
-          '&nbsp; Video
-      - if post.featured && featured
-        .featured
-          'Featured
-      .category-name
-        = post.category_name
-      h3 = post.title
+      h4 = post.title
       .signature = post.signature
       = post.teaser
       br = truncate(post.subtitle, length: 125)

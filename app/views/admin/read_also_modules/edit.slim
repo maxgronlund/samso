@@ -1,0 +1,31 @@
+.row
+  h3 = t('edit_model', model_name: @read_also_module.model_name.human)
+
+= simple_form_for [:admin, @read_also_module], url: url_for(action: 'update', controller: 'admin/read_also_modules'), method: 'put' do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+      .col-sm-3
+        = f.input :name
+    .row
+      .col-sm-3
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
+      .col-sm-3
+        = f.input :blog_id,
+          collection: Admin::Blog.order(:title).where(locale: I18n.locale),
+          include_blank: false
+    .row
+      .col-sm-3
+        = f.input :posts_pr_page
+      .col-sm-3
+        = f.input :show_all_categories
+
+
+
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+

@@ -55,11 +55,7 @@ class Admin::BlogModule < ApplicationRecord
   end
 
   def all_posts
-    Admin::BlogPost
-      .order('start_date DESC')
-      .where(
-        'start_date <= :today', today: Time.zone.now
-      )
+    Admin::BlogPost.all_posts
   end
 
   def featured_posts

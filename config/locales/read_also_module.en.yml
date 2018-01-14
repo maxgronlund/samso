@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/read_also_module:
+        one: read_also
+        other: read_alsos
+    attributes:
+      admin/read_also_module:
+        name:  Name
+
+  read_also_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/read_also_module:
+    name: ReadAlso module
