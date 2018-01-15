@@ -2,7 +2,7 @@
   .blog-post-content
     = link_to page_post_path(post.show_on_page, post) do
       .content
-        h4 = post.title
+        h5 = post.title
         .signature = post.signature
         = post.teaser
         br = truncate(post.subtitle, length: 125)

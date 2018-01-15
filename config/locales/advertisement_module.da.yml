@@ -14,5 +14,5 @@ da:
     bar: Bar
 
   admin/advertisement_module:
-    name: Overskrift
+    name: Annonce module
     index: Annoncer

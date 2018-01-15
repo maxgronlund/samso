@@ -15,8 +15,6 @@
   = post_module.signature(params[:id])
   = simple_format (post_module.body(params[:id]))
 
-
-
 - else
   == render 'subscription_modules/show', modulable: Admin::SubscriptionModule.first_or_create(title: 'default')
 - unless params[:page_id].nil?
@@ -24,14 +22,12 @@
     - if editor?
       - blog = post_module.blog(params[:id])
       - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
-      .pull-right
-        = link_to t('edit'),
-          edit_admin_blog_blog_post_path(blog, params[:id]),
-          class: 'btn btn-light btn-sm'
-    - else
-      = link_to t('back'),
-        session[:stored_path],
-        class: 'btn btn-light'
+      .row
+        .col-md-12
+          .pull-right
+            = link_to t('edit'),
+              edit_admin_blog_blog_post_path(blog, params[:id]),
+              class: 'btn btn-light btn-sm'
 
 javascript:
   $(".video-container").fitVids();
