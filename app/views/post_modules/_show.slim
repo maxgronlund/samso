@@ -24,17 +24,10 @@
     - if editor?
       - blog = post_module.blog(params[:id])
       - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
-      .btn-group
-        = link_to t('back'),
-          session[:stored_path],
-          class: 'btn btn-light'
+      .pull-right
         = link_to t('edit'),
           edit_admin_blog_blog_post_path(blog, params[:id]),
-          class: 'btn btn-light'
-        = link_to t('delete'),
-          blog_post_path(blog, params[:id], page_id: params[:id]),
-          data: { confirm: t('confirm') }, method: :delete,
-          class: 'btn btn-danger'
+          class: 'btn btn-light btn-sm'
     - else
       = link_to t('back'),
         session[:stored_path],

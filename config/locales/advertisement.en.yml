@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      admin/advertisement:
+        one: advertisement
+        other: advertisements
+    attributes:
+      admin/advertisement:
+        name:  Annonce
+
+
+  advertisement:
+    fo: Fo
+    bar: Bar
+
+  admin/advertisement:
+    name: Annonce
+    index: Annoncer

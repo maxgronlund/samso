@@ -18,3 +18,4 @@
 //= require rails-ujs
 //= require jquery.fancybox
 //= require fitvids
+//= require advertisements

@@ -6,6 +6,7 @@ class CreateAdminReadAlsoModules < ActiveRecord::Migration[5.1]
       t.integer :blog_id
       t.integer :posts_pr_page, default: 8
       t.boolean :show_all_categories, default: true
+      t.boolean :image_on_top, default: false
 
       t.timestamps
     end

@@ -1,0 +1,18 @@
+da:
+  activerecord:
+    models:
+      admin/advertisement_module:
+        one: advertisement
+        other: advertisements
+    attributes:
+      admin/advertisement_module:
+        name:  Overskrift
+
+
+  advertisement_module:
+    fo: Fo
+    bar: Bar
+
+  admin/advertisement_module:
+    name: Overskrift
+    index: Annoncer

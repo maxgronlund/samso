@@ -1,0 +1,14 @@
+- advertisement_module = modulable
+.advertisements
+  .text-right
+    h6 = advertisement_module.name
+  - advertisement_module.advertisements.each do |advertisement|
+    .advertisement id=advertisement.id
+      = link_to advertisement.url, target: 'blank' do
+        = image_tag( advertisement.image.url(:large), class: 'img-fluid')
+        .content
+          h5 = advertisement.title
+          = advertisement.body
+
+javascript:
+  init_click_on_advitesement();

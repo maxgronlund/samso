@@ -1,0 +1,52 @@
+.row
+  .col-sm-6
+    h3 = t('admin/advitisement.index')
+  .col-sm-6
+    .pull-right
+      = @admin_advertisements.count
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th =t('advertisement.title')
+        th =t('advertisement.views')
+        th =t('advertisement.clicks')
+        th =t('advertisement.start_date')
+        th =t('advertisement.end_date')
+        th =t('advertisement.active')
+        th =t('advertisement.featured')
+        th
+    tbody
+      - @admin_advertisements.each do |admin_advertisement|
+        tr
+          td = admin_advertisement.title
+          td = admin_advertisement.views
+          td = admin_advertisement.clicks
+          td = l admin_advertisement.start_date
+          td = l admin_advertisement.end_date
+          td = admin_advertisement.active
+          td = admin_advertisement.featured
+          td
+
+            .pull-right
+              .btn-group
+
+                = link_to t('show'),
+                  admin_advertisement,
+                  class: 'btn btn-light btn-sm'
+                = link_to t('edit'),
+                  edit_admin_advertisement_path(admin_advertisement),
+                  class: 'btn btn-light btn-sm'
+                = link_to t('delete'),
+                  admin_advertisement,
+                  data: { confirm: t('are_you_sure') },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'
+
+br
+.pull-right
+  = link_to t('advertisement.new'), new_admin_advertisement_path, class: 'btn btn-primary'
+br
+/= paginate @admin_advertisements
+

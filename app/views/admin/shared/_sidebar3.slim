@@ -53,6 +53,12 @@ nav#sidebar
       = link_to admin_blogs_path
         i.fa.fa-list
         = t('admin/blog.index')
+    li class="#{@selected == 'adverticements' ? 'active' : ''}"
+      = link_to admin_advertisements_path
+        i.fa.fa-list
+        = t('admin/advertisement.index')
+
+
 
 
     / li.active

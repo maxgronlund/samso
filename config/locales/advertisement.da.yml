@@ -1,0 +1,34 @@
+da:
+  activerecord:
+    models:
+      admin/advertisement:
+        one: Annonce
+        other: Annoncer
+    attributes:
+      admin/adverticement:
+        name:  Annonce
+        title: Overskrift
+        body: Annonce tekst
+        views: Visninger
+        clicks: Kliks
+        start_date: Startdato
+        end_date: Slutdato
+        active: Aktive
+        featured: Fremhævet
+        featured_price: Pris for fremhævning
+
+
+  advertisement:
+    fo: Fo
+    bar: Bar
+    title: Overskrift
+    views: Visninger
+    clicks: Kliks
+    start_date: Startdato
+    end_date: Slutdato
+    active: Aktive
+    featured: Fremhævet
+    new: Opret annonce
+
+  admin/advertisement:
+    index: Annoncer

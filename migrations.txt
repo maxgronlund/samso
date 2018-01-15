@@ -92,3 +92,9 @@ rails g scaffold admin/blog_post_category locale name --no-helper --no-assets
 
 
 rails g controller admin/articles index --no-helper --no-assets
+rails g controller admin/click_on_adverticements update --no-helper --no-assets
+
+
+rails g scaffold admin/adverticement title body:text price_pr_view:decimal views:integer price_pr_click:decimal clicks:integer start_date:datetime end_date:datetime active:boolean featured:boolean featured_price:decimal price:decimal url admin_system_setups:belongs_to --no-helper --no-assets
+
+rails g scaffold_module advertisement

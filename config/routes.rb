@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     namespace :admin do
+      resources :advertisements
       resources :articles, only: %i[index]
       resources :blogs do
         resources :blog_posts
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
       resources :carousel_modules, only: %i[edit update show] do
         resources :carousel_slides
       end
+      resources :click_on_advertisements, only: %i[update]
       resources :csv_imports do
         resources :parse_csv, only: %i[new]
       end
@@ -50,6 +52,7 @@ Rails.application.routes.draw do
       resources :text_modules
       resources :youtube_modules, only: %i[edit update]
       resources :read_also_modules, only: %i[edit update]
+      resources :advertisement_modules, only: %i[edit update]
       resources :users
     end
 

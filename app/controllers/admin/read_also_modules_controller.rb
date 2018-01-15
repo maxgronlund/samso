@@ -36,7 +36,8 @@ class Admin::ReadAlsoModulesController < AdminController
       :access_to,
       :blog_id,
       :posts_pr_page,
-      :show_all_categories
+      :show_all_categories,
+      :image_on_top
     )
   end
 end

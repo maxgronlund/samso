@@ -1,10 +1,11 @@
-.blog-post-content
-  = link_to page_post_path(post.show_on_page, post) do
-    .content
-      h4 = post.title
-      .signature = post.signature
-      = post.teaser
-      br = truncate(post.subtitle, length: 125)
-      - unless post.free_content?
-        .for-subscribers
-          'FOR ABONNENTER
+.blog-post
+  .blog-post-content
+    = link_to page_post_path(post.show_on_page, post) do
+      .content
+        h4 = post.title
+        .signature = post.signature
+        = post.teaser
+        br = truncate(post.subtitle, length: 125)
+        - unless post.free_content?
+          .for-subscribers
+            'FOR ABONNENTER

@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114183057) do
+ActiveRecord::Schema.define(version: 20180115180019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin_advertisement_modules", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_advertisements", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.decimal "price_pr_view", default: "0.0"
+    t.integer "views", default: 0
+    t.decimal "price_pr_click", default: "0.0"
+    t.integer "clicks", default: 0
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean "active", default: true
+    t.boolean "featured", default: false
+    t.decimal "featured_price", default: "0.0"
+    t.decimal "price", default: "0.0"
+    t.string "url", default: ""
+    t.string "locale"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admin_blog_modules", force: :cascade do |t|
     t.string "name"
@@ -256,6 +285,7 @@ ActiveRecord::Schema.define(version: 20180114183057) do
     t.boolean "show_all_categories", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "image_on_top", default: false
     t.index ["blog_id"], name: "index_admin_read_also_modules_on_blog_id"
   end
 

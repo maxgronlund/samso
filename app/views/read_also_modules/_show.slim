@@ -2,8 +2,9 @@
 h3 = read_also.name
 - read_also.posts.each do |post|
   - unless request.url == page_post_url(post.show_on_page, post)
-    .blog-post
-      - if post.image.present?
-        = render 'read_also_modules/layouts/image_top', read_also_module: read_also, post: post
-      - else
-        = render 'read_also_modules/layouts/no_image', read_also_module: read_also, post: post
+    - if read_also.image_on_top?
+      = render 'read_also_modules/layouts/image_top', post: post, featured: post.featured
+    - else
+      = render "read_also_modules/layouts/#{post.layout}", post: post, featured: post.featured
+
+
