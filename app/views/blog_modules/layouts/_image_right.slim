@@ -2,7 +2,7 @@
   - if post.image.present?
     = link_to page_post_path(post.show_on_page, post) do
       .row.blog-post-content
-        .col-md-6.content
+        .col-sm-6.content
           - if post.featured && featured
             .featured
               'Featured
@@ -15,7 +15,7 @@
           - unless post.free_content?
             .for-subscribers
               'FOR ABONNENTER
-        .col-md-6.no-padding
+        .col-sm-6.no-padding
           - unless post.video_url.empty?
             .video-symbol
               i.fa.fa-play
