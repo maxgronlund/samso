@@ -8,7 +8,8 @@ class Admin::BlogPostsController < AdminController
   # GET /admin/blog_posts/new
   def new
     @admin_blog = Admin::Blog.find(params[:blog_id])
-    @admin_blog_post = Admin::BlogPost.new
+    @admin_blog_post =
+      Admin::BlogPost.new(signature: current_user.signature)
   end
 
   # POST /admin/posts
