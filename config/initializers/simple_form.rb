@@ -169,17 +169,18 @@ SimpleForm.setup do |config|
   # config.i18n_scope = 'simple_form'
 end
 
-
 module SimpleForm
   module Inputs
+    # config
     class FileInput < Base
-      def input(wrapper_options = {})
-        idf = "#{lookup_model_names.join("_")}_#{reflection_or_attribute_name}"
+      # rubocop:disable Metrics/AbcSize
+      def input(_wrapper_options = {})
+        idf = "#{lookup_model_names.join('_')}_#{reflection_or_attribute_name}"
         input_html_options[:style] ||= 'display:none;'
 
         button = template.content_tag(:div, class: 'input-append') do
           template.tag(:input, id: "pbox_#{idf}", class: 'string input-medium', type: 'text') +
-          template.content_tag(:a, "Browse", class: 'btn btn-success', onclick: "$('input[id=#{idf}]').click();")
+            template.content_tag(:a, 'Browse', class: 'btn btn-success', onclick: "$('input[id=#{idf}]').click();")
         end
 
         script = template.content_tag(:script, type: 'text/javascript') do
@@ -189,5 +190,6 @@ module SimpleForm
         @builder.file_field(attribute_name, input_html_options) + button + script
       end
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end

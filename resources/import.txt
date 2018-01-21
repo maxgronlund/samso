@@ -1,0 +1,44 @@
+import users
+
+UNICODE UTF-8, Komma sepereret
+
+A: legazy_id
+B: abonnement_nr
+C: full_name
+D: adresse
+E: city
+F: postal_code_and_city
+G:
+
+0 - A:          Id
+1 - B:          Abonnr
+2 - C:          Navn
+3 - D:          Adresse
+4 - E:          Stednavn
+5 - F:          Postnr_by
+6 - G:          Telefon
+7 - H           Mobil
+8 - I           Nyhedsbrev
+9 - J           Email
+10 - K          Brugernavn
+11 - L          Password
+12 - M          Abon_periode
+13 - N          Oprettet
+14 - O          Aktiv
+15 - P          UdloebsDato
+16 - Q          SessionId
+17 - R          Friabon
+18 - S          Transact
+19 - T          Amount
+20 - U          TransactOpdateret
+21 - V          UpdateFriabon
+22 - W          UpdateAbon
+23 - X          BestilAbonavis
+24 - Y          passivAbon
+
+Opened in Textmate:
+Romoved all ',' removed all lines |||||||||||
+
+Opened in openoffic_
+used '|' as seperator
+Copied all content and pasted in to new document with ',' as seperator

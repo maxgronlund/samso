@@ -19,6 +19,12 @@ module PageColConcerns
     page_col_module.show
   end
 
+  def margin_bottom
+    return 0 if page_col_module.nil?
+    page_col_module.margin_bottom
+  end
+  # rubocop:enable Lint/DuplicateMethods
+
   def page_col_module
     page_col_modules.first
   end
@@ -55,10 +61,5 @@ module PageColConcerns
   # usage Admin::SystemSetup.clear_page_cache
   def clear_page_cache
     page.touch
-  end
-
-  def margin_bottom
-    return 0 if page_col_module.nil?
-    page_col_module.margin_bottom
   end
 end

@@ -1,3 +1,4 @@
+# Advertisement
 class Admin::Advertisement < ApplicationRecord
   scope :active, -> { where(active: true) }
 
@@ -16,5 +17,4 @@ class Admin::Advertisement < ApplicationRecord
   def clicked!
     update_attributes(clicks: clicks + 1)
   end
-
 end

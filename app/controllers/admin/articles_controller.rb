@@ -10,4 +10,5 @@ class Admin::ArticlesController < AdminController
     @selected = 'articles'
     @blog_pots_count = Admin::BlogPost.count
   end
+  # rubocop:enable Metrics/AbcSize
 end

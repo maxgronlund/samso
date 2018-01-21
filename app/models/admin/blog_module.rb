@@ -36,7 +36,7 @@ class Admin::BlogModule < ApplicationRecord
     "#{request_path}?page=#{page}"
   end
 
-  def last_page(request_path, current_page)
+  def last_page(request_path)
     return false if blog.nil?
     page = blog.blog_posts_count / posts_pr_page
     "#{request_path}?page=#{page}"

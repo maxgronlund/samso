@@ -32,6 +32,7 @@ module Admin::CalendarModuleHelper
     month_name = I18n.t('date.month_names')[month] + ' - ' + year.to_s
     month_name.capitalize
   end
+  # rubocop:enable Metrics/AbcSize
 
   def calendar_module_events_today(calendar_module)
     today = Date.today

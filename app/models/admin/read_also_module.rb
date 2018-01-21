@@ -1,7 +1,6 @@
 # show weather from DMI
 class Admin::ReadAlsoModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
-  #belongs_to :blog, class_name: 'Admin::Blog', optional: true
   include PageColConcerns
 
   def page_module

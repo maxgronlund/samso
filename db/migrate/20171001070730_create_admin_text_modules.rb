@@ -23,6 +23,8 @@ class CreateAdminTextModules < ActiveRecord::Migration[5.1]
     add_attachment :admin_text_modules, :image
     add_module_name
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def down
     drop_table :admin_text_modules

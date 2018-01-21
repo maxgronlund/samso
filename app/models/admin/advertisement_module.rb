@@ -12,7 +12,7 @@ class Admin::AdvertisementModule < ApplicationRecord
 
   def advertisements
     admin_advertisements = Admin::Advertisement.active.where(locale: I18n.locale)
-    admin_advertisements.map {|a| a.viewed!}
+    admin_advertisements.map(&:viewed!)
     admin_advertisements
   end
 end

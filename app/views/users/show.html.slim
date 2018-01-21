@@ -1,13 +1,39 @@
 
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container.pt-70
-  = image_tag( @user.avatar_url(:square))
 
-  p
-    strong Name:
-    = @user.name
-  p
-    strong Email:
-    = @user.email
+  h4 = @user.name
+  .row
+    .col-sm-3
 
-  = link_to t('edit'), edit_user_path(@user)
+
+      = image_tag( @user.avatar_url(:square))
+
+      br
+      = @user.email
+    .col-sm-9
+      - if @subscriptions.any?
+        .table-responsive
+          table.table.table-striped.table-bordered.table-hover
+            thead
+              tr
+                th = t('subscription.name')
+                th = t('subscription.start_date')
+                th = t('subscription.end_date')
+                th = t('subscription.on_hold_date')
+            tbody
+              - @subscriptions.each do |subscription|
+                tr
+                  td = subscription.type_name
+                  td = l subscription.start_date
+                  td = l subscription.end_date
+                  td
+                    = l subscription.on_hold_date unless subscription.on_hold_date.nil?
+
+
+
+
+
+
+
+  = link_to t('edit'), edit_user_path(@user), class: 'btn btn-light'

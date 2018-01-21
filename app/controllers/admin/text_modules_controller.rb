@@ -47,4 +47,5 @@ class Admin::TextModulesController < AdminController
       :access_to
     )
   end
+  # rubocop:enable Metrics/MethodLength
 end

@@ -24,7 +24,7 @@ class PaymentsController < ApplicationController
   def edit
   end
 
-  # POST /payments
+  # rubocop:disable Style/IfUnlessModifier
   def create
     @user = User.find(params[:user_id])
     ActiveRecord::Base.transaction do
@@ -36,6 +36,7 @@ class PaymentsController < ApplicationController
     end
     go_to_page
   end
+  # rubocop:enable Style/IfUnlessModifier
 
   def go_to_page
     url = session[:redirect_to]

@@ -37,12 +37,14 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
               link_name: 'Admin',
               link_url: admin_articles_url
 
-
-        li.nav-item
-          - if user_signed_in?
+        - if user_signed_in?
+          li.nav-item
+            = link_to t('user_account'), user_path(@current_user), class: 'nav-link'
+          li.nav-item
             = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'
 
-          - else
+        - else
+          li.nav-item
             = link_to t('login'), new_session_path, class: 'nav-link'
 
 

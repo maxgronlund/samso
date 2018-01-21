@@ -29,7 +29,6 @@ class PostsController < ApplicationController
     @blog_post = Admin::BlogPost.find(params[:id])
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create
     @blog = Admin::Blog.find(params[:blog_id])
     @blog_post = @blog.posts.new(post_params)
@@ -101,6 +100,7 @@ class PostsController < ApplicationController
         :signature
       )
   end
+  # rubocop:enable Metrics/MethodLength
 
   def user_signature
     return current_user.name if current_user.signature.blank?

@@ -23,6 +23,7 @@ module KnowUserHelper
     create_role(user, options)
     user
   end
+  # rubocop:enable Metrics/MethodLength
 
   def create_role(user, options = {})
     permission = options[:permission] || Role::MEMBER

@@ -5,13 +5,8 @@ class Admin::AdvertisementsController < AdminController
   def index
     @admin_advertisements =
       Admin::Advertisement
-        .active
-        .where(locale: I18n.locale)
-  end
-
-  # GET /admin/advertisements/1
-  def show
-
+      .active
+      .where(locale: I18n.locale)
   end
 
   # GET /admin/advertisements/new
@@ -20,8 +15,7 @@ class Admin::AdvertisementsController < AdminController
       Admin::Advertisement
       .new(
         locale: I18n.locale,
-        active: true,
-
+        active: true
       )
   end
 
@@ -58,30 +52,31 @@ class Admin::AdvertisementsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_advertisement
-      @admin_advertisement = Admin::Advertisement.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def admin_advertisement_params
-      params
-        .require(:admin_advertisement)
-        .permit(
-          :title,
-          :body,
-          :price_pr_view,
-          :views,
-          :price_pr_click,
-          :clicks,
-          :start_date,
-          :end_date,
-          :active,
-          :featured,
-          :featured_price,
-          :price,
-          :url,
-          :image
-        )
-    end
+  def set_admin_advertisement
+    @admin_advertisement = Admin::Advertisement.find(params[:id])
+  end
+
+  # rubocop:disable Metrics/MethodLength
+  def admin_advertisement_params
+    params
+      .require(:admin_advertisement)
+      .permit(
+        :title,
+        :body,
+        :price_pr_view,
+        :views,
+        :price_pr_click,
+        :clicks,
+        :start_date,
+        :end_date,
+        :active,
+        :featured,
+        :featured_price,
+        :price,
+        :url,
+        :image
+      )
+  end
+  # rubocop:enable Metrics/MethodLength
 end

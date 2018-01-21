@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    errors:
+      models:
+        admin/subscription:
+          attributes:
+            subscription_type_id:
+              blank: Missing
+            start_date:
+              blank: Start date missing
+    attributes:
+      admin/subscription:
+        subscription_type_id: Subscription
+        start_date: Start date
+        end_date: End date
+        on_hold_date: Subscription pause date
+
+    models:
+      admin/subscription: Subscription
+  subscription:
+    name: Subscription
+    start_date: Start date
+    end_date: End date
+    on_hold_date: Pause date

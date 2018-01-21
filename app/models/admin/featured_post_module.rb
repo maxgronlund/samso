@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 # show weather from DMI
 class Admin::FeaturedPostModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
   # belongs_to :blog_module, class_name: 'Admin::BlogModule'
   include PageColConcerns
 
-  FEATURED_POSTS = 'featured_posts'
-  LATEST_NEWS = 'latest_news'
+  FEATURED_POSTS = 'featured_posts'.freeze
+  LATEST_NEWS = 'latest_news'.freeze
 
-  CONTENT_TYPES =
-  [
+  CONTENT_TYPES = [
     [I18n.t('featured_post_module.featured_posts'), FEATURED_POSTS],
     [I18n.t('featured_post_module.latest_news'), LATEST_NEWS]
-  ]
+  ].freeze
 
   def page_module
     PageModule.find_by(
@@ -19,10 +20,6 @@ class Admin::FeaturedPostModule < ApplicationRecord
       moduleable_id: id
     )
   end
-
-  # def blog_module
-    # Admin::BlogModule.find_by(id: admin_blog_module_id)
-  # end
 
   def posts
     case content_type

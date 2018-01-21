@@ -77,4 +77,6 @@ namespace :system do
         .first_or_create(message)
     end
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/LineLength
 end

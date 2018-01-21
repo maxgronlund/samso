@@ -17,6 +17,7 @@ class SubscriptionsController < ApplicationController
       redirect_to new_user_path
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 

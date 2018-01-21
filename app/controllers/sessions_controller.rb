@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize
   def create
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email].downcase)
     if user && user.confirmed_at.nil?
       set_menu
       @landing_page = admin_system_setup.landing_page
@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def destroy
     session.delete(:user_id)

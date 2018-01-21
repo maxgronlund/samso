@@ -61,6 +61,7 @@ en:
   sign_out: Sign out
   signed_in: Logged in!
   signed_out: Signed out!
+  user_account: My account
   please_confirm_your_account: Please check your email for a confirmation link
   create_module: Create module
   back: Back

@@ -1,6 +1,6 @@
 - post_module = modulable
 - start_date = post_module.start_date(params[:id])
-- if post_module.free_content?(params[:id]) || access_to_subscribed_content?
+- if  post_module.free_content?(params[:id]) || access_to_subscribed_content?
   - post_module.shown!(params[:id])
 
   - video_url = post_module.video_url(params[:id])

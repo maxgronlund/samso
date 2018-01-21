@@ -1,4 +1,7 @@
+# Advretisements
 class CreateAdminAdvertisements < ActiveRecord::Migration[5.1]
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def change
     create_table :admin_advertisements do |t|
       t.string :title
@@ -23,4 +26,6 @@ class CreateAdminAdvertisements < ActiveRecord::Migration[5.1]
       t.timestamps
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 end

@@ -14,6 +14,7 @@ class Admin::UsersController < AdminController
     @selected = 'users'
     @user_count = User.count
   end
+  # rubocop:enable Metrics/AbcSize
 
   # GET /admin/users/1
   def show

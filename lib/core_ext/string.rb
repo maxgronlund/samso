@@ -10,4 +10,5 @@ class String
     time = date_time[1].split(':')
     Time.new date[2], date[1], date[0], time[0], time[1], time[2], '+00:00'
   end
+  # rubocop:enable Metrics/AbcSize
 end

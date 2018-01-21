@@ -30,7 +30,7 @@
     .col-sm-12
       - prev_url = blog_module.prev_page(request.path, params[:page])
       - next_url = blog_module.next_page(request.path, params[:page])
-      - last_url = blog_module.last_page(request.path, params[:page])
+      - last_url = blog_module.last_page(request.path)
       .d-flex.justify-content-center
         nav
           ul.pagination

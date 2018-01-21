@@ -22,4 +22,6 @@ class CreatePages < ActiveRecord::Migration[5.1]
       t.timestamps
     end
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end

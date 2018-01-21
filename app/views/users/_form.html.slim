@@ -8,9 +8,11 @@
 
     = f.input :password, placeholder: '••••••••'
     = f.input :password_confirmation, placeholder: '••••••••'
-    = label_tag :avatar
-    = f.input :avatar, as: :file, label: false
+    - if user_signed_in? && @current_user.avatar?
+      = image_tag @user.avatar.url(:square)
+      = f.input :delete_avatar, as: :boolean
+    = f.input :avatar, as: :file
 
   .form-actions
     .pull-right
-      = f.button :submit, class: 'btn btn-primary', id: 'submit'
+      = f.submit t('save'), class: 'btn btn-primary', id: 'submit'

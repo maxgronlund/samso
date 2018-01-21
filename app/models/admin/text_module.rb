@@ -13,9 +13,7 @@ class Admin::TextModule < ApplicationRecord
     aspect_ratio_4_3: '540x405#',
     aspect_ratio_3_4: '540x720#',
     aspect_ratio_original: '540x540>',
-
     large_default_url: 'style/missing_squarde_image.jpg',
-
     convert_options: {
       thumb: '-quality 75 -strip',
       aspect_ratio_1_1: '-quality 75 -strip',

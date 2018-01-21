@@ -59,6 +59,7 @@ class Admin::PageColModulesController < AdminController
   private
 
   # rubocop:disable Security/Eval
+  # rubocop:disable Style/EvalWithLocation
   def edit_path
     moduleable =
       @page_col_module
@@ -72,6 +73,8 @@ class Admin::PageColModulesController < AdminController
       .underscore
     eval("edit_admin_#{name}_path(#{moduleable.id})")
   end
+  # rubocop:enable Style/EvalWithLocation
+  # rubocop:enable Security/Eval
 
   def page_path
     admin_page_path(@page_col.page)

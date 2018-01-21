@@ -61,6 +61,7 @@ da:
   sign_out: Log ud
   signed_in: Logget ind
   signed_out: Logged ud
+  user_account: Min konto
   please_confirm_your_account: Kontroler venligst din email for en konfirmations email
   create_module: Opret modul
   back: Tilbage

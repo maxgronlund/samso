@@ -31,6 +31,8 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
     add_column :users, :blog_posts_count, :integer, default: 0
     add_column :admin_blogs, :blog_posts_count, :integer, default: 0
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def down
     drop_table :admin_blog_posts

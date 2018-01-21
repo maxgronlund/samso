@@ -9,6 +9,8 @@ class UsersController < ApplicationController
       redirect_to new_session_path
     elsif @user.nil? || current_user != @user
       render_404
+    else
+      @subscriptions = @user.subscriptions
     end
   end
 
@@ -101,7 +103,8 @@ class UsersController < ApplicationController
       :email,
       :avatar,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :delete_avatar
     )
   end
 end

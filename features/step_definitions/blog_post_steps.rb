@@ -1,13 +1,12 @@
 Given('there is a blog page with {int} blog posts') do |nr_posts|
   post_module = FactoryBot.create(:post_module)
-  post_module_page =
-    create_page_with_module(
-      title: 'post_module_page',
-      moduleable: post_module
-    )
+  create_page_with_module(
+    title: 'post_module_page',
+    moduleable: post_module
+  )
   blog = FactoryBot.create(:blog)
 
-  page = create_blog_module_page(
+  create_blog_module_page(
     blog_id: blog.id
   )
 

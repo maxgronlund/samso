@@ -73,4 +73,5 @@ class Admin::BlogPostsController < AdminController
         :video_url
       )
   end
+  # rubocop:enable Metrics/MethodLength
 end

@@ -89,5 +89,9 @@ class User < ApplicationRecord
     def self.valid_email?(options)
       options[:email].include?('@') && options[:email].include?('.')
     end
+
+    def self.invalid_email?(options)
+      !valid_email?(options)
+    end
   end
 end

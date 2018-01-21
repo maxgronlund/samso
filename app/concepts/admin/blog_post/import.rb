@@ -70,6 +70,8 @@ class Admin::BlogPost < ApplicationRecord
         galleri: row[25]
       }
     end
+    # rubocop:enable Metrics/MethodLength,
+    # rubocop:enable Metrics/AbcSize
 
     def import_blog_post(options = {})
       blog = find_or_create_blog(options)
@@ -147,3 +149,4 @@ class Admin::BlogPost < ApplicationRecord
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

@@ -27,7 +27,7 @@ class User < ApplicationRecord
     def build_options(row)
       {
         legacy_id: row[0].empty? ? nil : row[0].to_i,
-        abonnr: row[1].empty? ? nil : row[1].to_i,
+        Abonnr: row[1].empty? ? 0 : row[1].to_i,
         navn: row[2].downcase.titleize,
         Adresse: row[3].downcase.titleize,
         Stednavn: row[4].empty? ? nil : row[4].downcase.titleize,
@@ -38,14 +38,14 @@ class User < ApplicationRecord
         email: row[9].empty? ? fake_email : row[9].downcase.delete(' '),
         Brugernavn: row[10].empty? ? nil : row[10],
         password: row[11].empty? ? nil : row[11],
-        abon_periode: row[12],
+        Abon_periode: row[12],
         Oprettet: row[13].empty? ? nil : row[13].samso_import_to_datetime,
         Aktiv: row[14] == '0',
-        UdloebsDato: row[15].empty? ? nil : row[15],
+        UdloebsDato: row[15].empty? ? nil : row[15].samso_import_to_datetime,
         SessionId: row[16],
         Friabon: row[17] == '0',
         Transact: row[18].empty? ? nil : row[18].to_i,
-        Amount: row[19].empty? ? nil : row[15].to_i,
+        Amount: row[19].empty? ? nil : row[19].to_i,
         TransactOpdateret: row[20].empty? ? nil : row[20],
         UpdateFriabon: row[21] == '0',
         UpdateAbon: row[22] == '0',
@@ -55,6 +55,7 @@ class User < ApplicationRecord
     end
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def fake_email
       SecureRandom.uuid + User::FAKE_EMAIL
@@ -69,18 +70,20 @@ class User < ApplicationRecord
       user.save(validate: false)
       attach_role(user)
       options[:user_id] = user.id
-      create_or_update_subscription(options)
-    rescue
+      create_or_update_subscription(user, options) unless options[:Abon_periode].to_i.zero?
+    rescue => e
       Rails.logger.info '===================== unable to import user ====================='
       Rails.logger.info options
+      Rails.logger.info e.message
+      Rails.logger.info '-------------'
+      Rails.logger.info e.backtrace
       Rails.logger.info '================================================================='
     end
+    # rubocop:enable Metrics/AbcSize
 
     def secure_email(user, options)
       User::Service.sanitize_email(options)
-      unless User::Service.valid_email?(options)
-        options[:email] = User::Service.fake_email
-      end
+      options[:email] = User::Service.fake_email if User::Service.invalid_email?(options)
       user.name      = options[:navn]
       user.signature = options[:navn]
       user.email     = options[:email]
@@ -94,32 +97,38 @@ class User < ApplicationRecord
       end
     end
 
-    def create_or_update_subscription(options = {})
-      return unless options[:abonnr]
-      return if options[:abon_periode].to_i.zero?
-      subscription = find_or_create_subscription(options)
-      subscription.user_id = @current_user.id
-      subscription.subscription_type_id = subscription_type_id(options)
+    def create_or_update_subscription(user, options = {})
+      subscription = first_or_initialize_subscription(options)
+      subscription.user_id = user.id
+      subscription.subscription_type_id = first_or_create_subscription_type(options)
+      subscription.start_date = options[:Oprettet]
+      subscription.end_date = options[:UdloebsDato]
       subscription.save
     end
 
-    def subscription_type_id(options)
+    def build_abonnr(options = {})
+      abonnr = options[:Abonnr].to_i
+      return abonnr unless abonnr.zero?
+      options[:legacy_id] + 108000000
+    end
+
+    def first_or_create_subscription_type(options)
       Admin::SubscriptionType
         .where(
-          duration: options[:abon_periode].to_i,
+          duration: options[:Abon_periode].to_i,
           print_version: options[:bestil_abonavis],
           internet_version: true
         )
         .first_or_create(
-          duration: options[:abon_periode].to_i,
+          duration: options[:Abon_periode].to_i,
           print_version: options[:bestil_abonavis],
           internet_version: true
         ).id
     end
 
-    def find_or_create_subscription(options)
+    def first_or_initialize_subscription(options)
       Admin::Subscription
-        .where(subscription_id: options[:abonnr])
+        .where(subscription_id: build_abonnr(options))
         .first_or_initialize
     end
 
@@ -141,3 +150,4 @@ class User < ApplicationRecord
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

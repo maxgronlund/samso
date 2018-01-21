@@ -1,0 +1,25 @@
+da:
+  activerecord:
+    errors:
+      models:
+        admin/subscription:
+          attributes:
+            subscription_type_id:
+              blank: Mangler
+            start_date:
+              blank: Start date mangler
+    attributes:
+      admin/subscription:
+        subscription_type_id: Abonnement
+        start_date: Start dato
+        end_date: Slut date
+        on_hold_date: På pause dato
+
+
+    models:
+      admin/subscription: Abonnement
+  subscription:
+    name: Abonnement
+    start_date: Start dato
+    end_date: Slut dato
+    on_hold_date: Pause dato
