@@ -1,8 +1,8 @@
 - advertisement_module = modulable
 .advertisements
-  .text-right
-    h6 = advertisement_module.name
   - advertisement_module.advertisements.each do |advertisement|
+    .text-right
+      h6 = t('advertisement.name')
     .advertisement id=advertisement.id
       = link_to advertisement.url, target: 'blank' do
         = image_tag( advertisement.image.url(:large), class: 'img-fluid')

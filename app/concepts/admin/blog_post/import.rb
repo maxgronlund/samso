@@ -74,11 +74,11 @@ class Admin::BlogPost < ApplicationRecord
     # rubocop:enable Metrics/AbcSize
 
     def import_blog_post(options = {})
-      blog = find_or_create_blog(options)
+      blog       = find_or_create_blog(options)
       menu_title = "Kategori #{blog.title}"
-      page = Page.find_by(menu_title: menu_title)
+      page       = Page.find_by(menu_title: menu_title)
       return if page.nil?
-      options[:post_page_id] = page.id unless page.nil?
+      options[:post_page_id] = page.id
       post = find_or_initialize_blog_post(blog, options)
       return if post.nil?
       return if post.persisted?

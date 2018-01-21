@@ -2,17 +2,33 @@ en:
   activerecord:
     models:
       admin/advertisement:
-        one: advertisement
-        other: advertisements
+        one: Advertisement
+        other: Advertisements
     attributes:
-      admin/advertisement:
-        name:  Annonce
+      admin/adverticement:
+        name:  Advertisement
+        title: Headline
+        body: Body
+        views: Views
+        clicks: Cliks
+        start_date: Start date
+        end_date: End date
+        active: Active
+        featured: Featured
+        featured_price: Featured price
 
 
   advertisement:
-    fo: Fo
+    name: Advertisement
     bar: Bar
+    title: Headline
+    views: Visninger
+    clicks: Clicke
+    start_date: Start date
+    end_date: End date
+    active: Active
+    featured: Featured
+    new: Create advertisement
 
   admin/advertisement:
-    name: Annonce
-    index: Annoncer
+    index: Advertisements
