@@ -1,10 +1,8 @@
 - read_also = modulable
-h3 = read_also.name
+h5 = read_also.name
 - read_also.posts.each do |post|
   - unless request.url == page_post_url(post.show_on_page, post)
     - if read_also.image_on_top?
       = render 'read_also_modules/layouts/image_top', post: post, featured: post.featured
     - else
       = render "read_also_modules/layouts/#{post.layout}", post: post, featured: post.featured
-
-

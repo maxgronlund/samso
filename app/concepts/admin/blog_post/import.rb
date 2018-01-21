@@ -89,7 +89,7 @@ class Admin::BlogPost < ApplicationRecord
     def find_or_initialize_blog_post(blog, options = {})
       options = blog_post_options(options)
       blog.posts.where(
-        options
+        body: options[:body]
       ).first_or_initialize(
         options
       )
