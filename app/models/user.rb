@@ -50,9 +50,15 @@ class User < ApplicationRecord
   end
 
   def can_edit?(user)
-    if super_admin? || admin?
+    if administrator?
       return true unless user == self
     end
+    false
+  end
+
+  def can_access?(user)
+    return true if administrator?
+    return true if user == self
     false
   end
 
@@ -65,6 +71,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url(size)
+    return avatar.url(size) if avatar.exists?
     default_url = avatar.url(size)
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=182&d=#{CGI.escape(default_url)}"

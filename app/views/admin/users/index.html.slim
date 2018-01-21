@@ -34,6 +34,9 @@ br
           td
             .pull-right
               .btn-group
+                = link_to t('account'),
+                  user_path(user),
+                  class: 'btn btn-light btn-sm'
                 = link_to t('show'),
                   admin_user_path(user),
                   class: 'btn btn-light btn-sm'

@@ -10,7 +10,8 @@
       = image_tag( @user.avatar_url(:square))
 
       br
-      = @user.email
+      - unless @user.fake_email?
+        = @user.email
     .col-sm-9
       - if @subscriptions.any?
         .table-responsive

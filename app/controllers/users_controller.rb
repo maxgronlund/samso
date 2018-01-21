@@ -7,10 +7,12 @@ class UsersController < ApplicationController
     @landing_page = admin_system_setup.landing_page
     if current_user.nil?
       redirect_to new_session_path
-    elsif @user.nil? || current_user != @user
+    elsif @user.nil?
       render_404
-    else
+    elsif current_user.can_access?(@user)
       @subscriptions = @user.subscriptions
+    else
+      render_404
     end
   end
 
@@ -19,9 +21,15 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def edit_user?
+    administrator? || @user == current_user
+  end
+
   # GET /users/1/edit
   def edit
-    render_403 if current_user.nil? || current_user != @user
+    @user.password = nil
+    @user.email = nil if @user.fake_email?
+    render_403 unless current_user.can_access?(@user)
   end
 
   # POST /users
@@ -93,7 +101,14 @@ class UsersController < ApplicationController
     User::Service.titleize_name(sanitized_params)
     # User::Service.sanitize_email(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
+    copy_fake_email(sanitized_params)
     sanitized_params
+  end
+
+  def copy_fake_email(sanitized_params)
+    return unless sanitized_params[:email] == ''
+    return unless @user.fake_email?
+    sanitized_params[:email] = @user.email
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

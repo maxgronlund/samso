@@ -6,9 +6,11 @@
         h3 = t('payment.new')
         hr
         h5 = @subscription_type.title
-        h5 = @subscription_type.body
+        = @subscription_type.body
+        br
+        'Pris:&nbsp;
         = number_to_currency(@subscription_type.price)
-        = @subscription_type.duration
+        /= @subscription_type.duration
         hr
         == render 'form'
 
