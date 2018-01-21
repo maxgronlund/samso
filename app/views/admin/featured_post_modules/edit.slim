@@ -18,6 +18,12 @@
         = f.input :content_type,
           collection: Admin::FeaturedPostModule::CONTENT_TYPES,
           include_blank: false
+      .col-sm-3
+        = f.input :blog_id,
+          collection: Admin::Blog.order(:title).where(locale: I18n.locale),
+          include_blank: false
+
+
 
 
   .form-actions

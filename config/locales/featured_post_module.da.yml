@@ -8,12 +8,15 @@ da:
       admin/featured_post_module:
         title:  Overskrift
         access_to: Vises til
+        blog_id: Vælg kategori
+        content_type: Inhold
 
   featured_post_module:
     name:  Featured artikler
     edit: Rediger Featured artikler oversikts modul
     featured_posts: Featured artikler
     latest_news: Sidste nyt
+    category: Kategori
     more_from: Sidste nyt
 
   admin/featured_post_module:

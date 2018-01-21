@@ -5,7 +5,7 @@ class Admin::FeaturedPostModulesController < AdminController
   end
 
   def update
-    if @featured_post_module.update(featured_post_module_params)
+    if @featured_post_module.update!(featured_post_module_params)
       @featured_post_module
         .update_page_col_module(
           featured_post_module_params
@@ -36,7 +36,8 @@ class Admin::FeaturedPostModulesController < AdminController
       :access_to,
       :admin_blog_module_id,
       :featured_posts_pr_page,
-      :content_type
+      :content_type,
+      :blog_id
     )
   end
 end

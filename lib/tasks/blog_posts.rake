@@ -7,9 +7,9 @@ namespace :blog_posts do
   end
 
   def pritify_layouts
-    Admin::BlogPostCategory.find_each do |blog_post_category|
+    Admin::Blog.find_each do |blog|
       pritify_blog_posts(
-        Admin::BlogPost.where(admin_blog_post_category_id: blog_post_category.id)
+        blog.posts
       )
     end
   end
