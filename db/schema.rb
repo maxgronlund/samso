@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121190807) do
+ActiveRecord::Schema.define(version: 20180209125242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -299,6 +299,7 @@ ActiveRecord::Schema.define(version: 20180121190807) do
     t.text "expired_body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "locale", default: "en"
   end
 
   create_table "admin_subscription_types", force: :cascade do |t|
@@ -497,6 +498,9 @@ ActiveRecord::Schema.define(version: 20180121190807) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
+    t.string "address"
+    t.string "postal_code_and_city"
+    t.string "legacy_subscription_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

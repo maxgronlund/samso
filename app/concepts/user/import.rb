@@ -54,18 +54,14 @@ class User < ApplicationRecord
       }
     end
     # rubocop:enable Metrics/PerceivedComplexity
-    # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/CyclomaticComplexity
 
-    def fake_email
-      SecureRandom.uuid + User::FAKE_EMAIL
-    end
-
     def create_or_update_user(options = {})
-      user = find_or_create_user(options)
+      user = find_or_initialize_user(options)
       return if user.nil?
       secure_email(user, options)
       secure_password(user, options)
+      user.legacy_subscription_id = options[:Abonnr]
 
       user.save(validate: false)
       attach_role(user)
@@ -80,6 +76,11 @@ class User < ApplicationRecord
       Rails.logger.info '================================================================='
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
+
+    def fake_email
+      SecureRandom.uuid + User::FAKE_EMAIL
+    end
 
     def secure_email(user, options)
       User::Service.sanitize_email(options)
@@ -132,12 +133,22 @@ class User < ApplicationRecord
         .first_or_initialize
     end
 
-    def find_or_create_user(options = {})
-      user = User.find_by(email: options[:email])
+    def find_or_initialize_user(options = {})
+      user = find_user_by_legacy_subscription_id(options)
+      user = find_user_by_email(options) if user.nil?
       return user unless user.nil?
       User
         .where(legacy_id: options[:legacy_id])
         .first_or_initialize
+    end
+
+    def find_user_by_email(options = {})
+      User.find_by(email: options[:email])
+    end
+
+    def find_user_by_legacy_subscription_id(options = {})
+      return nil if options[:Abonnr].to_s.empty?
+      User.find_by(legacy_subscription_id: options[:Abonnr])
     end
 
     def attach_role(user)

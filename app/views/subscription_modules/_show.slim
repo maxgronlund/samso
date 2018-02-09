@@ -1,26 +1,28 @@
-- subscription_module = modulable
+- subscription_module = Admin::SystemSetup.subscription_module
 
-h4 = subscription_module.title
-= raw subscription_module.body
-hr
+.subscription-module
+  h4 = subscription_module.title
+  = raw subscription_module.body
+  hr
 
-= form_tag('/subscriptions', method: :post)
-  - Admin::SubscriptionType.for_subscription.each_with_index do |subscription_type, index|
-    = label_tag do
-      - if index == 0
-        = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
-      - else
-        = radio_button_tag 'subscription_type_id', subscription_type.id
+  = form_tag('/subscriptions', method: :post)
+    - Admin::SubscriptionType.for_subscription.each_with_index do |subscription_type, index|
+      = label_tag do
+        - if index == 0
+          = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
+        - else
+          = radio_button_tag 'subscription_type_id', subscription_type.id
 
-      '&nbsp
-      b = subscription_type.title
-    br = subscription_type.body
+        '&nbsp
+        b = subscription_type.title
+      = subscription_type.body
+      hr
 
-  .row
-    .col-12
-      .pull-right
-        - if current_user.nil?
-          = link_to t('login'), new_session_path, class: 'btn btn-secondary'
-          '&nbsp;
-        = submit_tag t('create_subscription'), class: "btn btn-primary"
-- session[:redirect_to] = request.url
+    .row
+      .col-12
+        .pull-right
+          - if current_user.nil?
+            = link_to t('login'), new_session_path, class: 'btn btn-light'
+            '&nbsp;
+          = submit_tag t('create_subscription'), class: "btn btn-success"
+  - session[:redirect_to] = request.url

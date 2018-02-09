@@ -34,7 +34,9 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    ap user_params[:validate_address]
     @user = User.new(user_params)
+    @user.validate_address = user_params[:validate_address]
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
     if @user.save
@@ -99,7 +101,6 @@ class UsersController < ApplicationController
   def user_params
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
-    # User::Service.sanitize_email(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
     copy_fake_email(sanitized_params)
     sanitized_params
@@ -107,6 +108,7 @@ class UsersController < ApplicationController
 
   def copy_fake_email(sanitized_params)
     return unless sanitized_params[:email] == ''
+    return if @user.nil?
     return unless @user.fake_email?
     sanitized_params[:email] = @user.email
   end
@@ -119,7 +121,10 @@ class UsersController < ApplicationController
       :avatar,
       :password,
       :password_confirmation,
-      :delete_avatar
+      :delete_avatar,
+      :address,
+      :postal_code_and_city,
+      :validate_address
     )
   end
 end

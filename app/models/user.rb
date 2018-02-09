@@ -4,7 +4,7 @@ class User < ApplicationRecord
   multisearchable against: %i[name email]
   pg_search_scope :search_by_name_or_emai, against: %i[name email]
   has_secure_password
-  attr_accessor :delete_avatar
+  attr_accessor :delete_avatar, :validate_address
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :payments, dependent: :destroy
@@ -26,6 +26,7 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :name, presence: true
   validates_confirmation_of :password
+  validates_with UserValidator
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze

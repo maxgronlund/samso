@@ -1,7 +1,7 @@
 # system setup
 class Admin::SystemSetup < ApplicationRecord
   attr_accessor :delete_logo
-  has_attached_file :logo, styles: { thumb: '222x22#', original: '1110x110#' }
+  has_attached_file :logo, styles: { thumb: '222x22#', original: '1110x143#' }
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
@@ -18,5 +18,10 @@ class Admin::SystemSetup < ApplicationRecord
   # usage Admin::SystemSetup.clear_page_cache
   def self.clear_page_cache
     Page.find_each(&:touch)
+  end
+
+  # Admin::SystemSetup.subscription_module
+  def self.subscription_module
+    Admin::SubscriptionModule.first_or_create(locale: I18n.locale)
   end
 end

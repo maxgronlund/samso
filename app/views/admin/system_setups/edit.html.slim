@@ -23,3 +23,5 @@ h3 = t('edit_model', model_name: 'System opsætning')
   = f.input :background_color
 
   = f.submit t('save'), class: 'btn btn-primary'
+  hr
+  = link_to 'Abonoment modul', edit_admin_subscription_module_path(1)

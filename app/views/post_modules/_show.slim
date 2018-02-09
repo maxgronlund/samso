@@ -16,7 +16,7 @@
   = simple_format (post_module.body(params[:id]))
 
 - else
-  == render 'subscription_modules/show', modulable: Admin::SubscriptionModule.first_or_create(title: 'default')
+  == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
 - unless params[:page_id].nil?
   .mt-18
     - if editor?

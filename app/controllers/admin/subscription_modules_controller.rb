@@ -30,7 +30,7 @@ class Admin::SubscriptionModulesController < AdminController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_subscription_module
-    @subscription_module = Admin::SubscriptionModule.find(params[:id])
+    @subscription_module = Admin::SubscriptionModule.first_or_create(title: 'default')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

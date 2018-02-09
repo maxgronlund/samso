@@ -26,6 +26,9 @@ da:
         email: "email"
         password: 'Password'
         password_confirmation: 'Gentag password'
+        address: Adresse
+        postal_code_and_city: "Postnummer / By"
+
       role:
         permission: 'Adgangs rettigheder'
 
@@ -56,3 +59,4 @@ da:
     confirm_email: Bekræft email
     errors:
       account_confirmed: Konto er allerde bekræftet
+    address: '*Adresse'
