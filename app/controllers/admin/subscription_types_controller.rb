@@ -73,7 +73,8 @@ class Admin::SubscriptionTypesController < AdminController
       :locale,
       :active,
       :duration,
-      :position
+      :position,
+      :free
     )
   end
 end

@@ -14,7 +14,10 @@ da:
         price: Pris i DKK
         active: Aktiv
         subscriptions_count: Abonnementer
+        free: Fri abbonoment
     models:
       admin/subscription_type:
         one: Abonnementstype
         other: Abonnementstyper
+  subscription_type:
+    new: Ny abonnementstype

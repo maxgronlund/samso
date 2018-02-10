@@ -9,7 +9,11 @@
     = f.input :print_version
     = f.input :price
     = f.hidden_field :locale, value: I18n.locale.to_s
-    = f.input :active
+    .row
+      .col-sm-4
+        = f.input :active
+      .col-sm-4
+        = f.input :free
     = f.input :position,
       hint: 'laveste position vises først på listen'
 

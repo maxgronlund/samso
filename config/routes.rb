@@ -55,7 +55,9 @@ Rails.application.routes.draw do
       resources :youtube_modules, only: %i[edit update]
       resources :read_also_modules, only: %i[edit update]
       resources :advertisement_modules, only: %i[edit update]
-      resources :users
+      resources :users do
+        resources :user_subscriptions
+      end
     end
 
     resources :admin, only: %i[index]

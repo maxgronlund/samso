@@ -22,6 +22,7 @@ br
         th Email
         th style='width:100px;'
          = t('user.access_as')
+        th= t('subscription.active')
         th style='min-width:155px;'
 
     tbody
@@ -31,10 +32,11 @@ br
           td = link_to user.name, admin_user_path(user)
           td = user.sanitized_email
           td = user.role_names
+          td = user.active_subscription?
           td
             .pull-right
               .btn-group
-                = link_to t('account'),
+                = link_to t('subscription.name'),
                   user_path(user),
                   class: 'btn btn-light btn-sm'
                 = link_to t('show'),

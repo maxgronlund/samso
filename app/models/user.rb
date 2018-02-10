@@ -84,6 +84,10 @@ class User < ApplicationRecord
     subscriptions.where('end_date >= :today', today: Date.today).any?
   end
 
+  def active_subscription?
+    subscriptions.where('end_date >= :today', today: Date.today).count
+  end
+
   def expired_subscriber?
     return false unless subscriptions.any?
     return false if access_to_subscribed_content?

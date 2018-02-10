@@ -103,8 +103,18 @@ class User < ApplicationRecord
       subscription.user_id = user.id
       subscription.subscription_type_id = first_or_create_subscription_type(options)
       subscription.start_date = options[:Oprettet]
-      subscription.end_date = options[:UdloebsDato]
+      subscription.end_date = subscription_end_date(options)
+      subscription.legacy_subscription_id = user.legacy_subscription_id
       subscription.save
+    end
+
+    def subscription_end_date(options = {})
+      return calculated_subscription_end_date(options) if options[:UdloebsDato].nil?
+      options[:UdloebsDato]
+    end
+
+    def calculated_subscription_end_date(options = {})
+      options[:Oprettet] + options[:Abon_periode].to_i.days
     end
 
     def build_abonnr(options = {})

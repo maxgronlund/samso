@@ -20,6 +20,7 @@ da:
       admin/subscription: Abonnement
   subscription:
     name: Abonnement
+    active: Abonnnent
     start_date: Start dato
     end_date: Slut dato
     on_hold_date: Pause dato

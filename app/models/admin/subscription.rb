@@ -6,7 +6,17 @@ class Admin::Subscription < ApplicationRecord
   has_one :payment
 
   def type_name
-    return '' if subscription_type.nil?
+    return 'Imported' if subscription_type.nil?
+    return 'Imported' if subscription_type.title.to_s.empty?
     subscription_type.title
+  end
+
+  def subscription_id
+    return id if legacy_subscription_id.empty?
+    legacy_subscription_id
+  end
+
+  def expired?
+    end_date < Time.zone.today
   end
 end

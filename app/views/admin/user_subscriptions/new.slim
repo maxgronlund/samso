@@ -1,0 +1,10 @@
+h3 Opret friabonnoment
+= simple_form_for [@user, @subscription],
+  url: admin_user_user_subscriptions_path(:admin, @user, @subscription),
+  method: 'POST' do |f|
+  .row
+    .col-sm-4
+      = f.input :start_date
+    .col-sm-4
+      = f.input :end_date
+  = f.submit t('save'), class: 'btn btn-light'
