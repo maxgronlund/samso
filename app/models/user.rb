@@ -2,7 +2,7 @@ class User < ApplicationRecord
   paginates_per 50
   include PgSearch
   multisearchable against: %i[name email]
-  pg_search_scope :search_by_name_or_emai, against: %i[name email]
+  pg_search_scope :search_by_name_or_emai, against: %i[name email legacy_subscription_id]
   has_secure_password
   attr_accessor :delete_avatar, :validate_address
   has_many :roles, dependent: :destroy
@@ -85,7 +85,11 @@ class User < ApplicationRecord
   end
 
   def active_subscription?
-    subscriptions.where('end_date >= :today', today: Date.today).count
+    subscriptions.where('end_date >= :today', today: Date.today).any?
+  end
+
+  def no_active_subscription?
+    !active_subscription?
   end
 
   def expired_subscriber?
@@ -118,5 +122,9 @@ class User < ApplicationRecord
 
   def sanitized_email
     fake_email? ? '' : email
+  end
+
+  def subscription_nr
+    legacy_subscription_id || legacy_id
   end
 end

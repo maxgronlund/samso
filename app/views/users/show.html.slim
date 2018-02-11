@@ -1,8 +1,9 @@
 
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container.pt-70
+  .row
+    h4 = @user.name
 
-  h4 = @user.name
   .row
     .col-sm-3
 
@@ -17,7 +18,7 @@
   .row
     .col-sm-12
       .pull-right
-        - if admin?
+        - if admin? && @user.no_active_subscription?
           = link_to 'Opret friabonnoment',
             new_admin_user_user_subscription_path(@user),
             class: 'btn btn-sm btn-success'
@@ -38,7 +39,7 @@
               - @subscriptions.each do |subscription|
                 tr
                   td = subscription.type_name
-                  td = subscription.legacy_subscription_id
+                  td = subscription.subscription_id
                   td = l subscription.start_date
                   td = l subscription.end_date
                   td = subscription.expired? ? 'Udløbet' : 'Ja'

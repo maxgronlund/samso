@@ -24,6 +24,10 @@ class Admin::CsvImport < ApplicationRecord
         ::Admin::Blog::Import
           .new
           .import(csv_import)
+      when Admin::Subscription.name
+        ::Admin::Subscription::Import
+          .new
+          .import(csv_import)
       end
     end
   end

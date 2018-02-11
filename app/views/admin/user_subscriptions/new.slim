@@ -1,6 +1,6 @@
 h3 Opret friabonnoment
 = simple_form_for [@user, @subscription],
-  url: admin_user_user_subscriptions_path(:admin, @user, @subscription),
+  url: admin_user_user_subscriptions_url(@user),
   method: 'POST' do |f|
   .row
     .col-sm-4

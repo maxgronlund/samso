@@ -62,7 +62,7 @@ class User < ApplicationRecord
       secure_email(user, options)
       secure_password(user, options)
       user.legacy_subscription_id = options[:Abonnr]
-
+      user.confirmed_at = DateTime.now if user.confirmed_at.nil?
       user.save(validate: false)
       attach_role(user)
       options[:user_id] = user.id

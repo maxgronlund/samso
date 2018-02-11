@@ -11,7 +11,8 @@ class Admin::CsvImport < ApplicationRecord
     [
       [User.model_name.human, User.name],
       [Admin::BlogPost.model_name.human, Admin::BlogPost.name],
-      [Admin::Blog.model_name.human, Admin::Blog.name]
+      [Admin::Blog.model_name.human, Admin::Blog.name],
+      ['E-Conomics export', Admin::Subscription.name]
     ]
   end
 

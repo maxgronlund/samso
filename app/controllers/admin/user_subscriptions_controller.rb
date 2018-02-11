@@ -1,20 +1,27 @@
 class Admin::UserSubscriptionsController < AdminController
-  before_action :set_subscription_and_user, only: %i[edit update]
-  
+  before_action :set_subscription, only: %i[edit update]
+  before_action :set_user, only: %i[new create edit update]
+
   def new
-    @subscription_types = Admin::SubscriptionType.free
-    set_user
-    @subscription = @user.subscriptions.new
+    @subscription =
+      @user
+      .subscriptions
+      .new(end_date: Time.zone.now + 1.month)
   end
 
   def create
-    @user = User.find(params[:user_id])
-    subscription = @user.subscriptions
-      .new(new_subscription_params)
+    subscription_type = Admin::SubscriptionType.free_subscription
+    subscription =
+      @user
+      .subscriptions
+      .new(subscription_params)
+    subscription.subscription_type_id = subscription_type.id
+    subscription.subscription_id = Admin::Subscription.next_subscription_id
+    subscription.save
+    redirect_to user_path(@user)
   end
 
   def edit
-    
   end
 
   def update
@@ -22,11 +29,10 @@ class Admin::UserSubscriptionsController < AdminController
     redirect_to user_path(@user)
   end
 
-  private 
+  private
 
-  def set_subscription_and_user
+  def set_subscription
     @subscription = Admin::Subscription.find(params[:id])
-    set_user
   end
 
   def set_user
@@ -36,10 +42,5 @@ class Admin::UserSubscriptionsController < AdminController
   def subscription_params
     params[:admin_subscription]
       .permit(:start_date, :end_date)
-  end
-
-  def new_subscription_params
-    params[:admin_subscription]
-      .permit(:subscription_type_id)
   end
 end
