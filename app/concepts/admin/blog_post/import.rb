@@ -61,8 +61,6 @@ class Admin::BlogPost < ApplicationRecord
         polls: row[16],
         opdateret_frontpagestory: row[17].samso_import_to_datetime,
         visning: row[19],
-        # notes: row[19],
-        # teaser: row[20],
         fokus: row[21],
         pix2: row[22],
         pix2_mappe: row[23],

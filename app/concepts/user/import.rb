@@ -35,7 +35,7 @@ class User < ApplicationRecord
         Telefon: row[6].empty? ? nil : row[6].strip.downcase,
         Mobil: row[7].empty? ? nil : row[7].strip.downcase,
         Nyhedsbrev: row[8] == '0',
-        email: row[9],
+        email: User::Service.sanitize_email(row[9]),
         Brugernavn: row[10].empty? ? nil : row[10].strip,
         password: row[11].empty? ? nil : row[11].strip,
         Abon_periode: row[12],
@@ -65,7 +65,7 @@ class User < ApplicationRecord
       user.confirmed_at = DateTime.now if user.confirmed_at.nil?
       user.name = options[:navn]
       user.signature = options[:navn]
-      user.email = User::Service.sanitize_email(options)
+      user.email = options[:email]
       user.save(validate: false)
       attach_role(user)
       options[:user_id] = user.id
