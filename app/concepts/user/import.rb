@@ -4,6 +4,33 @@ class User < ApplicationRecord
   require 'cgi'
   # services for Admin::CsvImport
   # rubocop:disable Metrics/ClassLength
+
+  A = 0
+  B = 1
+  C = 2
+  D = 3
+  E = 4
+  F = 5
+  G = 6
+  H = 7
+  I = 8
+  J = 9
+  K = 10
+  L = 11
+  M = 12
+  N = 13
+  O = 14
+  P = 15
+  Q = 16
+  R = 17
+  S = 18
+  T = 19
+  U = 20
+  V = 21
+  W = 22
+  X = 23
+  Y = 24
+
   class Import
     def initialize(current_user)
       @current_user = current_user
@@ -26,31 +53,31 @@ class User < ApplicationRecord
     # rubocop:disable Metrics/CyclomaticComplexity
     def build_options(row)
       {
-        legacy_id: row[0].empty? ? nil : row[0].to_i,
-        Abonnr: row[1].strip,
-        navn: row[2].strip.downcase.titleize,
-        Adresse: row[3].strip.downcase.titleize,
-        Stednavn: row[4].empty? ? nil : row[4].strip.downcase.titleize,
-        Postnr_by: row[5].empty? ? nil : row[5].strip.downcase.titleize,
-        Telefon: row[6].empty? ? nil : row[6].strip.downcase,
-        Mobil: row[7].empty? ? nil : row[7].strip.downcase,
-        Nyhedsbrev: row[8] == '0',
-        email: User::Service.sanitize_email(row[9]),
-        Brugernavn: row[10].empty? ? nil : row[10].strip,
-        password: row[11].empty? ? nil : row[11].strip,
-        Abon_periode: row[12],
-        Oprettet: row[13].empty? ? nil : row[13].strip.samso_import_to_datetime,
-        Aktiv: row[14] == '0',
-        UdloebsDato: row[15].empty? ? nil : row[15].strip.samso_import_to_datetime,
-        SessionId: row[16],
-        Friabon: row[17] == '0',
-        Transact: row[18].empty? ? nil : row[18].to_i,
-        Amount: row[19].empty? ? nil : row[19].to_i,
-        TransactOpdateret: row[20].empty? ? nil : row[20],
-        UpdateFriabon: row[21] == '0',
-        UpdateAbon: row[22] == '0',
-        bestil_abonavis: row[23] == '0',
-        passivAbon: row[24] == '0'
+        legacy_id: row[A].empty? ? nil : row[A].to_i,
+        Abonnr: row[B].strip,
+        navn: row[C].strip.downcase.titleize,
+        Adresse: row[D].strip.downcase.titleize,
+        Stednavn: row[E].empty? ? nil : row[E].strip.downcase.titleize,
+        Postnr_by: row[F].empty? ? nil : row[F].strip.downcase.titleize,
+        Telefon: row[G].empty? ? nil : row[G].strip.downcase,
+        Mobil: row[H].empty? ? nil : row[H].strip.downcase,
+        Nyhedsbrev: row[U] == '0',
+        email: User::Service.sanitize_email(row[J]),
+        Brugernavn: row[K].empty? ? nil : row[K].strip,
+        password: row[L].empty? ? nil : row[L].strip,
+        Abon_periode: row[M],
+        Oprettet: row[N].empty? ? nil : row[N].strip.samso_import_to_datetime,
+        Aktiv: row[O] == '0',
+        UdloebsDato: row[P].empty? ? nil : row[P].strip.samso_import_to_datetime,
+        SessionId: row[Q],
+        Friabon: row[R] == '0',
+        Transact: row[S].empty? ? nil : row[S].to_i,
+        Amount: row[T].empty? ? nil : row[T].to_i,
+        TransactOpdateret: row[U].empty? ? nil : row[U],
+        UpdateFriabon: row[V] == '0',
+        UpdateAbon: row[W] == '0',
+        bestil_abonavis: row[X] == '0',
+        passivAbon: row[Y] == '0'
       }
     end
     # rubocop:enable Metrics/PerceivedComplexity
@@ -59,17 +86,17 @@ class User < ApplicationRecord
     def create_or_update_user(options = {})
       user = find_or_initialize_user(options)
       return if user.nil?
-
       secure_password(user, options)
       user.legacy_subscription_id = legacy_subscription_id(options)
       user.confirmed_at = DateTime.now if user.confirmed_at.nil?
       user.name = options[:navn]
       user.signature = options[:navn]
       user.email = options[:email]
-      user.save(validate: false)
-      attach_role(user)
-      options[:user_id] = user.id
-      create_or_update_subscription(user, options) unless options[:Abon_periode].to_i.zero?
+      if user.save(validate: false)
+        attach_role(user)
+        options[:user_id] = user.id
+        create_or_update_subscription(user, options)
+      end
     rescue => e
       Rails.logger.info '===================== unable to import user ====================='
       Rails.logger.info options
@@ -95,8 +122,8 @@ class User < ApplicationRecord
     end
 
     def create_or_update_subscription(user, options = {})
+      return if options[:Abon_periode].to_i.zero?
       subscription = first_or_initialize_subscription(user, options)
-      subscription.user_id = user.id
       subscription.subscription_type_id = first_or_create_subscription_type(options)
       subscription.start_date = options[:Oprettet]
       subscription.end_date = subscription_end_date(options)
