@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class User < ApplicationRecord
   paginates_per 50
   include PgSearch
@@ -128,3 +129,4 @@ class User < ApplicationRecord
     legacy_subscription_id || legacy_id
   end
 end
+# rubocop:enable Metrics/ClassLength

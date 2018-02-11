@@ -5,7 +5,7 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :active, -> { internal.where(active: true, free: false) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }
   scope :free, -> { internal.where(active: true, free: true) }
-  scope :internal, -> {where(identifier: 'internal')}
+  scope :internal, -> { where(identifier: 'internal') }
 
   def self.for_subscription
     active.locale.order(:position)

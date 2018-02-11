@@ -82,9 +82,7 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/MethodLength
 
     def legacy_subscription_id(options = {})
-      if options[:Abonnr].nil? || options[:Abonnr].empty?
-        return Admin::Subscription.new_safe_subscription_id
-      end
+      return Admin::Subscription.new_safe_subscription_id if options[:Abonnr].nil? || options[:Abonnr].empty?
       options[:Abonnr]
     end
 
@@ -137,9 +135,7 @@ class User < ApplicationRecord
     end
 
     def subscription_id(options = {})
-      if options[:Abonnr].nil? || options[:Abonnr].empty?
-        return Admin::Subscription.count + 10000000
-      end
+      return Admin::Subscription.count + 10000000 if options[:Abonnr].nil? || options[:Abonnr].empty?
       options[:Abonnr]
     end
 

@@ -10,6 +10,7 @@ class Admin::CsvImport < ApplicationRecord
 
     # usage
     # Admin:CsvImport::Service.new.import(csv_import)
+    # rubocop:disable Metrics/MethodLength
     def import(csv_import)
       case csv_import.import_type
       when User.name
@@ -30,5 +31,6 @@ class Admin::CsvImport < ApplicationRecord
           .import(csv_import)
       end
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

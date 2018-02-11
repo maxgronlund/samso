@@ -24,19 +24,20 @@ class Admin::Subscription < ApplicationRecord
 
   # Admin::Subscription.next_subscription_id
   def self.last_subscription
-    subscription =
-      Admin::Subscription
+    Admin::Subscription
       .order(:subscription_id)
       .where.not(subscription_id: nil)
       .last
   end
 
+  # rubocop:disable Style/IfUnlessModifier
   def self.find_next_subscription_id(subscription_id)
     if subscription_exists?(subscription_id + 1)
       next_subscription_id?(subscription_id + 1)
     end
     subscription_id.to_s
   end
+  # rubocop:enable Style/IfUnlessModifier
 
   # Admin::Subscription.new_safe_subscription_id
   def self.new_safe_subscription_id

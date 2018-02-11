@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     render_403 unless current_user.can_access?(@user)
   end
 
-  # POST /users
+  # rubocop:disable Metrics/AbcSize
   def create
     ap user_params[:validate_address]
     @user = User.new(user_params)
@@ -46,13 +46,8 @@ class UsersController < ApplicationController
     else
       render :new
     end
-
-    # if session[:subscription_type_id]
-    #   create_with_subscription
-    # else
-    #   create_without_subscription
-    # end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def redirect_user
     if session[:subscription_type_id]

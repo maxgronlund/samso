@@ -1,4 +1,5 @@
 # namespace to confine service class to Admin:BlogPost::Import
+# rubocop:disable Metrics/ClassLength
 class Admin::Subscription < ApplicationRecord
   require 'csv'
   require 'cgi'
@@ -12,6 +13,7 @@ class Admin::Subscription < ApplicationRecord
         .destroy_all
     end
 
+    # rubocop:disable Metrics/AbcSize
     def import(csv_import)
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
@@ -28,6 +30,7 @@ class Admin::Subscription < ApplicationRecord
 
     private
 
+    # rubocop:disable Metrics/MethodLength
     def build_options(row)
       {
         abonr: row[0].strip,
@@ -51,6 +54,8 @@ class Admin::Subscription < ApplicationRecord
         david: row[18]
       }
     end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     def find_user_by_legacy_subscription_id(options = {})
       User.find_by(legacy_subscription_id: options[:abonr])
@@ -85,6 +90,7 @@ class Admin::Subscription < ApplicationRecord
       name
     end
 
+    # rubocop:disable Metrics/AbcSize
     def build_user_address(options = {})
       address = options[:vejnavn]
       address += " #{options[:husnr]}" unless options[:husnr].empty?
@@ -93,10 +99,12 @@ class Admin::Subscription < ApplicationRecord
       address += ".#{options[:side]}" unless options[:side].empty?
       address
     end
+    # rubocop:enable Metrics/AbcSize
 
     def build_postal_code_and_city(options = {})
       postal_code_and_city = options[:postnr]
-      postal_code_and_city = " #{options[:bynavn]}"
+      postal_code_and_city += " #{options[:bynavn]}" unless options[:bynavn].empty?
+      postal_code_and_city
     end
 
     def fake_email
@@ -120,3 +128,4 @@ class Admin::Subscription < ApplicationRecord
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
