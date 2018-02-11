@@ -33,7 +33,7 @@ class Admin::Subscription < ApplicationRecord
   # rubocop:disable Style/IfUnlessModifier
   def self.find_next_subscription_id(subscription_id)
     if subscription_exists?(subscription_id + 1)
-      next_subscription_id?(subscription_id + 1)
+      next_subscription_id(subscription_id + 1)
     end
     subscription_id.to_s
   end
