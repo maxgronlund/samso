@@ -11,31 +11,41 @@ class Admin::Subscription < ApplicationRecord
     subscription_type.title
   end
 
-  # def subscription_id
-  #   return id if legacy_subscription_id.empty?
-  #   legacy_subscription_id
-  # end
-
   def expired?
     end_date < Time.zone.today
   end
 
   # Admin::Subscription.next_subscription_id
   def self.next_subscription_id
+    subscription = last_subscription
+    return new_safe_subscription_id if subscription.nil?
+    find_next_subscription_id(subscription.subscription_id.to_i)
+  end
+
+  # Admin::Subscription.next_subscription_id
+  def self.last_subscription
     subscription =
       Admin::Subscription
       .order(:subscription_id)
       .where.not(subscription_id: nil)
       .last
-
-    last_id = subscription.nil? ? 0 : subscription.id
-    find_next_subscription_id(last_id)
   end
 
   def self.find_next_subscription_id(subscription_id)
-    if Admin::Subscription.where(subscription_id: subscription_id).any?
+    if subscription_exists?(subscription_id + 1)
       next_subscription_id?(subscription_id + 1)
     end
-    subscription_id
+    subscription_id.to_s
+  end
+
+  # Admin::Subscription.new_safe_subscription_id
+  def self.new_safe_subscription_id
+    find_next_subscription_id(Admin::Subscription.count + 10000000)
+  end
+
+  # Admin::Subscription.subscription_exists?(id)
+  def self.subscription_exists?(subscription_id)
+    return false if subscription_id.nil?
+    where(subscription_id: subscription_id.to_s).any?
   end
 end

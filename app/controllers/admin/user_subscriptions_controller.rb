@@ -16,8 +16,9 @@ class Admin::UserSubscriptionsController < AdminController
       .subscriptions
       .new(subscription_params)
     subscription.subscription_type_id = subscription_type.id
-    subscription.subscription_id = Admin::Subscription.next_subscription_id
+    subscription.subscription_id = Admin::Subscription.new_safe_subscription_id
     subscription.save
+    @user.update_attributes(legacy_subscription_id: subscription.subscription_id)
     redirect_to user_path(@user)
   end
 

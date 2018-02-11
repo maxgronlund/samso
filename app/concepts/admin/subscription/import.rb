@@ -16,11 +16,13 @@ class Admin::Subscription < ApplicationRecord
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         next if index.zero?
+
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = build_options(unescaped_row)
-        user = find_or_initialize_user(options)
+        next if options[:abonr].nil? || options[:abonr].empty?
+        user = find_user_by_legacy_subscription_id(options)
         user = create_user(options) if user.nil?
-        create_subscription(user)
+        create_subscription(user, options)
       end
     end
 
@@ -28,29 +30,29 @@ class Admin::Subscription < ApplicationRecord
 
     def build_options(row)
       {
-        abonr: row[0],
-        fornavn: row[1],
-        mellemnavn: row[2],
-        efternavn: row[3],
-        attention: row[4],
-        kontaktperson: row[5],
-        vejnavn: row[6],
+        abonr: row[0].strip,
+        fornavn: row[1].strip,
+        mellemnavn: row[2].strip,
+        efternavn: row[3].strip,
+        attention: row[4].strip,
+        kontaktperson: row[5].strip,
+        vejnavn: row[6].strip,
         husnr: row[7],
-        litra: row[8],
+        litra: row[8].strip,
         sal: row[9],
         side: row[10],
         postnr: row[11],
-        bynavn: row[12],
-        land: row[13],
+        bynavn: row[12].strip,
+        land: row[13].strip,
         antalaviser: row[14],
-        co: row[15],
-        tiltaleform: row[16],
-        gadeident: row[17],
+        co: row[15].strip,
+        tiltaleform: row[16].strip,
+        gadeident: row[17].strip,
         david: row[18]
       }
     end
 
-    def find_or_initialize_user(options = {})
+    def find_user_by_legacy_subscription_id(options = {})
       User.find_by(legacy_subscription_id: options[:abonr])
     end
 
