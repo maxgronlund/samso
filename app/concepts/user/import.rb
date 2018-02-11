@@ -25,7 +25,6 @@ class User < ApplicationRecord
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/CyclomaticComplexity
     def build_options(row)
-      ap "#{row[2].strip} #{row[9].strip}"
       {
         legacy_id: row[0].empty? ? nil : row[0].to_i,
         Abonnr: row[1].strip,
