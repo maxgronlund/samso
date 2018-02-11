@@ -110,7 +110,10 @@ class User < ApplicationRecord
     end
 
     def calculated_subscription_end_date(options = {})
-      options[:Oprettet] + options[:Abon_periode].to_i.days
+      oprettet = options[:Oprettet]
+      abon_periode = options[:Abon_periode].to_i
+      oprettet = Time.zone.now - 1.year if oprettet.nil?
+      oprettet + abon_periode.days
     end
 
     def first_or_create_subscription_type(options)
