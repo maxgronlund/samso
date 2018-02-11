@@ -1,25 +1,25 @@
 class DeclinedPaymentsController < ApplicationController
   def index
-    ap params
+    # ap params
   end
 
   def new
-    ap params
+    # ap params
   end
 
   def create
-    ap params
+    # ap params
   end
 
   def show
-    ap params
+    # ap params
   end
 
   def edit
-    ap params
+    # ap params
   end
 
   def destroy
-    ap params
+    # ap params
   end
 end

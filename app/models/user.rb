@@ -27,10 +27,14 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :name, presence: true
   validates_confirmation_of :password
-  validates_with UserValidator
+  validates_with UserAddressValidator, if: :validate_subscription_address
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
+
+  def validate_subscription_address
+    ap @validate_address
+  end
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?

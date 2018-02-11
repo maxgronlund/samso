@@ -2,13 +2,14 @@
 class Admin::SubscriptionType < ApplicationRecord
   has_many :subscriptions, class_name: 'Admin::Subscription', foreign_key: :subscription_type_id
 
-  scope :active, -> { internal.where(active: true, free: false) }
+  scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }
-  scope :free, -> { internal.where(active: true, free: true) }
+  scope :free, -> { internal.where(free: true) }
+  scope :payed, -> { internal.where(free: false) }
   scope :internal, -> { where(identifier: 'internal') }
 
   def self.for_subscription
-    active.locale.order(:position)
+    internal.active.locale.payed.order(:position)
   end
 
   # Admin::SubscriptionType.imported
