@@ -79,14 +79,14 @@ class Admin::BlogPost < ApplicationRecord
       options[:post_page_id] = page.id
       post = find_or_initialize_blog_post(blog, options)
       return if post.nil? || post.persisted?
-      post.save
-      attach_image(post, options)
+
+      attach_image(post, options) if post.save
     end
 
     def find_or_initialize_blog_post(blog, options = {})
       options = blog_post_options(options)
       blog.posts.where(
-        body: options[:body]
+        legacy_id: options[:legacy_id]
       ).first_or_initialize(
         options
       )
