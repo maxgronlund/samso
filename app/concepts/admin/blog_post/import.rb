@@ -72,7 +72,6 @@ class Admin::BlogPost < ApplicationRecord
     # rubocop:enable Metrics/AbcSize
 
     def import_blog_post(options = {})
-      return if options[:legacy_id].zero?
       blog       = find_or_create_blog(options)
       menu_title = "Kategori #{blog.title}"
       page       = Page.find_by(menu_title: menu_title)
@@ -87,7 +86,7 @@ class Admin::BlogPost < ApplicationRecord
     def find_or_initialize_blog_post(blog, options = {})
       options = blog_post_options(options)
       blog.posts.where(
-        legacy_id: options[:legacy_id]
+        body: options[:body]
       ).first_or_initialize(
         options
       )
