@@ -85,7 +85,7 @@ class User < ApplicationRecord
 
     def create_or_update_user(options = {})
       user = find_or_initialize_user(options)
-      return if user.nil?
+      return if user.nil? || user.persisted?
       secure_password(user, options)
       user.legacy_subscription_id = legacy_subscription_id(options)
       user.confirmed_at = DateTime.now if user.confirmed_at.nil?
@@ -174,9 +174,7 @@ class User < ApplicationRecord
       user = find_user_by_legacy_id(options) if user.nil?
       user = find_user_by_email(options) if user.nil?
       return user unless user.nil?
-      User
-        .where(legacy_id: options[:legacy_id])
-        .first_or_initialize
+      User.new
     end
 
     def find_user_by_email(options = {})
