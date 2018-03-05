@@ -1,0 +1,24 @@
+.row
+  h3 = t('edit_model', model_name: @e_page_module.model_name.human)
+
+= simple_form_for [:admin, @e_page_module], url: url_for(action: 'update', controller: 'admin/e_page_modules'), method: 'put' do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
+      .col-sm-6
+        = f.input :title
+        = f.input :body
+    .row
+      .col-sm-12
+        = f.input :link
+    .row
+      .col-sm-12
+        = f.input :image_link
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+

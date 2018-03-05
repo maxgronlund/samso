@@ -97,7 +97,7 @@ Things you may want to cover:
   $ UserNotifierMailer.send_signup_email(user).deliver
 
 * building a module
-  $ rails g scaffold_module MODULE_NAME
+  $ rails g scaffold_module MODULE_NAME (singular)
 * Huray ported
 
 [![Build Status](https://semaphoreci.com/api/v1/synthmax/samso/branches/master/badge.svg)](https://semaphoreci.com/synthmax/samso)

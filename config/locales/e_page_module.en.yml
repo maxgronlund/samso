@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/e_page_module:
+        one: e_page
+        other: e_pages
+    attributes:
+      admin/e_page_module:
+        name:  Name
+
+  e_page_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/e_page_module:
+    name: EPage module

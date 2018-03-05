@@ -61,3 +61,4 @@ da:
     errors:
       account_confirmed: Konto er allerde bekræftet
     address: '*Adresse'
+    active_subscribers: Abonnenter med gyldigt abonnement

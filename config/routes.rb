@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :acceped_payments
     resources :declined_payments
     namespace :admin do
+      resources :active_subscribers
       resources :advertisements
       resources :articles, only: %i[index]
       resources :blogs do
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
       end
       resources :dmi_modules, only: %i[edit update]
 
+      resources :e_page_modules, only: %i[edit update]
       resources :featured_post_modules, only: %i[edit update]
       resources :footers
       resources :gallery_images, only: %i[edit update]
@@ -46,6 +48,7 @@ Rails.application.routes.draw do
       end
 
       resources :post_modules, only: %i[edit update]
+      resources :e_page_modules, only: %i[edit update]
       resources :subscriptions
       resources :subscription_modules, only: %i[edit update]
       resources :subscription_types

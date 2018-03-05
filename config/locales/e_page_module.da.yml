@@ -1,0 +1,19 @@
+da:
+  activerecord:
+    models:
+      admin/e_page_module:
+        one: e_page
+        other: e_pages
+        link: link
+        image_link: Link til billed
+    attributes:
+      admin/e_page_module:
+        name: e-pages
+
+  e_page_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/e_page_module:
+    name: e-page module
