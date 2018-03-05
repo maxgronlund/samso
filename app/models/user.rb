@@ -33,7 +33,7 @@ class User < ApplicationRecord
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
 
   def validate_subscription_address
-    ap @validate_address
+    # ap @validate_address
   end
 
   def super_admin?

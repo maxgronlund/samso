@@ -1,0 +1,36 @@
+= simple_form_for(@admin_advertisement) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-md-6
+        = f.input :title
+      .col-md-6
+        = f.input :image
+    .row
+      .col-md-6
+        = f.input :start_date
+      .col-md-6
+        = f.input :end_date
+    .row
+      .col-md-6
+        = f.input :body
+    .row
+      .col-md-3
+        = f.input :price_pr_view
+      .col-md-3
+        = f.input :price_pr_click
+    .row
+      .col-md-3
+        = f.input :active, default: true
+      .col-md-3
+        = f.input :featured, default: false
+      .col-md-3
+        = f.input :featured_price
+      .col-md-3
+        = f.input :price
+    = f.input :url
+
+
+  .form-actions
+    = f.button :submit
