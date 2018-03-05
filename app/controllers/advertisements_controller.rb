@@ -27,6 +27,7 @@ class AdvertisementsController < AdminController
   def create
     @admin_advertisement =
       Admin::Advertisement.new(admin_advertisement_params)
+    @admin_advertisement.user_id = current_user.id
     @admin_advertisement.locale = I18n.locale
 
     if @admin_advertisement.save
