@@ -1,5 +1,6 @@
 class ResetPasswordController < ApplicationController
   def index
+    @landing_page = admin_system_setup.landing_page
     return if resend_password_params[:send].nil?
     @message = Admin::SystemMessage.resend_password
   end
