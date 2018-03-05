@@ -72,7 +72,7 @@ class Admin::UsersController < AdminController
   def user_params
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
-    User::Service.sanitize_email(sanitized_params)
+    User::Service.sanitize_email(sanitized_params[:email])
     User::Service.sanitize_password(sanitized_params)
     sanitized_params
   end

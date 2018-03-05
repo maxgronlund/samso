@@ -67,9 +67,10 @@ class User < ApplicationRecord
       options[:name] = options[:name].downcase.titleize
     end
 
-    def self.sanitize_email(options)
-      options[:email] = fake_email if options[:email].empty?
-      options[:email].downcase!
+    def self.sanitize_email(email)
+      email = email.to_s.strip.downcase
+      return fake_email if email.empty?
+      email
     end
 
     def self.sanitize_password(options)

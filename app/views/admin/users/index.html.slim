@@ -15,7 +15,7 @@
         = link_to t('user.search.show_all'), admin_users_path, class: 'btn btn-light'
 br
 .table-responsive
-  table.table.table-striped.table-bordered.table-hover
+  table.table.table-striped.table-bordered.table-hover.table-sm
     thead
       tr
         th Navn
@@ -32,7 +32,16 @@ br
           td = link_to user.name, admin_user_path(user)
           td = user.sanitized_email
           td = user.role_names
-          td = user.active_subscription?
+          td
+
+            - if user.active_subscription?
+              .green-text
+                = user.legacy_subscription_id
+            - elsif user.expired_subscriber?
+              .red-text
+                = user.legacy_subscription_id
+            - else
+              = user.legacy_subscription_id
           td
             .pull-right
               .btn-group

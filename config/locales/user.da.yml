@@ -28,6 +28,7 @@ da:
         password_confirmation: 'Gentag password'
         address: Adresse
         postal_code_and_city: "Postnummer / By"
+        free_subscription: Gratis abonnoment
 
       role:
         permission: 'Adgangs rettigheder'

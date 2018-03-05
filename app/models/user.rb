@@ -1,8 +1,9 @@
+# rubocop:disable Metrics/ClassLength
 class User < ApplicationRecord
   paginates_per 50
   include PgSearch
   multisearchable against: %i[name email]
-  pg_search_scope :search_by_name_or_emai, against: %i[name email]
+  pg_search_scope :search_by_name_or_emai, against: %i[name email legacy_subscription_id]
   has_secure_password
   attr_accessor :delete_avatar, :validate_address
   has_many :roles, dependent: :destroy
@@ -26,10 +27,14 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :name, presence: true
   validates_confirmation_of :password
-  validates_with UserValidator
+  validates_with UserAddressValidator, if: :validate_subscription_address
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
+
+  def validate_subscription_address
+    ap @validate_address
+  end
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?
@@ -85,7 +90,11 @@ class User < ApplicationRecord
   end
 
   def active_subscription?
-    subscriptions.where('end_date >= :today', today: Date.today).count
+    subscriptions.where('end_date >= :today', today: Date.today).any?
+  end
+
+  def no_active_subscription?
+    !active_subscription?
   end
 
   def expired_subscriber?
@@ -119,4 +128,9 @@ class User < ApplicationRecord
   def sanitized_email
     fake_email? ? '' : email
   end
+
+  def subscription_nr
+    legacy_subscription_id || legacy_id
+  end
 end
+# rubocop:enable Metrics/ClassLength

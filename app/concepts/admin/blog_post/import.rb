@@ -61,8 +61,6 @@ class Admin::BlogPost < ApplicationRecord
         polls: row[16],
         opdateret_frontpagestory: row[17].samso_import_to_datetime,
         visning: row[19],
-        # notes: row[19],
-        # teaser: row[20],
         fokus: row[21],
         pix2: row[22],
         pix2_mappe: row[23],
@@ -81,8 +79,8 @@ class Admin::BlogPost < ApplicationRecord
       options[:post_page_id] = page.id
       post = find_or_initialize_blog_post(blog, options)
       return if post.nil? || post.persisted?
-      post.save
-      attach_image(post, options)
+
+      attach_image(post, options) if post.save
     end
 
     def find_or_initialize_blog_post(blog, options = {})

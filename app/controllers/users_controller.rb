@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    session[:print_version] = params[:print_version]
     @user = User.new
   end
 
@@ -32,27 +34,23 @@ class UsersController < ApplicationController
     render_403 unless current_user.can_access?(@user)
   end
 
-  # POST /users
+  # rubocop:disable Metrics/AbcSize
   def create
-    ap user_params[:validate_address]
     @user = User.new(user_params)
-    @user.validate_address = user_params[:validate_address]
+    @user.validate_address = session[:print_version]
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
+    @user.legacy_subscription_id = Admin::Subscription.new_safe_subscription_id
     if @user.save
+      session.delete :print_version
       @user.roles.create(permission: 'member')
       UserNotifierMailer.send_signup_email(@user.id).deliver
       redirect_user
     else
       render :new
     end
-
-    # if session[:subscription_type_id]
-    #   create_with_subscription
-    # else
-    #   create_without_subscription
-    # end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def redirect_user
     if session[:subscription_type_id]
@@ -128,3 +126,4 @@ class UsersController < ApplicationController
     )
   end
 end
+# rubocop:enable Metrics/ClassLength

@@ -17,7 +17,7 @@ class Admin::BlogPostsController < AdminController
     @admin_blog = Admin::Blog.find(params[:blog_id])
     @blog_post = @admin_blog.posts.new(admin_blog_post_params)
     @blog_post.user = current_user
-    if @blog_post.save!
+    if @blog_post.save
       redirect_to admin_blog_path(@admin_blog)
     else
       render :new
