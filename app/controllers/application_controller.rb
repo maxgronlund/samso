@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
 
   def set_default_page
     @body_style = ''
-    @page ||= admin_system_setup.landing_page
+    @page ||= landing_page
   end
 
   def set_admin

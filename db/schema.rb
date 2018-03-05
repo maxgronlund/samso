@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20180228123738) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +41,9 @@ ActiveRecord::Schema.define(version: 20180228123738) do
     t.datetime "image_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "notes", default: ""
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_admin_advertisements_on_user_id"
   end
 
   create_table "admin_blog_modules", force: :cascade do |t|
@@ -54,9 +56,9 @@ ActiveRecord::Schema.define(version: 20180228123738) do
     t.string "locale"
     t.boolean "show_all_categories", default: false
     t.integer "featured_posts_pr_page", default: 0
+    t.boolean "show_search", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "show_search", default: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
   end
 
@@ -294,9 +296,9 @@ ActiveRecord::Schema.define(version: 20180228123738) do
     t.integer "blog_id"
     t.integer "posts_pr_page", default: 8
     t.boolean "show_all_categories", default: true
+    t.boolean "image_on_top", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "image_on_top", default: false
     t.index ["blog_id"], name: "index_admin_read_also_modules_on_blog_id"
   end
 
@@ -337,6 +339,7 @@ ActiveRecord::Schema.define(version: 20180228123738) do
     t.integer "subscription_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "legacy_subscription_id", default: ""
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end

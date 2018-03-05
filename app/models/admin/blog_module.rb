@@ -13,7 +13,7 @@ class Admin::BlogModule < ApplicationRecord
 
   def featured_post
     return nil if blog.nil?
-    @posts ||=
+    @featured_post ||=
       blog
       .posts
       .where(featured: true)

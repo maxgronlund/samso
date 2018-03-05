@@ -4,8 +4,6 @@ class SessionsController < ApplicationController
   end
 
   def new
-    set_menu
-    @landing_page = admin_system_setup.landing_page
     params[:email] = session_params[:email]
   end
 

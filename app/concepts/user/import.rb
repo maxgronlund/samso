@@ -31,6 +31,7 @@ class User < ApplicationRecord
   X = 23
   Y = 24
 
+  # importer
   class Import
     def initialize(current_user)
       @current_user = current_user

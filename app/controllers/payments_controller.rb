@@ -58,7 +58,6 @@ class PaymentsController < ApplicationController
     )
     session.delete :subscription_type_id
   end
-  # rubocop:enable Metrics/AbcSize
 
   def create_payment
     @payment =

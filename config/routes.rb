@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     resources :acceped_payments
+    resources :advertisements
     resources :declined_payments
     namespace :admin do
       resources :active_subscribers

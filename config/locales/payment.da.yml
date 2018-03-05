@@ -12,7 +12,8 @@ da:
 
 
   payment:
-    new: Opret betaling
+    new: Bekræft order
+    confirm: Gå til betaling
     continue: Fortsæt
     admin: Administrator
     super_admin: Super administrator

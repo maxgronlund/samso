@@ -1,0 +1,47 @@
+p#notice = notice
+
+= image_tag( @admin_advertisement.image.url(:large))
+  strong Title:
+  = @admin_advertisement.title
+p
+  strong Body:
+  = @admin_advertisement.body
+p
+  strong Price pr view:
+  = @admin_advertisement.price_pr_view
+p
+  strong Views:
+  = @admin_advertisement.views
+p
+  strong Price pr click:
+  = @admin_advertisement.price_pr_click
+p
+  strong Clicks:
+  = @admin_advertisement.clicks
+p
+  strong Start date:
+  = l @admin_advertisement.start_date
+p
+  strong End date:
+  = l @admin_advertisement.end_date
+p
+  strong Active:
+  = @admin_advertisement.active
+p
+  strong Featured:
+  = @admin_advertisement.featured
+p
+  strong Featured price:
+  = @admin_advertisement.featured_price
+p
+  strong Price:
+  = @admin_advertisement.price
+p
+  strong Url:
+  = @admin_advertisement.url
+
+
+
+=> link_to 'Edit', edit_admin_advertisement_path(@admin_advertisement)
+'|
+=< link_to 'Back', admin_advertisements_path
