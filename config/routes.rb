@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :epaper_verification, only: [:index]
+    end
+  end
+
   scope "(:locale)", locale: /da|en/ do
     resources :acceped_payments
     resources :advertisements

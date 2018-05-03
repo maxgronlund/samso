@@ -36,3 +36,6 @@ Error pages
 
 Q
 there is many users without an email
+
+epaper integration
+https://support.visiolink.com/hc/en-us/articles/200003711?input_string=integration+af+e-paper
