@@ -1,9 +1,11 @@
 - e_page = modulable
 .e-pages
   - if access_to_epaper?
-    = link_to(e_page.link, target: '_blank') do
+    = link_to(e_page.validation_url(current_user), target: '_blank') do
      h3 = e_page.title
      = simple_format e_page.body
      = image_tag(e_page.image_link, class: 'img-fluid mr-1')
   - else
-    'fo
+    h3 = e_page.title
+    = simple_format e_page.body
+    = image_tag(e_page.image_link, class: 'img-fluid mr-1')
