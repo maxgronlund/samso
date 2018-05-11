@@ -400,7 +400,7 @@ ActiveRecord::Schema.define(version: 20180511083726) do
 
   create_table "e_paper_tokens", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "uuid"
+    t.string "secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_e_paper_tokens_on_user_id"
