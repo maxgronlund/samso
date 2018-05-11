@@ -8,6 +8,7 @@ class User < ApplicationRecord
   attr_accessor :delete_avatar, :validate_address
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
+  has_many :e_paper_tokens, dependent: :destroy
   has_many :payments, dependent: :destroy
   has_many :gallery_images, class_name: 'Admin::GalleryImage'
   has_many :blog_posts, class_name: 'Admin::BlogPost'
@@ -85,22 +86,36 @@ class User < ApplicationRecord
 
   def access_to_subscribed_content?
     return true if free_subscription
-    return false unless subscriptions.any?
-    subscriptions.where('end_date >= :today', today: Date.today).any?
+    active_subscription?
+  end
+
+  def access_to_epaper?
+    Admin::SubscriptionType
+      .where(id: subscription_type_ids)
+      .any?
   end
 
   def active_subscription?
-    subscriptions.where('end_date >= :today', today: Date.today).any?
+    valid_subscriptions.any?
   end
 
   def no_active_subscription?
-    !active_subscription?
+    valid_subscriptions.empty?
+  end
+
+  def valid_subscriptions
+    @valid_subscriptions ||=
+      subscriptions
+      .where(
+        'start_date <= :today AND end_date >= :today',
+        today: Date.today.beginning_of_day
+      )
   end
 
   def expired_subscriber?
     return false unless subscriptions.any?
     return false if access_to_subscribed_content?
-    subscriptions.where('end_date < :today', today: Date.today).any?
+    subscriptions.where('end_date >= :today', today: Date.today).any?
   end
 
   def self.super_admin
@@ -131,6 +146,15 @@ class User < ApplicationRecord
 
   def subscription_nr
     legacy_subscription_id || legacy_id
+  end
+
+  private
+
+  def subscription_type_ids
+    @subscription_type_ids ||=
+      valid_subscriptions
+      .pluck(:subscription_type_id)
+      .uniq
   end
 end
 # rubocop:enable Metrics/ClassLength

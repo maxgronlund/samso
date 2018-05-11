@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305090327) do
+ActiveRecord::Schema.define(version: 20180511083726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,6 +398,14 @@ ActiveRecord::Schema.define(version: 20180305090327) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "e_paper_tokens", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "uuid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_e_paper_tokens_on_user_id"
+  end
+
   create_table "page_col_modules", force: :cascade do |t|
     t.bigint "page_col_id"
     t.string "moduleable_type"
@@ -515,11 +523,13 @@ ActiveRecord::Schema.define(version: 20180305090327) do
     t.string "address"
     t.string "postal_code_and_city"
     t.string "legacy_subscription_id"
+    t.integer "e_paper_tokens_count"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "admin_subscriptions", "users"
+  add_foreign_key "e_paper_tokens", "users"
   add_foreign_key "page_col_modules", "page_cols"
   add_foreign_key "page_cols", "page_rows"
   add_foreign_key "page_rows", "pages"
