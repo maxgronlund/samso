@@ -7,7 +7,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
 
   def access_to_epaper?
     params.permit!
-    epaper_token = EPaperToken.find_by(secret: params[:secret])
+    epaper_token = EPaperToken.find_by(secret: params["secret"])
     return false if epaper_token.nil?
     return false unless epaper_token.unused?
     user = epaper_token.user
