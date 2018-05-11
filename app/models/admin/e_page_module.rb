@@ -22,6 +22,8 @@ class Admin::EPageModule < ApplicationRecord
     current_user
       .e_paper_tokens
       .create(uuid: uuid)
-    link + "?secret=#{uuid}"
+    #link + "?secret=#{uuid}&date=2018-05-03&edition=SM1"
+
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{uuid}&date=2018-05-03&edition=SM1"
   end
 end

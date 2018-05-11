@@ -114,11 +114,25 @@ Feature: The visibility of modules
 
   Scenario: As a expired subscriber I can visit the page with a module accessible to subscribers only without seeing it
     When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
+    Then Does it look right
     Then I visit the page named "subscribers_only"
     Then I can not see "subscribers_only"
 
-  Scenario: As a valid expired I can visit the page with a module accessible to expired subscribers only and see it
+
+  Scenario: As a expired subscriber I can visit the page with a module accessible to expired subscribers only and see it
     When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
     Then I visit the page named "expired_subscribers"
-    Then I can see "expired_subscribers"
+    Then Does it look right
+    Then I can not see "subscribers_only"
+
+
+  # Scenario: As a expired subscriber I can visit the page with a module accessible to expired subscribers only and see it
+  #   When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
+  #   Then Does it look right
+  #   # Then I visit the page named "subscribers_only"
+  #   # Then I can not see "subscribers_only"
+  #   # When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
+  #   # Then Does it look right
+  #   # Then I visit the page named "expired_subscribers"
+  #   # Then I can see "expired_subscribers"
 
