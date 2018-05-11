@@ -8,5 +8,4 @@ class Api::V1::EpaperVerificationController < ApplicationController
     return false if user.nil?
     @access_to_epaper = user.access_to_epaper?
   end
-
 end

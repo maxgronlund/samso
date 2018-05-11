@@ -150,7 +150,7 @@ class User < ApplicationRecord
 
   def e_paper_token_url
     secret = e_paper_token.secret
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{uuid}&date=2018-05-03&edition=SM1"
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{e_paper_token.secret}&date=2018-05-03&edition=SM1"
   end
 
   def e_paper_token
