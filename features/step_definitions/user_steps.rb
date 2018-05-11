@@ -3,7 +3,7 @@ Given('there is a {string} with the email {string} and the password {string}') d
     create_user(
       email: email,
       password: password,
-      permission: Role::MEMBER,
+      permission: role,
       confirmed_at: DateTime.now
     )
 

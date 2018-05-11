@@ -7,13 +7,14 @@ Feature: The visibility of modules
     And there is a "member" with the email "member@example.com" and the password "ComeOnIn123"
     And there is a "valid-subscriber" with the email "valid-subscriber@example.com" and the password "ComeOnIn123"
     And the user "valid-subscriber@example.com" has a "valid-subscription"
-    And there is a "expired-subscriberis " with the email "expired-subscriber@example.com" and the password "ComeOnIn123"
+    And there is a "expired-subscriberer " with the email "expired-subscriber@example.com" and the password "ComeOnIn123"
     And the user "expired-subscriber@example.com" has a "expired-subscription"
     And there is a page where a text_module is visible to "all"
     And there is a page where a text_module is visible to "guests_only"
     And there is a page where a text_module is visible to "members_only"
     And there is a page where a text_module is visible to "subscribers_only"
     And there is a page where a text_module is visible to "expired_subscribers"
+    # And there is a "admin" with the email "admin@example.com" and the password "ComeOnIn123"
 
   # ----------------------
   # test access for guests
@@ -114,25 +115,10 @@ Feature: The visibility of modules
 
   Scenario: As a expired subscriber I can visit the page with a module accessible to subscribers only without seeing it
     When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
-    Then Does it look right
     Then I visit the page named "subscribers_only"
     Then I can not see "subscribers_only"
-
 
   Scenario: As a expired subscriber I can visit the page with a module accessible to expired subscribers only and see it
     When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
     Then I visit the page named "expired_subscribers"
-    Then Does it look right
-    Then I can not see "subscribers_only"
-
-
-  # Scenario: As a expired subscriber I can visit the page with a module accessible to expired subscribers only and see it
-  #   When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
-  #   Then Does it look right
-  #   # Then I visit the page named "subscribers_only"
-  #   # Then I can not see "subscribers_only"
-  #   # When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
-  #   # Then Does it look right
-  #   # Then I visit the page named "expired_subscribers"
-  #   # Then I can see "expired_subscribers"
-
+    Then I can see "expired_subscribers"

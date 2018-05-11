@@ -115,7 +115,9 @@ class User < ApplicationRecord
   def expired_subscriber?
     return false unless subscriptions.any?
     return false if access_to_subscribed_content?
-    subscriptions.where('end_date >= :today', today: Date.today).any?
+    no_active_subscription?
+    # subscriptions.where('end_date >= :today', today: Date.today).any?
+
   end
 
   def self.super_admin

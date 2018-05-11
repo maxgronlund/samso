@@ -1,5 +1,5 @@
 class Admin::UserSubscriptionsController < AdminController
-  before_action :set_subscription, only: %i[edit update]
+
   before_action :set_user, only: %i[new create edit update]
 
   def new
@@ -23,17 +23,20 @@ class Admin::UserSubscriptionsController < AdminController
   end
 
   def edit
+    subscription
   end
 
   def update
-    @subscription.update!(subscription_params)
+    ap subscription
+    subscription.update!(subscription_params)
     redirect_to user_path(@user)
   end
 
   private
 
-  def set_subscription
-    @subscription = Admin::Subscription.find(params[:id])
+  def subscription
+    @subscription ||=
+      Admin::Subscription.find(params[:id])
   end
 
   def set_user
