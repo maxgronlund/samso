@@ -15,13 +15,14 @@ class Api::V1::EpaperVerificationController < ApplicationController
 
     Rails.logger.debug '-----------epaper_token.nil?------------'
     Rails.logger.debug epaper_token.nil?
+    Rails.logger.debug epaper_token.instance_variables
     #return false if epaper_token.nil?
     Rails.logger.debug '-------------unused?----------'
     Rails.logger.debug epaper_token.unused?
     # return false unless epaper_token.unused?
     Rails.logger.debug '-------------user.nil?----------'
-    Rails.logger.debug epaper_token.user.nil?
-    user = epaper_token.user.nil?
+    Rails.logger.debug epaper_token.user.instance_variables
+    user = epaper_token.user
     #return false if user.nil?
     Rails.logger.debug '-------------access_to_epaper----------'
     Rails.logger.debug user.access_to_epaper?
