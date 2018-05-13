@@ -1,8 +1,8 @@
 class EPaperToken < ApplicationRecord
   belongs_to :user, counter_cache: true
 
-  def used?
-    return true if secret.nil?
+  def grand_access?
+    return true if secret.nil? && created_at > Time.now - 1.minute
     update(secret: nil)
     false
   end
