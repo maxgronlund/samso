@@ -43,12 +43,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :access_to_subscribed_content?
 
-  def access_to_epaper?
+  def access_to_e_paper?
     return false unless current_user
     return true if editor?
-    current_user.access_to_epaper?
+    current_user.access_to_e_paper?
   end
-  helper_method :access_to_epaper?
+  helper_method :access_to_e_paper?
 
   def can_manage_resource?(resource)
     return true if editor?

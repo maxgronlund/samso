@@ -3,6 +3,7 @@ class EPaperToken < ApplicationRecord
 
   def grand_access?
     return false if secret.nil? && created_at > Time.now + 1.minute
+    update(secret: nil)
     true
   end
 end

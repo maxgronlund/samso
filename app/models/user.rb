@@ -89,7 +89,7 @@ class User < ApplicationRecord
     active_subscription?
   end
 
-  def access_to_epaper?
+  def access_to_e_paper?
     Admin::SubscriptionType
       .where(id: subscription_type_ids)
       .any?

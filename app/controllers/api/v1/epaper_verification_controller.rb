@@ -10,24 +10,27 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     if permitted?(user)
-      Rails.logger.debug 'PERMITTED'
-      Rails.logger.debug e_paper_token_url(user)
-      redirect_to e_paper_token_url(user)
+      redirect_to e_paper_token_url
     else
-      Rails.logger.debug 'NOT PERMITTED'
       redirect_to root_path
     end
   end
 
   private
 
-  def e_paper_token_url(user)
-    secret = create_e_paper_secret!(user)
-    Rails.logger.debug "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
+  def e_paper_token_url
+    secret = e_paper_secret
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
   end
 
-  def e_paper_secret!(user)
-    user.e_paper_tokens.where.not(secret: nil).first_or_create(secret: SecureRandom.uuid)
+  def e_paper_secret
+    current_user
+      .e_paper_tokens
+      .where
+      .not(secret: nil)
+      .first_or_create(
+        secret: SecureRandom.uuid
+      ).secret
   end
 
   def access_to_e_paper?
