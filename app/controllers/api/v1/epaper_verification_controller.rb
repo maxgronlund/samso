@@ -1,10 +1,9 @@
 class Api::V1::EpaperVerificationController < ApplicationController
   def index
-
-    if access_to_epaper?
-      @access_to_epaper = 'Api::V1::EpaperVerification'
+    if access_to_e_paper?
+      @access_to_e_paper = 'Api::V1::EpaperVerification'
     else
-      @access_to_epaper = 'Not authorized'
+      @access_to_e_paper = SecureRandom.uuid
     end
   end
 
@@ -23,39 +22,30 @@ class Api::V1::EpaperVerificationController < ApplicationController
   private
 
   def e_paper_token_url(user)
-    secret = e_paper_secret(user)
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
+    secret = create_e_paper_secret!(user)
+    Rails.logger.debug "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
   end
 
-  def e_paper_secret(user)
-    create_e_paper_sceret!(user)
+  def e_paper_secret!(user)
+    user.e_paper_tokens.where.not(secret: nil).first_or_create(secret: SecureRandom.uuid)
   end
 
-  def create_e_paper_sceret!(user)
-    current_user.e_paper_tokens
-      .where
-      .not(secret: nil)
-      .first_or_create(
-        secret: SecureRandom.uuid
-      ).secret
-  end
-
-  def access_to_epaper?
+  def access_to_e_paper?
     params.permit!
-    epaper_token = EPaperToken.find_by(secret: params[:secret])
-    return false if epaper_token.nil?
-    return false unless epaper_token.grand_access?
-    user = epaper_token.user
+    e_paper_token = EPaperToken.find_by(secret: params[:secret])
+    return false if e_paper_token.nil?
+    return false unless e_paper_token.grand_access?
+    user = e_paper_token.user
     return false if user.nil?
-    user.access_to_epaper?
+    user.access_to_e_paper?
   end
 
   def permitted?(user)
     return false if current_user.nil?
     return false if user.nil?
-    return false unless current_user.access_to_epaper?
+    return false unless current_user.access_to_e_paper?
     return false unless current_user == user
-    current_user.access_to_epaper?
+    current_user.access_to_e_paper?
   end
 end
 
