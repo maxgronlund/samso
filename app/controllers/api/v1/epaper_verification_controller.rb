@@ -1,6 +1,6 @@
 class Api::V1::EpaperVerificationController < ApplicationController
   def index
-    if access_to_epaper?
+    if true
       @access_to_epaper = 'Api::V1::EpaperVerification'
     else
       @access_to_epaper = 'Not authorized'
