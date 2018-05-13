@@ -1,6 +1,10 @@
 class Api::V1::EpaperVerificationController < ApplicationController
   def index
-    @access_to_epaper = true#access_to_epaper?
+    if access_to_epaper?
+      @access_to_epaper = 'Api::V1::EpaperVerification'
+    else
+      @access_to_epaper = 'Not authorized'
+    end
   end
 
   private
@@ -26,9 +30,9 @@ class Api::V1::EpaperVerificationController < ApplicationController
     #return false if user.nil?
     Rails.logger.debug '-------------access_to_epaper----------'
     Rails.logger.debug user.access_to_epaper?
-    'true'
+    true
   rescue
     Rails.logger.debug '-------------rescued----------'
-    'true'
+    true
   end
 end
