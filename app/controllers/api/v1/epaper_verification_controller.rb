@@ -26,9 +26,9 @@ class Api::V1::EpaperVerificationController < ApplicationController
     #return false if user.nil?
     Rails.logger.debug '-------------access_to_epaper----------'
     Rails.logger.debug user.access_to_epaper?
-    true
+    'true'
   rescue
     Rails.logger.debug '-------------rescued----------'
-    true
+    'true'
   end
 end
