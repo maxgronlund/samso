@@ -11,9 +11,11 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     if permitted?(user)
-      e_paper_token_url(user)
+      Rails.logger.debug 'PERMITTED'
+      Rails.logger.debug e_paper_token_url(user)
       redirect_to e_paper_token_url(user)
     else
+      Rails.logger.debug 'NOT PERMITTED'
       redirect_to root_path
     end
   end
@@ -26,12 +28,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   end
 
   def e_paper_secret(user)
-    if permitted?(user)
-      create_e_paper_sceret!(user)
-    else
-      SecureRandom.uuid
-    end
-
+    create_e_paper_sceret!(user)
   end
 
   def create_e_paper_sceret!(user)
@@ -41,9 +38,6 @@ class Api::V1::EpaperVerificationController < ApplicationController
       .first_or_create(
         secret: SecureRandom.uuid
       ).secret
-  end
-
-  def create_fake_sceret
   end
 
   def access_to_epaper?
@@ -57,9 +51,11 @@ class Api::V1::EpaperVerificationController < ApplicationController
   end
 
   def permitted?(user)
-    return false if user.nil?
     return false if current_user.nil?
-    current_user == user && user.access_to_epaper?
+    return false if user.nil?
+    return false unless current_user.access_to_epaper?
+    return false unless current_user == user
+    current_user.access_to_epaper?
   end
 end
 
