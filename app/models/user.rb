@@ -150,22 +150,6 @@ class User < ApplicationRecord
     legacy_subscription_id || legacy_id
   end
 
-  def e_paper_token_url
-    Rails.logger.debug e_paper_token.secret
-    secret = e_paper_token.secret
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
-    #"http://login.e-pages.dk/samsoposten/open/?secret=test&date=2018-05-03&edition=SM1"
-  end
-
-  def e_paper_token
-    e_paper_tokens
-      .where
-      .not(secret: nil)
-      .first_or_create(
-        secret: SecureRandom.uuid
-      )
-  end
-
   def subscription_type_ids
     @subscription_type_ids ||=
       valid_subscriptions

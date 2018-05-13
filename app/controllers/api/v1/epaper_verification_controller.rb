@@ -7,32 +7,40 @@ class Api::V1::EpaperVerificationController < ApplicationController
     end
   end
 
+  def show
+    current_user = User.find(params[:id])
+    redirect_to e_paper_token_url(current_user)
+  end
+
   private
+
+  def e_paper_token_url(current_user)
+    secret = e_paper_secret(current_user)
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
+  end
+
+  def e_paper_secret(current_user)
+    current_user.e_paper_tokens
+      .where
+      .not(secret: nil)
+      .first_or_create(
+        secret: SecureRandom.uuid
+      ).secret
+  end
 
   def access_to_epaper?
 
     params.permit!
-    Rails.logger.debug '-----------key------------'
-    Rails.logger.debug params[:secret]
 
     epaper_token = EPaperToken.find_by(secret: params[:secret])
-
-    Rails.logger.debug '-----------epaper_token.nil?------------'
-    Rails.logger.debug epaper_token.nil?
-    Rails.logger.debug epaper_token.instance_variables
-    #return false if epaper_token.nil?
-    Rails.logger.debug '-------------unused?----------'
-    Rails.logger.debug epaper_token.unused?
-    # return false unless epaper_token.unused?
-    Rails.logger.debug '-------------user.nil?----------'
-    Rails.logger.debug epaper_token.user.instance_variables
+    return false if epaper_token.nil?
+    return false unless epaper_token.used?
     user = epaper_token.user
-    #return false if user.nil?
-    Rails.logger.debug '-------------access_to_epaper----------'
-    Rails.logger.debug user.access_to_epaper?
-    true
+    return false if user.nil?
+    user.access_to_epaper?
+
   rescue
     Rails.logger.debug '-------------rescued----------'
-    true
+    false
   end
 end
