@@ -151,8 +151,10 @@ class User < ApplicationRecord
   end
 
   def e_paper_token_url
+    Rails.logger.debug e_paper_token.secret
     secret = e_paper_token.secret
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
+    #"http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
+    "http://login.e-pages.dk/samsoposten/open/?secret=test&date=2018-05-03&edition=SM1"
   end
 
   def e_paper_token

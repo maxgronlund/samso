@@ -8,4 +8,4 @@ class EPaperToken < ApplicationRecord
   end
 end
 
-# http://localhost:3000/api/v1/epaper_verification?secret=c1bcbf97-4183-4cfb-985e-1a1ab918910c
+# http://localhost:3000/api/v1/epaper_verification?secret=4f047525-4c57-4114-8954-2a913037192a
