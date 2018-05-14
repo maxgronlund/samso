@@ -90,6 +90,7 @@ class User < ApplicationRecord
   end
 
   def access_to_e_paper?
+    return true if free_subscription
     Admin::SubscriptionType
       .where(id: subscription_type_ids)
       .any?

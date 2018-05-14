@@ -26,8 +26,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def e_paper_secret
     current_user
       .e_paper_tokens
-      .where
-      .not(secret: nil)
+      .where.not(secret: nil)
       .first_or_create(
         secret: SecureRandom.uuid
       ).secret
