@@ -13,6 +13,8 @@ da:
         start_date: Start dato
         blog_id: Kategori
         video_url: Video snippet
+        enable_comments: Brugere kan kommenterer
+        free_content: Læs gratis
 
   blog_post:
     new: 'Nyt artikkel'

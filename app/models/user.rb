@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :payments, dependent: :destroy
   has_many :gallery_images, class_name: 'Admin::GalleryImage'
   has_many :blog_posts, class_name: 'Admin::BlogPost'
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :roles
 

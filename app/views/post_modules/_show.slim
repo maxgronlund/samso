@@ -1,32 +1,49 @@
 - post_module = modulable
-- start_date = post_module.start_date(params[:id])
-- if  post_module.free_content?(params[:id]) || access_to_subscribed_content?
-  - post_module.shown!(params[:id])
+- blog_post_id = params[:id]
+- blog_post = post_module.blog_post(blog_post_id)
 
-  - video_url = post_module.video_url(params[:id])
+- start_date = blog_post.start_date
+- if  blog_post.free_content? || access_to_subscribed_content?
+  - blog_post.shown!
+
+  - video_url = blog_post.video_url #post_module.video_url(blog_post_id)
   - if !video_url.empty?
     .video-container
       =  raw video_url
-  - elsif post_module.image_present?(params[:id])
+  - elsif post_module.image_present?(blog_post_id)
     .mb-8
-      = image_tag(post_module.image_url(params[:id]), class: 'img-fluid')
+      = image_tag(post_module.image_url(blog_post_id), class: 'img-fluid')
   .start_date = l start_date unless start_date.nil?
-  h3 = post_module.title(params[:id])
-  = post_module.signature(params[:id])
-  = simple_format (post_module.body(params[:id]))
+  h3 = blog_post.title
+  = blog_post.signature
+  = simple_format (blog_post.body)
+  - if blog_post.enable_comments?
+    = render 'comments/index', comments: blog_post.comments, commentable: blog_post
+  / - if blog_post.comments.any?
+  /   'Kommentarer
+  /   br
+  /   - blog_post.comments.order(created_at: :asc).each do |comment|
+  /     hr
+  /     = raw t('comment.posted_at',
+  /       posted_by: comment.author_name,
+  /       posted_at: time_ago_in_words(comment.created_at))
+  /     = simple_format comment.comment
+  /   - if current_user.present?
+  /     #add-comment
+  /     = render 'comments/form', comment: Comment.new, commentable: blog_post
 
 - else
   == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
 - unless params[:page_id].nil?
   .mt-18
     - if editor?
-      - blog = post_module.blog(params[:id])
+      - blog = blog_post.blog
       - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
       .row
         .col-md-12
           .pull-right
             = link_to t('edit'),
-              edit_admin_blog_blog_post_path(blog, params[:id]),
+              edit_admin_blog_blog_post_path(blog, blog_post_id),
               class: 'btn btn-light btn-sm'
 
 javascript:

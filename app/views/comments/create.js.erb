@@ -1,0 +1,3 @@
+$("#add-comment").append('<%=j render "comments/comment", comment: @comment %>');
+$('#comment_' + "<%= @comment.id %>").show("slow");
+$('#comment_comment').val("");

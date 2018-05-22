@@ -1,0 +1,15 @@
+- if comments.any?
+  hr
+  h5 Kommentarer
+
+  - comments.order(created_at: :asc).each do |comment|
+    .comments
+      = raw t('comment.posted_at',
+        posted_by: comment.author_name,
+        posted_at: time_ago_in_words(comment.created_at))
+      = simple_format comment.comment
+
+
+- if current_user.present?
+  #add-comment
+  = render 'comments/form', comment: Comment.new, commentable: commentable

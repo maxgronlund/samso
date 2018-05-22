@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180511083726) do
+ActiveRecord::Schema.define(version: 20180519085712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20180511083726) do
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.text "video_url", default: ""
+    t.boolean "enable_comments", default: false
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_posts_on_post_page_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
@@ -398,6 +399,17 @@ ActiveRecord::Schema.define(version: 20180511083726) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "user_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "e_paper_tokens", force: :cascade do |t|
     t.bigint "user_id"
     t.string "secret"
@@ -529,6 +541,7 @@ ActiveRecord::Schema.define(version: 20180511083726) do
   end
 
   add_foreign_key "admin_subscriptions", "users"
+  add_foreign_key "comments", "users"
   add_foreign_key "e_paper_tokens", "users"
   add_foreign_key "page_col_modules", "page_cols"
   add_foreign_key "page_cols", "page_rows"

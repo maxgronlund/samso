@@ -1,0 +1,13 @@
+= simple_form_for([comment], remote: true) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :comment, label: t('comment.new_comment')
+    /= f.association :user
+    /= f.association :commentable
+    = f.hidden_field :commentable_id, value: commentable.id
+    = f.hidden_field :commentable_type, value: commentable.class.name
+    = f.hidden_field :user_id, value: current_user.id
+
+  .form-actions
+    = f.submit t('comment.save'), class: 'btn btn-light'

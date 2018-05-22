@@ -70,7 +70,8 @@ class Admin::BlogPostsController < AdminController
         :layout,
         :start_date,
         :blog_id,
-        :video_url
+        :video_url,
+        :enable_comments
       )
   end
   # rubocop:enable Metrics/MethodLength

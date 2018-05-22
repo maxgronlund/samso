@@ -16,6 +16,7 @@ class Admin::BlogPost < ApplicationRecord
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
+  has_many :comments, as: :commentable, dependent: :destroy
 
   LAYOUTS =
     [

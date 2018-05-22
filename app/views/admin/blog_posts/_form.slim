@@ -31,10 +31,12 @@
 
 = f.input :body, :input_html => { rows: 15}
 .row.mb-10
-  .col-md-6
+  .col-md-4
     = f.input :free_content
-  .col-md-6
+  .col-md-4
     = f.input :featured
+  .col-md-4
+    = f.input :enable_comments
 .row
   .col-md-6
     = f.input :signature

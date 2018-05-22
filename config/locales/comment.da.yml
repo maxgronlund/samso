@@ -1,0 +1,6 @@
+da:
+  comment:
+    posted_at: "<b>%{posted_by}</b> %{posted_at} siden"
+    new_comment: Skriv kommentar
+    save: Publicer
+

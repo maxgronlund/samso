@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   before_action :set_menu
   before_action :set_default_page
 
+  rescue_from ActionView::MissingTemplate do |exception|
+    render_404
+  end
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
