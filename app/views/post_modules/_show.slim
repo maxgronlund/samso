@@ -17,20 +17,6 @@
   h3 = blog_post.title
   = blog_post.signature
   = simple_format (blog_post.body)
-  - if blog_post.enable_comments?
-    = render 'comments/index', comments: blog_post.comments, commentable: blog_post
-  / - if blog_post.comments.any?
-  /   'Kommentarer
-  /   br
-  /   - blog_post.comments.order(created_at: :asc).each do |comment|
-  /     hr
-  /     = raw t('comment.posted_at',
-  /       posted_by: comment.author_name,
-  /       posted_at: time_ago_in_words(comment.created_at))
-  /     = simple_format comment.comment
-  /   - if current_user.present?
-  /     #add-comment
-  /     = render 'comments/form', comment: Comment.new, commentable: blog_post
 
 - else
   == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
@@ -45,6 +31,9 @@
             = link_to t('edit'),
               edit_admin_blog_blog_post_path(blog, blog_post_id),
               class: 'btn btn-light btn-sm'
+
+- if blog_post.enable_comments?
+  = render 'comments/index', comments: blog_post.comments, commentable: blog_post
 
 javascript:
   $(".video-container").fitVids();
