@@ -17,12 +17,8 @@
   h3 = blog_post.title
   = blog_post.signature
   = simple_format (blog_post.body)
-
-- else
-  == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
-- unless params[:page_id].nil?
-  .mt-18
-    - if editor?
+  - if params[:page_id].present? && editor?
+    .mt-18
       - blog = blog_post.blog
       - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
       .row
@@ -31,9 +27,11 @@
             = link_to t('edit'),
               edit_admin_blog_blog_post_path(blog, blog_post_id),
               class: 'btn btn-light btn-sm'
+  - if blog_post.enable_comments?
+    = render 'comments/index', comments: blog_post.comments, commentable: blog_post
+- else
+  == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
 
-- if blog_post.enable_comments?
-  = render 'comments/index', comments: blog_post.comments, commentable: blog_post
 
 javascript:
   $(".video-container").fitVids();

@@ -1,0 +1,4 @@
+$('#destroy_comment_' + "<%= @comment.id %>").empty();
+$('#destroy_comment_' + "<%= @comment.id %>").hide();
+$('#destroy_comment_' + "<%= @comment.id %>").append('<%=j render "comments/comment", comment: @comment %>');
+$('#destroy_comment_' + "<%= @comment.id %>").show(200);

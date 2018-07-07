@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-
     if comment_params[:comment].present?
       comment_params[:user_id] = current_user.id
       @comment    = Comment.create(comment_params)
@@ -15,17 +14,13 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1
   def update
-    if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'
-    else
-      render :edit
-    end
+    @comment.update(comment_params)
   end
 
   # DELETE /comments/1
   def destroy
     @comment.destroy
-    redirect_to comments_url, notice: 'Comment was successfully destroyed.'
+    #redirect_to comments_url, notice: 'Comment was successfully destroyed.'
   end
 
   private

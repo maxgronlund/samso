@@ -1,6 +1,23 @@
 da:
   comment:
-    posted_at: "<b>%{posted_by}</b> %{posted_at} siden"
+    comments: Kommentarer
+    posted_at: "For %{time_ago} siden"
     new_comment: Skriv kommentar
     save: Publicer
+    update: Opdater
+    destroy: Slet
+
+
+  activerecord:
+    errors:
+      models:
+        comment: Kommentar
+    attributes:
+      comment:
+        comment: Kommentar
+
+    models:
+      comment:
+        one: Kommentar
+        other: Kommentarer
 

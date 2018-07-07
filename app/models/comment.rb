@@ -3,6 +3,12 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
 
   def author_name
-    return user.name unless user.nil?
+    user.present? ? user.name : ''
+  end
+
+  def edditable?(edditor)
+    return false if edditor.nil?
+    return true if edditor.administrator?
+    edditor == user
   end
 end

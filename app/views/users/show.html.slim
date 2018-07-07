@@ -48,15 +48,25 @@
                   td = l subscription.end_date
                   td = subscription.expired? ? 'Udløbet' : 'Ja'
                   / td = l subscription.on_hold_date unless subscription.on_hold_date.nil?
-                  td
-                    - if admin?
+                  - if admin?
+                    td
                       = link_to t('edit'),
                         edit_admin_user_user_subscription_path(@user, subscription),
                         class: 'btn btn-light btn-sm'
-
-
-
-
-
-
-
+  .row
+    .col-sm-12
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        thead
+          tr
+            th Kommentar til
+            th Oprettet
+            th
+            th
+        tbody
+          - @user.comments.each do |comment|
+            tr
+              td = commentable_page_path(comment)
+              td = l comment.created_at
+              td
+                = simple_format comment.comment&.truncate(100)
+              td = show_comment(comment)
