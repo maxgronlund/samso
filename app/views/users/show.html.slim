@@ -10,10 +10,7 @@
         strong = @user.legacy_subscription_id
   .row
     .col-sm-3
-
-
       = image_tag( @user.avatar_url(:square))
-
       br
       - unless @user.fake_email?
         = @user.email
@@ -70,3 +67,6 @@
               td
                 = simple_format comment.comment&.truncate(100)
               td = show_comment(comment)
+  .row
+    .col-sm-12
+      = link_to 'Slet konto', cancel_account_path(@user.id), class: 'btn btn-danger'

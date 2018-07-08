@@ -1,0 +1,26 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-70
+  .row
+    .col-sm-8
+      h4 = @user.name
+    .col-sm-4
+      .pull-right
+        'Abonnonet NR.
+        strong = @user.legacy_subscription_id
+  .row
+    .col-sm-3
+      'Du er ved at slette din konto, for at slette den skal indtaste din email her og klikke på OK
+      = simple_form_for [@user] do |f|
+        = f.error_notification
+
+        .form-inputs
+          = f.input :delete_account, label: 'email', placeholder: 'Skriv din email her', required: true
+
+
+
+        .form-actions
+          .pull-right
+            = f.submit t('save'), class: 'btn btn-primary', id: 'submit'
+
+
+
