@@ -35,6 +35,8 @@ da:
 
   user:
     create: 'Opret konto'
+    delete_account: Slet konto
+    accept_gdpr: Godkend databehandleraftale
     password:
       update: Opdater password
       updated: Password opdateret

@@ -13,7 +13,7 @@ class Admin::BlogPost < ApplicationRecord
   pg_search_scope :search_by_content, against: %i[title body subtitle teaser signature]
   multisearchable against: %i[title body subtitle teaser signature]
   pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
-
+  validates :body, presence: true
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
   has_many :comments, as: :commentable, dependent: :destroy

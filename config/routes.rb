@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   #get 'cancel_account/show'
   resources :comments
   namespace :api do
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     resources :acceped_payments
     resources :advertisements
-    resources :cancel_account, only: %i[show update]
+    resources :cancel_account, only: %i[show destroy]
     resources :declined_payments
     namespace :admin do
       resources :active_subscribers
@@ -75,6 +76,7 @@ Rails.application.routes.draw do
 
     resources :admin, only: %i[index]
     resources :gallery_images, only: %i[show]
+    resources :gdpr, only: %i[show update]
     resources :blogs, only: [:show] do
       resources :posts
     end

@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   # GET /pages/1
   def show
+    return if performed?
     @page =
       Page
       .includes(page_rows: [page_cols: [:page_col_modules]])

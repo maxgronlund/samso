@@ -5,3 +5,25 @@
     = render 'pages/show', page: @page
 - else
   = render 'pages/show', page: @page
+
+#gdpr_acceptance_missing
+  - if gdpr_acceptance_missing?
+    - session[:gdpr_acceptad_path] = request.path
+    /! Modal
+    #gdpr-acceptance-dialog.modal.fade aria-hidden="true" aria-labelledby="gdpr-acceptance-dialog" role="dialog" tabindex="-1"
+      .modal-dialog.modal-dialog-centered role="document"
+        .modal-content
+          .modal-header
+            h5#exampleModalCenterTitle.modal-title = Admin::SystemMessage.accept_gdpr_message.title
+            button.close aria-label="Close" data-dismiss="modal" type="button"
+              span aria-hidden="true"  &times;
+          .modal-body
+            = Admin::SystemMessage.accept_gdpr_message.body
+          .modal-footer
+            = simple_form_for [current_user], url: url_for(action: 'update', controller: 'gdpr'), method: 'PUT' do |f|
+              .form-actions
+                .pull-right
+                  = f.submit t('accept'), class: 'btn btn-success', id: 'submit'
+                  = link_to 'Læs mere', gdpr_path(current_user), class: 'btn btn-info'
+    javascript:
+      $('#gdpr-acceptance-dialog').modal('show');

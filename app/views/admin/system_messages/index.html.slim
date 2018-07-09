@@ -15,3 +15,6 @@ h3 = t('system_messages')
             .pull-right
               .btn-group
                 = link_to t('edit'), edit_admin_system_message_path(admin_system_message), class: 'btn btn-sm btn-primary'
+.row
+  .col-sm-12
+    = link_to 'rediger abonnement besked', edit_admin_subscription_module_path(Admin::SystemSetup.subscription_module)

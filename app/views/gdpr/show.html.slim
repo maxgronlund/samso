@@ -1,0 +1,20 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-70
+  - if @user == current_user
+    .row
+      .col-sm-8
+        h5 = Admin::SystemMessage.general_data_protection_regulation.title
+        = Admin::SystemMessage.general_data_protection_regulation.body
+      .col-sm-4
+    .row
+      .col-sm-6
+          = simple_form_for [@user], url: url_for(action: 'update', controller: 'gdpr'), method: 'PUT' do |f|
+            .form-actions
+              .pull-right
+                = f.submit t('user.accept_gdpr'), class: 'btn btn-success', id: 'submit'
+                = link_to 'Mine data', user_path(current_user), class: 'btn btn-light'
+  - else
+    .row
+      .col-sm-6
+          .alert.alert-danger
+            'Du kan kun godkende databehandleraftalen for din egen konto

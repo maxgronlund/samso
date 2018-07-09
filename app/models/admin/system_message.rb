@@ -71,4 +71,44 @@ class Admin::SystemMessage < ApplicationRecord
         body: 'An confirmation email is send to your account'
       )
   end
+
+  # usage Admin::SystemMessage.accept_gdpr_message
+  def self.accept_gdpr_message
+    @accept_gdpr_message =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'accept_gdpr_message')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'accept_gdpr_message',
+        title: 'Godkendelse af databehandleraftale',
+        body: "Ved at klikke knappen 'godkend' accepterer du vores handelsbetingelser, for yderlig information kan du klikke på linket 'Læs mere'"
+      )
+  end
+
+  # usage Admin::SystemMessage.general_data_protection_regulation
+  def self.general_data_protection_regulation
+    @general_data_protection_regulation =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'general_data_protection_regulation')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'general_data_protection_regulation',
+        title: 'General Data Protection Regulation',
+        body: "Hos Samsø er din data i sikre hænder. På din profil kan du altid se din data, hente din data eller slette din data."
+      )
+  end
+
+  # usage Admin::SystemMessage.cancel_account_message
+  def self.cancel_account_message
+    @cancel_account_message =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'cancel_account_message')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'cancel_account_message',
+        title: 'Delete account',
+        body: "You are about to delete your account!<br/> All informations related to it will be destroyed and can't be recovered!
+        To confirm please type the following code<br/><strong>{{CANCEL_ACCOUNT_TOKEN}}</strong><br/> in the text field below"
+      )
+  end
 end

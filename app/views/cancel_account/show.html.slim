@@ -1,26 +1,28 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container.pt-70
-  .row
-    .col-sm-8
-      h4 = @user.name
-    .col-sm-4
-      .pull-right
-        'Abonnonet NR.
-        strong = @user.legacy_subscription_id
-  .row
-    .col-sm-3
-      'Du er ved at slette din konto, for at slette den skal indtaste din email her og klikke på OK
-      = simple_form_for [@user] do |f|
-        = f.error_notification
+  - if @user == current_user
+    .row
+      .col-sm-8
+        h4 = @user.name
+      .col-sm-4
+    .row
+      .col-sm-6
+          = simple_form_for [@user], url: url_for(action: 'destroy', controller: 'cancel_account'), method: 'DELETE' do |f|
+            = f.error_notification
 
-        .form-inputs
-          = f.input :delete_account, label: 'email', placeholder: 'Skriv din email her', required: true
-
-
-
-        .form-actions
-          .pull-right
-            = f.submit t('save'), class: 'btn btn-primary', id: 'submit'
-
-
-
+            .alert.alert-warning
+              = simple_format @cancel_account_message
+            = f.input :cancel_account_token,
+              label: 'kode',
+              placeholder: 'skriv koden her',
+              required: true
+            .form-actions
+              .pull-right
+              = f.submit t('user.delete_account'), class: 'btn btn-danger', id: 'submit'
+  - else
+    .row
+      .col-sm-6
+          .alert.alert-danger
+            'Du kan kun slette din egen konto, hvis du er administrator kan du slette en konto fra
+            - if admin?
+              = link_to 'Brugere', admin_users_path

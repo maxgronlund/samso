@@ -5,7 +5,7 @@ class User < ApplicationRecord
   multisearchable against: %i[name email]
   pg_search_scope :search_by_name_or_emai, against: %i[name email legacy_subscription_id]
   has_secure_password
-  attr_accessor :delete_avatar, :validate_address, :delete_account
+  attr_accessor :delete_avatar, :validate_address, :cancel_account_token
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :e_paper_tokens, dependent: :destroy
@@ -98,28 +98,38 @@ class User < ApplicationRecord
   end
 
   def active_subscription?
-    valid_subscriptions.any?
+    @active_subscription ||=
+      valid_subscriptions.any?
   end
 
   def no_active_subscription?
-    valid_subscriptions.empty?
+    @no_active_subscription ||=
+      valid_subscriptions.empty?
+  end
+
+  def last_valid_subscription
+    @last_valid_subscription ||=
+      valid_subscriptions.last
   end
 
   def valid_subscriptions
     @valid_subscriptions ||=
       subscriptions
       .where(
-        'start_date <= :today AND end_date >= :today',
-        today: Date.today.beginning_of_day
+        'start_date <= :start_date AND end_date >= :end_date',
+        start_date: Date.today.beginning_of_day,
+        end_date: Date.today.beginning_of_day
       )
   end
 
-  def expired_subscriber?
-    return false unless subscriptions.any?
-    return false if access_to_subscribed_content?
-    no_active_subscription?
-    # subscriptions.where('end_date >= :today', today: Date.today).any?
+  def subscription_id
+    return last_valid_subscription.subscription_id if last_valid_subscription.present?
+    legacy_subscription_id + '!'
+  end
 
+  def expired_subscriber?
+    return false if access_to_subscribed_content?
+    subscriptions.any? && no_active_subscription?
   end
 
   def self.super_admin

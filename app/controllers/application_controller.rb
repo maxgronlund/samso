@@ -80,6 +80,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :navbar_style
 
+  def gdpr_acceptance_missing?
+    return false if current_user.nil?
+    !current_user.gdpr_accepted
+  end
+  helper_method :gdpr_acceptance_missing?
+
   protected
 
   def set_default_page

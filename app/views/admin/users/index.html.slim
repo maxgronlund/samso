@@ -36,15 +36,17 @@ br
           td = user.sanitized_email
           td = user.role_names
           td
-
-            - if user.active_subscription?
+            - if user.free_subscription
               .green-text
-                = user.legacy_subscription_id
+                'Gratis
+            - elsif user.active_subscription?
+              .green-text
+                = user.subscription_id
             - elsif user.expired_subscriber?
               .red-text
-                = user.legacy_subscription_id
+                = user.subscription_id
             - else
-              = user.legacy_subscription_id
+              = user.subscription_id
           td
             .pull-right
               .btn-group

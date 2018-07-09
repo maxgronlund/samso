@@ -16,6 +16,8 @@
         '&nbsp
         b = subscription_type.title
       = subscription_type.body
+      br
+      b =  number_to_currency(subscription_type.price, locale: I18n.locale, precision: 2, unit: t('currency_name'))
       hr
 
     .row
@@ -24,5 +26,6 @@
           - if current_user.nil?
             = link_to t('login'), new_session_path, class: 'btn btn-light'
             '&nbsp;
-          = submit_tag t('create_subscription'), class: "btn btn-success"
+          - if Admin::SubscriptionType.for_subscription.any?
+            = submit_tag t('create_subscription'), class: "btn btn-success"
   - session[:redirect_to] = request.url
