@@ -10,6 +10,7 @@
       = image_tag @admin_blog_post.image.url(:thumb)
   .col-md-6
     = f.input :video_url, input_html: {rows: '5'}
+    = link_to 'Vidio snippet hjælp', 'https://support.google.com/youtube/answer/171780?hl=en', target: 'top'
 
 = f.input :subtitle
 = f.input :teaser
