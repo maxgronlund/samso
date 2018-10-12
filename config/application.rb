@@ -25,6 +25,6 @@ module Samso
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :da
     config.time_zone = 'Copenhagen'
-    config.active_record.schema_format = :sql
+    # config.active_record.schema_format = :sql
   end
 end
