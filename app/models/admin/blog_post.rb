@@ -14,22 +14,22 @@ class Admin::BlogPost < ApplicationRecord
 
   pg_search_scope :search_by_content, against: %i[title body subtitle teaser signature]
   multisearchable against: %i[title body subtitle teaser signature]
-  # pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
+  pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
 
-  pg_search_scope(
-    :search_by_title_or_body,
-    against: %i(
-      title
-      body
-      subtitle
-      signature
-    ),
-    using: {
-      tsearch: {
-        dictionary: "english",
-      }
-    }
-  )
+  # pg_search_scope(
+  #   :search_by_title_or_body,
+  #   against: %i(
+  #     title
+  #     body
+  #     subtitle
+  #     signature
+  #   ),
+  #   using: {
+  #     tsearch: {
+  #       dictionary: "english",
+  #     }
+  #   }
+  # )
 
   validates :body, presence: true unless Rails.env == 'test'
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}

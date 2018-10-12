@@ -211,8 +211,7 @@ CREATE TABLE public.admin_blog_posts (
     image_file_size integer,
     image_updated_at timestamp without time zone,
     video_url text DEFAULT ''::text,
-    enable_comments boolean DEFAULT false,
-    tsv tsvector
+    enable_comments boolean DEFAULT false
 );
 
 
@@ -2281,13 +2280,6 @@ CREATE INDEX index_admin_blog_posts_on_post_page_id ON public.admin_blog_posts U
 
 
 --
--- Name: index_admin_blog_posts_on_tsv; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_admin_blog_posts_on_tsv ON public.admin_blog_posts USING gin (tsv);
-
-
---
 -- Name: index_admin_blog_posts_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2505,13 +2497,6 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
--- Name: admin_blog_posts tsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON public.admin_blog_posts FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv', 'pg_catalog.english', 'title', 'body', 'subtitle', 'signature');
-
-
---
 -- Name: comments fk_rails_03de2dc08c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2648,7 +2633,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180519085303'),
 ('20180519085712'),
 ('20180709091441'),
-('20181012112027'),
-('20181012143100');
+('20181012112027');
 
 
