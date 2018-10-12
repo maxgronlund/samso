@@ -1,5 +1,7 @@
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
+  include PgSearch
+
   attr_accessor :delete_image, :page_id
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true, optional: true
   belongs_to :user, class_name: 'User', counter_cache: true, optional: true
@@ -9,10 +11,26 @@ class Admin::BlogPost < ApplicationRecord
     large: '770x770>',
     full_size: '1110x1110>'
   }
-  include PgSearch
+
   pg_search_scope :search_by_content, against: %i[title body subtitle teaser signature]
   multisearchable against: %i[title body subtitle teaser signature]
-  pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
+  # pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
+
+  pg_search_scope(
+    :search_by_title_or_body,
+    against: %i(
+      title
+      body
+      subtitle
+      signature
+    ),
+    using: {
+      tsearch: {
+        dictionary: "english",
+      }
+    }
+  )
+
   validates :body, presence: true unless Rails.env == 'test'
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
