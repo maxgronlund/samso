@@ -12,6 +12,9 @@
   position: relative;
   display: none;
   width: 100%;
+  &.active {
+    display: block;
+  }
 }
 
 @media (-webkit-transform-3d) {
@@ -22,13 +25,13 @@
     transition: transform 0.6s ease-in-out;
     transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out, -o-transform 0.6s ease-in-out;
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+    backface-visibility: hidden;
     -webkit-perspective: 1000px;
-            perspective: 1000px;
+    perspective: 1000px;
   }
 }
 
-@supports ((-webkit-transform: translate3d(0, 0, 0)) or (transform: translate3d(0, 0, 0))) {
+@supports (-webkit-transform: translate3d(0, 0, 0)) or (transform: translate3d(0, 0, 0)) {
   .carousel-item {
     -webkit-transition: -webkit-transform 0.6s ease-in-out;
     transition: -webkit-transform 0.6s ease-in-out;
@@ -36,68 +39,52 @@
     transition: transform 0.6s ease-in-out;
     transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out, -o-transform 0.6s ease-in-out;
     -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+    backface-visibility: hidden;
     -webkit-perspective: 1000px;
-            perspective: 1000px;
+    perspective: 1000px;
   }
 }
 
-.carousel-item.active,
-.carousel-item-next,
-.carousel-item-prev {
-  /*
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  */
+.carousel-item-next, .carousel-item-prev {
   display: block;
 }
 
-.carousel-item-next,
-.carousel-item-prev {
+.carousel-item-next, .carousel-item-prev {
   position: absolute;
   top: 0;
 }
 
 @media (-webkit-transform-3d) {
-  .carousel-item-next.carousel-item-left,
-  .carousel-item-prev.carousel-item-right {
+  .carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {
     -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
-  .carousel-item-next,
-  .active.carousel-item-right {
+  .carousel-item-next, .active.carousel-item-right {
     -webkit-transform: translate3d(100%, 0, 0);
-            transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
-  .carousel-item-prev,
-  .active.carousel-item-left {
+  .carousel-item-prev, .active.carousel-item-left {
     -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
   }
 }
 
-@supports ((-webkit-transform: translate3d(0, 0, 0)) or (transform: translate3d(0, 0, 0))) {
-  .carousel-item-next.carousel-item-left,
-  .carousel-item-prev.carousel-item-right {
+@supports (-webkit-transform: translate3d(0, 0, 0)) or (transform: translate3d(0, 0, 0)) {
+  .carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {
     -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
-  .carousel-item-next,
-  .active.carousel-item-right {
+  .carousel-item-next, .active.carousel-item-right {
     -webkit-transform: translate3d(100%, 0, 0);
-            transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
-  .carousel-item-prev,
-  .active.carousel-item-left {
+  .carousel-item-prev, .active.carousel-item-left {
     -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
   }
 }
 
-.carousel-control-prev,
-.carousel-control-next {
+.carousel-control-prev, .carousel-control-next {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -107,25 +94,34 @@
   display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   width: 15%;
   color: #fff;
   text-align: center;
   opacity: 0.5;
 }
 
-.carousel-control-prev:focus, .carousel-control-prev:hover,
-.carousel-control-next:focus,
-.carousel-control-next:hover {
-  color: #fff;
-  text-decoration: none;
-  outline: 0;
-  opacity: .9;
+.carousel-control-prev {
+  &:focus, &:hover {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    opacity: .9;
+  }
+}
+
+.carousel-control-next {
+  &:focus, &:hover {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    opacity: .9;
+  }
 }
 
 .carousel-control-prev {
@@ -136,14 +132,13 @@
   right: 0;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
+.carousel-control-prev-icon, .carousel-control-next-icon {
   display: inline-block;
   width: 20px;
   height: 20px;
   background: transparent no-repeat center center;
   -webkit-background-size: 100% 100%;
-          background-size: 100% 100%;
+  background-size: 100% 100%;
 }
 
 .carousel-control-prev-icon {
@@ -166,51 +161,47 @@
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   padding-left: 0;
   margin-right: 15%;
   margin-left: 15%;
   list-style: none;
-}
-
-.carousel-indicators li {
-  position: relative;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 0 auto;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
-  max-width: 30px;
-  height: 3px;
-  margin-right: 3px;
-  margin-left: 3px;
-  text-indent: -999px;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.carousel-indicators li::before {
-  position: absolute;
-  top: -10px;
-  left: 0;
-  display: inline-block;
-  width: 100%;
-  height: 10px;
-  content: "";
-}
-
-.carousel-indicators li::after {
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  display: inline-block;
-  width: 100%;
-  height: 10px;
-  content: "";
-}
-
-.carousel-indicators .active {
-  background-color: #fff;
+  li {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    max-width: 30px;
+    height: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+    &::before {
+      position: absolute;
+      top: -10px;
+      left: 0;
+      display: inline-block;
+      width: 100%;
+      height: 10px;
+      content: "";
+    }
+    &::after {
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      display: inline-block;
+      width: 100%;
+      height: 10px;
+      content: "";
+    }
+  }
+  .active {
+    background-color: #fff;
+  }
 }
 
 .carousel-caption {

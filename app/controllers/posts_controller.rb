@@ -42,6 +42,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /admin/posts/1
   def update
+    ap post_params
     @blog = @post.blog
     if @post.update(post_params)
       redirect_to page_path(session[:page_id])

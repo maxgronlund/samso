@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 20180709091441) do
     t.string "locale"
     t.boolean "show_all_categories", default: false
     t.integer "featured_posts_pr_page", default: 0
+    t.boolean "show_search", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "show_search", default: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
   end
 
@@ -298,9 +298,9 @@ ActiveRecord::Schema.define(version: 20180709091441) do
     t.integer "blog_id"
     t.integer "posts_pr_page", default: 8
     t.boolean "show_all_categories", default: true
+    t.boolean "image_on_top", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "image_on_top", default: false
     t.index ["blog_id"], name: "index_admin_read_also_modules_on_blog_id"
   end
 

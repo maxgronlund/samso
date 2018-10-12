@@ -1,102 +1,50 @@
-  $ rails g scaffold content title body:text identifier:text position:integer contentable:references{polymorphic} --no-helper --no-assets --no-controller-specs --no-view-specs
-  $ rails g controller about index  --no-helper --no-assets --no-controller-specs
-
+rails g scaffold content title body:text identifier:text position:integer contentable:references{polymorphic} --no-helper --no-assets --no-controller-specs --no-view-specs
+rails g controller about index  --no-helper --no-assets --no-controller-specs
 rails g scaffold post title body:text identifier:text position:integer postable:references{polymorphic} --no-helper --no-assets --no-controller-specs
-
 rails g scaffold Page title menu_title position:integer active:boolean locale user:belongs_to  --no-helper --no-assets --no-controller-specs
 rails g scaffold Layout title menu_title position:integer active:boolean locale user:belongs_to  --no-helper --no-assets --no-controller-specs
-
 rails g scaffold PageModule page:belongs_to moduleable:references{polymorphic} slot_id:integer position:integer --no-helper --no-assets --no-controller-specs
-
-
 rails g scaffold TextModule body:text --no-helper --no-assets --no-controller-specs
-
 rails g migration AddImageAndTeaserToTextModules teaser:text
-
 rails g scaffold admin/carousel_module name layout --no-helper --no-assets --no-controller-specs
-
-
 rails g scaffold admin/carousel_slide title body:text position:integer admin_carousel_module:belongs_to --no-helper --no-assets --no-controller-specs
-
-
-# rails g migration AddPageToCarouselClide page:references
-
+rails g migration AddPageToCarouselClide page:references
 rails g migration AddLandingPageToAdminSystemSetup da_landing_page_id:integer en_landing_page_id:integer
-
 rails g scaffold admin/subscription_type title body:text internet_version:boolean print_version:boolean price:integer locale active:boolean --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/subscription subscription_type:belongs_to duration start_date:date end_date:date user:belongs_to --no-helper --no-assets --no-controller-specs
-
-
 rails g scaffold admin/subscription_module name body layout --no-helper --no-assets --no-controller-specs
-
 rails g controller payments new create show --no-helper --no-assets --no-controller-specs
-
 rails g scaffold payment name email address postal_code_and_city password password_confirmation news_letter:boolean subscription:belongs_to user:belongs_to --no-helper --no-assets --no-controller-specs
-
 rails g migration add_login_required_title_to_admin_subscriptions login_required_title login_required_body:text
-
-
 rails g scaffold admin/blog_module name body layout --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/blog_post title body:text position:integer --no-helper --no-assets --no-controller-specs
-
 rails g migration AddImageToBlogPost
-
 rails g migration AddPostPageToAdminSystemSetup da_post_page_id:integer en_post_page_id:integer
-
 rails g scaffold admin/post_module name --no-helper --no-assets --no-controller-specs
 rails g scaffold admin/dmi_module forecast_duration --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/gallery_module name body:text layout --no-helper --no-assets --no-controller-specs
 rails g scaffold admin/gallery_image title body:text admin/gallery_module:belongs_to user:belongs_to --no-helper --no-assets --no-controller-specs
 rails g migration add_image_to_admin_gallery_images
-
-
 rails g scaffold admin/image_module layout --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/vide_module layout snippet --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/footer title locale about_link about_link_name email email_name terms_of_usage_link terms_of_usage_link_name info copyright  --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/csv_import name import_type comments:text summary:text --no-helper --no-assets --no-controller-specs
-
 rails g migration add_legazy_id_to_users legacy_id:integer
-
 rails g migration add_page_id_to_text_moduels page_id:integer
-
 rails g migration add_colors_to_page_modules color_row_1 color_row_2 color_row_3
-
 rails g controller session new  --no-helper --no-assets --no-controller-specs
-
 rails g controller reset_passwords index --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/system_messages title body:text identifier locale --no-helper --no-assets --no-controller-specs
-
 rails g scaffold PageColModule page_col:belongs_to moduleable:references{polymorphic} position:integer --no-helper --no-assets --no-controller-specs
-
 rails g model admin/module_names name
-
-
 $ bin/rails g scaffold admin/page_link name page_id background_color color  --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/vertical_menu_content name  --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/vertical_menu_link title page_id:integer url active:boolean color background_color admin_vertical_menu_content:belongs_to --no-helper --no-assets --no-controller-specs
-
 rails g scaffold admin/calendar admin_calendar_module:belongs_to title --no-helper --no-assets
 rails g scaffold admin/calendar_event admin_calendar:belongs_to title --no-helper --no-assets
-
 rails g scaffold admin/blog_post_category locale name --no-helper --no-assets
-
-
-
 rails g controller admin/articles index --no-helper --no-assets
 rails g controller admin/click_on_adverticements update --no-helper --no-assets
-
-
 rails g scaffold admin/adverticement title body:text price_pr_view:decimal views:integer price_pr_click:decimal clicks:integer start_date:datetime end_date:datetime active:boolean featured:boolean featured_price:decimal price:decimal url admin_system_setups:belongs_to --no-helper --no-assets
-
 rails g scaffold_module advertisement
-
 rails g scaffold_module e_page title snippet

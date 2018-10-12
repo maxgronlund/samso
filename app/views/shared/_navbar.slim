@@ -6,46 +6,47 @@
           = image_tag navbar_logo, class: 'img-fluid'
 
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
+  .container-fluid
+    = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
 
-  /a.navbar-brand href="#"  Navbar
-  button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
-    span.navbar-toggler-icon
+    /a.navbar-brand href="#"  Navbar
+    button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+      span.navbar-toggler-icon
 
-  #navbarSupportedContent.collapse.navbar-collapse
-    ul.navbar-nav.mr-auto
-      - menu.each do |page|
-        = render 'shared/navbar_link',
-          link_name: page.menu_title,
-          link_url: page_path(page),
-          link: page_path(page),
-          top_page: top_page
-    / .my-2.my-lg-0
-    /   form.form-inline
-    /     input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="text" /
-    /     button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        - menu.each do |page|
+          = render 'shared/navbar_link',
+            link_name: page.menu_title,
+            link_url: page_path(page),
+            link: page_path(page),
+            top_page: top_page
+      / .my-2.my-lg-0
+      /   form.form-inline
+      /     input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="text" /
+      /     button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
 
-    .my-2.my-lg-0
-      ul.navbar-nav
-        - if  admin?
-          li.nav-item
-            = render 'shared/navbar_link',
-              link_name: t('page.edit'),
-              link_url: admin_page_path(@page)
-          li.nav-item
-            = render 'shared/navbar_link',
-              link_name: 'Admin',
-              link_url: admin_articles_url
+      .my-2.my-lg-0
+        ul.navbar-nav
+          - if  admin?
+            li.nav-item
+              = render 'shared/navbar_link',
+                link_name: t('page.edit'),
+                link_url: admin_page_path(@page)
+            li.nav-item
+              = render 'shared/navbar_link',
+                link_name: 'Admin',
+                link_url: admin_articles_url
 
-        - if user_signed_in?
-          li.nav-item
-            = link_to t('user_account'), user_path(@current_user), class: 'nav-link'
-          li.nav-item
-            = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'
+          - if user_signed_in?
+            li.nav-item
+              = link_to t('user_account'), user_path(@current_user), class: 'nav-link'
+            li.nav-item
+              = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'
 
-        - else
-          li.nav-item
-            = link_to t('login'), new_session_path, class: 'nav-link'
+          - else
+            li.nav-item
+              = link_to t('login'), new_session_path, class: 'nav-link'
 
 
 / nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top

@@ -8,6 +8,7 @@
               'Featured
           .category-name
             = post.category_name
+          .start_date = l start_date unless start_date.nil?
           h4 = post.title
           .signature = post.signature
           = post.teaser

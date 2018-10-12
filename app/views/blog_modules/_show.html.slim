@@ -22,9 +22,16 @@
   - featured_posts  = blog_module.featured_posts
   - paginated_posts = blog_module.paginated_posts(params[:page]) - featured_posts
   - featured_posts.each do |post|
-    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post, featured: true
+    - start_date = post.start_date
+    = render "blog_modules/layouts/#{post.layout}",
+      blog_module: blog_module,
+      post: post, featured: true,
+      start_date: post.start_date
   - paginated_posts.each do |post|
-    = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post, featured: false
+     = render "blog_modules/layouts/#{post.layout}",
+      blog_module: blog_module,
+      post: post, featured: false,
+      start_date: post.start_date
 
   .row.mt-10
     .col-sm-12

@@ -1,6 +1,6 @@
 # README
 
-Shoe-lace
+
 
 A framework for building custom web-app.
 it trades explicity over implicity

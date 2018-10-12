@@ -37,7 +37,8 @@ class PageRow < ApplicationRecord
   ].freeze
 
   def style
-    page_style = "background-image: url(#{background_image_url});"
+    page_style = ''
+    page_style += "background-image: url(#{background_image_url});" if background?
     page_style += "padding: #{padding_top}px 0 #{padding_bottom}px;"
     page_style + "background-color: #{background_color}"
   end
