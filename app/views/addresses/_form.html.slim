@@ -1,0 +1,12 @@
+= simple_form_for(@address) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :user
+    = f.input :name
+    = f.input :address
+    = f.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
+    = f.input :city, input_html: { class: 'city-name-autofill' }
+
+  .form-actions
+    = f.button :submit

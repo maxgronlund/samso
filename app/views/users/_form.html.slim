@@ -6,16 +6,20 @@
     = f.input :name
     = f.input :email
 
+    / - if user_signed_in? && @user.avatar.exists?
+    /   = image_tag @user.avatar.url(:square)
+    /   = f.input :delete_avatar, as: :boolean
+    / - if session[:print_version] == 'true'
+    /   = f.input :address, required: true
+    /   = f.input :postal_code_and_city, required: true
+    /   = f.hidden_field :validate_address, value: true
+    /= f.input :avatar, as: :file
+    = f.simple_fields_for :parts do |address|
+      = address.input :address
+      = address.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
+      = address.input :city, input_html: { class: 'city-name-autofill' }
     = f.input :password, placeholder: '••••••••'
     = f.input :password_confirmation, placeholder: '••••••••'
-    - if user_signed_in? && @user.avatar.exists?
-      = image_tag @user.avatar.url(:square)
-      = f.input :delete_avatar, as: :boolean
-    - if session[:print_version] == 'true'
-      = f.input :address, required: true
-      = f.input :postal_code_and_city, required: true
-      = f.hidden_field :validate_address, value: true
-    = f.input :avatar, as: :file
 
   .form-actions
     .pull-right

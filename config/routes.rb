@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :addresses
   #get 'cancel_account/show'
   resources :comments
   namespace :api do

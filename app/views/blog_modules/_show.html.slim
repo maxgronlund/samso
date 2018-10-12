@@ -17,7 +17,11 @@
     'Nothing found
   - else
     - found_posts.each do |post|
-      = render "blog_modules/layouts/#{post.layout}", blog_module: blog_module, post: post, featured: true
+      = render "blog_modules/layouts/#{post.layout}",
+        blog_module: blog_module,
+        post: post,
+        featured: true,
+      start_date: post.start_date
 - else
   - featured_posts  = blog_module.featured_posts
   - paginated_posts = blog_module.paginated_posts(params[:page]) - featured_posts

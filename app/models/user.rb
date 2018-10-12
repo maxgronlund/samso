@@ -13,7 +13,8 @@ class User < ApplicationRecord
   has_many :gallery_images, class_name: 'Admin::GalleryImage'
   has_many :blog_posts, class_name: 'Admin::BlogPost'
   has_many :comments, dependent: :destroy
-
+  has_many :addresses, dependent: :destroy
+  accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles
 
   has_attached_file :avatar, styles: {

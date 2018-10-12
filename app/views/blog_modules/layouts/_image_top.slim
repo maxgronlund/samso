@@ -12,6 +12,7 @@
               'Featured
           .category-name
             = post.category_name
+          .start_date = l start_date unless start_date.nil?
           h3 = post.title
           .signature = post.signature
           = post.teaser
@@ -20,4 +21,8 @@
             .for-subscribers
               'FOR ABONNENTER
   - else
-    = render 'blog_modules/layouts/no_image', blog_module: blog_module, post: post, featured: featured
+    = render 'blog_modules/layouts/no_image',
+      blog_module: blog_module,
+      post: post,
+      featured: featured,
+      start_date: start_date
