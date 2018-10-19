@@ -29,6 +29,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if @user.addresses.blank?
+      @user.addresses.build
+    end
     @user.password = nil
     @user.email = nil if @user.fake_email?
     render_403 unless current_user.can_access?(@user)
@@ -68,6 +71,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    ap user_params
+    ap @user.address
     if @user.update(user_params)
       redirect_to @user
     else
@@ -120,9 +125,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :delete_avatar,
-      :address,
-      :postal_code_and_city,
-      :validate_address
+      addresses_attributes: [ :id, :address, :zipp_code, :city]
     )
   end
 end

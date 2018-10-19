@@ -4,6 +4,12 @@ class Admin::Subscription < ApplicationRecord
   belongs_to :subscription_type, class_name: 'Admin::SubscriptionType', counter_cache: true
   belongs_to :user
   has_one :payment
+  has_many(
+    :subscription_addresses,
+    class_name: 'SubscriptionAddress',
+    foreign_key: :admin_subscription_id,
+    dependent: :destroy
+  )
 
   def type_name
     return 'Imported' if subscription_type.nil?
@@ -13,6 +19,10 @@ class Admin::Subscription < ApplicationRecord
 
   def expired?
     end_date < Time.zone.today
+  end
+
+  def print_version?
+    subscription_type&.print_version?
   end
 
   # Admin::Subscription.last_subscription

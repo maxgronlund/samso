@@ -14,7 +14,7 @@
     /   = f.input :postal_code_and_city, required: true
     /   = f.hidden_field :validate_address, value: true
     /= f.input :avatar, as: :file
-    = f.simple_fields_for :parts do |address|
+    = f.simple_fields_for :addresses do |address|
       = address.input :address
       = address.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
       = address.input :city, input_html: { class: 'city-name-autofill' }

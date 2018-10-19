@@ -15,7 +15,6 @@ da:
         end_date: Slut date
         on_hold_date: På pause dato
 
-
     models:
       admin/subscription: Abonnement
   subscription:
@@ -24,3 +23,4 @@ da:
     start_date: Start dato
     end_date: Slut dato
     on_hold_date: Pause dato
+    delivery_address: Forsendelses adresse

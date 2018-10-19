@@ -2,6 +2,21 @@
 class Admin::BlogPost < ApplicationRecord
   include PgSearch
 
+
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  settings do
+    mappings dynamic: false do
+      indexes :title, type: :text
+      indexes :subtitle, type: :text, analyzer: :danish
+      indexes :teaser, type: :text, analyzer: :danish
+      indexes :body, type: :text, analyzer: :danish
+      indexes :published, type: :boolean
+    end
+  end
+
+
   attr_accessor :delete_image, :page_id
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true, optional: true
   belongs_to :user, class_name: 'User', counter_cache: true, optional: true

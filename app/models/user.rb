@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :blog_posts, class_name: 'Admin::BlogPost'
   has_many :comments, dependent: :destroy
   has_many :addresses, dependent: :destroy
+  has_many :subscription_addresses, dependent: :destroy
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles
 
@@ -30,14 +31,15 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :name, presence: true
   validates_confirmation_of :password
-  validates_with UserAddressValidator, if: :validate_subscription_address
+  # validates_with UserAddressValidator, if: :validate_subscription_address
+  validates_with User::Validator
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
 
-  def validate_subscription_address
-    # ap @validate_address
-  end
+  # def validate_subscription_address
+  #   # ap @validate_address
+  # end
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?

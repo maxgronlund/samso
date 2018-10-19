@@ -102,3 +102,9 @@ Things you may want to cover:
 * Huray ported
 
 [![Build Status](https://semaphoreci.com/api/v1/synthmax/samso/branches/master/badge.svg)](https://semaphoreci.com/synthmax/samso)
+
+
+$ Admin::BlogPost.__elasticsearch__.delete_index!
+$ Admin::BlogPost.import force: true
+
+

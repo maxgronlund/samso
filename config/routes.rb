@@ -96,6 +96,7 @@ Rails.application.routes.draw do
     resources :pages, only: %i[show]
 
     resources :sessions, only: %i[new destroy create index]
+    resources :subscription_addresses, only: %i[edit update]
     resources :subscriptions
     get '/:locale' => 'home#index'
     root to: "home#index"

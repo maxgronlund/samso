@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_112027) do
+ActiveRecord::Schema.define(version: 2018_10_15_075909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_10_12_112027) do
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address_type", default: "user_address"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -518,6 +519,17 @@ ActiveRecord::Schema.define(version: 2018_10_12_112027) do
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
+  create_table "subscription_addresses", force: :cascade do |t|
+    t.bigint "admin_subscription_id"
+    t.bigint "address_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_subscription_addresses_on_address_id"
+    t.index ["admin_subscription_id"], name: "index_subscription_addresses_on_admin_subscription_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "signature"
@@ -562,4 +574,6 @@ ActiveRecord::Schema.define(version: 2018_10_12_112027) do
   add_foreign_key "pages", "admin_footers"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"
+  add_foreign_key "subscription_addresses", "addresses"
+  add_foreign_key "subscription_addresses", "admin_subscriptions"
 end

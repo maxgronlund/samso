@@ -26,5 +26,4 @@ namespace :addresses do
           city: postal_code_and_city.last
         )
   end
-
 end

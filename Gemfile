@@ -35,6 +35,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'awesome_print'
 
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # gem 'bootstrap', '~> 4.0.0.alpha6'

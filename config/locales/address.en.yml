@@ -1,0 +1,14 @@
+da:
+  activerecord:
+    models:
+      address: Addresse
+    attributes:
+      address:
+        address: Addresse
+        zipp_code: Zipp code
+        city: City
+
+  address:
+    index: Addresses
+    new: Create new address
+    edit: Edit address

@@ -45,6 +45,7 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
+    ap permitted_user_params
     if @user.update(user_params)
       redirect_to admin_users_path
     else
@@ -73,7 +74,7 @@ class Admin::UsersController < AdminController
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_email(sanitized_params[:email])
-    User::Service.sanitize_password(sanitized_params)
+    #User::Service.sanitize_password(sanitized_params)
     sanitized_params
   end
 

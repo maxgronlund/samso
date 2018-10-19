@@ -33,6 +33,7 @@
                 th = t('subscription.start_date')
                 th = t('subscription.end_date')
                 th Gyldig
+                th = t('subscription.delivery_address')
                 / th = t('subscription.on_hold_date')
                 - if admin?
                   th
@@ -44,6 +45,7 @@
                   td = l subscription.start_date
                   td = l subscription.end_date
                   td = subscription.expired? ? 'Udløbet' : 'Ja'
+                  th = link_to t('edit'), edit_subscription_address_path(subscription)
                   / td = l subscription.on_hold_date unless subscription.on_hold_date.nil?
                   - if admin?
                     td
