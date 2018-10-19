@@ -117,4 +117,7 @@ Rails.application.configure do
   }
 
   config.secret_key_base = ENV.fetch('SECRET_KEY_BASE')
+
+  Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['SEARCHBOX_SSL_URL']
+
 end

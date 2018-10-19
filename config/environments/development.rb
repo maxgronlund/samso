@@ -74,4 +74,9 @@ Rails.application.configure do
       s3_region: Rails.application.secrets.s3_region
     }
   }
+
+  Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['SEARCHBOX_SSL_URL']
+
+
 end
+
