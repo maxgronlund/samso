@@ -1,20 +1,33 @@
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
-  include PgSearch
-
+  # include PgSearch
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  settings do
-    mappings dynamic: false do
-      indexes :title, type: :text
-      indexes :subtitle, type: :text, analyzer: :danish
-      indexes :teaser, type: :text, analyzer: :danish
-      indexes :body, type: :text, analyzer: :danish
-      indexes :published, type: :boolean
+  index_name    "articles-#{Rails.env}"
+  document_type "post"
+
+
+
+
+
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :title, analyzer: 'danish', type: 'text'
+      indexes :body, analyzer: 'danish', type: 'text'
     end
   end
+
+  # settings do
+  #   mappings dynamic: false do
+  #     indexes :title, type: :text
+  #     indexes :subtitle, type: :text, analyzer: :danish
+  #     indexes :teaser, type: :text, analyzer: :danish
+  #     indexes :body, type: :text, analyzer: :danish
+  #     # indexes :published, type: :boolean
+  #   end
+  # end
 
 
   attr_accessor :delete_image, :page_id
@@ -27,9 +40,9 @@ class Admin::BlogPost < ApplicationRecord
     full_size: '1110x1110>'
   }
 
-  pg_search_scope :search_by_content, against: %i[title body subtitle teaser signature]
-  multisearchable against: %i[title body subtitle teaser signature]
-  pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
+  # pg_search_scope :search_by_content, against: %i[title body subtitle teaser signature]
+  # multisearchable against: %i[title body subtitle teaser signature]
+  # pg_search_scope :search_by_title_or_body, against: %i[title body subtitle teaser signature]
 
   # pg_search_scope(
   #   :search_by_title_or_body,
@@ -57,6 +70,62 @@ class Admin::BlogPost < ApplicationRecord
       [I18n.t('blog_post.image_left'), 'image_left'],
       [I18n.t('blog_post.image_right'), 'image_right']
     ].freeze
+
+  # def self.search_published(query)
+  #   __elasticsearch__.search({
+  #     query: {
+  #       bool: {
+  #         must: [
+  #           {
+  #             multi_match: {
+  #               query: query,
+  #               fields: [:title, :body, :signature]
+  #             }
+  #           }
+  #         ]
+  #       }
+  #     }
+  #   })
+  # end
+
+  def self.elasticsearch(query)
+    __elasticsearch__.search(
+      {
+        query: {
+          multi_match: {
+            query: query,
+            fields: ['title^10', 'body', 'signature^20']
+          }
+        },
+        highlight: {
+          pre_tags: ['<em class="label-highlight">'],
+          post_tags: ['</em>'],
+          fields: {
+            signature:   { number_of_fragments: 0 },
+            title:   { number_of_fragments: 0 },
+            body: { fragment_size: 50 }
+          }
+        }
+      }
+    )
+  end
+
+  # def self.demo_search(query)
+  #   response = self.search(
+  #       query:     { match:  { title: query } },
+  #       highlight: {
+  #         pre_tags: ['<em class="label-highlight">'],
+  #         post_tags: ['</em>'],
+  #         fields: {
+  #           title:   { number_of_fragments: 0 },
+  #           body: { fragment_size: 25 }
+  #         }
+  #       }
+  #     )
+  #   response.results#.first.highlight.title
+  # end
+
+  # h({query: {match: { title: "asdf" }}, sort: [title: {order:'desc'}]})
 
   def show_on_page
     Page.find_by(id: post_page_id) || Page.find_by(locale: I18n.locale)

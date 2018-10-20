@@ -105,6 +105,14 @@ Things you may want to cover:
 
 
 $ Admin::BlogPost.__elasticsearch__.delete_index!
+$ Admin::BlogPost.create_index!
+$ Admin::BlogPost.__elasticsearch__.refresh_index!
+$ Admin::BlogPost.__elasticsearch__.create_index! force: true
 $ Admin::BlogPost.import force: true
+$ Admin::BlogPost.search('biblioteket').size
 
+
+Admin::BlogPost.__elasticsearch__.client.indices.delete index: Admin::BlogPost.index_name rescue nil
+Admin::BlogPost.__elasticsearch__.create_index! force: true
+Admin::BlogPost.__elasticsearch__.refresh_index!
 

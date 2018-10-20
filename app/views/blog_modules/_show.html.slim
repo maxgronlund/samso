@@ -1,10 +1,14 @@
 - blog_module = modulable
 - if blog_module.show_search
-  = form_tag blog_path(@page), method: 'get' do
-    = hidden_field_tag 'blog_module_id', blog_module.id
+  / = form_tag search_index_path, method: 'get' do
+  /   = text_field_tag :query, params[:query]
+  /   = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
+
+
+  = form_tag search_index_path, method: 'get' do
     .row.mb-10
       .col-sm-7
-        = text_field_tag :search, params[:search],
+        = text_field_tag :query, params[:query],
         placeholder: 'Skriv søgeord...',
         class: 'form-control'
       .col-sm-5

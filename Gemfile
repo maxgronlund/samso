@@ -37,6 +37,8 @@ gem 'awesome_print'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 
 
 # Use Capistrano for deployment

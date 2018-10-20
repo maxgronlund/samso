@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :addresses
   #get 'cancel_account/show'
   resources :comments
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /da|en/ do
+    resources :search, only: %i[index show]
     resources :acceped_payments
     resources :advertisements
     resources :cancel_account, only: %i[show destroy]
