@@ -1828,16 +1828,21 @@ body > .container
   padding: 0.25em 0.5em
   border-radius: 5px
 
-
 .truncate-search
+  font-size: 14px
+  margin: .5rem 0
+  height: 90px
   position: relative
-  height: 8em
   overflow: hidden
 
-.truncate-search-shadow
+.truncate-search:after
+  content: ""
   position: absolute
-  top: 6em
+  bottom: 0
+  left: 0
   width: 100%
-  height: 2em
-  background: linear-gradient(transparent, white)
+  height: 70%
+  background: -webkit-gradient(linear,left bottom,left top,from(#fff),to(hsla(0,0%,100%,0))) no-repeat
+  background: linear-gradient(0deg,#fff,hsla(0,0%,100%,0)) no-repeat
+
 

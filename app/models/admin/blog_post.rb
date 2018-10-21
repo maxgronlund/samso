@@ -16,6 +16,7 @@ class Admin::BlogPost < ApplicationRecord
     mappings dynamic: 'false' do
       indexes :title, analyzer: 'danish', type: 'text'
       indexes :body, analyzer: 'danish', type: 'text'
+      indexes :signature, analyzer: 'danish', type: 'text'
     end
   end
 
@@ -94,7 +95,7 @@ class Admin::BlogPost < ApplicationRecord
         query: {
           multi_match: {
             query: query,
-            fields: ['title^10', 'body', 'signature^20']
+            fields: [ 'signature^20', 'title^10', 'body']
           }
         },
         highlight: {

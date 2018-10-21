@@ -71,7 +71,8 @@ class Admin::BlogPostsController < AdminController
         :start_date,
         :blog_id,
         :video_url,
-        :enable_comments
+        :enable_comments,
+        :signature
       )
   end
   # rubocop:enable Metrics/MethodLength
