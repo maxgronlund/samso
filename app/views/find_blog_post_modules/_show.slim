@@ -1,0 +1,11 @@
+- find_blog_post_module = modulable
+= form_tag search_index_path, method: 'get' do
+  .row.mb-10
+    .col-sm-7
+      = text_field_tag :query, params[:query],
+      placeholder: find_blog_post_module.name,
+      class: 'form-control'
+    .col-sm-5
+      .btn-group
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
+        / = link_to t('user.search.show_all'), page_path(find_blog_post_module.page), class: 'btn btn-light'

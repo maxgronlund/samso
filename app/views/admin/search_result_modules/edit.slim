@@ -1,0 +1,17 @@
+.row
+  h3 = t('edit_model', model_name: @search_result_module.model_name.human)
+
+= simple_form_for [:admin, @search_result_module], url: url_for(action: 'update', controller: 'admin/search_result_modules'), method: 'put' do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-3
+        = f.input :position, as: :integer
+        = f.input :access_to, collection: PageColModule.permissions, include_blank: false
+      .col-sm-3
+        = f.input :name
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-primary'
+

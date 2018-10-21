@@ -1,0 +1,18 @@
+da:
+  activerecord:
+    models:
+      admin/search_result_module:
+        one: søgeresulat
+        other: søgeresultater
+    attributes:
+      admin/search_result_module:
+        name:  Søgeresultat
+
+  search_result_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/search_result_module:
+    name: Søgeresultat modul
+    nothing_found: Din søgning gav ikke noget resultat

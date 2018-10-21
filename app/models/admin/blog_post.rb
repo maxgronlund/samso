@@ -103,7 +103,7 @@ class Admin::BlogPost < ApplicationRecord
           fields: {
             signature:   { number_of_fragments: 0 },
             title:   { number_of_fragments: 0 },
-            body: { fragment_size: 45 }
+            body: { fragment_size: 145 }
           }
         }
       }

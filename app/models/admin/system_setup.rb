@@ -11,6 +11,10 @@ class Admin::SystemSetup < ApplicationRecord
     Page.find_by(locale: locale, id: landing_page_id)
   end
 
+  def search_page
+    Page.find_by(locale: locale, id: search_page_id)
+  end
+
   def subscription_page
     Page.find_by(locale: locale, id: subscription_page_id)
   end

@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      admin/search_result_module:
+        one: search result
+        other: search results
+    attributes:
+      admin/search_result_module:
+        name:  Search result
+
+  search_result_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/search_result_module:
+    name: SearchResult module
+    nothing_found: Nothing found

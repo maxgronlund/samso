@@ -17,6 +17,7 @@ namespace :system do
         build_system_setup(page, landing_page, suscription_page)
       end
       create_system_messages
+      create_search_pages
     end
   end
 
@@ -29,6 +30,27 @@ namespace :system do
         locale: locale[:locale]
       }
     Admin::Footer.where(params).first_or_create(params)
+  end
+
+  def create_search_pages
+    pages_options =
+      [
+        { locale: 'en', name: 'Search results' },
+        { locale: 'da', name: 'Søge resultater'}
+      ]
+    pages_options.each do |page_options|
+      footer = build_footer(page_options)
+      page =
+        build_page(
+          page_options[:name],
+          footer.id,
+          page_options[:locale]
+        )
+      system_setup =
+        Admin::SystemSetup
+        .find_by(locale: page_options[:locale])
+      system_setup.update(search_page_id: page.id)
+    end
   end
 
   def build_page(name, footer_id, locale)

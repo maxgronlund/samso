@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/find_blog_post_module:
+        one: find_blog_post
+        other: find_blog_posts
+    attributes:
+      admin/find_blog_post_module:
+        name:  Name
+
+  find_blog_post_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/find_blog_post_module:
+    name: FindBlogPost module

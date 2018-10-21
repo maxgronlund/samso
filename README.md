@@ -99,6 +99,8 @@ Things you may want to cover:
 
 * building a module
   $ rails g scaffold_module MODULE_NAME (singular)
+
+  in routes
 * Huray ported
 
 [![Build Status](https://semaphoreci.com/api/v1/synthmax/samso/branches/master/badge.svg)](https://semaphoreci.com/synthmax/samso)
@@ -109,10 +111,7 @@ $ Admin::BlogPost.create_index!
 $ Admin::BlogPost.__elasticsearch__.refresh_index!
 $ Admin::BlogPost.__elasticsearch__.create_index! force: true
 $ Admin::BlogPost.import force: true
-$ Admin::BlogPost.search('biblioteket').size
 
 
-Admin::BlogPost.__elasticsearch__.client.indices.delete index: Admin::BlogPost.index_name rescue nil
-Admin::BlogPost.__elasticsearch__.create_index! force: true
-Admin::BlogPost.__elasticsearch__.refresh_index!
+
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_15_075909) do
+ActiveRecord::Schema.define(version: 2018_10_21_192128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,12 @@ ActiveRecord::Schema.define(version: 2018_10_15_075909) do
     t.index ["blog_id"], name: "index_admin_featured_post_modules_on_blog_id"
   end
 
+  create_table "admin_find_blog_post_modules", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "admin_footers", force: :cascade do |t|
     t.string "title", default: ""
     t.string "locale"
@@ -316,6 +322,12 @@ ActiveRecord::Schema.define(version: 2018_10_15_075909) do
     t.index ["blog_id"], name: "index_admin_read_also_modules_on_blog_id"
   end
 
+  create_table "admin_search_result_modules", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "admin_subscription_modules", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -379,6 +391,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_075909) do
     t.string "logo_content_type"
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer "search_page_id"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
