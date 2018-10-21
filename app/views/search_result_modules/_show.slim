@@ -4,8 +4,8 @@
   h3 = t('admin/search_result_module.nothing_found')
 - else
   - @blog_posts.each_with_hit do |blog_post, hit|
-    b = hit.try(:highlight)&.signature.present?
-    b = hit.try(:highlight)&.signature.present? ? hit.highlight.title.join.html_safe : blog_post.title
+    - next if blog_post.start_date > Time.zone.now
+    b = hit.try(:highlight)&.title.present? ? hit.highlight.title.join.html_safe : blog_post.title
     .start_date = l blog_post.start_date unless blog_post.start_date.nil?
     i = hit.try(:highlight)&.signature.present? ? hit.highlight.signature.join.html_safe : blog_post.signature
     / .truncate-search
