@@ -14,6 +14,7 @@ da:
         blog_id: Kategori
         video_url: Video snippet
         enable_comments: Brugere kan kommenterer
+        show_facebook_comments: Vis Facebook kommentarer
         free_content: Læs gratis
 
   blog_post:
@@ -25,6 +26,8 @@ da:
     image_top: Billed over artikkel
     image_left: Billed til venstre
     image_right: Billed til højre
+    enable_comments_hint: Internt system
+    show_facebook_comments_hint: "*Check system opsætning"
 
   admin/blog_post:
     name: Blog post modul

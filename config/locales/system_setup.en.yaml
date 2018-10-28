@@ -10,5 +10,6 @@ en:
         post_page_id: Read post page
         welcome_page_id: Welcome page
         locale: Language
+        show_facebook_comments: Show Facebook comments
     models:
       admin/system_setup: System configuration

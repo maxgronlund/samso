@@ -34,7 +34,8 @@ class Admin::SystemSetupsController < AdminController
       :subscription_page_id,
       :logo,
       :delete_logo,
-      :background_color
+      :background_color,
+      :fb_snippet
     )
   end
 end

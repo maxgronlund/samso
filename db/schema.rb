@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_192128) do
+ActiveRecord::Schema.define(version: 2018_10_28_124221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_192128) do
     t.datetime "image_updated_at"
     t.text "video_url", default: ""
     t.boolean "enable_comments", default: false
+    t.boolean "show_facebook_comments", default: true
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_posts_on_post_page_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
@@ -392,6 +393,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_192128) do
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer "search_page_id"
+    t.text "fb_snippet", default: ""
   end
 
   create_table "admin_text_modules", force: :cascade do |t|

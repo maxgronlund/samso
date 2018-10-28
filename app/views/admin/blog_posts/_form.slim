@@ -32,12 +32,16 @@
 
 = f.input :body, :input_html => { rows: 15}
 .row.mb-10
-  .col-md-4
+  .col-md-3
     = f.input :free_content
-  .col-md-4
+  .col-md-3
     = f.input :featured
-  .col-md-4
-    = f.input :enable_comments
+  .col-md-3
+    = f.input :enable_comments,
+      hint: t('blog_post.enable_comments_hint')
+  .col-md-3
+    = f.input :show_facebook_comments,
+      hint: t('blog_post.show_facebook_comments_hint')
 .row
   .col-md-6
     = f.input :signature
