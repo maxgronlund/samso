@@ -37,6 +37,7 @@ javascript:
   $(".video-container").fitVids();
   $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
 
-- if blog_post.show_facebook_comments
-
-  <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="5"></div>
+- if blog_post.show_facebook_comments?
+  /= ENV['RAILS_HOST']
+  - data_href = ENV['RAILS_HOST'] + request.path
+  .fb-comments, 'data-href'.to_sym => data_href 'data-width'.to_sym => "100%" 'data-numposts'.to_sym => "5"
