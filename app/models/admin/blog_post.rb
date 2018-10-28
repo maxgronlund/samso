@@ -92,6 +92,19 @@ class Admin::BlogPost < ApplicationRecord
     blog.title
   end
 
+  def build_video_url
+
+    ap youtube_video_url
+    return youtube_video_url if video_url.include?('https://youtu.be/')
+    video_url
+  end
+
+  def youtube_video_url
+    src = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'
+    src += video_url.split("https://youtu.be/").last
+    src + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
+  end
+
   def self.all_posts
     Admin::BlogPost
       .order('start_date DESC')

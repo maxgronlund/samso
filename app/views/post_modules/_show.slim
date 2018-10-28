@@ -6,7 +6,7 @@
 - if  blog_post.free_content? || access_to_subscribed_content?
   - blog_post.shown!
 
-  - video_url = blog_post.video_url #post_module.video_url(blog_post_id)
+  - video_url = blog_post.build_video_url
   - if !video_url.empty?
     .video-container
       =  raw video_url
@@ -40,4 +40,5 @@ javascript:
 - if blog_post.show_facebook_comments?
   /= ENV['RAILS_HOST']
   - data_href = ENV['RAILS_HOST'] + request.path
-  .fb-comments, 'data-href'.to_sym => data_href 'data-width'.to_sym => "100%" 'data-numposts'.to_sym => "5"
+  .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
+  /<div class="fb-comments" data-href=data_href data-width="100%" data-numposts="5"></div>
