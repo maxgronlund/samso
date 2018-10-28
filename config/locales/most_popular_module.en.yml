@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/most_popular_module:
+        one: most_popular
+        other: most_populars
+    attributes:
+      admin/most_popular_module:
+        name:  Name
+
+  most_popular_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/most_popular_module:
+    name: MostPopular module

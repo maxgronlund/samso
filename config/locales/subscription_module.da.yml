@@ -14,11 +14,11 @@ da:
         price: Pris i DKK
         active: Aktiv
         subscriptions_count: Abonnenter
-    
+
     models:
       admin/subscription_module:
         one: Abonnement modul
         other: Abonnement moduler
 
   admin/subscription_module:
-    name: Abonnoment module
+    name: Abonnoment modul

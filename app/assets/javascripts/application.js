@@ -11,7 +11,6 @@
 // about supported directives.
 //
 
-
 //= require jquery3
 //= require bootstrap
 //= require turbolinks
@@ -20,3 +19,4 @@
 //= require fitvids
 //= require advertisements
 //= require dk-zipp-codes
+//= require facebook

@@ -29,16 +29,13 @@
               class: 'btn btn-light btn-sm'
   - if blog_post.enable_comments?
     = render 'comments/index', comments: blog_post.comments, commentable: blog_post
+
+  - if blog_post.show_facebook_comments?
+    - data_href = ENV['RAILS_HOST'] + request.path
+    .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
 - else
   == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
-
 
 javascript:
   $(".video-container").fitVids();
   $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
-
-- if blog_post.show_facebook_comments?
-  /= ENV['RAILS_HOST']
-  - data_href = ENV['RAILS_HOST'] + request.path
-  .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
-  /<div class="fb-comments" data-href=data_href data-width="100%" data-numposts="5"></div>
