@@ -93,8 +93,6 @@ class Admin::BlogPost < ApplicationRecord
   end
 
   def build_video_url
-
-    ap youtube_video_url
     return youtube_video_url if video_url.include?('https://youtu.be/')
     video_url
   end
