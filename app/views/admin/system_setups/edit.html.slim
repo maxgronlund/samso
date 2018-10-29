@@ -11,8 +11,6 @@ h3 = t('edit_model', model_name: 'System opsætning')
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
-  = f.input :fb_snippet
-
   .row
     .col-md-6
       = f.input :logo

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_220836) do
+ActiveRecord::Schema.define(version: 2018_10_29_221144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -399,7 +399,6 @@ ActiveRecord::Schema.define(version: 2018_10_28_220836) do
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer "search_page_id"
-    t.text "fb_snippet", default: ""
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
