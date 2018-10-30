@@ -2,20 +2,21 @@
   .col-admin-header
     .layout
       = page_col.layout
-      .pull-right
-        = link_to 'e', edit_admin_page_row_page_col_path(page_col.page_row, page_col)
+      '&nbsp;
+      = link_to 'edit', edit_admin_page_row_page_col_path(page_col.page_row, page_col)
 
   - page_col.page_col_modules.ordered.each do |page_col_module|
     - if page_col_module.moduleable.nil?
       - page_col_module.destroy
     - else
-      = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
-      .fs-12
-        = t('page_col_module.access_to')
-        '&nbsp;
-        = t('page_col_module.show.' + page_col_module.access_to)
+      .mt-10.mb-20.edit-preview-module
+        = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
+        .fs-12
+          = t('page_col_module.access_to')
+          '&nbsp;
+          = t('page_col_module.show.' + page_col_module.access_to)
+
   .col-admin-footer
-    .pull-right
-      = link_to t('page_col_module.add_module'),
-        new_admin_page_col_page_col_module_path(page_col),
-        class: 'btn btn-primary btn-sm'
+    = link_to t('page_col_module.add_module'),
+      new_admin_page_col_page_col_module_path(page_col),
+      class: 'btn btn-primary btn-sm'

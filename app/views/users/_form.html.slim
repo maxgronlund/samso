@@ -4,6 +4,8 @@
   .form-inputs
 
     = f.input :name
+    - if @user.persisted? && @user.admin?
+      = f.input :signature
     = f.input :email
 
     / - if user_signed_in? && @user.avatar.exists?

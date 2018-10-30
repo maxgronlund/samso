@@ -125,6 +125,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :delete_avatar,
+      :signature,
       addresses_attributes: [ :id, :address, :zipp_code, :city]
     )
   end

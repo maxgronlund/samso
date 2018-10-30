@@ -2,15 +2,14 @@ da:
   activerecord:
     models:
       admin/most_popular_module:
-        one: most_popular
-        other: most_populars
+        one: Ugens mest læste modul
+        other: Ugens mest læste moduler
     attributes:
       admin/most_popular_module:
         name:  Name
 
   most_popular_module:
-    fo: Fo
-    bar: Bar
+    default_name: Ugens mest læste
 
   admin/most_popular_module:
     name: Mest læste atikel modul

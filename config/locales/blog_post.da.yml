@@ -16,6 +16,7 @@ da:
         enable_comments: Brugere kan kommenterer
         show_facebook_comments: Vis Facebook kommentarer
         free_content: Læs gratis
+        post_page_id: Vis på side
 
   blog_post:
     new: 'Nyt artikkel'
@@ -26,8 +27,8 @@ da:
     image_top: Billed over artikkel
     image_left: Billed til venstre
     image_right: Billed til højre
-    enable_comments_hint: Internt system
-    show_facebook_comments_hint: "*Check system opsætning"
+    enable_comments_hint: Interne kommentarer
+    post_page_id_hint: "*Vælg en kategori side"
 
   admin/blog_post:
     name: Blog post modul

@@ -8,8 +8,7 @@ class Admin::BlogPostsController < AdminController
   # GET /admin/blog_posts/new
   def new
     @admin_blog = Admin::Blog.find(params[:blog_id])
-    @admin_blog_post =
-      Admin::BlogPost.new(signature: current_user.signature)
+    @admin_blog_post = Admin::BlogPost.new(signature: signature)
   end
 
   # POST /admin/posts
@@ -41,6 +40,11 @@ class Admin::BlogPostsController < AdminController
   end
 
   private
+
+  def signature
+    return current_user.name if current_user.signature.blank?
+    current_user.signature
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_blog_post

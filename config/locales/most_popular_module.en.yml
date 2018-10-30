@@ -9,9 +9,8 @@ en:
         name:  Name
 
   most_popular_module:
-    fo: Fo
-    bar: Bar
+    default_name: Most read this week
 
-  
+
   admin/most_popular_module:
     name: MostPopular module

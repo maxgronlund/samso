@@ -1,2 +1,12 @@
 - most_popular = modulable
-h3 = most_popular.name
+h5 = most_popular.name
+.blog-post
+  - Admin::MostPopularModule.posts.each do |post|
+    - link = page_post_url(post.show_on_page, post)
+    - unless link == request.url
+      .featured-post
+        .content
+          = link_to link do
+            = post.title
+            .time-ago
+              = time_ago_in_words(post.start_date)

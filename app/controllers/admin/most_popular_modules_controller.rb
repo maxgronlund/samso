@@ -2,6 +2,9 @@ class Admin::MostPopularModulesController < AdminController
   before_action :set_admin_most_popular_module, only: %i[edit update destroy]
 
   def edit
+    if @most_popular_module.name.blank?
+      @most_popular_module.update(name: default_name)
+    end
   end
 
   def update
@@ -35,5 +38,9 @@ class Admin::MostPopularModulesController < AdminController
       :name,
       :access_to
     )
+  end
+
+  def default_name
+    t('most_popular_module.default_name')
   end
 end
