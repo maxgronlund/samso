@@ -1,3 +1,11 @@
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'Brugerer', admin_users_path
+    li.breadcrumb-item
+      = link_to  @user.name, admin_user_path(@user)
+    li.breadcrumb-item.active aria-current="page"
+      'Friabonnoment'
 h3 Opret friabonnoment
 = simple_form_for [@user, @subscription],
   url: admin_user_user_subscriptions_url(@user),

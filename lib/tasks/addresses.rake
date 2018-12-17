@@ -1,29 +1,48 @@
+# frozen_string_literal: true
+
 namespace :addresses do
   # usage
-  # rake blog_posts:update_layout
-  desc 'import addresses from esisting users'
-  task import: :environment do
-    ap 'import addresses'
+  # rake addresses:create_user_addresse
+  desc 'Create one addresses record for all users'
+  task create_for_users: :environment do
     User.find_each do |user|
-      import_address(user) unless user.postal_code_and_city.blank?
+      create_address(user)
     end
   end
 
-  def import_address(user)
-    #return if user.addresses.any?
-    postal_code_and_city = user.postal_code_and_city.split
-    address =
-      Address
-      .where(user_id: user.id)
-      .first_or_initialize(
-        user_id: user.id,
-      )
-      address
-        .update(
-          name: user.name,
-          address: user.address,
-          zipp_code: postal_code_and_city.first.to_i,
-          city: postal_code_and_city.last
-        )
+  desc 'Delete all user addresses'
+  task destroy_for_users: :environment do
+    Address.where(addressable_type: 'User').destroy_all
+  end
+
+  def create_address(user)
+    address           = user.addresses.first_or_initialize
+    zipp_code         = parse_zipp_code(user)
+    city              = parse_city(user, zipp_code)
+    address.zipp_code = zipp_code if zipp_code.present?
+    address.city      = city if city.present?
+    address.name      = user.name
+    address.address   = user.address
+    address.save if address.changed?
+  end
+
+  def parse_zipp_code(user)
+    zipp_code = postal_code_and_city(user).first
+    zipp_code = zipp_code.to_i
+    return zipp_code if zipp_code < 10000 && zipp_code > 999
+
+    nil
+  end
+
+  def parse_city(user, zipp_code)
+    city = postal_code_and_city(user)
+    city.delete_at(0) if zipp_code.is_a?(Integer)
+    city.join(' ')
+  end
+
+  def postal_code_and_city(user)
+    return [] if user.postal_code_and_city.blank?
+
+    user.postal_code_and_city.split
   end
 end

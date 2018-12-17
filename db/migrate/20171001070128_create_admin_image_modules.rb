@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # module to show one image
 class CreateAdminImageModules < ActiveRecord::Migration[5.1]
   def up
@@ -27,6 +29,6 @@ class CreateAdminImageModules < ActiveRecord::Migration[5.1]
 
   def remove_module_name
     module_name = Admin::ModuleName.find_by(name: 'Admin::ImageModule')
-    module_name.delete unless module_name.nil?
+    module_name.delete if module_name.present?
   end
 end

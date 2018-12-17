@@ -1,11 +1,11 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
 
-  button.sidebar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent"  type="button"
-    span#sidebarCollapse.navbar-toggler-icon
+    button.sidebar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent"  type="button"
+      span#sidebarCollapse.navbar-toggler-icon
 
-  #navbarSupportedContent
+    #navbarSupportedContent
 
-    ul.navbar-nav
-      / - Admin::SystemSetup.find_each do |system_setup|
-      /   li.nav-item
-      /     = link_to system_setup.locale_name,  locale: system_setup.locale.to_sym, class: 'nav-link'
+      ul.navbar-nav.mr-auto
+        li.nav-item
+           = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'

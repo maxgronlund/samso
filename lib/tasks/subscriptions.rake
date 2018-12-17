@@ -1,38 +1,40 @@
 namespace :subscriptions do
   # usage
-  # rake subscriptions:add_addresses
+  # rake subscriptions:attach_address
 
-  desc 'attach addresses to printed subscriptions'
-  task add_addresses: :environment do
+  desc 'attach addresses to subscriptions'
+  task attach_address: :environment do
     Admin::Subscription.find_each do |subscription|
       next unless subscription.print_version?
-      add_addres(subscription)
+
+      add_address(subscription)
     end
   end
 
-  def add_addres(subscription)
+  desc 'attach addresses to subscriptions'
+  task remove_addresses: :environment do
+    Address.where(addressable_type: 'Admin::Subscription').destroy_all
+  end
+
+  def add_address(subscription)
     user = subscription.user
-    address = user_address(user)
-    return if address.blank?
-    address =
-      user
-      .addresses
-      .first_or_create(
-        address: address.address,
-        zipp_code: address.zipp_code,
-        city: address.city,
-        address_type: Address::SUBSCRIPTION_ADDRESS
-      )
+    address_options = user_address_options(user)
+
     subscription
-      .subscription_addresses
+      .addresses
+      .where(address_options)
       .first_or_create(
-        address_id: address.id,
-        start_date: subscription.start_date,
-        end_date: subscription.end_date
+        address_options
       )
   end
 
-  def user_address(user)
-    user&.addresses&.user_address
+  def user_address_options(user)
+    address = user.address
+    {
+      name: address.name,
+      address: address.address,
+      zipp_code: address.zipp_code,
+      city: address.zipp_code
+    }
   end
 end

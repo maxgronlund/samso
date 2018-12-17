@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Module for carousel
 class Admin::CarouselModule < ApplicationRecord
   include PageColConcerns

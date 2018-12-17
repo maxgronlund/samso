@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Shared functionalith between page_col_modules
 module PageColConcerns
   extend ActiveSupport::Concern
@@ -5,23 +7,19 @@ module PageColConcerns
 
   # rubocop:disable Lint/DuplicateMethods
   def position
-    return nil if page_col_module.nil?
-    page_col_module.position
+    page_col_module.position.presence
   end
 
   def access_to
-    return nil if page_col_module.nil?
-    page_col_module.access_to
+    page_col_module.access_to.presence
   end
 
   def show
-    return nil if page_col_module.nil?
-    page_col_module.show
+    page_col_module.show.presence
   end
 
   def margin_bottom
-    return 0 if page_col_module.nil?
-    page_col_module.margin_bottom
+    page_col_module.margin_bottom.presence || 0
   end
   # rubocop:enable Lint/DuplicateMethods
 
@@ -30,13 +28,11 @@ module PageColConcerns
   end
 
   def page_col
-    return nil if page_col_module.nil?
-    page_col_module.page_col
+    page_col_module.page_col.presence
   end
 
   def page
-    return nil if page_col.nil?
-    page_col.page
+    page_col.page.presence
   end
 
   def update_position(new_position)

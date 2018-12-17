@@ -1,6 +1,7 @@
 class ResetPasswordController < ApplicationController
   def index
     return if resend_password_params[:send].nil?
+
     @message = Admin::SystemMessage.resend_password
   end
 
@@ -46,6 +47,7 @@ class ResetPasswordController < ApplicationController
     user.reset_password_token = SecureRandom.hex(32)
     user.reset_password_sent_at = Time.zone.now
     return unless user.save
+
     UserNotifierMailer.send_reset_password_link(user.id).deliver
   end
 end

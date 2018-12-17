@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # namespace to confine service class to Admin:CsvImport::Service
 class Admin::CsvImport < ApplicationRecord
   # require 'csv'

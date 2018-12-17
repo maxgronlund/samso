@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -31,16 +33,11 @@ gem 'turbolinks', '~> 5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
-
 gem 'awesome_print'
-
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
-
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # gem 'bootstrap', '~> 4.0.0.alpha6'
@@ -50,7 +47,6 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'font-awesome-sass'
 gem 'glyphicons-rails'
 gem 'jquery-rails'
-gem 'kaminari'
 gem 'sendgrid-ruby'
 gem 'slim-rails'
 gem 'simple_form'
@@ -74,7 +70,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
+  gem 'capybara'#, '~> 2.13'
   gem 'chromedriver-helper'
 end
 
@@ -90,5 +86,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-ruby '2.4.1'

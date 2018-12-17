@@ -1,4 +1,6 @@
 .row
+  .col-sm-12
+    == render 'shared/admin_links', selected: 'users'
   .col-sm-6
     h3 = t('user.pluralized')
     = link_to t('user.active_subscribers'), admin_active_subscribers_path
@@ -50,9 +52,6 @@ br
           td
             .pull-right
               .btn-group
-                = link_to t('subscription.name'),
-                  user_path(user),
-                  class: 'btn btn-light btn-sm'
                 = link_to t('show'),
                   admin_user_path(user),
                   class: 'btn btn-light btn-sm'

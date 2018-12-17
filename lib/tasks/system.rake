@@ -32,11 +32,12 @@ namespace :system do
     Admin::Footer.where(params).first_or_create(params)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create_search_pages
     pages_options =
       [
         { locale: 'en', name: 'Search results' },
-        { locale: 'da', name: 'Søge resultater'}
+        { locale: 'da', name: 'Søge resultater' }
       ]
     pages_options.each do |page_options|
       footer = build_footer(page_options)
@@ -52,6 +53,7 @@ namespace :system do
       system_setup.update(search_page_id: page.id)
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def build_page(name, footer_id, locale)
     params =

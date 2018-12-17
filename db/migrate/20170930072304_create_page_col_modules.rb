@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ploymorphic joyn so modules can be inserted into a page_col
 class CreatePageColModules < ActiveRecord::Migration[5.1]
   def change

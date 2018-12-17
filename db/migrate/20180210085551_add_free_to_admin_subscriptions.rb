@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # so we can have free subscriptions
 class AddFreeToAdminSubscriptions < ActiveRecord::Migration[5.1]
   def change

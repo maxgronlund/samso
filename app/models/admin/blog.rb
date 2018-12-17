@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # a blog to embed inside the BlogModule
 class Admin::Blog < ApplicationRecord
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy

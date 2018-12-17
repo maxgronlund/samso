@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # link to a page / url
 class Admin::MenuLink < ApplicationRecord
   belongs_to :menu_content, class_name: 'Admin::MenuContent'

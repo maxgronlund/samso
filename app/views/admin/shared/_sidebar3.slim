@@ -6,78 +6,52 @@ nav#sidebar
     li
       = link_to root_path do
         i.fa.fa-home
-        | Forsiden
-
-    li class="#{@selected == 'articles' ? 'active' : ''}"
+        = t('sidebar.front_page')
+    li class="#{ @selected == 'articles' ? 'active' : '' }"
       = link_to admin_articles_path do
-        i.fa.fa-file-text
-        | Artikler
-
-    li class="#{@selected == 'users' ? 'active' : ''}"
+        i.fa.fa-newspaper
+        = t('sidebar.articles')
+    li class="#{ @selected == 'users' ? 'active' : ''}"
       = link_to admin_users_path do
         i.fa.fa-users
-        | Brugere
-    li class="#{@selected == 'subscription_types' ? 'active' : ''}"
+        = t('sidebar.users')
+    li class="#{ @selected == 'subscription_types' ? 'active' : '' }"
       = link_to admin_subscription_types_path do
         i.fa.fa-shopping-cart
-        | Abonnement typer
-    li class="#{@selected == 'system_setups' ? 'active' : ''}"
+        = t('sidebar.subscription_types')
+    li class="#{ @selected == 'system_setups' ? 'active' : '' }"
       = link_to edit_admin_system_setup_path(Admin::SystemSetup.first)
-        i.fa.fa-gear
-        | System opsætning
-    li class="#{@selected == 'pages' ? 'active' : ''}"
+        i.fa.fa-cogs
+        = t('sidebar.system_settings')
+    li class="#{ @selected == 'pages' ? 'active' : '' }"
       = link_to admin_pages_path
-        i.fa.fa-list
-        | Sider
-    / li class="#{@selected == 'footers' ? 'active' : ''}"
-    /   = link_to admin_footers_path
-    /     i.fa.fa-address-card
-    /     | Footers
-    li class="#{@selected == 'csv_imports' ? 'active' : ''}"
+        i.fa.fa-copy
+        = t('sidebar.pages')
+    li class="#{ @selected == 'footers' ? 'active' : '' }"
+      = link_to admin_footers_path
+        i.fa.fa-address-card
+        | Footers
+    li class="#{ @selected == 'csv_imports' ? 'active' : '' }"
       = link_to admin_csv_imports_path
-        i.fa.fa-file-text
-        | CSV Imports
-    li class="#{@selected == 'system_messages' ? 'active' : ''}"
+        i.fa.fa-file-csv
+        = t('sidebar.csv_imports')
+    li class="#{ @selected == 'system_messages' ? 'active' : '' }"
       = link_to admin_system_messages_path
-        i.fa.fa-file-text
-        = t('system_messages')
-    li class="#{@selected == 'menu_contents' ? 'active' : ''}"
+        i.fa.fa-comments
+        = t('sidebar.system_messages')
+    li class="#{ @selected == 'menu_contents' ? 'active' : '' }"
       = link_to admin_menu_contents_path
-        i.fa.fa-list
-        = t('menus')
-    li class="#{@selected == 'calendars' ? 'active' : ''}"
+        i.fa.fa-caret-square-down
+        = t('sidebar.menus')
+    li class="#{ @selected == 'calendars' ? 'active' : '' }"
       = link_to admin_calendars_path
-        i.fa.fa-list
-        = t('calendars')
-    li class="#{@selected == 'blogs' ? 'active' : ''}"
+        i.fa.fa-calendar
+        = t('sidebar.calendars')
+    li class="#{ @selected == 'blogs' ? 'active' : '' }"
       = link_to admin_blogs_path
-        i.fa.fa-list
-        = t('admin/blog.index')
-    li class="#{@selected == 'adverticements' ? 'active' : ''}"
+        i.fa.fa-object-group
+        = t('sidebar.categories')
+    li class="#{ @selected == 'adverticements' ? 'active' : '' }"
       = link_to admin_advertisements_path
-        i.fa.fa-list
-        = t('admin/advertisement.index')
-
-
-
-
-    / li.active
-    /   a aria-expanded="false" data-toggle="collapse" href="#homeSubmenu"  Home
-    /   ul#homeSubmenu.collapse.list-unstyled
-    /     li
-    /       a href="#"  Home 1
-    /     li
-    /       a href="#"  Home 2
-    /     li
-    /       a href="#"  Home 3
-    / li
-    /   a href="#"  About
-    /   a aria-expanded="false" data-toggle="collapse" href="#pageSubmenu"  Pages
-    /   ul#pageSubmenu.collapse.list-unstyled
-    /     li
-    /       a href="#"  Page 1
-    /     li
-    /       a href="#"  Page 2
-    /     li
-    /       a href="#"  Page 3
-
+        i.fa.fa-ad
+        = t('sidebar.ads')

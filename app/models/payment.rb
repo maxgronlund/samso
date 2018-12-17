@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # papertrail of payments
 class Payment < ApplicationRecord
   belongs_to :subscription, class_name: 'Admin::Subscription'

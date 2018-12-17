@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Calendars for the calendar_modules
 class CreateAdminCalendars < ActiveRecord::Migration[5.1]
   def change

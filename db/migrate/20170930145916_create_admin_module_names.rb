@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # list of available names
 class CreateAdminModuleNames < ActiveRecord::Migration[5.1]
   def change

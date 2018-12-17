@@ -1,2 +1,18 @@
-= link_to t('back'), admin_blog_path(@admin_blog)
-= render 'blog_posts/show', blog: @admin_blog, post: @admin_blog_post
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/article.index'), admin_articles_path
+    i.breadcrumb-item.active aria-current="page"
+      = @admin_blog_post.title
+
+.row
+  .col-sm-8
+
+    = render "blog_modules/layouts/#{@admin_blog_post.layout}",
+      post: @admin_blog_post,
+      featured: @admin_blog_post.featured,
+      start_date: @admin_blog_post.start_date
+    .pull-right
+      = link_to t('edit'),
+        edit_admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post),
+        class: 'btn btn-primary btn-sm'

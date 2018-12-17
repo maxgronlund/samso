@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# facebook comments
 class AddFbSnippetToAdminSystemSetups < ActiveRecord::Migration[5.2]
   def change
     add_column :admin_system_setups, :fb_snippet, :text, default: ''

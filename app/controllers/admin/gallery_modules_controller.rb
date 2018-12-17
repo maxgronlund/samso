@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::GalleryModulesController < AdminController
   before_action :set_admin_gallery_module, only: %i[show edit update destroy]
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # limit to one category
 class AddBlogIdToFeaturedPostModules < ActiveRecord::Migration[5.1]
   def change

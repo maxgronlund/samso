@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # link for the vertiacal menu content
 class CreateAdminMenuLinks < ActiveRecord::Migration[5.1]
   def change

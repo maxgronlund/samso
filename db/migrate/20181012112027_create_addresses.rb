@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateAddresses < ActiveRecord::Migration[5.2]
   def change
     create_table :addresses do |t|
-      t.belongs_to :user, foreign_key: true
+      t.references :addressable, polymorphic: true
       t.string :name
       t.string :address
       t.integer :zipp_code

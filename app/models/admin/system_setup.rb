@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # system setup
 class Admin::SystemSetup < ApplicationRecord
   attr_accessor :delete_logo

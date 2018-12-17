@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # link to a page
 class Admin::PageLink < ApplicationRecord
   belongs_to :page_link_module, class_name: 'Admin::PageLinkModule'

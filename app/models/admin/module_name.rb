@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Dynamical storages of module names
 # TODO: expand with image url for preview
 class Admin::ModuleName < ApplicationRecord

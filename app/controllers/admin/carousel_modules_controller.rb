@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::CarouselModulesController < AdminController
   before_action :set_admin_carousel_module, only: %i[edit update destroy show]
 

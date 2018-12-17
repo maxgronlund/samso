@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class Admin::MostPopularModulesController < AdminController
   before_action :set_admin_most_popular_module, only: %i[edit update destroy]
 
   def edit
-    if @most_popular_module.name.blank?
-      @most_popular_module.update(name: default_name)
-    end
+    @most_popular_module.update(name: default_name) if @most_popular_module.name.blank?
   end
 
   def update

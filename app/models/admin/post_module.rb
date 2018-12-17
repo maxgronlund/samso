@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # module for showning a post from the blog on a page
 class Admin::PostModule < ApplicationRecord
   include PageColConcerns
@@ -5,11 +7,13 @@ class Admin::PostModule < ApplicationRecord
 
   def image_present?(blog_post_id)
     return false unless blog_post(blog_post_id).present?
+
     blog_post(blog_post_id).image.present?
   end
 
   def image_url(blog_post_id)
     return '' unless blog_post(blog_post_id).present?
+
     blog_post_image_url(blog_post_id)
   end
 
@@ -20,6 +24,7 @@ class Admin::PostModule < ApplicationRecord
 
   def free_content?(blog_post_id)
     return false unless blog_post(blog_post_id).present?
+
     blog_post(blog_post_id).free_content
   end
 
@@ -29,6 +34,7 @@ class Admin::PostModule < ApplicationRecord
 
   def video_url(blog_post_id)
     return '' unless blog_post(blog_post_id)
+
     blog_post(blog_post_id).video_url
   end
 
@@ -39,6 +45,7 @@ class Admin::PostModule < ApplicationRecord
   def blog_post(blog_post_id)
     @blog_post ||= Admin::BlogPost.find_by(id: blog_post_id)
     return @blog_post if @blog_post.present?
+
     Admin::BlogPost.last
   end
 end

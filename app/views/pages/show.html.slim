@@ -1,5 +1,5 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
-/- session[:stored_path] = request.path
+- session[:last_page] = request.path
 - if @page.cache_page
   - cache @page do
     = render 'pages/show', page: @page

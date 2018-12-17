@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # system settings
 class CreateAdminSystemSetups < ActiveRecord::Migration[5.1]
   def up

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # gallery module
 class CreateAdminGalleryModules < ActiveRecord::Migration[5.1]
   def up
@@ -34,6 +36,6 @@ class CreateAdminGalleryModules < ActiveRecord::Migration[5.1]
 
   def remove_module_name
     module_name = Admin::ModuleName.find_by(name: 'Admin::GalleryModule')
-    module_name.delete unless module_name.nil?
+    module_name.delete if module_name.present?
   end
 end

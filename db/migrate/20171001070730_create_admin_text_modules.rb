@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # generic text module
 class CreateAdminTextModules < ActiveRecord::Migration[5.1]
   # rubocop:disable Metrics/MethodLength
@@ -43,6 +45,6 @@ class CreateAdminTextModules < ActiveRecord::Migration[5.1]
 
   def remove_module_name
     module_name = Admin::ModuleName.find_by(name: 'Admin::TextModule')
-    module_name.delete unless module_name.nil?
+    module_name.delete if module_name.present?
   end
 end

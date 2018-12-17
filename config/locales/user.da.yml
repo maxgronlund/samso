@@ -36,6 +36,7 @@ da:
   user:
     create: 'Opret konto'
     delete_account: Slet konto
+    edit: Rediger konto
     accept_gdpr: Godkend databehandleraftale
     password:
       update: Opdater password
@@ -64,3 +65,7 @@ da:
       account_confirmed: Konto er allerde bekræftet
     address: '*Adresse'
     active_subscribers: Abonnenter med gyldigt abonnement
+    write_code_placeholder: Skriv koden her
+    code: Kode
+    have_to_fill: 'Skal udfyldes'
+    update_address_on_subscription: Opdater forsendelses adresse på abonnement

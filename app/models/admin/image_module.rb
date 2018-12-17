@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # show one image from the GGallery
 class Admin::ImageModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
@@ -20,6 +22,7 @@ class Admin::ImageModule < ApplicationRecord
   def galery_image(gallery_image_id)
     @gallery_image ||= Admin::GalleryImage.find_by(id: gallery_image_id)
     return @gallery_image unless @gallery_image.nil?
+
     Admin::GalleryImage.last
   end
 end

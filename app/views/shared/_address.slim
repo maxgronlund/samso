@@ -1,0 +1,33 @@
+.table-responsive
+  table.table.table-bordered.table-hover.table-sm
+    - if address.temporary?
+      tr
+        th
+          .pull-right
+            = t('address.start_date')
+        th
+          strong = l address.start_date
+      tr
+        th
+          .pull-right
+            = t('address.end_date')
+        th
+          strong = l address.end_date
+    tr
+      th
+        .pull-right Navn
+      th
+        strong = address.name
+    tr
+      th
+        .pull-right Addrese
+      th
+        strong = address.address
+    tr
+      th
+        .pull-right Post nummer, by
+      th
+        strong
+          = address.zipp_code
+          '&nbsp;,
+          = address.city

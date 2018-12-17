@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # one column form bootstrap
 class PageCol < ApplicationRecord
   belongs_to :page_row, counter_cache: true
@@ -13,6 +15,7 @@ class PageCol < ApplicationRecord
 
   def next_page_col_module_position
     return 0 if ordered_page_col_modules.empty?
+
     ordered_page_col_modules.first.position + 10
   end
 end

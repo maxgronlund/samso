@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # blog to embed in BlogModule
 class CreateAdminBlogs < ActiveRecord::Migration[5.1]
   def change

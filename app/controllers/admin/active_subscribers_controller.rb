@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class Admin::ActiveSubscribersController < AdminController
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def index
     user_ids =
       Admin::Subscription
@@ -16,14 +20,15 @@ class Admin::ActiveSubscribersController < AdminController
           .page params[:page]
       else
         User
-        .where(id: user_ids)
-        .order(:name)
-        .page params[:page]
+          .where(id: user_ids)
+          .order(:name)
+          .page params[:page]
       end
     @selected = 'users'
     @user_count = user_ids.count
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
-  def show
-  end
+  def show; end
 end

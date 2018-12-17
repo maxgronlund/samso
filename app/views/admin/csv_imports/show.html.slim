@@ -1,24 +1,34 @@
-p#notice = notice
+h3 = @admin_csv_import.name
+.table-responsive
+  table.table.table-bordered.table-hover.table-sm
 
-p
-  strong Name:
-  = @admin_csv_import.name
-p
-  strong Import type:
-  = @admin_csv_import.import_type
-p
-  strong Comments:
-  = @admin_csv_import.comments
-p
-  strong Summary:
-  = @admin_csv_import.summary
+    tr
+      th
+        .pull-right
+          = t('csv_file.import_type')
+      th
+        = @admin_csv_import.import_type_translation
+    tr
+      th
+        .pull-right
+          = t('csv_file.comments')
+      th
+        = @admin_csv_import.comments
+    tr
+      th
+        .pull-right
+          = t('csv_file.file_url')
+      th
+        = @admin_csv_import.csv_file
 
-= @admin_csv_import.csv_file
-hr
 .btn-group
   = link_to t('edit'),
     edit_admin_csv_import_path(@admin_csv_import),
     class: 'btn btn-light'
 
   = link_to t('back'), admin_csv_imports_path,
+    class: 'btn btn-light'
+
+  = link_to 'import',
+    new_admin_csv_import_parse_csv_path(@admin_csv_import),
     class: 'btn btn-light'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::MenuModulesController < AdminController
   before_action :set_admin_menu_module, only: %i[edit update destroy]
 

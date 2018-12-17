@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Advretisements
 class CreateAdminAdvertisements < ActiveRecord::Migration[5.1]
   # rubocop:disable Metrics/MethodLength

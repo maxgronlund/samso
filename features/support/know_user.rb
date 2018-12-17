@@ -31,6 +31,7 @@ module KnowUserHelper
       .create(:role, permission: permission, user_id: user.id)
 
     return unless permission == Role::SUPER_ADMIN
+
     FactoryBot
       .create(:role, permission: permission, user_id: user.id)
   end

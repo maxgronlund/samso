@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # raw text to place on a page
 class Admin::TextModule < ApplicationRecord
   include PageColConcerns

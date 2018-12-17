@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # show weather from DMI
 class Admin::MostPopularModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
@@ -11,10 +13,10 @@ class Admin::MostPopularModule < ApplicationRecord
   end
 
   def self.posts
-      Admin::BlogPost
-        .order(views: :desc)
-        .where(find_condition, time_range)
-        .first(5)
+    Admin::BlogPost
+      .order(views: :desc)
+      .where(find_condition, time_range)
+      .first(5)
   end
 
   def self.find_condition

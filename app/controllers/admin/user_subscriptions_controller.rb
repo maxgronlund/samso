@@ -1,5 +1,6 @@
-class Admin::UserSubscriptionsController < AdminController
+# frozen_string_literal: true
 
+class Admin::UserSubscriptionsController < AdminController
   before_action :set_user, only: %i[new create edit update]
 
   def new
@@ -18,8 +19,9 @@ class Admin::UserSubscriptionsController < AdminController
     subscription.subscription_type_id = subscription_type.id
     subscription.subscription_id = Admin::Subscription.new_safe_subscription_id
     subscription.save
-    @user.update_attributes(legacy_subscription_id: subscription.subscription_id)
-    redirect_to user_path(@user)
+    subscription.set_address
+    @user.update(legacy_subscription_id: subscription.subscription_id)
+    redirect_to admin_user_path(@user)
   end
 
   def edit
@@ -27,9 +29,8 @@ class Admin::UserSubscriptionsController < AdminController
   end
 
   def update
-    ap subscription
     subscription.update!(subscription_params)
-    redirect_to user_path(@user)
+    redirect_to admin_user_path(@user)
   end
 
   private

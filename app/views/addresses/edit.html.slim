@@ -1,8 +1,11 @@
-h1 Editing address
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header = t("address.#{@address.address_type}")
 
-== render 'form'
-
-=> link_to 'Show', @address
-'|
-=< link_to 'Back', addresses_path
+        .card-body
+          p#notice = notice
+          == render 'form'
 

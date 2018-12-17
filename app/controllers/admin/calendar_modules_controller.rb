@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::CalendarModulesController < AdminController
   before_action :set_admin_calendar_module, only: %i[edit update destroy]
 

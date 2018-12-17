@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::PageColModulesController < AdminController
   before_action :set_page_col_module, only: %i[show edit update destroy]
   before_action :set_page_col, only: %i[show new create edit update destroy]

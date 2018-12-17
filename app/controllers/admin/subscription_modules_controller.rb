@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::SubscriptionModulesController < AdminController
   before_action :set_admin_subscription_module, only: %i[show edit update destroy]
 

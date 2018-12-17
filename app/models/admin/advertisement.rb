@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Advertisement
 class Admin::Advertisement < ApplicationRecord
   scope :active, -> { where(active: true) }

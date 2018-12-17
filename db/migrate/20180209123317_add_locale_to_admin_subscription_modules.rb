@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # so the subscription module can be translated
 class AddLocaleToAdminSubscriptionModules < ActiveRecord::Migration[5.1]
   def change

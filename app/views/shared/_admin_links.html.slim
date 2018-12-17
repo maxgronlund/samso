@@ -1,0 +1,24 @@
+ .admin-links
+  ul.nav
+    li.nav-item
+      = link_to root_path do
+        . class="nav-link #{selected == 'home' ? 'disabled' : ''}"
+          i.fa.fa-home
+          |&nbsp;
+          = t('sidebar.front_page')
+
+    li.nav-item
+      = link_to admin_articles_path do
+        . class="nav-link #{selected == 'articles' ? 'disabled' : ''}"
+          i.fa.fa-newspaper
+          |&nbsp;
+          = t('sidebar.articles')
+
+    li.nav-item
+      = link_to admin_users_path do
+        . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
+          i.fa.fa-users
+          |&nbsp;
+          = t('sidebar.users')
+
+

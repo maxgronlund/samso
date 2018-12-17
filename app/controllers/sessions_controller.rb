@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize
   def create
-    user = User.find_by(email: params[:email].downcase)
+    user = User.find_by(email: params[:email].downcase.strip)
     if user && user.confirmed_at.nil?
       set_menu
       @landing_page = admin_system_setup.landing_page
@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
 
   def signin_user(user)
     session[:user_id] = user.id
-    redirect_to default_path(root_url), notice: t('signed_in')
+    redirect_to default_path(root_url)
   end
 
   def session_params

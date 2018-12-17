@@ -14,6 +14,7 @@ class Admin::Subscription < ApplicationRecord
     end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Security/Open
     def import(csv_import)
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
@@ -22,11 +23,13 @@ class Admin::Subscription < ApplicationRecord
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = build_options(unescaped_row)
         next if options[:abonr].nil? || options[:abonr].empty?
+
         user = find_user_by_legacy_subscription_id(options)
         user = create_user(options) if user.nil?
         create_subscription(user, options)
       end
     end
+    # rubocop:enable Security/Open
 
     private
 

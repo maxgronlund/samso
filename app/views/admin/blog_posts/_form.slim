@@ -55,6 +55,7 @@
 
 .form-actions
   .pull-right
+    = link_to t('cancel'), admin_articles_path, class: 'btn btn-light'
     = f.submit t('save'), class: 'btn btn-primary'
 
 javascript:

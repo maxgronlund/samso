@@ -1,28 +1,51 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
-.container.pt-70
-  - if @user == current_user
-    .row
-      .col-sm-8
-        h4 = @user.name
-      .col-sm-4
-    .row
-      .col-sm-6
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header = t('user.delete_account')
+
+        .card-body
+          p#notice = notice
           = simple_form_for [@user], url: url_for(action: 'destroy', controller: 'cancel_account'), method: 'DELETE' do |f|
-            = f.error_notification
+            - if @cancel_account_error.present?
+              .alert.alert-danger
+                = simple_format @cancel_account_error
 
             .alert.alert-warning
               = simple_format @cancel_account_message
             = f.input :cancel_account_token,
-              label: 'kode',
-              placeholder: 'skriv koden her',
+              label: t('user.code'),
+              placeholder: t('user.write_code_placeholder'),
               required: true
+            - if @cancel_account_error.present?
+              .red-text
+                = t('user.have_to_fill')
             .form-actions
               .pull-right
-              = f.submit t('user.delete_account'), class: 'btn btn-danger', id: 'submit'
-  - else
-    .row
-      .col-sm-6
-          .alert.alert-danger
-            'Du kan kun slette din egen konto, hvis du er administrator kan du slette en konto fra
-            - if admin?
-              = link_to 'Brugere', admin_users_path
+                = link_to t('cancel'), user_path(current_user), class: 'btn btn-light'
+                = f.submit t('user.delete_account'), class: 'btn btn-danger', id: 'submit'
+
+
+/.container.pt-70
+/  - if @user == current_user
+/    .row
+/      .col-sm-8
+/        h4 = @user.name
+/      .col-sm-4
+/    .row
+/      .col-sm-6
+/          = simple_form_for [@user], url: url_for(action: 'destroy', controller: 'cancel_account'), method: 'DELETE' do |f|
+/            = f.error_notification
+/
+/            .alert.alert-warning
+/              = simple_format @cancel_account_message
+/            = f.input :cancel_account_token,
+/              label: t('user.code'),
+/              placeholder: t('user.write_code_placeholder'),
+/              required: true
+/            .form-actions
+/              .pull-right
+/                = link_to t('cancel'), user_path(current_user), class: 'btn btn-light'
+/                = f.submit t('user.delete_account'), class: 'btn btn-danger', id: 'submit'
+/

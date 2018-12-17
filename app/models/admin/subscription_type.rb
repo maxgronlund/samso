@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Dynamic subscription types
 class Admin::SubscriptionType < ApplicationRecord
   has_many :subscriptions, class_name: 'Admin::Subscription', foreign_key: :subscription_type_id

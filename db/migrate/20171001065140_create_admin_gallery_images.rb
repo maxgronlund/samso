@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # an image that fits in to the gallery
 class CreateAdminGalleryImages < ActiveRecord::Migration[5.1]
   def up

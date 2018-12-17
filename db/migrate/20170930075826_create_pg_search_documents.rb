@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # full text search
 # pg_search
 class CreatePgSearchDocuments < ActiveRecord::Migration[5.1]

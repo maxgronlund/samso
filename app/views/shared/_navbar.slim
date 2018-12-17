@@ -45,6 +45,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
               = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'
 
           - else
+
+            li.nav-item
+              = link_to t('signup'), new_user_path, class: 'nav-link'
             li.nav-item
               = link_to t('login'), new_session_path, class: 'nav-link'
 

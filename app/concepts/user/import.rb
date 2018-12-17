@@ -37,6 +37,7 @@ class User < ApplicationRecord
       @current_user = current_user
     end
 
+    # rubocop:disable Security/Open
     def import(csv_import)
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each do |row|
@@ -45,6 +46,7 @@ class User < ApplicationRecord
         create_or_update_user(options) unless options[:legacy_id].nil?
       end
     end
+    # rubocop:enable Security/Open
 
     private
 
@@ -57,9 +59,9 @@ class User < ApplicationRecord
         legacy_id: row[A].empty? ? nil : row[A].to_i,
         Abonnr: row[B].strip,
         navn: row[C].strip.downcase.titleize,
-        Adresse: row[D].strip.downcase.titleize,
+        adresse: row[D].strip.downcase.titleize,
         Stednavn: row[E].empty? ? nil : row[E].strip.downcase.titleize,
-        Postnr_by: row[F].empty? ? nil : row[F].strip.downcase.titleize,
+        postnr_by: row[F].empty? ? nil : row[F].strip.downcase.titleize,
         Telefon: row[G].empty? ? nil : row[G].strip.downcase,
         Mobil: row[H].empty? ? nil : row[H].strip.downcase,
         Nyhedsbrev: row[U] == '0',
@@ -87,6 +89,7 @@ class User < ApplicationRecord
     def create_or_update_user(options = {})
       user = find_or_initialize_user(options)
       return if user.nil? || user.persisted?
+
       secure_password(user, options)
       user.legacy_subscription_id = legacy_subscription_id(options)
       user.confirmed_at = DateTime.now if user.confirmed_at.nil?
@@ -95,6 +98,7 @@ class User < ApplicationRecord
       user.email = options[:email]
       if user.save(validate: false)
         attach_role(user)
+        attach_address(user, options)
         options[:user_id] = user.id
         create_or_update_subscription(user, options)
       end
@@ -111,6 +115,7 @@ class User < ApplicationRecord
 
     def legacy_subscription_id(options = {})
       return Admin::Subscription.new_safe_subscription_id if options[:Abonnr].nil? || options[:Abonnr].empty?
+
       options[:Abonnr]
     end
 
@@ -124,16 +129,31 @@ class User < ApplicationRecord
 
     def create_or_update_subscription(user, options = {})
       return if options[:Abon_periode].to_i.zero?
+
       subscription = first_or_initialize_subscription(user, options)
       subscription.subscription_type_id = first_or_create_subscription_type(options)
       subscription.start_date = options[:Oprettet]
       subscription.end_date = subscription_end_date(options)
       subscription.subscription_id = subscription_id(options)
-      subscription.save
+      create_subscription_address(subscription) if subscription.save
+    end
+
+    def create_subscription_address(subscription)
+      return unless subscription.addresses.empty?
+
+      user = subscription.user
+      subscription
+        .addresses
+        .create(
+          address: user.street_address,
+          city: user.city,
+          zipp_code: user.zipp_code
+        )
     end
 
     def subscription_end_date(options = {})
       return calculated_subscription_end_date(options) if options[:UdloebsDato].nil?
+
       options[:UdloebsDato]
     end
 
@@ -167,6 +187,7 @@ class User < ApplicationRecord
 
     def subscription_id(options = {})
       return Admin::Subscription.count + 10000000 if options[:Abonnr].nil? || options[:Abonnr].empty?
+
       options[:Abonnr]
     end
 
@@ -175,6 +196,7 @@ class User < ApplicationRecord
       user = find_user_by_legacy_id(options) if user.nil?
       user = find_user_by_email(options) if user.nil?
       return user unless user.nil?
+
       User.new
     end
 
@@ -184,21 +206,58 @@ class User < ApplicationRecord
 
     def find_user_by_legacy_id(options = {})
       return nil if options[:legacy_id].to_s.empty?
+
       User.find_by(legacy_id: options[:legacy_id])
     end
 
     def find_user_by_legacy_subscription_id(options = {})
       return nil if options[:Abonnr].to_s.empty?
+
       User.find_by(legacy_subscription_id: options[:Abonnr])
     end
 
     def attach_role(user)
       return if user.roles.any?
+
       Role.create(
         user_id: user.id,
         permission: Role::MEMBER,
         active: true
       )
+    end
+
+    def attach_address(user, options = {})
+      create_user_address(user, options) if user.addresses.empty?
+    end
+
+    def create_user_address(user, options = {})
+      address           = user.addresses.new
+      zipp_code         = parse_zipp_code(options)
+      city              = parse_city(options, zipp_code)
+      address.zipp_code = zipp_code if zipp_code.present?
+      address.city      = city if city.present?
+      address.name      = user.name
+      address.address   = options[:adresse]
+      address.save
+    end
+
+    def parse_zipp_code(options = {})
+      zipp_code = postal_code_and_city(options).first.to_s
+      return zipp_code if Address::Service::ZIP_CODE_TO_CITY[zipp_code.to_sym].present?
+    end
+
+    def parse_city(zipp_code, options)
+      city = Address::Service::ZIP_CODE_TO_CITY[zipp_code.to_sym]
+      return city if city.present?
+
+      city = postal_code_and_city(options)
+      city.delete_at(0) unless city.to_i.zero?
+      city.join(' ')
+    end
+
+    def postal_code_and_city(options = {})
+      return [] if options[:postnr_by].blank?
+      options[:postnr_by].split
     end
   end
 end

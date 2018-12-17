@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/ClassLength
+# frozen_string_literal: true
 class User < ApplicationRecord
   paginates_per 50
   include PgSearch
@@ -13,10 +13,16 @@ class User < ApplicationRecord
   has_many :gallery_images, class_name: 'Admin::GalleryImage'
   has_many :blog_posts, class_name: 'Admin::BlogPost'
   has_many :comments, dependent: :destroy
-  has_many :addresses, dependent: :destroy
-  has_many :subscription_addresses, dependent: :destroy
+  has_many(
+    :addresses,
+    as: :addressable,
+    dependent: :destroy
+  )
+
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles
+
+  attr_accessor :update_subscription_address
 
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
@@ -30,16 +36,39 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :name, presence: true
-  validates_confirmation_of :password
+  # validates_confirmation_of :password
   # validates_with UserAddressValidator, if: :validate_subscription_address
   validates_with User::Validator
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
 
-  # def validate_subscription_address
-  #   # ap @validate_address
-  # end
+  def free_subscription?
+    Admin::SubscriptionType
+      .where(free: true)
+      .joins(:subscriptions)
+      .where(admin_subscriptions: { user_id: id })
+      .any?
+  end
+
+  def address
+    addresses
+      .where(address_type: Address::PRIMARY_ADDRESS)
+      .first_or_create
+  end
+  alias :primary_address :address
+
+  def street_address
+    address.address
+  end
+
+  def city
+    address.city
+  end
+
+  def zipp_code
+    address.zipp_code
+  end
 
   def super_admin?
     roles.where(permission: Role::SUPER_ADMIN).any?
@@ -57,6 +86,7 @@ class User < ApplicationRecord
     return true if roles.where(permission: Role::EDITOR).any?
     return true if admin?
     return true if super_admin?
+
     false
   end
 
@@ -70,6 +100,7 @@ class User < ApplicationRecord
   def can_access?(user)
     return true if administrator?
     return true if user == self
+
     false
   end
 
@@ -83,6 +114,7 @@ class User < ApplicationRecord
 
   def avatar_url(size)
     return avatar.url(size) if avatar.exists?
+
     default_url = avatar.url(size)
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=182&d=#{CGI.escape(default_url)}"
@@ -90,11 +122,13 @@ class User < ApplicationRecord
 
   def access_to_subscribed_content?
     return true if free_subscription
+
     active_subscription?
   end
 
   def access_to_e_paper?
     return true if free_subscription
+
     Admin::SubscriptionType
       .where(id: subscription_type_ids)
       .any?
@@ -120,7 +154,7 @@ class User < ApplicationRecord
       subscriptions
       .where(
         'start_date <= :start_date AND end_date >= :end_date',
-        start_date: Date.today.beginning_of_day,
+        start_date: Date.today.beginning_of_day + 1.day,
         end_date: Date.today.beginning_of_day
       )
   end
@@ -128,11 +162,13 @@ class User < ApplicationRecord
   def subscription_id
     return last_valid_subscription.subscription_id if last_valid_subscription.present?
     return '' if legacy_subscription_id.blank?
+
     legacy_subscription_id + '!'
   end
 
   def expired_subscriber?
     return false if access_to_subscribed_content?
+
     subscriptions.any? && no_active_subscription?
   end
 
@@ -172,5 +208,13 @@ class User < ApplicationRecord
       .pluck(:subscription_type_id)
       .uniq
   end
+
+  def signature
+    self[:signature].presence || name
+  end
+
+  # def signature
+  #   [:signature].presence || name
+  # end
 end
 # rubocop:enable Metrics/ClassLength

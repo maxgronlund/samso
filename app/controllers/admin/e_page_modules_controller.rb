@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::EPageModulesController < AdminController
   before_action :set_admin_e_page_module, only: %i[edit update destroy]
 

@@ -1,3 +1,12 @@
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/article.index'), admin_articles_path
+    i.breadcrumb-item.
+      = link_to @admin_blog_post.title, admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post)
+    i.breadcrumb-item.active aria-current="page"
+      = t('edit')
+
 .container
   .row.justify-content-md-center
     .col-md-auto.col-md-12
@@ -8,4 +17,3 @@
           = simple_form_for [:admin, @admin_blog, @admin_blog_post], multipart: true, url: url_for(action: 'update', controller: 'admin/blog_posts'), method: 'put', multipart: true  do |f|
             = f.error_notification
             == render 'form', f: f
-

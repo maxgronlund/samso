@@ -1,10 +1,19 @@
 - session[:stored_path] = request.path
+- blog = Admin::Blog.first
 .row
+  .col-sm-12
+    == render 'shared/admin_links', selected: 'articles'
   .col-sm-6
     h3 = t('admin/article.index')
   .col-sm-6
     .pull-right
-      = @blog_pots_count
+      = @blog_posts_count
+
+- if blog.nil?
+  .row
+    .col-sm-12
+      .alert.alert-danger
+        'Der skal oprettes in kategori før du kan oprette en artikkel
 br
 = form_tag admin_articles_path, method: 'get', class: 'md-form' do
   .row
@@ -14,19 +23,14 @@ br
       = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-6
       .btn-group
-        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-info'
-        = link_to t('user.search.show_all'), admin_articles_path, class: 'btn btn-info'
+        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
+        = link_to t('user.search.show_all'), admin_articles_path, class: 'btn btn-light'
 
-.row.mt-10
-  .col-md-12
-    .pull-right
-      - blog = Admin::Blog.first
-      - if blog.nil?
-        'Der skal oprettes in kategori før du kan oprette en artikkel
-      - else
-        = link_to t('blog_post.new'),
-          new_admin_blog_blog_post_path(Admin::Blog.first),
-          class: 'btn btn-primary btn-sm'
+        - if blog.present?
+          = link_to t('blog_post.new'),
+            new_admin_blog_blog_post_path(Admin::Blog.first),
+            class: 'btn btn-primary'
+
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
@@ -48,18 +52,18 @@ br
           td = l(blog_post.start_date) unless blog_post.start_date.nil?
           td
             = t('admin/article.views', views: blog_post.views)
-            br
-            .btn-group
-              = link_to t('show'),
-                admin_blog_blog_post_path(blog_post.blog, blog_post),
-                class: 'btn btn-sm btn-info'
-              = link_to t('edit'),
-                edit_admin_blog_blog_post_path(blog_post.blog, blog_post),
-                class: 'btn btn-sm btn-primary'
-              = link_to t('delete'),
-                admin_blog_blog_post_path(blog_post.blog, blog_post),
-                data: { confirm: t('are_you_sure') },
-                method: :delete,
-                class: 'btn btn-danger btn-sm'
+            .pull-right
+              .btn-group
+                = link_to t('show'),
+                  admin_blog_blog_post_path(blog_post.blog, blog_post),
+                  class: 'btn btn-sm btn-light'
+                = link_to t('edit'),
+                  edit_admin_blog_blog_post_path(blog_post.blog, blog_post),
+                  class: 'btn btn-sm btn-light'
+                = link_to t('delete'),
+                  admin_blog_blog_post_path(blog_post.blog, blog_post),
+                  data: { confirm: t('are_you_sure') },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'
 
 = paginate @blog_pots

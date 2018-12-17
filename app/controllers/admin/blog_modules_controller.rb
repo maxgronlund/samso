@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::BlogModulesController < AdminController
   before_action :set_admin_blog_module, only: %i[edit update]
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Payment mock
 class CreatePayments < ActiveRecord::Migration[5.1]
   def change

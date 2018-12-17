@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::DmiModulesController < AdminController
   before_action :set_admin_dmi_module, only: %i[show edit update destroy]
 

@@ -9,8 +9,10 @@ class UserNotifierMailer < ApplicationMailer
   def send_signup_email(user_id)
     @user = User.find_by(id: user_id)
     return if @user.nil?
+
     @token = @user.confirmation_token
     return if @token.nil?
+
     @name = @user.name
     message = Admin::SystemMessage.thanks_for_signing_up_email
     @title  = message.title
@@ -27,6 +29,7 @@ class UserNotifierMailer < ApplicationMailer
   def send_reset_password_link(user_id)
     @user = User.find_by(id: user_id)
     return if @user.nil?
+
     @token = @user.reset_password_token
     @name = @user.name
     @message = Admin::SystemMessage.new_password_email

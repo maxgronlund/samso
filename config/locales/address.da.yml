@@ -21,8 +21,14 @@ da:
         address: Adresse
         zipp_code: Postnummer
         city: By
+        start_date: Fra dato
+        end_date: Til dato
 
   address:
     index: Adresser
     new: Opret ny adresse
     edit: Rediger adresse
+    city: By
+    zipp_code: Postnummer
+    primary_address: Abonnements addresse
+    temporary_address: Midlertidig abonnements adresse

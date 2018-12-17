@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # so we can have imported subscriptions
 class AddIdentifierToAdminSubscription < ActiveRecord::Migration[5.1]
   def change

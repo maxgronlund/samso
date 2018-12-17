@@ -19,6 +19,7 @@ class User < ApplicationRecord
     def remove_permission(permission)
       role = @user.roles.find_by(permission: permission)
       return if role.nil?
+
       role.destroy
     end
 
@@ -64,19 +65,26 @@ class User < ApplicationRecord
 
     def self.titleize_name(options)
       return if options[:name].nil?
+
       options[:name] = options[:name].downcase.titleize
     end
 
     def self.sanitize_email(email)
       email = email.to_s.strip.downcase
       return fake_email if email.empty?
+
       email
     end
 
     def self.sanitize_password(options)
-      return unless options[:password].to_s.empty?
+      return unless options[:password].blank?
+
       options.delete :password
       options.delete :password_confirmation
+    end
+
+    def self.set_address_name(options)
+      options[:addresses_attributes]['0'][:name] = options[:name]
     end
 
     def self.fake_email

@@ -29,11 +29,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if @user.addresses.blank?
-      @user.addresses.build
-    end
+    @user.addresses.build if @user.addresses.blank?
     @user.password = nil
     @user.email = nil if @user.fake_email?
+    @user.update_subscription_address = true
     render_403 unless current_user.can_access?(@user)
   end
 
@@ -55,25 +54,12 @@ class UsersController < ApplicationController
   end
   # rubocop:enable Metrics/AbcSize
 
-  def redirect_user
-    if session[:subscription_type_id]
-      initialize_user
-      redirect_to(
-        new_user_payment_path(
-          user_id: @user.id,
-          subscription_type_id: session[:subscription_type_id]
-        )
-      )
-    else
-      redirect_to confirm_signups_path
-    end
-  end
-
   # PATCH/PUT /users/1
   def update
-    ap user_params
-    ap @user.address
     if @user.update(user_params)
+      if Check.checked?(user_params[:update_subscription_address])
+        update_subscription_address
+      end
       redirect_to @user
     else
       render :edit
@@ -91,6 +77,26 @@ class UsersController < ApplicationController
 
   private
 
+  def update_subscription_address
+    return unless @user.active_subscription?
+    subscription = @user.last_valid_subscription
+    subscription.copy_from_address(@user.primary_address)
+  end
+
+  def redirect_user
+    if session[:subscription_type_id]
+      initialize_user
+      redirect_to(
+        new_user_payment_path(
+          user_id: @user.id,
+          subscription_type_id: session[:subscription_type_id]
+        )
+      )
+    else
+      redirect_to confirm_signups_path
+    end
+  end
+
   def initialize_user
     User::Service.new(@user).initialize_user
     session[:user_id] = @user.id
@@ -105,6 +111,8 @@ class UsersController < ApplicationController
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
+    User::Service.sanitize_email(sanitized_params[:email])
+    User::Service.set_address_name(sanitized_params)
     copy_fake_email(sanitized_params)
     sanitized_params
   end
@@ -113,6 +121,7 @@ class UsersController < ApplicationController
     return unless sanitized_params[:email] == ''
     return if @user.nil?
     return unless @user.fake_email?
+
     sanitized_params[:email] = @user.email
   end
 
@@ -126,7 +135,8 @@ class UsersController < ApplicationController
       :password_confirmation,
       :delete_avatar,
       :signature,
-      addresses_attributes: [ :id, :address, :zipp_code, :city]
+      :update_subscription_address,
+      addresses_attributes: %i[id name address zipp_code city]
     )
   end
 end

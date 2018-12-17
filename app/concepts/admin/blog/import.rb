@@ -4,9 +4,7 @@ class Admin::Blog < ApplicationRecord
   require 'cgi'
   # services for Admin::CsvImport
   class Import
-    def initialize
-    end
-
+    # rubocop:disable Security/Open
     def import(csv_import)
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each do |row|
@@ -15,6 +13,7 @@ class Admin::Blog < ApplicationRecord
         import_category(options)
       end
     end
+    # rubocop:enable Security/Open
 
     private
 

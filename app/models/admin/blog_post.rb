@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
   index_name    "articles-#{Rails.env}"
-  document_type "post"
+  document_type 'post'
 
   settings index: { number_of_shards: 1 } do
     mappings dynamic: 'false' do
@@ -36,27 +38,27 @@ class Admin::BlogPost < ApplicationRecord
       [I18n.t('blog_post.image_right'), 'image_right']
     ].freeze
 
+  # rubocop:disable Metrics/MethodLength
   def self.elasticsearch(query)
     __elasticsearch__.search(
-      {
-        query: {
-          multi_match: {
-            query: query,
-            fields: [ 'signature^20', 'title^10', 'body']
-          }
-        },
-        highlight: {
-          pre_tags: ['<em class="label-highlight">'],
-          post_tags: ['</em>'],
-          fields: {
-            signature:   { number_of_fragments: 0 },
-            title:   { number_of_fragments: 0 },
-            body: { fragment_size: 145 }
-          }
+      query: {
+        multi_match: {
+          query: query,
+          fields: ['signature^20', 'title^10', 'body']
+        }
+      },
+      highlight: {
+        pre_tags: ['<em class="label-highlight">'],
+        post_tags: ['</em>'],
+        fields: {
+          signature: { number_of_fragments: 0 },
+          title: { number_of_fragments: 0 },
+          body: { fragment_size: 145 }
         }
       }
     )
   end
+  # rubocop:enable Metrics/MethodLength
 
   def show_on_page
     Page.find_by(id: post_page_id) || Page.find_by(locale: I18n.locale)
@@ -85,6 +87,7 @@ class Admin::BlogPost < ApplicationRecord
   def author_name
     return signature unless signature.blank?
     return user.name if user
+
     ''
   end
 
@@ -94,12 +97,13 @@ class Admin::BlogPost < ApplicationRecord
 
   def build_video_url
     return youtube_video_url if video_url.include?('https://youtu.be/')
+
     video_url
   end
 
   def youtube_video_url
     src = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'
-    src += video_url.split("https://youtu.be/").last
+    src += video_url.split('https://youtu.be/').last
     src + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
   end
 

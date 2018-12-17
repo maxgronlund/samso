@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # show wheter forecast
 class CreateAdminDmiModules < ActiveRecord::Migration[5.1]
   def up
@@ -26,6 +28,6 @@ class CreateAdminDmiModules < ActiveRecord::Migration[5.1]
 
   def remove_module_name
     module_name = Admin::ModuleName.find_by(name: 'Admin::DmiModule')
-    module_name.delete unless module_name.nil?
+    module_name.delete if module_name.present?
   end
 end

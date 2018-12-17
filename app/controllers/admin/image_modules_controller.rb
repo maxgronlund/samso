@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::ImageModulesController < AdminController
   before_action :set_admin_image_module, only: %i[show edit update destroy]
 

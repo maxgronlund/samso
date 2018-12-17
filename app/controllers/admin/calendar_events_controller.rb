@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::CalendarEventsController < AdminController
   before_action :set_admin_calendar_event, only: %i[show edit update destroy]
   before_action :set_admin_calendar, only: %i[index show new edit update destroy create]

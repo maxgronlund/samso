@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::BlogPostsController < AdminController
   before_action :set_admin_blog_post, only: %i[show edit update destroy]
 
@@ -43,6 +45,7 @@ class Admin::BlogPostsController < AdminController
 
   def signature
     return current_user.name if current_user.signature.blank?
+
     current_user.signature
   end
 

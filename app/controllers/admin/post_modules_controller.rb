@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::PostModulesController < AdminController
   before_action :set_admin_post_module, only: %i[edit update destroy]
 

@@ -1,21 +1,21 @@
 - search_result = modulable
 
 - if @blog_posts.nil? || @blog_posts.empty?
-  h3 = t('admin/search_result_module.nothing_found')
+  h4 = t('admin/search_result_module.nothing_found')
 - else
   - @blog_posts.each_with_hit do |blog_post, hit|
-    - next if blog_post.start_date > Time.zone.now
-    b = hit.try(:highlight)&.title.present? ? hit.highlight.title.join.html_safe : blog_post.title
-    .start_date = l blog_post.start_date unless blog_post.start_date.nil?
-    i = hit.try(:highlight)&.signature.present? ? hit.highlight.signature.join.html_safe : blog_post.signature
-    / .truncate-search
-    /   .truncate-search-shadow
-    .truncate-search
-      - if hit.try(:highlight)&.body.nil?
-        = simple_format blog_post.body
-      - else
-        = simple_format hit.highlight.body.join('&hellip;&nbsp;')
-    /= simple_format(hit.try(:highlight)&.body  ? hit.highlight.body.join('&hellip;') : blog_post.body)
-    = link_to 'læs artiklen', search_path(blog_post.id)
-    hr
+    .search-result
+      = link_to search_path(blog_post.id) do
+        - next if blog_post.start_date > Time.zone.now
+        h4 = hit.try(:highlight)&.title.present? ? hit.highlight.title.join.html_safe : blog_post.title
+        .start_date = l blog_post.start_date unless blog_post.start_date.nil?
+        i = hit.try(:highlight)&.signature.present? ? hit.highlight.signature.join.html_safe : blog_post.signature
+        / .truncate-search
+        /   .truncate-search-shadow
+        .truncate-search
+          - if hit.try(:highlight)&.body.nil?
+            = simple_format blog_post.body
+          - else
+            = simple_format hit.highlight.body.join('&hellip;&nbsp;')
+        = link_to 'læs artiklen', search_path(blog_post.id), class: 'btn btn-primary'
   = paginate @blog_posts

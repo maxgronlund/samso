@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: %i[show edit update destroy]
   layout false
 
   # POST /comments
   def create
     if comment_params[:comment].present?
       comment_params[:user_id] = current_user.id
-      @comment    = Comment.create(comment_params)
+      @comment = Comment.create(comment_params)
     else
       render nothing: true
     end
@@ -20,10 +20,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     @comment.destroy
-    #redirect_to comments_url, notice: 'Comment was successfully destroyed.'
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])

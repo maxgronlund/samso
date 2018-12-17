@@ -100,9 +100,15 @@ Style/Documentation:
     - 'app/models/role.rb'
     - 'app/models/user.rb'
     - 'config/application.rb'
-    - 'db/migrate/20170624134327_create_users.rb'
-    - 'db/migrate/20170625063026_add_devise_to_users.rb'
-    - 'db/migrate/20170625064610_create_roles.rb'
+    - 'db/migrate/*'
+    - 'features/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Exclude:
+    - 'bin/rails'
 
 # Offense count: 3
 # Cop supports --auto-correct.

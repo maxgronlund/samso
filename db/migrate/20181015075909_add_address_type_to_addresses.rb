@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAddressTypeToAddresses < ActiveRecord::Migration[5.2]
   def up
     add_column :addresses, :address_type, :string, default: 'user_address'

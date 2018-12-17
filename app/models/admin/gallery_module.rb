@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Gallery module
 class Admin::GalleryModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
@@ -21,12 +23,14 @@ class Admin::GalleryModule < ApplicationRecord
   def prev_page(request_path, current_page)
     page = current_page.to_i - 1
     return request_path if page <= 0
+
     "#{request_path}?page=#{page}"
   end
 
   def next_page(request_path, current_page)
     page = current_page.to_i + 1
     return false if page * images_pr_page >= gallery_images_count
+
     "#{request_path}?page=#{page}"
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file contain all the record creation needed to seed the database with its default values.
 
 user = User.where(
@@ -25,3 +27,6 @@ role = Role.where(
   user_id: user.id,
   permission: Role::SUPER_ADMIN
 )
+
+Rake::Task['system:setup'].invoke
+Rake::Task['pages:build'].invoke

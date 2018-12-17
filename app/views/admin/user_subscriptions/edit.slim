@@ -1,10 +1,20 @@
-h3 Rediger abonnoment
-= simple_form_for [@user, @subscription],
-  url: admin_user_user_subscription_path(@user, @subscription),
-  method: 'PUT' do |f|
-  .row
-    .col-sm-4
-      = f.input :start_date
-    .col-sm-4
-      = f.input :end_date
-  = f.submit t('save'), class: 'btn btn-light'
+/= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header = t('subscription.edit_dates')
+
+        .card-body
+          p#notice = notice
+          = simple_form_for [@user, @subscription],
+            url: admin_user_user_subscription_path(@user, @subscription),
+            method: 'PUT' do |f|
+              .row
+                .col-sm-6
+                  = f.input :start_date
+                .col-sm-6
+                  = f.input :end_date
+              .pull-right
+                = link_to t('cancel'), admin_user_path(@subscription.user_id), class: 'btn btn-light'
+                = f.submit t('save'), class: 'btn btn-primary'

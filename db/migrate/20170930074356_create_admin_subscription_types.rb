@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Support for subscription types
 class CreateAdminSubscriptionTypes < ActiveRecord::Migration[5.1]
   def change

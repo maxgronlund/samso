@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::UsersController < AdminController
   before_action :set_user, only: %i[show edit update destroy]
   before_action :set_selected
@@ -18,6 +20,7 @@ class Admin::UsersController < AdminController
 
   # GET /admin/users/1
   def show
+    @subscriptions = @user.subscriptions
   end
 
   # GET /users/new
@@ -45,7 +48,6 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
-    ap permitted_user_params
     if @user.update(user_params)
       redirect_to admin_users_path
     else
@@ -73,8 +75,9 @@ class Admin::UsersController < AdminController
   def user_params
     sanitized_params = permitted_user_params.dup
     User::Service.titleize_name(sanitized_params)
+    User::Service.sanitize_password(sanitized_params)
     User::Service.sanitize_email(sanitized_params[:email])
-    #User::Service.sanitize_password(sanitized_params)
+    User::Service.set_address_name(sanitized_params)
     sanitized_params
   end
 
@@ -89,6 +92,7 @@ class Admin::UsersController < AdminController
       :delete_avatar,
       :free_subscription,
       :signature,
+      addresses_attributes: %i[id name address zipp_code city],
       roles_attributes: %i[permission id]
     )
   end

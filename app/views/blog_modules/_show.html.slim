@@ -20,7 +20,7 @@
         blog_module: blog_module,
         post: post,
         featured: true,
-      start_date: post.start_date
+        start_date: post.start_date
 - else
   - featured_posts  = blog_module.featured_posts
   - paginated_posts = blog_module.paginated_posts(params[:page]) - featured_posts

@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+## frozen_string_literal: true
 
 # show weather from DMI
 class Admin::FeaturedPostModule < ApplicationRecord
@@ -51,6 +51,7 @@ class Admin::FeaturedPostModule < ApplicationRecord
 
   def category_news
     return featured_posts if blog.nil?
+
     all_posts
       .where(blog_id: blog_id)
       .first(featured_posts_pr_page)

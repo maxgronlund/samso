@@ -1,4 +1,6 @@
+# find blogposts
 class SearchController < ApplicationController
+  # rubocop:disable Metrics/AbcSize
   def index
     @blog_posts =
       Admin::BlogPost
@@ -7,7 +9,6 @@ class SearchController < ApplicationController
       .per(20)
       .records
 
-
     @page             = admin_system_setup.search_page
     @landing_page     = admin_system_setup.landing_page || Page.find_by(locale: I18n.locale)
     @footer           = @page.footer
@@ -15,9 +16,8 @@ class SearchController < ApplicationController
     session[:page_id] = @page.id
 
     render 'pages/show'
-  # rescue
-  #   render_404
   end
+  # rubocop:enable Metrics/AbcSize
 
   def show
     @blog_post = Admin::BlogPost.find(params[:id])

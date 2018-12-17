@@ -1,53 +1,62 @@
-h3 = @user.name
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'Brugerer', admin_users_path
+    li.breadcrumb-item.active aria-current="page"
+      = @user.name
+
 
 .row
-  .col-md-6
-    = "Email: #{@user.email}"
-    / br
-    / = image_tag( @user.avatar_url(:square))
-  .col-md-6
-    table.table-sm
-      tbody
-        tr
-          td
-            .pull-right
-              = t('user.sign_in_count')
-          td
-            b = @user.sign_in_count
-        tr
-          td
-            .pull-right
-              = t('user.last_sign_in_at')
-          td
-            b = l @user.last_sign_in_at.localtime if @user.last_sign_in_at
+  .col-sm-4
+    h3= @user.name
+    .btn-group.mt-10
+      = link_to t('edit'),
+        edit_admin_user_path(@user),
+        class: 'btn btn-primary btn-sm'
+      - unless @user.free_subscription?
+        = link_to 'Opret friabonnoment',
+          new_admin_user_user_subscription_path(@user),
+          class: 'btn btn-sm btn-success'
+  .col-sm-4
+    = render 'shared/user_stat', user: @user
+  .col-sm-4
+    = render 'shared/address', address: @user.address
 
-        tr
-          td
-            .pull-right
-              = t('user.current_sign_in_at')
-          td
-            b = l @user.current_sign_in_at.localtime if @user.current_sign_in_at
-        tr
-          td
-            .pull-right
-              = t('user.last_sign_in_ip')
-          td
-            b = @user.last_sign_in_ip
-        tr
-          td
-            .pull-right
-              = t('user.current_sign_in_ip')
-          td
-            b = @user.current_sign_in_ip
 
-hr
-.row
-  .col-md-12
-    .pull-right
-      .btn-group
-        = link_to t('back'), admin_users_path, class: 'btn btn-light'
-        = link_to t('edit'), edit_admin_user_path(@user), class: 'btn btn-primary'
 
+
+.row.mt-20
+  .col-sm-12
+    - if @subscriptions.any?
+      .table-responsive
+        table.table.table-striped.table-bordered.table-hover.table-sm
+          thead
+            tr
+              th = t('subscription.type')
+              th = t('subscription.id')
+              th = t('subscription.start_date')
+              th = t('subscription.end_date')
+              th Status
+              th
+                .pull-right = t('edit')
+
+          tbody
+            - @subscriptions.each do |subscription|
+              tr
+                td = subscription.type_name
+                td = subscription.subscription_id
+                td = l subscription.start_date
+                td = l subscription.end_date
+                td = subscription.expired? ? 'Udløbet' : 'Gyldigt'
+                th
+                  .pull-right
+                    .btn-group
+                      = link_to t('subscription.delivery_address'),
+                        subscription_address_path(subscription),
+                        class: 'btn btn-light btn-sm'
+                      = link_to t('subscription.edit_dates'),
+                        edit_admin_user_user_subscription_path(@user, subscription),
+                        class: 'btn btn-light btn-sm'
 
 
 

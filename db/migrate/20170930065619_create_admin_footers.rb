@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # page footer
 class CreateAdminFooters < ActiveRecord::Migration[5.1]
   def change

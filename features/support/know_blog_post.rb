@@ -20,7 +20,7 @@ module KnowBlogPostHelper
       {
         title: Faker::Beer.name + '' + SecureRandom.uuid,
         subtitle: Faker::Hipster.sentence,
-        teaser: Faker::HowIMetYourMother.quote,
+        teaser: Faker::TvShows::HowIMetYourMother.quote,
         body: Faker::Hipster.paragraph,
         free_content: true,
         signature: Faker::Name.name

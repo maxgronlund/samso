@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # show weather from DMI
 class Admin::MoreArticlesModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable

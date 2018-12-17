@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Events for the calendar
 class Admin::CalendarEvent < ApplicationRecord
   belongs_to :calendar, class_name: 'Admin::Calendar', counter_cache: true

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # bootstrap style rows
 class CreatePageRows < ActiveRecord::Migration[5.1]
   def change

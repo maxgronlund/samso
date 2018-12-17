@@ -7,6 +7,8 @@ en:
 
   user:
     create: 'Create account'
+    delete_account: Delete account
+    edit: Edit account
     password:
       update: Update password
       updated: Password updated

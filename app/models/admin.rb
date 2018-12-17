@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # db wrapper for the admin namespace
 module Admin
   def self.table_name_prefix

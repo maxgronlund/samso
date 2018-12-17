@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # a horizontal collections of columns
 class PageRow < ApplicationRecord
   attr_accessor :preset, :delete_background_image, :nr_cols
@@ -55,10 +57,11 @@ class PageRow < ApplicationRecord
 
   def background_image_url
     return '' unless background?
+
     background_image.url
   end
 
   def background?
-    !background_image_file_size.nil?
+    background_image_file_size.present?
   end
 end

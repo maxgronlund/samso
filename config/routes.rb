@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-
-
   resources :addresses
-  #get 'cancel_account/show'
   resources :comments
   namespace :api do
     namespace :v1 do
@@ -101,8 +98,10 @@ Rails.application.routes.draw do
     resources :pages, only: %i[show]
 
     resources :sessions, only: %i[new destroy create index]
-    resources :subscription_addresses, only: %i[edit update]
-    resources :subscriptions
+    resources :subscription_addresses, only: %i[show update]
+    resources :subscriptions do
+      resources :addresses, only: %i[new create edit update destroy]
+    end
     get '/:locale' => 'home#index'
     root to: "home#index"
     resources :users, except: %i[index] do

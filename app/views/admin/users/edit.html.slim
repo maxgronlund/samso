@@ -1,3 +1,12 @@
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'Brugerer', admin_users_path
+    li.breadcrumb-item
+      = link_to @user.name, admin_user_path(@user)
+    li.breadcrumb-item.active aria-current="page"
+      = t('edit')
+
 h3 = t('edit_model', model_name: @user.model_name.human)
 
 == render 'form'

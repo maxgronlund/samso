@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# internal comments
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, polymorphic: true
@@ -9,6 +12,7 @@ class Comment < ApplicationRecord
   def edditable?(edditor)
     return false if edditor.nil?
     return true if edditor.administrator?
+
     edditor == user
   end
 end

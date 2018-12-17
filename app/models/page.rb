@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Dynamic page to hold content
 class Page < ApplicationRecord
   has_many :page_rows, dependent: :destroy
@@ -50,6 +52,7 @@ class Page < ApplicationRecord
   def deletable?
     return false if Admin::SystemSetup.where(locale: locale, landing_page_id: id).any?
     return false if Admin::SystemSetup.where(locale: locale, subscription_page_id: id).any?
+
     true
   end
 
@@ -67,6 +70,7 @@ class Page < ApplicationRecord
 
   def body_style
     return '' unless background? || background_color?
+
     "background: url(#{background_url});background-size: cover; background-repeat: no-repeat; background-color: #{background_color}"
   end
 

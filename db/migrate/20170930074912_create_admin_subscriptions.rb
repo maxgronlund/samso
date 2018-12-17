@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TODO: Rename to UserSubscription
 # a user subscription
 class CreateAdminSubscriptions < ActiveRecord::Migration[5.1]

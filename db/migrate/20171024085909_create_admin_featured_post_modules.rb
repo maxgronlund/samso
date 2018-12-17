@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Module for new feature
 class CreateAdminFeaturedPostModules < ActiveRecord::Migration[5.1]
   def up

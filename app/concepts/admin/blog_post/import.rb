@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # namespace to confine service class to Admin:BlogPost::Import
 class Admin::BlogPost < ApplicationRecord
   require 'csv'
@@ -9,6 +11,7 @@ class Admin::BlogPost < ApplicationRecord
       @current_user = current_user
     end
 
+    # rubocop:disable Security/Open
     def import(csv_import)
       @errors = 0
       csv = open(csv_import.file_url)
@@ -20,6 +23,7 @@ class Admin::BlogPost < ApplicationRecord
       Admin::Blog.update_all_counts
       pritify_layouts
     end
+    # rubocop:enable Security/Open
 
     def pritify_layouts
       Admin::Blog.find_each do |blog|
@@ -76,9 +80,11 @@ class Admin::BlogPost < ApplicationRecord
       menu_title = "Kategori #{blog.title}"
       page       = Page.find_by(menu_title: menu_title)
       return if page.nil?
+
       options[:post_page_id] = page.id
       post = find_or_initialize_blog_post(blog, options)
       return if post.nil? || post.persisted?
+
       attach_image(post, options) if post.save
     end
 
@@ -122,6 +128,7 @@ class Admin::BlogPost < ApplicationRecord
       image_1_url += options[:pix]
       image_1_url.gsub!(' ', '%20')
       return if image_1_url == 'http://samso.dk/'
+
       post.image = URI.parse(image_1_url)
       post.save
     rescue => e
@@ -131,6 +138,7 @@ class Admin::BlogPost < ApplicationRecord
 
     def last_blog_post_possition(blog_module)
       return 100 if blog_module.blog_posts.empty?
+
       blog_module.blog_posts.count * 100 + 100
     end
 

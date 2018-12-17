@@ -1,10 +1,11 @@
 class Api::V1::EpaperVerificationController < ApplicationController
   def index
-    if access_to_e_paper?
-      @access_to_e_paper = 'Api::V1::EpaperVerification'
-    else
-      @access_to_e_paper = SecureRandom.uuid
-    end
+    @access_to_e_paper =
+      if access_to_e_paper?
+        'Api::V1::EpaperVerification'
+      else
+        SecureRandom.uuid
+      end
   end
 
   def show
@@ -37,8 +38,10 @@ class Api::V1::EpaperVerificationController < ApplicationController
     e_paper_token = EPaperToken.find_by(secret: params[:secret])
     return false if e_paper_token.nil?
     return false unless e_paper_token.grand_access?
+
     user = e_paper_token.user
     return false if user.nil?
+
     user.access_to_e_paper?
   end
 
@@ -47,9 +50,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
     return false if user.nil?
     return false unless current_user.access_to_e_paper?
     return false unless current_user == user
+
     current_user.access_to_e_paper?
   end
 end
-
-
-# http://localhost:3000/api/v1/epaper_verification/14938?locale=da

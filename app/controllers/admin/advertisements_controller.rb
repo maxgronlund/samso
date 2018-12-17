@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::AdvertisementsController < AdminController
   before_action :set_admin_advertisement, only: %i[show edit update destroy]
 

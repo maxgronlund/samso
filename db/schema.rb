@@ -10,21 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_221144) do
+ActiveRecord::Schema.define(version: 2018_12_13_105819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.string "name"
     t.string "address"
-    t.integer "zipp_code"
+    t.string "zipp_code"
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "address_type", default: "user_address"
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+    t.string "address_type", default: "primary_address"
+    t.date "start_date"
+    t.date "end_date"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "admin_advertisement_modules", force: :cascade do |t|
@@ -96,7 +99,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.text "video_url", default: ""
     t.boolean "enable_comments", default: false
@@ -162,7 +165,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.index ["carousel_module_id"], name: "index_admin_carousel_slides_on_carousel_module_id"
     t.index ["page_id"], name: "index_admin_carousel_slides_on_page_id"
@@ -177,7 +180,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.datetime "updated_at", null: false
     t.string "csv_file_file_name"
     t.string "csv_file_content_type"
-    t.integer "csv_file_file_size"
+    t.bigint "csv_file_file_size"
     t.datetime "csv_file_updated_at"
   end
 
@@ -242,7 +245,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.index ["gallery_module_id"], name: "index_admin_gallery_images_on_gallery_module_id"
     t.index ["user_id"], name: "index_admin_gallery_images_on_user_id"
@@ -396,7 +399,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.datetime "updated_at", null: false
     t.string "logo_file_name"
     t.string "logo_content_type"
-    t.integer "logo_file_size"
+    t.bigint "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer "search_page_id"
   end
@@ -418,7 +421,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
     t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
@@ -539,17 +542,6 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
-  create_table "subscription_addresses", force: :cascade do |t|
-    t.bigint "admin_subscription_id"
-    t.bigint "address_id"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_subscription_addresses_on_address_id"
-    t.index ["admin_subscription_id"], name: "index_subscription_addresses_on_admin_subscription_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "signature"
@@ -571,20 +563,17 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer "legacy_id"
+    t.string "legacy_subscription_id"
     t.boolean "free_subscription", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
-    t.string "address"
-    t.string "postal_code_and_city"
-    t.string "legacy_subscription_id"
     t.integer "e_paper_tokens_count"
     t.boolean "gdpr_accepted", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "addresses", "users"
   add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "e_paper_tokens", "users"
@@ -594,6 +583,4 @@ ActiveRecord::Schema.define(version: 2018_10_29_221144) do
   add_foreign_key "pages", "admin_footers"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"
-  add_foreign_key "subscription_addresses", "addresses"
-  add_foreign_key "subscription_addresses", "admin_subscriptions"
 end

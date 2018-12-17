@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::FindBlogPostModulesController < AdminController
   before_action :set_admin_find_blog_post_module, only: %i[edit update destroy]
 

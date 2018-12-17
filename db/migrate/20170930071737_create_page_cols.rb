@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # coll bootstrap style
 class CreatePageCols < ActiveRecord::Migration[5.1]
   def change

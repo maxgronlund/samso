@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # System messages
 class Admin::SystemMessage < ApplicationRecord
   def self.welcome
@@ -94,7 +96,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'general_data_protection_regulation',
         title: 'General Data Protection Regulation',
-        body: "Hos Samsø er din data i sikre hænder. På din profil kan du altid se din data, hente din data eller slette din data."
+        body: 'Hos Samsø er din data i sikre hænder. På din profil kan du altid se din data, hente din data eller slette din data.'
       )
   end
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -8,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_menu
   before_action :set_default_page
 
-  rescue_from ActionView::MissingTemplate do |exception|
+  rescue_from ActionView::MissingTemplate do
     render_404
   end
 
@@ -21,17 +22,23 @@ class ApplicationController < ActionController::Base
   end
 
   def super_admin?
-    current_user && current_user.super_admin?
+    return false if current_user.nil?
+
+    current_user.super_admin?
   end
   helper_method :super_admin?
 
   def admin?
-    @admin ||= current_user && current_user.admin?
+    return false if current_user.nil?
+
+    @admin ||= current_user.admin?
   end
   helper_method :admin?
 
   def editor?
-    current_user && current_user.editor?
+    return false if current_user.nil?
+
+    current_user.editor?
   end
   helper_method :editor?
 
@@ -43,6 +50,7 @@ class ApplicationController < ActionController::Base
   def access_to_subscribed_content?
     return false unless current_user
     return true if editor?
+
     current_user.access_to_subscribed_content?
   end
   helper_method :access_to_subscribed_content?
@@ -50,13 +58,16 @@ class ApplicationController < ActionController::Base
   def access_to_e_paper?
     return false unless current_user
     return true if editor?
+
     current_user.access_to_e_paper?
   end
   helper_method :access_to_e_paper?
 
   def can_manage_resource?(resource)
+    return false if current_user.nil?
     return true if editor?
-    current_user && current_user.can_manage_resource?(resource)
+
+    current_user.can_manage_resource?(resource)
   end
   helper_method :can_manage_resource?
 
@@ -82,16 +93,19 @@ class ApplicationController < ActionController::Base
 
   def gdpr_acceptance_missing?
     return false if current_user.nil?
+
     !current_user.gdpr_accepted
   end
   helper_method :gdpr_acceptance_missing?
 
   protected
 
+  # rubocop:disable Naming/MemoizedInstanceVariableName
   def set_default_page
     @body_style = ''
     @page ||= landing_page
   end
+  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   def set_admin
     @admin = admin?
@@ -123,20 +137,23 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def user_signed_in?
-    !current_user.nil?
+    current_user.present?
   end
   helper_method :user_signed_in?
 
   def authenticate_admin!
     return if Rails.env.test?
+
     render_403 unless user_signed_in? && current_user.administrator?
   end
   helper_method :authenticate_user!
 
   def default_path(path)
     return path if session[:stored_path].nil?
+
     path = session[:stored_path]
     session.delete :stored_path
     path
   end
 end
+# rubocop:enable Metrics/ClassLength

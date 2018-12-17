@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::MenuLinksController < AdminController
   before_action :set_admin_menu_link, only: %i[show edit update destroy]
   before_action :set_admin_menu_content, only: %i[show new create edit update destroy]

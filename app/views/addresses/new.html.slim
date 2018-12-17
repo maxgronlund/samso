@@ -1,5 +1,21 @@
-h1 New address
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-20
+  / nav aria-label="breadcrumb"
+  /   ol.breadcrumb
+  /     li.breadcrumb-item
+  /       = link_to @user.name, user_path(@user)
+  /     li.breadcrumb-item
+  /       = link_to t('subscription.delivery_address'), edit_subscription_address_path(@subscription)
+  /     li.breadcrumb-item.active aria-current="page"
+  /       = t('subscription.temporary_delivery_address')
 
-== render 'form'
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header = t('subscription.temporary_delivery_address')
 
-= link_to 'Back', addresses_path
+        .card-body
+          p#notice = notice
+
+          == render 'form'
+

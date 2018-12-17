@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::ClickOnAdvertisementsController < ApplicationController
   def update
     acvertisement = Admin::Advertisement.find(update_params[:id])

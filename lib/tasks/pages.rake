@@ -55,6 +55,7 @@ namespace :pages do
 
   def find_or_create_post_module(page_col, blog)
     return if page_col.page_col_modules.any?
+
     post_module =
       Admin::PostModule
       .where(name: blog.title)

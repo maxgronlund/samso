@@ -1,11 +1,15 @@
 class CancelAccountController < ApplicationController
   def show
+    render_403 unless current_user == User.find(params[:id])
     setup_cancel_account_view
   end
 
+  # rubocop:disable  Metrics/AbcSize
   def destroy
-    if permitted_user_params[:cancel_account_token].nil? || permitted_user_params[:cancel_account_token].empty?
+    @user = User.find(params[:id])
+    if permitted_user_params[:cancel_account_token].blank?
       @user.errors[:cancel_account_token] << 'Koden kan ikke være tom'
+      @cancel_account_error = 'Koden kan ikke være tom'
       setup_cancel_account_view
       render :show
     elsif permitted_user_params[:cancel_account_token] == session[:cancel_account_token]
@@ -13,12 +17,13 @@ class CancelAccountController < ApplicationController
       session.delete(:cancel_account_token)
       current_user.destroy
       redirect_to root_path
-    elsif
+    else
       @user.errors[:cancel_account_token] << 'Koden er ikke korekt'
       setup_cancel_account_view
       render :show
     end
   end
+  # rubocop:enable  Metrics/AbcSize
 
   private
 
@@ -36,7 +41,8 @@ class CancelAccountController < ApplicationController
 
   def cancel_account_message
     @cancel_account_message =
-      Admin::SystemMessage.cancel_account_message
+      Admin::SystemMessage
+      .cancel_account_message
       .body
       .gsub('{{CANCEL_ACCOUNT_TOKEN}}', cancel_account_token)
   end
@@ -44,5 +50,5 @@ class CancelAccountController < ApplicationController
   def cancel_account_token
     @cancel_account_token ||=
       (0...4).map { ('A'..'Z').to_a[rand(26)] }.join
-   end
+  end
 end

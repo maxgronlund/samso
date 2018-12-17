@@ -25,6 +25,7 @@ class PageRow < ApplicationRecord
       old_cols_count = @page_row.page_cols_count
 
       return unless old_cols_count > new_cols_count
+
       move_page_cols_content(new_cols_count)
     end
 
@@ -47,8 +48,6 @@ class PageRow < ApplicationRecord
       move_modules_to_col(move_to_page_col, page_cols)
     end
 
-    def move_modules_to_col(move_to_page_col, page_cols)
-      # move_to_page_col = page_cols
-    end
+    def move_modules_to_col(move_to_page_col, page_cols); end
   end
 end

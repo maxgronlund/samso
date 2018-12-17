@@ -7,22 +7,23 @@
     - if @user.persisted? && @user.admin?
       = f.input :signature
     = f.input :email
-
-    / - if user_signed_in? && @user.avatar.exists?
-    /   = image_tag @user.avatar.url(:square)
-    /   = f.input :delete_avatar, as: :boolean
-    / - if session[:print_version] == 'true'
-    /   = f.input :address, required: true
-    /   = f.input :postal_code_and_city, required: true
-    /   = f.hidden_field :validate_address, value: true
-    /= f.input :avatar, as: :file
     = f.simple_fields_for :addresses do |address|
       = address.input :address
-      = address.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
-      = address.input :city, input_html: { class: 'city-name-autofill' }
+      = address.input :zipp_code,
+        label: t('address.zipp_code'),
+        input_html: { class: 'post-code-autofill-dk' }
+      = address.input :city,
+        label: t('address.city'),
+        input_html: { class: 'city-name-autofill' }
+    - if @user.active_subscription?
+      = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
     = f.input :password, placeholder: '••••••••'
     = f.input :password_confirmation, placeholder: '••••••••'
 
   .form-actions
     .pull-right
+      - if current_user.nil?
+        = link_to t('cancel'), session[:last_page].presence || root_path, class: 'btn btn-light'
+      - else
+        = link_to t('cancel'), user_path(current_user), class: 'btn btn-light'
       = f.submit t('save'), class: 'btn btn-primary', id: 'submit'

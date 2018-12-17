@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Image for the gallery
 class Admin::GalleryImage < ApplicationRecord
   belongs_to :gallery_module, class_name: 'Admin::GalleryModule', counter_cache: true

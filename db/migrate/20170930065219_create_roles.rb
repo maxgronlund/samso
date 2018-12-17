@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Rolebased system for permissions
 class CreateRoles < ActiveRecord::Migration[5.1]
   def change

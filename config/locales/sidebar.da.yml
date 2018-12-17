@@ -1,0 +1,14 @@
+da:
+  sidebar:
+    front_page: Forside
+    articles: Artikler
+    users: Bruger
+    subscription_types: Abonnoment typer
+    system_settings: System opsætning
+    menus: Menuer
+    pages: Sider
+    csv_imports: CSV Imports
+    calendars: Kalenderer
+    categories: Artikel kategorier
+    system_messages: System beskeder
+    ads: Annoncer

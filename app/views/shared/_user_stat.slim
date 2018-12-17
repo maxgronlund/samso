@@ -1,0 +1,18 @@
+.table-responsive
+  table.table.table-bordered.table-hover.table-sm
+    tr
+      th
+        .pull-right = t('user.sign_in_count')
+      th
+        strong = user.sign_in_count
+    tr
+      td
+        .pull-right = t('user.last_sign_in_at')
+      td
+        strong = l user.last_sign_in_at if user.last_sign_in_at
+
+    tr
+      td
+        .pull-right = t('user.current_sign_in_at')
+      td
+        strong = l @user.current_sign_in_at.localtime if @user.current_sign_in_at

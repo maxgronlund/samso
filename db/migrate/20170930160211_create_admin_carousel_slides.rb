@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # slide for the carousel
 class CreateAdminCarouselSlides < ActiveRecord::Migration[5.1]
   def up

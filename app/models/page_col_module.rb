@@ -1,4 +1,6 @@
-# join a modyle to a col
+# frozen_string_literal: true
+
+# join a modole to a col
 class PageColModule < ApplicationRecord
   belongs_to :page_col
   belongs_to :moduleable, polymorphic: true
@@ -37,6 +39,7 @@ class PageColModule < ApplicationRecord
     return true if access_to_members_only?(current_user)
     return true if access_to_guests_only?(current_user)
     return true if access_to_subscribers_only?(current_user)
+
     access_to_expired_subscribers?(current_user)
   end
 
@@ -52,18 +55,21 @@ class PageColModule < ApplicationRecord
 
   def access_to_members_only?(current_user)
     return false if current_user.nil?
+
     access_to == 'members_only'
   end
 
   def access_to_subscribers_only?(current_user)
     return false if current_user.nil?
     return false unless access_to == 'subscribers_only'
+
     current_user.access_to_subscribed_content?
   end
 
   def access_to_expired_subscribers?(current_user)
     return false if current_user.nil?
     return false unless access_to == 'expired_subscribers'
+
     current_user.expired_subscriber?
   end
 
@@ -71,6 +77,7 @@ class PageColModule < ApplicationRecord
     return false unless access_to == 'all_without_valid_subscription'
     return true if current_user.nil?
     return false if current_user.access_to_subscribed_content?
+
     true
   end
 end

@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     render 'pages/show'
   end
 
+  # rubocop:disable Metrics/AbcSize
   def new
     @blog = Admin::Blog.find(params[:blog_id])
     @blog_post =
@@ -20,9 +21,10 @@ class PostsController < ApplicationController
       .new(
         start_date: Time.zone.now + 2.hours,
         end_date: Time.zone.now + 1.year,
-        signature: user_signature
+        signature: current_user.signature
       )
   end
+  # rubocop:enable Metrics/AbcSize
 
   def edit
     @blog = Admin::Blog.find(params[:blog_id])
@@ -42,7 +44,6 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /admin/posts/1
   def update
-    ap post_params
     @blog = @post.blog
     if @post.update(post_params)
       redirect_to page_path(session[:page_id])
@@ -102,9 +103,4 @@ class PostsController < ApplicationController
       )
   end
   # rubocop:enable Metrics/MethodLength
-
-  def user_signature
-    return current_user.name if current_user.signature.blank?
-    current_user.signature
-  end
 end
