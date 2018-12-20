@@ -51,8 +51,8 @@ class Admin::BlogPost < ApplicationRecord
         pre_tags: ['<em class="label-highlight">'],
         post_tags: ['</em>'],
         fields: {
-          signature: { number_of_fragments: 0 },
-          title: { number_of_fragments: 0 },
+          signature: { number_of_fragments: 1 },
+          title: { number_of_fragments: 1 },
           body: { fragment_size: 145 }
         }
       }
