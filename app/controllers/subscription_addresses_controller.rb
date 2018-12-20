@@ -14,5 +14,4 @@ class SubscriptionAddressesController < ApplicationController
     @address.update(address_params[:address])
     redirect_to subscription_address_path(subscription)
   end
-
 end
