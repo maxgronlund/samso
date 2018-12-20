@@ -228,7 +228,6 @@ class User < ApplicationRecord
     end
 
     def attach_address(user, options = {})
-      ap user.addresses.empty?
       create_user_address(user, options) if user.addresses.empty?
     end
 
@@ -241,7 +240,6 @@ class User < ApplicationRecord
       address.name      = user.name
       address.address   = options[:adresse]
       address.save
-      ap address
     end
 
     def parse_zipp_code(options = {})

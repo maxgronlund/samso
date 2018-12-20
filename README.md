@@ -49,6 +49,9 @@ Things you may want to cover:
 * Database initialization
   rake db:seed
 
+* Import categories as csv file and build pages for articles
+  rake page:build
+
 
 * Database migration
   $ heroku run --app samso rake db:migrate
