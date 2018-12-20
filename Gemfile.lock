@@ -304,7 +304,6 @@ GEM
     sassc (2.0.0)
       ffi (~> 1.9.6)
       rake
-    scout_apm (2.4.21)
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -396,7 +395,6 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sassc
-  scout_apm
   selenium-webdriver
   sendgrid-ruby
   simple_form
