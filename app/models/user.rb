@@ -156,9 +156,7 @@ class User < ApplicationRecord
   end
 
   def expired_subscriber?
-    return false if access_to_subscribed_content?
-
-    subscriptions.any? && no_active_subscription?
+    subscriptions.any? && valid_subscriptions.empty?
   end
 
   def self.super_admin

@@ -33,8 +33,8 @@ da:
   csv_file:
     import_type: Type af import
     select_csv_file: Vælg CSV dokument
-    new: Upload CSV fil
-    index: CSV filer
+    new: Upload CSV dokument
+    index: CSV dokumenter
     catogories: Kategorier
     economic: E-Conomics export
     subscriptions: Abonnomenter
@@ -43,3 +43,4 @@ da:
     file_url: URL
     articles: Artikler
     show: "CSV dokument: %{name}"
+    import: Importer

@@ -1,5 +1,13 @@
-h3 = t('new_model', model_name: @admin_csv_import.model_name.human)
+== render 'shared/admin_links', selected: ''
+
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('csv_file.index'), admin_csv_imports_path
+    li.breadcrumb-item.active aria-current="page"
+      = t('new')
+
+
+h3 = t('csv_file.new')
 
 == render 'form'
-
-= link_to 'Back', admin_csv_imports_path

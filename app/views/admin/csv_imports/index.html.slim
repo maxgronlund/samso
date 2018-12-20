@@ -23,7 +23,7 @@ h3 = t('csv_file.index')
           td
             .pull-right
               .btn-group
-                = link_to 'import',
+                = link_to t('csv_file.import'),
                   new_admin_csv_import_parse_csv_path(admin_csv_import),
                   class: 'btn btn-light btn-sm'
                 = link_to t('show'),
@@ -41,4 +41,4 @@ br
 .pull-right
   = link_to t('csv_file.new'),
     new_admin_csv_import_path,
-    class: 'btn btn-light'
+    class: 'btn btn-primary'

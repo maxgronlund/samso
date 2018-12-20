@@ -1,3 +1,14 @@
+== render 'shared/admin_links', selected: ''
+
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('csv_file.index'), admin_csv_imports_path
+    li.breadcrumb-item
+      = link_to @admin_csv_import.name,  admin_csv_import_path(@admin_csv_import)
+    li.breadcrumb-item.active aria-current="page"
+      = t('edit')
+
 h3 = t('edit_model', model_name: @admin_csv_import.model_name.human)
 
 == render 'form'
