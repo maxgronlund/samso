@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_action :set_address, only: %i[show edit update destroy]
+  # before_action :set_address, only: %i[show edit update destroy]
 
   # GET /addresses
   def index
@@ -38,12 +38,12 @@ class AddressesController < ApplicationController
 
   # POST /addresses
   def create
-    address_params[:addressable_type] = Address::TEMPORARY_ADDRESS
     @subscription = Admin::Subscription.find(address_params[:addressable_id])
     @address = @subscription.addresses.new(address_params)
+    @address.address_type = Address::TEMPORARY_ADDRESS
 
     if @address.save
-      redirect_to user_path(@subscription.user_id)
+      redirect_to subscription_address_path(@subscription)
     else
       render :new
     end
@@ -60,17 +60,18 @@ class AddressesController < ApplicationController
   end
 
   # DELETE /addresses/1
-  def destroy
-    @address.destroy
-    redirect_to addresses_url, notice: 'Address was successfully destroyed.'
-  end
+  # def destroy
+  #   subscription = @address.addressable
+  #   @address.destroy
+  #   redirect_to subscription_address_path(subscription)
+  # end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_address
-    @address = Address.find(params[:id])
-  end
+  # def set_address
+  #   @address = Address.find(params[:id])
+  # end
 
   # Only allow a trusted parameter "white list" through.
   def address_params

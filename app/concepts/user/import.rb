@@ -145,6 +145,7 @@ class User < ApplicationRecord
       subscription
         .addresses
         .create(
+          name: user.name,
           address: user.street_address,
           city: user.city,
           zipp_code: user.zipp_code
@@ -227,36 +228,41 @@ class User < ApplicationRecord
     end
 
     def attach_address(user, options = {})
+      ap user.addresses.empty?
       create_user_address(user, options) if user.addresses.empty?
     end
 
     def create_user_address(user, options = {})
       address           = user.addresses.new
       zipp_code         = parse_zipp_code(options)
-      city              = parse_city(options, zipp_code)
+      city              = parse_city(zipp_code, options)
       address.zipp_code = zipp_code if zipp_code.present?
       address.city      = city if city.present?
       address.name      = user.name
       address.address   = options[:adresse]
       address.save
+      ap address
     end
 
     def parse_zipp_code(options = {})
       zipp_code = postal_code_and_city(options).first.to_s
       return zipp_code if Address::Service::ZIP_CODE_TO_CITY[zipp_code.to_sym].present?
+
+      nil
     end
 
     def parse_city(zipp_code, options)
-      city = Address::Service::ZIP_CODE_TO_CITY[zipp_code.to_sym]
+      city = Address::Service::ZIP_CODE_TO_CITY[zipp_code.to_s.to_sym]
       return city if city.present?
 
       city = postal_code_and_city(options)
-      city.delete_at(0) unless city.to_i.zero?
+      city.delete_at(0) if city.is_a?(Array) && city.length > 1
       city.join(' ')
     end
 
     def postal_code_and_city(options = {})
       return [] if options[:postnr_by].blank?
+
       options[:postnr_by].split
     end
   end

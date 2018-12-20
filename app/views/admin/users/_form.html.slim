@@ -1,34 +1,28 @@
 = simple_form_for [:admin, @user], multipart: true do |f|
   = f.error_notification
-  .row
-    .col-md-6
-      = f.input :name
-      = f.input :email
-      = f.input :free_subscription
-    .col-md-6
-      = f.input :password,
-        placeholder: '••••••••••'
-      = f.input :password_confirmation,
-        placeholder: '••••••••••'
-      = f.input :signature
-  .row
+  .form-inputs
+    = f.input :name
+    = f.input :email
+    = f.input :free_subscription
+
+    = f.input :password,
+      placeholder: '••••••••••'
+    = f.input :password_confirmation,
+      placeholder: '••••••••••'
+    = f.input :signature
+
     - if current_user.can_edit?(@user)
-      .col-md-6
-        = f.simple_fields_for :roles do |roles_form|
-          = roles_form.input :permission, collection: Role::ROLES, include_blank: false
-    .col-md-6
-      = f.simple_fields_for :addresses do |address|
-        = address.input :address
-        = address.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
-        = address.input :city, input_html: { class: 'city-name-autofill' }
-      / .mb-5
-      /   = image_tag @user.avatar.url(:square)
-      / br
-      / = f.input :avatar
-      / - if @user.persisted? && @user.avatar?
-      /   br
-      /   = f.input :delete_avatar, as: :boolean
-  .row
-    .col-md-12
-      .pull-right
-        = f.submit t('save'), class: 'btn btn-primary'
+      = f.simple_fields_for :roles do |roles_form|
+        = roles_form.input :permission, collection: Role::ROLES, include_blank: false
+
+    - if @user.active_subscription?
+      = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
+
+    = f.simple_fields_for :addresses do |address|
+      = address.input :address
+      = address.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
+      = address.input :city, input_html: { class: 'city-name-autofill' }
+
+  .form-actions
+    .pull-right
+      = f.submit t('save'), class: 'btn btn-primary'

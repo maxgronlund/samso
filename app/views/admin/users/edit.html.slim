@@ -7,11 +7,14 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item.active aria-current="page"
       = t('edit')
 
-h3 = t('edit_model', model_name: @user.model_name.human)
 
-== render 'form'
+.container.pt-60
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header = t('user.edit')
 
-= link_to t('show'), admin_user_path(@user)
-'  |
-= link_to t('back'), admin_users_path
+        .card-body
+          p#notice = notice
+          == render 'form'
 

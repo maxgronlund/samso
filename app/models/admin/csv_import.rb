@@ -11,10 +11,10 @@ class Admin::CsvImport < ApplicationRecord
   # Admin::CsvImport.import_type_collection
   def self.import_type_collection
     [
-      [I18n.t('csv_file.users'), User.name],
+      [I18n.t('csv_file.subscriptions'), Admin::Subscription.name],
       [I18n.t('csv_file.articles'), Admin::BlogPost.name],
-      [I18n.t('csv_file.catogories'), Admin::Blog.name],
-      [I18n.t('csv_file.subscriptions'), Admin::Subscription.name]
+      [I18n.t('csv_file.users'), User.name],
+      [I18n.t('csv_file.catogories'), Admin::Blog.name]
     ]
   end
 
@@ -24,7 +24,6 @@ class Admin::CsvImport < ApplicationRecord
 
   def import_type_translation
     case import_type
-    when 'User'
     when 'Admin::Blog'
       I18n.t('csv_file.catogories')
     when 'Admin::BlogPost'

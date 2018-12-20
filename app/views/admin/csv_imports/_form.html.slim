@@ -17,5 +17,6 @@
     / = f.input :import_type
     /= f.input :summary
 
-  .form-actions
+  .pull-right
+    = link_to t('cancel'), admin_csv_imports_path, class: 'btn btn-light'
     = f.submit t('save'), class: 'btn btn-primary'

@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+# rubocop:disable Metrics/ClassLength
 class User < ApplicationRecord
   paginates_per 50
   include PgSearch
@@ -22,8 +24,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles
 
-  attr_accessor :update_subscription_address
-
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
     square: '200x200#',
@@ -36,27 +36,16 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :name, presence: true
-  # validates_confirmation_of :password
+  validates_confirmation_of :password
   # validates_with UserAddressValidator, if: :validate_subscription_address
   validates_with User::Validator
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
 
-  def free_subscription?
-    Admin::SubscriptionType
-      .where(free: true)
-      .joins(:subscriptions)
-      .where(admin_subscriptions: { user_id: id })
-      .any?
-  end
-
   def address
-    addresses
-      .where(address_type: Address::PRIMARY_ADDRESS)
-      .first_or_create
+    addresses.first_or_create
   end
-  alias :primary_address :address
 
   def street_address
     address.address
@@ -154,7 +143,7 @@ class User < ApplicationRecord
       subscriptions
       .where(
         'start_date <= :start_date AND end_date >= :end_date',
-        start_date: Date.today.beginning_of_day + 1.day,
+        start_date: Date.today.beginning_of_day,
         end_date: Date.today.beginning_of_day
       )
   end

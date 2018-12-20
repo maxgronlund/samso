@@ -1,4 +1,9 @@
-h3 = @admin_csv_import.name
+.row
+  .col-sm-12
+    == render 'shared/admin_links', selected: ''
+
+
+h3 = t('csv_file.show', name: @admin_csv_import.name)
 .table-responsive
   table.table.table-bordered.table-hover.table-sm
 

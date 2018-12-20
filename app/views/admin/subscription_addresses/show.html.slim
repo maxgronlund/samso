@@ -1,4 +1,3 @@
-= render 'shared/navbar', menu: @menu, top_page: @page
 .container
   nav aria-label="breadcrumb"
     ol.breadcrumb
@@ -33,24 +32,24 @@
           = render 'shared/address', address: address
           .pull-right
             = link_to t('edit'),
-              edit_subscription_address_path(address),
+              edit_subscription_address_path(@subscription, address),
               class: 'btn btn-light btn-sm'
-        .col-sm-6
-          - if @subscription.temporary_address.blank?
-            .pull-right
-              = link_to t('subscription.new_temporary_delivery_address'),
-                new_subscription_address_path(@subscription),
-                class: 'btn btn-light'
-          - else
-            - temporary_address = @subscription.temporary_address
-            h5 = t("address.#{temporary_address.address_type}")
-            = render 'shared/address', address: temporary_address
-            .pull-right
-              = link_to t('delete'),
-                subscription_address_path(temporary_address),
-                data: { confirm: t('confirm') },
-                method: :delete,
-                class: 'btn btn-danger btn-sm'
-              = link_to t('edit'),
-                edit_subscription_address_path(temporary_address),
-                class: 'btn btn-light btn-sm'
+        / .col-sm-6
+        /   - if @subscription.temporary_address.blank?
+        /     .pull-right
+        /       = link_to t('subscription.new_temporary_delivery_address'),
+        /         new_subscription_address_path(@subscription),
+        /         class: 'btn btn-light'
+        /   - else
+        /     - temporary_address = @subscription.temporary_address
+        /     h5 = t("address.#{temporary_address.address_type}")
+        /     = render 'shared/address', address: temporary_address
+        /     .pull-right
+        /       = link_to t('delete'),
+        /         admin_subscription_address_path(temporary_address),
+        /         data: { confirm: t('confirm') },
+        /         method: :delete,
+        /         class: 'btn btn-danger btn-sm'
+        /       = link_to t('edit'),
+        /         edit_admin_subscription_address_path(@subscription, temporary_address),
+        /         class: 'btn btn-light btn-sm'

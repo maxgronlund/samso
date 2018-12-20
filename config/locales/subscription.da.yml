@@ -30,5 +30,5 @@ da:
     new_temporary_delivery_address: Opret midlertidig forsendelses adresse
     edit_dates: Rediger periode
     subscription_info: "Abonnoment %{id}"
-    primary_address: Midlertidig forsendelses adresse
+    temporary_address: Midlertidig forsendelses adresse
     primary_address: Forsendelses adresse

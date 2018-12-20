@@ -11,10 +11,7 @@ class Address < ApplicationRecord
   scope :temporary_address, -> { find_by(address_type: TEMPORARY_ADDRESS) }
 
   def valid_address?
-    return false if name.nil?
-    return false if address.nil?
-    return false if zipp_code.nil?
-    return false if city.nil?
+    return false if name.nil? || address.nil? || zipp_code.nil? || city.nil?
 
     true
   end
@@ -28,12 +25,17 @@ class Address < ApplicationRecord
   end
 
   def user
-    case addressable
+    case addressable_type
     when 'User'
       addressable
     when 'Admin::Subscription'
       addressable.user
     end
+  end
+
+  def subscription
+    return addressable if addressable.is_a?(Admin::Subscription)
+
     nil
   end
 end

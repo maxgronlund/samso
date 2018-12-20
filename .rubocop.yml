@@ -21,6 +21,7 @@ AllCops:
   Exclude:
     - 'db/schema.rb'
     - 'lib/tasks/cucumber.rake'
+    - 'app/views/**/*'
 
 
 Bundler/OrderedGems:

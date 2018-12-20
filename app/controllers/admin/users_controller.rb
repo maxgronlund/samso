@@ -49,7 +49,10 @@ class Admin::UsersController < AdminController
   # PATCH/PUT /admin/users/1
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path
+      redirect_to admin_user_path(@user)
+      if Check.checked?(user_params[:update_subscription_address])
+        update_subscription_address
+      end
     else
       render :edit
     end
@@ -62,6 +65,12 @@ class Admin::UsersController < AdminController
   end
 
   private
+
+  def update_subscription_address
+    return unless @user.active_subscription?
+    subscription = @user.last_valid_subscription
+    subscription.copy_from_address(@user.primary_address)
+  end
 
   def set_selected
     @selected = 'users'
@@ -92,6 +101,7 @@ class Admin::UsersController < AdminController
       :delete_avatar,
       :free_subscription,
       :signature,
+      :update_subscription_address,
       addresses_attributes: %i[id name address zipp_code city],
       roles_attributes: %i[permission id]
     )
