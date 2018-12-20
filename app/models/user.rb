@@ -7,7 +7,7 @@ class User < ApplicationRecord
   multisearchable against: %i[name email]
   pg_search_scope :search_by_name_or_emai, against: %i[name email legacy_subscription_id]
   has_secure_password
-  attr_accessor :delete_avatar, :validate_address, :cancel_account_token
+  attr_accessor :delete_avatar, :validate_address, :cancel_account_token, :update_subscription_address
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :e_paper_tokens, dependent: :destroy
