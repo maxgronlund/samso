@@ -13,6 +13,8 @@ class Admin::BlogPost < ApplicationRecord
       indexes :title, analyzer: 'danish', type: 'text'
       indexes :body, analyzer: 'danish', type: 'text'
       indexes :signature, analyzer: 'danish', type: 'text'
+      indexes :subtitle, analyzer: 'danish', type: 'text'
+      indexes :teaser, analyzer: 'danish', type: 'text'
     end
   end
 
@@ -44,7 +46,7 @@ class Admin::BlogPost < ApplicationRecord
       query: {
         multi_match: {
           query: query,
-          fields: ['signature^20', 'title^10', 'body']
+          fields: ['signature^20', 'title^10', 'teaser^5', 'subtitle^5', 'body']
         }
       },
       highlight: {
@@ -53,6 +55,8 @@ class Admin::BlogPost < ApplicationRecord
         fields: {
           signature: { number_of_fragments: 1 },
           title: { number_of_fragments: 1 },
+          teaser: { number_of_fragments: 1 },
+          subtitle: { number_of_fragments: 1 },
           body: { fragment_size: 145 }
         }
       }
