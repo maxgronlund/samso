@@ -8,8 +8,8 @@ Feature: Gests can signup
     When I visit the "login_page" page
     Then I can see a "signup" link
 
-  Scenario: As a guest I can visit the login page and click on the signup link
-    When I visit the "login_page" page
+  Scenario: As a guest I click on the signup link
+    When I visit the "landing_page" page
     Then I can click on a "signup" link
     Then I can see the signup page
 

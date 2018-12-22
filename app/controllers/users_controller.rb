@@ -112,7 +112,7 @@ class UsersController < ApplicationController
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
     User::Service.sanitize_email(sanitized_params[:email])
-    User::Service.set_address_name(sanitized_params)
+    # User::Service.set_address_name(sanitized_params)
     copy_fake_email(sanitized_params)
     sanitized_params
   end

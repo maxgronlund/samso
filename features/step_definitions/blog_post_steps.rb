@@ -13,7 +13,7 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
   nr_posts.times do
     FactoryBot
       .create(
-        :blog_post,
+        :admin_blog_post,
         blog_id: blog.id,
         title: Faker::TvShows::HeyArnold.quote,
         subtitle: Faker::Hipster.sentence,

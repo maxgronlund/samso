@@ -48,3 +48,6 @@ rails g controller admin/click_on_adverticements update --no-helper --no-assets
 rails g scaffold admin/adverticement title body:text price_pr_view:decimal views:integer price_pr_click:decimal clicks:integer start_date:datetime end_date:datetime active:boolean featured:boolean featured_price:decimal price:decimal url admin_system_setups:belongs_to --no-helper --no-assets
 rails g scaffold_module advertisement
 rails g scaffold_module e_page title snippet
+
+
+rails g factory_bot:model Admin::BlogPost layout subtitle:text teaser:text body:text position:integer blog_id:integer free_content:boolean featured:boolean start_date:datetime end_date:datetime user_id:integer views:integer signature:string post_page_id:integer created_at:datetime updated_at:datetime  video_url:text enable_comments:boolean show_facebook_comments:boolean
