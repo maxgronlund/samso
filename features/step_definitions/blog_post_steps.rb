@@ -15,12 +15,7 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
       .create(
         :admin_blog_post,
         blog_id: blog.id,
-        title: Faker::TvShows::HeyArnold.quote,
-        subtitle: Faker::Hipster.sentence,
-        teaser: Faker::TvShows::HowIMetYourMother.quote,
-        body: Faker::Hipster.paragraph,
-        free_content: true,
-        signature: Faker::Name.name
+        free_content: true
       )
   end
 end
