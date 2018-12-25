@@ -48,3 +48,5 @@ da:
       aspect_ratio_4_3: '4:3'
       aspect_ratio_3_4: '3:4'
       aspect_ratio_original: 'original'
+  text_module:
+    edit: Rediger tekst sektion

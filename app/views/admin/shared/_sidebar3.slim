@@ -20,7 +20,7 @@ nav#sidebar
         i.fa.fa-shopping-cart
         = t('sidebar.subscription_types')
     li class="#{ @selected == 'system_setups' ? 'active' : '' }"
-      = link_to edit_admin_system_setup_path(Admin::SystemSetup.first)
+      = link_to admin_index_path
         i.fa.fa-cogs
         = t('sidebar.system_settings')
     li class="#{ @selected == 'pages' ? 'active' : '' }"

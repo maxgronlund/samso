@@ -24,21 +24,21 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles
 
-  has_attached_file :avatar, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }, default_url: 'https://s3.amazonaws.com/samso-images/users/avatars/defaults/:style/missing.png'
+  # has_attached_file :avatar, styles: {
+  #   thumb: '100x100>',
+  #   square: '200x200#',
+  #   medium: '300x300>'
+  # }, default_url: 'https://s3.amazonaws.com/samso-images/users/avatars/defaults/:style/missing.png'
 
-  # Validate the attached image is image/jpg, image/png, etc
-  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
-  before_validation { avatar.clear if delete_avatar == '1' }
+  # # Validate the attached image is image/jpg, image/png, etc
+  # validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
+  # before_validation { avatar.clear if delete_avatar == '1' }
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :name, presence: true
   validates_confirmation_of :password
   # validates_with UserAddressValidator, if: :validate_subscription_address
-  validates_with User::Validator
+  # validates_with User::Validator
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
@@ -141,11 +141,8 @@ class User < ApplicationRecord
   def valid_subscriptions
     @valid_subscriptions ||=
       subscriptions
-      .where(
-        'start_date <= :start_date AND end_date >= :end_date',
-        start_date: Date.today.beginning_of_day,
-        end_date: Date.today.beginning_of_day
-      )
+      .where('start_date <= :start_date', start_date: Date.today.beginning_of_day + 1.day)
+      .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
   end
 
   def subscription_id

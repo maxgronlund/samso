@@ -1,5 +1,14 @@
-h3 = t('subscription_type.new')
+== render 'shared/admin_links', selected: ''
+
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('subscription_type.index'), admin_subscription_types_path
+    i.breadcrumb-item.active aria-current="page"
+      = t('subscription_type.new')
+
+
 
 == render 'form'
 
-= link_to 'Back', admin_subscription_types_path
+

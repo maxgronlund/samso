@@ -29,6 +29,7 @@ class Admin::BlogPostsController < AdminController
   end
 
   def update
+    ap admin_blog_post_params
     if @admin_blog_post.update(admin_blog_post_params)
       redirect_to default_path(admin_articles_path)
     else
@@ -64,7 +65,6 @@ class Admin::BlogPostsController < AdminController
         :title,
         :body,
         :position,
-        :post_page_id,
         :image,
         :teaser,
         :subtitle,

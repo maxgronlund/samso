@@ -64,8 +64,9 @@ da:
     errors:
       account_confirmed: Konto er allerde bekræftet
     address: '*Adresse'
-    active_subscribers: Abonnenter med gyldigt abonnement
+    active_subscribers: Brugere med gyldigt abonnement
     write_code_placeholder: Skriv koden her
     code: Kode
     have_to_fill: 'Skal udfyldes'
     update_address_on_subscription: Opdater forsendelses adresse på abonnement
+    change_address: Adresseændring

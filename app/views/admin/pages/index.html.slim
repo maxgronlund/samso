@@ -1,4 +1,10 @@
-h3 = t('pages')
+== render 'shared/admin_links', selected: ''
+.row
+  .col-sm-6
+    h3 = t('pages')
+  .col-sm-6
+    .pull-right
+      = link_to 'Opret side', new_admin_page_path, class: 'btn btn-primary'
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
@@ -30,6 +36,5 @@ h3 = t('pages')
                   = link_to t('delete'), admin_page_path(page), data: { confirm: t('are_you_sure') }, method: :delete, class: 'btn btn-danger btn-sm'
                 - else
                   = link_to t('delete'), '#', class: 'btn btn-danger btn-sm disabled'
-br
-.pull-right
-  = link_to 'Opret side', new_admin_page_path, class: 'btn btn-primary'
+
+

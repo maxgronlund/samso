@@ -1,0 +1,62 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+
+.container
+  .row
+    .col-sm-12
+      nav aria-label="breadcrumb"
+        ol.breadcrumb
+          li.breadcrumb-item
+            = link_to @subscription.user.name, user_path(@subscription.user)
+          i.breadcrumb-item.active aria-current="page"
+            = @subscription.type_name
+
+
+      table-responsive
+        table.table.table-striped.table-bordered.table-hover
+          thead
+            tr
+              th = t('subscription.type')
+              th = t('subscription.id')
+              th = t('subscription.start_date')
+              th = t('subscription.end_date')
+              th Gyldighed
+
+          tbody
+            tr
+              td = @subscription.type_name
+              td = @subscription.subscription_id
+              td = l @subscription.start_date
+              td = l @subscription.end_date
+              td = @subscription.expired? ? 'Udløbet' : 'Ja'
+      .row
+        .col-sm-6
+          - address = @subscription.primary_address
+          h5 = t("address.#{address.address_type}")
+          = render 'shared/address', address: address
+          .pull-right
+            - if @subscription.period_valid?
+              = link_to t('edit'),
+                edit_subscription_delivery_address_path(@subscription, address),
+                class: 'btn btn-light'
+        .col-sm-6
+          - if @subscription.temporary_address.blank?
+            .pull-right
+                - @subscription.period_valid?
+                = link_to t('subscription.new_temporary_delivery_address'),
+                  new_subscription_delivery_address_path(@subscription),
+                  class: 'btn btn-light'
+          - else
+            - temporary_address = @subscription.temporary_address
+            h5 = t("address.#{temporary_address.address_type}")
+            = render 'shared/address', address: temporary_address
+            .pull-right
+              - if @subscription.period_valid?
+                = link_to t('delete'),
+                  subscription_delivery_address_path(@subscription, temporary_address),
+                  data: { confirm: t('confirm') },
+                  method: :delete,
+                  class: 'btn btn-danger'
+              - if @subscription.period_valid?
+                = link_to t('edit'),
+                  edit_subscription_delivery_address_path(@subscription, temporary_address),
+                  class: 'btn btn-light'

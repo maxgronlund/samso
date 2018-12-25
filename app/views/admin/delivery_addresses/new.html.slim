@@ -1,0 +1,58 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-20
+  nav aria-label="breadcrumb"
+    ol.breadcrumb
+      li.breadcrumb-item
+        = link_to @user.name, user_path(@user)
+      li.breadcrumb-item.active aria-current="page"
+        = t('subscription.delivery_address')
+
+
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header
+          - if @address.temporary?
+            = t('subscription.temporary_address')
+          - else
+            = t('subscription.delivery_address')
+
+        .card-body
+          .table-responsive
+            table.table.table-striped.table-bordered.table-hover
+              thead
+                tr
+                  th = t('subscription.type')
+                  th = t('subscription.start_date')
+                  th = t('subscription.end_date')
+              tbody
+                tr
+                  td = @subscription.type_name
+                  td = l @subscription.start_date
+                  td = l @subscription.end_date
+
+
+
+
+
+
+          = simple_form_for [@address], url: url_for(action: 'create', controller: 'delivery_addresses'), method: 'POST' do |f|
+            = f.error_notification
+            - if @address.temporary?
+              .row
+                .col-sm-6
+                  = f.input :start_date
+                .col-sm-6
+                  = f.input :end_date
+
+            = f.input :name
+            = f.input :address
+            = f.input :zipp_code
+            = f.input :city
+            .pull-right
+              / = link_to t('subscription.new_temporary_delivery_address'),
+              /   new_subscription_address_path(@subscription),
+              /   class: 'btn btn-light'
+              / = link_to t('cancel'), subscription_delivery_address_path(@subscription), class: 'btn btn-light'
+              /= link_to t('cancel'), user_path(@subscription.user_id), class: 'btn btn-light'
+              = f.submit t('save'), class: 'btn btn-primary'

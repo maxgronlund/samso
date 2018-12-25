@@ -7,11 +7,11 @@ da:
             title:
               blank: Mangler
             body:
-              blank: Inhold mangler
+              blank: Indhold mangler
     attributes:
       admin/system_message:
         title: Overskrift
-        body: Inhold
+        body: Indhold
 
 
     models:

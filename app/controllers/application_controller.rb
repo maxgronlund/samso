@@ -80,6 +80,10 @@ class ApplicationController < ActionController::Base
     @landing_page ||= admin_system_setup.landing_page
   end
 
+  def admin_page
+    edit_admin_system_setup_path(admin_system_setup.id)
+  end
+
   def navbar_logo
     @navbar_logo ||= admin_system_setup.logo(:original)
   end

@@ -65,7 +65,9 @@ namespace :system do
         locale: locale,
         admin_footer_id: footer_id
       }
-    Page.where(params).first_or_create(params)
+    page = Page.where(params).first_or_initialize(params)
+    page.save!(validate: false)
+    page
   end
 
   def build_system_setup(page, landing_page, suscription_page)

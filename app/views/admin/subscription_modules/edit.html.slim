@@ -1,3 +1,4 @@
+== render 'shared/admin_links', selected: ''
 h3 = t('edit_model', model_name: @subscription_module.model_name.human)
 = simple_form_for [:admin, @page, @subscription_module], url: url_for(action: 'update', controller: 'admin/subscription_modules'), method: 'patch' do |f|
   = f.error_notification

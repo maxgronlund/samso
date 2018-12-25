@@ -1,13 +1,3 @@
-#
-# Post codes - autofill city name (DK).
-#
-# (C) 2011-2014 Lars Hoeg <larshoeg@gmail.com>
-#
-
-# Usage:
-#   Add `class="post_code-autofill-dk"` to +post_code+ input field.
-#   Add class="city_name-autofill" to +city_name+ input field.
-#   Note: Both fields must be inside either same fieldset or .clear block.
 $ ->
   $("form .post-code-autofill-dk").bind "keyup", ->
     autofill_city_from_post_code($(this))

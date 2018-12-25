@@ -12,3 +12,5 @@ da:
     index: Addresses
     new: Create new address
     edit: Edit address
+    start_date: Start dato
+    end_date: Slut dato

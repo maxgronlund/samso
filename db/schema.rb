@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_105819) do
+ActiveRecord::Schema.define(version: 2018_12_25_181832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -509,7 +509,10 @@ ActiveRecord::Schema.define(version: 2018_12_13_105819) do
     t.boolean "cache_page", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "category_page", default: false
+    t.integer "blog_id"
     t.index ["admin_footer_id"], name: "index_pages_on_admin_footer_id"
+    t.index ["blog_id"], name: "index_pages_on_blog_id"
   end
 
   create_table "payments", force: :cascade do |t|

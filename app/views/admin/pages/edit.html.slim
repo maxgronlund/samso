@@ -1,6 +1,12 @@
-h3 = t('edit_model', model_name: @page.model_name.human)
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('pages'), admin_pages_path
+    li.breadcrumb-item
+      = link_to t('page.content'), admin_page_path(@page)
+    i.breadcrumb-item.active aria-current="page"
+      = @page.title
+h3 = t('page.edit_layout_for', title: @page.title)
 hr
 == render 'form'
-
-
-

@@ -1,29 +1,31 @@
-/= f.hidden_field :page_id, value: params[:page_id]
-= f.input :title
-
 .row
   .col-md-3
     = f.input :image
   .col-md-3
-    - if !@admin_blog_post.image.nil? && @admin_blog_post.image.exists?
+    - if @admin_blog_post.image.present?
       = f.input :delete_image, as: :boolean
       = image_tag @admin_blog_post.image.url(:thumb)
+
   .col-md-6
     = f.input :video_url, input_html: {rows: '5'}
-    = link_to 'Vidio snippet hjælp', 'https://support.google.com/youtube/answer/171780?hl=en', target: 'top'
-
-= f.input :subtitle
-= f.input :teaser
+    = link_to 'Video snippet hjælp', 'https://support.google.com/youtube/answer/171780?hl=en', target: 'top'
 .row
-  .col-md-6
-    = f.input :blog_id,
-      collection: Admin::Blog.order(:title).where(locale: I18n.locale),
-      include_blank: false
-
-  .col-md-6
+  .col-sm-4
     = f.input :layout,
       collection: Admin::BlogPost::LAYOUTS,
       include_blank: false
+  .col-md-4
+    = f.input :blog_id,
+      collection: Admin::Blog.order(:title).where(locale: I18n.locale),
+      include_blank: false
+  .col-sm-4
+    / = f.input :post_page_id,
+    /   collection: Page.category_pages.where(locale: I18n.locale),
+    /   hint: t('blog_post.post_page_id_hint')
+= f.input :title
+= f.input :subtitle
+= f.input :teaser
+
 .row
   .col-md-12
     = f.input :start_date
@@ -45,13 +47,8 @@
 .row
   .col-md-6
     = f.input :signature
-  .col-sm-6
-      = f.input :post_page_id,
-        collection: Page.where(locale: I18n.locale),
-        hint: t('blog_post.post_page_id_hint')
 
-/= f.hidden_field :blog_id, value: @blog.id
-/= f.association :user
+
 
 .form-actions
   .pull-right

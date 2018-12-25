@@ -5,6 +5,7 @@ da:
     attributes:
       admin/blog:
         title: Navn
+        page_id: Vis på siden
 
   admin/blog:
     index: Kategorier

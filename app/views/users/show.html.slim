@@ -12,7 +12,6 @@
       .pull-right
         'Adresse:&nbsp;
         = render 'shared/address', address: @user.address
-        = link_to 'Adresseændring', edit_user_path(@user)
 
   .row
     .col-sm-3
@@ -34,7 +33,6 @@
                 th = t('subscription.end_date')
                 th Gyldig
                 th
-                  .pull-right = t('edit')
                 / th = t('subscription.on_hold_date')
             tbody
               - @subscriptions.each do |subscription|
@@ -47,7 +45,7 @@
                   th
                     .pull-right
                       = link_to t('subscription.delivery_address'),
-                        subscription_address_path(subscription),
+                        subscription_delivery_addresses_path(subscription),
                         class: 'btn btn-light btn-sm'
                   / td = l subscription.on_hold_date unless subscription.on_hold_date.nil?
 

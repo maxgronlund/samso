@@ -79,8 +79,9 @@ class UsersController < ApplicationController
 
   def update_subscription_address
     return unless @user.active_subscription?
+
     subscription = @user.last_valid_subscription
-    subscription.copy_from_address(@user.primary_address)
+    subscription.copy_from_address(@user.address)
   end
 
   def redirect_user
@@ -112,7 +113,7 @@ class UsersController < ApplicationController
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
     User::Service.sanitize_email(sanitized_params[:email])
-    # User::Service.set_address_name(sanitized_params)
+    User::Service.set_address_name(sanitized_params)
     copy_fake_email(sanitized_params)
     sanitized_params
   end

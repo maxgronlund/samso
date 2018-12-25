@@ -27,7 +27,7 @@ class Admin::BlogsController < AdminController
     @admin_blog = Admin::Blog.new(admin_blog_params)
     @admin_blog.locale = I18n.locale
     if @admin_blog.save
-      redirect_to @admin_blog, notice: 'Blog was successfully created.'
+      redirect_to @admin_blog
     else
       render :new
     end
@@ -36,7 +36,7 @@ class Admin::BlogsController < AdminController
   # PATCH/PUT /admin/blogs/1
   def update
     if @admin_blog.update(admin_blog_params)
-      redirect_to @admin_blog, notice: 'Blog was successfully updated.'
+      redirect_to @admin_blog
     else
       render :edit
     end

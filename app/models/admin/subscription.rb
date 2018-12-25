@@ -13,6 +13,11 @@ class Admin::Subscription < ApplicationRecord
     dependent: :destroy
   )
 
+  def self.valid
+    where('start_date <= :start_date', start_date: Date.today.beginning_of_day + 1.day)
+    .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
+  end
+
   def type_name
     return 'Imported' if subscription_type.nil?
     return 'Imported' if subscription_type.title.to_s.empty?
@@ -22,6 +27,10 @@ class Admin::Subscription < ApplicationRecord
 
   def expired?
     end_date < Time.zone.today
+  end
+
+  def period_valid?
+    start_date < Time.zone.today && end_date > Time.zone.today
   end
 
   def address

@@ -1,3 +1,12 @@
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('sidebar.system_settings'), admin_index_path
+    li.breadcrumb-item.active aria-current="page"
+      = t('edit')
+
+
 h3 = t('edit_model', model_name: 'System opsætning')
 
 = simple_form_for [@admin_system_setup], multipart: true do |f|
@@ -11,6 +20,10 @@ h3 = t('edit_model', model_name: 'System opsætning')
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
+  = f.input :search_page_id,
+    collection: Page.where(locale: I18n.locale),
+    include_blank: false
+
   .row
     .col-md-6
       = f.input :logo
@@ -21,7 +34,8 @@ h3 = t('edit_model', model_name: 'System opsætning')
         = f.input :delete_logo, as: :boolean
 
   = f.input :background_color
+  .pull-right
+    = link_to t('cancel'), admin_index_path, class: 'btn btn-light'
+    = f.submit t('save'), class: 'btn btn-primary'
 
-  = f.submit t('save'), class: 'btn btn-primary'
-  hr
-  = link_to 'Abonoment modul', edit_admin_subscription_module_path(1)
+

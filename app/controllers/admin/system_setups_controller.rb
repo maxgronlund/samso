@@ -12,7 +12,7 @@ class Admin::SystemSetupsController < AdminController
   # PATCH/PUT /admin/system_setups/1.json
   def update
     if @admin_system_setup.update(admin_system_setup_params)
-      redirect_to admin_index_path, notice: 'System setup er opdateret.'
+      redirect_to admin_index_path, notice: 'System opsætningen er opdateret.'
     else
       render :edit
     end

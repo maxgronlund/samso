@@ -9,7 +9,7 @@ da:
 
   page_col_module:
     access_to: Vis til
-    add_module: Tilføj module
+    add_module: Opret modul
     show:
       all: Alle besøgende
       guests_only: Besøgende der ikke er logget ind

@@ -65,7 +65,7 @@ class Admin::BlogPost < ApplicationRecord
   # rubocop:enable Metrics/MethodLength
 
   def show_on_page
-    Page.find_by(id: post_page_id) || Page.find_by(locale: I18n.locale)
+    blog.page
   end
 
   def page

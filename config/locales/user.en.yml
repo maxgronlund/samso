@@ -34,3 +34,10 @@ en:
     confirm_email: Confirm email
     errors:
       account_confirmed: Account already confirmed
+    address: '*Addresse'
+    active_subscribers: Users with a valid subscription
+    write_code_placeholder: Write code here
+    code: Code
+    have_to_fill: Required
+    update_address_on_subscription: Update delivery address on subscription
+    change_address: Change address

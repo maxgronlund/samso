@@ -14,7 +14,6 @@
       = f.input :background_color,
         hint: t('page.background_color.hint')
       = f.input :cache_page
-
     .col-sm-6
       = f.input :menu_title,
         placeholder: 'leave blank to hide'
@@ -28,10 +27,11 @@
         collection: Admin::Footer.where(locale: I18n.locale)
       = f.input :active
 
+
   .row
     .col-12
       .pull-right
-        = link_to t('cancel'), admin_pages_path, class: 'btn btn-secondary'
+        = link_to t('cancel'), admin_pages_path, class: 'btn btn-light'
         '&nbsp;
         = f.submit t('save'), class: 'btn btn-primary'
 

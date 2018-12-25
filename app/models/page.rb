@@ -2,8 +2,8 @@
 
 # Dynamic page to hold content
 class Page < ApplicationRecord
+  belongs_to :blog, class_name: 'Admin::Blog'
   has_many :page_rows, dependent: :destroy
-
   has_attached_file :body_background, styles: {
     thumb: '90x100>'
   }
@@ -16,6 +16,8 @@ class Page < ApplicationRecord
   LOCALES = %w[da en].freeze
 
   scope :active, -> { where(active: true) }
+  scope :category_pages, -> { where(category_page: true) }
+  scope :show_one_pages, -> { where(category_page: false) }
 
   def ordered_page_rows
     page_rows.order('position ASC')

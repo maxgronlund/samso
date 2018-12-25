@@ -21,6 +21,7 @@ module KnowUserHelper
         confirmed_at: confirmed_at # Time.zone.now
       )
     create_role(user, options)
+    create_address(user, options)
     user
   end
   # rubocop:enable Metrics/MethodLength
@@ -34,6 +35,17 @@ module KnowUserHelper
 
     FactoryBot
       .create(:role, permission: permission, user_id: user.id)
+  end
+
+  def create_address(user, options = {})
+    user
+      .addresses
+      .create(
+        address: options[:address] || Faker::Address.street_address,
+        zipp_code: options[:zipp_code] || Faker::Number.number(4).to_s,
+        city: optios[:city] || Faker::Address.city,
+        address_type: options[:address_type] || Address::PRIMARY_ADDRESS
+      )
   end
 end
 

@@ -1,5 +1,19 @@
 /= render 'shared/navbar', menu: @menu, top_page: @page
-.container.pt-60
+.container
+  == render 'shared/admin_links', selected: ''
+  .row
+    .col-sm-12
+      nav aria-label="breadcrumb"
+        ol.breadcrumb
+          li.breadcrumb-item
+            = link_to t('user.pluralized'), admin_users_path
+          li.breadcrumb-item
+            = link_to @subscription.user.name, admin_user_path(@subscription.user)
+          li.breadcrumb-item
+            = link_to @subscription.type_name, admin_subscription_delivery_addresses_path(@subscription)
+          i.breadcrumb-item.active aria-current="page"
+            = t('edit')
+
   .row.justify-content-md-center
     .col-md-auto.col-md-8
       .card
@@ -7,7 +21,7 @@
 
         .card-body
           p#notice = notice
-          = simple_form_for [@user, @subscription],
+          = simple_form_for [:admin, @user, @subscription],
             url: admin_user_user_subscription_path(@user, @subscription),
             method: 'PUT' do |f|
               .row

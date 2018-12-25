@@ -1,4 +1,70 @@
+== render 'shared/admin_links', selected: ''
 
+.row
+  .col-sm-6
+    h4 System opsætning
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        tbody
+          tr
+            th Language
+            td = @system_setup.locale_name
+          tr
+            th Forside
+            td
+              = link_to @system_setup.landing_page.title, edit_admin_page_path(@system_setup.landing_page)
+              .pull-right
+                i class="fas fa-pen"
+                '&nbsp;
+                = link_to t('edit'), edit_admin_page_path(@system_setup.landing_page)
+          tr
+            th Opret abonnement side
+            td
+              = link_to @system_setup.subscription_page.title, edit_admin_page_path(@system_setup.subscription_page)
+              .pull-right
+                i class="fas fa-pen"
+                '&nbsp;
+                = link_to t('edit'), edit_admin_page_path(@system_setup.subscription_page)
+          tr
+            th Vis søgeresultat
+            td
+              = link_to @system_setup.search_page.title, edit_admin_page_path(@system_setup.search_page)
+              .pull-right
+                i class="fas fa-pen"
+                '&nbsp;
+                = link_to t('edit'), edit_admin_page_path(@system_setup.search_page)
+          tr
+            th logo baggrunds farve
+            td = @system_setup.background_color
+          tr
+            th logo
+            td. style="#{navbar_style}"
+              = image_tag(@system_setup.logo(:thumb))
+
+    .pull-right
+      = link_to 'Rediger system opsætning', edit_admin_system_setup_path(Admin::SystemSetup.first), class: 'btn btn-light'
+  .col-sm-6
+    h4 Statistik
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        tbody
+          tr
+            th = link_to t('sidebar.articles'), admin_articles_path
+            td = Admin::BlogPost.count
+          tr
+            th = link_to t('sidebar.users'), admin_users_path
+            td = User.count
+          tr
+            th Abonnomenter
+            td = Admin::Subscription.count
+          tr
+            th Gyldige abonnomenter
+            td = Admin::Subscription.valid.count
+          tr
+            th = link_to t('pages'), admin_pages_path
+            td = Page.count
+    .pull-right
+      = link_to 'Rediger Abonoment modul', edit_admin_subscription_module_path(@subscription_module), class: 'btn btn-light'
 
 
 

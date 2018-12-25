@@ -2,7 +2,7 @@
 
 .form-inputs
   = f.input :title
-  = f.input :page_id, collection: Page.active.where(locale: I18n.locale)
+  = f.input :page_id, collection: Page.category_pages.where(locale: I18n.locale).order(:title)
   = f.input :url
   = f.input :active
   = f.input :color

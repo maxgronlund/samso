@@ -3,7 +3,7 @@
     - menu_content.menu_links.each do |menu_link|
       li
         - if menu_link.url.blank?
-           = link_to page_url(menu_link.page_id) do
+           = link_to page_url(menu_link.page) do
             . style="#{menu_link.style}"
               . style="#{menu_link.link_style}"
                 = menu_link.title

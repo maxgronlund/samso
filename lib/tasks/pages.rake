@@ -5,21 +5,22 @@ namespace :pages do
   task build: :environment do
     Admin::Blog.find_each do |blog|
       find_or_create_post_page(blog)
-      find_or_create_blog_page(blog)
+      find_or_create_category_page(blog)
     end
   end
 
-  def find_or_create_blog_page(blog)
+  def find_or_create_category_page(blog)
     options = {
       title: "Kategori-#{blog.title}",
       active: true,
       locale: blog.locale,
       menu_title: "Kategori #{blog.title}",
-      menu_id: 'not_in_any_menus'
+      menu_id: 'not_in_any_menus',
+      blog_id: blog.id,
+      category_page: true
     }
     page_col = find_or_create_page(options)
-    find_or_create_post_module(page_col, blog)
-    page_col.page_row.page
+    find_or_create_blog_module(page_col, blog)
   end
 
   def find_or_create_post_page(blog)
@@ -28,10 +29,12 @@ namespace :pages do
       active: true,
       locale: blog.locale,
       menu_title: blog.title,
-      menu_id: 'not_in_any_menus'
+      menu_id: 'not_in_any_menus',
+      blog_id: blog.id,
+      category_page: false
     }
     page_col = find_or_create_page(options)
-    find_or_create_blog_module(page_col, blog)
+    find_or_create_post_module(page_col, blog)
   end
 
   def find_or_create_page(options)

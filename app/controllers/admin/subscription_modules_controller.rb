@@ -12,7 +12,11 @@ class Admin::SubscriptionModulesController < AdminController
         .update_page_col_module(
           subscription_module_params
         )
-      redirect_to admin_page_path(@subscription_module.page)
+      if @subscription_module.page.nil?
+        redirect_to admin_index_path, notice: 'Abonoments modulet er opdateret.'
+      else
+        redirect_to admin_page_path(@subscription_module.page)
+      end
     else
       render :edit
     end
@@ -22,17 +26,14 @@ class Admin::SubscriptionModulesController < AdminController
   # DELETE /admin/subscription_modules/1.json
   def destroy
     @subscription_module.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_subscription_modules_url }
-      format.json { head :no_content }
-    end
+    redirect_to admin_subscription_modules_url
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_subscription_module
-    @subscription_module = Admin::SubscriptionModule.first_or_create(title: 'default')
+    @subscription_module = Admin::SystemSetup.subscription_module
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -8,4 +8,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
 
       ul.navbar-nav.mr-auto
         li.nav-item
+          = render 'shared/navbar_link',
+            link_name: 'Admin',
+            link_url: admin_index_path
+        li.nav-item
            = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'

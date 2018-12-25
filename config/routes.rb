@@ -63,10 +63,13 @@ Rails.application.routes.draw do
 
       resources :post_modules, only: %i[edit update]
       resources :e_page_modules, only: %i[edit update]
-      resources :subscription_addresses, only: %i[show edit]
+      # resources :subscription_addresses, only: %i[show]
       # resources :subscriptions do
-      #   resources :addresses
+      #   resources :addresses, only: %i[new edit update destroy]
       # end
+      resources :subscriptions do
+        resources :delivery_addresses
+      end
       resources :subscription_modules, only: %i[edit update]
       resources :subscription_types
       resources :system_messages, only: %i[index edit update]
@@ -101,10 +104,10 @@ Rails.application.routes.draw do
     resources :pages, only: %i[show]
 
     resources :sessions, only: %i[new destroy create index]
-    resources :subscription_addresses
-    # resources :subscriptions do
-    #   resources :addresses
-    # end
+
+    resources :subscriptions do
+      resources :delivery_addresses
+    end
     get '/:locale' => 'home#index'
     root to: "home#index"
     resources :users, except: %i[index] do

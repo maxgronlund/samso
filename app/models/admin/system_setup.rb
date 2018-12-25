@@ -28,6 +28,8 @@ class Admin::SystemSetup < ApplicationRecord
 
   # Admin::SystemSetup.subscription_module
   def self.subscription_module
-    Admin::SubscriptionModule.first_or_create(locale: I18n.locale)
+    Admin::SubscriptionModule
+      .where(locale: I18n.locale)
+      .first_or_create(locale: I18n.locale)
   end
 end

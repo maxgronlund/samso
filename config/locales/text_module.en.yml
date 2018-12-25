@@ -15,10 +15,9 @@ en:
         color: Text color
 
     models:
-      text_module: Text module
+      text_module: Tekst module
 
   admin/text_module:
-    name: Texst module
     hints:
       title: As shown on the index page
       image: Optional
@@ -33,6 +32,7 @@ en:
     full_width: To the edge
     bordered: With border
     circle: Circle
+    edit: Edit text module
     link_layouts:
       text_left: Text left alligned
       text_center: Text Center alligned

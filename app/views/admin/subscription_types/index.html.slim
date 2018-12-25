@@ -1,3 +1,4 @@
+== render 'shared/admin_links', selected: ''
 .row
   .col
     h2 = I18n.t('activerecord.models.admin/subscription_type', count: 2)
@@ -28,7 +29,11 @@
           td = admin_subscription_type.duration
           td = admin_subscription_type.internet_version ? '√' : ''
           td = admin_subscription_type.print_version ? '√' : ''
-          td = number_to_currency(admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
+          td
+            - if admin_subscription_type.free?
+              = t('subscription_type.free')
+            - else
+              = number_to_currency(admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
           td = admin_subscription_type.active ? '√' : ''
           td = admin_subscription_type.subscriptions_count
           td

@@ -5,13 +5,12 @@ module PageColConcerns
   extend ActiveSupport::Concern
   attr_accessor :position, :margin_bottom, :access_to
 
-  # rubocop:disable Lint/DuplicateMethods
   def position
-    page_col_module.position.presence
+    page_col_module&.position.presence || 0
   end
 
   def access_to
-    page_col_module.access_to.presence
+    page_col_module&.access_to.presence || 'all_without_valid_subscription'
   end
 
   def show
@@ -28,11 +27,11 @@ module PageColConcerns
   end
 
   def page_col
-    page_col_module.page_col.presence
+    page_col_module&.page_col.presence
   end
 
   def page
-    page_col.page.presence
+    page_col&.page.presence
   end
 
   def update_position(new_position)
@@ -42,6 +41,8 @@ module PageColConcerns
   end
 
   def update_page_col_module(params)
+    return if page_col_module.nil?
+
     page_col_module
       .update_attributes(
         position: params[:position],

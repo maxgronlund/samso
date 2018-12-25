@@ -21,3 +21,13 @@ da:
         other: Abonnementstyper
   subscription_type:
     new: Ny abonnementstype
+    edit: Rediger abonnementstype
+    index: Abonnementstyper
+    show: Abonnementstype
+    internet_version: Internet adgang
+    print_version: Papir udgave
+    price: Pris
+    active: Aktiveret
+    subscriptions: Abonnementer
+    position: Position på liste
+    free: Friabonnement

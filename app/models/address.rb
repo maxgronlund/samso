@@ -7,6 +7,8 @@ class Address < ApplicationRecord
   PRIMARY_ADDRESS = 'primary_address'.freeze
   TEMPORARY_ADDRESS = 'temporary_address'.freeze
 
+  validates_with Address::Validator
+
   scope :primary_address, -> { find_by(address_type: PRIMARY_ADDRESS) }
   scope :temporary_address, -> { find_by(address_type: TEMPORARY_ADDRESS) }
 

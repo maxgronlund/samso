@@ -1,19 +1,5 @@
 da:
   activerecord:
-    errors:
-      models:
-        address:
-          attributes:
-            password:
-              too_short: 'Password skal være mindst 6 karakterer langt'
-            password_confirmation:
-              confirmation: 'Password og gentagelse af password passet ikke sammen'
-            address:
-              blank: Adressen skal udfyldes
-            zipp_code:
-              blank: Postnummer skal udfyldes
-            city:
-              blank: By skal udfyldes
     models:
       address: Adresse
     attributes:
@@ -26,9 +12,13 @@ da:
 
   address:
     index: Adresser
-    new: Opret ny adresse
-    edit: Rediger adresse
+    name: Navn
+    address: Adresse
     city: By
     zipp_code: Postnummer
     primary_address: Abonnements addresse
     temporary_address: Midlertidig abonnements adresse
+    new: Opret ny adresse
+    edit: Rediger adresse
+    end_date_hint: Minimum to uger fra start dato
+

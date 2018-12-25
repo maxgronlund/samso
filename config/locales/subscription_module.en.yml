@@ -14,7 +14,7 @@ en:
         price: Price i DKK
         active: Active
         subscriptions_count: Subscriptions
-    
+
     models:
       admin/subscription_module:
         one: Abonnementstype
@@ -22,3 +22,10 @@ en:
 
   admin/subscription_module:
     name: Subscription module
+
+
+  subscription_type:
+    new: New subscription type
+    edit: Edit subscription type
+    index: Subscription types
+

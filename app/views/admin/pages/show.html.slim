@@ -1,10 +1,14 @@
-
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('pages'), admin_pages_path
+    i.breadcrumb-item.active aria-current="page"
+      = @page.title
 .row
   .col-sm-8
-    h3
-      = t('edit')
-      '&nbsp:&nbsp;
-      = @page.title
+    h3 = t('page.edit_content', title: @page.title)
+
   .col-sm-4
     .edit-page-links
       = link_to t('page.show'), page_path(@page)

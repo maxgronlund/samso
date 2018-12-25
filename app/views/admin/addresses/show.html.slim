@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong User:
+  = @address.user
+p
+  strong Name:
+  = @address.name
+p
+  strong Address:
+  = @address.address
+p
+  strong Zipp code:
+  = @address.zipp_code
+p
+  strong City:
+  = @address.city
+
+=> link_to 'Edit', edit_address_path(@address)
+'|
+=< link_to 'Back', addresses_path

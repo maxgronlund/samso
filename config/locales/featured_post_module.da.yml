@@ -9,7 +9,7 @@ da:
         title:  Overskrift
         access_to: Vises til
         blog_id: Vælg kategori
-        content_type: Inhold
+        content_type: Indhold
 
   featured_post_module:
     name:  Featured artikler
