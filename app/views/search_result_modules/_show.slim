@@ -5,7 +5,7 @@
 - else
   - @blog_posts.each_with_hit do |blog_post, hit|
     .search-result
-      = link_to search_path(blog_post.id) do
+      = link_to page_post_path(blog_post.show_page, blog_post.id) do
         - next if blog_post.start_date > Time.zone.now
         h4 = hit.try(:highlight)&.title.present? ? hit.highlight.title.join.html_safe : blog_post.title
         .start_date = l blog_post.start_date unless blog_post.start_date.nil?
@@ -17,5 +17,5 @@
             = simple_format blog_post.body
           - else
             = simple_format hit.highlight.body.join('&hellip;&nbsp;')
-        = link_to 'læs artiklen', search_path(blog_post.id), class: 'btn btn-primary'
+        = link_to 'læs artiklen', page_post_path(blog_post.show_page, blog_post.id), class: 'btn btn-primary'
   = paginate @blog_posts
