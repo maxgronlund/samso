@@ -16,7 +16,6 @@ namespace :pages do
       locale: blog.locale,
       menu_title: "Kategori #{blog.title}",
       menu_id: 'not_in_any_menus',
-      blog_id: blog.id,
       category_page: true
     }
     page_col = find_or_create_page(options)
@@ -30,7 +29,6 @@ namespace :pages do
       locale: blog.locale,
       menu_title: blog.title,
       menu_id: 'not_in_any_menus',
-      blog_id: blog.id,
       category_page: false
     }
     page_col = find_or_create_page(options)

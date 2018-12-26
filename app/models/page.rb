@@ -88,6 +88,6 @@ class Page < ApplicationRecord
   private
 
   def nullify_blog
-    blog.update(page_id: null) if blog.present?
+    blog.update(show_page_id: nil, index_page_id: nil) if blog.present?
   end
 end
