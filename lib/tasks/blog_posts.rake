@@ -44,9 +44,9 @@ namespace :blog_posts do
   end
 
   def dublet_post(last_post, this_post)
-    return false uif last_post.teaser != this_post.teaser
-    return false uif last_post.body != this_post.body
-    return false uif last_post.title != this_post.title
+    return false if last_post.teaser != this_post.teaser
+    return false if last_post.body != this_post.body
+    return false if last_post.title != this_post.title
 
     true
   end
