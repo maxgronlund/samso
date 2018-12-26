@@ -26,18 +26,28 @@ namespace :blog_posts do
   # rake blog_posts:delete_dublets
   desc 'remove dublets'
   task delete_dublets: :environment do
+    count = 0
     last_post = Admin::BlogPost.first
     Admin::BlogPost.find_each do |this_post|
       next if this_post == Admin::BlogPost.first
-      this_post.destroy if dublet_post(last_post, this_post)
+
+      if dublet_post(last_post, this_post)
+        last_post.destroy
+        count += 1
+      end
       last_post = this_post
     end
+
+    ap '====================='
+    ap "#{count} dublets deleted"
+    ap '====================='
   end
 
   def dublet_post(last_post, this_post)
-    return false unless last_post.teaser == this_post.teaser
-    return false unless last_post.body == this_post.body
-    return false unless last_post.title == this_post.title
+    return false uif last_post.teaser != this_post.teaser
+    return false uif last_post.body != this_post.body
+    return false uif last_post.title != this_post.title
+
     true
   end
 end
