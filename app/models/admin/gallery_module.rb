@@ -16,7 +16,7 @@ class Admin::GalleryModule < ApplicationRecord
     latest_images.limit(images_pr_page).offset(page_id.to_i * images_pr_page)
   end
 
-  def show_on_page
+  def show_page
     Page.find_by(id: page_id)
   end
 

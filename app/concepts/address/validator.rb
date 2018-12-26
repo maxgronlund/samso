@@ -4,7 +4,7 @@ class Address::Validator < ActiveModel::Validator
     when 'Admin::Subscription'
       validate_subscription_address(address)
     when 'User'
-      ap 'No validation required'
+
     end
   end
 

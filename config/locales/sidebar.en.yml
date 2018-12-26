@@ -1,14 +1,14 @@
 en:
   sidebar:
-    front_page: Front pate
-    articles: Articlse
-    users: users
+    front_page: Front page
+    articles: Articles
+    users: Users
     subscription_types: Subscription types
     system_settings: System settings
     menus: Menus
     pages: Pages
     csv_imports: CSV Imports
     calendars: Calendars
-    categories: Article categories
+    categories: Categories
     system_messages: System messages
     ads: Ads

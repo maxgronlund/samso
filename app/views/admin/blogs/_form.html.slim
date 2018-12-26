@@ -5,6 +5,8 @@
     .col-md-6
       .form-inputs
         = f.input :title
+        = f.input :index_page_id, collection: Page.category_pages.active
+        = f.input :show_page_id, collection: Page.show_one_pages.active
 
       .form-actions
         .pull-right

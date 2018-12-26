@@ -2,9 +2,17 @@
 
 # a blog to embed inside the BlogModule
 class Admin::Blog < ApplicationRecord
-  # has_one :page, class_name: 'Page', dependent: :nullify
-  has_one :page, class_name: 'Page', dependent: :nullify
+  #has_one :page, class_name: 'Page', dependent: :nullify
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
+
+  def show_page
+    Page.find_by(id: show_page_id)
+  end
+
+  def index_page
+    Page.find_by(id: show_page_id)
+  end
+
   def clear_page_cache
     blog_modules = Admin::BlogModule.where(admin_blog_id: id)
     blog_modules.each(&:clear_page_cache)

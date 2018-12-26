@@ -1,6 +1,6 @@
 .blog-post
   - if post.image.present?
-    = link_to page_post_path(post.show_on_page, post) do
+    = link_to page_post_path(post.show_page, post) do
       .row.blog-post-content
         .col-sm-6.no-padding
           - unless post.video_url.empty?

@@ -43,7 +43,7 @@ module KnowUserHelper
       .create(
         address: options[:address] || Faker::Address.street_address,
         zipp_code: options[:zipp_code] || Faker::Number.number(4).to_s,
-        city: optios[:city] || Faker::Address.city,
+        city: options[:city] || Faker::Address.city,
         address_type: options[:address_type] || Address::PRIMARY_ADDRESS
       )
   end

@@ -21,14 +21,14 @@ Then('I visit my account page') do
   visit user_path(I18n.locale, user.id)
 end
 
-Then("I can see my account") do
+Then('I can see my account') do
   user = User.find_by(email: 'valid-subscriber@example.com')
   expect(user_path(I18n.locale, user.id)).to have_content(current_path)
   expect(page).to have_content(I18n.t('edit'))
   expect(page).to have_content(user.name)
 end
 
-Then("I can change my address") do
+Then('I can change my address') do
   user = User.find_by(email: 'valid-subscriber@example.com')
   name = Faker::Name.name
   city = Faker::Address.city

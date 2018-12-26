@@ -64,8 +64,8 @@ class Admin::BlogPost < ApplicationRecord
   end
   # rubocop:enable Metrics/MethodLength
 
-  def show_on_page
-    blog.page
+  def show_page
+    blog.show_page
   end
 
   def page

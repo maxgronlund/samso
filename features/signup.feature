@@ -21,6 +21,3 @@ Feature: Gests can signup
   Scenario: As user can confirm an account
     When I signup with the email "unconfirmed@example.com" and the password "ComeOnIn123"
     Then the user with the email "unconfirmed@example.com" can confirm the account
-
-
-

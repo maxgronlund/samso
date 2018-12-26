@@ -2,6 +2,7 @@
 module KnowBlogModuleHelper
   def create_blog_module_page(options = {})
     blog_id = options[:blog_id]
+    title = options[:title] || 'blog_module_page'
     blog_module =
       FactoryBot
       .create(
@@ -12,7 +13,7 @@ module KnowBlogModuleHelper
       )
 
     create_page_with_module(
-      title: 'blog_module_page',
+      title: title,
       moduleable: blog_module
     )
   end

@@ -18,4 +18,8 @@ FactoryBot.define do
   sequence :blog_post_signature do |n|
     "#{Faker::Name.name}_#{n}"
   end
+
+  sequence :blog_title do |n|
+    "#{Faker::Name.name}_#{n}"
+  end
 end

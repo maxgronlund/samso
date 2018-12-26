@@ -10,7 +10,7 @@ module KnowPageHelper
 
   def create_page(options = {})
     title = options[:title] || Faker::Name.name
-    menu_title = options[:menu_title] || Faker::Name.name
+    menu_title = options[:menu_title] || title
     menu_id = options[:menu_id] || 'not_in_any_menus'
     FactoryBot
       .create(

@@ -1,7 +1,7 @@
 .blog-post
   - if post.image.present?
     .blog-post-content
-      = link_to page_post_path(post.show_on_page, post) do
+      = link_to page_post_path(post.show_page, post) do
         - unless post.video_url.empty?
           .video-symbol.ml-3
             i.fa.fa-play

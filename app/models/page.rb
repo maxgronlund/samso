@@ -2,7 +2,8 @@
 
 # Dynamic page to hold content
 class Page < ApplicationRecord
-  belongs_to :blog, class_name: 'Admin::Blog'
+  #belongs_to :blog, class_name: 'Admin::Blog'
+  before_destroy :nullify_blog
   has_many :page_rows, dependent: :destroy
   has_attached_file :body_background, styles: {
     thumb: '90x100>'
@@ -18,6 +19,10 @@ class Page < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :category_pages, -> { where(category_page: true) }
   scope :show_one_pages, -> { where(category_page: false) }
+
+  def blog
+    Admin::Blog.find_by(index_page_id: id)
+  end
 
   def ordered_page_rows
     page_rows.order('position ASC')
@@ -78,5 +83,11 @@ class Page < ApplicationRecord
 
   def to_param
     "#{id} #{title}".parameterize
+  end
+
+  private
+
+  def nullify_blog
+    blog.update(page_id: null) if blog.present?
   end
 end

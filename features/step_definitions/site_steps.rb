@@ -1,5 +1,5 @@
 Given('the site is ready') do
-  page =
+  landing_page =
     FactoryBot
     .create(
       :page,
@@ -10,7 +10,7 @@ Given('the site is ready') do
   FactoryBot
     .create(
       :system_setup,
-      landing_page_id: page.id
+      landing_page_id: landing_page.id
     )
 
   FactoryBot

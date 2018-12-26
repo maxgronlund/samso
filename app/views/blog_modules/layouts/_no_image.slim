@@ -1,5 +1,5 @@
 .blog-post-content
-  = link_to page_post_path(post.show_on_page, post) do
+  = link_to page_post_path(post.show_page, post) do
     .content
       - unless post.video_url.empty?
         .video

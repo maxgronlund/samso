@@ -116,6 +116,9 @@ ActiveRecord::Schema.define(version: 2018_12_25_181832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0
+    t.integer "index_page_id"
+    t.integer "show_page_id"
+    t.index ["show_page_id"], name: "index_admin_blogs_on_show_page_id"
   end
 
   create_table "admin_calendar_events", force: :cascade do |t|
@@ -510,9 +513,7 @@ ActiveRecord::Schema.define(version: 2018_12_25_181832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "category_page", default: false
-    t.integer "blog_id"
     t.index ["admin_footer_id"], name: "index_pages_on_admin_footer_id"
-    t.index ["blog_id"], name: "index_pages_on_blog_id"
   end
 
   create_table "payments", force: :cascade do |t|

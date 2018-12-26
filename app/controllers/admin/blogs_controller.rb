@@ -27,7 +27,7 @@ class Admin::BlogsController < AdminController
     @admin_blog = Admin::Blog.new(admin_blog_params)
     @admin_blog.locale = I18n.locale
     if @admin_blog.save
-      redirect_to @admin_blog
+      redirect_to admin_blogs_path
     else
       render :new
     end
@@ -36,7 +36,7 @@ class Admin::BlogsController < AdminController
   # PATCH/PUT /admin/blogs/1
   def update
     if @admin_blog.update(admin_blog_params)
-      redirect_to @admin_blog
+      redirect_to admin_blogs_path
     else
       render :edit
     end
@@ -57,7 +57,7 @@ class Admin::BlogsController < AdminController
 
   # Only allow a trusted parameter "white list" through.
   def admin_blog_params
-    params.require(:admin_blog).permit(:title)
+    params.require(:admin_blog).permit(:title, :index_page_id, :show_page_id)
   end
 
   def set_selected
