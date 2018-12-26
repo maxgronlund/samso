@@ -5,7 +5,7 @@ class Admin::MenuLink < ApplicationRecord
   belongs_to :menu_content, class_name: 'Admin::MenuContent'
 
   def page
-    @page ||= Page.find_by(id: page_id)
+     Page.find_by(id: page_id).presence || Page.first
   end
 
   def page_title
