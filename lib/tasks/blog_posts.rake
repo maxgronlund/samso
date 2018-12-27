@@ -27,13 +27,12 @@ namespace :blog_posts do
   desc 'remove dublets'
   task delete_dublets: :environment do
     count = 0
-    last_post = Admin::BlogPost.first
+    last_post = nil
     Admin::BlogPost.find_each do |this_post|
-      next if this_post == Admin::BlogPost.first
-
       if dublet_post(last_post, this_post)
-        last_post.destroy
+        this_post.destroy
         count += 1
+        next
       end
       last_post = this_post
     end
@@ -44,10 +43,6 @@ namespace :blog_posts do
   end
 
   def dublet_post(last_post, this_post)
-    return false if last_post.teaser != this_post.teaser
-    return false if last_post.body != this_post.body
-    return false if last_post.title != this_post.title
-
-    true
+    (last_post&.teaser == this_post.teaser) && (last_post&.body == this_post.body) && (last_post&.title == this_post.title)
   end
 end
