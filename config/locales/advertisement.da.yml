@@ -5,9 +5,10 @@ da:
         one: Annonce
         other: Annoncer
     attributes:
-      admin/adverticement:
+      admin/advertisement:
         name:  Annonce
         title: Overskrift
+        image: Billed
         body: Annonce tekst
         views: Visninger
         clicks: Kliks
@@ -16,9 +17,13 @@ da:
         active: Aktive
         featured: Fremhævet
         featured_price: Pris for fremhævning
+        price: Pris
+        price_pr_click: Pris pr klik
+        price_pr_view: Pris pr visning
 
 
   advertisement:
+    index: Annnoncer
     name: Annonce
     bar: Bar
     title: Overskrift
