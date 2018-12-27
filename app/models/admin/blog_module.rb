@@ -35,18 +35,26 @@ class Admin::BlogModule < ApplicationRecord
   end
 
   def next_page(request_path, current_page)
-    return false if blog.nil?
-
     page = current_page.to_i + 1
-    return false if page * posts_pr_page >= blog.blog_posts_count
-
+    if show_all_categories
+      return false if page * posts_pr_page >= Admin::BlogPost.count
+    else
+      return false if blog.nil?
+      return false if page * posts_pr_page >= blog.blog_posts_count
+    end
     "#{request_path}?page=#{page}"
   end
 
   def last_page(request_path)
-    return false if blog.nil?
+    if show_all_categories
+      count = Admin::BlogPost.count
+    else
+      return false if blog.nil?
 
-    page = blog.blog_posts_count / posts_pr_page
+      count = blog.blog_posts_count
+    end
+
+    page = count / posts_pr_page
     "#{request_path}?page=#{page}"
   end
 
