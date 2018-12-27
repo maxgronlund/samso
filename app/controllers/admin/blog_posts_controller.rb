@@ -79,7 +79,9 @@ class Admin::BlogPostsController < AdminController
         :blog_id,
         :video_url,
         :enable_comments,
-        :signature
+        :signature,
+        :show_facebook_comments,
+        :delete_image
       )
   end
   # rubocop:enable Metrics/MethodLength
