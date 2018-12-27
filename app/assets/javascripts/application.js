@@ -20,3 +20,4 @@
 //= require advertisements
 //= require dk-zipp-codes
 //= require facebook
+//= require jssocials
