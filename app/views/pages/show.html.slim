@@ -7,9 +7,6 @@
   = render 'pages/show', page: @page
 
 
-h2 fo
-#share
-
 #gdpr_acceptance_missing
   - if gdpr_acceptance_missing?
     - session[:gdpr_acceptad_path] = request.path
@@ -30,11 +27,7 @@ h2 fo
                   = f.submit t('accept'), class: 'btn btn-success', id: 'submit'
                   = link_to 'Læs mere', gdpr_path(current_user), class: 'btn btn-info'
     javascript:
-      alert('f');
       $('#gdpr-acceptance-dialog').modal('show');
 
 
-      $("#share").jsSocials({
-          shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-      });
 

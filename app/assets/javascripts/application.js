@@ -21,3 +21,4 @@
 //= require dk-zipp-codes
 //= require facebook
 //= require jssocials
+//= require jssocials-share

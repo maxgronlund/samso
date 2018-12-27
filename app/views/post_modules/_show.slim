@@ -1,11 +1,15 @@
 - post_module = modulable
 - blog_post_id = params[:id]
 - blog_post = post_module.blog_post(blog_post_id)
-
 - start_date = blog_post.start_date
 - if  blog_post.free_content? || access_to_subscribed_content?
   - blog_post.shown!
-
+  - if params[:page_id].present? && editor?
+    - blog = blog_post.blog
+    - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
+    = link_to t('edit'),
+      edit_admin_blog_blog_post_path(blog, blog_post_id),
+      class: 'btn btn-light btn-sm'
   - video_url = blog_post.build_video_url
   - if !video_url.empty?
     .video-container
@@ -17,16 +21,10 @@
   h3 = blog_post.title
   = blog_post.signature
   = simple_format (blog_post.body)
-  - if params[:page_id].present? && editor?
-    .mt-18
-      - blog = blog_post.blog
-      - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
-      .row
-        .col-md-12
-          .pull-right
-            = link_to t('edit'),
-              edit_admin_blog_blog_post_path(blog, blog_post_id),
-              class: 'btn btn-light btn-sm'
+  .pull-right
+    #shareRoundIcons
+    javascript:
+      init_share_buttons();
   - if blog_post.enable_comments?
     = render 'comments/index', comments: blog_post.comments, commentable: blog_post
 
