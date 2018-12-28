@@ -2,8 +2,8 @@ da:
   activerecord:
     models:
       admin/featured_post_module:
-        one: Featured artikel
-        other: Featured artikler
+        one: Udvalgte artikel
+        other: Udvalgte artikler
     attributes:
       admin/featured_post_module:
         title:  Overskrift
@@ -12,9 +12,9 @@ da:
         content_type: Indhold
 
   featured_post_module:
-    name:  Featured artikler
-    edit: Rediger Featured artikler oversikts modul
-    featured_posts: Featured artikler
+    name:  Udvalgte artikler
+    edit: Rediger Udvalgte artikler oversikts modul
+    featured_posts: Udvalgte artikler
     latest_news: Sidste nyt
     category: Kategori
     more_from: Sidste nyt

@@ -14,11 +14,7 @@ Feature: The visibility of modules
     And there is a page where a text_module is visible to "members_only"
     And there is a page where a text_module is visible to "subscribers_only"
     And there is a page where a text_module is visible to "expired_subscribers"
-    # And there is a "admin" with the email "admin@example.com" and the password "ComeOnIn123"
 
-  # ----------------------
-  # test access for guests
-  # ----------------------
   Scenario: As a guest I can visit the page with a module accessible to all and see it
     When I visit the page named "all"
     Then I can see "all"
@@ -39,9 +35,6 @@ Feature: The visibility of modules
     When I visit the page named "expired_subscribers"
     Then I can not see "expired_subscribers"
 
-  # ----------------------
-  # test access for members
-  # ----------------------
   Scenario: As a member I can visit the page with a module accessible to all and see it
     When I login as "member@example.com" with the password "ComeOnIn123"
     Then I visit the page named "all"
@@ -67,9 +60,6 @@ Feature: The visibility of modules
     Then I visit the page named "expired_subscribers"
     Then I can not see "expired_subscribers"
 
-  # ----------------------
-  # test access for valid subscribers
-  # ----------------------
   Scenario: As a valid subscriber I can visit the page with a module accessible to all and see it
     When I login as "valid-subscriber@example.com" with the password "ComeOnIn123"
     Then I visit the page named "all"
@@ -95,9 +85,6 @@ Feature: The visibility of modules
     Then I visit the page named "expired_subscribers"
     Then I can not see "expired_subscribers"
 
-  # ----------------------
-  # test access for expired subscribers
-  # ----------------------
   Scenario: As a expired subscriber I can visit the page with a module accessible to all and see it
     When I login as "expired-subscriber@example.com" with the password "ComeOnIn123"
     Then I visit the page named "all"

@@ -3,13 +3,10 @@
     - if comments.any?
       hr
       h5 = t('comment.comments')
-
       - comments.order(created_at: :asc).each do |comment|
         == render "comments/comment", comment: comment
-
     - if current_user.present?
       #add-comment
-
       = simple_form_for([Comment.new], remote: true) do |f|
         = f.error_notification
         = f.input :comment, label: t('comment.new_comment'), input_html: {id: 'new_comment_form'}

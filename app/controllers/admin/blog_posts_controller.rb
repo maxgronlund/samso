@@ -19,6 +19,7 @@ class Admin::BlogPostsController < AdminController
     @admin_blog_post = @admin_blog.posts.new(admin_blog_post_params)
     @admin_blog_post.user = current_user
     if @admin_blog_post.save
+      clear_page_cache
       redirect_to admin_blog_path(@admin_blog)
     else
       render :new
@@ -29,8 +30,8 @@ class Admin::BlogPostsController < AdminController
   end
 
   def update
-    ap admin_blog_post_params
     if @admin_blog_post.update(admin_blog_post_params)
+      clear_page_cache
       redirect_to default_path(admin_articles_path)
     else
       render :edit
@@ -83,6 +84,10 @@ class Admin::BlogPostsController < AdminController
         :show_facebook_comments,
         :delete_image
       )
+  end
+
+  def clear_page_cache
+    @admin_blog.clear_page_cache
   end
   # rubocop:enable Metrics/MethodLength
 end

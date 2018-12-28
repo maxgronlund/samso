@@ -1,37 +1,38 @@
 - post_module = modulable
 - blog_post_id = params[:id]
 - blog_post = post_module.blog_post(blog_post_id)
-- start_date = blog_post.start_date
-- if  blog_post.free_content? || access_to_subscribed_content?
-  - blog_post.shown!
-  - if params[:page_id].present? && editor?
-    - blog = blog_post.blog
-    - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
-    .pull-right
-      = link_to t('edit'),
-        edit_admin_blog_blog_post_path(blog, blog_post_id),
-        class: 'btn btn-light btn-sm'
-  - video_url = blog_post.build_video_url
-  - if !video_url.empty?
-    .video-container
-      =  raw video_url
-  - elsif post_module.image_present?(blog_post_id)
-    .mb-8
-      = image_tag(post_module.image_url(blog_post_id), class: 'img-fluid')
-  .start_date = l start_date unless start_date.nil?
-  h3 = blog_post.title
-  = blog_post.signature
-  = simple_format (blog_post.body)
-  = render 'shared/social_icons'
-  - if blog_post.enable_comments?
-    = render 'comments/index', comments: blog_post.comments, commentable: blog_post
+= cache blog_post do
+  - start_date = blog_post.start_date
+  - if  blog_post.free_content? || access_to_subscribed_content?
+    - blog_post.shown!
+    - if params[:page_id].present? && editor?
+      - blog = blog_post.blog
+      - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
+      .pull-right
+        = link_to t('edit'),
+          edit_admin_blog_blog_post_path(blog, blog_post_id),
+          class: 'btn btn-light btn-sm'
+    - video_url = blog_post.build_video_url
+    - if !video_url.empty?
+      .video-container
+        =  raw video_url
+    - elsif post_module.image_present?(blog_post_id)
+      .mb-8
+        = image_tag(post_module.image_url(blog_post_id), class: 'img-fluid')
+    .start_date = l start_date unless start_date.nil?
+    h3 = blog_post.title
+    = blog_post.signature
+    = simple_format (blog_post.body)
+    = render 'shared/social_icons'
+    - if blog_post.enable_comments?
+      = render 'comments/index', comments: blog_post.comments, commentable: blog_post
 
-  - if blog_post.show_facebook_comments?
-    - data_href = ENV['RAILS_HOST'] + request.path
-    .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
-- else
-  == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
+    - if blog_post.show_facebook_comments?
+      - data_href = ENV['RAILS_HOST'] + request.path
+      .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
+  - else
+    == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
 
-javascript:
-  $(".video-container").fitVids();
-  $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
+  javascript:
+    $(".video-container").fitVids();
+    $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});

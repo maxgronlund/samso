@@ -50,7 +50,6 @@ class Admin::BlogModule < ApplicationRecord
       count = Admin::BlogPost.count
     else
       return false if blog.nil?
-
       count = blog.blog_posts_count
     end
 

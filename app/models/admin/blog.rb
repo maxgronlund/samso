@@ -2,7 +2,6 @@
 
 # a blog to embed inside the BlogModule
 class Admin::Blog < ApplicationRecord
-  #has_one :page, class_name: 'Page', dependent: :nullify
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
 
   def show_page
@@ -14,8 +13,8 @@ class Admin::Blog < ApplicationRecord
   end
 
   def clear_page_cache
-    blog_modules = Admin::BlogModule.where(admin_blog_id: id)
-    blog_modules.each(&:clear_page_cache)
+    Admin::BlogModule.find_each(&:touch)
+    Admin::FeaturedPostModule.find_each(&:touch)
   end
 
   # Admin::Blog.update_all_counts
