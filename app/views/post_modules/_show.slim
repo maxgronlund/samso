@@ -7,7 +7,6 @@
     - blog_post.shown!
     - if params[:page_id].present? && editor?
       - blog = blog_post.blog
-      - session[:stored_path] = page_path(Page.find(session[:page_id] || @landing_page.id))
       .pull-right
         = link_to t('edit'),
           edit_admin_blog_blog_post_path(blog, blog_post_id),

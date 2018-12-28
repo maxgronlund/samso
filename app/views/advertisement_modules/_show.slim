@@ -8,7 +8,7 @@
         = image_tag( advertisement.image.url(:large), class: 'img-fluid')
         .content
           h5 = advertisement.title
-          = advertisement.body
+          = simple_format advertisement.body
 
 javascript:
   init_click_on_advitesement();
