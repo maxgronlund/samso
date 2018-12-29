@@ -77,7 +77,8 @@ namespace :system do
         locale_name: page[:translation],
         landing_page_id: landing_page.id,
         subscription_page_id: suscription_page.id,
-        maintenance: false
+        maintenance: false,
+        administrator_email: 'admin@example.com'
       }
     Admin::SystemSetup.where(params).first_or_create(params)
   end
