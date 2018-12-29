@@ -19,4 +19,12 @@ class String
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/AbcSize
+
+  def valid_email?
+    self =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  end
+
+  def invalid_email?
+    !valid_email?
+  end
 end

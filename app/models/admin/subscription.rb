@@ -34,7 +34,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def address
-    addresses.first
+    addresses.primary_address
   end
 
   def print_version?
@@ -47,7 +47,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def temporary_address
-    addresses.find_by(address_type: 'temporary_address')
+    addresses.temporary_address
   end
   alias :set_address :primary_address
 

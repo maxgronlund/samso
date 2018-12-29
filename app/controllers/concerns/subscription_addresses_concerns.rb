@@ -40,8 +40,14 @@ module SubscriptionAddressesConcerns
   end
 
   def address_changed_by(current_user, address)
-    ap 'address_changed_by'
-    ap address
+    AddressUpdateMailer
+      .send_message_to_system_administrator(
+        current_user_id: current_user.id,
+        address_id: address.id,
+        subscription_id: @subscription.id,
+        system_setup_id: admin_system_setup.id
+      )
+      .deliver
   end
 
   private

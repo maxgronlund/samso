@@ -11,6 +11,7 @@ class Admin::SystemSetupsController < AdminController
   # PATCH/PUT /admin/system_setups/1
   # PATCH/PUT /admin/system_setups/1.json
   def update
+    admin_system_setup_params[:administrator_email].delete!(' ')
     if @admin_system_setup.update(admin_system_setup_params)
       redirect_to admin_index_path, notice: 'System opsætningen er opdateret.'
     else
@@ -36,7 +37,8 @@ class Admin::SystemSetupsController < AdminController
       :subscription_page_id,
       :logo,
       :delete_logo,
-      :background_color
+      :background_color,
+      :administrator_email
     )
   end
 end

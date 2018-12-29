@@ -18,6 +18,10 @@ class Address < ApplicationRecord
     true
   end
 
+  def primary?
+    address_type == PRIMARY_ADDRESS
+  end
+
   def temporary?
     address_type == TEMPORARY_ADDRESS
   end

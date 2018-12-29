@@ -9,6 +9,7 @@ class DeliveryAddressesController < ApplicationController
       .new(address_params)
     @address.address_type = Address::TEMPORARY_ADDRESS
     if @address.save
+
       redirect_to subscription_delivery_addresses_path(@subscription)
     else
       @user = @subscription.user
@@ -18,7 +19,7 @@ class DeliveryAddressesController < ApplicationController
 
   def update
     if update_address
-      address_changed_by(current_user) if @address_changed
+      address_changed_by(current_user, @address) if @address_changed
       redirect_to subscription_delivery_addresses_path(@subscription)
     else
       @user = @subscription.user

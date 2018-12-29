@@ -12,6 +12,8 @@ h3 = t('edit_model', model_name: 'System opsætning')
 = simple_form_for [@admin_system_setup], multipart: true do |f|
   = f.error_notification
 
+  = f.input :administrator_email, as: :email
+
   = f.input :landing_page_id,
     collection: Page.where(locale: I18n.locale),
     include_blank: false
