@@ -30,7 +30,7 @@ end
 
 Then('I can change my address') do
   user = User.find_by(email: 'valid-subscriber@example.com')
-  name = Faker::Name.name
+  name = Faker::Name.first_name + ' ' + Faker::Name.last_name
   city = Faker::Address.city
   zipp_code = '8520'
   fill_in 'user_name', with: name
