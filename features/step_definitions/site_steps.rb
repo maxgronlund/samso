@@ -10,7 +10,8 @@ Given('the site is ready') do
   FactoryBot
     .create(
       :system_setup,
-      landing_page_id: landing_page.id
+      landing_page_id: landing_page.id,
+      administrator_email: 'admin@example.com'
     )
 
   FactoryBot

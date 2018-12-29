@@ -4,5 +4,6 @@ FactoryBot.define do
     f.landing_page_id { 1 }
     f.locale { 'en' }
     f.locale_name { 'English' }
+    f.administrator_email { 'admin@example.com' }
   end
 end
