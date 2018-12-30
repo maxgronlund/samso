@@ -19,7 +19,9 @@ class Admin::MenuLinksController < AdminController
     @admin_menu_link =
       @admin_menu_content
       .menu_links
-      .new
+      .new(
+        position: Admin::MenuLink.next_position
+      )
   end
 
   # GET /admin/menu_links/1/edit
@@ -77,7 +79,10 @@ class Admin::MenuLinksController < AdminController
         :page_id,
         :url, :active,
         :color,
-        :background_color
+        :background_color,
+        :position
       )
   end
+
+
 end

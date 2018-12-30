@@ -2,16 +2,19 @@
   = render 'page_rows/show', page_row: page_row
 
 
-/- if @footer
+/ - if @footer
+/   .footer
+/     .row
+/       .col-sm-4
+/         - if @footer.about_page.present?
+/           = link_to @footer.about_page_link_name, page_path(@footer.about_page)
+/       .col-sm-4
+/         - if @footer.copyright_page.present?
+/           = link_to @footer.copyright_page_link_name, page_path(@footer.copyright_page)
+/       .col-sm-4
+/         - if @footer.term_of_usage_page.present?
+/           = link_to @footer.term_of_usage_page_link_name, page_path(@footer.term_of_usage_page)
 
-  /.fixed-bottom
-  /  .footer
-  / .container.footer
-  /   .row
-  /     .col-sm-4
-  /       - unless @footer.about_link.empty?
-  /         = link_to @footer.about_link_name, @footer.about_link
-  /     .col-sm-4
-  /       - unless @footer.terms_of_usage_link.empty?
-  /         = link_to @footer.terms_of_usage_link_name, @footer.terms_of_usage_link
+/     .row
+
 

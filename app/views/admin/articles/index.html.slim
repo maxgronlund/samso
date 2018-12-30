@@ -1,8 +1,7 @@
 - session[:stored_path] = request.path
 - blog = Admin::Blog.first
+== render 'shared/admin_links', selected: 'articles'
 .row
-  .col-sm-12
-    == render 'shared/admin_links', selected: 'articles'
   .col-sm-6
     h3 = t('admin/article.index')
   .col-sm-6

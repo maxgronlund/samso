@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_215939) do
+ActiveRecord::Schema.define(version: 2018_12_30_090801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2018_12_28_215939) do
     t.integer "views", default: 0
     t.decimal "price_pr_click", default: "0.0"
     t.integer "clicks", default: 0
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date "start_date"
+    t.date "end_date"
     t.boolean "active", default: true
     t.boolean "featured", default: false
     t.decimal "featured_price", default: "0.0"
@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 2018_12_28_215939) do
     t.integer "menu_content_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position", default: 0
     t.index ["menu_content_id"], name: "index_admin_menu_links_on_menu_content_id"
   end
 
@@ -434,6 +435,22 @@ ActiveRecord::Schema.define(version: 2018_12_28_215939) do
   create_table "admin_youtube_modules", force: :cascade do |t|
     t.string "name"
     t.text "snippet"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ads", force: :cascade do |t|
+    t.date "start_date"
+    t.integer "number_of_columns"
+    t.text "body"
+    t.text "comment"
+    t.string "name"
+    t.string "address"
+    t.string "zipp_code"
+    t.string "city"
+    t.string "email"
+    t.string "phone"
+    t.string "contact_person"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

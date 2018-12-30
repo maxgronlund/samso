@@ -1,8 +1,18 @@
-h1 Editing admin_menu_content
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/menu_content.index'), admin_menu_contents_path
+    li.breadcrumb-item.active aria-current="page"
+      = t('admin/menu_content.edit_name')
+
+
+
+/ h1 Editing admin_menu_content
 
 == render 'form'
 
-= link_to 'Show', @admin_menu_content
-'  |
-= link_to 'Back', admin_menu_contents_path
+/ = link_to 'Show', @admin_menu_content
+/ '  |
+/ = link_to 'Back', admin_menu_contents_path
 

@@ -1,3 +1,4 @@
+== render 'shared/admin_links', selected: ''
 h3 = t('admin/menu_content.index')
 
 .table-responsive
@@ -17,16 +18,15 @@ h3 = t('admin/menu_content.index')
           td = admin_menu_content.menu_links.count
           td
             .pull-right
-              .btn-group
-                = link_to t('admin/menu_module.edit_links'),
-                  admin_menu_content,
-                  class: 'btn btn-sm btn-outline-primary'
-                = link_to t('admin/menu_module.edit_name'),
-                  edit_admin_menu_content_path(admin_menu_content),
-                  class: 'btn btn-sm btn-outline-secondary'
-                = link_to t('delete'),
-                  admin_menu_content, data: { confirm: 'Are you sure?' }, method: :delete,
-                  class: 'btn btn-sm btn-danger'
+              = link_to t('admin/menu_module.edit_links'),
+                admin_menu_content,
+                class: 'btn btn-sm btn-light'
+              = link_to t('admin/menu_module.edit_name'),
+                edit_admin_menu_content_path(admin_menu_content),
+                class: 'btn btn-sm btn-secondary'
+              = link_to t('delete'),
+                admin_menu_content, data: { confirm: 'Are you sure?' }, method: :delete,
+                class: 'btn btn-sm btn-danger'
 
 br
 .pull-right

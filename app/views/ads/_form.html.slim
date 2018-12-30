@@ -1,0 +1,18 @@
+= simple_form_for(@ad) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :start_date
+    = f.input :number_of_columns
+    = f.input :body
+    = f.input :comment
+    = f.input :name
+    = f.input :address
+    = f.input :zipp_code
+    = f.input :city
+    = f.input :email
+    = f.input :phone
+    = f.input :contact_person
+
+  .form-actions
+    = f.button :submit

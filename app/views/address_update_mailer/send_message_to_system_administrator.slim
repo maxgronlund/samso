@@ -1,5 +1,3 @@
-
-
 b = "Vedrørende #{@subscription.type_name} id: ##{@subscription.subscription_id}"
 br
 'Gyldigt fra:&nbsp;
@@ -10,13 +8,14 @@ br
 br
 = "Opdatering er fortaget af #{@current_user.name}"
 br
-'Vedrørende&nbsp;
+'Vedrørende kontoen&nbsp;
 a href="#{@user_url}"
   = @user.name
 br
+br
 - if @address.temporary?
   - primary_address = @subscription.primary_address
-  b Fast abonnement adresse
+  b Abonnentens adresse
   br
   = primary_address.name
   br
@@ -29,7 +28,7 @@ br
   br
   b = "Midlertidig adresse"
   br
-  = "fra #{l @address.start_date} til #{l @address.end_date}"
+  = "Fra #{l @address.start_date} til #{l @address.end_date} flyttes adressen til:"
   br
   = @address.name
   br
@@ -38,6 +37,17 @@ br
   = @address.zipp_code
   ',&nbsp;
   = @address.city
+- else
+  b Permanet flytning af abonnement adresse
+  br
+  = primary_address.name
+  br
+  = primary_address.address
+  br
+  = primary_address.zipp_code
+  ',&nbsp;
+  = primary_address.city
+  br
 
 
   /= @address.address

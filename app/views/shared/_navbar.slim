@@ -9,6 +9,7 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
     = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
+    / = render 'shared/mega_menu'
 
     /a.navbar-brand href="#"  Navbar
     button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"

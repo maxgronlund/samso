@@ -23,4 +23,10 @@ class Admin::MenuLink < ApplicationRecord
   def link_style
     "color: #{color}"
   end
+
+  def self.next_position
+    return 0 if Admin::MenuLink.last.nil?
+
+    Admin::MenuLink.last.position. + 10
+  end
 end

@@ -1,8 +1,11 @@
-h1 Editing admin_advertisement
-
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('advertisement.index'), admin_advertisements_path
+    i.breadcrumb-item
+      = link_to @admin_advertisement.title, @admin_advertisement
+    i.breadcrumb-item.active aria-current="page"
+      = t('edit')
+h3 = t('advertisement.edit')
 == render 'form'
-
-=> link_to 'Show', @admin_advertisement
-'|
-=< link_to 'Back', admin_advertisements_path
-

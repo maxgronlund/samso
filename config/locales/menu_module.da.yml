@@ -26,3 +26,17 @@ da:
     name: Menu
     new: Opret menu
     index: Menuer
+    edit: Rediger
+    edit_name: Rediger navn
+
+  admin/menu_link:
+    name: Link
+    index: Links
+    edit: Rediger link
+    new: Opret link
+    position: Position
+    title: Tekst
+    page_url: Side / URL
+    active: Aktiveret
+    color: Tekst farve
+    background_color: Baggrundsfarve

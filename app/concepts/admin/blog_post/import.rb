@@ -111,7 +111,8 @@ class Admin::BlogPost < ApplicationRecord
         user_id: user_id(options),
         views: options[:visning],
         signature: options[:signatur],
-        post_page_id: options[:post_page_id]
+        post_page_id: options[:post_page_id],
+        enable_comments: true
       }
     end
 

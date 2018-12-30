@@ -1,48 +1,49 @@
-p#notice = notice
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/menu_content.index'), admin_menu_contents_path
+    li.breadcrumb-item.active aria-current="page"
+      = @admin_menu_content.name
 
-h3
-  = @admin_menu_content.name
+/ h3 = @admin_menu_content.name
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
 
     thead
       tr
-        th Title
-        th Page
-        th Url
-        th Active
-        th Color
-        th Background color
-        th  colspan=3
+        th = t('admin/menu_link.position')
+        th = t('admin/menu_link.title')
+        th = t('admin/menu_link.page_url')
+        th = t('admin/menu_link.active')
+        th = t('admin/menu_link.color')
+        th = t('admin/menu_link.background_color')
+        th
 
 
     tbody
-      - @admin_menu_content.menu_links.each do |menu_link|
+      - @admin_menu_content.menu_links.order(:position).each do |menu_link|
         tr
+          td = menu_link.position
           td = menu_link.title
-          td = menu_link.page_title
-          td = menu_link.url
-          td = menu_link.active
+          td = menu_link.url.presence || menu_link.page_title.presence
+          td = menu_link.active ? '√' : ''
           td = menu_link.color
           td = menu_link.background_color
           td
             .pull-right
-              .btn-group
-                = link_to t('edit'),
-                  edit_admin_menu_content_menu_link_path(@admin_menu_content, menu_link),
-                  class: 'btn btn-sm btn-secondary'
+              = link_to t('edit'),
+                edit_admin_menu_content_menu_link_path(@admin_menu_content, menu_link),
+                class: 'btn btn-sm btn-light'
 
-                = link_to t('delete'),
-                  admin_menu_content_menu_link_path(@admin_menu_content, menu_link),
-                  data: { confirm: 'Are you sure?' },
-                  method: :delete,
-                  class: 'btn btn-sm btn-danger'
+              = link_to t('delete'),
+                admin_menu_content_menu_link_path(@admin_menu_content, menu_link),
+                data: { confirm: 'Are you sure?' },
+                method: :delete,
+                class: 'btn btn-sm btn-danger'
 
 .pull-right
   = link_to t('admin/menu_module.new_link'),
     new_admin_menu_content_menu_link_path(@admin_menu_content),
     class: 'btn btn-primary'
-
-
-= link_to 'Back', admin_menu_contents_path

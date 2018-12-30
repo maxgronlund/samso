@@ -24,6 +24,7 @@ da:
 
   advertisement:
     index: Annnoncer
+    edit: Rediger annonce
     name: Annonce
     bar: Bar
     title: Overskrift

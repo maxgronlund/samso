@@ -17,7 +17,9 @@ class Admin::AdvertisementsController < AdminController
       Admin::Advertisement
       .new(
         locale: I18n.locale,
-        active: true
+        active: true,
+        start_date: Date.today,
+        end_date: Date.today + 1.year
       )
   end
 

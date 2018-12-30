@@ -1,5 +1,11 @@
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('advertisement.index'), admin_advertisements_path
+    i.breadcrumb-item.active aria-current="page"
+      = t('new')
 h3 = t('advertisement.new')
-
 == render 'form'
 
-= link_to 'Back', admin_advertisements_path
+

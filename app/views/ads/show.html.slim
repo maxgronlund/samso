@@ -1,0 +1,39 @@
+p#notice = notice
+
+p
+  strong Start date:
+  = @ad.start_date
+p
+  strong Number of columns:
+  = @ad.number_of_columns
+p
+  strong Body:
+  = @ad.body
+p
+  strong Comment:
+  = @ad.comment
+p
+  strong Name:
+  = @ad.name
+p
+  strong Address:
+  = @ad.address
+p
+  strong Zipp code:
+  = @ad.zipp_code
+p
+  strong City:
+  = @ad.city
+p
+  strong Email:
+  = @ad.email
+p
+  strong Phone:
+  = @ad.phone
+p
+  strong Contact person:
+  = @ad.contact_person
+
+=> link_to 'Edit', edit_ad_path(@ad)
+'|
+=< link_to 'Back', ads_path

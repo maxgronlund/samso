@@ -1,47 +1,24 @@
-p#notice = notice
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('advertisement.index'), admin_advertisements_path
+    i.breadcrumb-item.active aria-current="page"
+      = @admin_advertisement.title
 
-= image_tag( @admin_advertisement.image.url(:large))
-  strong Title:
-  = @admin_advertisement.title
-p
-  strong Body:
-  = @admin_advertisement.body
-p
-  strong Price pr view:
-  = @admin_advertisement.price_pr_view
-p
-  strong Views:
-  = @admin_advertisement.views
-p
-  strong Price pr click:
-  = @admin_advertisement.price_pr_click
-p
-  strong Clicks:
-  = @admin_advertisement.clicks
-p
-  strong Start date:
-  = l @admin_advertisement.start_date
-p
-  strong End date:
-  = l @admin_advertisement.end_date
-p
-  strong Active:
-  = @admin_advertisement.active
-p
-  strong Featured:
-  = @admin_advertisement.featured
-p
-  strong Featured price:
-  = @admin_advertisement.featured_price
-p
-  strong Price:
-  = @admin_advertisement.price
-p
-  strong Url:
-  = @admin_advertisement.url
+.row
+  .col-sm-4
+    .advertisements
+      .text-right
+        h6 = t('advertisement.name')
+      .advertisement id=@admin_advertisement.id
+        = link_to @admin_advertisement.url, target: 'blank' do
+          = image_tag( @admin_advertisement.image.url(:large), class: 'img-fluid')
+          .content
+            h5.mt-2 = @admin_advertisement.title
+            = simple_format @admin_advertisement.body
+      .pull-right
+        => link_to t('edit'),
+          edit_admin_advertisement_path(@admin_advertisement),
+          class: 'btn btn-primary'
 
-
-
-=> link_to 'Edit', edit_admin_advertisement_path(@admin_advertisement)
-'|
-=< link_to 'Back', admin_advertisements_path

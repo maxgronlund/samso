@@ -10,7 +10,13 @@ class Admin::BlogPostsController < AdminController
   # GET /admin/blog_posts/new
   def new
     @admin_blog = Admin::Blog.find(params[:blog_id])
-    @admin_blog_post = Admin::BlogPost.new(signature: signature)
+    @admin_blog_post =
+      Admin::BlogPost
+      .new(
+        signature: signature,
+        enable_comments: true
+
+      )
   end
 
   # POST /admin/posts
