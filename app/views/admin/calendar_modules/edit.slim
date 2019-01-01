@@ -1,5 +1,4 @@
-.row
-  h3 = t('edit_model', model_name: @calendar_module.model_name.human)
+h3 = t('admin/calendar_module.edit')
 
 = simple_form_for [:admin, @calendar_module], url: url_for(action: 'update', controller: 'admin/calendar_modules'), method: 'put' do |f|
   = f.error_notification

@@ -24,6 +24,7 @@ da:
 
   admin/calendar_module:
     name: Kalender modul
+    edit: Rediger kalender modul
     layout:
       today-overview: I dag overblik
       today-detailed: I dag detalieret

@@ -9,7 +9,7 @@
     - if page_col_module.moduleable.nil?
       - page_col_module.destroy
     - else
-      .mt-10.mb-20.edit-preview-module
+      .mt-1.edit-preview-module
         = render page_col_module.admin_modulable_path, modulable: page_col_module.moduleable
         .fs-12
           = t('page_col_module.access_to')
