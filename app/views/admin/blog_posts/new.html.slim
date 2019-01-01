@@ -1,12 +1,14 @@
-.container.pt-60
-  .row.justify-content-md-center
-    .col-md-12.col-lg-9
-      .card
-        .card-body
-          h3 = t('blog_post.new')
-          = simple_form_for [:admin, @admin_blog, @admin_blog_post],
-            multipart: true,
-            url: url_for(action: 'create', controller: 'admin/blog_posts'),
-            method: 'post' do |f|
-            = f.error_notification
-            == render 'form', f: f
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/article.index'), admin_articles_path
+    i.breadcrumb-item.active aria-current="page"
+      = t('blog_post.new')
+
+= simple_form_for [:admin, @admin_blog, @admin_blog_post],
+  multipart: true,
+  url: url_for(action: 'create', controller: 'admin/blog_posts'),
+  method: 'post' do |f|
+  = f.error_notification
+  == render 'form', f: f

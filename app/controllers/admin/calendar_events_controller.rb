@@ -16,7 +16,11 @@ class Admin::CalendarEventsController < AdminController
   # GET /admin/calendar_events/new
   def new
     @admin_calendar_event =
-      @admin_calendar.events.new
+      @admin_calendar
+      .events
+      .new(
+        start_time: DateTime.now.in_time_zone.beginning_of_day + 1.week
+      )
   end
 
   # GET /admin/calendar_events/1/edit
@@ -33,7 +37,7 @@ class Admin::CalendarEventsController < AdminController
       if page_id.nil?
         redirect_to @admin_calendar, notice: 'Event was successfully created.'
       else
-        redirect_to page_url(page_id)
+        redirect_to admin_calendar_path(@admin_calendar)
       end
     else
       render :new

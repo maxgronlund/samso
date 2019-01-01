@@ -1,8 +1,12 @@
-h3 = t('edit_model', model_name: @admin_calendar.model_name.human)
+
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/calendar.index'), admin_calendars_path
+    li.breadcrumb-item
+      = link_to @admin_calendar.title, admin_calendar_path(@admin_calendar)
+    i.breadcrumb-item.active aria-current="page"
+       = t('edit')
 
 == render 'form'
-
-= link_to 'Show', @admin_calendar
-'  |
-= link_to 'Back', admin_calendars_path
-

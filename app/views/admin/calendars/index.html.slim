@@ -1,3 +1,4 @@
+== render 'shared/admin_links', selected: ''
 h3 = t('admin/calendar.index')
 
 .table-responsive
@@ -14,13 +15,12 @@ h3 = t('admin/calendar.index')
           td = admin_calendar.title
           td
             .pull-right
-              .btn-group
-                = link_to t('show'), admin_calendar, class: 'btn btn-secondary btn-sm'
-                = link_to t('edit'), edit_admin_calendar_path(admin_calendar), class: 'btn btn-secondary btn-sm'
-                = link_to t('delete'),
-                  admin_calendar,
-                  data: { confirm: t('confirm') }, method: :delete,
-                  class: 'btn btn-danger btn-sm'
+              = link_to t('show'), admin_calendar, class: 'btn btn-light btn-sm'
+              =< link_to t('edit'), edit_admin_calendar_path(admin_calendar), class: 'btn btn-light btn-sm'
+              =< link_to t('delete'),
+                admin_calendar,
+                data: { confirm: t('confirm') }, method: :delete,
+                class: 'btn btn-danger btn-sm'
 
 br
 .pull-right

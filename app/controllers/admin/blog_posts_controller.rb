@@ -14,7 +14,8 @@ class Admin::BlogPostsController < AdminController
       Admin::BlogPost
       .new(
         signature: signature,
-        enable_comments: true
+        enable_comments: true,
+        show_facebook_comments: false
 
       )
   end

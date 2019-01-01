@@ -27,7 +27,7 @@ class Admin::CalendarsController < AdminController
     @admin_calendar = Admin::Calendar.new(admin_calendar_params)
     @admin_calendar.locale = I18n.locale
     if @admin_calendar.save
-      redirect_to @admin_calendar, notice: 'Calendar was successfully created.'
+      redirect_to @admin_calendar
     else
       render :new
     end
@@ -36,7 +36,7 @@ class Admin::CalendarsController < AdminController
   # PATCH/PUT /admin/calendars/1
   def update
     if @admin_calendar.update(admin_calendar_params)
-      redirect_to @admin_calendar, notice: 'Calendar was successfully updated.'
+      redirect_to @admin_calendar
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class Admin::CalendarsController < AdminController
   # DELETE /admin/calendars/1
   def destroy
     @admin_calendar.destroy
-    redirect_to admin_calendars_url, notice: 'Calendar was successfully destroyed.'
+    redirect_to admin_calendars_url
   end
 
   private
