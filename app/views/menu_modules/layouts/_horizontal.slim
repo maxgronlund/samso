@@ -1,14 +1,45 @@
-.horizontal-menu
-  ul
-    - menu_content.menu_links.order(:position).each do |menu_link|
-      li
-        - if menu_link.url.blank?
-           = link_to page_url(menu_link.page) do
-            . style="#{menu_link.style}"
-              . style="#{menu_link.link_style}"
-                = menu_link.title
-        - else
-          = link_to menu_link.url do
-            . style="#{menu_link.style}"
-              . style="#{menu_link.link_style}"
-                = menu_link.title
+
+
+.menu-bars
+  i.fas.fa-bars data-target="#exampleModal" data-toggle="modal" type="button"
+
+
+
+#exampleModal.modal.fade aria-hidden="true" aria-labelledby="menu-modal" role="dialog" tabindex="-1"
+  .modal-dialog.modal-xl role="document"
+    .modal-content
+      .container-fluid
+        .row
+          .col-sm-12
+            .modal-header
+              h5#menu-modal.modal-title
+                = link_to ' Forsiden',root_path
+              button.close aria-label="Close" data-dismiss="modal" type="button"
+                span aria-hidden="true"  &times;
+            .modal-body
+              .horizontal-menu
+                ul
+                  - menu_content.menu_links.order(:position).each do |menu_link|
+                    li
+                      - if menu_link.url.blank?
+                         = link_to page_url(menu_link.page) do
+                          . style="#{menu_link.style}"
+                            . style="#{menu_link.link_style}"
+                              = menu_link.title
+                      - else
+                        = link_to menu_link.url do
+                          . style="#{menu_link.style}"
+                            . style="#{menu_link.link_style}"
+                              = menu_link.title
+            .modal-footer
+              ul.navbar-nav
+                - if  admin?
+                  li.nav-item
+                    = render 'shared/navbar_link',
+                      link_name: t('page.edit'),
+                      link_url: admin_page_path(@page)
+                  li.nav-item
+                    = render 'shared/navbar_link',
+                      link_name: 'Admin',
+                      link_url: admin_index_path
+
