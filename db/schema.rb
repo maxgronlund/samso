@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_30_090801) do
+ActiveRecord::Schema.define(version: 2019_01_03_172709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_090801) do
     t.string "csv_file_content_type"
     t.bigint "csv_file_file_size"
     t.datetime "csv_file_updated_at"
+    t.datetime "imported"
   end
 
   create_table "admin_dmi_modules", force: :cascade do |t|

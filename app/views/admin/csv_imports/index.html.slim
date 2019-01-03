@@ -11,6 +11,7 @@ h3 = t('csv_file.index')
         th Name
         th Import type
         th Komentarer
+        th Status
         th style='min-width:175px;'
 
 
@@ -20,6 +21,11 @@ h3 = t('csv_file.index')
           td = admin_csv_import.name
           td = admin_csv_import.import_type_translation
           td = admin_csv_import.comments
+          td
+            - if admin_csv_import.imported.present?
+              = l admin_csv_import.imported
+            - else
+              'Pending
           td
             .pull-right
               .btn-group

@@ -5,6 +5,7 @@ class Admin::ParseCsvController < AdminController
   def new
     @admin_csv_import = Admin::CsvImport.find(params[:csv_import_id])
     import_service.import(@admin_csv_import)
+    @admin_csv_import.update(imported: Time.zone.now)
     redirect_to @admin_csv_import
   end
 

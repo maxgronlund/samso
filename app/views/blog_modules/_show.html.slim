@@ -34,8 +34,9 @@ ow.mt-10
           - if prev_url
             li.page-item
               = link_to t('blog_module.prev'), prev_url, class: 'page-link'
-          li.page-item.active
-            a.page-link remote="false"  = params[:page]
+          - if params[:page]
+            li.page-item.active
+              a.page-link remote="false"  = params[:page]
           - if next_url
             li.page-item
               = link_to t('blog_module.next'), next_url, class: 'page-link'
