@@ -115,7 +115,7 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/MethodLength
 
     def legacy_subscription_id(options = {})
-      return Admin::Subscription.new_safe_subscription_id if options[:Abonnr].nil? || options[:Abonnr].empty?
+      return Admin::Subscription.new_safe_subscription_id if options[:Abonnr].blank?
 
       options[:Abonnr]
     end
@@ -197,9 +197,7 @@ class User < ApplicationRecord
       user = find_user_by_legacy_subscription_id(options)
       user = find_user_by_legacy_id(options) if user.nil?
       user = find_user_by_email(options) if user.nil?
-      return user unless user.nil?
-
-      User.new
+      user.presence || User.new
     end
 
     def find_user_by_email(options = {})
@@ -207,13 +205,13 @@ class User < ApplicationRecord
     end
 
     def find_user_by_legacy_id(options = {})
-      return nil if options[:legacy_id].to_s.empty?
+      return nil if options[:legacy_id].blank?
 
       User.find_by(legacy_id: options[:legacy_id])
     end
 
     def find_user_by_legacy_subscription_id(options = {})
-      return nil if options[:Abonnr].to_s.empty?
+      return nil if options[:Abonnr].blank?
 
       User.find_by(legacy_subscription_id: options[:Abonnr])
     end
