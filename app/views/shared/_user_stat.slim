@@ -10,9 +10,17 @@
         .pull-right = t('user.last_sign_in_at')
       td
         strong = l user.last_sign_in_at if user.last_sign_in_at
+    tr
+      td
+        .pull-right Sidste Login IP
+      td = @user.last_sign_in_ip.to_s
 
     tr
       td
         .pull-right = t('user.current_sign_in_at')
       td
         strong = l @user.current_sign_in_at.localtime if @user.current_sign_in_at
+    tr
+      td
+        .pull-right Login IP
+      td = @user.current_sign_in_ip.to_s

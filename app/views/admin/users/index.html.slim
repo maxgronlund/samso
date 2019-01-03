@@ -17,53 +17,51 @@
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
         = link_to t('user.search.show_all'), admin_users_path, class: 'btn btn-light'
-= cache @users do
-  br
-  .table-responsive
-    table.table.table-striped.table-bordered.table-hover.table-sm
-      thead
+
+br
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead
+      tr
+        th Navn
+        th Email
+        th style='width:100px;'
+         = t('user.access_as')
+        th= t('subscription.active')
+        th style='min-width:155px;'
+
+    tbody
+      - @users.each do |user|
+
         tr
-          th Navn
-          th Email
-          th style='width:100px;'
-           = t('user.access_as')
-          th= t('subscription.active')
-          th style='min-width:155px;'
-
-      tbody
-        - @users.each do |user|
-
-          tr
-            td = link_to user.name, admin_user_path(user)
-            td = user.sanitized_email
-            td = user.role_names
-            td
-              - if user.free_subscription
-                .green-text
-                  'Gratis
-              - elsif user.active_subscription?
-                .green-text
-                  = user.subscription_id
-              - elsif user.expired_subscriber?
-                .red-text
-                  = user.subscription_id
-              - else
+          td = link_to user.name, admin_user_path(user)
+          td = user.sanitized_email
+          td = user.role_names
+          td
+            - if user.free_subscription
+              .green-text
+                'Gratis
+            - elsif user.active_subscription?
+              .green-text
                 = user.subscription_id
-            td
-              .pull-right
-                .btn-group
-                  = link_to t('show'),
-                    admin_user_path(user),
+            - elsif user.expired_subscriber?
+              .red-text
+                = user.subscription_id
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'),
+                  admin_user_path(user),
+                  class: 'btn btn-light btn-sm'
+                - if current_user.can_edit?(user)
+                  = link_to t('edit'),
+                    edit_admin_user_path(user),
                     class: 'btn btn-light btn-sm'
-                  - if current_user.can_edit?(user)
-                    = link_to t('edit'),
-                      edit_admin_user_path(user),
-                      class: 'btn btn-light btn-sm'
-                    = link_to t('delete'),
-                      admin_user_path(user),
-                      data: { confirm: t('are_you_sure') },
-                      method: :delete,
-                      class: 'btn btn-danger btn-sm'
+                  = link_to t('delete'),
+                    admin_user_path(user),
+                    data: { confirm: t('are_you_sure') },
+                    method: :delete,
+                    class: 'btn btn-danger btn-sm'
 
 .pull-right
   = link_to t('user.create'), new_admin_user_path, class: 'btn btn-primary'

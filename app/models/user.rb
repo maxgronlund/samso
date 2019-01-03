@@ -147,8 +147,7 @@ class User < ApplicationRecord
 
   def subscription_id
     return last_valid_subscription.subscription_id if last_valid_subscription.present?
-
-    legacy_subscription_id.presence || ''
+    ''
   end
 
   def expired_subscriber?
