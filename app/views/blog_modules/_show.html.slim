@@ -16,21 +16,47 @@
 
   .row.mt-10
     .col-sm-12
-      - prev_url = blog_module.prev_page(request.path, params[:page].to_i)
-      - next_url = blog_module.next_page(request.path, params[:page].to_i)
-      - last_url = blog_module.last_page(request.path)
+      = request.original_url
+      br
+      = params["page"]
+      br
+      - prev_url = blog_module.prev_url(request.path, params[:page].to_i)
+      = prev_url
+      - next_url = blog_module.next_url(request.path, params[:page].to_i)
+      - last_url = blog_module.last_url(request.path)
       .d-flex.justify-content-center
         nav
           ul.pagination
-            - if params[:page]
+            - if params["page"].present?
               li.page-item
                 = link_to t('blog_module.first'), request.path, class: 'page-link'
+            - if prev_url
               li.page-item
                 = link_to t('blog_module.prev'), prev_url, class: 'page-link'
-              li.page-item.active
-                a.page-link remote="false"  = params[:page]
+              /li.page-item.active
+              /  a.page-link remote="false"  = params[:page]
             - if next_url
               li.page-item
                 = link_to t('blog_module.next'), next_url, class: 'page-link'
             li.page-item
               = link_to t('blog_module.last'), last_url, class: 'page-link'
+
+
+
+
+
+      /.d-flex.justify-content-center
+      /  nav
+      /    ul.pagination
+      /      - if params[:page]
+      /        li.page-item
+      /          = link_to t('blog_module.first'), request.path, class: 'page-link'
+      /        li.page-item
+      /          = link_to t('blog_module.prev'), prev_url, class: 'page-link'
+      /        li.page-item.active
+      /          a.page-link remote="false"  = params[:page]
+      /      - if next_url
+      /        li.page-item
+      /          = link_to t('blog_module.next'), next_url, class: 'page-link'
+      /      li.page-item
+      /        = link_to t('blog_module.last'), last_url, class: 'page-link'

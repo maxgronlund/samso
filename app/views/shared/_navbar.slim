@@ -6,17 +6,8 @@
           = link_to root_path do
             = image_tag navbar_logo, class: 'img-fluid'
 
-
-
-
-
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
-
-    / - menu_content = Admin::MenuContent.first
-    / - unless menu_content.nil?
-    /   == render "menu_modules/layouts/horizontal",
-    /     menu_content: menu_content
     = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
     / = render 'shared/mega_menu'
 
@@ -35,12 +26,24 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
 
       .my-2.my-lg-0
         ul.navbar-nav
+          - if  admin?
+            li.nav-item
+              = render 'shared/navbar_link',
+                link_name: t('page.edit'),
+                link_url: admin_page_path(@page)
+            li.nav-item
+              = render 'shared/navbar_link',
+                link_name: 'Admin',
+                link_url: admin_index_path
+
           - if user_signed_in?
             li.nav-item
               = link_to t('user_account'), user_path(@current_user), class: 'nav-link'
             li.nav-item
               = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'
+
           - else
+
             li.nav-item
               = link_to t('signup'), new_user_path, class: 'nav-link'
             li.nav-item
