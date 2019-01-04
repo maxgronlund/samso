@@ -2,7 +2,7 @@
 h5 = most_popular.name
 .blog-post
   - Admin::MostPopularModule.posts.each do |post|
-    - link = page_post_url(post.show_on_page, post)
+    - link = page_post_url(post.show_page, post)
     - unless link == request.url
       .featured-post
         .content
