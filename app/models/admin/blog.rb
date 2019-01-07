@@ -9,7 +9,7 @@ class Admin::Blog < ApplicationRecord
   end
 
   def index_page
-    Page.find_by(id: show_page_id)
+    Page.find_by(id: index_page_id)
   end
 
   def clear_page_cache

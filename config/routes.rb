@@ -48,6 +48,7 @@ Rails.application.routes.draw do
         resources :menu_links
       end
       resources :menu_modules
+      resources :mega_menu_modules
       resources :pages do
         resources :page_rows
       end

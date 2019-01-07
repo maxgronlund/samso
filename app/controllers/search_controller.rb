@@ -21,7 +21,7 @@ class SearchController < ApplicationController
 
   def show
     @blog_post = Admin::BlogPost.find(params[:id])
-    redirect_to page_post_path(@blog_post.show_on_page, @blog_post)
+    redirect_to page_post_path(@blog_post.show_page, @blog_post)
   end
 
   private
