@@ -11,6 +11,10 @@ nav#sidebar
       = link_to admin_articles_path do
         i.fa.fa-newspaper
         = t('sidebar.articles')
+    li class="#{ @selected == 'blogs' ? 'active' : '' }"
+      = link_to admin_blogs_path
+        i.fa.fa-object-group
+        = t('sidebar.categories')
     - if administrator?
       li class="#{ @selected == 'users' ? 'active' : ''}"
         = link_to admin_users_path do
@@ -48,10 +52,6 @@ nav#sidebar
         = link_to admin_calendars_path
           i.fa.fa-calendar
           = t('sidebar.calendars')
-      li class="#{ @selected == 'blogs' ? 'active' : '' }"
-        = link_to admin_blogs_path
-          i.fa.fa-object-group
-          = t('sidebar.categories')
       li class="#{ @selected == 'adverticements' ? 'active' : '' }"
         = link_to admin_advertisements_path
           i.fa.fa-ad
