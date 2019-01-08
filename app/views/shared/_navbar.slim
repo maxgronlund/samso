@@ -8,14 +8,15 @@
 
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
-    = link_to 'Menu', '#', 'data-toggle'.to_sym => "modal", 'data-target'.to_sym => ".navigation-menu"
+    = link_to 'Menu', '#', 'data-toggle'.to_sym => "modal", 'data-target'.to_sym => ".navigation-menu", class: 'navbar-brand'
     .pull-right
-      - if user_signed_in?
-        = link_to t('user_account'), user_path(@current_user)
-        =< link_to t('sign_out'), session_path(1), method: :delete
-      - else
-        = link_to t('signup'), new_user_path
-        =< link_to t('login'), new_session_path
+      .top-menu-links
+        - if user_signed_in?
+          = link_to t('user_account'), user_path(@current_user), class: 'top-menu-link'
+          =< link_to t('sign_out'), session_path(1), method: :delete, class: 'top-menu-link'
+        - else
+          = link_to t('signup'), new_user_path, class: 'top-menu-link'
+          =< link_to t('login'), new_session_path, class: 'top-menu-link'
 .modal.fade.navigation-menu aria-hidden="true" role="dialog" tabindex="-1"
   .modal-dialog.modal-xl
     .modal-content

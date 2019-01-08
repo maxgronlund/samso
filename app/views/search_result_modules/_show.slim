@@ -17,5 +17,4 @@
             = simple_format blog_post.body
           - else
             = simple_format hit.highlight.body.join('&hellip;&nbsp;')
-        = link_to 'læs artiklen', page_post_path(blog_post.show_page, blog_post.id), class: 'btn btn-primary'
   = paginate @blog_posts
