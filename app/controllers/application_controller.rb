@@ -159,7 +159,7 @@ class ApplicationController < ActionController::Base
   helper_method :authenticate_user!
 
   def no_editor
-    render_403 if editor?
+    render_403 if current_user.nil? || current_user.roles.where(permission: Role::EDITOR).any?
   end
 
   def default_path(path)
