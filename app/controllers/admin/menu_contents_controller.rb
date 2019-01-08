@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::MenuContentsController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_menu_content, only: %i[show edit update destroy]
   before_action :set_selected
 

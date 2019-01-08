@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::PostModulesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_post_module, only: %i[edit update destroy]
 
   # GET /admin/post_modules/1/edit

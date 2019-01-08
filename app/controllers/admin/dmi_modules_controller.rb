@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::DmiModulesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_dmi_module, only: %i[show edit update destroy]
 
   # GET /admin/dmi_modules/1/edit

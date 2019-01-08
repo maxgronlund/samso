@@ -1,4 +1,5 @@
 class Admin::SubscriptionAddressesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   include SubscriptionAddressesConcerns
 
   def destroy

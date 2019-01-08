@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::SubscriptionTypesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_subscription_type, only: %i[show edit update destroy]
   before_action :set_selected
 

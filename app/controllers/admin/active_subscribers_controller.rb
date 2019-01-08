@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::ActiveSubscribersController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def index

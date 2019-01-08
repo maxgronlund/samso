@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::CsvImportsController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_csv_import, only: %i[show edit update destroy]
   before_action :set_selected
 

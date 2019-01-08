@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::PageColsController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_page_col, only: %i[show edit update destroy]
 
   # GET /page_cols

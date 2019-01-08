@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::GalleryModulesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_gallery_module, only: %i[show edit update destroy]
 
   # GET /admin/gallery_modules/1/edit

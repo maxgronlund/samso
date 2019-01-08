@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::ReadAlsoModulesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_read_also_module, only: %i[edit update destroy]
 
   def edit

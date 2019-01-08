@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::SystemMessagesController < AdminController
+  before_action :no_editor, only: %i[index show edit update destroy]
   before_action :set_admin_system_message, only: %i[show edit update destroy]
   before_action :set_selected
 
