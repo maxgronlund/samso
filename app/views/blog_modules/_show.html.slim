@@ -8,6 +8,7 @@
       blog_module: blog_module,
       post: post, featured: true,
       start_date: post.start_date
+h3 = blog_module.name
 = cache paginated_posts do
   - paginated_posts.each do |post|
      = render "blog_modules/layouts/#{post.layout}",
@@ -17,10 +18,6 @@
 
 ow.mt-10
   .col-sm-12
-    = request.original_url
-    br
-    = params["page"]
-    br
     - prev_url = blog_module.prev_url(request.path, params[:page].to_i)
     = prev_url
     - next_url = blog_module.next_url(request.path, params[:page].to_i)
@@ -42,23 +39,3 @@ ow.mt-10
               = link_to t('blog_module.next'), next_url, class: 'page-link'
           li.page-item
             = link_to t('blog_module.last'), last_url, class: 'page-link'
-
-
-
-
-
-      /.d-flex.justify-content-center
-      /  nav
-      /    ul.pagination
-      /      - if params[:page]
-      /        li.page-item
-      /          = link_to t('blog_module.first'), request.path, class: 'page-link'
-      /        li.page-item
-      /          = link_to t('blog_module.prev'), prev_url, class: 'page-link'
-      /        li.page-item.active
-      /          a.page-link remote="false"  = params[:page]
-      /      - if next_url
-      /        li.page-item
-      /          = link_to t('blog_module.next'), next_url, class: 'page-link'
-      /      li.page-item
-      /        = link_to t('blog_module.last'), last_url, class: 'page-link'

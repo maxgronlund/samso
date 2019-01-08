@@ -16,27 +16,18 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
       - else
         = link_to t('signup'), new_user_path
         =< link_to t('login'), new_session_path
-    /. data-target=".navigation-menu" data-toggle="modal"  Menu
-
-
-
-.container-fluid
-
 .modal.fade.navigation-menu aria-hidden="true" role="dialog" tabindex="-1"
   .modal-dialog.modal-xl
     .modal-content
       .modal-body
-
-
-
-        .row
-          .col-sm-3
-            = link_to 'Forsiden', root_path
+        .row.menu-links
+          .col-sm-4
+            = link_to 'Forsiden', root_path, class: 'menu-link'
           - if admin?
-            .col-sm-3
-              = link_to t('page.edit'), admin_page_path(@page)
-            .col-sm-3
-              = link_to 'Admin', admin_index_path
+            .col-sm-4
+              = link_to t('page.edit'), admin_page_path(@page), class: 'menu-link'
+            .col-sm-4
+              = link_to 'Admin', admin_index_path, class: 'menu-link'
         hr
         .row
           .col-sm-12
@@ -51,12 +42,14 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                     = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
 
         - Admin::Blog.find_in_batches(start: 0, batch_size: 3).each do |batch|
-          .row
+          .row.menu-links
             - batch.each do |blog|
               - page = blog.index_page
               - if page.present?
                 .col-sm-4
-                  = link_to blog.title, page_path(page)
+                  = link_to blog.title,
+                    page_url(page),
+                    class: 'menu-link'
 
 
     / = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
