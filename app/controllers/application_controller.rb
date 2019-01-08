@@ -22,23 +22,26 @@ class ApplicationController < ActionController::Base
   end
 
   def super_admin?
-    return false if current_user.nil?
-
-    current_user.super_admin?
+    @super_admin ||=
+      current_user.present? && current_user.super_admin?
   end
   helper_method :super_admin?
 
   def admin?
-    return false if current_user.nil?
-
-    @admin ||= current_user.admin?
+    @admin ||=
+      current_user.present? && current_user.admin?
   end
   helper_method :admin?
 
-  def editor?
-    return false if current_user.nil?
+  def administrator?
+    @administrator ||=
+      current_user.present? && current_user.administrator?
+  end
+  helper_method :administrator?
 
-    current_user.editor?
+  def editor?
+    @editor ||=
+      current_user.present? && current_user.editor?
   end
   helper_method :editor?
 
@@ -145,12 +148,19 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_signed_in?
 
-  def authenticate_admin!
+  def authenticate_admin
     return if Rails.env.test?
+    return true if editor?
+    return true if administrator?
+    return true if super_admin?
 
-    render_403 unless user_signed_in? && current_user.administrator?
+    render_403
   end
   helper_method :authenticate_user!
+
+  def no_editor
+    render_403 if editor?
+  end
 
   def default_path(path)
     return path if session[:stored_path].nil?

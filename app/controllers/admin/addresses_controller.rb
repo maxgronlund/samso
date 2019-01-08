@@ -1,5 +1,5 @@
 class Admin::AddressesController < ApplicationController
-  # before_action :set_address, only: %i[show edit update destroy]
+  before_action :no_editor, only: %i[index show edit update destroy]
 
   # GET /addresses
   def index

@@ -13,13 +13,13 @@
           i.fa.fa-newspaper
           |&nbsp;
           = t('sidebar.articles')
-
-    li.nav-item
-      = link_to admin_users_path do
-        . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
-          i.fa.fa-users
-          |&nbsp;
-          = t('sidebar.users')
+    - if administrator?
+      li.nav-item
+        = link_to admin_users_path do
+          . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
+            i.fa.fa-users
+            |&nbsp;
+            = t('sidebar.users')
 br
 hr.admin-links
 
