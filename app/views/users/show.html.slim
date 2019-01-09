@@ -18,14 +18,14 @@
       - unless @user.fake_email?
         = @user.email
       br
-
+  br
   .row
     .col-sm-12
       - if @subscriptions.any?
 
         .table-responsive
-          table.table.table-striped.table-bordered.table-hover
-            thead
+          table.table.table-bordered.table-hover.table-sm
+            thead.thead-dark
               tr
                 th = t('subscription.type')
                 th = t('subscription.id')
@@ -53,7 +53,7 @@
     .row
       .col-sm-12
         table.table.table-striped.table-bordered.table-hover.table-sm
-          thead
+          thead.thead-dark
             tr
               th Kommentar til
               th Oprettet

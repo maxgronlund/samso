@@ -1,0 +1,39 @@
+p#notice = notice
+
+p
+  strong Start date:
+  = @service_functions_printed_ad.start_date
+p
+  strong Number of columns:
+  = @service_functions_printed_ad.number_of_columns
+p
+  strong Body:
+  = @service_functions_printed_ad.body
+p
+  strong Comment:
+  = @service_functions_printed_ad.comment
+p
+  strong Name:
+  = @service_functions_printed_ad.name
+p
+  strong Address:
+  = @service_functions_printed_ad.address
+p
+  strong Zipp code:
+  = @service_functions_printed_ad.zipp_code
+p
+  strong City:
+  = @service_functions_printed_ad.city
+p
+  strong Email:
+  = @service_functions_printed_ad.email
+p
+  strong Phone:
+  = @service_functions_printed_ad.phone
+p
+  strong Contact person:
+  = @service_functions_printed_ad.contact_person
+
+=> link_to 'Edit', edit_service_functions_printed_ad_path(@service_functions_printed_ad)
+'|
+=< link_to 'Back', service_functions_printed_ads_path

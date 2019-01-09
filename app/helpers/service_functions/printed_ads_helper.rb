@@ -1,0 +1,2 @@
+module ServiceFunctions::PrintedAdsHelper
+end

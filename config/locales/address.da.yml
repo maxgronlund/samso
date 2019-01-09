@@ -16,8 +16,8 @@ da:
     address: Adresse
     city: By
     zipp_code: Postnummer
-    primary_address: Abonnements addresse
-    temporary_address: Midlertidig abonnements adresse
+    primary_address: Forsendelses addresse
+    temporary_address: Midlertidig forsendelses adresse
     new: Opret ny adresse
     edit: Rediger adresse
     end_date_hint: Minimum to uger fra start dato

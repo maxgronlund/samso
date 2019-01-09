@@ -13,8 +13,8 @@ a href="#{@user_url}"
   = @user.name
 br
 br
+- primary_address = @subscription.primary_address
 - if @address.temporary?
-  - primary_address = @subscription.primary_address
   b Abonnentens adresse
   br
   = primary_address.name

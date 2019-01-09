@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :ads
-  resources :addresses
+  # resources :ads
+  # resources :addresses
   resources :comments
   namespace :api do
     namespace :v1 do
@@ -83,6 +83,11 @@ Rails.application.routes.draw do
       resources :users do
         resources :user_subscriptions
       end
+    end
+
+
+    namespace :service_functions do
+      resources :printed_ads
     end
 
     resources :admin, only: %i[index]

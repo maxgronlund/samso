@@ -1,0 +1,10 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+- session[:stored_path] = request.path
+
+.container-fluid
+  .row.mt-20
+    .col-sm-12
+      h3 = t('printed_ad.create')
+      = t('printed_ad.dead_line', date_time: l(DateTime.now.beginning_of_week + 8.day + 9.hours))
+
+      == render 'form'

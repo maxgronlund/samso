@@ -23,9 +23,9 @@ da:
 
 
   advertisement:
-    index: Annnoncer
-    edit: Rediger annonce
-    name: Annonce
+    index: Online annoncer
+    edit: Rediger online annonce
+    name: Online annonce
     bar: Bar
     title: Overskrift
     views: Visninger
@@ -34,7 +34,7 @@ da:
     end_date: Slutdato
     active: Aktive
     featured: Fremhævet
-    new: Opret annonce
+    new: Opret online annonce
 
   admin/advertisement:
-    index: Annoncer
+    index: Online annoncer
