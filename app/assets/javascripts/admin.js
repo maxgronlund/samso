@@ -11,7 +11,6 @@
 // about supported directives.
 //
 // require tether.min
-//= require jquery
 //= require rails-ujs
 //= require turbolinks
 // require admin/Sortable
