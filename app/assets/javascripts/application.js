@@ -11,8 +11,6 @@
 // about supported directives.
 //
 
-//= require jquery3
-//= require bootstrap
 //= require turbolinks
 //= require rails-ujs
 //= require jquery.fancybox
