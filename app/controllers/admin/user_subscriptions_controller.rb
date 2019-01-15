@@ -26,7 +26,7 @@ class Admin::UserSubscriptionsController < AdminController
   end
 
   def edit
-    subscription
+    ap subscription
   end
 
   def update

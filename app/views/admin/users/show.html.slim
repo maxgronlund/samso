@@ -59,7 +59,7 @@ nav aria-label="breadcrumb"
                         admin_subscription_delivery_addresses_path(subscription),
                         class: 'btn btn-light btn-sm'
                       = link_to t('subscription.edit_dates'),
-                        edit_admin_user_user_subscription_path(@user, subscription),
+                        edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
                         class: 'btn btn-light btn-sm'
 
 
