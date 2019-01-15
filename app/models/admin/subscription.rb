@@ -60,9 +60,9 @@ class Admin::Subscription < ApplicationRecord
 
   def self.new_subscription_id
     subscription = last
-    return '1' if subscription.nil?
+    return '900000' if subscription.nil?
 
-    (subscription.subscription_id.to_i + 1).to_s
+    (900000 + count + 1).to_s
   end
 
   def imported_subscription?
@@ -81,6 +81,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def self.find(id)
+    return nil if id.blank?
     find_by(subscription_id: id).presence || find_by(subscription_id: id + '-legacy')
   end
 

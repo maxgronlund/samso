@@ -10,7 +10,7 @@ class Admin::SubscriptionType < ApplicationRecord
 
   scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }
-  scope :free, -> { internal.where(free: true) }
+  scope :free, -> { where(free: true) }
   scope :payed, -> { internal.where(free: false) }
   scope :internal, -> { where(identifier: IMPORTED) }
 

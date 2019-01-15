@@ -203,13 +203,10 @@ class User < ApplicationRecord
     end
 
     def create_or_update_subscription( options = {})
-      ap 'create_or_update_subscription'
-      ap options
       user = User.find_by(legacy_id: options[:legacy_id])
       return if user.nil?
       return if Admin::Subscription.find(options[:Abonnr]).present?
       return if options[:Abon_periode].to_i.zero?
-
       subscription = first_or_initialize_subscription(user, options)
       subscription.start_date = options[:Oprettet]
       subscription.end_date = subscription_end_date(options)
@@ -238,10 +235,11 @@ class User < ApplicationRecord
 
     def first_or_initialize_subscription(user, options)
       type_id = subscription_type_id(options)
+      subscription_id = options[:Abonnr].presence || Admin::Subscription.new_subscription_id
       user
         .subscriptions
         .where(
-          subscription_id: options[:Abonnr],
+          subscription_id: subscription_id,
           subscription_type_id: type_id
         )
         .first_or_initialize
