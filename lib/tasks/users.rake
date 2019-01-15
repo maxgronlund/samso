@@ -10,4 +10,11 @@ namespace :users do
       end
     end
   end
+
+  desc 'reset legacy_subscription_id s'
+  task reset_legacy_subscription_ids: :environment do
+    User
+      .where(legacy_subscription_id: [100000001, 100000002])
+      .update_all(legacy_subscription_id: nil)
+  end
 end

@@ -19,9 +19,6 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def type_name
-    return 'Imported' if subscription_type.nil?
-    return 'Imported' if subscription_type.title.to_s.empty?
-
     subscription_type.title
   end
 
@@ -51,31 +48,6 @@ class Admin::Subscription < ApplicationRecord
   end
   alias :set_address :primary_address
 
-  # Admin::Subscription.last_subscription
-  def self.last_subscription
-    order(:subscription_id)
-      .where
-      .not(subscription_id: nil)
-      .last
-  end
-
-  # Admin::Subscription.last_subscription_id
-  def self.last_subscription_id
-    last_subscription.nil? ? 10000000 : last_subscription.subscription_id
-  end
-
-  # Admin::Subscription.new_safe_subscription_id
-  def self.new_safe_subscription_id
-    new_id = last_subscription_id + 1
-    new_id += 1 while subscription_exists?(new_id)
-    new_id
-  end
-
-  # Admin::Subscription.subscription_exists?(id)
-  def self.subscription_exists?(subscription_id)
-    where(subscription_id: subscription_id.to_s).any?
-  end
-
   def copy_from_address(address)
     primary_address
       .update(
@@ -84,6 +56,32 @@ class Admin::Subscription < ApplicationRecord
         zipp_code: address.zipp_code,
         city: address.city
       )
+  end
+
+  def self.new_subscription_id
+    subscription = last
+    return '1' if subscription.nil?
+
+    (subscription.subscription_id.to_i + 1).to_s
+  end
+
+  def imported_subscription?
+    self[:subscription_id].include?('-legacy')
+  end
+
+  def subscription_id
+    return self[:subscription_id].delete('-legacy') if imported_subscription?
+
+    self[:subscription_id]
+  end
+
+  def self.legacy_subscriptions
+    where('subscription_id ILIKE :subscription_id', subscription_id: '%-legacy')
+    .order(:subscription_id)
+  end
+
+  def self.find(id)
+    find_by(subscription_id: id).presence || find_by(subscription_id: id + '-legacy')
   end
 
   private

@@ -122,4 +122,12 @@ $ Admin::BlogPost.import force: true
 start elasticsearch
 $ elasticsearch
 
+* maintance
+heroku maintenance:on --app samso
+heroku maintenance:off --app samso
+
+heroku config:set MAINTENANCE_PAGE_URL=//s3.amazonaws.com/samso-images/maintance.html
+
+
+
 

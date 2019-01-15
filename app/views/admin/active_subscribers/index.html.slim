@@ -37,7 +37,7 @@ br
 
             - if user.active_subscription?
               .green-text
-                = user.legacy_subscription_id
+                = user.subscription_id
             - elsif user.expired_subscriber?
               .red-text
                 = user.legacy_subscription_id

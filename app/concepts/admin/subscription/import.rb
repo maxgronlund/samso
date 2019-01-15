@@ -21,6 +21,9 @@ class Admin::Subscription < ApplicationRecord
         next if index.zero?
 
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
+
+        ap unescaped_row
+        next
         options = build_options(unescaped_row)
         next if options[:abonr].nil? || options[:abonr].empty?
 

@@ -35,9 +35,6 @@ class Admin::BlogModule < ApplicationRecord
   end
 
   def next_url(request_path, current_page)
-    ap 'next url'
-    ap current_page
-    ap request_path
     page = current_page.to_i + 1
     if show_all_categories
       return false if page * posts_pr_page >= Admin::BlogPost.count

@@ -19,7 +19,7 @@ da:
         post_page_id: Vis på side
 
   blog_post:
-    new: 'Nyt artikkel'
+    new: 'Ny artikkel'
     edit: 'Rediger artikkel'
     read_more: Læs mere
     next: Næste

@@ -85,7 +85,6 @@ Rails.application.routes.draw do
       end
     end
 
-
     namespace :service_functions do
       resources :printed_ads
     end

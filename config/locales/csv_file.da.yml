@@ -34,10 +34,10 @@ da:
     import_type: Type af import
     select_csv_file: Vælg CSV dokument
     new: Upload CSV dokument
-    index: CSV dokumenter
+    index: CSV dokumenter - Unicode (UTF-8)
     catogories: Kategorier
     economic: E-Conomics export
-    subscriptions: Abonnomenter
+    subscriptions: Abonnomenter (E-Conomics)
     users: Brugere
     comments: Komentarer
     file_url: URL

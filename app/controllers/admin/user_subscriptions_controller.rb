@@ -18,7 +18,7 @@ class Admin::UserSubscriptionsController < AdminController
       .subscriptions
       .new(subscription_params)
     subscription.subscription_type_id = subscription_type.id
-    subscription.subscription_id = Admin::Subscription.new_safe_subscription_id
+    subscription.subscription_id = Admin::Subscription.new_subscription_id
     subscription.save
     subscription.set_address
     @user.update(legacy_subscription_id: subscription.subscription_id)
