@@ -133,15 +133,13 @@ class User < ApplicationRecord
       end
     end
 
-
     def find_or_initialize_user(options = {})
       return User.new if options[:legacy_id].blank?
+
       User
         .where(legacy_id: options[:legacy_id])
         .first_or_initialize(legacy_id: options[:legacy_id])
-
     end
-
 
     def attach_role(user)
       return if user.roles.any?
@@ -186,6 +184,7 @@ class User < ApplicationRecord
 
     def postal_code_and_city(options = {})
       return [] if options[:postnr_by].blank?
+
       options[:postnr_by].split
     end
 
@@ -202,11 +201,12 @@ class User < ApplicationRecord
       end
     end
 
-    def create_or_update_subscription( options = {})
+    def create_or_update_subscription(options = {})
       user = User.find_by(legacy_id: options[:legacy_id])
       return if user.nil?
-      return if Admin::Subscription.find(options[:Abonnr]).present?
+      return if user.subscriptions.any?
       return if options[:Abon_periode].to_i.zero?
+
       subscription = first_or_initialize_subscription(user, options)
       subscription.start_date = options[:Oprettet]
       subscription.end_date = subscription_end_date(options)

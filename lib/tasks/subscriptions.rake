@@ -16,6 +16,16 @@ namespace :subscriptions do
     Address.where(addressable_type: 'Admin::Subscription').destroy_all
   end
 
+  desc 'delete dublets'
+  task delete_dublets: :environment do
+    User.find_each do |user|
+      next unless user.subscriptions.any?
+      next unless user.subscriptions.count > 1
+      subscriptions = user.subscriptions - [user.subscriptions.last]
+      subscriptions.map(&:destroy)
+    end
+  end
+
   def add_address(subscription)
     user = subscription.user
     address_options = user_address_options(user)
