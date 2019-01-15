@@ -125,7 +125,7 @@ class User < ApplicationRecord
 
   def free_subscription?
     free_subscription_id = Admin::SubscriptionType.free_subscription.id
-    valid_subscriptions.where(subscription_type_id: free_subscription_id)
+    valid_subscriptions.where(subscription_type_id: free_subscription_id).any?
   end
 
   def active_subscription?
@@ -175,6 +175,11 @@ class User < ApplicationRecord
 
   def fake_password?
     password_digest.include?(FAKE_PASSWORD)
+  end
+
+  def real_email?
+    return false if email.blank?
+    !fake_email?
   end
 
   def fake_email?

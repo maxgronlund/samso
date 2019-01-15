@@ -10,7 +10,7 @@ nav aria-label="breadcrumb"
 .row
   .col-sm-4
     h3= @user.name
-    = mail_to @user.email if @user.email.present?
+    = mail_to @user.email if @user.email.real_email?
     br
 
     .btn-group.mt-10
