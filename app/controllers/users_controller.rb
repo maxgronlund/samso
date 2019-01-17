@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user.validate_address = session[:print_version]
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
-    @user.legacy_subscription_id = Admin::Subscription.new_safe_subscription_id
+    @user.legacy_subscription_id = Admin::Subscription.new_subscription_id
     if @user.save
       session.delete :print_version
       @user.roles.create(permission: 'member')

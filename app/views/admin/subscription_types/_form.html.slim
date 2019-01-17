@@ -8,6 +8,7 @@
     = f.input :internet_version
     = f.input :print_version
     = f.input :price
+    = f.input :identifier, collection: ['internal', 'imported']
     = f.hidden_field :locale, value: I18n.locale.to_s
     .row
       .col-sm-4

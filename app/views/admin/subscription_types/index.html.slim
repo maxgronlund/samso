@@ -13,6 +13,7 @@
     thead.thead-dark
       tr
         th = t('activerecord.attributes.admin/subscription_type.title')
+        th = t('subscription_type.creation_method')
         th = t('activerecord.attributes.admin/subscription_type.duration')
         th = t('activerecord.attributes.admin/subscription_type.internet_version')
         th = t('activerecord.attributes.admin/subscription_type.print_version')
@@ -26,6 +27,7 @@
       - @admin_subscription_types.each do |admin_subscription_type|
         tr
           td = admin_subscription_type.title
+          td = admin_subscription_type.identifier
           td = admin_subscription_type.duration
           td = admin_subscription_type.internet_version ? '√' : ''
           td = admin_subscription_type.print_version ? '√' : ''

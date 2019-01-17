@@ -28,4 +28,7 @@ en:
     new: New subscription type
     edit: Edit subscription type
     index: Subscription types
+    imported: Imported
+    internal: Created
+    creation_method: Creation method
 
