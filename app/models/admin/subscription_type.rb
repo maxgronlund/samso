@@ -13,7 +13,7 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :free, -> { where(free: true) }
   scope :payed, -> { internal.where(free: false) }
   scope :imported, -> { where(identifier: IMPORTED) }
-  scope :internal, -> { where(identifier: INTERNAL) }
+  scope :internal, -> { where(identifier: INTERNAL, free: false).order(:position) }
 
   def self.for_subscription
     internal.active.locale.payed.order(:position)
