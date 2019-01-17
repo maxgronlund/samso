@@ -77,7 +77,8 @@ class Admin::SubscriptionTypesController < AdminController
       :active,
       :duration,
       :position,
-      :free
+      :free,
+      :identifier
     )
   end
 end
