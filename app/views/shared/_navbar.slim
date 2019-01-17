@@ -55,6 +55,18 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                   = link_to blog.title,
                     page_url(page),
                     class: 'menu-link'
+        .row
+          .col-sm-12
+            hr
+        .row
+          .col-sm-3
+            = link_to 'Send læserbrev', '#'
+          .col-sm-3
+            = link_to 'Betingelser', '#'
+          .col-sm-3
+            = link_to 'Kontakt', '#'
+          .col-sm-3
+            = link_to 'Annoncer', '#'
 
 
     / = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'

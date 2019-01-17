@@ -128,6 +128,9 @@ heroku maintenance:off --app samso
 
 heroku config:set MAINTENANCE_PAGE_URL=//s3.amazonaws.com/samso-images/maintance.html
 
+* DNS
+heroku domains --app samso
+
 
 
 

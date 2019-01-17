@@ -6,7 +6,7 @@
   hr
 
   = form_tag('/subscriptions', method: :post)
-    - Admin::SubscriptionType.for_subscription.each_with_index do |subscription_type, index|
+    - Admin::SubscriptionType.internal.each_with_index do |subscription_type, index|
       = label_tag do
         - if index == 0
           = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
