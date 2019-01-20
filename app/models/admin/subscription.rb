@@ -23,10 +23,14 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def expired?
+    return false if end_date.nil?
+
     end_date < Time.zone.today
   end
 
   def period_valid?
+    return true if end_date.nil? || start_date.nil?
+
     start_date < Time.zone.today && end_date > Time.zone.today
   end
 
@@ -69,20 +73,31 @@ class Admin::Subscription < ApplicationRecord
     self[:subscription_id].include?('-legacy')
   end
 
+  def economic_imported_subscription?
+    self[:subscription_id].include?('-economic-import')
+  end
+
   def subscription_id
     return self[:subscription_id].delete('-legacy') if imported_subscription?
+    return self[:subscription_id].delete('-economic-import') if economic_imported_subscription?
 
     self[:subscription_id]
   end
 
   def self.legacy_subscriptions
     where('subscription_id ILIKE :subscription_id', subscription_id: '%-legacy')
-    .order(:subscription_id)
+      .order(:subscription_id)
+  end
+
+  def self.economic_imported_subscriptions
+    where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-import')
+      .order(:subscription_id)
   end
 
   def self.find(id)
     return nil if id.blank?
-    find_by(subscription_id: id).presence || find_by(subscription_id: id + '-legacy')
+
+    find_by(subscription_id: id).presence || find_by(subscription_id: id + '-legacy') || find_by(subscription_id: id + '-economic-import')
   end
 
   private

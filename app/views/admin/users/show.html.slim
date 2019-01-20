@@ -27,9 +27,11 @@ nav aria-label="breadcrumb"
     = render 'shared/address', address: @user.address
     = link_to 'Adresseændring', edit_admin_user_path(@user)
 
-.row.mt-20
-  .col-sm-12
-    - if @subscriptions.any?
+- if @subscriptions.any?
+  hr
+  h5 Abonnoment
+  .row.mt-20
+    .col-sm-12
       .table-responsive
         table.table.table-striped.table-bordered.table-hover.table-sm
           thead.thead-dark
@@ -50,7 +52,9 @@ nav aria-label="breadcrumb"
                 td
                   - if subscription.start_date.present?
                     = l subscription.start_date
-                td = l subscription.end_date
+                td
+                  - if subscription.end_date.present?
+                    = l subscription.end_date
                 td = subscription.expired? ? 'Udløbet' : 'Gyldigt'
                 th
                   .pull-right
@@ -61,7 +65,21 @@ nav aria-label="breadcrumb"
                       = link_to t('subscription.edit_dates'),
                         edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
                         class: 'btn btn-light btn-sm'
-
-
-
-
+- if @user.sign_in_ips.any?
+  hr
+  h5 IP addresser brugt de sidste to uger
+  .row.mt-20
+    .col-sm-12
+      .table-responsive
+        table.table.table-striped.table-bordered.table-hover.table-sm
+          thead.thead-dark
+            tr
+              th IP
+              th Dato
+              th Gange logget ind
+          tbody
+            - @user.sign_in_ips.order(sign_in_at: :desc).each do |sign_in_ip|
+              tr
+                td = sign_in_ip.ip.to_s
+                td = l sign_in_ip.sign_in_at
+                td = sign_in_ip.count

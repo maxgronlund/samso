@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_081053) do
+ActiveRecord::Schema.define(version: 2019_01_20_202053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_081053) do
     t.string "address_type", default: "primary_address"
     t.date "start_date"
     t.date "end_date"
+    t.string "country", default: "Danmark"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
@@ -343,6 +344,16 @@ ActiveRecord::Schema.define(version: 2019_01_11_081053) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admin_sign_in_ips", force: :cascade do |t|
+    t.inet "ip"
+    t.datetime "sign_in_at"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "count", default: 1
+    t.index ["user_id"], name: "index_admin_sign_in_ips_on_user_id"
+  end
+
   create_table "admin_subscription_modules", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -610,10 +621,12 @@ ActiveRecord::Schema.define(version: 2019_01_11_081053) do
     t.integer "blog_posts_count", default: 0
     t.integer "e_paper_tokens_count"
     t.boolean "gdpr_accepted", default: false
+    t.integer "sign_in_ips_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admin_sign_in_ips", "users"
   add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "e_paper_tokens", "users"

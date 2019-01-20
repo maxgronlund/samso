@@ -63,6 +63,21 @@ class User < ApplicationRecord
       @user.save
     end
 
+    def update_login_stats(request)
+      @user.update_attributes(
+        sign_in_count: @user.sign_in_count + 1,
+        last_sign_in_at: @user.current_sign_in_at,
+        current_sign_in_at: Time.zone.now.to_datetime,
+        last_sign_in_ip: @user.current_sign_in_ip,
+        current_sign_in_ip: request.remote_ip
+      )
+      sign_in_ip_service.store_sign_in_ip(@user, request)
+    end
+
+    def sign_in_ip_service
+      @sign_in_ip_service ||= Admin::SignInIp::Service
+    end
+
     def self.titleize_name(options)
       return if options[:name].nil?
 

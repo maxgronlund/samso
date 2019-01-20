@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       flash.now.alert = t('please_confirm_your_account')
       render 'new'
     elsif user && user.authenticate(params[:password])
-      store_stats(user)
+      update_login_stats(user)
       signin_user(user)
     else
       set_menu
@@ -43,13 +43,7 @@ class SessionsController < ApplicationController
     params.permit!
   end
 
-  def store_stats(user)
-    user.update_attributes(
-      sign_in_count: user.sign_in_count + 1,
-      last_sign_in_at: user.current_sign_in_at,
-      current_sign_in_at: Time.zone.now.to_datetime,
-      last_sign_in_ip: user.current_sign_in_ip,
-      current_sign_in_ip: request.remote_ip
-    )
+  def update_login_stats(user)
+    User::Service.new(user).update_login_stats(request)
   end
 end

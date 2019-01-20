@@ -1,8 +1,13 @@
 == render 'shared/admin_links', selected: 'users'
+.btn-group
+  = link_to t('user.all'), admin_users_path, class: 'btn btn-light btn-sm'
+  = link_to t('user.active_subscribers'), admin_active_subscribers_path, class: 'btn btn-light btn-sm'
+  = link_to t('user.many_sign_in_ips'), admin_sign_in_ips_path, class: 'btn btn-light btn-sm'
+br
+br
 .row
   .col-sm-6
     h3 = t('user.pluralized')
-    = link_to t('user.active_subscribers'), admin_active_subscribers_path
   .col-sm-6
     .pull-right
       = @user_count
@@ -16,8 +21,6 @@
     .col-sm-6
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
-        = link_to t('user.search.show_all'), admin_users_path, class: 'btn btn-light'
-
 br
 .table-responsive
   table.table.table-striped.table-bordered.table-hover.table-sm

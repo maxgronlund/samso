@@ -68,7 +68,7 @@ Things you may want to cover:
   $ heroku run --app samso rake db:seed
   $ heroku run --app samso rake blog_posts:update_layout
   $ heroku restart -a samso
-  $ heroku run --app samso rake pg_search:multisearch:rebuild[Admin::BlogPost]
+  $ heroku run --app samso rake pg_search:multisearch:rebuild[User]
 
 
   $ heroku addons:create heroku-postgresql:hobby-basic --app samso

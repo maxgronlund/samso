@@ -1,0 +1,25 @@
+== render 'shared/admin_links', selected: 'users'
+
+h2 Brugere
+h5 Logget ind fra mere end 5 forskellige IP adresser inden for de sidste 2 uger
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th Navn
+        th Email
+        th Gange logget ind
+
+
+
+    tbody
+      - @users.each do |user|
+        tr
+          td = link_to user.name, admin_user_path(user)
+          td = mail_to user.email
+          td
+            = link_to user.sign_in_ips_count, admin_user_path(user)
+            .pull-right
+              = link_to t('show'), admin_user_path(user), class: 'btn btn-light btn-sm'
+

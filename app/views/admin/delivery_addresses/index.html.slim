@@ -27,8 +27,12 @@
             tr
               td = @subscription.type_name
               td = @subscription.subscription_id
-              td = l @subscription.start_date
-              td = l @subscription.end_date
+              td
+                - if @subscription.start_date.present?
+                  = l @subscription.start_date
+              td
+                - if @subscription.end_date.present?
+                  = l @subscription.end_date
               td
                 = link_to t('subscription.edit_dates'),
                   edit_admin_user_user_subscription_path(@subscription.user, @subscription),

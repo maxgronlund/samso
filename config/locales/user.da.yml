@@ -70,3 +70,5 @@ da:
     have_to_fill: 'Skal udfyldes'
     update_address_on_subscription: Opdater forsendelses adresse på abonnement
     change_address: Adresseændring
+    many_sign_in_ips: Logget ind fra mange IP addresser
+    all: Alle brugere

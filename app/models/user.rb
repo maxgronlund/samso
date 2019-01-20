@@ -5,7 +5,14 @@ class User < ApplicationRecord
   paginates_per 50
   include PgSearch
   multisearchable against: %i[name email]
-  pg_search_scope :search_by_name_or_emai, against: %i[name email legacy_subscription_id]
+  pg_search_scope(
+    :search_by_name_or_emai,
+    against: %i[name email legacy_subscription_id],
+    associated_against: {
+      subscriptions: [:subscription_id],
+      addresses: [:zipp_code, :address, :city]
+    }
+  )
   has_secure_password
   attr_accessor :delete_avatar, :validate_address, :cancel_account_token, :update_subscription_address
   has_many :roles, dependent: :destroy
@@ -15,6 +22,7 @@ class User < ApplicationRecord
   has_many :gallery_images, class_name: 'Admin::GalleryImage'
   has_many :blog_posts, class_name: 'Admin::BlogPost'
   has_many :comments, dependent: :destroy
+  has_many :sign_in_ips, class_name: 'Admin::SignInIp', dependent: :destroy
   has_many(
     :addresses,
     as: :addressable,
@@ -203,6 +211,11 @@ class User < ApplicationRecord
 
   def signature
     self[:signature].presence || name
+  end
+
+  def self.economic_imported_users
+    where('legacy_subscription_id ILIKE :subscription_id', subscription_id: '%-economic-import')
+      .order(:legacy_subscription_id)
   end
 
   # def signature
