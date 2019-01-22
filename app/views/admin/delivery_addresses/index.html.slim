@@ -45,14 +45,14 @@
           .pull-right
             - if @subscription.period_valid?
               = link_to t('edit'),
-                edit_admin_subscription_delivery_address_path(@subscription, address),
+                edit_admin_subscription_delivery_address_path(@subscription.subscription_id, address),
                 class: 'btn btn-light'
         .col-sm-6
           - if @subscription.temporary_address.blank?
             .pull-right
                 - @subscription.period_valid?
                 = link_to t('subscription.new_temporary_delivery_address'),
-                  new_admin_subscription_delivery_address_path(@subscription),
+                  new_admin_subscription_delivery_address_path(@subscription.subscription_id),
                   class: 'btn btn-light'
           - else
             - temporary_address = @subscription.temporary_address
@@ -61,7 +61,7 @@
             .pull-right
               - if @subscription.period_valid?
                 = link_to t('delete'),
-                  admin_subscription_delivery_address_path(@subscription, temporary_address),
+                  admin_subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
                   data: { confirm: t('confirm') },
                   method: :delete,
                   class: 'btn btn-danger'

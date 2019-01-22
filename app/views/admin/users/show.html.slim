@@ -57,6 +57,7 @@ nav aria-label="breadcrumb"
                     = l subscription.end_date
                 td = subscription.expired? ? 'Udløbet' : 'Gyldigt'
                 th
+                  = subscription.subscription_id
                   .pull-right
                     .btn-group
                       = link_to t('subscription.delivery_address'),
