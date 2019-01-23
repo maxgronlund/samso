@@ -1,8 +1,9 @@
 class AccepedPaymentsController < ApplicationController
   def index
     ap params.permit!
-    ap params[:onpay_reference]
-    ap subscription = Admin::Subscription.find(params[:onpay_reference])
+    ap params
+    params[:onpay_reference]
+    subscription = Admin::Subscription.find(params[:onpay_reference])
     subscription.accepted!
     ap subscription.user
   end
