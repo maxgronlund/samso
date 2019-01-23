@@ -1,29 +1,16 @@
 .row
   .col-sm-6
-    /= simple_form_for [@user, @payment] do |f|
-    /  = f.error_notification
-    /  .form-inputs
-    /    = f.input :name
-    /    = f.input :address
-    /    = f.input :postal_code_and_city
-    /    = f.hidden_field :subscription_type_id, value: @subscription_type_id
-    /  .form-actions
-    /    .pull-right
-    /      = f.submit t('payment.continue'), class: 'btn btn-primary'
+
   .col-sm-6
     .pull-right
       .form-inputs
-        form action="https://betaling.wannafind.dk/paymentwindow/" method="post"
-          input name="shopid" type="hidden" value="2007010985569"
-          / input name="currency" type="hidden" value=("CURRENCY (DKK 208)")
-          input name="amount" type="hidden" value="200"
-          input name="orderid" type="hidden" value="16789"
-          input name="uniqueorderid" type="hidden" value="true"
-          input name="lang" type="hidden" value="da"
-          input name="protocol" type="hidden" value="1"
-          input name="paytype" type="hidden" value="creditcard"
-          input name="accepturl" type="hidden" value="http://f3b00a23.ngrok.io/da/acceped_payments"
-          input name="declineurl" type="hidden" value="http://f3b00a23.ngrok.io/da/declined_payments"
+        form action="https://onpay.io/window/v3/" method="post"
+          input name="onpay_gatewayid" type="hidden" value="#{@form_data[:onpay_gatewayid]}"
+          input name="onpay_currency" type="hidden" value="#{@form_data[:onpay_currency]}"
+          input name="onpay_amount" type="hidden" value="#{@form_data[:onpay_amount]}"
+          input name="onpay_reference" type="hidden" value="#{@form_data[:onpay_reference]}"
+          input name="onpay_hmac_sha1" type="hidden" value="#{@onpay_hmac_sha1}"
+          input name="onpay_accepturl" type="hidden" value="#{@form_data[:onpay_accepturl]}"
+          input name="onpay_declineurl" type="hidden" value="#{@form_data[:onpay_declineurl]}"
           input type="submit" value="#{t('payment.confirm')}" class="btn btn-primary"
 
-          /input type="#{t('payment.confirm')}" value="open paymentwindow" class="btn btn-primary"

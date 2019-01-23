@@ -152,6 +152,7 @@ class User < ApplicationRecord
   end
 
   def valid_subscriptions
+    ap subscriptions
     @valid_subscriptions ||=
       subscriptions
       .where('start_date <= :start_date', start_date: Date.today.beginning_of_day + 1.day)

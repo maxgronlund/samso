@@ -15,6 +15,10 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :imported, -> { where(identifier: IMPORTED) }
   scope :internal, -> { where(identifier: INTERNAL, free: false).order(:position) }
 
+  def price_in_cent
+    (price.presence || 0) * 100
+  end
+
   def self.for_subscription
     internal.active.locale.payed.order(:position)
   end

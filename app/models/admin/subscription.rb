@@ -13,9 +13,40 @@ class Admin::Subscription < ApplicationRecord
     dependent: :destroy
   )
 
+  PENDING = 'pending'.freeze
+  ACCEPTED = 'accepted'.freeze
+  DECLINED = 'declined'.freeze
+
+  scope :pending, -> { where(state: PENDING) }
+  scope :accepted, -> { where(state: ACCEPTED) }
+
+  def pending!
+    update(state: PENDING)
+  end
+
+  def pending?
+    state == PENDING
+  end
+
+  def accepted!
+    update(state: ACCEPTED)
+  end
+
+  def accepted?
+    state == ACCEPTED
+  end
+
+  def declined!
+    update(state: DECLINED)
+  end
+
+  def declined?
+    state == DECLINED
+  end
+
   def self.valid
     where('start_date <= :start_date', start_date: Date.today.beginning_of_day + 1.day)
-    .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
+      .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
   end
 
   def type_name
@@ -66,7 +97,7 @@ class Admin::Subscription < ApplicationRecord
     subscription = last
     return '900000' if subscription.nil?
 
-    (900000 + count + 1).to_s
+    (900000 + subscription.id + 1).to_s
   end
 
   def imported_subscription?
@@ -97,7 +128,19 @@ class Admin::Subscription < ApplicationRecord
   def self.find(id)
     return nil if id.blank?
 
-    find_by(subscription_id: id).presence || find_by(subscription_id: id + '-legacy') || find_by(subscription_id: id + '-economic-import')
+    plain(id).presence || legacy(id) || economic_import(id)
+  end
+
+  def self.plain(id)
+    find_by(subscription_id: id)
+  end
+
+  def self.legacy(id)
+    find_by(subscription_id: id + '-legacy')
+  end
+
+  def self.economic_import(id)
+    find_by(subscription_id: id + '-economic-import')
   end
 
   private
