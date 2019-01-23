@@ -46,8 +46,8 @@ class PaymentsController < ApplicationController
       onpay_currency: ENV['ONPAY_CURRENCY'],
       onpay_amount: amount,
       onpay_reference: subscription_id,
-      onpay_accepturl: 'https://97417ab2.ngrok.io/da/acceped_payments',
-      onpay_declineurl: 'https://97417ab2.ngrok.io/da/declined_payments'
+      onpay_accepturl: ENV['ONPAY_ACCEPTURL'],
+      onpay_declineurl: ENV['ONPAY_DECLINEURL']
     }
   end
 
@@ -67,6 +67,7 @@ class PaymentsController < ApplicationController
 
   # rubocop:disable Style/IfUnlessModifier
   def create
+    ap 'CREATE'
     @user = User.find(params[:user_id])
     # ActiveRecord::Base.transaction do
     #   create_subscription
