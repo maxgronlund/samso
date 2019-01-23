@@ -1,11 +1,9 @@
 class AccepedPaymentsController < ApplicationController
   def index
     ap params.permit!
-    ap params
-    params[:onpay_reference]
     subscription = Admin::Subscription.find(params[:onpay_reference])
     subscription.accepted!
-    ap subscription.user
+    redirect_to default_path(root_url)
   end
 
   def new
