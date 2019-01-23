@@ -14,7 +14,6 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
-    ap ENV['ONPAY_GATEWAY_ID']
     @landing_page      = admin_system_setup.landing_page
     @subscription_type = Admin::SubscriptionType.find(session[:subscription_type_id])
     @user              = User.find(params[:user_id])
@@ -51,16 +50,6 @@ class PaymentsController < ApplicationController
     }
   end
 
-  # def form_data
-  #   {
-  #     onpay_gatewayid: '2007010985569',
-  #     onpay_currency: 'DKK',
-  #     onpay_amount: '100',
-  #     onpay_reference: 'AF-847824',
-  #     onpay_accepturl: 'https://1a86f4f7.ngrok.io'
-  #   }
-  # end
-
   # GET /payments/1/edit
   def edit
   end
@@ -80,15 +69,7 @@ class PaymentsController < ApplicationController
   end
   # rubocop:enable Style/IfUnlessModifier
 
-  def go_to_page
-    url = session[:redirect_to]
-    if url.nil?
-      redirect_to root_path
-    else
-      session.delete :redirect_to
-      redirect_to url
-    end
-  end
+
 
   def create_subscription
     ap 'create_subscription'

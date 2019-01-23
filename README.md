@@ -51,6 +51,12 @@ Things you may want to cover:
 * Database initialization
   rake db:seed
 
+* Database dump
+  $ psql samso_development > samso_development
+
+* Database restore
+  $ psql samso_development < samso_development
+
 * Import categories as csv file and build pages for articles
   rake page:build
 
