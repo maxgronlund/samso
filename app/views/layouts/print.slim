@@ -18,7 +18,7 @@ html
         border: 1.25cm solid #FFF;
       }
       img {
-        width: 100%;
+        width: 50%;
         height: auto;
       }
       @media print {
@@ -32,3 +32,6 @@ html
   body
     page size="A4"
       = yield
+
+  javascript:
+    window.print();
