@@ -12,7 +12,7 @@
           edit_admin_blog_blog_post_path(blog, blog_post_id),
           class: 'btn btn-light btn-sm'
     - video_url = blog_post.build_video_url
-    - if !video_url.empty?
+    - if video_url.present?
       .video-container
         =  raw video_url
     - elsif post_module.image_present?(blog_post_id)
@@ -22,7 +22,7 @@
     h3 = blog_post.title
     = blog_post.signature
     = simple_format (blog_post.body)
-    = render 'shared/social_icons'
+    = render 'shared/social_icons', blog_post: blog_post
     - if blog_post.enable_comments?
       = render 'comments/index', comments: blog_post.comments, commentable: blog_post
 

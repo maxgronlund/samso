@@ -1,0 +1,11 @@
+p
+  = @blog_post.signature
+  '&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+  = l @blog_post.start_date
+
+= image_tag(@blog_post.image_url(:full_size)) if @blog_post.image_content_type.present?
+h1 = @blog_post.title
+b = @blog_post.teaser
+p = simple_format @blog_post.body
+/ - if post_module.image_present?(blog_post_id)
+/   = image_tag(@post_module.image_url(blog_post_id), class: 'img-fluid')

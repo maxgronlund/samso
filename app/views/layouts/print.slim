@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title
+      'Samso
+    css:
+      body {
+        background: rgb(204,204,204);
+      }
+      page[size="A4"] {
+        background: white;
+        width: 21cm;
+        min-height: 29.7cm;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 0.5cm;
+        box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        border: 1.25cm solid #FFF;
+      }
+      img {
+        width: 50%;
+        height: auto;
+      }
+      @media print {
+        body, page[size="A4"] {
+          margin: 0;
+          box-shadow: 0;
+        }
+      }
+
+
+  body
+    page size="A4"
+      = yield
+
+  javascript:
+    window.print();
