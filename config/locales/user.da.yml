@@ -29,6 +29,7 @@ da:
         address: Adresse
         postal_code_and_city: "Postnummer / By"
         free_subscription: Gratis abonnoment
+        subscript_to_news: Modtag nyhedsbrev
 
       role:
         permission: 'Adgangs rettigheder'

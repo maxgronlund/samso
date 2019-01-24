@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_095333) do
+ActiveRecord::Schema.define(version: 2019_01_24_084849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -623,6 +623,7 @@ ActiveRecord::Schema.define(version: 2019_01_23_095333) do
     t.integer "e_paper_tokens_count"
     t.boolean "gdpr_accepted", default: false
     t.integer "sign_in_ips_count", default: 0
+    t.boolean "subscript_to_news", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
