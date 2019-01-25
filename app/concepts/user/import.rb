@@ -264,7 +264,8 @@ class User < ApplicationRecord
           title: Admin::SubscriptionType::IMPORTED,
           duration: options[:Abon_periode].to_i,
           print_version: options[:bestil_abonavis],
-          internet_version: true
+          internet_version: true,
+          uuid: SecureRandom.uuid
         ).id
     end
   end

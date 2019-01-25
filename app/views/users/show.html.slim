@@ -22,7 +22,6 @@
   .row
     .col-sm-12
       - if @subscriptions.any?
-
         .table-responsive
           table.table.table-bordered.table-hover.table-sm
             thead.thead-dark
@@ -67,7 +66,20 @@
                 td
                   = simple_format comment.comment&.truncate(100)
                 td = show_comment(comment)
+
+  .row
+    .col-sm-12
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        thead.thead-dark
+          tr
+            th Faktura
+        tbody
+          - @subscriptions.each do |subscription|
+            tr
+              td = subscription.type_name
+            
   .row
     .col-sm-12
       .pull-right
         = link_to 'Slet konto', cancel_account_path(@user.id), class: 'btn btn-danger'
+

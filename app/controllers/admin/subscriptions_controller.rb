@@ -28,6 +28,7 @@ class Admin::SubscriptionsController < AdminController
   # POST /admin/subscriptions.json
   def create
     @admin_subscription = Admin::Subscription.new(admin_subscription_params)
+    @admin_subscription.uuid = SecureRandom.uuid
     if @admin_subscription.save
       redirect_to @admin_subscription
     else

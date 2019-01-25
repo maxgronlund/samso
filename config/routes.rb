@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       resources :advertisement_modules, only: %i[edit update]
       resources :users do
         resources :user_subscriptions
+        resources :invoices, only: %i[index show]
       end
     end
 
@@ -121,6 +122,7 @@ Rails.application.routes.draw do
     root to: "home#index"
     resources :users, except: %i[index] do
       resources :payments
+      resources :invoices, only: %i[index show]
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
