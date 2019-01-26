@@ -7,58 +7,53 @@
                 td.title
                   img src="https://s3.amazonaws.com/samso-images/Sams%C3%B8_posten_logo.png" style=("width:100%; max-width:300px;") /
                 td
-                  /= t('payment.transaction_id', transaction_id: @payment.transaction_id)
+                  = t('payment.transaction_id', transaction_id: @payment.transaction_id)
                   br/
-                  'Created: January 1, 2015
-                  br/
-                  'Due: February 1, 2015
+                  = t('payment.created_at', created_at: l(@payment.created_at))
+
         tr.information
           td colspan="2"
             table
               tr
                 td
-                  'Sparksuite, Inc.
+                  'Samsø Posten ApS.
                   br/
-                  '12345 Sunny Road
+                  'Industrivej 6, Tranebjerg
                   br/
-                  'Sunnyville, CA 12345
+                  '8305 Samsø
+                  br/
+                  'Tlf. 86 59 13 45
+                  br/
+                  'CVR. Nr. 26460816
+                  br/
+                  = mail_to 'info@samsoposten.dk', 'info@samsoposten.dk'
                 td
-                  'Acme Corp.
-                  br/
-                  'John Doe
-                  br/
-                  'john@example.com
+                  = @payment.user.name
+
+
         tr.heading
           td
-            'Payment Method
+            = t('payment.payment_method')
           td
-            'Check #
+            = t('payment.card_mask')
         tr.details
           td
-            'Check
+            = @payment.payment_method.capitalize
           td
-            '1000
+            = @payment.card_mask
         tr.heading
           td
-            'Item
+            = t('payment.subscription')
           td
-            'Price
+            = t('payment.price')
         tr.item
           td
-            'Website design
+            = @payment.payable_name
           td
-            '$300.00
-        tr.item
-          td
-            'Hosting (3 months)
-          td
-            '$75.00
-        tr.item.last
-          td
-            'Domain name (1 year)
-          td
-            '$10.00
+            = number_to_currency(@payment.amount, precision: 2)
+
         tr.total
           td
           td
-            'Total: $385.00
+            'Total:&nbsp;
+            = number_to_currency(@payment.amount, precision: 2)

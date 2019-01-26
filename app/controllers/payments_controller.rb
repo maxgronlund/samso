@@ -3,14 +3,14 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   # GET /payments.json
-  def index
-    @payments = Payment.all
-  end
+  # def index
+  #   @payments = Payment.all
+  # end
 
   # GET /payments/1
   # GET /payments/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /payments/new
   def new
@@ -58,10 +58,10 @@ class PaymentsController < ApplicationController
   end
 
   def onpay_accepturl
-    Rails.env.development? ? "https://33b108c9.ngrok.io/da/acceped_payments" : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? "https://c19e7fe3.ngrok.io/da/acceped_payments" : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? "https://33b108c9.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? "https://c19e7fe3.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
   end
 end
