@@ -1,18 +1,62 @@
-nav aria-label="breadcrumb"
-  ol.breadcrumb
-    li.breadcrumb-item
-      = link_to 'Brugerer', admin_users_path
-    li.breadcrumb-item
-      = link_to  @user.name, admin_user_path(@user)
-    li.breadcrumb-item.active aria-current="page"
-      'Friabonnoment'
-h3 Opret friabonnoment
-= simple_form_for [@user, @subscription],
-  url: admin_user_user_subscriptions_url(@user),
-  method: 'POST' do |f|
+.container
+  == render 'shared/admin_links', selected: ''
   .row
-    .col-sm-4
-      = f.input :start_date
-    .col-sm-4
-      = f.input :end_date
-  = f.submit t('save'), class: 'btn btn-light'
+    .col-sm-12
+      nav aria-label="breadcrumb"
+        ol.breadcrumb
+          li.breadcrumb-item
+            = link_to t('user.pluralized'), admin_users_path
+          li.breadcrumb-item
+            = link_to @subscription.user.name, admin_user_path(@subscription.user)
+          li.breadcrumb-item.active aria-current="page"
+            = t('new')
+
+  .row.justify-content-md-center
+    .col-md-auto.col-md-8
+      .card
+        h4.card-header Opret friabonnoment
+
+        .card-body
+          = simple_form_for [@user, @subscription],
+            url: admin_user_user_subscriptions_url(@user),
+            method: 'POST' do |f|
+            .row
+              .col-sm-6
+                = f.input :start_date
+              .col-sm-6
+                = f.input :end_date
+            .pull-right
+              = f.submit t('save'), class: 'btn btn-primary'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ nav aria-label="breadcrumb"
+/   ol.breadcrumb
+/     li.breadcrumb-item
+/       = link_to 'Brugerer', admin_users_path
+/     li.breadcrumb-item
+/       = link_to  @user.name, admin_user_path(@user)
+/     li.breadcrumb-item.active aria-current="page"
+/       'Friabonnoment'
+/ h3 Opret friabonnoment
+/ = simple_form_for [@user, @subscription],
+/   url: admin_user_user_subscriptions_url(@user),
+/   method: 'POST' do |f|
+/   .row
+/     .col-sm-4
+/       = f.input :start_date
+/     .col-sm-4
+/       = f.input :end_date
+/   = f.submit t('save'), class: 'btn btn-light'

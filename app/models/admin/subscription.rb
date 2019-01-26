@@ -50,13 +50,14 @@ class Admin::Subscription < ApplicationRecord
 
   def primary_address
     return user_address_copy if addresses.primary_address.blank?
+
     addresses.primary_address
   end
+  alias :set_address :primary_address
 
   def temporary_address
     addresses.find_by(address_type: Address::TEMPORARY_ADDRESS)
   end
-  alias :set_address :primary_address
 
   def copy_from_address(address)
     primary_address
@@ -66,6 +67,10 @@ class Admin::Subscription < ApplicationRecord
         zipp_code: address.zipp_code,
         city: address.city
       )
+  end
+
+  def free?
+    subscription_type.nil? ? true : subscription_type.free?
   end
 
   def self.new_subscription_id
@@ -103,7 +108,7 @@ class Admin::Subscription < ApplicationRecord
   def self.find(id)
     return nil if id.blank?
 
-    plain(id).presence || legacy(id) || economic_import(id)
+    plain(id) || legacy(id) || economic_import(id)
   end
 
   def self.plain(id)

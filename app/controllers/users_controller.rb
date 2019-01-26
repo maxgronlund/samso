@@ -44,6 +44,7 @@ class UsersController < ApplicationController
     @user.confirmation_sent_at = Time.zone.now
     @user.legacy_subscription_id = Admin::Subscription.new_subscription_id
     if @user.save
+      User::Service.new(@user).update_login_stats(request)
       session.delete :print_version
       @user.roles.create(permission: 'member')
       UserNotifierMailer.send_signup_email(@user.id).deliver
@@ -135,6 +136,7 @@ class UsersController < ApplicationController
       :delete_avatar,
       :signature,
       :update_subscription_address,
+      :subscribe_to_news,
       addresses_attributes: %i[id name address zipp_code city]
     )
   end

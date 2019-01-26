@@ -54,6 +54,7 @@ class User < ApplicationRecord
   def address
     addresses.first_or_create
   end
+  alias :primary_address :address
 
   def street_address
     address.address

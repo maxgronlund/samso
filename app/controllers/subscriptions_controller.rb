@@ -13,9 +13,9 @@ class SubscriptionsController < ApplicationController
     subscription_type = Admin::SubscriptionType.find(params[:subscription_type_id])
     print_version = subscription_type.print_version
     if user_signed_in?
-      redirect_to new_user_payment_path(current_user, print_version: print_version)
+      redirect_to new_user_payment_path(current_user)
     else
-      redirect_to new_user_path(print_version: print_version)
+      redirect_to new_user_path
     end
   end
   # rubocop:enable Metrics/AbcSize

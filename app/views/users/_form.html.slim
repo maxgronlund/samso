@@ -7,6 +7,8 @@
     - if @user.persisted? && @user.admin?
       = f.input :signature
     = f.input :email
+    = f.input :password, placeholder: '••••••••'
+    = f.input :password_confirmation, placeholder: '••••••••'
     = f.simple_fields_for :addresses do |address|
       = address.input :address
       = address.input :zipp_code,
@@ -17,8 +19,8 @@
         input_html: { class: 'city-name-autofill' }
     - if @user.active_subscription?
       = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
-    = f.input :password, placeholder: '••••••••'
-    = f.input :password_confirmation, placeholder: '••••••••'
+      = f.input :subscribe_to_news, as: :boolean
+
 
   .form-actions
     .pull-right

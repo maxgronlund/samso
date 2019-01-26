@@ -35,7 +35,7 @@
                   = l @subscription.end_date
               td
                 = link_to t('subscription.edit_dates'),
-                  edit_admin_user_user_subscription_path(@subscription.user, @subscription),
+                  edit_admin_user_user_subscription_path(@subscription.user, @subscription.subscription_id),
                   class: 'btn btn-light btn-sm'
       .row
         .col-sm-6
@@ -43,10 +43,9 @@
           h5 = t("address.#{address.address_type}")
           = render 'shared/address', address: address
           .pull-right
-            - if @subscription.period_valid?
-              = link_to t('edit'),
-                edit_admin_subscription_delivery_address_path(@subscription.subscription_id, address),
-                class: 'btn btn-light'
+            = link_to t('edit'),
+              edit_admin_subscription_delivery_address_path(@subscription.subscription_id, address),
+              class: 'btn btn-light'
         .col-sm-6
           - if @subscription.temporary_address.blank?
             .pull-right

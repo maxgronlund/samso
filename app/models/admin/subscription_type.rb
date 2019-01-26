@@ -19,6 +19,12 @@ class Admin::SubscriptionType < ApplicationRecord
     (price.presence || 0) * 100
   end
 
+  def free?
+    return true if price.nil? || price.zero?
+
+    free
+  end
+
   def self.for_subscription
     internal.active.locale.payed.order(:position)
   end

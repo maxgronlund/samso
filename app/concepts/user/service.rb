@@ -64,7 +64,7 @@ class User < ApplicationRecord
     end
 
     def update_login_stats(request)
-      @user.update_attributes(
+      @user.update(
         sign_in_count: @user.sign_in_count + 1,
         last_sign_in_at: @user.current_sign_in_at,
         current_sign_in_at: Time.zone.now.to_datetime,

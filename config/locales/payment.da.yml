@@ -18,5 +18,11 @@ da:
     admin: Administrator
     super_admin: Super administrator
     subscriber: Abonnent
+    transaction_id: "Faktura #: %{transaction_id}"
+    created_at: "Betalt: %{created_at}"
+    payment_method: Betalings metode
+    card_mask: Kort nummer
+    subscription: Abonnent
+    price: Pris
 
 

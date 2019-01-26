@@ -42,6 +42,15 @@ class Payment < ApplicationRecord
     payable_type.constantize.find_by(id: payable_id)
   end
 
+  def payable_name
+    case payable.class.name
+    when 'Admin::Subscription'
+      payable.type_name
+    else
+      ''
+    end
+  end
+
   def for
     case payable_type
     when 'Admin::Subscription'
@@ -52,13 +61,39 @@ class Payment < ApplicationRecord
   end
 
   def amount
-    ap transaction_info['']
     return 0 if transaction_info.size.zero?
     case payment_provider
     when PROVIDER_ONPAY
       return transaction_info['onpay_amount'].to_i * 0.01
     else
       0
+    end
+  end
+
+  def transaction_id
+    case payment_provider
+    when PROVIDER_ONPAY
+      return transaction_info['onpay_number']
+    else
+      ''
+    end
+  end
+
+  def payment_method
+    case payment_provider
+    when PROVIDER_ONPAY
+      return transaction_info['onpay_cardtype']
+    else
+      ''
+    end
+  end
+
+  def card_mask
+    case payment_provider
+    when PROVIDER_ONPAY
+      return transaction_info['onpay_cardmask']
+    else
+      ''
     end
   end
 end

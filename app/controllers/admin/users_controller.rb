@@ -101,9 +101,9 @@ class Admin::UsersController < AdminController
       :avatar,
       :password_confirmation,
       :delete_avatar,
-      :free_subscription,
       :signature,
       :update_subscription_address,
+      :subscribe_to_news,
       addresses_attributes: %i[id name address zipp_code city],
       roles_attributes: %i[permission id]
     )

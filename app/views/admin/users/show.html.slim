@@ -107,5 +107,5 @@ nav aria-label="breadcrumb"
               td = payment.for
               th
                 .pull-right
-                  = link_to t('show'), '#', class: 'btn btn-sm btn-light'
+                  = link_to t('show'), admin_user_invoice_path(@user, payment.uuid), class: 'btn btn-sm btn-light'
 

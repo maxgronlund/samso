@@ -22,7 +22,7 @@
         .card-body
           p#notice = notice
           = simple_form_for [:admin, @user, @subscription],
-            url: admin_user_user_subscription_path(@user, @subscription),
+            url: admin_user_user_subscription_path(@user, @subscription.subscription_id),
             method: 'PUT' do |f|
               .row
                 .col-sm-6

@@ -6,7 +6,10 @@
       .btn-group.mt-10
         = link_to t('edit'),
           edit_user_path(@user),
-          class: 'btn btn-primary btn-sm'
+          class: 'btn btn-light'
+        = link_to 'Slet konto',
+          cancel_account_path(@user.id),
+          class: 'btn btn-danger'
     .col-sm-4
     .col-sm-4
       .pull-right
@@ -75,11 +78,36 @@
             th Faktura
         tbody
           - @subscriptions.each do |subscription|
+            - next if subscription.free?
             tr
               td = subscription.type_name
-            
-  .row
-    .col-sm-12
-      .pull-right
-        = link_to 'Slet konto', cancel_account_path(@user.id), class: 'btn btn-danger'
+
+  - if @user.payments.any?
+    hr
+    h5 Transaktioner
+    .row.mt-20
+      .col-sm-12
+        .table-responsive
+          table.table.table-striped.table-bordered.table-hover.table-sm
+            thead.thead-dark
+              tr
+                th Id
+                th Dato
+                th Beløb
+                th Betaling for
+                th Faktura
+            -  @user.payments.order(:created_at).each do |payment|
+              tr
+                td = payment.id
+                td = l payment.created_at
+                td = number_to_currency(payment.amount, precision: 2)
+                td = payment.for
+                th
+                  .pull-right
+                    = link_to t('show'), '#', class: 'btn btn-sm btn-light'
+
+  / .row
+  /   .col-sm-12
+  /     .pull-right
+  /       = link_to 'Slet konto', cancel_account_path(@user.id), class: 'btn btn-danger'
 

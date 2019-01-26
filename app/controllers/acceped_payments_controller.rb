@@ -8,6 +8,7 @@ class AccepedPaymentsController < ApplicationController
     else
       update_subscription
       update_payment
+      remove_invalid_payments
       redirect_to default_path(root_url)
     end
   end
@@ -79,5 +80,9 @@ class AccepedPaymentsController < ApplicationController
       start_date: start_date,
       end_date: end_date,
     }
+  end
+
+  def remove_invalid_payments
+    # current_user.payments.where()
   end
 end

@@ -18,7 +18,6 @@ class PaymentsController < ApplicationController
       # do something
     end
     @subscription_type = Admin::SubscriptionType.find(session[:subscription_type_id])
-    session.delete :subscription_type_id
     @user = User.find(params[:user_id])
     payment =
       @user
@@ -44,6 +43,11 @@ class PaymentsController < ApplicationController
       onpay_accepturl: onpay_accepturl,
       onpay_declineurl: onpay_declineturl
     }
+  end
+
+  def destroy
+    @payment.destroy
+    redirect_to default_path(root_path)
   end
 
   private

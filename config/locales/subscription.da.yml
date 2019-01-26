@@ -12,7 +12,7 @@ da:
       admin/subscription:
         subscription_type_id: Abonnement
         start_date: Start dato
-        end_date: Slut date
+        end_date: Slut dato
         on_hold_date: På pause dato
 
     models:
