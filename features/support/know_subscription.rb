@@ -4,6 +4,7 @@ module KnowSubscriptionHelper
     FactoryBot
       .create(
         :subscription,
+        subscription_id: Admin::Subscription.new_subscription_id,
         user_id: user.id,
         subscription_type_id: subscription_type.id
       )
@@ -13,6 +14,7 @@ module KnowSubscriptionHelper
     FactoryBot
       .create(
         :subscription,
+        subscription_id: Admin::Subscription.new_subscription_id,
         user_id: user.id,
         subscription_type_id: subscription_type.id,
         start_date: Time.zone.now.to_datetime - 500.days,
