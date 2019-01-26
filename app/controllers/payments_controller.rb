@@ -14,85 +14,36 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
-    @landing_page      = admin_system_setup.landing_page
+    if session[:subscription_type_id].nil?
+      # do something
+    end
     @subscription_type = Admin::SubscriptionType.find(session[:subscription_type_id])
-    @user              = User.find(params[:user_id])
-
-    subscription_id = Admin::Subscription.new_subscription_id
-
-    @subscription =
+    session.delete :subscription_type_id
+    @user = User.find(params[:user_id])
+    payment =
       @user
-      .subscriptions
-      .pending
-      .first_or_initialize
-
-    @subscription.subscription_id = subscription_id
-    @subscription.start_date = Date.today
-    @subscription.end_date = Date.today + @subscription_type.duration.to_i.days
-    @subscription.subscription_type_id = @subscription_type.id
-    @subscription.save!
-
-    @form_data = form_data(@subscription_type.price_in_cent, subscription_id)
+      .payments
+      .create(
+        uuid: SecureRandom.uuid,
+        payable_type: 'Admin::Subscription',
+        payment_provider: Payment::PROVIDER_ONPAY
+      )
+    @form_data = form_data(@subscription_type.price_in_cent, payment.uuid)
 
     @onpay_hmac_sha1 =
       Payment::Service
       .mac_sha1(@form_data)
   end
 
-  def form_data(amount, subscription_id)
+  def form_data(amount, payment_uuid)
     {
       onpay_gatewayid:  ENV['ONPAY_GATEWAY_ID'],
       onpay_currency: ENV['ONPAY_CURRENCY'],
       onpay_amount: amount,
-      onpay_reference: subscription_id,
-      onpay_accepturl: ENV['ONPAY_ACCEPTURL'],
-      onpay_declineurl: ENV['ONPAY_DECLINEURL']
+      onpay_reference: payment_uuid,
+      onpay_accepturl: onpay_accepturl,
+      onpay_declineurl: onpay_declineturl
     }
-  end
-
-  # GET /payments/1/edit
-  def edit
-  end
-
-  # rubocop:disable Style/IfUnlessModifier
-  def create
-    ap 'CREATE'
-    @user = User.find(params[:user_id])
-    # ActiveRecord::Base.transaction do
-    #   create_subscription
-    #   create_payment
-    #   if @subscription.nil? || @payment.nil?
-    #     raise ActiveRecord::Rollback, 'something went wrong'
-    #   end
-    # end
-    go_to_page
-  end
-  # rubocop:enable Style/IfUnlessModifier
-
-
-
-  def create_subscription
-    ap 'create_subscription'
-    # subscription_type =
-    #   Admin::SubscriptionType.find(session[:subscription_type_id])
-    # @subscription = subscription_type.subscriptions.create!(
-    #   user_id: @user.id,
-    #   start_date: Date.today,
-    #   end_date:   Date.today + subscription_type.duration.to_i.days
-    # )
-    session.delete :subscription_type_id
-  end
-
-  def create_payment
-    # @payment =
-    #   @user
-    #   .payments
-    #   .create!(
-    #     name: @user.name,
-    #     address: payment_params[:address],
-    #     postal_code_and_city: payment_params[:postal_code_and_city],
-    #     subscription_id: @subscription.id
-    #   )
   end
 
   private
@@ -102,14 +53,11 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def payment_params
-    params.require(:payment).permit(
-      :name,
-      :address,
-      :postal_code_and_city,
-      :subscription_type_id,
-      :user_id
-    )
+  def onpay_accepturl
+    Rails.env.development? ? "https://33b108c9.ngrok.io/da/acceped_payments" : ENV['ONPAY_ACCEPTURL']
+  end
+
+  def onpay_declineturl
+    Rails.env.development? ? "https://33b108c9.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
   end
 end

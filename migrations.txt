@@ -53,3 +53,9 @@ rails g scaffold_module e_page title snippet
 rails g factory_bot:model Admin::BlogPost layout subtitle:text teaser:text body:text position:integer blog_id:integer free_content:boolean featured:boolean start_date:datetime end_date:datetime user_id:integer views:integer signature:string post_page_id:integer created_at:datetime updated_at:datetime  video_url:text enable_comments:boolean show_facebook_comments:boolean
 
 rails g scaffold service_functions/printed_ad start_date:date number_of_columns:integer body:text comment:text name address zipp_code city email phone contact_person
+
+
+
+rails g migration add_payable_to_payments payable references{polymorphic}
+
+

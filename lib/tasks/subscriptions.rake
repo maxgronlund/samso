@@ -1,13 +1,5 @@
 namespace :subscriptions do
 
-  desc 'add uuid to old subscriptions'
-  task add_uuid: :environment do
-    Admin::Subscription.find_each do |subscription|
-      subscription.update(uuid: SecureRandom.uuid)
-    end
-  end
-
-
   # usage
   # rake subscriptions:attach_address
   desc 'attach addresses to subscriptions'

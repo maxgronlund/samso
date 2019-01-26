@@ -5,7 +5,7 @@ class Admin::Subscription < ApplicationRecord
   attr_accessor :on_hold
   belongs_to :subscription_type, class_name: 'Admin::SubscriptionType', counter_cache: true
   belongs_to :user
-  has_many :payment
+  #has_many :payments, as: :payable
 
   has_many(
     :addresses,
@@ -13,35 +13,10 @@ class Admin::Subscription < ApplicationRecord
     dependent: :destroy
   )
 
-  PENDING = 'pending'.freeze
-  ACCEPTED = 'accepted'.freeze
-  DECLINED = 'declined'.freeze
+  validates :subscription_id, uniqueness: true
 
-  scope :pending, -> { where(state: PENDING) }
-  scope :accepted, -> { where(state: ACCEPTED) }
-
-  def pending!
-    update(state: PENDING)
-  end
-
-  def pending?
-    state == PENDING
-  end
-
-  def accepted!
-    update(state: ACCEPTED)
-  end
-
-  def accepted?
-    state == ACCEPTED
-  end
-
-  def declined!
-    update(state: DECLINED)
-  end
-
-  def declined?
-    state == DECLINED
+  def payments
+    Payment.where(payable_type: 'Admin::Subscription', payable_id: id)
   end
 
   def self.valid

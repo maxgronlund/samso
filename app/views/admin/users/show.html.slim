@@ -84,3 +84,28 @@ nav aria-label="breadcrumb"
                 td = sign_in_ip.ip.to_s
                 td = l sign_in_ip.sign_in_at
                 td = sign_in_ip.count
+
+- if @user.payments.any?
+  hr
+  h5 Transaktioner
+  .row.mt-20
+    .col-sm-12
+      .table-responsive
+        table.table.table-striped.table-bordered.table-hover.table-sm
+          thead.thead-dark
+            tr
+              th Id
+              th Dato
+              th Beløb
+              th Betaling for
+              th Faktura
+          -  @user.payments.order(:created_at).each do |payment|
+            tr
+              td = payment.id
+              td = l payment.created_at
+              td = number_to_currency(payment.amount, precision: 2)
+              td = payment.for
+              th
+                .pull-right
+                  = link_to t('show'), '#', class: 'btn btn-sm btn-light'
+

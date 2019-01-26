@@ -21,7 +21,6 @@ class Admin::UserSubscriptionsController < AdminController
     subscription.subscription_id = Admin::Subscription.new_subscription_id
     subscription.save
     subscription.set_address
-    subscription.uuid = SecureRandom.uuid
     @user.update(legacy_subscription_id: subscription.subscription_id)
     redirect_to admin_user_path(@user)
   end

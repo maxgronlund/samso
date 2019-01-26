@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_24_130538) do
+ActiveRecord::Schema.define(version: 2019_01_26_101138) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
@@ -391,8 +392,6 @@ ActiveRecord::Schema.define(version: 2019_01_24_130538) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "subscription_id", default: ""
-    t.string "state", default: "pending"
-    t.uuid "uuid"
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end
@@ -549,15 +548,16 @@ ActiveRecord::Schema.define(version: 2019_01_24_130538) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "postal_code_and_city"
-    t.integer "subscription_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "uuid"
-    t.index ["subscription_id"], name: "index_payments_on_subscription_id"
+    t.string "state", default: "pending"
+    t.hstore "transaction_info", default: {}, null: false
+    t.string "payment_provider"
+    t.string "payable_type"
+    t.bigint "payable_id"
+    t.index ["payable_type", "payable_id"], name: "index_payments_on_payable_type_and_payable_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
@@ -625,7 +625,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_130538) do
     t.integer "e_paper_tokens_count"
     t.boolean "gdpr_accepted", default: false
     t.integer "sign_in_ips_count", default: 0
-    t.boolean "subscript_to_news", default: false
+    t.boolean "subscribe_to_news", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
