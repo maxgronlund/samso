@@ -555,9 +555,8 @@ ActiveRecord::Schema.define(version: 2019_01_26_101138) do
     t.string "state", default: "pending"
     t.hstore "transaction_info", default: {}, null: false
     t.string "payment_provider"
+    t.integer "payable_id"
     t.string "payable_type"
-    t.bigint "payable_id"
-    t.index ["payable_type", "payable_id"], name: "index_payments_on_payable_type_and_payable_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
