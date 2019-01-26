@@ -104,7 +104,7 @@
                 td = payment.for
                 th
                   .pull-right
-                    = link_to t('show'), user_invoice_path(@user, payment.uuid), class: 'btn btn-sm btn-light'
+                    = link_to t('show'), user_invoice_path(@user, payment.uuid), class: 'btn btn-sm btn-light', "data-turbolinks" => false
 
   / .row
   /   .col-sm-12

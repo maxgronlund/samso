@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_menu
   before_action :set_default_page
 
+
   rescue_from ActionView::MissingTemplate do
     render_404
   end
