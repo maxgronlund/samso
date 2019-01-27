@@ -54,7 +54,15 @@ class User < ApplicationRecord
   def address
     addresses.first_or_create
   end
-  alias :primary_address :address
+  alias primary_address address
+
+  def pending_payments
+    payments.where(state: Payment::PENDING)
+  end
+
+  def destroy_pending_payments
+    pending_payments.map(&:destroy)
+  end
 
   def street_address
     address.address

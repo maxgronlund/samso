@@ -1,0 +1,14 @@
+= render 'shared/navbar', menu: @menu
+.container-fluid
+  .row.mt-20
+    .col-sm-12
+      h3 = @message.title
+      = simple_format @message.body
+      hr
+      .pull-right
+        .btn-group
+          = link_to t('back'), session[:stored_path].presence || root_path, class: 'btn btn-primary'
+          = link_to t('payment.show_invoice'),
+            user_invoice_path(@payment.user, @payment.uuid),
+            class: 'btn btn-light',
+            "data-turbolinks" => false

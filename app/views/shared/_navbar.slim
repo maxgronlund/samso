@@ -67,37 +67,3 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
             = link_to 'Kontakt', '#'
           .col-sm-3
             = link_to 'Annoncer', '#'
-
-
-    / = link_to @landing_page.menu_title, page_path(@landing_page), class: 'navbar-brand'
-    / button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
-    /   span.navbar-toggler-icon
-    / #navbarSupportedContent.collapse.navbar-collapse
-    /   ul.navbar-nav.mr-auto
-    /     - menu.each do |page|
-    /       = render 'shared/navbar_link',
-    /         link_name: page.menu_title,
-    /         link_url: page_path(page),
-    /         link: page_path(page),
-    /         top_page: top_page
-    /   .my-2.my-lg-0
-    /     ul.navbar-nav
-    /       - if  admin?
-    /         li.nav-item
-    /           = render 'shared/navbar_link',
-    /             link_name: t('page.edit'),
-    /             link_url: admin_page_path(@page)
-    /         li.nav-item
-    /           = render 'shared/navbar_link',
-    /             link_name: 'Admin',
-    /             link_url: admin_index_path
-    /       - if user_signed_in?
-    /         li.nav-item
-    /           = link_to t('user_account'), user_path(@current_user), class: 'nav-link'
-    /         li.nav-item
-    /           = link_to t('sign_out'), session_path(1), method: :delete, class: 'nav-link'
-    /       - else
-    /         li.nav-item
-    /           = link_to t('signup'), new_user_path, class: 'nav-link'
-    /         li.nav-item
-    /           = link_to t('login'), new_session_path, class: 'nav-link'

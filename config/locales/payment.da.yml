@@ -24,5 +24,6 @@ da:
     card_mask: Kort nummer
     subscription: Abonnent
     price: Pris
+    show_invoice: Vis faktura
 
 

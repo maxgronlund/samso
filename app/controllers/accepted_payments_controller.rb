@@ -1,16 +1,13 @@
-class AccepedPaymentsController < ApplicationController
+class AcceptedPaymentsController < ApplicationController
   def index
     params.permit!
+    raise and return if payment.nil?
+    raise and return unless payment.user == current_user
 
-    if payment.nil?
-      # show a something went wrong message
-      redirect_to default_path(root_url)
-    else
-      update_subscription
-      update_payment
-      remove_invalid_payments
-      redirect_to default_path(root_url)
-    end
+    update_subscription
+    update_payment
+    current_user.destroy_pending_payments
+    @message = Admin::SystemMessage.subscription_payment_completed
   end
 
   private
@@ -78,11 +75,7 @@ class AccepedPaymentsController < ApplicationController
       user_id: payment.user_id,
       subscription_type_id: subscription_type.id,
       start_date: start_date,
-      end_date: end_date,
+      end_date: end_date
     }
-  end
-
-  def remove_invalid_payments
-    # current_user.payments.where()
   end
 end

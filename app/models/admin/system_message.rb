@@ -113,4 +113,17 @@ class Admin::SystemMessage < ApplicationRecord
         To confirm please type the following code<br/><strong>{{CANCEL_ACCOUNT_TOKEN}}</strong><br/> in the text field below"
       )
   end
+
+  # usage Admin::SystemMessage.subscription_payment_completed
+  def self.subscription_payment_completed
+    @cancel_account_message =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'subscription_payment_completed')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'subscription_payment_completed',
+        title: 'Payment for subscription completed',
+        body: "bla bla"
+      )
+  end
 end

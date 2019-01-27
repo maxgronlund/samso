@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /da|en/ do
     resources :search, only: %i[index show]
-    resources :acceped_payments
+    resources :accepted_payments
     resources :advertisements
     resources :cancel_account, only: %i[show destroy]
     resources :declined_payments
