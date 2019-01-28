@@ -14,12 +14,11 @@ class AcceptedPaymentsController < ApplicationController
   private
 
   def update_subscriper
-    return if subscriper.nil?
-    subscriper.update(latest_online_payment: Time.zone.now)
+    subscriper.update(latest_online_payment: Time.zone.now) if subscriper.present?
   end
 
   def subscriper
-    payment.user.presence
+    subscription.user
   end
 
   def subscription
