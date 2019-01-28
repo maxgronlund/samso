@@ -2,7 +2,10 @@
 
 h2 Brugere
 h5 Logget ind fra mere end 5 forskellige IP adresser inden for de sidste 2 uger
-
+.row
+  .col-sm-4
+    == render 'admin/shared/user_navigation', selected: 'logged in from many ips'
+br
 .table-responsive
   table.table.table-striped.table-bordered.table-hover.table-sm
     thead.thead-dark

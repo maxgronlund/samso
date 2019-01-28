@@ -58,10 +58,10 @@ class PaymentsController < ApplicationController
   end
 
   def onpay_accepturl
-    Rails.env.development? ? "https://be5543a5.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? "https://f9db18a7.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? "https://be5543a5.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? "https://f9db18a7.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
   end
 end

@@ -6,11 +6,19 @@ class User < ApplicationRecord
   include PgSearch
   multisearchable against: %i[name email]
   pg_search_scope(
-    :search_by_name_or_emai,
+    :search_by_name_or_email,
     against: %i[name email legacy_subscription_id],
+    using: {
+      tsearch: {
+        dictionary: 'danish'
+      },
+      trigram: {
+        only: 'email'
+      }
+    },
     associated_against: {
       subscriptions: [:subscription_id],
-      addresses: [:zipp_code, :address, :city]
+      addresses: %i[zipp_code address city]
     }
   )
   has_secure_password
@@ -217,6 +225,8 @@ class User < ApplicationRecord
       .pluck(:subscription_type_id)
       .uniq
   end
+
+
 
   def signature
     self[:signature].presence || name

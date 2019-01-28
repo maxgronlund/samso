@@ -2,15 +2,25 @@ class AcceptedPaymentsController < ApplicationController
   def index
     params.permit!
     raise and return if payment.nil?
-    raise and return unless payment.user == current_user
+    # raise and return unless payment.user == current_user
 
     update_subscription
     update_payment
-    current_user.destroy_pending_payments
+    update_subscriper
+    @payment.user.destroy_pending_payments
     @message = Admin::SystemMessage.subscription_payment_completed
   end
 
   private
+
+  def update_subscriper
+    return if subscriper.nil?
+    subscriper.update(latest_online_payment: Time.zone.now)
+  end
+
+  def subscriper
+    payment.user.presence
+  end
 
   def subscription
     @subscription ||= payment.payable

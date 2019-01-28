@@ -1,30 +1,35 @@
-== render 'shared/admin_links', selected: ''
+- session[:stored_path] = request.path
+== render 'shared/admin_links', selected: 'users'
+.row
+  .col-sm-12
+
 .row
   .col-sm-6
-    h3 = t('user.active_subscribers')
+    h3 = t('user.pluralized')
   .col-sm-6
     .pull-right
       = @user_count
 
-= form_tag admin_active_subscribers_path, method: 'get' do
+
+= form_tag admin_latest_online_payments_path, method: 'get' do
   .row
     .col-sm-4
-      == render 'admin/shared/user_navigation', selected: 'active subscribers'
+      == render 'admin/shared/user_navigation', selected: 'latest online payments'
     .col-sm-6
       = text_field_tag :search, params[:search], class: 'form-control'
     .col-sm-2
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
 br
+
 .table-responsive
   table.table.table-striped.table-bordered.table-hover.table-sm
     thead.thead-dark
       tr
         th Navn
         th Email
-        th style='width:100px;'
-         = t('user.access_as')
-        th= t('subscription.active')
+        th = t('user.latest_online_payment')
+
         th style='min-width:155px;'
 
     tbody
@@ -33,17 +38,12 @@ br
         tr
           td = link_to user.name, admin_user_path(user)
           td = user.sanitized_email
-          td = user.role_names
           td
-
-            - if user.active_subscription?
-              .green-text
-                = user.subscription_id
-            - elsif user.expired_subscriber?
-              .red-text
-                = user.legacy_subscription_id
+            - if user.latest_online_payment.present?
+              = l user.latest_online_payment.presence || ''
             - else
-              = user.legacy_subscription_id
+              = l user.created_at
+
           td
             .pull-right
               .btn-group
@@ -59,10 +59,5 @@ br
                     data: { confirm: t('are_you_sure') },
                     method: :delete,
                     class: 'btn btn-danger btn-sm'
-
 br
 = paginate @users
-
-
-
-

@@ -9,10 +9,15 @@ class Admin::UsersController < AdminController
   # rubocop:disable Metrics/AbcSize
   def index
     @users =
-      if params[:search] && !params[:search].empty?
-        User.search_by_name_or_emai(params[:search]).order(:name).page params[:page]
+      if params[:search].present?
+        User
+          .search_by_name_or_email(params[:search])
+          .order(:latest_online_payment)
+          .page params[:page]
       else
-        User.order(:name).page params[:page]
+        User
+          .order(:latest_online_payment)
+          .page params[:page]
       end
     @selected = 'users'
     @user_count = User.count
@@ -51,10 +56,10 @@ class Admin::UsersController < AdminController
   def update
     ap user_params
     if @user.update(user_params)
-      redirect_to admin_user_path(@user)
       if Check.checked?(user_params[:update_subscription_address])
         update_subscription_address
       end
+      redirect_to default_path(admin_user_path(@user))
     else
       render :edit
     end

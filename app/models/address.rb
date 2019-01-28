@@ -2,7 +2,10 @@
 
 # generic address
 class Address < ApplicationRecord
-  belongs_to :addressable, polymorphic: true
+  belongs_to :addressable, polymorphic: true, touch: true
+
+#  include Elasticsearch::Model
+#  include Elasticsearch::Model::Callbacks
 
   PRIMARY_ADDRESS = 'primary_address'.freeze
   TEMPORARY_ADDRESS = 'temporary_address'.freeze

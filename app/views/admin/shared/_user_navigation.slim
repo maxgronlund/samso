@@ -1,0 +1,5 @@
+.form-inputs
+  = select_tag "admin_user_pages", options_for_select([ ["Alle", 'all'], ['Med gyldigt abonnement', 'active subscribers'], ['Nyeste betalinger via web', 'latest online payments'], ['Logget ind fra mange IP addresser', 'logged in from many ips'] ], selected), id: 'admin-user-pages', class: 'form-control select optional'
+
+javascript:
+  admin_user_pages_dropdown()

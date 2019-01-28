@@ -125,6 +125,18 @@ $ Admin::BlogPost.__elasticsearch__.refresh_index! √
 $
 $ Admin::BlogPost.import force: true
 
+
+User.__elasticsearch__.delete_index!
+User.__elasticsearch__.create_index!
+User.__elasticsearch__.refresh_index!
+User.import force: true
+
+Address.__elasticsearch__.delete_index!
+Address.__elasticsearch__.create_index!
+Address.__elasticsearch__.refresh_index!
+Address.import force: true
+
+
 start elasticsearch
 $ elasticsearch
 

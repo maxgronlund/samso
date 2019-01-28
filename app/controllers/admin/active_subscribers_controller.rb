@@ -5,7 +5,7 @@ class Admin::ActiveSubscribersController < AdminController
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def index
-    user_ids =
+    ap user_ids =
       Admin::Subscription
       .where('end_date > ?', Time.zone.today)
       .pluck(:user_id)
@@ -13,10 +13,10 @@ class Admin::ActiveSubscribersController < AdminController
     user_ids.uniq!
 
     @users =
-      if params[:search] && !params[:search].empty?
+      if params[:search].present?
         User
           .where(id: user_ids)
-          .search_by_name_or_emai(params[:search])
+          .search_by_name_or_email(params[:search])
           .order(:name)
           .page params[:page]
       else

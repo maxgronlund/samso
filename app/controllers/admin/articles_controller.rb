@@ -3,7 +3,7 @@
 class Admin::ArticlesController < AdminController
   def index
     @blog_pots =
-      if params[:search] && !params[:search].empty?
+      if params[:search].present?
         blog_posts
       else
         Admin::BlogPost.order('start_date DESC').page params[:page]

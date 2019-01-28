@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :comments
   namespace :api do
     namespace :v1 do
@@ -43,6 +44,7 @@ Rails.application.routes.draw do
       resources :gallery_images, only: %i[edit update]
       resources :gallery_modules, only: %i[edit update]
       resources :image_modules, only: %i[edit update]
+      resources :latest_online_payments, only: %i[index]
       resources :menu_contents do
         resources :menu_links
       end

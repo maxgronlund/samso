@@ -1,10 +1,8 @@
+- session[:stored_path] = request.path
 == render 'shared/admin_links', selected: 'users'
-.btn-group
-  = link_to t('user.all'), admin_users_path, class: 'btn btn-light btn-sm'
-  = link_to t('user.active_subscribers'), admin_active_subscribers_path, class: 'btn btn-light btn-sm'
-  = link_to t('user.many_sign_in_ips'), admin_sign_in_ips_path, class: 'btn btn-light btn-sm'
-br
-br
+
+.row
+
 .row
   .col-sm-6
     h3 = t('user.pluralized')
@@ -16,9 +14,11 @@ br
 
 = form_tag admin_users_path, method: 'get' do
   .row
+    .col-sm-4
+      == render 'admin/shared/user_navigation', selected: 'all'
     .col-sm-6
       = text_field_tag :search, params[:search], class: 'form-control'
-    .col-sm-6
+    .col-sm-2
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
 br

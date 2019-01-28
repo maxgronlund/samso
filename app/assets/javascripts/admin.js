@@ -22,3 +22,4 @@
 // require admin/init-metismenu
 // require admin/page
 //= require mdb
+//= require admin/users
