@@ -1,14 +1,19 @@
 = simple_form_for [:admin, @user], multipart: true do |f|
   = f.error_notification
   .form-inputs
-    = f.input :name
-    = f.input :email
-    / = f.input :free_subscription
+    .row
+      .col-sm-6
+        = f.input :name
+      .col-sm-6
+        = f.input :email
 
-    = f.input :password,
-      placeholder: '••••••••••'
-    = f.input :password_confirmation,
-      placeholder: '••••••••••'
+    .row
+      .col-sm-6
+        = f.input :password,
+          placeholder: '••••••••••'
+      .col-sm-6
+        = f.input :password_confirmation,
+          placeholder: '••••••••••'
     = f.input :signature
 
     - if current_user.can_edit?(@user)
@@ -18,9 +23,18 @@
 
 
     = f.simple_fields_for :addresses do |address|
-      = address.input :address
-      = address.input :zipp_code, input_html: { class: 'post-code-autofill-dk' }
-      = address.input :city, input_html: { class: 'city-name-autofill' }
+      .row
+        .col-sm-4
+          = address.input :address,
+          label: t('address.address')
+        .col-sm-4
+          = address.input :zipp_code,
+          label: t('address.zipp_code'),
+          input_html: { class: 'post-code-autofill-dk' }
+        .col-sm-4
+          = address.input :city,
+          label: t('address.city'),
+          input_html: { class: 'city-name-autofill' }
     - if @user.active_subscription?
       = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
   .form-actions

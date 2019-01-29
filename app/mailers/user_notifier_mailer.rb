@@ -38,4 +38,19 @@ class UserNotifierMailer < ApplicationMailer
       subject: @message.title
     )
   end
+
+  # send a welcome message to the user, pass in the user object that
+  # contains the user's email address
+  def welcome_message(user_id)
+    @user = User.find_by(id: user_id)
+    return if @user.nil?
+
+    @token = @user.reset_password_token
+    @name = @user.name
+    @message = Admin::SystemMessage.new_password_email
+    mail(
+      to: @user.email,
+      subject: @message.title
+    )
+  end
 end

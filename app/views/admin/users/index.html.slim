@@ -4,12 +4,15 @@
 .row
 
 .row
-  .col-sm-6
+  .col-sm-4
     h3 = t('user.pluralized')
-  .col-sm-6
+  .col-sm-5
+    = link_to t('user.create_printed_subscription'), new_admin_subscription_path, class: 'btn btn-light btn-sm'
+    = link_to t('user.create'), new_admin_user_path, class: 'btn btn-light btn-sm'
+  .col-sm-3
     .pull-right
-      = @user_count
-
+      = t('user.count', count: @user_count)
+  
 
 
 = form_tag admin_users_path, method: 'get' do
@@ -66,7 +69,6 @@ br
                     method: :delete,
                     class: 'btn btn-danger btn-sm'
 
-.pull-right
-  = link_to t('user.create'), new_admin_user_path, class: 'btn btn-primary'
+
 br
 = paginate @users

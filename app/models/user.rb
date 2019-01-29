@@ -22,7 +22,14 @@ class User < ApplicationRecord
     }
   )
   has_secure_password
-  attr_accessor :delete_avatar, :validate_address, :cancel_account_token, :update_subscription_address
+  attr_accessor(
+     :delete_avatar,
+     :validate_address,
+     :cancel_account_token,
+     :update_subscription_address,
+     :subscription_type,
+     :validate_email
+  )
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :e_paper_tokens, dependent: :destroy
@@ -49,12 +56,12 @@ class User < ApplicationRecord
   # # Validate the attached image is image/jpg, image/png, etc
   # validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
   # before_validation { avatar.clear if delete_avatar == '1' }
-  validates :email, uniqueness: true
-  validates :email, presence: true
+  # validates :email, uniqueness: true
+  # validates :email, presence: true
   validates :name, presence: true
   validates_confirmation_of :password
   # validates_with UserAddressValidator, if: :validate_subscription_address
-  # validates_with User::Validator
+  validates_with User::Validator
 
   FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze

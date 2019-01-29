@@ -1,5 +1,40 @@
-h1 New admin_subscription
+- session[:stored_path] = request.path
+== render 'shared/admin_links', selected: 'users'
+h3 = t('user.create_printed_subscription')
 
-== render 'form'
+= simple_form_for [:admin, @user],
+	multipart: true,
+	url: url_for(action: 'create', controller: 'admin/subscriptions'),
+	method: 'POST'do |f|
+  = f.error_notification
+  .form-inputs
+  	.row
+      .col-sm-6
+        = f.input :name
+      .col-sm-6
+        = f.input :email
+    / .row
+    /   .col-sm-6
+    /     = f.input :password,
+    /       placeholder: '••••••••••'
+    /   .col-sm-6
+    /     = f.input :password_confirmation,
+    /       placeholder: '••••••••••'   
 
-= link_to 'Back', admin_subscriptions_path
+    = f.simple_fields_for :addresses do |address|
+      .row
+        .col-sm-4
+          = address.input :address,
+          label: t('address.address')
+        .col-sm-4
+          = address.input :zipp_code,
+          label: t('address.zipp_code'),
+          input_html: { class: 'post-code-autofill-dk' }
+        .col-sm-4
+          = address.input :city,
+          label: t('address.city'),
+          input_html: { class: 'city-name-autofill' }
+    
+  .form-actions
+    .pull-right
+      = f.submit t('save'), class: 'btn btn-primary'

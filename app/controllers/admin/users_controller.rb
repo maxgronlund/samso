@@ -33,6 +33,7 @@ class Admin::UsersController < AdminController
   def new
     @user = User.new
     @user.roles.build
+    @user.addresses.build
   end
 
   # GET /admin/users/1/edit
@@ -54,7 +55,6 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
-    ap user_params
     if @user.update(user_params)
       if Check.checked?(user_params[:update_subscription_address])
         update_subscription_address
