@@ -1,0 +1,17 @@
+da:
+  printed_ad:
+    index: Anonncer til udskrifts side
+    create_new: Opret ny annonce til udskrift
+    edit: Rediger annonce til udskrift
+    image: Billed
+    image_hint: bliver skaleret til 390x140 pixels
+    title: Overskrift
+    body: Tekst
+    active: Aktiveret
+    active_hint: Kun aktive annoncer bliver vist
+    position: Position
+    position_hint: De to aktiverede annoncer med det højeste nummer bliver vist
+    impressions: Visninger
+    index_help: Kun de to øverste aktive annoncer bliver vist
+
+

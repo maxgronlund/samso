@@ -1,0 +1,43 @@
+== render 'shared/admin_links', selected: ''
+h3 = t('printed_ad.index')
+p = t('printed_ad.index_help')
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th
+        th
+        th = t('printed_ad.active')
+        th = t('printed_ad.position')
+        th = t('printed_ad.impressions')
+        th
+
+    tbody
+      - @admin_printed_ads.each do |admin_printed_ad|
+        tr
+          td = image_tag admin_printed_ad.image(:small)
+          td
+            h4 = admin_printed_ad.title
+            = simple_format admin_printed_ad.body
+          td = admin_printed_ad.active? ? '√' : ''
+          td = admin_printed_ad.position
+          td = admin_printed_ad.impressions
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'),
+                  admin_printed_ad,
+                  "data-turbolinks" => false,
+                  class: 'btn btn-light btn-sm'
+                = link_to t('edit'),
+                edit_admin_printed_ad_path(admin_printed_ad),
+                class: 'btn btn-light btn-sm'
+                = link_to t('delete'),
+                  admin_printed_ad, data: { confirm: 'Are you sure?' },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'
+
+br
+.pull-right
+  = link_to t('printed_ad.create_new'), new_admin_printed_ad_path, class: 'btn btn-light'

@@ -14,20 +14,38 @@ html
         display: block;
         margin: 0 auto;
         margin-bottom: 0.5cm;
-        box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
         border: 1.25cm solid #FFF;
       }
       img {
         width: 50%;
         height: auto;
       }
+      .full-size {width: 100%}
       @media print {
         body, page[size="A4"] {
           margin: 0;
           box-shadow: 0;
         }
       }
+      .row {
+        width: 100%;
+      }
+      .block {
+        height: 100px;
+        width: 390px;
+        display: inline-block;
+        margin: 1px;
+        vertical-align: top;
+      }​
+      @media all {
+        .page-break { display: none; }
+      }
 
+      @media print {
+        .page-break { display: block; page-break-before: auto; }
+      }
+      .mt-20 {margin-top: 20px;}
+      .p-4 {padding-right: 4px;}
 
   body
     page size="A4"

@@ -1,6 +1,7 @@
 class PrintPostsController < ApplicationController
   layout 'print'
   def show
-    ap @blog_post = Admin::BlogPost.find(params[:id])
+    @blog_post = Admin::BlogPost.find(params[:id])
+    @printed_ads = Admin::PrintedAd.for_print
   end
 end

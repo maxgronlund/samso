@@ -1,0 +1,25 @@
+= simple_form_for(@admin_printed_ad) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-8
+        = f.input :title, label: t('printed_ad.title')
+      .col-sm-4
+        = f.input :image, label: t('printed_ad.image'), hint: t('printed_ad.image_hint')
+    = f.input :body, label: t('printed_ad.body')
+    = f.input :active, label: t('printed_ad.active'), hint: t('printed_ad.active_hint')
+    = f.input :position, label: t('printed_ad.position'), hint: t('printed_ad.position_hint')
+
+
+  .form-actions
+    = f.submit t('save'), class: 'btn btn-light'
+
+javascript:
+  $(function() {
+    $('#admin_printed_ad_body').froalaEditor(
+      {
+        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+      }
+    )
+  });

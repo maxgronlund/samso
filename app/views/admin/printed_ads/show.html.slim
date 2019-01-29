@@ -1,0 +1,7 @@
+.row.mt-20
+  - @printed_ads.each do |printed_ad|
+    - printed_ad.printed!
+    .block.p-4
+      = image_tag printed_ad.image(:small), class: 'full-size'
+      h3 = printed_ad.title
+      = simple_format printed_ad.body

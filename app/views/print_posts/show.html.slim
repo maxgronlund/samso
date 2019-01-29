@@ -6,6 +6,15 @@ p
 = image_tag(@blog_post.image_url(:full_size)) if @blog_post.image_content_type.present?
 h1 = @blog_post.title
 b = @blog_post.teaser
-p = simple_format @blog_post.body
-/ - if post_module.image_present?(blog_post_id)
-/   = image_tag(@post_module.image_url(blog_post_id), class: 'img-fluid')
+= simple_format @blog_post.body
+
+
+.page-break
+  .row.mt-20
+    - @printed_ads.each do |printed_ad|
+      - printed_ad.printed!
+      .block.p-4
+        = image_tag printed_ad.image(:small), class: 'full-size'
+        h3 = printed_ad.title
+        = simple_format printed_ad.body
+

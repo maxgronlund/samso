@@ -56,3 +56,7 @@ nav#sidebar
         = link_to admin_advertisements_path
           i.fa.fa-ad
           = t('sidebar.ads')
+      li class="#{ @selected == 'adverticements' ? 'active' : '' }"
+        = link_to admin_printed_ads_path
+          i.fa.fa-ad
+          = t('sidebar.printed_ads')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_123552) do
+ActiveRecord::Schema.define(version: 2019_01_28_152718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -325,6 +325,20 @@ ActiveRecord::Schema.define(version: 2019_01_28_123552) do
 
   create_table "admin_post_modules", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_printed_ads", force: :cascade do |t|
+    t.string "title", default: ""
+    t.text "body", default: ""
+    t.integer "impressions", default: 0
+    t.boolean "active", default: false
+    t.integer "position", default: 0
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
