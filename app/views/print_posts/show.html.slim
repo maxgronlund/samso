@@ -1,20 +1,33 @@
-p
-  = @blog_post.signature
-  '&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-  = l @blog_post.start_date
+page size="A4"
+  #content
+    = image_tag(@blog_post.image_url(:full_size)) if @blog_post.image_content_type.present?
+    h1 = @blog_post.title
+    b = @blog_post.teaser
+    = simple_format @blog_post.body
+    /! Write HTML just like a web page
+    /! article This is an A4 document.
 
-= image_tag(@blog_post.image_url(:full_size)) if @blog_post.image_content_type.present?
-h1 = @blog_post.title
-b = @blog_post.teaser
-= simple_format @blog_post.body
 
 
-.page-break
-  .row.mt-20
-    - @printed_ads.each do |printed_ad|
-      - printed_ad.printed!
-      .block.p-4
-        = image_tag printed_ad.image(:small), class: 'full-size'
-        h3 = printed_ad.title
-        = simple_format printed_ad.body
+
+
+
+
+    .page-break
+      hr
+      .grid
+        .left
+          - printed_ad = @printed_ads.first
+          - unless printed_ad.nil?
+            - printed_ad.printed!
+            = image_tag printed_ad.image(:medium)
+            h3 = printed_ad.title
+            = simple_format printed_ad.body
+        .right
+          - printed_ad = @printed_ads.last
+          - unless printed_ad.nil?
+            - printed_ad.printed!
+            = image_tag printed_ad.image(:medium)
+            h3 = printed_ad.title
+            = simple_format printed_ad.body
 
