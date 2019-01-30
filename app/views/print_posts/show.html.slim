@@ -1,17 +1,13 @@
 page size="A4"
   #content
+    .logo
+      = image_tag @admin_system_setup.logo(:original)
     = image_tag(@blog_post.image_url(:full_size)) if @blog_post.image_content_type.present?
     h1 = @blog_post.title
     b = @blog_post.teaser
     = simple_format @blog_post.body
     /! Write HTML just like a web page
     /! article This is an A4 document.
-
-
-
-
-
-
 
     .page-break
       hr

@@ -56,6 +56,11 @@ html
         grid-column: 3 / 4;
       }
 
+      .logo img {
+        width: 100%;
+        height: auto;
+      }
+
       @media print {
         .page-break {display: block;}
         #content, #page {
@@ -67,6 +72,7 @@ html
         @page { margin: 2cm }
 
         body {
+          margin-top: -20px;
           background: #fff !important;
           color: #000;
         }
