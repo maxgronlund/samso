@@ -43,10 +43,9 @@ class Admin::SubscriptionsController < AdminController
   end
 
   def destroy
-    ap params[:id]
     user = @admin_subscription.user
     @admin_subscription.destroy
-    redirect_to default_path(admin_user_path(@user))
+    redirect_to default_path(admin_user_path(user))
   end
 
   private

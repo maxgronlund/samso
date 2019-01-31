@@ -7,6 +7,8 @@ class Admin::Subscription < ApplicationRecord
   belongs_to :user
   #has_many :payments, as: :payable
 
+  scope :economic_integrated, -> { where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')}
+
   has_many(
     :addresses,
     as: :addressable,
@@ -53,7 +55,7 @@ class Admin::Subscription < ApplicationRecord
 
     addresses.primary_address
   end
-  alias :set_address :primary_address
+  alias set_address primary_address
 
   def temporary_address
     addresses.find_by(address_type: Address::TEMPORARY_ADDRESS)
@@ -84,10 +86,6 @@ class Admin::Subscription < ApplicationRecord
     self[:subscription_id].include?('-legacy')
   end
 
-  def economic_imported_subscription?
-    self[:subscription_id].include?('-economic-integration')
-  end
-
   def subscription_id
     return self[:subscription_id].delete('-legacy') if imported_subscription?
     return self[:subscription_id].delete('-economic-integration') if economic_imported_subscription?
@@ -100,7 +98,11 @@ class Admin::Subscription < ApplicationRecord
       .order(:subscription_id)
   end
 
-  def self.economic_imported_subscriptions
+  def economic_imported_subscription?
+    self[:subscription_id].include?('-economic-integration')
+  end
+
+  def self.integrated_with_economics
     where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')
       .order(:subscription_id)
   end
@@ -116,11 +118,11 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def self.legacy(id)
-    find_by(subscription_id: id + '-legacy')
+    find_by(subscription_id: id.to_s + '-legacy')
   end
 
   def self.economic_import(id)
-    find_by(subscription_id: id + '-economic-integration')
+    find_by(subscription_id: id.to_s + '-economic-integration')
   end
 
   private

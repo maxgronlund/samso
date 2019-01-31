@@ -63,8 +63,8 @@ class User < ApplicationRecord
   # validates_with UserAddressValidator, if: :validate_subscription_address
   validates_with User::Validator
 
-  FAKE_EMAIL = '@10ff3690-389e-42ed-84dc-bd40a8d99fa5.example.com'.freeze
-  FAKE_PASSWORD = 'dd7ed83bfb1e6d17aaa7798c3f69054fa910aac19b395dd037cc9abc4cb16db8'.freeze
+  FAKE_EMAIL =    '@10ff3690--bd40a8d99fa5.example.com'.freeze
+  FAKE_PASSWORD = 'c01141c5-d91d-4995-9a56-c01cc198fe25'.freeze
 
   def address
     addresses.first_or_create
@@ -232,8 +232,6 @@ class User < ApplicationRecord
       .pluck(:subscription_type_id)
       .uniq
   end
-
-
 
   def signature
     self[:signature].presence || name
