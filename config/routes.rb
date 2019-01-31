@@ -85,7 +85,7 @@ Rails.application.routes.draw do
       resources :advertisement_modules, only: %i[edit update]
       resources :users do
         resources :user_subscriptions
-        resources :invoices, only: %i[index show]
+        resources :invoices, only: %i[index show destroy]
       end
     end
 

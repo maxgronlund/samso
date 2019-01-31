@@ -36,9 +36,9 @@ da:
 
   user:
     count: "%{count} : Brugere"
-    create: 'Opret konto'
-    delete_account: Slet konto
-    edit: Rediger konto
+    create: Opret bruger konto
+    delete_account: Slet bruger konto
+    edit: Rediger bruger konto
     accept_gdpr: Godkend databehandleraftale
     password:
       update: Opdater password
@@ -74,4 +74,4 @@ da:
     change_address: Adresseændring
     many_sign_in_ips: Logget ind fra mange IP addresser
     all: Alle brugere
-    create_printed_subscription: Opret trykt abonnoment
+    create_printed_subscription: Opret abonnent til trykt avis

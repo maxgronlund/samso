@@ -2,21 +2,34 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :title
-    = f.input :body
-    = f.input :duration
-    = f.input :internet_version
-    = f.input :print_version
-    = f.input :price
-    = f.input :identifier, collection: ['internal', 'imported']
-    = f.hidden_field :locale, value: I18n.locale.to_s
     .row
-      .col-sm-4
-        = f.input :active
-      .col-sm-4
-        = f.input :free
-    = f.input :position,
-      hint: 'laveste position vises først på listen'
+      .col-sm-6
+        = f.input :title
+      .col-sm-6
+        = f.input :position,
+          hint: 'laveste position vises først på listen'
+        = f.hidden_field :locale, value: I18n.locale.to_s
+    .row
+      .col-sm-6
+         = f.input :body
+      .col-sm-6
+        br
+        .row
+          .col-sm-6
+            = f.input :print_version
+            = f.input :internet_version
+          .col-sm-6
+            = f.input :free
+    .row
+      .col-sm-3
+        = f.input :duration
+      .col-sm-3
+        = f.input :price
+
+      .col-sm-6
+        br
+        = f.input :active, hint: t('subscription_type.active_hint')
+
 
   .pull-right
     = link_to t('cancel'), admin_subscription_types_path, class: 'btn btn-light'

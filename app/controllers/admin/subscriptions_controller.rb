@@ -21,80 +21,67 @@ class Admin::SubscriptionsController < AdminController
     @user.addresses.build
   end
 
-  # GET /admin/subscriptions/1/edit
+
   def edit
   end
 
-  # POST /admin/subscriptions
-  # POST /admin/subscriptions.json
   def create
-
-    # ap Admin::Subscription.new_subscription_id
-    # admin_subscription_params[:validate_address] = true
     @user = User.new(admin_subscription_params)
     @user.addresses.first.name = @user.name
     @user.password_digest = User::Service.fake_password
     @user.validate_email = @user.email.present?
     @user.reset_password_token = SecureRandom.hex(32)
     @user.reset_password_sent_at = Time.zone.now
+    @user.roles = [Role.new]
+    @user.subscriptions = [new_subscription]
     if @user.save
-    # @user.destroy
-
-      add_member_role
-      create_print_type_subscription
       send_welcome_message
       redirect_to admin_show_subscription_id_path(@user.id)
     else
       render :new
     end
+  end
 
-
-    # redirect_back(fallback_location: root_path)
-    # @admin_subscription = Admin::Subscription.new(admin_subscription_params)
-    # if @admin_subscription.save
-    #   redirect_to @admin_subscription
-    # else
-    #   render :new
-    # end
+  def destroy
+    ap params[:id]
+    user = @admin_subscription.user
+    @admin_subscription.destroy
+    redirect_to default_path(admin_user_path(@user))
   end
 
   private
 
-  def create_print_type_subscription
+  def new_subscription
     subscription_type =
-      Admin::subscription_type
+      Admin::SubscriptionType
       .find(admin_system_setup.admin_subscription_type_id)
 
-    @subscription =
-      subscription_type
-      .subscriptions
-      .where(
-        user_id: @user.id, 
-      )
-      first_or_initialize
-
-    @subscription.start_date = Time.zone.now - 1.day
-    @subscription.end_date = subscription_type.duration.days
-    @subscription.subscription_id = Admin::Subscription.new_subscription_id
-    add_address_to_subscription if @subscription.save
-
+    Admin::Subscription.new(
+      start_date: Time.zone.now,
+      end_date: Time.zone.now + subscription_type.duration.days,
+      subscription_type_id: subscription_type.id,
+      subscription_id: Admin::Subscription.new_subscription_id + '-economic-integration',
+      addresses: [subscription_address]
+    )
   end
 
-  def add_address_to_subscription
-    @subscription.copy_user_address unless @subscription.addresses.present?
+  def subscription_address
+    address = admin_subscription_params[:addresses_attributes]['0']
+    Address.new(
+      addressable_type: 'Admin::Subscription',
+      name: admin_subscription_params[:name],
+      address: address[:address],
+      zipp_code: address[:zipp_code],
+      city: address[:city]
+    )
   end
 
   def add_member_role
-    return if @user.roles.any?
-
-    @user.roles.create
+    @user.roles.create if @user.roles.empty?
   end
 
   def send_welcome_message
-    
-    return if @user.email.blank?
-
-    UserNotifierMailer.welcome_message(@user.id).deliver
+    UserNotifierMailer.welcome_message(@user.id).deliver if @user.email.present?
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -104,7 +91,6 @@ class Admin::SubscriptionsController < AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_subscription_params
-
     params.require(:user).permit(
       :name,
       :email,
@@ -114,13 +100,5 @@ class Admin::SubscriptionsController < AdminController
       addresses_attributes: %i[id name address zipp_code city],
       roles_attributes: %i[permission id]
     )
-    
-    # params.require(:admin_subscription).permit(
-    #   :subscription_type_id,
-    #   :duration,
-    #   :start_date,
-    #   :end_date,
-    #   :user_id
-    # )
   end
 end

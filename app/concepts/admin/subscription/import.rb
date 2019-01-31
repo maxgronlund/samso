@@ -76,7 +76,7 @@ class Admin::Subscription < ApplicationRecord
         Admin::SubscriptionType
         .where(
           title: options[:group],
-          identifier: 'economic-import'
+          identifier: 'economic-integration'
         ).first_or_create(
           title: options[:group],
           body: 'Importeret fra economics',
@@ -85,7 +85,7 @@ class Admin::Subscription < ApplicationRecord
           locale: 'da',
           active: false,
           free: false,
-          identifier: 'economic-import',
+          identifier: 'economic-integration',
         )
     end
 
@@ -159,7 +159,7 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def subscription_id(options)
-      options[:subscription_id] + '-economic-import'
+      options[:subscription_id] + '-economic-integration'
     end
 
 

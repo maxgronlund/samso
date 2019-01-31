@@ -1,3 +1,4 @@
+- session[:stored_path] = request.path
 == render 'shared/admin_links', selected: ''
 nav aria-label="breadcrumb"
   ol.breadcrumb
@@ -6,6 +7,14 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item.active aria-current="page"
       = @user.name
 
+- subscription = @user.default_subscription
+.row
+  .col-sm-12
+    .alert.alert-success role="alert"
+      h4 Abonoment id til integration med e-conomics:
+      h3
+        '#
+        = subscription.subscription_id
 
 .row
   .col-sm-4
@@ -17,17 +26,14 @@ nav aria-label="breadcrumb"
       = link_to t('edit'),
         edit_admin_user_path(@user),
         class: 'btn btn-primary btn-sm'
-      - unless @user.free_subscription?
-        = link_to 'Opret friabonnoment',
-          new_admin_user_user_subscription_path(@user),
-          class: 'btn btn-sm btn-success'
   .col-sm-4
-    = render 'shared/user_stat', user: @user
+
   .col-sm-4
     = render 'shared/address', address: @user.address
-    = link_to 'Adresseændring', edit_admin_user_path(@user)
 
-- if @subscriptions.any?
+
+- if subscription.present?
+
   hr
   h5 Abonnoment
   .row.mt-20
@@ -45,45 +51,24 @@ nav aria-label="breadcrumb"
                 .pull-right = t('edit')
 
           tbody
-            - @subscriptions.each do |subscription|
-              tr
-                td = subscription.type_name
-                td = subscription.subscription_id
-                td
-                  - if subscription.start_date.present?
-                    = l subscription.start_date
-                td
-                  - if subscription.end_date.present?
-                    = l subscription.end_date
-                td = subscription.expired? ? 'Udløbet' : 'Gyldigt'
-                th
-                  = subscription.subscription_id
-                  .pull-right
-                    .btn-group
-                      = link_to t('subscription.delivery_address'),
-                        admin_subscription_delivery_addresses_path(subscription),
-                        class: 'btn btn-light btn-sm'
-                      = link_to t('subscription.edit_dates'),
-                        edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
-                        class: 'btn btn-light btn-sm'
-- if @user.sign_in_ips.any?
-  hr
-  h5 IP addresser brugt de sidste to uger
-  .row.mt-20
-    .col-sm-12
-      .table-responsive
-        table.table.table-striped.table-bordered.table-hover.table-sm
-          thead.thead-dark
+
             tr
-              th IP
-              th Dato
-              th Gange logget ind
-          tbody
-            - @user.sign_in_ips.order(sign_in_at: :desc).each do |sign_in_ip|
-              tr
-                td = sign_in_ip.ip.to_s
-                td = l sign_in_ip.sign_in_at
-                td = sign_in_ip.count
+              td = subscription.type_name
+              td = subscription.subscription_id
+              td
+                - if subscription.start_date.present?
+                  = l subscription.start_date
+              td
+                - if subscription.end_date.present?
+                  = l subscription.end_date
+              td = subscription.expired? ? 'Udløbet' : 'Gyldigt'
+              th
+                .pull-right
+                  .btn-group
+                    = link_to t('subscription.delivery_address'),
+                      admin_subscription_delivery_addresses_path(subscription),
+                      class: 'btn btn-light btn-sm'
+
 
 - if @user.payments.any?
   hr

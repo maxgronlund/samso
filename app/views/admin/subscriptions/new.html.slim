@@ -10,7 +10,7 @@ h3 = t('user.create_printed_subscription')
   .form-inputs
   	.row
       .col-sm-6
-        = f.input :name
+        = f.input :name, autofocus: true
       .col-sm-6
         = f.input :email
     / .row
@@ -19,7 +19,7 @@ h3 = t('user.create_printed_subscription')
     /       placeholder: '••••••••••'
     /   .col-sm-6
     /     = f.input :password_confirmation,
-    /       placeholder: '••••••••••'   
+    /       placeholder: '••••••••••'
 
     = f.simple_fields_for :addresses do |address|
       .row
@@ -34,7 +34,7 @@ h3 = t('user.create_printed_subscription')
           = address.input :city,
           label: t('address.city'),
           input_html: { class: 'city-name-autofill' }
-    
+
   .form-actions
     .pull-right
       = f.submit t('save'), class: 'btn btn-primary'

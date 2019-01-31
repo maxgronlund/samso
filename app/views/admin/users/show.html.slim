@@ -1,3 +1,4 @@
+- session[:stored_path] = request.path
 == render 'shared/admin_links', selected: ''
 nav aria-label="breadcrumb"
   ol.breadcrumb
@@ -25,7 +26,6 @@ nav aria-label="breadcrumb"
     = render 'shared/user_stat', user: @user
   .col-sm-4
     = render 'shared/address', address: @user.address
-    = link_to 'Adresseændring', edit_admin_user_path(@user)
 
 - if @subscriptions.any?
   hr
@@ -57,15 +57,21 @@ nav aria-label="breadcrumb"
                     = l subscription.end_date
                 td = subscription.expired? ? 'Udløbet' : 'Gyldigt'
                 th
-                  = subscription.subscription_id
                   .pull-right
                     .btn-group
                       = link_to t('subscription.delivery_address'),
                         admin_subscription_delivery_addresses_path(subscription),
                         class: 'btn btn-light btn-sm'
-                      = link_to t('subscription.edit_dates'),
-                        edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
-                        class: 'btn btn-light btn-sm'
+                      - if subscription == @user.default_subscription
+                        = link_to t('delete'),
+                          admin_subscription_path(subscription.subscription_id),
+                          data: { confirm: t('are_you_sure') },
+                          method: :delete,
+                          class: 'btn btn-danger btn-sm'
+                      - else
+                        = link_to t('subscription.edit_dates'),
+                          edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
+                          class: 'btn btn-light btn-sm'
 - if @user.sign_in_ips.any?
   hr
   h5 IP addresser brugt de sidste to uger

@@ -12,7 +12,8 @@ da:
         print_version: Trykt
         internet_version: WWW
         price: Pris i DKK
-        active: Aktiv
+        active: Vises på liste
+
         subscriptions_count: Abonnementer
         free: Fri abbonoment
     models:
@@ -31,3 +32,4 @@ da:
     subscriptions: Abonnementer
     position: Position på liste
     free: Friabonnement
+    active_hint: Brugere uden gyldigt abonnoment kan vælge denne type

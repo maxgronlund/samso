@@ -85,12 +85,12 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def economic_imported_subscription?
-    self[:subscription_id].include?('-economic-import')
+    self[:subscription_id].include?('-economic-integration')
   end
 
   def subscription_id
     return self[:subscription_id].delete('-legacy') if imported_subscription?
-    return self[:subscription_id].delete('-economic-import') if economic_imported_subscription?
+    return self[:subscription_id].delete('-economic-integration') if economic_imported_subscription?
 
     self[:subscription_id]
   end
@@ -101,7 +101,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def self.economic_imported_subscriptions
-    where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-import')
+    where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')
       .order(:subscription_id)
   end
 
@@ -120,7 +120,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def self.economic_import(id)
-    find_by(subscription_id: id + '-economic-import')
+    find_by(subscription_id: id + '-economic-integration')
   end
 
   private

@@ -25,7 +25,7 @@ da:
     start_date: Start dato
     end_date: Slut dato
     on_hold_date: Pause dato
-    delivery_address: Forsendelses adresse
+    delivery_address: Forsendelses adresser
     temporary_delivery_address: Midlertidig forsendelses adresse
     new_temporary_delivery_address: Opret midlertidig forsendelses adresse
     edit_dates: Rediger periode

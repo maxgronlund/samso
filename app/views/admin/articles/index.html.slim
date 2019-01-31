@@ -19,7 +19,7 @@ br
     .col-sm-6
       i.fa.fa-search.prefix.grey-text
       = label_tag :search, 'Søg'
-      = text_field_tag :search, params[:search], class: 'form-control'
+      = text_field_tag :search, params[:search], autofocus: true, class: 'form-control'
     .col-sm-6
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'

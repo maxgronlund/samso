@@ -240,8 +240,15 @@ class User < ApplicationRecord
   end
 
   def self.economic_imported_users
-    where('legacy_subscription_id ILIKE :subscription_id', subscription_id: '%-economic-import')
+    where('legacy_subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')
       .order(:legacy_subscription_id)
+  end
+
+  def default_subscription
+    @default_subscription ||=
+      subscriptions
+      .where(subscription_type_id: Admin::SystemSetup.find_by(locale: I18n.locale).admin_subscription_type_id)
+      .first
   end
 
   # def signature

@@ -7,12 +7,13 @@
   .col-sm-4
     h3 = t('user.pluralized')
   .col-sm-5
-    = link_to t('user.create_printed_subscription'), new_admin_subscription_path, class: 'btn btn-light btn-sm'
-    = link_to t('user.create'), new_admin_user_path, class: 'btn btn-light btn-sm'
+    .btn-group
+      = link_to t('user.create_printed_subscription'), new_admin_subscription_path, class: 'btn btn-light btn-sm'
+      = link_to t('user.create'), new_admin_user_path, class: 'btn btn-light btn-sm'
   .col-sm-3
     .pull-right
       = t('user.count', count: @user_count)
-  
+
 
 
 = form_tag admin_users_path, method: 'get' do
@@ -20,7 +21,7 @@
     .col-sm-4
       == render 'admin/shared/user_navigation', selected: 'all'
     .col-sm-6
-      = text_field_tag :search, params[:search], class: 'form-control'
+      = text_field_tag :search, params[:search], autofocus: true, class: 'form-control'
     .col-sm-2
       .btn-group
         = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
