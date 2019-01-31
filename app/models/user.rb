@@ -161,8 +161,7 @@ class User < ApplicationRecord
   end
 
   def active_subscription?
-    @active_subscription ||=
-      valid_subscriptions.any?
+    @active_subscription ||= valid_subscriptions.any?
   end
 
   def no_active_subscription?
@@ -171,14 +170,13 @@ class User < ApplicationRecord
   end
 
   def last_valid_subscription
-    @last_valid_subscription ||=
-      valid_subscriptions.last
+    @last_valid_subscription ||= valid_subscriptions.last
   end
 
   def valid_subscriptions
     @valid_subscriptions ||=
       subscriptions
-      .where('start_date <= :start_date', start_date: Date.today.beginning_of_day + 1.day)
+      .where('start_date <= :start_date', start_date: Date.today.beginning_of_day)
       .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
   end
 
