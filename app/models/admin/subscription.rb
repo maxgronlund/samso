@@ -135,4 +135,5 @@ class Admin::Subscription < ApplicationRecord
         city: user_address.city
       )
   end
+  alias copy_address user_address_copy
 end

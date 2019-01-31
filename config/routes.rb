@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :comments
   namespace :api do
     namespace :v1 do
@@ -70,6 +71,7 @@ Rails.application.routes.draw do
       #   resources :addresses, only: %i[new edit update destroy]
       # end
       resources :sign_in_ips, only: %i[index]
+      resources :show_subscription_ids, only: %i[show]
       resources :subscriptions do
         resources :delivery_addresses
       end

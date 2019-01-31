@@ -26,6 +26,11 @@ h3 = t('edit_model', model_name: 'System opsætning')
     collection: Page.where(locale: I18n.locale),
     include_blank: false
 
+  = f.input :admin_subscription_type_id,
+    collection: Admin::SubscriptionType.where(locale: I18n.locale),
+    include_blank: false,
+    label: 'Abonnement som bliver knyttet til brugere importeret fra economic '
+
   .row
     .col-md-6
       = f.input :logo

@@ -30,7 +30,6 @@ class Admin::SubscriptionsController < AdminController
   def create
 
     # ap Admin::Subscription.new_subscription_id
-    ap admin_subscription_params
     # admin_subscription_params[:validate_address] = true
     @user = User.new(admin_subscription_params)
     @user.addresses.first.name = @user.name
@@ -44,7 +43,7 @@ class Admin::SubscriptionsController < AdminController
       add_member_role
       create_print_type_subscription
       send_welcome_message
-      redirect_to admin_user_path(@user)
+      redirect_to admin_show_subscription_id_path(@user.id)
     else
       render :new
     end
@@ -62,7 +61,27 @@ class Admin::SubscriptionsController < AdminController
   private
 
   def create_print_type_subscription
-    
+    subscription_type =
+      Admin::subscription_type
+      .find(admin_system_setup.admin_subscription_type_id)
+
+    @subscription =
+      subscription_type
+      .subscriptions
+      .where(
+        user_id: @user.id, 
+      )
+      first_or_initialize
+
+    @subscription.start_date = Time.zone.now - 1.day
+    @subscription.end_date = subscription_type.duration.days
+    @subscription.subscription_id = Admin::Subscription.new_subscription_id
+    add_address_to_subscription if @subscription.save
+
+  end
+
+  def add_address_to_subscription
+    @subscription.copy_user_address unless @subscription.addresses.present?
   end
 
   def add_member_role
