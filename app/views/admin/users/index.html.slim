@@ -30,17 +30,21 @@ br
   table.table.table-striped.table-bordered.table-hover.table-sm
     thead.thead-dark
       tr
+        th Betalt
         th Navn
         th Email
         th style='width:100px;'
          = t('user.access_as')
         th= t('subscription.active')
-        th style='min-width:155px;'
+        th style='width:95px;'
 
     tbody
       - @users.each do |user|
 
         tr
+          td
+            - if user.latest_online_payment.present?
+              = user.latest_online_payment.strftime("%e/%m %Y")
           td = link_to user.name, admin_user_path(user)
           td = user.sanitized_email
           td = user.role_names
