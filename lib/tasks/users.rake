@@ -17,4 +17,11 @@ namespace :users do
       .where(legacy_subscription_id: [100000001, 100000002])
       .update_all(legacy_subscription_id: nil)
   end
+
+  desc 'remove all non editors'
+  task remove_non_editors: :environment do
+    User.find_each do |user|
+      user.destroy unless user.editor?
+    end
+  end
 end

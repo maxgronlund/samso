@@ -4,7 +4,7 @@ class Address::Validator < ActiveModel::Validator
     when 'Admin::Subscription'
       validate_subscription_address(address)
     when 'User'
-      validate_address(address)
+      validate_address(address) if address_present?(address)
     end
   end
 
@@ -15,6 +15,10 @@ class Address::Validator < ActiveModel::Validator
     when Address::PRIMARY_ADDRESS
       validate_primary_subscription_address(address)
     end
+  end
+
+  def address_present?(address)
+    address.address.present? || address.zipp_code.present? || address.city.present?
   end
 
   def validate_primary_subscription_address(address)

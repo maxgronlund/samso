@@ -119,5 +119,17 @@ class User < ApplicationRecord
     def self.invalid_email?(options)
       !valid_email?(options)
     end
+
+    def self.set_password(user, password)
+      if password.nil?
+        user.password_digest = User::Service.fake_password
+      else
+        user.password = password
+      end
+    end
+
+    # def self.set_legacy_subscription_id(user, set_legacy_subscription_id)
+    #   user.legacy_subscription_id = set_legacy_subscription_id unlessset_legacy_subscription_id
+    # end
   end
 end

@@ -45,10 +45,11 @@ class Admin::UsersController < AdminController
   # POST /users
   def create
     @user = User.new(user_params)
-
+    @user.validate_email = true
     if @user.save
       redirect_to admin_users_path
     else
+      @user.email = @user.sanitized_email
       render :new
     end
   end

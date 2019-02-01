@@ -23,13 +23,14 @@ class User < ApplicationRecord
   )
   has_secure_password
   attr_accessor(
-     :delete_avatar,
-     :validate_address,
-     :cancel_account_token,
-     :update_subscription_address,
-     :subscription_type,
-     :validate_email
+    :delete_avatar,
+    :validate_address,
+    :cancel_account_token,
+    :update_subscription_address,
+    :subscription_type,
+    :validate_email
   )
+
   has_many :roles, dependent: :destroy
   has_many :subscriptions, class_name: 'Admin::Subscription', dependent: :destroy
   has_many :e_paper_tokens, dependent: :destroy
@@ -182,6 +183,7 @@ class User < ApplicationRecord
 
   def subscription_id
     return last_valid_subscription.subscription_id if last_valid_subscription.present?
+
     ''
   end
 
@@ -209,6 +211,7 @@ class User < ApplicationRecord
 
   def real_email?
     return false if email.blank?
+
     !fake_email?
   end
 

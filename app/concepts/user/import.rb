@@ -45,7 +45,7 @@ class User < ApplicationRecord
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
-        create_or_update_user(options) unless options[:legacy_id].nil?
+        import_user(options) unless options[:legacy_id].blank?
       end
       Rails.logger.info '===================== IMPORT OF USERS ========================='
       Rails.logger.info "Succeeded: #{@imported}"
@@ -53,7 +53,7 @@ class User < ApplicationRecord
       Rails.logger.info "Failed with legacy_ids: #{@legacy_ids}"
       Rails.logger.info '==============================================================='
 
-      import_subscriptions(csv_import)
+      # import_subscriptions(csv_import)
     end
     # rubocop:enable Security/Open
 
@@ -95,75 +95,49 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
 
-    def create_or_update_user(options = {})
-      user = find_or_initialize_user(options)
-      return if user.nil? || user.persisted?
+    def import_user(options = {})
+      user =
+        User
+        .where(legacy_id: options[:legacy_id])
+        .first_or_initialize
+      return if user.persisted? || User.exists?(email: options[:email])
 
-      secure_password(user, options)
-      user.legacy_subscription_id = options[:Abonnr] + '-legacy' unless options[:Abonnr].blank?
-      user.confirmed_at = DateTime.now if user.confirmed_at.nil?
+      User::Service.set_password(user, options[:password])
+      user.legacy_subscription_id = options[:Abonnr]
+      user.confirmed_at = DateTime.now
       user.name = options[:navn]
       user.signature = options[:navn]
-      user.email = options[:email]
-      save_user(user, options)
-    rescue
-      @legacy_ids << options[:legacy_id]
+      user.email = options[:email].presence || User::Service.fake_email
+      user.addresses = [address('User', options)]
+      user.roles = [Role.new]
+      user.subscriptions = [subscription(options)]
+
+      @legacy_ids << options[:legacy_id] unless user.save
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
-    def save_user(user, options)
-      ActiveRecord::Base.transaction do
-        if user.save
-          @imported += 1
-          attach_role(user)
-          attach_address(user, options)
-        else
-          @imported -= 1
-          raise ActiveRecord::Rollback
-        end
-      end
-    end
-
-    def secure_password(user, options)
-      if options[:password].nil?
-        user.password_digest = User::Service.fake_password
-      else
-        user.password = options[:password]
-      end
-    end
-
-    def find_or_initialize_user(options = {})
-      return User.new if options[:legacy_id].blank?
-
-      User
-        .where(legacy_id: options[:legacy_id])
-        .first_or_initialize(legacy_id: options[:legacy_id])
-    end
-
-    def attach_role(user)
-      return if user.roles.any?
-
-      Role.create(
-        user_id: user.id,
-        permission: Role::MEMBER,
-        active: true
+    def address(addressable_type, options = {})
+      zipp_code         = parse_zipp_code(options)
+      city              = parse_city(zipp_code, options)
+      Address.new(
+        addressable_type: addressable_type,
+        name: options[:navn].presence || '-',
+        address: options[:adresse].presence || '-',
+        zipp_code: zipp_code.presence || '-',
+        city: city.presence || 'Danmark'
       )
     end
 
-    def attach_address(user, options = {})
-      create_user_address(user, options) if user.addresses.empty?
-    end
-
-    def create_user_address(user, options = {})
-      address           = user.addresses.new
-      zipp_code         = parse_zipp_code(options)
-      city              = parse_city(zipp_code, options)
-      address.zipp_code = zipp_code if zipp_code.present?
-      address.city      = city if city.present?
-      address.name      = user.name
-      address.address   = options[:adresse]
-      address.save
+    def subscription(options)
+      Admin::Subscription
+        .new(
+          subscription_type_id: subscription_type(options).id,
+          subscription_id: Admin::Subscription.new_subscription_id + '-legacy',
+          start_date: options[:Oprettet],
+          end_date: subscription_end_date(options),
+          addresses: [address('Admin::Subscription', options)]
+        )
     end
 
     def parse_zipp_code(options = {})
@@ -188,71 +162,20 @@ class User < ApplicationRecord
       options[:postnr_by].split
     end
 
-    # ============================
-    # IMPORT SUBSCRIPTIONS
-    # ============================
-
-    def import_subscriptions(csv_import)
-      csv_file = open(csv_import.file_url)
-      CSV.parse(csv_file, headers: false).each do |row|
-        unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-        options = parsed_row(unescaped_row)
-        create_or_update_subscription(options) unless options[:legacy_id].nil?
-      end
-    end
-
-    def create_or_update_subscription(options = {})
-      user = User.find_by(legacy_id: options[:legacy_id])
-      return if user.nil?
-      return if user.subscriptions.any?
-      return if options[:Abon_periode].to_i.zero?
-
-      subscription = first_or_initialize_subscription(user, options)
-      subscription.start_date = options[:Oprettet]
-      subscription.end_date = subscription_end_date(options)
-      create_subscription_address(subscription) if subscription.save
-    end
-
-    def create_subscription_address(subscription)
-      return unless subscription.addresses.empty?
-
-      user = subscription.user
-      subscription
-        .addresses
-        .create(
-          name: user.name,
-          address: user.street_address,
-          city: user.city,
-          zipp_code: user.zipp_code
-        )
-    end
-
     def subscription_end_date(options = {})
-      return calculated_subscription_end_date(options) if options[:UdloebsDato].nil?
+      return calculate_subscription_end_date(options) if options[:UdloebsDato].nil?
 
       options[:UdloebsDato]
     end
 
-    def first_or_initialize_subscription(user, options)
-      type_id = subscription_type_id(options)
-      subscription_id = options[:Abonnr].presence || Admin::Subscription.new_subscription_id
-      user
-        .subscriptions
-        .where(
-          subscription_id: subscription_id,
-          subscription_type_id: type_id
-        )
-        .first_or_initialize
-    end
-
-    def calculated_subscription_end_date(options = {})
+    def calculate_subscription_end_date(options = {})
       oprettet = options[:Oprettet]
       abon_periode = options[:Abon_periode].to_i
       oprettet = Time.zone.now - 1.year if oprettet.nil?
       oprettet + abon_periode.days
     end
 
-    def subscription_type_id(options)
+    def subscription_type(options)
       Admin::SubscriptionType
         .where(
           title: Admin::SubscriptionType::IMPORTED,
@@ -260,12 +183,7 @@ class User < ApplicationRecord
           print_version: options[:bestil_abonavis],
           internet_version: true
         )
-        .first_or_create(
-          title: Admin::SubscriptionType::IMPORTED,
-          duration: options[:Abon_periode].to_i,
-          print_version: options[:bestil_abonavis],
-          internet_version: true
-        ).id
+        .first_or_create
     end
   end
 end

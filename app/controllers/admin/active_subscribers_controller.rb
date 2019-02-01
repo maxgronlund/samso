@@ -5,7 +5,7 @@ class Admin::ActiveSubscribersController < AdminController
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def index
-    ap user_ids =
+    user_ids =
       Admin::Subscription
       .where('end_date > ?', Time.zone.today)
       .pluck(:user_id)

@@ -17,7 +17,6 @@ class Address < ApplicationRecord
 
   def valid_address?
     return false if name.nil? || address.nil? || zipp_code.nil? || city.nil?
-
     true
   end
 

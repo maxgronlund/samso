@@ -84,7 +84,7 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def user_exists?
-      user.exists?(legacy_subscription_id: subscription_id(options))
+      user.exists?(legacy_subscription_id: options[:subscription_id])
     end
 
     def subscription_type
@@ -94,11 +94,11 @@ class Admin::Subscription < ApplicationRecord
     def address(addressable_type, options = {})
       Address.new(
         addressable_type: addressable_type,
-        name: options[:name],
-        address: options[:address],
-        zipp_code: options[:zipp_code],
-        city: options[:city],
-        country: options[:country]
+        name: options[:name].presence || 'No Name',
+        address: options[:address].presence || 'NA',
+        zipp_code: options[:zipp_code].presence || 'NA',
+        city: options[:city].presence || '',
+        country: options[:country].presence || 'Danmark',
       )
     end
 

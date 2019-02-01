@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_163634) do
+ActiveRecord::Schema.define(version: 2019_01_31_192015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -407,6 +407,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_163634) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "subscription_id", default: ""
+    t.datetime "reminder_send"
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end
