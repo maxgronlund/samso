@@ -8,7 +8,7 @@ class Admin::Subscription < ApplicationRecord
   #has_many :payments, as: :payable
 
   scope :economic_integrated, -> { where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')}
-
+  scope :with_reminders, -> { where(send_reminder: true)}
   has_many(
     :addresses,
     as: :addressable,
@@ -73,6 +73,11 @@ class Admin::Subscription < ApplicationRecord
 
   def free?
     subscription_type.nil? ? true : subscription_type.free?
+  end
+
+  def send_reminder!
+    return if reminder_send
+    update(reminder_send: true)
   end
 
   def self.new_subscription_id
