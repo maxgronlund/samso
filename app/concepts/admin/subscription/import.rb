@@ -6,10 +6,11 @@ class Admin::Subscription < ApplicationRecord
   require 'cgi'
   # services for Admin::CsvImport
   class Import
+    # expire all subscriptions
     def initialize
       Admin::Subscription
         .integrated_with_economics.update_all(
-          end_date: Time.zone.now - 2.days
+          end_date: Time.zone.now - 1.days
         )
     end
 
@@ -21,6 +22,7 @@ class Admin::Subscription < ApplicationRecord
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         if index.zero?
           #ap unescaped_row
+          # dont use the top row
           next
         end
 
@@ -29,7 +31,7 @@ class Admin::Subscription < ApplicationRecord
         subscription  = subscription(options)
 
         if subscription.persisted?
-          subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+          extend_subscription(subscription)
           next
         end
         user = user(options)
@@ -41,6 +43,10 @@ class Admin::Subscription < ApplicationRecord
     # rubocop:enable Security/Open
 
     private
+
+    def extend_subscription(subscription)
+      subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+    end
 
     def attach_subscription(user, subscription)
       return if user.subscriptions.economic_integrated.any?
@@ -62,6 +68,7 @@ class Admin::Subscription < ApplicationRecord
       )
     end
 
+    # return the user if the user is a in the system, other wise build a new one 
     def user(options)
       User.find_by(legacy_subscription_id: subscription_id(options)).presence || build_user(options)
     end
@@ -79,18 +86,22 @@ class Admin::Subscription < ApplicationRecord
         )
     end
 
+    # tag subscription with economic
     def subscription_id(options)
       options[:subscription_id] + '-economic-integration'
     end
 
-    def user_exists?
-      user.exists?(legacy_subscription_id: options[:subscription_id])
-    end
+    # check if the user alreaddy is in the system
+    # def user_exists?
+    #   user.exists?(legacy_subscription_id: options[:subscription_id])
+    # end
 
+    # the default subscription type for economics
     def subscription_type
       @subscription_type_||= Admin::SubscriptionType.find(admin_system_setup.admin_subscription_type_id)
     end
 
+    # build a new address
     def address(addressable_type, options = {})
       Address.new(
         addressable_type: addressable_type,
