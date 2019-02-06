@@ -25,7 +25,7 @@ class Admin::Subscription < ApplicationRecord
 
         options = parse_options(unescaped_row)
         @options = utf_8_encode(options)
-        ap @subscription  = get_subscription
+        @subscription  = get_subscription
 
         if @subscription.persisted?
           extend_subscription

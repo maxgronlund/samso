@@ -6,6 +6,7 @@ class Admin::SubscriptionType < ApplicationRecord
 
   INTERNAL = 'internal'
   IMPORTED = 'imported'
+  IMPORTED_FROM_ECONOMICS = 'imported_from_economics'
   FREE_SUBSCRIPTION = 'free_subscription'
 
   scope :active, -> { internal.where(active: true) }
@@ -31,20 +32,23 @@ class Admin::SubscriptionType < ApplicationRecord
 
   # Admin::SubscriptionType.imported
   def self.imported
-    where(identifier: IMPORTED)
-      .first_or_create(
-        title: 'Imported from E-Conomics',
-        body: 'Import fra economics, kan ikke slettes og bliver oprettet automatisk',
-        identifier: IMPORTED,
-        duration: 365000,
-        internet_version: true,
-        print_version: true,
-        price: 0,
-        locale: 'da',
-        active: true,
-        position: 0,
-        free: false
-      )
+    where(imported_options).first_or_create
+  end
+
+  def self.imported_options
+    {
+      identifier: IMPORTED_FROM_ECONOMICS,
+      duration: 365000,
+      internet_version: true,
+      print_version: true,
+      price: 0,
+      locale: 'da',
+      active: false,
+      position: 0,
+      free: false,
+      title: 'Imported from E-Conomics',
+      body: 'Import fra economics, kan ikke slettes og bliver oprettet automatisk'
+    }
   end
 
   # Admin::SubscriptionType.imported
