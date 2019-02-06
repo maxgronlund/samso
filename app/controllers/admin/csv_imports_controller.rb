@@ -36,7 +36,9 @@ class Admin::CsvImportsController < AdminController
 
   # PATCH/PUT /admin/csv_imports/1
   def update
+
     if @admin_csv_import.update(admin_csv_import_params)
+      @admin_csv_import.update(imported: nil)
       redirect_to @admin_csv_import
     else
       render :edit
