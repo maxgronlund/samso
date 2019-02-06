@@ -34,14 +34,14 @@
           h5 = t("address.#{address.address_type}")
           = render 'shared/address', address: address
           .pull-right
-            - if @subscription.period_valid?
+            - if @subscription.valid_period?
               = link_to t('edit'),
                 edit_subscription_delivery_address_path(@subscription.subscription_id, address),
                 class: 'btn btn-light'
         .col-sm-6
           - if @subscription.temporary_address.blank?
             .pull-right
-              - if  @subscription.period_valid?
+              - if  @subscription.valid_period?
                 = link_to t('subscription.new_temporary_delivery_address'),
                   new_subscription_delivery_address_path(@subscription.subscription_id),
                   class: 'btn btn-light'
@@ -50,13 +50,13 @@
             h5 = t("address.#{temporary_address.address_type}")
             = render 'shared/address', address: temporary_address
             .pull-right
-              - if @subscription.period_valid?
-                = link_to t('delete'),
-                  subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
-                  data: { confirm: t('confirm') },
-                  method: :delete,
-                  class: 'btn btn-danger'
-              - if @subscription.period_valid?
+              - if temporary_address.start_date < Time.zone.today + 5.days
+                / = link_to t('delete'),
+                /   subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
+                /   data: { confirm: t('confirm') },
+                /   method: :delete,
+                /   class: 'btn btn-danger'
+          
                 = link_to t('edit'),
                   edit_subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
                   class: 'btn btn-light'

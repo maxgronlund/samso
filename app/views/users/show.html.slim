@@ -3,6 +3,9 @@
   .row
     .col-sm-4
       h3= @user.name
+
+      - unless @user.fake_email?
+        = mail_to @user.email, @user.email
       .btn-group.mt-10
         = link_to t('edit'),
           edit_user_path(@user),
@@ -16,11 +19,6 @@
         'Adresse:&nbsp;
         = render 'shared/address', address: @user.address
 
-  .row
-    .col-sm-3
-      - unless @user.fake_email?
-        = @user.email
-      br
   br
   .row
     .col-sm-12
@@ -69,18 +67,6 @@
                 td
                   = simple_format comment.comment&.truncate(100)
                 td = show_comment(comment)
-
-  .row
-    .col-sm-12
-      table.table.table-striped.table-bordered.table-hover.table-sm
-        thead.thead-dark
-          tr
-            th Faktura
-        tbody
-          - @subscriptions.each do |subscription|
-            - next if subscription.free?
-            tr
-              td = subscription.type_name
 
   - if @user.payments.any?
     hr

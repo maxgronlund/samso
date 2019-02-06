@@ -26,7 +26,7 @@ class Admin::UsersController < AdminController
 
   # GET /admin/users/1
   def show
-    @subscriptions = @user.subscriptions
+    @subscriptions = @user.subscriptions.order(:subscription_id)
   end
 
   # GET /users/new
@@ -45,7 +45,7 @@ class Admin::UsersController < AdminController
   # POST /users
   def create
     @user = User.new(user_params)
-    @user.validate_email = true
+    # @user.validate_email = true
     if @user.save
       redirect_to admin_users_path
     else
@@ -75,8 +75,8 @@ class Admin::UsersController < AdminController
   private
 
   def update_subscription_address
-    return unless @user.active_subscription?
-    subscription = @user.last_valid_subscription
+    return unless @user.valid_subscriber?
+    subscription = @user.valid_subscriptions.last
     subscription.copy_from_address(@user.primary_address)
   end
 

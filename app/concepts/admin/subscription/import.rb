@@ -8,10 +8,7 @@ class Admin::Subscription < ApplicationRecord
   class Import
     # expire all subscriptions
     def initialize
-      Admin::Subscription
-        .integrated_with_economics.update_all(
-          end_date: Time.zone.now - 1.days
-        )
+      Admin::Subscription.economic_integrated.update_all(end_date: Time.zone.now - 1.days)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -27,16 +24,17 @@ class Admin::Subscription < ApplicationRecord
         end
 
         options = parse_options(unescaped_row)
-        options = utf_8_encode(options)
-        subscription  = subscription(options)
+        @options = utf_8_encode(options)
+        ap @subscription  = get_subscription
 
-        if subscription.persisted?
-          extend_subscription(subscription)
+        if @subscription.persisted?
+          extend_subscription
           next
         end
-        user = user(options)
-        attach_subscription(user, subscription)
-
+        user = build_user
+        user.subscriptions = [@subscription]
+        #attach_subscription(user)
+        ap user
         user.save!
       end
     end
@@ -44,72 +42,59 @@ class Admin::Subscription < ApplicationRecord
 
     private
 
-    def extend_subscription(subscription)
-      subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+    # def attach_subscription(user)
+    #   return if user.subscriptions.economic_integrated.any?
+    #   user.subscriptions = [@subscription]
+    # end
+
+    def get_subscription
+      Admin::Subscription.find(@options[:subscription_id]) || build_subscription
     end
 
-    def attach_subscription(user, subscription)
-      return if user.subscriptions.economic_integrated.any?
-       user.subscriptions = [subscription]
-    end
-
-    def subscription(options = {})
-      subscription = Admin::Subscription.find(subscription_id(options))
-      subscription.presence || build_subscription(options)
-    end
-
-    def build_subscription(options = {})
-      Admin::Subscription.new(
-        subscription_id: subscription_id(options),
-        start_date: Time.zone.now - 10.days,
-        end_date: Time.zone.now + subscription_type.duration.days,
-        subscription_type_id: subscription_type.id,
-        addresses: [address('Admin::Subscription', options)]
-      )
+    def extend_subscription
+      @subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
     end
 
     # return the user if the user is a in the system, other wise build a new one 
-    def user(options)
-      User.find_by(legacy_subscription_id: subscription_id(options)).presence || build_user(options)
+    # def get_user
+      # subscription.present? ? subscription.user : build_user
+    # end
+
+    def build_subscription
+      Admin::Subscription.new(
+        subscription_id: @options[:subscription_id],
+        start_date: Time.zone.now,
+        end_date: Time.zone.now + subscription_type.duration.days,
+        subscription_type_id: Admin::SubscriptionType.imported.id,
+        addresses: [address('Admin::Subscription')]
+      )
     end
 
-    def build_user(options)
+    def build_user
       User
         .new(
-          name: options[:name],
-          signature: options[:name],
+          name: @options[:name],
+          signature: @options[:name],
           email: User::Service.fake_email,
           password_digest: User::Service.fake_password,
-          legacy_subscription_id: subscription_id(options),
-          addresses: [address('User', options)],
           roles: [Role.new]
         )
     end
 
-    # tag subscription with economic
-    def subscription_id(options)
-      options[:subscription_id] + '-economic-integration'
-    end
-
-    # check if the user alreaddy is in the system
-    # def user_exists?
-    #   user.exists?(legacy_subscription_id: options[:subscription_id])
-    # end
-
     # the default subscription type for economics
     def subscription_type
-      @subscription_type_||= Admin::SubscriptionType.find(admin_system_setup.admin_subscription_type_id)
+      @subscription_type ||= Admin::SubscriptionType.imported
     end
 
     # build a new address
-    def address(addressable_type, options = {})
+    def address(addressable_type)
       Address.new(
         addressable_type: addressable_type,
-        name: options[:name].presence || 'No Name',
-        address: options[:address].presence || 'NA',
-        zipp_code: options[:zipp_code].presence || 'NA',
-        city: options[:city].presence || '',
-        country: options[:country].presence || 'Danmark',
+        name: @options[:name].presence || 'No Name',
+        address: @options[:address].presence || 'NA',
+        zipp_code: @options[:zipp_code].presence || 'NA',
+        city: @options[:city].presence || '',
+        country: @options[:country].presence || 'Danmark',
       )
     end
 

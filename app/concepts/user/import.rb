@@ -40,17 +40,17 @@ class User < ApplicationRecord
     # rubocop:disable Security/Open
     def import(csv_import)
       @imported = 0
-      @legacy_ids = []
+      @user_ids = []
       csv_file = open(csv_import.file_url)
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
-        import_user(options) unless options[:legacy_id].blank?
+        import_user(options) unless options[:user_id].blank?
       end
       Rails.logger.info '===================== IMPORT OF USERS ========================='
       Rails.logger.info "Succeeded: #{@imported}"
-      Rails.logger.info "Failed: #{@legacy_ids.length}"
-      Rails.logger.info "Failed with legacy_ids: #{@legacy_ids}"
+      Rails.logger.info "Failed: #{@user_ids.length}"
+      Rails.logger.info "Failed with user_ids: #{@user_ids}"
       Rails.logger.info '==============================================================='
 
       # import_subscriptions(csv_import)
@@ -65,7 +65,7 @@ class User < ApplicationRecord
     # rubocop:disable Metrics/CyclomaticComplexity
     def parsed_row(row)
       {
-        legacy_id: row[A].empty? ? nil : row[A].to_i,
+        user_id: row[A].empty? ? nil : row[A].to_i,
         Abonnr: row[B].strip,
         navn: row[C].strip.downcase.titleize,
         adresse: row[D].strip.downcase.titleize,
@@ -96,14 +96,13 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/CyclomaticComplexity
 
     def import_user(options = {})
-      user =
+
+      ap user =
         User
-        .where(legacy_id: options[:legacy_id])
+        .where(user_id: options[:user_id])
         .first_or_initialize
       return if user.persisted? || User.exists?(email: options[:email])
-
       User::Service.set_password(user, options[:password])
-      user.legacy_subscription_id = options[:Abonnr]
       user.confirmed_at = DateTime.now
       user.name = options[:navn]
       user.signature = options[:navn]
@@ -112,7 +111,7 @@ class User < ApplicationRecord
       user.roles = [Role.new]
       user.subscriptions = [subscription(options)]
 
-      @legacy_ids << options[:legacy_id] unless user.save
+      @user_ids << options[:user_id] unless user.save
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
@@ -133,7 +132,7 @@ class User < ApplicationRecord
       Admin::Subscription
         .new(
           subscription_type_id: subscription_type(options).id,
-          subscription_id: Admin::Subscription.new_subscription_id + '-legacy',
+          subscription_id: options[:Abonnr],#Admin::Subscription.new_subscription_id,
           start_date: options[:Oprettet],
           end_date: subscription_end_date(options),
           addresses: [address('Admin::Subscription', options)]

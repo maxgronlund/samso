@@ -22,11 +22,12 @@ class PaymentsController < ApplicationController
     payment =
       @user
       .payments
-      .create(
-        uuid: SecureRandom.uuid,
-        payable_type: 'Admin::Subscription',
-        payment_provider: Payment::PROVIDER_ONPAY
-      )
+      .pending
+      .first_or_initialize
+    payment.uuid = SecureRandom.uuid
+    paymentpayable_type = 'Admin::Subscription'
+    payment.payment_provider = Payment::PROVIDER_ONPAY
+    payment.save
     @form_data = form_data(@subscription_type.price_in_cent, payment.uuid)
 
     @onpay_hmac_sha1 =
@@ -40,8 +41,7 @@ class PaymentsController < ApplicationController
       onpay_currency: ENV['ONPAY_CURRENCY'],
       onpay_amount: amount,
       onpay_reference: payment_uuid,
-      onpay_accepturl: onpay_accepturl,
-      onpay_declineurl: onpay_declineturl
+      onpay_accepturl: onpay_accepturl
     }
   end
 
@@ -58,10 +58,10 @@ class PaymentsController < ApplicationController
   end
 
   def onpay_accepturl
-    Rails.env.development? ? "https://f9db18a7.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? "https://18132e67.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? "https://f9db18a7.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? "https://18132e67.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
   end
 end

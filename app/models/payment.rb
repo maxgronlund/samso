@@ -8,6 +8,8 @@ class Payment < ApplicationRecord
 
   PROVIDER_ONPAY = 'onpay'
 
+  scope :pending, -> {where(state: PENDING)}
+
   #belongs_to :subscription, class_name: 'Admin::Subscription'
 
   belongs_to :user
@@ -52,6 +54,7 @@ class Payment < ApplicationRecord
   end
 
   def for
+    return '' if payable_id.nil?
     case payable_type
     when 'Admin::Subscription'
       payable.subscription_type.title

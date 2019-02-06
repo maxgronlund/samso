@@ -13,7 +13,7 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :free, -> { where(free: true) }
   scope :payed, -> { internal.where(free: false) }
   scope :imported, -> { where(identifier: IMPORTED) }
-  scope :internal, -> { where(identifier: INTERNAL, free: false).order(:position) }
+  scope :internal, -> { where(identifier: INTERNAL).order(:position) }
 
   def price_in_cent
     (price.presence || 0) * 100
@@ -31,12 +31,12 @@ class Admin::SubscriptionType < ApplicationRecord
 
   # Admin::SubscriptionType.imported
   def self.imported
-    Admin::SubscriptionType
-      .where(identifier: IMPORTED)
+    where(identifier: IMPORTED)
       .first_or_create(
         title: 'Imported from E-Conomics',
-        body: 'Auto generated',
-        identifier: 'imported',
+        body: 'Import fra economics, kan ikke slettes og bliver oprettet automatisk',
+        identifier: IMPORTED,
+        duration: 365000,
         internet_version: true,
         print_version: true,
         price: 0,
@@ -49,12 +49,12 @@ class Admin::SubscriptionType < ApplicationRecord
 
   # Admin::SubscriptionType.imported
   def self.free_subscription
-    Admin::SubscriptionType
-      .where(identifier: 'free_subscription')
+    where(identifier: FREE_SUBSCRIPTION)
       .first_or_create(
         title: 'Fri abonnement ',
-        body: 'Fri adgang til online version',
+        body: 'Fri adgang til online version, kan ikke slettes og bliver oprettet automatisk',
         identifier: FREE_SUBSCRIPTION,
+        duration: 365000,
         internet_version: true,
         print_version: true,
         price: 0,

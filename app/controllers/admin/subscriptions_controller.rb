@@ -29,7 +29,7 @@ class Admin::SubscriptionsController < AdminController
     @user = User.new(admin_subscription_params)
     @user.addresses.first.name = @user.name
     @user.password_digest = User::Service.fake_password
-    @user.validate_email = @user.email.present?
+    # @user.validate_email = @user.email.present?
     @user.reset_password_token = SecureRandom.hex(32)
     @user.reset_password_sent_at = Time.zone.now
     @user.roles = [Role.new]
@@ -44,22 +44,20 @@ class Admin::SubscriptionsController < AdminController
 
   def destroy
     user = @admin_subscription.user
-    @admin_subscription.destroy
+    @admin_subscription.expire!
     redirect_to default_path(admin_user_path(user))
   end
 
   private
 
   def new_subscription
-    subscription_type =
-      Admin::SubscriptionType
-      .find(admin_system_setup.admin_subscription_type_id)
+    subscription_type = Admin::SubscriptionType.imported
 
     Admin::Subscription.new(
       start_date: Time.zone.now,
       end_date: Time.zone.now + subscription_type.duration.days,
       subscription_type_id: subscription_type.id,
-      subscription_id: Admin::Subscription.new_subscription_id + '-economic-integration',
+      subscription_id: Admin::Subscription.new_subscription_id,
       addresses: [subscription_address]
     )
   end

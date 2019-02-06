@@ -19,8 +19,9 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    session[:print_version] = params[:print_version]
     @user = User.new
+    @user.addresses = [Address.new] if add_sbscription_address?
+    session[:subscription_type_id] = params[:subscription_type_id]
   end
 
   def edit_user?
@@ -39,13 +40,13 @@ class UsersController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def create
     @user = User.new(user_params)
-    @user.validate_address = session[:print_version]
+    # @user.validate_address = session[:subscription_type_id].present?
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
-    @user.legacy_subscription_id = Admin::Subscription.new_subscription_id
+    @user.user_id = Admin::Subscription.new_subscription_id
     if @user.save
       User::Service.new(@user).update_login_stats(request)
-      session.delete :print_version
+      # session.delete :subscription_type_id
       @user.roles.create(permission: 'member')
       UserNotifierMailer.send_signup_email(@user.id).deliver
       redirect_user
@@ -57,6 +58,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    
     if @user.update(user_params)
       update_subscription_address if Check.checked?(user_params[:update_subscription_address])
       redirect_to @user
@@ -77,9 +79,9 @@ class UsersController < ApplicationController
   private
 
   def update_subscription_address
-    return unless @user.active_subscription?
+    return unless @user.valid_subscriber?
 
-    subscription = @user.last_valid_subscription
+    subscription = @user.valid_subscriptions.last
     subscription.copy_from_address(@user.address)
   end
 
@@ -139,6 +141,16 @@ class UsersController < ApplicationController
       :subscribe_to_news,
       addresses_attributes: %i[id name address zipp_code city]
     )
+  end
+
+  def add_sbscription_address?
+    subscription_type.present? && subscription_type.print_version
+  end
+
+  def subscription_type
+    @subscription_type ||=
+      Admin::SubscriptionType
+      .find_by(id: params[:subscription_type_id])
   end
 end
 # rubocop:enable Metrics/ClassLength

@@ -1,6 +1,6 @@
 .row
   .col-sm-6
-
+    = link_to t('cancel'), root_path, class: 'btn btn-light'
   .col-sm-6
     .pull-right
       .form-inputs
@@ -11,7 +11,6 @@
           input name="onpay_reference" type="hidden" value="#{@form_data[:onpay_reference]}"
           input name="onpay_hmac_sha1" type="hidden" value="#{@onpay_hmac_sha1}"
           input name="onpay_accepturl" type="hidden" value="#{@form_data[:onpay_accepturl]}"
-          input name="onpay_declineurl" type="hidden" value="#{@form_data[:onpay_declineurl]}"
           input name="subscription_type_id" type="hidden" value="#{@subscription_type.id}"
           input type="submit" value="#{t('payment.confirm')}" class="btn btn-primary"
 

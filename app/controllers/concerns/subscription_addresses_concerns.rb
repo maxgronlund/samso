@@ -29,7 +29,7 @@ module SubscriptionAddressesConcerns
     @address = Address.find(params[:id])
     @subscription = @address.subscription
     @address.assign_attributes(address_params)
-    ap @address_changed = @address.changed?
+    @address_changed = @address.changed?
     @address.save
   end
 
@@ -44,7 +44,7 @@ module SubscriptionAddressesConcerns
       .send_message_to_system_administrator(
         current_user_id: current_user.id,
         address_id: address.id,
-        subscription_id: @subscription.id,
+        subscription_id: @subscription.subscription_id,
         system_setup_id: admin_system_setup.id
       )
       .deliver

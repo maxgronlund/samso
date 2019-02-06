@@ -1,5 +1,5 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
-.container.pt-60
+.container
   .row.justify-content-md-center
     .col-md-auto.col-md-8
       .card
@@ -10,5 +10,3 @@
           = link_to t('forgot_password'), reset_password_index_path
           br
           /= link_to t('signup'), new_user_path
-
-

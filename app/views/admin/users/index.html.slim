@@ -49,10 +49,7 @@ br
           td = user.sanitized_email
           td = user.role_names
           td
-            - if user.free_subscription
-              .green-text
-                'Fri abonnoment
-            - elsif user.active_subscription?
+            - if user.valid_subscriber?
               .green-text
                 = user.subscription_id
             - elsif user.expired_subscriber?

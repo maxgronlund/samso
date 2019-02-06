@@ -1,31 +1,31 @@
 - subscription_module = Admin::SystemSetup.subscription_module
 
-.subscription-module
-  h4 = subscription_module.title
+.card
+  h4.card-header  = subscription_module.title
   = raw subscription_module.body
-  hr
+  .card-body
+    .subscription-module
+      = form_tag('/subscriptions', method: :post)
+        - Admin::SubscriptionType.internal.each_with_index do |subscription_type, index|
+          = label_tag do
+            - if index == 0
+              = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
+            - else
+              = radio_button_tag 'subscription_type_id', subscription_type.id
 
-  = form_tag('/subscriptions', method: :post)
-    - Admin::SubscriptionType.internal.each_with_index do |subscription_type, index|
-      = label_tag do
-        - if index == 0
-          = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'
-        - else
-          = radio_button_tag 'subscription_type_id', subscription_type.id
+            '&nbsp
+            b = subscription_type.title
+          = subscription_type.body
+          br
+          b =  number_to_currency(subscription_type.price, locale: I18n.locale, precision: 2, unit: t('currency_name'))
+          hr
 
-        '&nbsp
-        b = subscription_type.title
-      = subscription_type.body
-      br
-      b =  number_to_currency(subscription_type.price, locale: I18n.locale, precision: 2, unit: t('currency_name'))
-      hr
-
-    .row
-      .col-12
-        .pull-right
-          - if current_user.nil?
-            = link_to t('login'), new_session_path, class: 'btn btn-light'
-            '&nbsp;
-          - if Admin::SubscriptionType.for_subscription.any?
-            = submit_tag t('create_subscription'), class: "btn btn-success"
-  - session[:redirect_to] = request.url
+        .row
+          .col-12
+            .pull-right
+              - if current_user.nil?
+                = link_to t('login'), new_session_path, class: 'btn btn-light'
+                '&nbsp;
+              - if Admin::SubscriptionType.for_subscription.any?
+                = submit_tag t('create_subscription'), class: "btn btn-success"
+      - session[:redirect_to] = request.url

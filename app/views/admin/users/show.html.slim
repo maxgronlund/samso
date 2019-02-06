@@ -10,8 +10,11 @@ nav aria-label="breadcrumb"
 
 .row
   .col-sm-4
-    h3= @user.name
-    = mail_to @user.email if @user.real_email?
+    h3 = @user.name
+    = t('user.user_id', user_id: @user.user_id)
+    - if @user.real_email?
+      br
+      = mail_to @user.email 
     br
 
     .btn-group.mt-10
@@ -59,19 +62,20 @@ nav aria-label="breadcrumb"
                 th
                   .pull-right
                     .btn-group
+                      
+                      - unless subscription.expired?
+                          = link_to t('subscription.expire'),
+                            admin_subscription_path(subscription.subscription_id),
+                            data: { confirm: t('are_you_sure') },
+                            method: :delete,
+                              class: 'btn btn-danger btn-sm'
                       = link_to t('subscription.delivery_address'),
                         admin_subscription_delivery_addresses_path(subscription),
                         class: 'btn btn-light btn-sm'
-                      - if subscription == @user.default_subscription
-                        = link_to t('delete'),
-                          admin_subscription_path(subscription.subscription_id),
-                          data: { confirm: t('are_you_sure') },
-                          method: :delete,
-                          class: 'btn btn-danger btn-sm'
-                      - else
-                        = link_to t('subscription.edit_dates'),
-                          edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
-                          class: 'btn btn-light btn-sm'
+        
+                      = link_to t('subscription.edit_dates'),
+                        edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
+                        class: 'btn btn-light btn-sm'
 - if @user.sign_in_ips.any?
   hr
   h5 IP addresser brugt de sidste to uger
