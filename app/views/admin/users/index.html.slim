@@ -54,7 +54,7 @@ br
                 = user.subscription_id
             - elsif user.expired_subscriber?
               .red-text
-                = user.subscription_id
+                = user.subscription_id.presence || ''
 
           td
             .pull-right

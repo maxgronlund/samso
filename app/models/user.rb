@@ -27,7 +27,7 @@ class User < ApplicationRecord
     :validate_address,
     :cancel_account_token,
     :update_subscription_address,
-    :subscription_type #, :validate_email
+    :imported #, :validate_email
   )
 
   has_many :roles, dependent: :destroy
@@ -48,7 +48,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :roles
 
   validates :name, presence: true
-  # validates :user_id, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
   validates_with User::Validator
 
@@ -201,16 +201,6 @@ class User < ApplicationRecord
       .pluck(:subscription_type_id)
       .uniq
   end
-
-  # def self.new_user_id
-  #   return 20000 if User.count.zero?
-
-  #   new_id = (User.last.user_id.presence || 20000) + 1
-  #   while User.exists?(new_id)
-  #     new_id += 1
-  #   end
-  #   new_id
-  # end
 
   def signature
     self[:signature].presence || name

@@ -33,14 +33,10 @@ class User < ApplicationRecord
 
   # importer
   class Import
-    def initialize(current_user)
-      @current_user = current_user
-    end
-
     # rubocop:disable Security/Open
     def import(csv_import)
-      @imported = 0
-      @user_ids = []
+      @succeeded = 0
+      @failed = []
       csv_file = open(csv_import.file_url)
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
@@ -48,9 +44,8 @@ class User < ApplicationRecord
         import_user(options) unless options[:user_id].blank?
       end
       Rails.logger.info '===================== IMPORT OF USERS ========================='
-      Rails.logger.info "Succeeded: #{@imported}"
-      Rails.logger.info "Failed: #{@user_ids.length}"
-      Rails.logger.info "Failed with user_ids: #{@user_ids}"
+      Rails.logger.info "Succeeded: #{@succeeded}"
+      log_failed if @failed.any?
       Rails.logger.info '==============================================================='
 
       # import_subscriptions(csv_import)
@@ -58,6 +53,16 @@ class User < ApplicationRecord
     # rubocop:enable Security/Open
 
     private
+
+    def log_failed
+      Rails.logger.info "Failed: #{@failed.length}"
+      @failed.each do |failed|
+        Rails.logger.info '--------------------------------'
+        failed.each do |k,v|
+          Rails.logger.info "#{k}: #{v}"
+        end
+      end
+    end
 
     # rubocop:disable Metrics/PerceivedComplexity
     # rubocop:disable Metrics/MethodLength
@@ -96,12 +101,9 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/CyclomaticComplexity
 
     def import_user(options = {})
-
-      ap user =
-        User
-        .where(user_id: options[:user_id])
-        .first_or_initialize
+      user = User.where(user_id: options[:user_id]).first_or_initialize
       return if user.persisted? || User.exists?(email: options[:email])
+
       User::Service.set_password(user, options[:password])
       user.confirmed_at = DateTime.now
       user.name = options[:navn]
@@ -109,9 +111,13 @@ class User < ApplicationRecord
       user.email = options[:email].presence || User::Service.fake_email
       user.addresses = [address('User', options)]
       user.roles = [Role.new]
-      user.subscriptions = [subscription(options)]
-
-      @user_ids << options[:user_id] unless user.save
+      user.subscriptions = [subscription(options)] if options[:Abonnr].present?
+      user.imported = true
+      if user.save
+        @succeeded += 1
+      else
+        @failed << {options: options, user: user, subscription: user.subscriptions}
+      end
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
@@ -132,11 +138,18 @@ class User < ApplicationRecord
       Admin::Subscription
         .new(
           subscription_type_id: subscription_type(options).id,
-          subscription_id: options[:Abonnr],#Admin::Subscription.new_subscription_id,
+          subscription_id: subscription_id(options),#Admin::Subscription.new_subscription_id,
           start_date: options[:Oprettet],
           end_date: subscription_end_date(options),
           addresses: [address('Admin::Subscription', options)]
         )
+    end
+
+    def subscription_id(options = {})
+      if Admin::Subscription.exists?(subscription_id: options[:Abonnr].to_i)
+        return Admin::Subscription.new_subscription_id
+      end
+      options[:Abonnr]
     end
 
     def parse_zipp_code(options = {})
