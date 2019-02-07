@@ -118,7 +118,7 @@ class User < ApplicationRecord
       user = User.where(user_id: options[:Abonnr]).first_or_initialize
       email = User::Service.sanitize_email(options[:email])
       if user.persisted? || User.exists?(email: email)
-        @persisted << {options: options, user: user, subscription: user.subscriptions}
+        @persisted << {options: options, user: user.attributes, subscription: user.subscriptions}
         return
       end
 
@@ -137,7 +137,7 @@ class User < ApplicationRecord
       if user.save
         @succeeded += 1
       else
-        @failed << {options: options, user: user, subscription: user.subscriptions}
+        @failed << {options: options, user: user.attributes, subscription: user.subscriptions}
       end
     end
 
