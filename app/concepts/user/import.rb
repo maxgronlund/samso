@@ -102,8 +102,7 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/CyclomaticComplexity
 
     def import_user(options = {})
-
-      user = User.where(user_id: options[:user_id]).first_or_initialize
+      user = User.where(user_id: options[:Abonnr]).first_or_initialize
       email = User::Service.sanitize_email(options[:email])
       return if user.persisted? || User.exists?(email: email)
 
@@ -157,7 +156,7 @@ class User < ApplicationRecord
         )
     end
 
-    def expitation_date(options)      
+    def expitation_date(options)
       return options[:Oprettet] + 90.days if options[:bestil_abonavis]
 
       options[:Oprettet] + options[:Abon_periode].to_i.days
@@ -203,7 +202,6 @@ class User < ApplicationRecord
       Admin::SubscriptionType
         .where(
           duration: truncate_duration(options),
-          print_version: false,
           internet_version: true,
           print_version: options[:bestil_abonavis],
         )
@@ -237,7 +235,7 @@ class User < ApplicationRecord
       return 20.0 if options[:Abon_periode] <= 7
       return 65.0 if options[:Abon_periode] <= 30
       return 165.0 if options[:Abon_periode] <= 90
-      
+
       500
     end
   end

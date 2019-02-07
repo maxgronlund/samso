@@ -27,7 +27,7 @@ class Admin::Subscription < ApplicationRecord
           extend_subscription
           next
         end
-        user = build_user
+        user = find_or_create_user
         user.addresses = [address('User')]
         user.subscriptions = [@subscription]
         user.save!
@@ -55,9 +55,14 @@ class Admin::Subscription < ApplicationRecord
       )
     end
 
-    def build_user
-      User
-        .new(
+    def find_or_create_user
+      user =
+        User
+        .where(
+          user_id: @options[:subscription_id]
+        )
+        .first_or_initialize(
+          user_id: @options[:subscription_id],
           name: @options[:name],
           signature: @options[:name],
           email: User::Service.fake_email,
