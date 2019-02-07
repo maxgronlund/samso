@@ -37,6 +37,7 @@ class User < ApplicationRecord
     # rubocop:disable Security/Open
     def import(csv_import)
       @succeeded = 0
+      @persisted = []
       @failed = []
       csv_file = open(csv_import.file_url)
       CSV.parse(csv_file, headers: false).each do |row|
@@ -47,6 +48,8 @@ class User < ApplicationRecord
       Rails.logger.info '===================== IMPORT OF USERS ========================='
       Rails.logger.info "Succeeded: #{@succeeded}"
       log_failed if @failed.any?
+      log_persisted if @persisted.any?
+
       Rails.logger.info '==============================================================='
 
       # import_subscriptions(csv_import)
@@ -60,7 +63,17 @@ class User < ApplicationRecord
       @failed.each do |failed|
         Rails.logger.info '--------------------------------'
         failed.each do |k,v|
-          ap "#{k}: #{v}"
+          Rails.logger.info "#{k}: #{v}"
+        end
+      end
+    end
+
+    def log_persisted
+      Rails.logger.info "Failed: #{@persisted.length}"
+      @persisted.each do |persisted|
+        Rails.logger.info '--------------------------------'
+        persisted.each do |k,v|
+          Rails.logger.info "#{k}: #{v}"
         end
       end
     end
@@ -104,7 +117,9 @@ class User < ApplicationRecord
     def import_user(options = {})
       user = User.where(user_id: options[:Abonnr]).first_or_initialize
       email = User::Service.sanitize_email(options[:email])
-      return if user.persisted? || User.exists?(email: email)
+      if user.persisted? || User.exists?(email: email)
+
+      end
 
 
 
