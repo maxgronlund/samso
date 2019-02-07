@@ -85,7 +85,7 @@ class User < ApplicationRecord
     def parsed_row(row)
       {
         user_id: row[A].empty? ? nil : row[A].to_i,
-        Abonnr: row[B].strip,
+        Abonnr: build_subscription_id(row),
         navn: row[C].strip.downcase.titleize,
         adresse: row[D].strip.downcase.titleize,
         Stednavn: row[E].empty? ? nil : row[E].strip.downcase.titleize,
@@ -110,6 +110,11 @@ class User < ApplicationRecord
         bestil_abonavis: row[X] == '1',
         passivAbon: row[Y] == '0'
       }
+    end
+
+    def build_subscription_id(row)
+      subscription_id = row[B].strip
+      subscription_id.presence ||  User.new_user_id
     end
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
@@ -179,7 +184,7 @@ class User < ApplicationRecord
     end
 
     def subscription_id(options = {})
-      if Admin::Subscription.exists?(subscription_id: options[:Abonnr].to_i)
+      if Admin::Subscription.exists?(subscription_id: options[:Abonnr])
         return Admin::Subscription.new_subscription_id
       end
       options[:Abonnr]

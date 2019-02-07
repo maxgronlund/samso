@@ -205,5 +205,12 @@ class User < ApplicationRecord
     self[:signature].presence || name
   end
 
+  def self.new_user_id
+    user = last
+    return 900000 if user.nil?
+
+    900000 + user.user_id + 1
+  end
+
 end
 # rubocop:enable Metrics/ClassLength
