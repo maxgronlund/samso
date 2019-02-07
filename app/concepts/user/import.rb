@@ -69,7 +69,7 @@ class User < ApplicationRecord
     end
 
     def log_persisted
-      Rails.logger.info "Failed: #{@persisted.length}"
+      Rails.logger.info "Persisted: #{@persisted.length}"
       @persisted.each do |persisted|
         Rails.logger.info '--------------------------------'
         persisted.each do |k,v|
@@ -118,7 +118,8 @@ class User < ApplicationRecord
       user = User.where(user_id: options[:Abonnr]).first_or_initialize
       email = User::Service.sanitize_email(options[:email])
       if user.persisted? || User.exists?(email: email)
-
+        @persisted << {options: options, user: user, subscription: user.subscriptions}
+        return
       end
 
 
