@@ -4,10 +4,9 @@
 class User < ApplicationRecord
   paginates_per 50
   include PgSearch
-  multisearchable against: %i[name email]
   pg_search_scope(
     :search_by_name_or_email,
-    against: %i[name email legacy_subscription_id],
+    against: %i[name email],
     using: {
       tsearch: {
         dictionary: 'danish'
@@ -27,8 +26,7 @@ class User < ApplicationRecord
     :validate_address,
     :cancel_account_token,
     :update_subscription_address,
-    :subscription_type,
-    :validate_email
+    :imported #, :validate_email
   )
 
   has_many :roles, dependent: :destroy
@@ -48,20 +46,9 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles
 
-  # has_attached_file :avatar, styles: {
-  #   thumb: '100x100>',
-  #   square: '200x200#',
-  #   medium: '300x300>'
-  # }, default_url: 'https://s3.amazonaws.com/samso-images/users/avatars/defaults/:style/missing.png'
-
-  # # Validate the attached image is image/jpg, image/png, etc
-  # validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
-  # before_validation { avatar.clear if delete_avatar == '1' }
-  # validates :email, uniqueness: true
-  # validates :email, presence: true
   validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
-  # validates_with UserAddressValidator, if: :validate_subscription_address
   validates_with User::Validator
 
   FAKE_EMAIL =    '@10ff3690--bd40a8d99fa5.example.com'.freeze
@@ -143,48 +130,32 @@ class User < ApplicationRecord
   end
 
   def access_to_subscribed_content?
-    return true if free_subscription
-
-    active_subscription?
+    valid_subscriber?
   end
 
   def access_to_e_paper?
-    return true if free_subscription
-
-    Admin::SubscriptionType
-      .where(id: subscription_type_ids)
-      .any?
+    valid_subscriber?
   end
 
   def free_subscription?
-    free_subscription_id = Admin::SubscriptionType.free_subscription.id
-    valid_subscriptions.where(subscription_type_id: free_subscription_id).any?
+    valid_subscriber?
+    #valid_subscriptions.where(subscription_type_id: Admin::SubscriptionType.free_subscription.id).any?
   end
 
-  def active_subscription?
-    @active_subscription ||= valid_subscriptions.any?
+  def valid_subscriber?
+    valid_subscriptions.any?
   end
 
   def no_active_subscription?
-    @no_active_subscription ||=
-      valid_subscriptions.empty?
-  end
-
-  def last_valid_subscription
-    @last_valid_subscription ||= valid_subscriptions.last
+    valid_subscriptions.empty?
   end
 
   def valid_subscriptions
-    @valid_subscriptions ||=
-      subscriptions
-      .where('start_date <= :start_date', start_date: Date.today.beginning_of_day)
-      .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
+    subscriptions.valid
   end
 
   def subscription_id
-    return last_valid_subscription.subscription_id if last_valid_subscription.present?
-
-    ''
+    subscriptions.empty? ? nil : subscriptions.last.subscription_id
   end
 
   def expired_subscriber?
@@ -223,10 +194,6 @@ class User < ApplicationRecord
     fake_email? ? '' : email
   end
 
-  def subscription_nr
-    legacy_subscription_id || legacy_id
-  end
-
   def subscription_type_ids
     @subscription_type_ids ||=
       valid_subscriptions
@@ -238,20 +205,5 @@ class User < ApplicationRecord
     self[:signature].presence || name
   end
 
-  def self.economic_imported_users
-    where('legacy_subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')
-      .order(:legacy_subscription_id)
-  end
-
-  def default_subscription
-    @default_subscription ||=
-      subscriptions
-      .where(subscription_type_id: Admin::SystemSetup.find_by(locale: I18n.locale).admin_subscription_type_id)
-      .first
-  end
-
-  # def signature
-  #   [:signature].presence || name
-  # end
 end
 # rubocop:enable Metrics/ClassLength

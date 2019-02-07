@@ -55,6 +55,7 @@ Feature: The visibility of modules
     Then I visit the page named "subscribers_only"
     Then I can not see "subscribers_only"
 
+  @javascript
   Scenario: As a member I can visit the page with a module accessible to expired subscribers only without seeing it
     When I login as "member@example.com" with the password "ComeOnIn123"
     Then I visit the page named "expired_subscribers"

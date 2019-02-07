@@ -24,26 +24,24 @@
 
 
     tbody
-      - @admin_subscription_types.each do |admin_subscription_type|
+      - @admin_subscription_types.each do |subscription_type|
         tr
-          td = admin_subscription_type.title
-          td = admin_subscription_type.identifier
-          td = admin_subscription_type.duration
-          td = admin_subscription_type.internet_version ? '√' : ''
-          td = admin_subscription_type.print_version ? '√' : ''
+          td = subscription_type.title
+          td = t('subscription_type.' + subscription_type.identifier)
+          td = subscription_type.duration == 365000 ? "1000 år" : "#{subscription_type.duration} dage"
+          td = subscription_type.internet_version ? '√' : ''
+          td = subscription_type.print_version ? '√' : ''
           td
-            - if admin_subscription_type.free?
-              = t('subscription_type.free')
-            - else
-              = number_to_currency(admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
-          td = admin_subscription_type.active ? '√' : ''
-          td = admin_subscription_type.subscriptions_count
+            - unless subscription_type.free?
+              = number_to_currency(subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
+          td = subscription_type.active ? '√' : ''
+          td = subscription_type.subscriptions_count
           td
             .pull-right
               .btn-group
-                = link_to t('show'), admin_subscription_type, class: 'btn btn-light btn-sm'
-                = link_to t('edit'), edit_admin_subscription_type_path(admin_subscription_type), class: 'btn btn-light btn-sm'
-                = link_to t('delete'), admin_subscription_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
+                = link_to t('show'), subscription_type, class: 'btn btn-light btn-sm'
+                = link_to t('edit'), edit_admin_subscription_type_path(subscription_type), class: 'btn btn-light btn-sm'
+                = link_to t('delete'), subscription_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger btn-sm'
 
 br
 .pull-right

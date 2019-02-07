@@ -32,3 +32,4 @@ da:
     subscription_info: "Abonnoment %{id}"
     temporary_address: Midlertidig forsendelses adresse
     primary_address: Forsendelses adresse
+    expire: Afslut

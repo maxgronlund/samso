@@ -2,29 +2,28 @@
 == render 'shared/admin_links', selected: 'users'
 
 .row
-
-.row
   .col-sm-4
     h3 = t('user.pluralized')
-  .col-sm-5
+  .col-sm-6
     .btn-group
       = link_to t('user.create_printed_subscription'), new_admin_subscription_path, class: 'btn btn-light btn-sm'
       = link_to t('user.create'), new_admin_user_path, class: 'btn btn-light btn-sm'
-  .col-sm-3
+  .col-sm-2
     .pull-right
       = t('user.count', count: @user_count)
 
 
-
-= form_tag admin_users_path, method: 'get' do
-  .row
-    .col-sm-4
-      == render 'admin/shared/user_navigation', selected: 'all'
-    .col-sm-6
-      = text_field_tag :search, params[:search], autofocus: true, class: 'form-control'
-    .col-sm-2
-      .btn-group
-        = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
+.row.mt-10
+  .col-sm-12
+    = form_tag admin_users_path, method: 'get' do
+      .row
+        .col-sm-4
+          == render 'admin/shared/user_navigation', selected: 'all'
+        .col-sm-6
+          = text_field_tag :search, params[:search], autofocus: true, class: 'form-control'
+        .col-sm-2
+          .btn-group
+            = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
 br
 .table-responsive
   table.table.table-striped.table-bordered.table-hover.table-sm
@@ -49,15 +48,12 @@ br
           td = user.sanitized_email
           td = user.role_names
           td
-            - if user.free_subscription
-              .green-text
-                'Fri abonnoment
-            - elsif user.active_subscription?
+            - if user.valid_subscriber?
               .green-text
                 = user.subscription_id
             - elsif user.expired_subscriber?
               .red-text
-                = user.subscription_id
+                = user.subscription_id.presence || ''
 
           td
             .pull-right

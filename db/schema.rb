@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_192015) do
+ActiveRecord::Schema.define(version: 2019_02_06_124133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -406,8 +406,9 @@ ActiveRecord::Schema.define(version: 2019_01_31_192015) do
     t.datetime "on_hold_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "subscription_id", default: ""
     t.datetime "reminder_send"
+    t.boolean "send_reminder", default: false
+    t.integer "subscription_id"
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end
@@ -436,7 +437,6 @@ ActiveRecord::Schema.define(version: 2019_01_31_192015) do
     t.datetime "logo_updated_at"
     t.integer "search_page_id"
     t.string "administrator_email"
-    t.integer "admin_subscription_type_id"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
@@ -628,13 +628,7 @@ ActiveRecord::Schema.define(version: 2019_01_31_192015) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.integer "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.integer "legacy_id"
-    t.string "legacy_subscription_id"
-    t.boolean "free_subscription", default: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "blog_posts_count", default: 0

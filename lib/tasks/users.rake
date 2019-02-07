@@ -2,7 +2,7 @@ namespace :users do
   desc 'delete dublets'
   task delete_dublets: :environment do
     User.find_each do |user|
-      users = User.where(legacy_id: user.legacy_id)
+      users = User.where(user_id: user.user_id)
       if users.count > 1
         users.each_with_index do |user_to_delete, index|
           user_to_delete.destroy unless index.zero?
@@ -11,17 +11,23 @@ namespace :users do
     end
   end
 
-  desc 'reset legacy_subscription_id s'
-  task reset_legacy_subscription_ids: :environment do
+  desc 'reset user_ids'
+  task reset_ids: :environment do
     User
-      .where(legacy_subscription_id: [100000001, 100000002])
-      .update_all(legacy_subscription_id: nil)
+      .where(user_id: nil)
+      .update_all(user_id: User.new_user_id)
   end
 
+  # usage
+  # rake users:remove_non_editors
   desc 'remove all non editors'
   task remove_non_editors: :environment do
     User.find_each do |user|
       user.destroy unless user.editor?
     end
+
+    Admin::CsvImport
+    .where(import_type: ['User', 'Admin::Subscription'])
+    .update_all(imported: nil)
   end
 end

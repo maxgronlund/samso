@@ -34,8 +34,4 @@ class Admin::SystemSetup < ApplicationRecord
       .where(locale: I18n.locale)
       .first_or_create(locale: I18n.locale)
   end
-
-  # def default_subscription_type
-  #   Admin::SubscriptionType.find_by(id: admin_subscription_type_id)
-  # end
 end

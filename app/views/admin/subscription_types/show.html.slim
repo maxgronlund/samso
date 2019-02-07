@@ -10,65 +10,89 @@ nav aria-label="breadcrumb"
 h3 = @admin_subscription_type.title
 p = @admin_subscription_type.body
 
+.row
+  .col-sm-12
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover
+        thead.thead-dark
+          tr
+            th = t('activerecord.attributes.admin/subscription_type.duration')
+            th = t('activerecord.attributes.admin/subscription_type.internet_version')
+            th = t('activerecord.attributes.admin/subscription_type.print_version')
+            th = t('activerecord.attributes.admin/subscription_type.price')
+            th = t('activerecord.attributes.admin/subscription_type.active')
+            th = t('activerecord.attributes.admin/subscription_type.subscriptions_count')
+            th = t('subscription_type.position')
 
-.table-responsive
-  table.table.table-striped.table-bordered.table-hover
-    thead.thead-dark
-      tr
-        th = t('activerecord.attributes.admin/subscription_type.duration')
-        th = t('activerecord.attributes.admin/subscription_type.internet_version')
-        th = t('activerecord.attributes.admin/subscription_type.print_version')
-        th = t('activerecord.attributes.admin/subscription_type.price')
-        th = t('activerecord.attributes.admin/subscription_type.active')
-        th = t('activerecord.attributes.admin/subscription_type.subscriptions_count')
-        th = t('subscription_type.position')
+
+        tbody
+            tr
+              td = @admin_subscription_type.duration == 365000 ? '1000 år' : "#{@admin_subscription_type.duration} dage"
+              td = @admin_subscription_type.internet_version ? '√' : ''
+              td = @admin_subscription_type.print_version ? '√' : ''
+              td
+                - if @admin_subscription_type.free?
+                  = t('subscription_type.free')
+                - else
+                  = number_to_currency(@admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
+              td = @admin_subscription_type.active ? '√' : ''
+              td = @admin_subscription_type.subscriptions_count
+              td = @admin_subscription_type.position
+
+    .pull-right
+      = link_to t('edit'),
+        edit_admin_subscription_type_path(@admin_subscription_type),
+        class: 'btn btn-primary'
+.row
+  .col-sm-12
+    hr
+    = form_tag admin_subscription_type_path(@admin_subscription_type), method: 'get' do
+      .row
+        / .col-sm-4
+        /   == render 'admin/shared/user_navigation', selected: 'all'
+        .col-sm-8
+          = text_field_tag :search, params[:search], autofocus: true, class: 'form-control'
+        .col-sm-4
+          .btn-group
+            = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
+            = link_to t('show_all'), admin_subscription_type_path(@admin_subscription_type), class: 'btn btn-light'
+    br
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        thead.thead-dark
+          tr
+            th Betalt
+            th Navn
+            th Email
+            th= t('subscription.active')
+            th style='width:95px;'
+
+        tbody
+          - @users.each do |user|
+
+            tr
+              td
+                - if user.latest_online_payment.present?
+                  = user.latest_online_payment.strftime("%e/%m %Y")
+              td = link_to user.name, admin_user_path(user)
+              td = user.sanitized_email
+              td
+                - if user.valid_subscriber?
+                  .green-text
+                    = user.subscription_id
+                - elsif user.expired_subscriber?
+                  .red-text
+                    = user.subscription_id.presence || ''
+
+              td
+                .pull-right
+                  .btn-group
+                    = link_to t('show'),
+                      admin_user_path(user),
+                      class: 'btn btn-light btn-sm'
+                    
+                      
 
 
-    tbody
-        tr
-          td = @admin_subscription_type.duration
-          td = @admin_subscription_type.internet_version ? '√' : ''
-          td = @admin_subscription_type.print_version ? '√' : ''
-          td
-            - if @admin_subscription_type.free?
-              = t('subscription_type.free')
-            - else
-              = number_to_currency(@admin_subscription_type.price, locale: :da, precision: 2, unit: t('currency_name'))
-          td = @admin_subscription_type.active ? '√' : ''
-          td = @admin_subscription_type.subscriptions_count
-          td = @admin_subscription_type.position
-
-.pull-right
-  = link_to t('edit'),
-    edit_admin_subscription_type_path(@admin_subscription_type),
-    class: 'btn btn-primary'
-/ '  |
-/ = link_to 'Back', admin_subscription_types_path
-/ p
-/   strong Internet version:
-/   = @admin_subscription_type.internet_version
-/ p
-/   strong Print version:
-
-/ p
-/   strong Price:
-/ p
-/   strong Locale:
-/   = @admin_subscription_type.locale
-/ p
-/   strong Active:
-/   = @admin_subscription_type.active
-/ p
-/   strong Free:
-/   = @admin_subscription_type.free
-/ p
-/   strong Position:
-/   = @admin_subscription_type.position
-
-/ p
-/   strong Subscriptions:
-/   = @admin_subscription_type.subscriptions_count
-
-/ = link_to 'Edit', edit_admin_subscription_type_path(@admin_subscription_type)
-/ '  |
-/ = link_to 'Back', admin_subscription_types_path
+    br
+    = paginate @users

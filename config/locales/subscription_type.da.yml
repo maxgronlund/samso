@@ -7,14 +7,13 @@ da:
       admin/subscription_type:
         title: Navn
         body: Beskrivelse
-        duration: Varighed i dage
+        duration: Varighed
         locale: Sprog
         print_version: Trykt
         internet_version: WWW
         price: Pris i DKK
         active: Vises på liste
-
-        subscriptions_count: Abonnementer
+        subscriptions_count: Abonnenter
         free: Fri abbonoment
     models:
       admin/subscription_type:
@@ -33,3 +32,10 @@ da:
     position: Position på liste
     free: Friabonnement
     active_hint: Brugere uden gyldigt abonnoment kan vælge denne type
+    internal: Oprettet
+    imported: Importeret
+    imported_from_economics: Importeret fra e-conomics
+    free_subscription: Gratis abonnement
+    imported: Importeret
+    internal: Oprettet af admin
+    creation_method: Type

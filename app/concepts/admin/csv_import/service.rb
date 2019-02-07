@@ -16,9 +16,7 @@ class Admin::CsvImport < ApplicationRecord
     def import(csv_import)
       case csv_import.import_type
       when User.name
-        User::Import
-          .new(@current_user)
-          .import(csv_import)
+        User::Import.new.import(csv_import)
       when Admin::BlogPost.name
         ::Admin::BlogPost::Import
           .new(@current_user)

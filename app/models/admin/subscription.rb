@@ -7,8 +7,8 @@ class Admin::Subscription < ApplicationRecord
   belongs_to :user
   #has_many :payments, as: :payable
 
-  scope :economic_integrated, -> { where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')}
-
+  scope :economic_integrated, -> { where(subscription_type_id: Admin::SubscriptionType.imported.id)}
+  scope :with_reminders, -> { where(send_reminder: true)}
   has_many(
     :addresses,
     as: :addressable,
@@ -21,25 +21,31 @@ class Admin::Subscription < ApplicationRecord
     Payment.where(payable_type: 'Admin::Subscription', payable_id: id)
   end
 
+  def expire!
+    update(end_date: Time.zone.today.beginning_of_day - 1.day)
+  end
+
   def self.valid
-    where('start_date <= :start_date', start_date: Date.today.beginning_of_day + 1.day)
-      .where('end_date >= :end_date', end_date: Date.today.beginning_of_day)
+    where('start_date <= :start_date', start_date: Time.zone.today + 1.day)
+      .where('end_date >= :end_date', end_date: Time.zone.today)
   end
 
   def type_name
-    subscription_type.title
+    subscription_type&.title.presence || 'na'
   end
 
   def expired?
-    return false if end_date.nil?
-
     end_date < Time.zone.today
+    # return false if end_date.nil?
+
+    # end_date < Time.zone.today
   end
 
-  def period_valid?
-    return true if end_date.nil? || start_date.nil?
+  def valid_period?
+    end_date > Time.zone.today && start_date < Time.zone.today
+    # return true if end_date.nil? || start_date.nil?
 
-    start_date < Time.zone.today && end_date > Time.zone.today
+    # start_date < Time.zone.today && end_date > Time.zone.today
   end
 
   def address
@@ -75,54 +81,20 @@ class Admin::Subscription < ApplicationRecord
     subscription_type.nil? ? true : subscription_type.free?
   end
 
+  def send_reminder!
+    return if reminder_send
+    update(reminder_send: true)
+  end
+
   def self.new_subscription_id
     subscription = last
-    return '900000' if subscription.nil?
+    return 900000 if subscription.nil?
 
-    (900000 + subscription.id + 1).to_s
-  end
-
-  def imported_subscription?
-    self[:subscription_id].include?('-legacy')
-  end
-
-  def subscription_id
-    return self[:subscription_id].delete('-legacy') if imported_subscription?
-    return self[:subscription_id].delete('-economic-integration') if economic_imported_subscription?
-
-    self[:subscription_id]
-  end
-
-  def self.legacy_subscriptions
-    where('subscription_id ILIKE :subscription_id', subscription_id: '%-legacy')
-      .order(:subscription_id)
-  end
-
-  def economic_imported_subscription?
-    self[:subscription_id].include?('-economic-integration')
-  end
-
-  def self.integrated_with_economics
-    where('subscription_id ILIKE :subscription_id', subscription_id: '%-economic-integration')
-      .order(:subscription_id)
+    (900000 + subscription.id + 1)
   end
 
   def self.find(id)
-    return nil if id.blank?
-
-    plain(id) || legacy(id) || economic_import(id)
-  end
-
-  def self.plain(id)
     find_by(subscription_id: id)
-  end
-
-  def self.legacy(id)
-    find_by(subscription_id: id.to_s + '-legacy')
-  end
-
-  def self.economic_import(id)
-    find_by(subscription_id: id.to_s + '-economic-integration')
   end
 
   private

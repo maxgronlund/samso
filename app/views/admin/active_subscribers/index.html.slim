@@ -36,14 +36,14 @@ br
           td = user.role_names
           td
 
-            - if user.active_subscription?
+            - if user.valid_subscriber?
               .green-text
                 = user.subscription_id
             - elsif user.expired_subscriber?
               .red-text
-                = user.legacy_subscription_id
+                = user.user_id
             - else
-              = user.legacy_subscription_id
+              = user.user_id
           td
             .pull-right
               .btn-group

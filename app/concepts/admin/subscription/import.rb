@@ -6,11 +6,9 @@ class Admin::Subscription < ApplicationRecord
   require 'cgi'
   # services for Admin::CsvImport
   class Import
+    # expire all subscriptions
     def initialize
-      Admin::Subscription
-        .integrated_with_economics.update_all(
-          end_date: Time.zone.now - 2.days
-        )
+      Admin::Subscription.economic_integrated.update_all(end_date: Time.zone.now - 1.days)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -19,22 +17,19 @@ class Admin::Subscription < ApplicationRecord
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-        if index.zero?
-          #ap unescaped_row
-          next
-        end
+        next if index.zero?
 
         options = parse_options(unescaped_row)
-        options = utf_8_encode(options)
-        subscription  = subscription(options)
+        @options = utf_8_encode(options)
+        @subscription  = get_subscription
 
-        if subscription.persisted?
-          subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+        if @subscription.persisted?
+          extend_subscription
           next
         end
-        user = user(options)
-        attach_subscription(user, subscription)
-
+        user = build_user
+        user.addresses = [address('User')]
+        user.subscriptions = [@subscription]
         user.save!
       end
     end
@@ -42,63 +37,49 @@ class Admin::Subscription < ApplicationRecord
 
     private
 
-    def attach_subscription(user, subscription)
-      return if user.subscriptions.economic_integrated.any?
-       user.subscriptions = [subscription]
+    def get_subscription
+      Admin::Subscription.find(@options[:subscription_id]) || build_subscription
     end
 
-    def subscription(options = {})
-      subscription = Admin::Subscription.find(subscription_id(options))
-      subscription.presence || build_subscription(options)
+    def extend_subscription
+      @subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
     end
 
-    def build_subscription(options = {})
+    def build_subscription
       Admin::Subscription.new(
-        subscription_id: subscription_id(options),
-        start_date: Time.zone.now - 10.days,
+        subscription_id: @options[:subscription_id],
+        start_date: Time.zone.now,
         end_date: Time.zone.now + subscription_type.duration.days,
-        subscription_type_id: subscription_type.id,
-        addresses: [address('Admin::Subscription', options)]
+        subscription_type_id: Admin::SubscriptionType.imported.id,
+        addresses: [address('Admin::Subscription')]
       )
     end
 
-    def user(options)
-      User.find_by(legacy_subscription_id: subscription_id(options)).presence || build_user(options)
-    end
-
-    def build_user(options)
+    def build_user
       User
         .new(
-          name: options[:name],
-          signature: options[:name],
+          name: @options[:name],
+          signature: @options[:name],
           email: User::Service.fake_email,
           password_digest: User::Service.fake_password,
-          legacy_subscription_id: subscription_id(options),
-          addresses: [address('User', options)],
           roles: [Role.new]
         )
     end
 
-    def subscription_id(options)
-      options[:subscription_id] + '-economic-integration'
-    end
-
-    def user_exists?
-      user.exists?(legacy_subscription_id: options[:subscription_id])
-    end
-
+    # the default subscription type for economics
     def subscription_type
-      @subscription_type_||= Admin::SubscriptionType.find(admin_system_setup.admin_subscription_type_id)
+      @subscription_type ||= Admin::SubscriptionType.imported
     end
 
-    def address(addressable_type, options = {})
+    # build a new address
+    def address(addressable_type)
       Address.new(
         addressable_type: addressable_type,
-        name: options[:name].presence || 'No Name',
-        address: options[:address].presence || 'NA',
-        zipp_code: options[:zipp_code].presence || 'NA',
-        city: options[:city].presence || '',
-        country: options[:country].presence || 'Danmark',
+        name: @options[:name].presence || 'No Name',
+        address: @options[:address].presence || 'NA',
+        zipp_code: @options[:zipp_code].presence || 'NA',
+        city: @options[:city].presence || '',
+        country: @options[:country].presence || 'Danmark',
       )
     end
 

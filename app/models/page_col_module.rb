@@ -55,7 +55,6 @@ class PageColModule < ApplicationRecord
 
   def access_to_members_only?(current_user)
     return false if current_user.nil?
-
     access_to == 'members_only'
   end
 

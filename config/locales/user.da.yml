@@ -75,3 +75,4 @@ da:
     many_sign_in_ips: Logget ind fra mange IP addresser
     all: Alle brugere
     create_printed_subscription: Opret abonnent til trykt avis
+    user_id: "Bruger id: %{user_id}"

@@ -23,11 +23,3 @@ da:
   admin/subscription_module:
     name: Abonnoment modul
 
-
-  subscription_type:
-    new: New subscription type
-    edit: Edit subscription type
-    index: Subscription types
-    imported: Importeret
-    internal: Oprettet
-    creation_method: Opretnings metode

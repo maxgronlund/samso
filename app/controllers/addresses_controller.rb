@@ -59,19 +59,7 @@ class AddressesController < ApplicationController
     end
   end
 
-  # DELETE /addresses/1
-  # def destroy
-  #   subscription = @address.addressable
-  #   @address.destroy
-  #   redirect_to subscription_address_path(subscription)
-  # end
-
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  # def set_address
-  #   @address = Address.find(params[:id])
-  # end
 
   # Only allow a trusted parameter "white list" through.
   def address_params

@@ -127,9 +127,5 @@ class User < ApplicationRecord
         user.password = password
       end
     end
-
-    # def self.set_legacy_subscription_id(user, set_legacy_subscription_id)
-    #   user.legacy_subscription_id = set_legacy_subscription_id unlessset_legacy_subscription_id
-    # end
   end
 end

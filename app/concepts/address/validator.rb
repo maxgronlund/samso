@@ -4,7 +4,7 @@ class Address::Validator < ActiveModel::Validator
     when 'Admin::Subscription'
       validate_subscription_address(address)
     when 'User'
-      validate_address(address) if address_present?(address)
+      validate_address(address) # if address_present?(address)
     end
   end
 

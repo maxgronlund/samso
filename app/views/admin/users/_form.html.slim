@@ -6,7 +6,6 @@
         = f.input :name
       .col-sm-6
         = f.input :email
-
     .row
       .col-sm-6
         = f.input :password,
@@ -35,7 +34,7 @@
           = address.input :city,
           label: t('address.city'),
           input_html: { class: 'city-name-autofill' }
-    - if @user.active_subscription?
+    - if @user.valid_subscriber?
       = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
   .form-actions
     .pull-right

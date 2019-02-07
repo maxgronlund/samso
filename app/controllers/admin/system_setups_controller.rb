@@ -39,8 +39,7 @@ class Admin::SystemSetupsController < AdminController
       :logo,
       :delete_logo,
       :background_color,
-      :administrator_email,
-      :admin_subscription_type_id
+      :administrator_email
     )
   end
 end

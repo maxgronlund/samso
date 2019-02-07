@@ -53,4 +53,12 @@ class UserNotifierMailer < ApplicationMailer
       subject: @message.title
     )
   end
+
+  def subscription_about_to_expier(user_id)
+    @user = User.find(user_id)
+    mail(
+      to: 'test01@synthmax.dk',
+      subject: 'expire'
+    )
+  end
 end
