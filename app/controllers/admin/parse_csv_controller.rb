@@ -4,9 +4,9 @@
 class Admin::ParseCsvController < AdminController
   before_action :no_editor, only: %i[index show edit update destroy]
   def new
+    @admin_csv_import.update(imported: Time.zone.now)
     @admin_csv_import = Admin::CsvImport.find(params[:csv_import_id])
     import_service.import(@admin_csv_import)
-    @admin_csv_import.update(imported: Time.zone.now)
     redirect_to @admin_csv_import
   end
 
