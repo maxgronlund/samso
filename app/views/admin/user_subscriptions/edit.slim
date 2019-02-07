@@ -26,9 +26,18 @@
             method: 'PUT' do |f|
               .row
                 .col-sm-6
-                  = f.input :start_date
+                  = f.input :start_date, 
+                    as: :date, 
+                    start_year: Date.today.year - 5,
+                    end_year: Date.today.year + 25,
+                    order: [:day, :month, :year]
+        
                 .col-sm-6
-                  = f.input :end_date
+                  = f.input :end_date, 
+                    as: :date, 
+                    start_year: Date.today.year - 5,
+                    end_year: Date.today.year + 25,
+                    order: [:day, :month, :year]
               .pull-right
                 = link_to t('cancel'), admin_user_path(@subscription.user_id), class: 'btn btn-light'
                 = f.submit t('save'), class: 'btn btn-primary'

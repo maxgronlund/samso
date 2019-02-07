@@ -4,7 +4,6 @@
 class User < ApplicationRecord
   paginates_per 50
   include PgSearch
-  multisearchable against: %i[name email]
   pg_search_scope(
     :search_by_name_or_email,
     against: %i[name email],

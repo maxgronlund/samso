@@ -41,17 +41,17 @@ class Admin::SubscriptionType < ApplicationRecord
       duration: 365000,
       internet_version: true,
       print_version: true,
-      price: 0,
+      price: 500,
       locale: 'da',
       active: false,
       position: 0,
       free: false,
-      title: 'Imported from E-Conomics',
+      title: 'E-Conomics',
       body: 'Import fra economics, kan ikke slettes og bliver oprettet automatisk'
     }
   end
 
-  # Admin::SubscriptionType.imported
+  # Admin::SubscriptionType.free_subscription
   def self.free_subscription
     where(identifier: FREE_SUBSCRIPTION)
       .first_or_create(
@@ -63,7 +63,7 @@ class Admin::SubscriptionType < ApplicationRecord
         print_version: true,
         price: 0,
         locale: 'da',
-        active: true,
+        active: false,
         position: 0,
         free: true
       )

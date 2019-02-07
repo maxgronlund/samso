@@ -69,6 +69,7 @@ da:
   confirm: Er du sikker?
   accept: Godkend
   ok: Ok
+  show_all: Vis alle
 
 
   activerecord:

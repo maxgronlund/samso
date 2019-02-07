@@ -17,11 +17,7 @@ class Admin::Subscription < ApplicationRecord
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-        if index.zero?
-          #ap unescaped_row
-          # dont use the top row
-          next
-        end
+        next if index.zero?
 
         options = parse_options(unescaped_row)
         @options = utf_8_encode(options)
@@ -32,20 +28,14 @@ class Admin::Subscription < ApplicationRecord
           next
         end
         user = build_user
+        user.addresses = [address('User')]
         user.subscriptions = [@subscription]
-        #attach_subscription(user)
-        ap user
         user.save!
       end
     end
     # rubocop:enable Security/Open
 
     private
-
-    # def attach_subscription(user)
-    #   return if user.subscriptions.economic_integrated.any?
-    #   user.subscriptions = [@subscription]
-    # end
 
     def get_subscription
       Admin::Subscription.find(@options[:subscription_id]) || build_subscription
@@ -54,11 +44,6 @@ class Admin::Subscription < ApplicationRecord
     def extend_subscription
       @subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
     end
-
-    # return the user if the user is a in the system, other wise build a new one 
-    # def get_user
-      # subscription.present? ? subscription.user : build_user
-    # end
 
     def build_subscription
       Admin::Subscription.new(

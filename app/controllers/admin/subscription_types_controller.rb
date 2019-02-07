@@ -14,6 +14,22 @@ class Admin::SubscriptionTypesController < AdminController
   # GET /admin/subscription_types/1
   # GET /admin/subscription_types/1.json
   def show
+    user_ids = @admin_subscription_type.subscriptions.pluck(:user_id).uniq
+    @users =
+      if params[:search].present?
+        User
+          .where(id: user_ids)
+          .search_by_name_or_email(params[:search])
+          .order(:latest_online_payment)
+          .page params[:page]
+      else
+        User
+          .where(id: user_ids)
+          .order(:latest_online_payment)
+          .page params[:page]
+      end
+    @selected = 'users'
+    @user_count = User.count
   end
 
   # GET /admin/subscription_types/new

@@ -18,10 +18,16 @@ namespace :users do
       .update_all(user_id: User.new_user_id)
   end
 
+  # usage
+  # rake users:remove_non_editors
   desc 'remove all non editors'
   task remove_non_editors: :environment do
     User.find_each do |user|
       user.destroy unless user.editor?
     end
+
+    Admin::CsvImport
+    .where(import_type: ['User', 'Admin::Subscription'])
+    .update_all(imported: nil)
   end
 end

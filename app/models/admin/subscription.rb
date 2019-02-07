@@ -31,7 +31,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def type_name
-    subscription_type.title
+    subscription_type&.title.presence || 'na'
   end
 
   def expired?

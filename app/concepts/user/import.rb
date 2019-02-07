@@ -1,3 +1,4 @@
+# old users
 # namespace to confine service class to Admin:CsvImport::Service
 class User < ApplicationRecord
   require 'csv'
@@ -59,7 +60,7 @@ class User < ApplicationRecord
       @failed.each do |failed|
         Rails.logger.info '--------------------------------'
         failed.each do |k,v|
-          Rails.logger.info "#{k}: #{v}"
+          ap "#{k}: #{v}"
         end
       end
     end
@@ -82,18 +83,18 @@ class User < ApplicationRecord
         email: User::Service.sanitize_email(row[J]),
         Brugernavn: row[K].empty? ? nil : row[K].strip,
         password: row[L].empty? ? nil : row[L].strip,
-        Abon_periode: row[M],
+        Abon_periode: row[M].to_i,
         Oprettet: row[N].empty? ? nil : row[N].strip.samso_import_to_datetime,
         Aktiv: row[O] == '0',
         UdloebsDato: row[P].empty? ? nil : row[P].strip.samso_import_to_datetime,
         SessionId: row[Q],
-        Friabon: row[R] == '0',
+        Friabon: row[R] == '1',
         Transact: row[S].empty? ? nil : row[S].to_i,
         Amount: row[T].empty? ? nil : row[T].to_i,
         TransactOpdateret: row[U].empty? ? nil : row[U],
         UpdateFriabon: row[V] == '0',
         UpdateAbon: row[W] == '0',
-        bestil_abonavis: row[X] == '0',
+        bestil_abonavis: row[X] == '1',
         passivAbon: row[Y] == '0'
       }
     end
@@ -101,23 +102,34 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/CyclomaticComplexity
 
     def import_user(options = {})
+
       user = User.where(user_id: options[:user_id]).first_or_initialize
-      return if user.persisted? || User.exists?(email: options[:email])
+      email = User::Service.sanitize_email(options[:email])
+      return if user.persisted? || User.exists?(email: email)
+
+
 
       User::Service.set_password(user, options[:password])
       user.confirmed_at = DateTime.now
       user.name = options[:navn]
       user.signature = options[:navn]
-      user.email = options[:email].presence || User::Service.fake_email
+      user.email = email
+      user.confirmed_at = Time.zone.today
       user.addresses = [address('User', options)]
       user.roles = [Role.new]
-      user.subscriptions = [subscription(options)] if options[:Abonnr].present?
+      user.subscriptions = [subscription(options)] if user_has_a_subscription(options)
       user.imported = true
       if user.save
         @succeeded += 1
       else
         @failed << {options: options, user: user, subscription: user.subscriptions}
       end
+    end
+
+    def user_has_a_subscription(options)
+      return false if options[:Oprettet].blank?
+      return false if options[:Abon_periode].zero?
+      options[:Abonnr].present?
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
@@ -140,9 +152,15 @@ class User < ApplicationRecord
           subscription_type_id: subscription_type(options).id,
           subscription_id: subscription_id(options),#Admin::Subscription.new_subscription_id,
           start_date: options[:Oprettet],
-          end_date: subscription_end_date(options),
+          end_date: expitation_date(options),
           addresses: [address('Admin::Subscription', options)]
         )
+    end
+
+    def expitation_date(options)      
+      return options[:Oprettet] + 90.days if options[:bestil_abonavis]
+
+      options[:Oprettet] + options[:Abon_periode].to_i.days
     end
 
     def subscription_id(options = {})
@@ -174,28 +192,53 @@ class User < ApplicationRecord
       options[:postnr_by].split
     end
 
-    def subscription_end_date(options = {})
-      return calculate_subscription_end_date(options) if options[:UdloebsDato].nil?
-
-      options[:UdloebsDato]
-    end
-
-    def calculate_subscription_end_date(options = {})
-      oprettet = options[:Oprettet]
-      abon_periode = options[:Abon_periode].to_i
-      oprettet = Time.zone.now - 1.year if oprettet.nil?
-      oprettet + abon_periode.days
-    end
-
     def subscription_type(options)
+      return Admin::SubscriptionType.free_subscription if options[:Friabon]
+      return subscription_types(options).first if subscription_types(options).any?
+
+      create_subscription_type(options)
+    end
+
+    def subscription_types(options)
       Admin::SubscriptionType
         .where(
-          title: Admin::SubscriptionType::IMPORTED,
-          duration: options[:Abon_periode].to_i,
+          duration: truncate_duration(options),
+          print_version: false,
+          internet_version: true,
           print_version: options[:bestil_abonavis],
-          internet_version: true
+        )
+    end
+
+    def create_subscription_type(options)
+      duration = truncate_duration(options)
+
+      Admin::SubscriptionType
+        .where(
+          title: "Importeret: #{duration.to_s} dage",
+          identifier: Admin::SubscriptionType::IMPORTED,
+          duration: duration,
+          print_version: options[:bestil_abonavis],
+          internet_version: true,
+          price: price(options)
         )
         .first_or_create
+    end
+
+    def truncate_duration(options)
+      # return 90 if options[:bestil_abonavis]
+      return 7 if options[:Abon_periode] <= 7
+      return 30 if options[:Abon_periode] <= 30
+      return 90 if options[:Abon_periode] <= 90
+      365
+    end
+
+    def price(options)
+      # return 300 if options[:bestil_abonavis]
+      return 20.0 if options[:Abon_periode] <= 7
+      return 65.0 if options[:Abon_periode] <= 30
+      return 165.0 if options[:Abon_periode] <= 90
+      
+      500
     end
   end
 end

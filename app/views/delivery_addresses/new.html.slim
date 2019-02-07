@@ -41,9 +41,21 @@
             - if @address.temporary?
               .row
                 .col-sm-6
-                  = f.input :start_date
+                  = f.input :start_date, 
+                    as: :date, 
+                    start_year: Date.today.year - 5,
+                    end_year: Date.today.year + 25,
+                    order: [:day, :month, :year],
+                    label: t('address.start_date')
+        
                 .col-sm-6
-                  = f.input :end_date
+                  = f.input :end_date, 
+                    as: :date, 
+                    start_year: Date.today.year - 5,
+                    end_year: Date.today.year + 25,
+                    order: [:day, :month, :year],
+                    label: t('address.end_date'),
+                    hint: t('address.end_date_hint')
 
             = f.input :name
             = f.input :address

@@ -69,9 +69,10 @@ nav aria-label="breadcrumb"
                             data: { confirm: t('are_you_sure') },
                             method: :delete,
                               class: 'btn btn-danger btn-sm'
-                      = link_to t('subscription.delivery_address'),
-                        admin_subscription_delivery_addresses_path(subscription),
-                        class: 'btn btn-light btn-sm'
+                      - if subscription.print_version?
+                        = link_to t('subscription.delivery_address'),
+                          admin_subscription_delivery_addresses_path(subscription),
+                          class: 'btn btn-light btn-sm'
         
                       = link_to t('subscription.edit_dates'),
                         edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
