@@ -209,7 +209,7 @@ class User < ApplicationRecord
     user = last
     return 900000 if user.nil?
 
-    900000 + user.user_id + 1
+    (900000 + user.id + 1)
   end
 
 end

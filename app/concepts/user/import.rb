@@ -127,8 +127,6 @@ class User < ApplicationRecord
         return
       end
 
-
-
       User::Service.set_password(user, options[:password])
       user.confirmed_at = DateTime.now
       user.name = options[:navn]
