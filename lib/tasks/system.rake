@@ -98,6 +98,7 @@ namespace :system do
       { title: 'Reset password link is send', body: '', identifier: 'resend_password', locale: 'en' },
       { title: 'Nyt password', body: '', identifier: 'new_password_email', locale: 'da' },
       { title: 'Indsend læserbrev', body: '', identifier: 'letter_to_the_edditors', locale: 'da' },
+      { title: 'Letter to the editor', body: '', identifier: 'letter_to_the_edditors', locale: 'en' },
       { title: 'New password', body: '', identifier: 'new_password_email', locale: 'en' },
       { title: 'Bekræfte email', body: '', identifier: 'confirm_email_email', locale: 'da' },
       { title: 'Confirm email', body: '', identifier: 'confirm_email_email', locale: 'en' },

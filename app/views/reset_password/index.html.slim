@@ -23,7 +23,7 @@
         .alert.alert-info
 
           h4 = @message.title
-          = @message.body
+          = simple_format @message.body
           hr
           .row
             .col-md-12

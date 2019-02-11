@@ -7,3 +7,12 @@
 
   .form-actions
     = f.submit t('save'), class: 'btn btn-primary'
+
+javascript:
+  $(function() {
+    $('#admin_system_message_body').froalaEditor(
+      {
+        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+      }
+    )
+  });

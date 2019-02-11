@@ -19,7 +19,7 @@
             button.close aria-label="Close" data-dismiss="modal" type="button"
               span aria-hidden="true"  &times;
           .modal-body
-            = Admin::SystemMessage.accept_gdpr_message.body
+            = simple_format Admin::SystemMessage.accept_gdpr_message.body
           .modal-footer
             = simple_form_for [current_user], url: url_for(action: 'update', controller: 'gdpr'), method: 'PUT' do |f|
               .form-actions

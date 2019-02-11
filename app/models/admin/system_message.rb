@@ -126,4 +126,17 @@ class Admin::SystemMessage < ApplicationRecord
         body: "bla bla"
       )
   end
+
+  # usage Admin::SystemMessage.letter_to_the_edditors
+  def self.letter_to_the_edditors
+    @cancel_account_message =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'letter_to_the_edditors')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'letter_to_the_edditors',
+        title: 'Letter to the editors',
+        body: "bla bla"
+      )
+  end
 end

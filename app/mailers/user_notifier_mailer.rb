@@ -16,7 +16,7 @@ class UserNotifierMailer < ApplicationMailer
     @name = @user.name
     message = Admin::SystemMessage.thanks_for_signing_up_email
     @title  = message.title
-    @body = message.body
+    @body = simple_format message.body
     @link = confirm_signup_url(I18n.locale, @token)
     mail(
       to: @user.email,

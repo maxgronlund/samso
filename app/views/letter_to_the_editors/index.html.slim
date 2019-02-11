@@ -1,2 +1,13 @@
-h1 LetterToTheEditors#index
-p Find me in app/views/letter_to_the_editors/index.html.slim
+= render 'shared/navbar', menu: @menu
+.container-fluid
+  .row.mt-20
+    .col-sm-12
+			h3 = @message.title
+			p = simple_format @message.body
+
+			- @emails.each_with_index do |email, index|
+				- unless index.zero?
+					'&nbsp;|&nbsp;
+				= mail_to email, email
+				
+	
