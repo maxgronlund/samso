@@ -12,30 +12,40 @@ h3 = t('edit_model', model_name: 'System opsætning')
 = simple_form_for [@admin_system_setup], multipart: true do |f|
   = f.error_notification
 
-  = f.input :administrator_email, as: :email
-
-  = f.input :landing_page_id,
-    collection: Page.where(locale: I18n.locale),
-    include_blank: false
-
-  = f.input :subscription_page_id,
-    collection: Page.where(locale: I18n.locale),
-    include_blank: false
-
-  = f.input :search_page_id,
-    collection: Page.where(locale: I18n.locale),
-    include_blank: false
+  .row
+    .col-sm-6
+      = f.input :administrator_email,
+        as: :email, 
+        label: t('system_setup.administrator_email'),
+        hint: t('system_setup.administrator_email_hint')
+    .col-sm-6
+      = f.input :editor_emails,
+      as: :email,
+      label: t('system_setup.editor_emails'),
+      hint: t('system_setup.editor_emails_hint')
 
   .row
+    .col-sm-6
+      = f.input :landing_page_id,
+        collection: Page.where(locale: I18n.locale),
+        include_blank: false
+    .col-sm-6
+      = f.input :subscription_page_id,
+        collection: Page.where(locale: I18n.locale),
+        include_blank: false
+  .row
+    .col-sm-6
+      = f.input :search_page_id,
+        collection: Page.where(locale: I18n.locale),
+        include_blank: false
     .col-md-6
-      = f.input :logo
-
-
-    .col-md-6
-      - unless @admin_system_setup.logo_file_size.nil?
-        = f.input :delete_logo, as: :boolean
-
-  = f.input :background_color
+      .row
+        .col-sm-6
+          = f.input :logo
+          - unless @admin_system_setup.logo_file_size.nil?
+            = f.input :delete_logo, as: :boolean
+        .col-sm-6
+          = f.input :background_color
   .pull-right
     = link_to t('cancel'), admin_index_path, class: 'btn btn-light'
     = f.submit t('save'), class: 'btn btn-primary'

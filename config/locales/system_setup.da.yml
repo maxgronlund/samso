@@ -12,3 +12,8 @@ da:
         locale: Sprog
     models:
       admin/system_setup: System opsætning
+  system_setup:
+    administrator_email: Email til administrator
+    administrator_email_hint: Beskeder om nye abonnenter
+    editor_emails: Emails til Jurnalister
+    editor_emails_hint: Emails med Læserbreve sendes til.

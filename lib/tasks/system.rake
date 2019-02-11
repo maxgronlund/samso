@@ -21,6 +21,11 @@ namespace :system do
     end
   end
 
+  desc 'build system messages'
+  task build_system_messages: :environment do
+    create_system_messages
+  end
+
   private
 
   def build_footer(locale)
@@ -92,6 +97,7 @@ namespace :system do
       { title: 'Reset password link er sendt', body: '', identifier: 'resend_password', locale: 'da' },
       { title: 'Reset password link is send', body: '', identifier: 'resend_password', locale: 'en' },
       { title: 'Nyt password', body: '', identifier: 'new_password_email', locale: 'da' },
+      { title: 'Indsend læserbrev', body: '', identifier: 'letter_to_the_edditors', locale: 'da' },
       { title: 'New password', body: '', identifier: 'new_password_email', locale: 'en' },
       { title: 'Bekræfte email', body: '', identifier: 'confirm_email_email', locale: 'da' },
       { title: 'Confirm email', body: '', identifier: 'confirm_email_email', locale: 'en' },
