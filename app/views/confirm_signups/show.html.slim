@@ -1,19 +1,41 @@
 /= render 'shared/navbar', menu: @menu, top_page: @page
+= render 'shared/navbar', menu: @menu
 .container
   .row.justify-content-md-center
     .col-md-auto.col-md-8
-      - if @user
-        .alert.alert-success
-          h3
-            = @user.name
-            ',&nbsp;
-            = Admin::SystemMessage.welcome.title
-          = Admin::SystemMessage.welcome.body
-          .row
-            .col-12.mt-8
-              .pull-right
-                = link_to t('get_started'), root_path, class: 'btn btn-secondary'
-      - else
-        .alert.alert-danger
-          = t('user.errors.account_confirmed')
-        = link_to t('user.login'), new_session_path, class: 'btn btn-success'
+      .card
+        h4.card-header = t('user.confirm_email')
+        .card-body
+          - if @user
+            h3
+              = @user.name
+              ',&nbsp;
+              = Admin::SystemMessage.welcome.title
+            = Admin::SystemMessage.welcome.body
+            .row
+              .col-12.mt-8
+                .pull-right
+                  = link_to t('get_started'), root_path, class: 'btn btn-light'
+          - else
+            .alert.alert-danger
+              = t('user.errors.account_confirmed')
+            .pull-right
+              = link_to t('user.login'), new_session_path, class: 'btn btn-light'
+
+
+/= render 'shared/navbar', menu: @menu
+/ .row.justify-content-md-center.mt-60
+/   .col-md-auto.col-md-8
+/     .card
+/       h4.card-header = t('user.confirm_email')
+/       .card-body
+/         h3
+/           = @user.name
+/           '&nbsp;
+/           = Admin::SystemMessage.welcome.title
+/         = simple_format Admin::SystemMessage.welcome.body
+
+/         .row
+/           .col-12.mt-8
+/             .pull-right
+/               = link_to t('user.continue_to_site'), root_path, class: 'btn btn-light'

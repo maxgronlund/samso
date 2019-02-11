@@ -64,7 +64,7 @@ da:
     current_sign_in_ip: 'Logget ind fra IP: '
     confirm_email: Bekræft email
     errors:
-      account_confirmed: Konto er allerde bekræftet
+      account_confirmed: Din email er allerde bekræftet
     address: '*Adresse'
     active_subscribers: Brugere med gyldigt abonnement
     write_code_placeholder: Skriv koden her
@@ -76,3 +76,5 @@ da:
     all: Alle brugere
     create_printed_subscription: Opret abonnent til trykt avis
     user_id: "Bruger id: %{user_id}"
+    continue_to_site: Fortsæt til siden
+
