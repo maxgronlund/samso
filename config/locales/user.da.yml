@@ -64,9 +64,9 @@ da:
     current_sign_in_ip: 'Logget ind fra IP: '
     confirm_email: Bekræft email
     errors:
-      account_confirmed: Konto er allerde bekræftet
       account_not_confirmed: Din email er ikke bekræftiget
       account_not_confirmed_hint: "Der er sendt en email til %{email}, kontroler venligst din email"
+      account_confirmed: Din email er allerde bekræftet
 
     address: '*Adresse'
     active_subscribers: Brugere med gyldigt abonnement
@@ -82,3 +82,6 @@ da:
     resend_email_confirmation: Send ny email
     confirmation_email_sent_title: Ny email konfirmations email er sent
     confirmation_email_sent_body: "Der er sent en ny email til %{email}, åben venligst emailen og følg instruktionerne"
+    continue_to_site: Fortsæt til siden
+
+>>>>>>> 5f26b1507d5be9fe6e85a17ee2b95d3f7c40e8eb

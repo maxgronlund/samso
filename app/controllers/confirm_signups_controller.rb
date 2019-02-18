@@ -5,6 +5,7 @@ class ConfirmSignupsController < ApplicationController
     @user = User.find_by(confirmation_token: params[:id])
     return if @user.nil?
 
+    @current_user = @user
     user_service = User::Service.new(@user)
     return unless user_service.valid_confirmation_token?
 

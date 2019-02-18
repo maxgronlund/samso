@@ -28,7 +28,7 @@
            = address.input :city,
            label: t('address.city'),
            input_html: { class: 'city-name-autofill' }
-    
+
     - if @user.valid_subscriber?
       = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
     = f.input :subscribe_to_news, as: :boolean
@@ -37,7 +37,7 @@
   .form-actions
     .pull-right
       - if current_user.nil?
-        = link_to t('cancel'), session[:last_page].presence || root_path, class: 'btn btn-light'
+        = link_to t('cancel'), session[:stored_path].presence || root_path, class: 'btn btn-light'
       - else
         = link_to t('cancel'), user_path(current_user), class: 'btn btn-light'
       = f.submit t('save'), class: 'btn btn-primary', id: 'submit'
