@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
-
-  resources :letter_to_the_editors, only: [:index]
+  
+  
   resources :comments
   namespace :api do
     namespace :v1 do
@@ -10,6 +9,11 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /da|en/ do
+    resources :contact, only: [:index]
+    resources :terms_and_conditions, only: [:index]
+    resources :letter_to_the_editors, only: [:index]
+    resources :confirmation_required, only: [:show, :update]
+    resources :confirmation_sent, only: [:show]
     resources :search, only: %i[index show]
     resources :accepted_payments
     resources :advertisements

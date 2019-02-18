@@ -129,7 +129,7 @@ class Admin::SystemMessage < ApplicationRecord
 
   # usage Admin::SystemMessage.letter_to_the_edditors
   def self.letter_to_the_edditors
-    @cancel_account_message =
+    @letter_to_the_edditors =
       Admin::SystemMessage
       .where(locale: I18n.locale, identifier: 'letter_to_the_edditors')
       .first_or_create(
@@ -137,6 +137,56 @@ class Admin::SystemMessage < ApplicationRecord
         identifier: 'letter_to_the_edditors',
         title: 'Letter to the editors',
         body: "bla bla"
+      )
+  end
+
+  # usage Admin::SystemMessage.printed_add
+  def self.printed_add
+    @printed_add =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'printed_add')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'printed_add',
+        title: 'Printed ad title',
+        body: "Printed body"
+      )
+  end
+
+  # usage Admin::SystemMessage.printed_ad_created
+  def self.printed_ad_created
+    @printed_add_created =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'printed_add_created')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'printed_add_created',
+        title: 'Printed ad created title',
+        body: "Printed ad created body"
+      )
+  end
+
+  def self.terms_and_conditions
+    @terms_and_conditions =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'terms_and_conditions')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'terms_and_conditions',
+        title: 'Terms and conditions title',
+        body: "Rerms and conditions body"
+      )
+  end
+
+  def self.contact
+    @contact =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'contact')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'contact',
+        title: 'Contact title',
+        body: "Contact body"
       )
   end
 end

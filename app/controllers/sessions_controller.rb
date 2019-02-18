@@ -11,9 +11,11 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email].downcase.strip)
     if user && user.confirmed_at.nil?
-      set_menu
-      @landing_page = admin_system_setup.landing_page
-      flash.now.alert = t('please_confirm_your_account')
+      redirect_to confirmation_required_path(user.confirmation_token)
+      return
+      # set_menu
+      # @landing_page = admin_system_setup.landing_page
+      # flash.now.alert = t('please_confirm_your_account')
       render 'new'
     elsif user && user.authenticate(params[:password])
       update_login_stats(user)

@@ -1,0 +1,9 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+- session[:stored_path] = request.path
+
+
+.container-fluid
+  .row
+    .col-sm-12.mt-20
+      h3 = Admin::SystemMessage.terms_and_conditions.title
+      = simple_format Admin::SystemMessage.terms_and_conditions.body

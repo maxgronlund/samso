@@ -4,45 +4,50 @@
 
 .container-fluid
   .row
-    .col-sm-12
-      h1 Listing service_functions_printed_ads
+    .col-sm-12.mt-20
+      - if notice.present?
+        .alert.alert-success
+          h5 = Admin::SystemMessage.printed_ad_created.title
+          = simple_format Admin::SystemMessage.printed_ad_created.body
+      h3 = Admin::SystemMessage.printed_add.title
+      = simple_format Admin::SystemMessage.printed_add.body
+      .pull-right
+        = link_to t('printed_ad.create'), new_service_functions_printed_ad_path, class: 'btn btn-light'
+      / h1 Listing service_functions_printed_ads
+      / table
+      /   thead
+      /     tr
+      /       th Start date
+      /       th Number of columns
+      /       th Body
+      /       th Comment
+      /       th Name
+      /       th Address
+      /       th Zipp code
+      /       th City
+      /       th Email
+      /       th Phone
+      /       th Contact person
+      /       th
+      /       th
+      /       th
+      /   tbody
+      /     - @service_functions_printed_ads.each do |service_functions_printed_ad|
+      /       tr
+      /         td = service_functions_printed_ad.start_date
+      /         td = service_functions_printed_ad.number_of_columns
+      /         td = service_functions_printed_ad.body
+      /         td = service_functions_printed_ad.comment
+      /         td = service_functions_printed_ad.name
+      /         td = service_functions_printed_ad.address
+      /         td = service_functions_printed_ad.zipp_code
+      /         td = service_functions_printed_ad.city
+      /         td = service_functions_printed_ad.email
+      /         td = service_functions_printed_ad.phone
+      /         td = service_functions_printed_ad.contact_person
+      /         td = link_to 'Show', service_functions_printed_ad
+      /         td = link_to 'Edit', edit_service_functions_printed_ad_path(service_functions_printed_ad)
+      /         td = link_to 'Destroy', service_functions_printed_ad, data: { confirm: 'Are you sure?' }, method: :delete
+      / br
 
-      table
-        thead
-          tr
-            th Start date
-            th Number of columns
-            th Body
-            th Comment
-            th Name
-            th Address
-            th Zipp code
-            th City
-            th Email
-            th Phone
-            th Contact person
-            th
-            th
-            th
-
-        tbody
-          - @service_functions_printed_ads.each do |service_functions_printed_ad|
-            tr
-              td = service_functions_printed_ad.start_date
-              td = service_functions_printed_ad.number_of_columns
-              td = service_functions_printed_ad.body
-              td = service_functions_printed_ad.comment
-              td = service_functions_printed_ad.name
-              td = service_functions_printed_ad.address
-              td = service_functions_printed_ad.zipp_code
-              td = service_functions_printed_ad.city
-              td = service_functions_printed_ad.email
-              td = service_functions_printed_ad.phone
-              td = service_functions_printed_ad.contact_person
-              td = link_to 'Show', service_functions_printed_ad
-              td = link_to 'Edit', edit_service_functions_printed_ad_path(service_functions_printed_ad)
-              td = link_to 'Destroy', service_functions_printed_ad, data: { confirm: 'Are you sure?' }, method: :delete
-
-      br
-
-      = link_to 'New Printed ad', new_service_functions_printed_ad_path
+      

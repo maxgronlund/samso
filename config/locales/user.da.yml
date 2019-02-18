@@ -65,6 +65,9 @@ da:
     confirm_email: Bekræft email
     errors:
       account_confirmed: Konto er allerde bekræftet
+      account_not_confirmed: Din email er ikke bekræftiget
+      account_not_confirmed_hint: "Der er sendt en email til %{email}, kontroler venligst din email"
+
     address: '*Adresse'
     active_subscribers: Brugere med gyldigt abonnement
     write_code_placeholder: Skriv koden her
@@ -76,3 +79,6 @@ da:
     all: Alle brugere
     create_printed_subscription: Opret abonnent til trykt avis
     user_id: "Bruger id: %{user_id}"
+    resend_email_confirmation: Send ny email
+    confirmation_email_sent_title: Ny email konfirmations email er sent
+    confirmation_email_sent_body: "Der er sent en ny email til %{email}, åben venligst emailen og følg instruktionerne"
