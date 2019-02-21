@@ -9,6 +9,7 @@ class Admin::Subscription < ApplicationRecord
 
   scope :economic_integrated, -> { where(subscription_type_id: Admin::SubscriptionType.imported.id)}
   scope :with_reminders, -> { where(send_reminder: true)}
+  scope :without_reminders, -> { where(send_reminder: [nil, false])}
   has_many(
     :addresses,
     as: :addressable,

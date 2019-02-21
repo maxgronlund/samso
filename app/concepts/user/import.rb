@@ -92,7 +92,7 @@ class User < ApplicationRecord
         postnr_by: row[F].empty? ? nil : row[F].strip.downcase.titleize,
         Telefon: row[G].empty? ? nil : row[G].strip.downcase,
         Mobil: row[H].empty? ? nil : row[H].strip.downcase,
-        Nyhedsbrev: row[U] == '0',
+        Nyhedsbrev: row[U].present?,
         email: User::Service.sanitize_email(row[J]),
         Brugernavn: row[K].empty? ? nil : row[K].strip,
         password: row[L].empty? ? nil : row[L].strip,
@@ -123,6 +123,7 @@ class User < ApplicationRecord
       user = User.where(user_id: options[:Abonnr]).first_or_initialize
       email = User::Service.sanitize_email(options[:email])
       if user.persisted? || User.exists?(email: email)
+        user.update(subscribe_to_news: options[:Nyhedsbrev])
         @persisted << {options: options, user: user.attributes, subscription: user.subscriptions}
         return
       end
@@ -136,6 +137,7 @@ class User < ApplicationRecord
       user.addresses = [address('User', options)]
       user.roles = [Role.new]
       user.subscriptions = [subscription(options)] if user_has_a_subscription(options)
+      user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
       if user.save
         @succeeded += 1

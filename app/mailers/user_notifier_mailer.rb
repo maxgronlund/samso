@@ -56,9 +56,13 @@ class UserNotifierMailer < ApplicationMailer
 
   def subscription_about_to_expier(user_id)
     @user = User.find(user_id)
+    if Rails.env =="development"
+      return unless @user.email == 'max@synthmax.dk'
+    end
+    ap @message = Admin::SystemMessage.subscription_about_to_expire
     mail(
-      to: 'test01@synthmax.dk',
-      subject: 'expire'
+      to: @user.email,
+      subject: @message.title
     )
   end
 end

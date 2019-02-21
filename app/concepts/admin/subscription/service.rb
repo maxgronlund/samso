@@ -35,7 +35,7 @@ class Admin::Subscription < ApplicationRecord
     # usage: Admin::Subscription::Service.users_to_notify
     def self.users_ids_to_notify
       Admin::Subscription
-        .with_reminders
+        .without_reminders
         .valid
         .where(query, start: start_date, end: end_date)
         .pluck(:user_id)

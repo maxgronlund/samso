@@ -83,15 +83,15 @@ class Admin::TextModule < ApplicationRecord
   end
 
   def no_link?
-    page_id.nil? && url.empty?
+    link? == false
   end
 
   def link?
-    !no_link?
+    page_id.present? || url.present?
   end
 
   def link_with_text?
-    link? && !url_text.blank?
+    link? && url_text.present?
   end
 
   def title_style

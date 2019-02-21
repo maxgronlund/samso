@@ -59,3 +59,4 @@ rails g scaffold service_functions/printed_ad start_date:date number_of_columns:
 rails g migration add_payable_to_payments payable references{polymorphic}
 
 
+rails g scaffold notification notifyable:references{polymorphic} user:belongs_to message

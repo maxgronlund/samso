@@ -44,6 +44,8 @@
                   td = subscription.expired? ? 'Udløbet' : 'Ja'
                   th
                     .pull-right
+                      - unless subscription.expired?
+                        = link_to 'Forny', '#'
                       = link_to t('subscription.delivery_address'),
                         subscription_delivery_addresses_path(subscription),
                         class: 'btn btn-light btn-sm'

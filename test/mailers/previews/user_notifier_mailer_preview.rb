@@ -20,4 +20,10 @@ class UserNotifierMailerPreview < ActionMailer::Preview
       )
     UserNotifierMailer.send_signup_email(user.id)
   end
+
+  # usage http://localhost:3000/rails/mailers/user_notifier_mailer/subscription_about_to_expier
+  def subscription_about_to_expier
+    user = User.find_by(email: 'max@synthmax.dk')
+    UserNotifierMailer.subscription_about_to_expier(user.id)
+  end
 end

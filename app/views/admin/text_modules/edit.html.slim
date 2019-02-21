@@ -17,7 +17,6 @@ h3 = t('text_module.edit')
         include_blank: false
 
       = f.input :access_to, collection: PageColModule.permissions, include_blank: false
-
       = f.input :border
 
     .col-sm-6
@@ -30,12 +29,10 @@ h3 = t('text_module.edit')
       .row
         .col-sm-6
           = f.input :url_text
-
         .col-sm-6
           = f.input :link_layout,
             collection: Admin::TextModule::link_layouts,
             include_blank: false
-
       .row
         .col-sm-6
           = f.input :color
@@ -55,9 +52,9 @@ h3 = t('text_module.edit')
   .row
     .col-12
       .pull-right
-        = f.submit t('save'), class: 'btn btn-primary'
-        '&nbsp
-        = link_to t('cancel'), admin_page_path(@page), class: 'btn btn-secondary'
+        = link_to t('cancel'), admin_page_path(@page), class: 'btn btn-light'
+        => f.submit t('save'), class: 'btn btn-primary'
+        
 
 
 / toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo'],
@@ -69,4 +66,3 @@ javascript:
       }
     )
   });
-

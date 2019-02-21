@@ -189,4 +189,17 @@ class Admin::SystemMessage < ApplicationRecord
         body: "Contact body"
       )
   end
+
+  # usage Admin::SystemMessage.subscription_about_to_expire
+  def self.subscription_about_to_expire
+    @subscription_about_to_expire =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'subscription_about_to_expire')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'subscription_about_to_expire',
+        title: 'Subscription about to expire',
+        body: "Subscription about to expire body"
+      )
+  end
 end
