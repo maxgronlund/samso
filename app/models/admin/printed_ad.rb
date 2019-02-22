@@ -1,3 +1,4 @@
+# Ad for the printed version of samso posten
 class Admin::PrintedAd < ApplicationRecord
   has_attached_file :image, styles: {
     small: '195x70#',
@@ -6,8 +7,8 @@ class Admin::PrintedAd < ApplicationRecord
 
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
-  scope :ordered, -> {order(position: :asc)}
-  scope :for_print, -> {ordered.where(active: true).last(2)}
+  scope :ordered, -> { order(position: :asc) }
+  scope :for_print, -> { ordered.where(active: true).last(2) }
 
   def printed!
     update_attributes(impressions: impressions + 1) unless updated_at > DateTime.now - 0.5.seconds
@@ -17,6 +18,5 @@ class Admin::PrintedAd < ApplicationRecord
     return 0 if ordered.empty?
 
     ordered.last.position + 1
-
   end
 end

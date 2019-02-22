@@ -43,6 +43,6 @@ namespace :blog_posts do
   end
 
   def dublet_post(last_post, this_post)
-    (last_post&.teaser == this_post.teaser) && (last_post&.body == this_post.body) && (last_post&.title == this_post.title)
+    (last_post.teaser == this_post.teaser) && (last_post.body == this_post.body) && (last_post.title == this_post.title)
   end
 end

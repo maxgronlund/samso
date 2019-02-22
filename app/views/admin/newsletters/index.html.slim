@@ -1,0 +1,40 @@
+== render 'shared/admin_links', selected: ''
+
+.row
+  .col-sm-6
+    h4 Nyhedsbreve
+  .col-sm-6
+    .pull-right
+      = link_to t('newsletter.new'), new_admin_newsletter_path, class: 'btn btn-light'
+.row
+  .col-sm-12
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        thead.thead-dark
+          tr
+            th Titel
+            th Oprettet
+            th
+        tbody
+          - @admin_newsletters.each do |newsletter|
+            tr
+              td = newsletter.title
+              td = l newsletter.created_at
+              td
+                .pull-right
+                  .btn-group
+                    = link_to 'send',
+                      admin_send_newsletter_path(newsletter.id),
+                      method: 'PATCH',
+                      class: 'btn btn-sm btn-light'
+                    = link_to t('show'),
+                      admin_newsletter_path(newsletter),
+                      class: 'btn btn-light btn-sm'
+                    = link_to t('edit'),
+                      edit_admin_newsletter_path(newsletter),
+                      class: 'btn btn-light btn-sm'
+                    = link_to t('delete'),
+                      newsletter,
+                      data: { confirm: t('are_you_sure') },
+                      method: :delete,
+                      class: 'btn btn-danger btn-sm'

@@ -1,5 +1,4 @@
 == render 'shared/admin_links', selected: ''
-
 .row
   .col-sm-6
     h4 System opsætning
@@ -68,6 +67,9 @@
             td = Page.count
     .pull-right
       = link_to 'Rediger Abonoment modul', edit_admin_subscription_module_path(@subscription_module), class: 'btn btn-light'
-
+hr
+.row
+  .col-sm-6
+    = link_to 'Nyheds breve', admin_newsletters_path, class: 'btn btn-light'
 
 

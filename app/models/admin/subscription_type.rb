@@ -4,10 +4,10 @@
 class Admin::SubscriptionType < ApplicationRecord
   has_many :subscriptions, class_name: 'Admin::Subscription', foreign_key: :subscription_type_id
 
-  INTERNAL = 'internal'
-  IMPORTED = 'imported'
-  IMPORTED_FROM_ECONOMICS = 'imported_from_economics'
-  FREE_SUBSCRIPTION = 'free_subscription'
+  INTERNAL = 'internal'.freeze
+  IMPORTED = 'imported'.freeze
+  IMPORTED_FROM_ECONOMICS = 'imported_from_economics'.freeze
+  FREE_SUBSCRIPTION = 'free_subscription'.freeze
 
   scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }

@@ -1,7 +1,6 @@
 # usage http://localhost:3000/rails/mailers/address_update_mailer/send_message_to_system_administrator
 class AddressUpdateMailerPreview < ActionMailer::Preview
   def send_message_to_system_administrator
-
     AddressUpdateMailer
       .send_message_to_system_administrator(
         current_user_id: current_user.id,
@@ -37,6 +36,5 @@ class AddressUpdateMailerPreview < ActionMailer::Preview
       current_user
       .subscriptions
       .first
-
   end
 end

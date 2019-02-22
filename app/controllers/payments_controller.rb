@@ -35,15 +35,15 @@ class PaymentsController < ApplicationController
       .mac_sha1(@form_data)
   end
 
-  def form_data(amount, payment_uuid)
-    {
-      onpay_gatewayid:  ENV['ONPAY_GATEWAY_ID'],
-      onpay_currency: ENV['ONPAY_CURRENCY'],
-      onpay_amount: amount,
-      onpay_reference: payment_uuid,
-      onpay_accepturl: onpay_accepturl
-    }
-  end
+  # def form_data(amount, payment_uuid)
+  #   {
+  #     onpay_gatewayid:  ENV['ONPAY_GATEWAY_ID'],
+  #     onpay_currency: ENV['ONPAY_CURRENCY'],
+  #     onpay_amount: amount,
+  #     onpay_reference: payment_uuid,
+  #     onpay_accepturl: onpay_accepturl
+  #   }
+  # end
 
   def destroy
     @payment.destroy
@@ -55,13 +55,13 @@ class PaymentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_payment
     @payment = Payment.find(params[:id])
-  end
+  # end
 
-  def onpay_accepturl
-    Rails.env.development? ? "https://afd596ae.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
-  end
+  # def onpay_accepturl
+  #   Rails.env.development? ? "https://afd596ae.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
+  # end
 
-  def onpay_declineturl
-    Rails.env.development? ? "https://afd596ae.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
-  end
+  # def onpay_declineturl
+  #   Rails.env.development? ? "https://afd596ae.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
+  # end
 end

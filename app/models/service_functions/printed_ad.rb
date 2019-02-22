@@ -1,9 +1,11 @@
+# Ad for the printed paper
+
 class ServiceFunctions::PrintedAd < ApplicationRecord
-  PENDING = 'pending'
-  RECEIVED = 'received'
-  REJECTED = 'rejected'
-  APPROVED = 'approved'
-  PRINTED = 'printed'
+  PENDING = 'pending'.freeze
+  RECEIVED = 'received'.freeze
+  REJECTED = 'rejected'.freeze
+  APPROVED = 'approved'.freeze
+  PRINTED = 'printed'.freeze
 
   STATES = [
     [PENDING, I18n.t('printed_ad.' + PENDING)],
@@ -12,7 +14,4 @@ class ServiceFunctions::PrintedAd < ApplicationRecord
     [REJECTED, I18n.t('printed_ad.' + REJECTED)],
     [PRINTED, I18n.t('printed_ad.' + PRINTED)]
   ].freeze
-
-
-  COLUMNS
 end

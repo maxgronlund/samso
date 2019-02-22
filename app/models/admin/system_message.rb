@@ -136,7 +136,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'letter_to_the_edditors',
         title: 'Letter to the editors',
-        body: "bla bla"
+        body: ''
       )
   end
 
@@ -149,7 +149,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'printed_add',
         title: 'Printed ad title',
-        body: "Printed body"
+        body: 'Printed body'
       )
   end
 
@@ -162,7 +162,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'printed_add_created',
         title: 'Printed ad created title',
-        body: "Printed ad created body"
+        body: 'Printed ad created body'
       )
   end
 
@@ -174,7 +174,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'terms_and_conditions',
         title: 'Terms and conditions title',
-        body: "Rerms and conditions body"
+        body: 'Rerms and conditions body'
       )
   end
 
@@ -186,7 +186,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'contact',
         title: 'Contact title',
-        body: "Contact body"
+        body: 'Contact body'
       )
   end
 
@@ -199,7 +199,7 @@ class Admin::SystemMessage < ApplicationRecord
         locale: I18n.locale,
         identifier: 'subscription_about_to_expire',
         title: 'Subscription about to expire',
-        body: "Subscription about to expire body"
+        body: 'Subscription about to expire body'
       )
   end
 end

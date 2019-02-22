@@ -45,6 +45,7 @@ class Admin::UsersController < AdminController
   # POST /users
   def create
     @user = User.new(user_params)
+    @user.uuid = SecureRandom.uuid
     # @user.validate_email = true
     if @user.save
       redirect_to admin_users_path

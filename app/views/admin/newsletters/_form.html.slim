@@ -1,0 +1,18 @@
+= simple_form_for(@admin_newsletter) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.hidden_field :locale
+    = f.input :title, label: 'Overskrivt'
+    = f.input :body, label: 'Tekst'
+    - if @admin_newsletter.persisted?
+
+    - else
+      = f.association :blog_posts,
+      	as: :check_boxes,
+      	collection: @blog_posts,
+      	label: 'Sidste 20 artikler der er publiceret'
+
+  .form-actions
+    .pull-right
+      = f.submit t('save'), class: 'btn btn-light'

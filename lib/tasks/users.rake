@@ -1,4 +1,11 @@
 namespace :users do
+  desc 'add uuid'
+  task add_uuid: :environment do
+    User.find_each do |user|
+      user.update(uuid: SecureRandom.uuid) if user.uuid.blank?
+    end
+  end
+
   desc 'delete dublets'
   task delete_dublets: :environment do
     User.find_each do |user|

@@ -139,6 +139,7 @@ class User < ApplicationRecord
       user.subscriptions = [subscription(options)] if user_has_a_subscription(options)
       user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
+      user.uuid = SecureRandom.uuid
       if user.save
         @succeeded += 1
       else

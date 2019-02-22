@@ -1,11 +1,11 @@
 class AddCategoryToPages < ActiveRecord::Migration[5.2]
+  # rubocop:disable Metrics/AbcSize
   def up
     add_column :pages, :category_page, :boolean, default: false
     add_column :admin_blogs, :index_page_id, :integer
     add_column :admin_blogs, :show_page_id, :integer
     add_index :admin_blogs, :show_page_id
     Page.find_each do |page|
-
       if page.title.include?('Kategori-')
         blog_title = page.title.gsub('Kategori-', '')
         blog = Admin::Blog.find_by(title: blog_title)
@@ -17,6 +17,7 @@ class AddCategoryToPages < ActiveRecord::Migration[5.2]
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def down
     remove_column :pages, :category_page, :boolean

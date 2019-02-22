@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_133311) do
+ActiveRecord::Schema.define(version: 2019_02_22_200347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -321,6 +321,24 @@ ActiveRecord::Schema.define(version: 2019_02_11_133311) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_newsletter_posts", force: :cascade do |t|
+    t.bigint "admin_blog_post_id"
+    t.bigint "admin_newsletter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_blog_post_id"], name: "index_admin_newsletter_posts_on_admin_blog_post_id"
+    t.index ["admin_newsletter_id"], name: "index_admin_newsletter_posts_on_admin_newsletter_id"
+  end
+
+  create_table "admin_newsletters", force: :cascade do |t|
+    t.string "locale"
+    t.string "title", default: ""
+    t.text "body", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "state", default: "pending"
   end
 
   create_table "admin_post_modules", force: :cascade do |t|
@@ -638,10 +656,13 @@ ActiveRecord::Schema.define(version: 2019_02_11_133311) do
     t.integer "sign_in_ips_count", default: 0
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
+    t.uuid "uuid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admin_newsletter_posts", "admin_blog_posts"
+  add_foreign_key "admin_newsletter_posts", "admin_newsletters"
   add_foreign_key "admin_sign_in_ips", "users"
   add_foreign_key "admin_subscriptions", "users"
   add_foreign_key "comments", "users"

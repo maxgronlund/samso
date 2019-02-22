@@ -33,6 +33,9 @@ class Admin::BlogPost < ApplicationRecord
   before_validation { image.clear if delete_image == '1' }
   has_many :comments, as: :commentable, dependent: :destroy
 
+  has_many :newsletter_posts, class_name: 'Admin::NewsletterPost', foreign_key: 'admin_blog_post_id'
+  has_many :newsletters, through: :newsletter_posts, source: 'admin_newsletter'
+
   LAYOUTS =
     [
       [I18n.t('blog_post.image_top'), 'image_top'],
@@ -68,9 +71,9 @@ class Admin::BlogPost < ApplicationRecord
     blog.show_page
   end
 
-  def page
-    blog_module.page
-  end
+  # def page
+  #   blog_module.page
+  # end
 
   def image_url(size)
     image.url(size)
@@ -80,9 +83,12 @@ class Admin::BlogPost < ApplicationRecord
     blog.clear_cache_on_pages
   end
 
+  # rubocop:disable Lint/HandleExceptions
   def shown!
     update_attributes(views: views + 1) unless updated_at > DateTime.now - 0.5.seconds
+  rescue
   end
+  # rubocop:enable Lint/HandleExceptions
 
   def to_param
     "#{id} #{title}".parameterize

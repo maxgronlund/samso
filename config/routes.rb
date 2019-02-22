@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  
-  
-  resources :comments
+
+
   namespace :api do
     namespace :v1 do
       resources :epaper_verification, only: %i[index show]
@@ -9,6 +8,8 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /da|en/ do
+    resources :cancel_newsletters
+    resources :comments
     resources :contact, only: [:index]
     resources :terms_and_conditions, only: [:index]
     resources :letter_to_the_editors, only: [:index]
@@ -45,6 +46,7 @@ Rails.application.routes.draw do
       resources :find_blog_post_modules, only: %i[edit update]
       resources :search_result_modules, only: %i[edit update]
       resources :most_popular_modules, only: %i[edit update]
+      resources :newsletters
       resources :footers
       resources :gallery_images, only: %i[edit update]
       resources :gallery_modules, only: %i[edit update]
@@ -76,6 +78,7 @@ Rails.application.routes.draw do
       # resources :subscriptions do
       #   resources :addresses, only: %i[new edit update destroy]
       # end
+      resources :send_newsletters, only: %i[update]
       resources :sign_in_ips, only: %i[index]
       resources :show_subscription_ids, only: %i[show]
       resources :subscriptions do
@@ -97,6 +100,7 @@ Rails.application.routes.draw do
 
 
     resources :print_posts, only: %i[show]
+    resources :renew_subscriptions, only: %i[edit update]
 
     namespace :service_functions do
       resources :printed_ads

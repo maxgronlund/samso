@@ -6,11 +6,9 @@ class Payment < ApplicationRecord
   ACCEPTED = 'accepted'.freeze
   DECLINED = 'declined'.freeze
 
-  PROVIDER_ONPAY = 'onpay'
+  PROVIDER_ONPAY = 'onpay'.freeze
 
-  scope :pending, -> {where(state: PENDING)}
-
-  #belongs_to :subscription, class_name: 'Admin::Subscription'
+  scope :pending, -> { where(state: PENDING) }
 
   belongs_to :user
   validates :user_id, presence: true
@@ -41,6 +39,7 @@ class Payment < ApplicationRecord
 
   def payable
     return nil if payable_type.nil? || payable_id.nil?
+
     payable_type.constantize.find_by(id: payable_id)
   end
 
@@ -55,6 +54,7 @@ class Payment < ApplicationRecord
 
   def for
     return '' if payable_id.nil?
+
     case payable_type
     when 'Admin::Subscription'
       payable.subscription_type.title
@@ -65,6 +65,7 @@ class Payment < ApplicationRecord
 
   def amount
     return 0 if transaction_info.size.zero?
+
     case payment_provider
     when PROVIDER_ONPAY
       return transaction_info['onpay_amount'].to_i * 0.01
@@ -76,7 +77,7 @@ class Payment < ApplicationRecord
   def transaction_id
     case payment_provider
     when PROVIDER_ONPAY
-      return transaction_info['onpay_number']
+      transaction_info['onpay_number']
     else
       ''
     end
@@ -85,7 +86,7 @@ class Payment < ApplicationRecord
   def payment_method
     case payment_provider
     when PROVIDER_ONPAY
-      return transaction_info['onpay_cardtype']
+      transaction_info['onpay_cardtype']
     else
       ''
     end
@@ -94,7 +95,7 @@ class Payment < ApplicationRecord
   def card_mask
     case payment_provider
     when PROVIDER_ONPAY
-      return transaction_info['onpay_cardmask']
+      transaction_info['onpay_cardmask']
     else
       ''
     end

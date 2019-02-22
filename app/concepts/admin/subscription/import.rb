@@ -67,7 +67,8 @@ class Admin::Subscription < ApplicationRecord
           signature: @options[:name],
           email: User::Service.fake_email,
           password_digest: User::Service.fake_password,
-          roles: [Role.new]
+          roles: [Role.new],
+          uuid: SecureRandom.uuid
         )
     end
 

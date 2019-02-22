@@ -44,6 +44,7 @@ class UsersController < ApplicationController
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
     @user.user_id = Admin::Subscription.new_subscription_id
+    @user.uuid = SecureRandom.uuid
     if @user.save
       User::Service.new(@user).update_login_stats(request)
       # session.delete :subscription_type_id

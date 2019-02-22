@@ -62,7 +62,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara'#, '~> 2.13'
+  gem 'capybara'
   gem 'chromedriver-helper'
 end
 

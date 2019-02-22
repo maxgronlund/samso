@@ -1,3 +1,4 @@
+# Samespace for service functions
 module ServiceFunctions
   def self.table_name_prefix
     'service_functions_'

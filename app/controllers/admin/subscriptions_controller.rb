@@ -29,7 +29,7 @@ class Admin::SubscriptionsController < AdminController
     @user = User.new(admin_subscription_params)
     @user.addresses.first.name = @user.name
     @user.password_digest = User::Service.fake_password
-    # @user.validate_email = @user.email.present?
+    @user.uuid = SecureRandom.uuid
     @user.reset_password_token = SecureRandom.hex(32)
     @user.reset_password_sent_at = Time.zone.now
     @user.roles = [Role.new]
