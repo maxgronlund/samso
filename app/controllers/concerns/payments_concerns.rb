@@ -34,10 +34,10 @@ module PaymentsConcerns
   private
 
   def onpay_accepturl
-    Rails.env.development? ? 'https://5590f7c7.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? 'https://96e4d6d6.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? 'https://5590f7c7.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? 'https://96e4d6d6.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
   end
 end

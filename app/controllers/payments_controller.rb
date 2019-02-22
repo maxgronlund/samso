@@ -1,16 +1,6 @@
 class PaymentsController < ApplicationController
+  include PaymentsConcerns
   before_action :set_payment, only: %i[show edit update destroy]
-
-  # GET /payments
-  # GET /payments.json
-  # def index
-  #   @payments = Payment.all
-  # end
-
-  # GET /payments/1
-  # GET /payments/1.json
-  # def show
-  # end
 
   # GET /payments/new
   def new
@@ -19,31 +9,31 @@ class PaymentsController < ApplicationController
     end
     @subscription_type = Admin::SubscriptionType.find(session[:subscription_type_id])
     @user = User.find(params[:user_id])
-    payment =
-      @user
-      .payments
-      .pending
-      .first_or_initialize
-    payment.uuid = SecureRandom.uuid
-    paymentpayable_type = 'Admin::Subscription'
-    payment.payment_provider = Payment::PROVIDER_ONPAY
-    payment.save
-    @form_data = form_data(@subscription_type.price_in_cent, payment.uuid)
 
-    @onpay_hmac_sha1 =
-      Payment::Service
-      .mac_sha1(@form_data)
+    build_form_data(
+      user: @user,
+      subscription_type: @subscription_type
+    )
+    # payment =
+    #   @user
+    #   .payments
+    #   .pending
+    #   .first_or_initialize
+    # payment.uuid = SecureRandom.uuid
+    # paymentpayable_type = 'Admin::Subscription'
+    # payment.payment_provider = Payment::PROVIDER_ONPAY
+    # payment.save
+
+
+
+
+
+    # @form_data = form_data(@subscription_type.price_in_cent, payment.uuid)
+
+    # @onpay_hmac_sha1 =
+    #   Payment::Service
+    #   .mac_sha1(@form_data)
   end
-
-  # def form_data(amount, payment_uuid)
-  #   {
-  #     onpay_gatewayid:  ENV['ONPAY_GATEWAY_ID'],
-  #     onpay_currency: ENV['ONPAY_CURRENCY'],
-  #     onpay_amount: amount,
-  #     onpay_reference: payment_uuid,
-  #     onpay_accepturl: onpay_accepturl
-  #   }
-  # end
 
   def destroy
     @payment.destroy
@@ -55,13 +45,7 @@ class PaymentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_payment
     @payment = Payment.find(params[:id])
-  # end
+  end
 
-  # def onpay_accepturl
-  #   Rails.env.development? ? "https://afd596ae.ngrok.io/da/accepted_payments" : ENV['ONPAY_ACCEPTURL']
-  # end
 
-  # def onpay_declineturl
-  #   Rails.env.development? ? "https://afd596ae.ngrok.io/da/declined_payments" : ENV['ONPAY_DECLINEURL']
-  # end
 end
