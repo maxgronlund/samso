@@ -22,12 +22,12 @@ class Admin::NewslettersController < AdminController
 
   # POST /admin/newsletters
   def create
-    
+
     # @admin_newsletter = Admin::Newsletter.new(admin_newsletter_params)
     #admin_newsletter_params.delete :blog_post_ids
 
 
-    
+
 
     @admin_newsletter = Admin::Newsletter.new(params_without_blog_post_ids)
     #@admin_newsletter.newsletter_posts = newsletter_posts
@@ -35,7 +35,7 @@ class Admin::NewslettersController < AdminController
 
     @admin_newsletter.save!
     create_newsletter_posts
-    
+
     redirect_to admin_newsletters_path
 
     #if @admin_newsletter.save
@@ -59,7 +59,7 @@ class Admin::NewslettersController < AdminController
   end
 
   def create_newsletter_posts
-    blog_post_ids.each do |id| 
+    blog_post_ids.each do |id|
       Admin::NewsletterPost
         .create(
           admin_blog_post_id: id.to_i,
@@ -100,8 +100,9 @@ class Admin::NewslettersController < AdminController
       .permit(
         :locale,
         :title,
+        :body,
         blog_post_ids: []
       )
-    
+
   end
 end

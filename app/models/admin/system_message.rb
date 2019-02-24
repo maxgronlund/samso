@@ -202,4 +202,17 @@ class Admin::SystemMessage < ApplicationRecord
         body: 'Subscription about to expire body'
       )
   end
+
+  # usage Admin::SystemMessage.renew_sutscription
+  def self.renew_sutscription
+    @subscription_about_to_expire =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'renew_sutscription')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'renew_sutscription',
+        title: 'Renew subscription',
+        body: 'An additional period will be added to your subscription from the experiration date.'
+      )
+  end
 end

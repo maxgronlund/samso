@@ -37,25 +37,14 @@ class UsersController < ApplicationController
     render_403 unless current_user.can_access?(@user)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create
     @user = User.new(user_params)
-    # @user.validate_address = session[:subscription_type_id].present?
     @user.confirmation_token = SecureRandom.hex(32)
     @user.confirmation_sent_at = Time.zone.now
     @user.user_id = Admin::Subscription.new_subscription_id
     @user.uuid = SecureRandom.uuid
-    if @user.save
-      User::Service.new(@user).update_login_stats(request)
-      # session.delete :subscription_type_id
-      @user.roles.create(permission: 'member')
-      UserNotifierMailer.send_signup_email(@user.id).deliver
-      redirect_user
-    else
-      render :new
-    end
+    save_user
   end
-  # rubocop:enable Metrics/AbcSize
 
   # PATCH/PUT /users/1
   def update
@@ -78,6 +67,16 @@ class UsersController < ApplicationController
 
   private
 
+  def save_user
+    if @user.save
+      @user.roles.create(permission: 'member')
+      UserNotifierMailer.send_signup_email(@user.id).deliver
+      redirect_user
+    else
+      render :new
+    end
+  end
+
   def update_subscription_address
     return unless @user.valid_subscriber?
 
@@ -86,8 +85,7 @@ class UsersController < ApplicationController
   end
 
   def redirect_user
-    if session[:subscription_type_id]
-      initialize_user
+    if session[:subscription_type_id].present?
       redirect_to(
         new_user_payment_path(
           user_id: @user.id,
@@ -97,11 +95,6 @@ class UsersController < ApplicationController
     else
       redirect_to confirm_signups_path
     end
-  end
-
-  def initialize_user
-    User::Service.new(@user).initialize_user
-    session[:user_id] = @user.id
   end
 
   # Use callbacks to share common setup or constraints between actions.

@@ -1,14 +1,17 @@
 class AcceptedPaymentsController < ApplicationController
+  # The paument went true so we don't need to validate the user
+  # hence te cc is a great validation
   def index
     params.permit!
     raise and return if payment.nil?
-    # raise and return unless payment.user == current_user
-
     update_subscription
     update_payment
     update_subscriper
     @payment.user.destroy_pending_payments
     @message = Admin::SystemMessage.subscription_payment_completed
+    session[:user_id] = subscriper.id
+    # confirm_user
+    # login_user
   end
 
   private
@@ -16,6 +19,14 @@ class AcceptedPaymentsController < ApplicationController
   def update_subscriper
     subscriper.update(latest_online_payment: Time.zone.now) if subscriper.present?
   end
+
+  # def confirm_user
+  #   subscriper.update(confirmed_at: Time.zone.now)
+  # end
+
+  # def login_user
+  #   session[:user_id] = subscriper.id
+  # end
 
   def subscriper
     subscription.user
@@ -57,13 +68,20 @@ class AcceptedPaymentsController < ApplicationController
 
   # only create a subscription if there is none
   def update_subscription
-    subscription.presence || create_subscription
+    subscription.present? ? extend_subscription : create_subscription
   end
 
   def create_subscription
     @subscription = Admin::Subscription.create(subscription_options)
   end
 
+  # extend subscription
+  def extend_subscription
+    new_end_date = subscription.end_date + subscription_type.duration.days
+    subscription.update(end_date: new_end_date)
+  end
+
+  # paper trail
   def onpay_info(params)
     {
       onpay_uuid: params[:onpay_uuid],
