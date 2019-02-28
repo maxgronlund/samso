@@ -37,7 +37,7 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
     @service_functions_printed_ad = ServiceFunctions::PrintedAd.new(service_functions_printed_ad_params)
 
     if @service_functions_printed_ad.save
-      redirect_to service_functions_printed_ads_path, notice: 'printed add crea'
+      redirect_to service_functions_printed_ads_path, notice: 'show'
        # TODO: send message to system admin
     else
       render :new

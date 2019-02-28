@@ -1,9 +1,14 @@
 .row
   .col-sm-12
     == render 'shared/admin_links', selected: ''
-
-h3 = t('csv_file.index')
-
+.row
+  .col-sm-8
+    h3 = t('csv_file.index')
+  .col-sm-4
+    .pull-right
+      = link_to t('csv_file.new'),
+        new_admin_csv_import_path,
+        class: 'btn btn-primary'
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead.thead-dark
@@ -44,7 +49,4 @@ h3 = t('csv_file.index')
                   method: :delete,
                   class: 'btn btn-danger btn-sm'
 br
-.pull-right
-  = link_to t('csv_file.new'),
-    new_admin_csv_import_path,
-    class: 'btn btn-primary'
+

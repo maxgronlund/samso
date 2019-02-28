@@ -1,4 +1,4 @@
-class Admin::AddressesController < ApplicationController
+class Admin::AddressesController < AdminController
   before_action :no_editor, only: %i[index show edit update destroy]
 
   # GET /addresses

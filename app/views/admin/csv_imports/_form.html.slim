@@ -5,10 +5,13 @@
     .row
       .col-sm-6
         = f.input :name
-      .col-sm-6
-        = f.input :import_type,
-          collection: Admin::CsvImport.import_type_collection,
-          include_blank: false
+      - if super_admin?
+        .col-sm-6
+          = f.input :import_type,
+            collection: Admin::CsvImport.import_type_collection,
+            include_blank: false
+      - else
+        = f.hidden_field :import_type, value: Admin::Subscription.name
     .row
       .col-sm-6
         = f.input :comments

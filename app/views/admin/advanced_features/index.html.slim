@@ -1,0 +1,99 @@
+
+h3 Avancerede funktioner
+p Kun for administratorer
+
+.row
+  .col-sm-6
+    = link_to admin_subscription_types_path
+      .card
+        .card-body
+          h4.card-title Abonnoment typer
+          p.card-text
+            = simple_format 'Priser&#10;Trykt/ online;&#10;Periode&#10'
+          a.card-link
+            .pull-right
+              'Rediger
+
+  .col-sm-6
+    = link_to admin_calendars_path
+      .card
+        .card-body
+          h4.card-title Kalendere
+          p.card-text
+            = simple_format 'Kalendere til kalender modulet&#10;Bliver pt. ikke brugt&#10;&nbsp;'
+          a.card-link
+            .pull-right
+              'Rediger
+
+
+.row.mt-10
+  .col-sm-6
+    = link_to admin_blogs_path
+      .card
+        .card-body
+          h4.card-title Kategorier
+          p.card-text
+            = simple_format 'Artikler tilhører en kategori&#10;Vises i hoved menuen&#10;&nbsp;'
+          a.card-link
+            .pull-right
+              'Rediger
+
+  .col-sm-6
+    = link_to admin_menu_contents_path
+      .card
+        .card-body
+          h4.card-title Menuer
+          p.card-text
+            = simple_format 'Inhold til menu modulet&#10;Bliver pt. ikke brugt&#10;&nbsp;'
+          a.card-link
+            .pull-right
+              'Rediger
+.row.mt-10
+  .col-sm-6
+    = link_to admin_pages_path
+      .card
+        .card-body
+          h4.card-title Sider
+          p.card-text
+            = simple_format 'Opret sider&#10;Rediger sider&#10;Slet sider'
+          a.card-link
+            .pull-right
+              'Rediger
+  .col-sm-6
+    .card
+      = link_to admin_system_messages_path
+        .card-body
+          h4.card-title System beskeder
+          p.card-text
+            = simple_format 'Beskeder til brugerne&#10;Email tekster&#10;Betaling, Velkommen, mm.'
+          a.card-link
+            .pull-right
+              'Rediger
+
+.row.mt-10
+  .col-sm-6
+    = link_to edit_admin_system_setup_path(Admin::SystemSetup.find_by(locale: I18n.locale))
+      .card
+        .card-body
+          h4.card-title System opsætning
+          p.card-text
+            = simple_format 'Logo&#10;Emails til jurnalister&#10;Forside mm.'
+          a.card-link
+            .pull-right
+              'Rediger
+
+
+  .col-sm-6
+    = link_to admin_footers_path
+      .card
+        .card-body
+          h4.card-title Sidefødder
+          p.card-text
+            = simple_format 'Til at placere nederst på siderne&#10;Bliver pt. ikke brugt&#10;&nbsp;'
+          a.card-link
+            .pull-right
+              'Rediger
+br
+br
+
+

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   namespace :api do
     namespace :v1 do
       resources :epaper_verification, only: %i[index show]
@@ -21,6 +20,7 @@ Rails.application.routes.draw do
     resources :cancel_account, only: %i[show destroy]
     resources :declined_payments
     namespace :admin do
+      resources :advanced_features, only: %i[index]
       resources :active_subscribers
       resources :advertisements
       resources :articles, only: %i[index]
