@@ -3,3 +3,6 @@ da:
     new: Opret nyhedsbrev
     unsubscribe_newsletter: Afmeld nyhedsbrev
     unsubscribe: Admeld
+    pending: Klade
+    in-sending-queue: Afventer afsendelse
+    send: Udsendt

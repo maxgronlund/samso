@@ -1,13 +1,7 @@
-== render 'shared/admin_links', selected: ''
-
-
-h4 = @admin_newsletter.title
-
+img alt="" height="85" src="https://s3.amazonaws.com/samso-images/Sams%C3%B8_posten_logo.png" style="vertical-align:top;" width="640"
+h1 = @admin_newsletter.title
+= simple_format @admin_newsletter.body
 - @admin_newsletter.blog_posts.each do |blog_post|
-  = link_to blog_post.title, page_post_path(blog_post.show_page, blog_post)
+  h3 = link_to blog_post.title, page_post_url(I18n.locale, blog_post.show_page, blog_post)
+  = simple_format blog_post.teaser
   hr
-
-
-/ => link_to 'Edit', edit_admin_newsletter_path(@admin_newsletter)
-/ '|
-/ =< link_to 'Back', admin_newsletters_path

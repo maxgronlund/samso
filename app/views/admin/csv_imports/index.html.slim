@@ -30,7 +30,8 @@
             - if admin_csv_import.imported.present?
               = l admin_csv_import.imported
             - else
-              'Pending
+              .green-text
+                'Afventer
           td
             .pull-right
               .btn-group

@@ -8,6 +8,8 @@ class Admin::NewslettersController < AdminController
 
   # GET /admin/newsletters/1
   def show
+    @user = current_user
+    render layout: 'newsletter_mailer'
   end
 
   # GET /admin/newsletters/new

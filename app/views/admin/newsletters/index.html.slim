@@ -14,27 +14,31 @@
           tr
             th Titel
             th Oprettet
+            th Status
             th
         tbody
           - @admin_newsletters.each do |newsletter|
             tr
               td = newsletter.title
               td = l newsletter.created_at
+              td = t('newsletter.' + newsletter.state)
               td
                 .pull-right
                   .btn-group
-                    = link_to 'send',
-                      admin_send_newsletter_path(newsletter.id),
-                      method: 'PATCH',
-                      class: 'btn btn-sm btn-light'
+                    - if newsletter.pending?
+                      = link_to 'Send',
+                        admin_send_newsletter_path(newsletter.id),
+                        method: 'PATCH',
+                        class: 'btn btn-sm btn-light'
                     = link_to t('show'),
                       admin_newsletter_path(newsletter),
                       class: 'btn btn-light btn-sm'
-                    = link_to t('edit'),
-                      edit_admin_newsletter_path(newsletter),
-                      class: 'btn btn-light btn-sm'
-                    = link_to t('delete'),
-                      newsletter,
-                      data: { confirm: t('are_you_sure') },
-                      method: :delete,
-                      class: 'btn btn-danger btn-sm'
+                    - unless newsletter.send?
+                      = link_to t('edit'),
+                        edit_admin_newsletter_path(newsletter),
+                        class: 'btn btn-light btn-sm'
+                      = link_to t('delete'),
+                        newsletter,
+                        data: { confirm: t('are_you_sure') },
+                        method: :delete,
+                        class: 'btn btn-danger btn-sm'

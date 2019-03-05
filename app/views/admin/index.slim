@@ -57,15 +57,15 @@
             th = link_to t('sidebar.users'), admin_users_path, class: 'btn btn-light btn-sm'
             td = User.count
           tr
-            th Abonnomenter
+            th = link_to 'Abonnomenter', admin_subscription_types_path, class: 'btn btn-light btn-sm'
             td = Admin::Subscription.count
           tr
-            th Gyldige abonnomenter
+            th = link_to 'Gyldige abonnomenter', admin_active_subscribers_path, class: 'btn btn-light btn-sm'
             td = Admin::Subscription.valid.count
-          tr
-            th = link_to t('pages'), admin_pages_path
-            td = Page.count
-    .pull-right
+    /       tr
+    /         th = link_to t('pages'), admin_pages_path
+    /         td = Page.count
+    / .pull-right
       = link_to 'Rediger Abonoment modul', edit_admin_subscription_module_path(@subscription_module), class: 'btn btn-light'
 hr
 .row

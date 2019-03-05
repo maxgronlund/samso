@@ -53,7 +53,7 @@ class Payment < ApplicationRecord
   end
 
   def for
-    return '' if payable_id.nil?
+    return payment_name if payable.nil?
 
     case payable_type
     when 'Admin::Subscription'
@@ -86,7 +86,7 @@ class Payment < ApplicationRecord
   def payment_method
     case payment_provider
     when PROVIDER_ONPAY
-      transaction_info['onpay_cardtype']
+      transaction_info['onpay_cardtype'].presence || 'Onpay'
     else
       ''
     end
@@ -99,5 +99,9 @@ class Payment < ApplicationRecord
     else
       ''
     end
+  end
+
+  def payment_name
+    'Abonnoment'
   end
 end
