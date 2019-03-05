@@ -45,7 +45,7 @@
                   th
                     .pull-right
                       .btn-group
-                        - unless subscription.expired?
+                        - if subscription.expired?
                           = link_to 'Forny',
                             edit_renew_subscription_path(subscription.subscription_id),
                             class: 'btn btn-primary btn-sm'

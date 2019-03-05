@@ -45,16 +45,16 @@
 
   /   .pull-right
   /     = link_to 'Rediger system opsætning', edit_admin_system_setup_path(Admin::SystemSetup.first), class: 'btn btn-light'
-  .col-sm-6
-    h4 Statistik
+  .col-sm-12
+    h4 Administration
     .table-responsive
       table.table.table-striped.table-bordered.table-hover.table-sm
         tbody
           tr
-            th = link_to t('sidebar.articles'), admin_articles_path
+            th = link_to t('sidebar.articles'), admin_articles_path, class: 'btn btn-light btn-sm'
             td = Admin::BlogPost.count
           tr
-            th = link_to t('sidebar.users'), admin_users_path
+            th = link_to t('sidebar.users'), admin_users_path, class: 'btn btn-light btn-sm'
             td = User.count
           tr
             th Abonnomenter

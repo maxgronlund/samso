@@ -15,7 +15,7 @@
             = t('edit')
 
   .row.justify-content-md-center
-    .col-md-auto.col-md-8
+    .col-md-12
       .card
         h4.card-header = t('subscription.edit_dates')
 
@@ -26,15 +26,15 @@
             method: 'PUT' do |f|
               .row
                 .col-sm-6
-                  = f.input :start_date, 
-                    as: :date, 
+                  = f.input :start_date,
+                    as: :date,
                     start_year: Date.today.year - 5,
                     end_year: Date.today.year + 25,
                     order: [:day, :month, :year]
-        
+
                 .col-sm-6
-                  = f.input :end_date, 
-                    as: :date, 
+                  = f.input :end_date,
+                    as: :date,
                     start_year: Date.today.year - 5,
                     end_year: Date.today.year + 25,
                     order: [:day, :month, :year]

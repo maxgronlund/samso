@@ -54,6 +54,8 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def print_version?
+    return false if subscription_type.nil?
+
     subscription_type.print_version?
   end
 
