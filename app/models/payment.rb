@@ -57,7 +57,7 @@ class Payment < ApplicationRecord
 
     case payable_type
     when 'Admin::Subscription'
-      payable.subscription_type.title
+      payable.subscription_type&.title
     else
       ''
     end

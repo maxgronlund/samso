@@ -1,6 +1,7 @@
 da:
   printed_ad:
     index: Anonncer til udskrifts side
+    side_nav:
     create_new: Opret ny annonce til udskrift
     edit: Rediger annonce til udskrift
     image: Billed

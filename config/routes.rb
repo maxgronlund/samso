@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :cancel_account, only: %i[show destroy]
     resources :declined_payments
     namespace :admin do
+      resources :ads, only: %i[index]
       resources :advanced_features, only: %i[index]
       resources :active_subscribers
       resources :advertisements
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
       resources :search_result_modules, only: %i[edit update]
       resources :most_popular_modules, only: %i[edit update]
       resources :newsletters
+      resources :newspaper_ads
       resources :footers
       resources :gallery_images, only: %i[edit update]
       resources :gallery_modules, only: %i[edit update]

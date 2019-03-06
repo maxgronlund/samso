@@ -1,0 +1,46 @@
+== render 'shared/admin_links', selected: ''
+/ nav aria-label="breadcrumb"
+/   ol.breadcrumb
+/     li.breadcrumb-item
+/       = link_to 'Brugerer', admin_users_path
+/     li.breadcrumb-item
+/       = link_to @user.name, admin_user_path(@user)
+/     li.breadcrumb-item.active aria-current="page"
+/       = t('edit')
+
+
+h3 Anonncer til avisen
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th Navn
+        th Start dato
+        th Kontaktperson
+        th Status
+        th Kolonner
+        th
+    tbody
+      - @newspaper_ads.each do |ad|
+        tr
+          td = ad.name
+          td = l ad.start_date
+          td = ad.contact_person
+          td = ad.state
+          td = ad.number_of_columns
+          td
+            .pull-right
+              .btn-group
+                = link_to t('show'),
+                  admin_newspaper_ad_path(ad),
+                  class: 'btn btn-sm btn-light'
+                = link_to t('edit'),
+                  edit_admin_newspaper_ad_path(ad),
+                  class: 'btn btn-sm btn-light'
+
+                = link_to t('delete'),
+                  admin_newspaper_ad_path(ad),
+                  data: { confirm: t('are_you_sure') },
+                  method: :delete,
+                  class: 'btn btn-danger btn-sm'

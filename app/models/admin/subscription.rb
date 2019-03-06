@@ -32,7 +32,9 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def type_name
-    subscription_type&.title.presence || 'na'
+    return 'na' if subscription_type.nil?
+
+    subscription_type.title.presence || 'na'
   end
 
   def expired?
@@ -98,6 +100,13 @@ class Admin::Subscription < ApplicationRecord
 
   def self.find(id)
     find_by(subscription_id: id)
+  end
+
+  def editable?
+    return false if subscription_type.nil?
+    return false if expired?
+
+    true
   end
 
   private

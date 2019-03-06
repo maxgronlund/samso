@@ -52,14 +52,14 @@ nav#sidebar
       /   = link_to admin_calendars_path
       /     i.fa.fa-calendar
       /     = t('sidebar.calendars')
-      li class="#{ @selected == 'adverticements' ? 'active' : '' }"
-        = link_to admin_advertisements_path
+      / li class="#{ @selected == 'adverticements' ? 'active' : '' }"
+      /   = link_to admin_advertisements_path
+      /     i.fa.fa-ad
+      /     = t('sidebar.ads')
+      li class="#{ @selected == 'ads' ? 'active' : '' }"
+        = link_to admin_ads_path
           i.fa.fa-ad
-          = t('sidebar.ads')
-      li class="#{ @selected == 'adverticements' ? 'active' : '' }"
-        = link_to admin_printed_ads_path
-          i.fa.fa-ad
-          = t('sidebar.printed_ads')
+          = t('ads.index')
       li class="#{ @selected == 'advanced_features' ? 'active' : '' }"
         = link_to admin_advanced_features_path
           i.fa.fa-cogs

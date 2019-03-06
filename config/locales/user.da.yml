@@ -51,6 +51,7 @@ da:
     admin: Administrator
     super_admin: Super administrator
     member: Bruger
+    members: Brugere
     editor: Redaktør
     new_password: Indtast nyt password
     access_as: Adgang som

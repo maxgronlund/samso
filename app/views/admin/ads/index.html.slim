@@ -1,0 +1,38 @@
+- session[:stored_path] = request.path
+
+
+== render 'shared/admin_links', selected: 'ads'
+h3 = t('ads.index')
+
+.row
+  .col-sm-6
+    = link_to admin_printed_ads_path
+      .card
+        .card-body
+          h4.card-title Anonncer til udskrifts side
+          p.card-text
+            = simple_format 'Opret&#10;Rediger;&#10;Kun to bliver vist&#10'
+          a.card-link
+            .pull-right
+              'Administrer
+  .col-sm-6
+    = link_to admin_advertisements_path
+      .card
+        .card-body
+          h4.card-title Online anonncer
+          p.card-text
+            = simple_format 'Opret&#10;Rediger;&#10;Kan sættes ind på sitet&#10'
+          a.card-link
+            .pull-right
+              'Administrer
+.row.mt-10
+  .col-sm-6
+    = link_to admin_newspaper_ads_path
+      .card
+        .card-body
+          h4.card-title Anonncer til tryk i avisen
+          p.card-text
+            = simple_format 'Opret&#10;Rediger;&#10;Kun to bliver vist&#10'
+          a.card-link
+            .pull-right
+              'Administrer

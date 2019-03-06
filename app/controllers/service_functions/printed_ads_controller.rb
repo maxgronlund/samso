@@ -24,7 +24,8 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
     @service_functions_printed_ad =
       ServiceFunctions::PrintedAd
       .new(
-        start_date: Date.today.beginning_of_week + 8.day + 9.hours
+        start_date: Date.today.beginning_of_week + 8.day + 9.hours,
+        number_of_columns: 2
       )
   end
 

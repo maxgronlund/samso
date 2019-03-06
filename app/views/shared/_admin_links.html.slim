@@ -1,11 +1,11 @@
 .admin-links
   ul.nav
     li.nav-item
-      = link_to root_path do
-        . class="nav-link #{selected == 'home' ? 'disabled' : ''}"
-          i.fa.fa-home
+      = link_to admin_index_path do
+        . class="nav-link #{selected == 'admin' ? 'disabled' : ''}"
+          i.fa.fa-cog
           |&nbsp;
-          = t('sidebar.front_page')
+          = t('sidebar.admin')
 
     li.nav-item
       = link_to admin_articles_path do

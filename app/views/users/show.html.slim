@@ -45,13 +45,14 @@
                   th
                     .pull-right
                       .btn-group
-                        - if subscription.expired?
+                        - if subscription.expired? && subscription.editable?
                           = link_to 'Forny',
                             edit_renew_subscription_path(subscription.subscription_id),
                             class: 'btn btn-primary btn-sm'
-                        = link_to t('subscription.delivery_address'),
-                          subscription_delivery_addresses_path(subscription),
-                          class: 'btn btn-light btn-sm'
+                        - if subscription.editable?
+                          = link_to t('subscription.delivery_address'),
+                            subscription_delivery_addresses_path(subscription),
+                            class: 'btn btn-light btn-sm'
                   / td = l subscription.on_hold_date unless subscription.on_hold_date.nil?
 
   - if @user.comments.any?

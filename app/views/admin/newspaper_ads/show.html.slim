@@ -1,0 +1,81 @@
+== render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'Anonncer til avisen', admin_newspaper_ads_path
+    li.breadcrumb-item.active aria-current="page"
+      = @newspaper_ad.name
+.row
+  .col-sm-8
+    h3
+      'Anonnce
+      - case @newspaper_ad.state
+      - when ServiceFunctions::PrintedAd::PENDING
+        .badge.badge-danger
+          = @newspaper_ad.state
+  .col-sm-4
+    .pull-right
+      = link_to t('edit'), edit_admin_newspaper_ad_path(@newspaper_ad), class: 'btn btn-light'
+.row
+  .col-sm-6
+    'Info
+    .table-responsive.mt-10
+      table.table.table-bordered.table-hover.table-sm
+        tr
+          th
+            .pull-right
+              = t('address.start_date')
+          th
+            strong = l @newspaper_ad.start_date
+        tr
+          th
+            .pull-right Kolloner
+          th
+            strong = @newspaper_ad.number_of_columns
+        tr
+          th
+            .pull-right Bemærkning
+          th
+            = simple_format @newspaper_ad.comment
+    h5 Anonnce tekst
+    = simple_format @newspaper_ad.body
+  .col-sm-6
+    'Adresse
+    .table-responsive.mt-10
+      table.table.table-bordered.table-hover.table-sm
+        tr
+          th
+            .pull-right Fulde navn/Firma
+          th
+            strong = @newspaper_ad.name
+        tr
+          th
+            .pull-right Addrese
+          th
+            strong = @newspaper_ad.address
+        tr
+          th
+            .pull-right Post nummer, by
+          th
+            strong
+              = @newspaper_ad.zipp_code
+              '&nbsp;,
+              = @newspaper_ad.city
+        tr
+          th
+            .pull-right Telefon
+          th
+            strong
+              = @newspaper_ad.phone
+        tr
+          th
+            .pull-right Kontaktperson
+          th
+            strong
+              = @newspaper_ad.contact_person
+        tr
+          th
+            .pull-right Email
+          th
+            strong
+              = mail_to @newspaper_ad.email, @newspaper_ad.email
