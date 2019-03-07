@@ -9,7 +9,7 @@ class Admin::SystemSetup < ApplicationRecord
   validates_attachment_content_type :logo, content_type: %r{\Aimage\/.*\Z}
   before_validation { logo.clear if delete_logo == '1' }
 
-  validates_with Admin::SystemSetup::Validator
+  # validates_with Admin::SystemSetup::Validator
 
   def landing_page
     Page.find_by(locale: locale, id: landing_page_id)

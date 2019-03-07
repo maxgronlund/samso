@@ -7,11 +7,9 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item
       = link_to t('ads.for_print_in_newspaper'), admin_newspaper_ads_path
     li.breadcrumb-item.active aria-current="page"
-      = link_to @newspaper_ad.name, admin_newspaper_ad_path(@newspaper_ad)
-    li.breadcrumb-item.active aria-current="page"
-      = t('edit')
+      = t('new')
 
 = simple_form_for([:admin, @newspaper_ad],
-  url: url_for(action: 'update', controller: 'admin/newspaper_ads'),
-  method: 'put') do |f|
+  url: url_for(action: 'create', controller: 'admin/newspaper_ads'),
+  method: 'post') do |f|
   = render 'form', f: f

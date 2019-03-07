@@ -2,6 +2,8 @@
 nav aria-label="breadcrumb"
   ol.breadcrumb
     li.breadcrumb-item
+      = link_to 'Anonncer', admin_ads_path
+    li.breadcrumb-item
       = link_to t('printed_ad.index'), admin_printed_ads_path
     i.breadcrumb-item.active aria-current="page"
       = t('printed_ad.create_new')

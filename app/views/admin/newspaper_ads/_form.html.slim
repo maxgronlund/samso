@@ -1,0 +1,34 @@
+
+= f.error_notification
+
+.row
+  .col-sm-6
+    = f.input :start_date, hint: t('printed_ad.start_date_hint')
+  .col-sm-6
+    = f.input :number_of_columns, collection: 0...5, as: :radio_buttons, class: 'horizontal-radio'
+.row
+  .col-sm-6
+    = f.input :body, input_html: { rows: 8}
+  .col-sm-6
+    = f.input :comment, input_html: { rows: 8}, hint: t('printed_ad.comments_hint')
+.row
+  .col-sm-3
+    = f.input :name
+  .col-sm-3
+    = f.input :address
+  .col-sm-3
+    = f.input :zipp_code
+  .col-sm-e
+    = f.input :city
+.row
+  .col-sm-6
+    = f.input :contact_person
+  .col-sm-3
+    = f.input :email
+  .col-sm-3
+    = f.input :phone
+.row
+  = f.input :state, collection: ServiceFunctions::PrintedAd::STATES, as: :radio_buttons, class: 'horizontal-radio'
+
+.pull-right
+  = f.submit t('save'), class: 'btn btn-primary'

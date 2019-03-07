@@ -7,6 +7,25 @@ class Admin::NewspaperAdsController < AdminController
     @newspaper_ad = ServiceFunctions::PrintedAd.find(params[:id])
   end
 
+  def new
+    @newspaper_ad =
+      ServiceFunctions::PrintedAd
+      .new(
+        start_date: Date.today.beginning_of_week + 8.day + 9.hours,
+        number_of_columns: 2
+      )
+  end
+
+  def create
+    @newspaper_ad = ServiceFunctions::PrintedAd.new(printed_ad_params)
+
+    if @newspaper_ad.save
+      redirect_to admin_newspaper_ads_path, notice: 'Anonncen er oprettet'
+    else
+      render :new
+    end
+  end
+
   def edit
     @newspaper_ad = ServiceFunctions::PrintedAd.find(params[:id])
   end
@@ -43,7 +62,8 @@ class Admin::NewspaperAdsController < AdminController
         :city,
         :email,
         :phone,
-        :contact_person
+        :contact_person,
+        :state
       )
   end
 end

@@ -2,7 +2,9 @@
 nav aria-label="breadcrumb"
   ol.breadcrumb
     li.breadcrumb-item
-      = link_to 'Anonncer til avisen', admin_newspaper_ads_path
+      = link_to 'Anonncer', admin_ads_path
+    li.breadcrumb-item
+      = link_to t('ads.for_print_in_newspaper'), admin_newspaper_ads_path
     li.breadcrumb-item.active aria-current="page"
       = @newspaper_ad.name
 .row
@@ -37,6 +39,11 @@ nav aria-label="breadcrumb"
             .pull-right Bemærkning
           th
             = simple_format @newspaper_ad.comment
+        tr
+          th
+            .pull-right Status
+          th
+            strong = t('ads.' +  @newspaper_ad.state)
     h5 Anonnce tekst
     = simple_format @newspaper_ad.body
   .col-sm-6

@@ -2,7 +2,7 @@ da:
   printed_ad:
     index: Anonncer til udskrifts side
     side_nav:
-    create_new: Opret ny annonce til udskrift
+    create_new: Opret ny annonce
     edit: Rediger annonce til udskrift
     image: Billed
     image_hint: bliver skaleret til 390x140 pixels

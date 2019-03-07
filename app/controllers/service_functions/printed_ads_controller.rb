@@ -38,8 +38,14 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
     @service_functions_printed_ad = ServiceFunctions::PrintedAd.new(service_functions_printed_ad_params)
 
     if @service_functions_printed_ad.save
-      redirect_to service_functions_printed_ads_path, notice: 'show'
-       # TODO: send message to system admin
+       NewspaperAdMailer
+        .send_message_to_administrators(
+          printed_ad_id: @service_functions_printed_ad.id,
+          emails: admin_system_setup.administrator_email,
+          link: admin_newspaper_ad_url(@service_functions_printed_ad)
+        )
+        .deliver
+        redirect_to service_functions_printed_ads_path, notice: 'show'
     else
       render :new
     end

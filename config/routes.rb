@@ -74,7 +74,7 @@ Rails.application.routes.draw do
       end
 
       resources :post_modules, only: %i[edit update]
-      resources :printed_ads
+      resources :printed_ads, except: %[show]
       resources :e_page_modules, only: %i[edit update]
       # resources :subscription_addresses, only: %i[show]
       # resources :subscriptions do

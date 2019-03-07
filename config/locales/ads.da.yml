@@ -1,3 +1,9 @@
 da:
   ads:
     index: Anonncer
+    for_print_in_newspaper: Anonncer til tryk i avisen
+    pending: Afventer
+    received: Modtaget
+    rejected: Afvist
+    approved: Godkendt
+    printed: Trykt

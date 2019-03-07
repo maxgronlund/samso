@@ -1,5 +1,5 @@
 class Admin::PrintedAdsController< AdminController
-  before_action :set_admin_printed_ad, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_printed_ad, only: %i[edit update destroy]
   layout "print", only: [:show]
 
 
@@ -10,9 +10,9 @@ class Admin::PrintedAdsController< AdminController
   end
 
   # GET /admin/printed_ads/1
-  def show
-    @printed_ads = Admin::PrintedAd.order(:position).last(2)
-  end
+  # def show
+  #   @printed_ads = Admin::PrintedAd.order(:position).last(2)
+  # end
 
   # GET /admin/printed_ads/new
   def new

@@ -1,6 +1,18 @@
 == render 'shared/admin_links', selected: ''
-h3 = t('printed_ad.index')
-p = t('printed_ad.index_help')
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'Anonncer', admin_ads_path
+    li.breadcrumb-item.active aria-current="page"
+      = t('printed_ad.index')
+
+.row
+  .col-sm-8
+    h3 = t('printed_ad.index')
+    p = t('printed_ad.index_help')
+  .col-sm-4
+    .pull-right
+      = link_to t('printed_ad.create_new'), new_admin_printed_ad_path, class: 'btn btn-primary'
 
 .table-responsive
   table.table.table-striped.table-bordered.table-hover.table-sm
@@ -26,10 +38,6 @@ p = t('printed_ad.index_help')
           td
             .pull-right
               .btn-group
-                = link_to t('show'),
-                  admin_printed_ad,
-                  "data-turbolinks" => false,
-                  class: 'btn btn-light btn-sm'
                 = link_to t('edit'),
                 edit_admin_printed_ad_path(admin_printed_ad),
                 class: 'btn btn-light btn-sm'
@@ -38,6 +46,3 @@ p = t('printed_ad.index_help')
                   method: :delete,
                   class: 'btn btn-danger btn-sm'
 
-br
-.pull-right
-  = link_to t('printed_ad.create_new'), new_admin_printed_ad_path, class: 'btn btn-light'
