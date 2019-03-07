@@ -1,0 +1,32 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+- session[:stored_path] = request.path
+
+
+.container-fluid
+  .row
+    .col-sm-12.mt-20
+      h3 Opret konto
+
+  .row
+    .col-sm-4.mt-10
+      .card
+        img.card-img-top alt="..." src="..." /
+        .card-body
+          h5.card-title For abonnomenter
+          p.card-text Hvis du abonnere på den trykte avis men ikke har adgang online.
+          a.btn.btn-primary href="#"  Fortsæt
+    - if @subscription_page.present?
+      .col-sm-4.mt-10
+        .card
+          img.card-img-top alt="..." src="..." /
+          .card-body
+            h5.card-title For nye brugere
+            p.card-text Du har ikke noget abonnoment og vil gerne læse Samsøposten
+            = link_to 'Fortsæt', page_url(@subscription_page), class: 'btn btn-primary'
+    .col-sm-4.mt-10
+      .card
+        img.card-img-top alt="..." src="..." /
+        .card-body
+          h5.card-title Eksisterende brugere
+          p.card-text Hvis du er registreret som bruger kan du logge ind her
+          = link_to 'Fortsæt', new_session_path, class: 'btn btn-primary'

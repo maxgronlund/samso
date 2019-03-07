@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   namespace :api do
     namespace :v1 do
       resources :epaper_verification, only: %i[index show]
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
     resources :cancel_newsletters
     resources :comments
     resources :contact, only: [:index]
+    resources :create_account, only: [:index]
     resources :terms_and_conditions, only: [:index]
     resources :letter_to_the_editors, only: [:index]
     resources :confirmation_required, only: [:show, :update]
