@@ -10,9 +10,11 @@ class SessionsController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def create
     user = User.find_by(email: params[:email].downcase.strip)
-    if user && user.confirmed_at.nil? && user.confirmation_token.present?
-      redirect_to confirmation_required_path(user.confirmation_token)
-      return
+    if user && user.confirmed_at.nil?
+      if user.confirmation_token.present?
+        redirect_to confirmation_required_path(user.confirmation_token)
+        return
+      end
       # set_menu
       # @landing_page = admin_system_setup.landing_page
       # flash.now.alert = t('please_confirm_your_account')
