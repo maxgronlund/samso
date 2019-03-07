@@ -26,7 +26,8 @@ class User < ApplicationRecord
     :validate_address,
     :cancel_account_token,
     :update_subscription_address,
-    :imported #, :validate_email
+    :imported,
+    :subscription_id
   )
 
   has_many :roles, dependent: :destroy

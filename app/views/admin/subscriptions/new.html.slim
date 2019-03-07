@@ -8,6 +8,9 @@ h3 = t('user.create_printed_subscription')
 	method: 'POST'do |f|
   = f.error_notification
   .form-inputs
+    .row
+      .col-sm-12
+        = f.input :subscription_id, label: '#Abonnoments NR'
   	.row
       .col-sm-6
         = f.input :name, autofocus: true
@@ -34,7 +37,7 @@ h3 = t('user.create_printed_subscription')
           = address.input :city,
           label: t('address.city'),
           input_html: { class: 'city-name-autofill' }
-
+    = f.input :subscribe_to_news, as: :boolean
   .form-actions
     .pull-right
       = f.submit t('save'), class: 'btn btn-primary'

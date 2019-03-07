@@ -1,0 +1,31 @@
+= simple_form_for [@user] , url: url_for(action: 'create', controller: 'account_for_subscribers'), method: 'post' do |f|
+
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .col-sm-6
+        = f.input :subscription_id, autofocus: true, label: 'Abonnoment nr'
+      .col-sm-6
+        = f.input :email, hint: 'Brug en email du har adgang til'
+    .row
+      .col-sm-6
+        = f.input :password,
+          placeholder: '••••••••••'
+      .col-sm-6
+        = f.input :password_confirmation,
+          placeholder: '••••••••••'
+
+
+    - if @user.valid_subscriber?
+      = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
+    = f.input :subscribe_to_news, as: :boolean
+
+
+  .form-actions
+    .pull-right
+      - if current_user.nil?
+        = link_to t('cancel'), session[:stored_path].presence || root_path, class: 'btn btn-light'
+      - else
+        = link_to t('cancel'), user_path(current_user), class: 'btn btn-light'
+      = f.submit t('save'), class: 'btn btn-primary', id: 'submit'

@@ -26,7 +26,8 @@ class Admin::SubscriptionsController < AdminController
   end
 
   def create
-    @user = User.new(admin_subscription_params)
+    ap subscription_params
+    @user = User.new(subscription_params)
     @user.addresses.first.name = @user.name
     @user.password_digest = User::Service.fake_password
     @user.uuid = SecureRandom.uuid
@@ -53,11 +54,13 @@ class Admin::SubscriptionsController < AdminController
   def new_subscription
     subscription_type = Admin::SubscriptionType.imported
 
+    subscription_id = admin_subscription_params[:subscription_id]
+
     Admin::Subscription.new(
       start_date: Time.zone.now,
       end_date: Time.zone.now + subscription_type.duration.days,
       subscription_type_id: subscription_type.id,
-      subscription_id: Admin::Subscription.new_subscription_id,
+      subscription_id: subscription_id, # Admin::Subscription.new_subscription_id,
       addresses: [subscription_address]
     )
   end
@@ -86,6 +89,12 @@ class Admin::SubscriptionsController < AdminController
     @admin_subscription = Admin::Subscription.find(params[:id])
   end
 
+  def subscription_params
+    @subscription_params ||= admin_subscription_params.dup
+    @subscription_params.delete :subscription_id
+    @subscription_params
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def admin_subscription_params
     params.require(:user).permit(
@@ -94,6 +103,7 @@ class Admin::SubscriptionsController < AdminController
       :password,
       :password_confirmation,
       :subscribe_to_news,
+      :subscription_id,
       addresses_attributes: %i[id name address zipp_code city],
       roles_attributes: %i[permission id]
     )

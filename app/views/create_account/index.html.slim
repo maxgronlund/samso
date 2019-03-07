@@ -1,5 +1,5 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
-- session[:stored_path] = request.path
+- session[:stored_path] = root_path
 
 
 .container-fluid
@@ -8,25 +8,36 @@
       h3 Opret konto
 
   .row
-    .col-sm-4.mt-10
-      .card
-        img.card-img-top alt="..." src="..." /
-        .card-body
-          h5.card-title For abonnomenter
-          p.card-text Hvis du abonnere på den trykte avis men ikke har adgang online.
-          a.btn.btn-primary href="#"  Fortsæt
     - if @subscription_page.present?
       .col-sm-4.mt-10
         .card
-          img.card-img-top alt="..." src="..." /
+          img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-02.jpg" /
           .card-body
             h5.card-title For nye brugere
             p.card-text Du har ikke noget abonnoment og vil gerne læse Samsøposten
             = link_to 'Fortsæt', page_url(@subscription_page), class: 'btn btn-primary'
     .col-sm-4.mt-10
       .card
-        img.card-img-top alt="..." src="..." /
+        img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-03.jpg" /
         .card-body
           h5.card-title Eksisterende brugere
           p.card-text Hvis du er registreret som bruger kan du logge ind her
           = link_to 'Fortsæt', new_session_path, class: 'btn btn-primary'
+    .col-sm-4.mt-10
+      .card
+        img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-01.jpg" /
+        .card-body
+          h5.card-title Hvis du har et abonnement
+          p.card-text Hvis du abonnere på den trykte avis men ikke har adgang online.
+          = link_to 'Fortsæt', new_account_for_subscriber_path, class: 'btn btn-primary'
+
+  .row.mt-12
+    .col-sm-12
+      .pull-right
+        a.photo-license-url href="https://creativecommons.org/licenses/by-sa/2.0/" rel=("license cc:license") target="_newtab"
+
+          i.fab.fa-creative-commons-sa
+          '&nbsp;
+          i.fab.fa-creative-commons-by
+          '&nbsp;
+          'Billeder David Huang, some rights reserved

@@ -1,6 +1,7 @@
 # validate user based on address or not"
 class User::Validator < ActiveModel::Validator
   def validate(record)
+    ap 'validate user'
   	validate_email(record)
   end
 

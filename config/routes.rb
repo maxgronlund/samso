@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /da|en/ do
+    resources :account_for_subscribers
     resources :cancel_newsletters
     resources :comments
     resources :contact, only: [:index]

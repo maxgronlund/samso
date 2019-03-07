@@ -2,8 +2,9 @@
 
 .card
   h4.card-header  = subscription_module.title
-  = raw subscription_module.body
   .card-body
+    = raw subscription_module.body
+    hr
     .subscription-module
       = form_tag('/subscriptions', method: :post)
         - Admin::SubscriptionType.internal.each_with_index do |subscription_type, index|

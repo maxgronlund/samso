@@ -1,7 +1,10 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container
-  .row.justify-content-md-center
+  .row.justify-content-sm-center
     .col-sm-12
+      - if flash.present? && flash.alert.present?
+        .alert.alert-danger
+          = flash.alert
       .card
         h4.card-header = t('user.create')
 

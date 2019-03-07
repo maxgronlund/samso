@@ -7,7 +7,7 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item.active aria-current="page"
       = @user.name
 
-- subscription = @user.default_subscription
+- subscription = @user.subscriptions.last
 .row
   .col-sm-12
     .alert.alert-success role="alert"
