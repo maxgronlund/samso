@@ -13,11 +13,11 @@
       .col-sm-6
         = f.input :password_confirmation,
           placeholder: '••••••••••'
-    = f.input :signature
+    = f.input :signature, label: 'Underskrift', hint: 'Bliver brugt af jurnalister'
 
     - if current_user.can_edit?(@user)
       = f.simple_fields_for :roles do |roles_form|
-        = roles_form.input :permission, collection: Role::ROLES, include_blank: false
+        = roles_form.input :permission, collection: Role::TRANSLATED_ROLES, include_blank: false
 
 
 
