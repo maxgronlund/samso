@@ -12,10 +12,9 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     if permitted?(user)
-
-      HTTParty.get(e_paper_token_url)
-
-      redirect_to "http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241"
+      # HTTParty.get(e_paper_token_url)
+      # redirect_to "http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241"
+      redirect_to e_paper_token_url
     else
       redirect_to root_path
     end
@@ -25,13 +24,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
 
   def e_paper_token_url
     secret = e_paper_secret
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-03-08&edition=SM1"
-
-    #{}"http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241&date=#{Time.zone.now.strftime('%Y-%m-%d')}"
-
-    # http://login.e-pages.dk/samsoposten/open/?secret=bc59443c-09b1-4962-9799-0b2278baeaf7&date=2019-03-08&edition=SM1
-    # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=#{Time.zone.now.strftime('%Y-%m-%d')}&edition=SM1"
-    # http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241&v=1549580400&date=2019-02-07
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&edition=SM1"
   end
 
   def e_paper_secret
