@@ -18,11 +18,11 @@ class Admin::Subscription < ApplicationRecord
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
+        options = parse_options(unescaped_row)
+        @options = utf_8_encode(options)
         next if index.zero?
         expire_subscriptions if @group.empty?
 
-        options = parse_options(unescaped_row)
-        @options = utf_8_encode(options)
         @subscription  = get_subscription
 
         if @subscription.persisted?
@@ -38,12 +38,12 @@ class Admin::Subscription < ApplicationRecord
     # rubocop:enable Security/Open
 
     def expire_subscriptions
-      @group = options[:group]
+      @group = @options[:group]
       subscription_type =
         Admin::SubscriptionType
-        .find_by(identifier: options[:group])
+        .find_by(identifier: @options[:group])
 
-      subscription.subscriptions.update_all(end_date: Time.zone.now - 1.days)
+      subscription_type.subscriptions.update_all(end_date: Time.zone.now - 1.days)
     end
 
     private
@@ -67,7 +67,7 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def subscription_type
-      Admin::SubscriptionType.find_by(options[:group])
+      Admin::SubscriptionType.find_by(identifier: @options[:group])
     end
 
     def find_or_create_user

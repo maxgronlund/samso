@@ -13,11 +13,9 @@ class Admin::SubscriptionType < ApplicationRecord
 
   scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }
-  #scope :free, -> { where(free: true) }
   scope :payed, -> { internal.where(free: false) }
-  scope :imported, -> { where(identifier: IMPORTED) }
   scope :internal, -> { where(identifier: INTERNAL).order(:position) }
-
+  scope :imported, -> { where(identifier: IMPORTED) }
   scope :free, -> { find_by(identifier: FREE) }
   scope :from_economics, -> { find_by(identifier: FROM_ECONOMICS) }
   scope :free_from_economics, -> { find_by(identifier: FREE_FROM_ECONOMICS) }
