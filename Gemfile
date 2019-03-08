@@ -46,7 +46,7 @@ gem 'paperclip'
 gem 'airbrake', '~> 6.2'
 # gem 'aws-sdk', '~> 2.3'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
-gem 'httparty'
+# gem 'httparty'
 # gem "wysiwyg-rails"
 
 group :development, :test do
