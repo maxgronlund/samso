@@ -1,5 +1,4 @@
 class Api::V1::EpaperVerificationController < ApplicationController
-  require 'httparty'
   def index
     @access_to_e_paper =
       if access_to_e_paper?
