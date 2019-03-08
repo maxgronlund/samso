@@ -8,7 +8,7 @@ class Admin::Subscription < ApplicationRecord
   class Import
     # expire all subscriptions
     def initialize
-      Admin::Subscription.economic_integrated.update_all(end_date: Time.zone.now - 1.days)
+      Admin::Subscription.economic_imported.update_all(end_date: Time.zone.now - 1.days)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -74,7 +74,13 @@ class Admin::Subscription < ApplicationRecord
 
     # the default subscription type for economics
     def subscription_type
-      @subscription_type ||= Admin::SubscriptionType.imported
+      @subscription_type ||= find_subscription_type
+    end
+
+    def find_subscription_type
+      return Admin::SubscriptionType.free_subscription if @options[:group] == 'FriAbb'
+
+      Admin::SubscriptionType.imported
     end
 
     # build a new address

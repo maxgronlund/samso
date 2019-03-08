@@ -46,15 +46,6 @@ h3 = t('edit_model', model_name: 'System opsætning')
             = f.input :delete_logo, as: :boolean
         .col-sm-6
           = f.input :background_color
-  .row
-    .col-sm-6
-      = f.input :subscription_type_id,
-        collection: Admin::SubscriptionType.where(locale: I18n.locale),
-        label: 'Abonnoment fra e-conomics'
-    .col-sm-6
-      = f.input :free_subscription_type_id,
-        collection: Admin::SubscriptionType.where(locale: I18n.locale),
-        label: 'Fri abonnoment fra e-conomics'
   .pull-right
     = link_to t('cancel'), admin_index_path, class: 'btn btn-light'
     = f.submit t('save'), class: 'btn btn-primary'
