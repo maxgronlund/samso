@@ -1,7 +1,12 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
     / button.sidebar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent"  type="button"
-    span#sidebarCollapse
+    span
+      ul.navbar-nav.mr-auto
+        li.nav-item
+          = render 'shared/navbar_link',
+            link_name: 'Forsiden',
+            link_url: root_path
     #navbarSupportedContent
       ul.navbar-nav.mr-auto
         li.nav-item

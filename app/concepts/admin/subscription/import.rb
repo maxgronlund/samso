@@ -8,7 +8,8 @@ class Admin::Subscription < ApplicationRecord
   class Import
     # expire all subscriptions
     def initialize
-      Admin::Subscription.economic_imported.update_all(end_date: Time.zone.now - 1.days)
+      @group = ''
+      #Admin::Subscription.economic_imported.update_all(end_date: Time.zone.now - 1.days)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -18,6 +19,7 @@ class Admin::Subscription < ApplicationRecord
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         next if index.zero?
+        expire_subscriptions if @group.empty?
 
         options = parse_options(unescaped_row)
         @options = utf_8_encode(options)
@@ -35,6 +37,15 @@ class Admin::Subscription < ApplicationRecord
     end
     # rubocop:enable Security/Open
 
+    def expire_subscriptions
+      @group = options[:group]
+      subscription_type =
+        Admin::SubscriptionType
+        .find_by(identifier: options[:group])
+
+      subscription.subscriptions.update_all(end_date: Time.zone.now - 1.days)
+    end
+
     private
 
     def get_subscription
@@ -50,9 +61,13 @@ class Admin::Subscription < ApplicationRecord
         subscription_id: @options[:subscription_id],
         start_date: Time.zone.now,
         end_date: Time.zone.now + subscription_type.duration.days,
-        subscription_type_id: Admin::SubscriptionType.imported.id,
+        subscription_type_id: subscription_type.id,
         addresses: [address('Admin::Subscription')]
       )
+    end
+
+    def subscription_type
+      Admin::SubscriptionType.find_by(options[:group])
     end
 
     def find_or_create_user
@@ -72,17 +87,6 @@ class Admin::Subscription < ApplicationRecord
         )
     end
 
-    # the default subscription type for economics
-    def subscription_type
-      @subscription_type ||= find_subscription_type
-    end
-
-    def find_subscription_type
-      return Admin::SubscriptionType.free_subscription if @options[:group] == 'FriAbb'
-
-      Admin::SubscriptionType.imported
-    end
-
     # build a new address
     def address(addressable_type)
       Address.new(
@@ -91,7 +95,7 @@ class Admin::Subscription < ApplicationRecord
         address: @options[:address].presence || 'NA',
         zipp_code: @options[:zipp_code].presence || 'NA',
         city: @options[:city].presence || '',
-        country: @options[:country].presence || 'Danmark',
+        country: @options[:country].presence || 'Danmark'
       )
     end
 

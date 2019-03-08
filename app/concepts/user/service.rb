@@ -49,6 +49,9 @@ class User < ApplicationRecord
       @user.reset_password_token = nil
       @user.current_sign_in_at = Time.zone.now
       @user.reset_password_sent_at = nil
+      @user.confirmation_token = nil
+      @user.confirmed_at = Time.zone.now
+      @user.confirmation_sent_at = nil
       unless password_params.empty?
         @user.password = password_params[:password]
         @user.password_confirmation = password_params[:password_confirmation]

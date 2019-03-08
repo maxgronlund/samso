@@ -30,3 +30,4 @@ role = Role.where(
 
 Rake::Task['system:setup'].invoke
 Rake::Task['pages:build'].invoke
+Rake::Task['subscription_types:build_defaults'].invoke
