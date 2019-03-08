@@ -28,7 +28,7 @@ class Address::Validator < ActiveModel::Validator
   def validate_temporary_subscription_address(address)
     validate_address(address)
     subscription = address.addressable
-    if address.end_date < address.start_date + 2.weeks
+    if address.end_date < address.start_date + 1.weeks
       address.errors[:end_date] << 'Varigheden er ugyldig'
     end
 

@@ -26,22 +26,21 @@
             - if @address.temporary?
               .row
                 .col-sm-6
-                  = f.input :start_date, 
-                    as: :date, 
+                  = f.input :start_date,
+                    as: :date,
                     start_year: Date.today.year - 5,
                     end_year: Date.today.year + 25,
                     order: [:day, :month, :year],
                     label: t('address.start_date')
-              
+
                 .col-sm-6
-                  = f.input :end_date, 
-                    as: :date, 
+                  = f.input :end_date,
+                    as: :date,
                     start_year: Date.today.year - 5,
                     end_year: Date.today.year + 25,
                     order: [:day, :month, :year],
-                    label: t('address.end_date'),
-                    hint: t('address.end_date_hint')
-              
+                    label: t('address.end_date')
+
             = f.input :name, label: t('address.name')
             = f.input :address, label: t('address.address')
             = f.input :zipp_code, label: t('address.zipp_code'), input_html: { class: 'post-code-autofill-dk' }

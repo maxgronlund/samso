@@ -1,25 +1,26 @@
-.admin-links
-  ul.nav
-    li.nav-item
-      = link_to admin_index_path do
-        . class="nav-link #{selected == 'admin' ? 'disabled' : ''}"
-          i.fa.fa-cog
-          |&nbsp;
-          = t('sidebar.admin')
-
-    li.nav-item
-      = link_to admin_articles_path do
-        . class="nav-link #{selected == 'articles' ? 'disabled' : ''}"
-          i.fa.fa-newspaper
-          |&nbsp;
-          = t('sidebar.articles')
-    - if administrator?
+.container
+  .admin-links
+    ul.nav
       li.nav-item
-        = link_to admin_users_path do
-          . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
-            i.fa.fa-users
+        = link_to admin_index_path do
+          . class="nav-link #{selected == 'admin' ? 'disabled' : ''}"
+            i.fa.fa-cog
             |&nbsp;
-            = t('sidebar.users')
-br
-hr.admin-links
+            = t('sidebar.admin')
+
+      li.nav-item
+        = link_to admin_articles_path do
+          . class="nav-link #{selected == 'articles' ? 'disabled' : ''}"
+            i.fa.fa-newspaper
+            |&nbsp;
+            = t('sidebar.articles')
+      - if administrator?
+        li.nav-item
+          = link_to admin_users_path do
+            . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
+              i.fa.fa-users
+              |&nbsp;
+              = t('sidebar.users')
+  br
+  hr.admin-links
 
