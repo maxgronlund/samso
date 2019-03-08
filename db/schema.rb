@@ -456,8 +456,8 @@ ActiveRecord::Schema.define(version: 2019_03_08_071519) do
     t.integer "search_page_id"
     t.string "administrator_email"
     t.string "editor_emails", default: ""
-    t.integer "subscription_id"
-    t.integer "free_subscription_id"
+    t.integer "subscription_type_id"
+    t.integer "free_subscription_type_id"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
