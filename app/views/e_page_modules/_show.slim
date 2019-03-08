@@ -1,5 +1,6 @@
 - e_page = modulable
 .e-pages
+  = link_to(api_v1_epaper_verification_path(current_user))
   - if access_to_e_paper?
     = link_to(api_v1_epaper_verification_path(current_user), target: '_blank') do
      h3 = e_page.title

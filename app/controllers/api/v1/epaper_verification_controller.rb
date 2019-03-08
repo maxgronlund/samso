@@ -1,4 +1,5 @@
 class Api::V1::EpaperVerificationController < ApplicationController
+  # this is called from https://www.e-pages.dk
   def index
     @access_to_e_paper =
       if access_to_e_paper?
@@ -8,14 +9,13 @@ class Api::V1::EpaperVerificationController < ApplicationController
       end
   end
 
+  # Called when the user click on the thumb on the e_page_module
   def show
     user = User.find_by(id: params[:id])
     if permitted?(user)
-      # HTTParty.get(e_paper_token_url)
-      # redirect_to "http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241"
       redirect_to e_paper_token_url
     else
-      redirect_to root_path
+      redirect_to create_account_index_path
     end
   end
 
@@ -23,7 +23,8 @@ class Api::V1::EpaperVerificationController < ApplicationController
 
   def e_paper_token_url
     secret = e_paper_secret
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-03-08&edition=SM1"
+    # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-03-08&edition=SM1"
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&edition=SM1"
   end
 
   def e_paper_secret
