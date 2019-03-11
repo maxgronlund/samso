@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   namespace :api do
     namespace :v1 do
       resources :epaper_verification, only: %i[index show]
@@ -43,6 +42,7 @@ Rails.application.routes.draw do
       resources :csv_imports do
         resources :parse_csv, only: %i[new]
       end
+      resources :export_delivery_list, only: %i[index]
       resources :dmi_modules, only: %i[edit update]
 
       resources :e_page_modules, only: %i[edit update]

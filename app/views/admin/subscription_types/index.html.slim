@@ -12,6 +12,8 @@
   table.table.table-striped.table-bordered.table-hover
     thead.thead-dark
       tr
+        - if super_admin?
+          th #
         th = t('activerecord.attributes.admin/subscription_type.title')
         th = t('subscription_type.creation_method')
         th = t('activerecord.attributes.admin/subscription_type.duration')
@@ -26,8 +28,10 @@
     tbody
       - @admin_subscription_types.each do |subscription_type|
         tr
+          - if super_admin?
+            td = subscription_type.id
           td = subscription_type.title
-          td = t('subscription_type.' + subscription_type.identifier)
+          td = Admin::SubscriptionType::Service.translation(subscription_type)
           td = subscription_type.duration == 365000 ? "1000 år" : "#{subscription_type.duration} dage"
           td = subscription_type.internet_version ? '√' : ''
           td = subscription_type.print_version ? '√' : ''

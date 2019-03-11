@@ -2,6 +2,7 @@
 
 # a subscription
 class Admin::Subscription < ApplicationRecord
+  require 'csv'
   attr_accessor :on_hold
   belongs_to :subscription_type, class_name: 'Admin::SubscriptionType', counter_cache: true
   belongs_to :user
@@ -70,7 +71,16 @@ class Admin::Subscription < ApplicationRecord
   alias set_address primary_address
 
   def temporary_address
-    addresses.find_by(address_type: Address::TEMPORARY_ADDRESS)
+    @temporary_address =
+      addresses
+      .find_by(address_type: Address::TEMPORARY_ADDRESS)
+  end
+
+  def delivery_address
+    return Address.new if addresses.count.zero?
+    return address if addresses.count == 1
+    return temporary_address if temporary_address.in_period?
+    primary_address
   end
 
   def copy_from_address(address)
@@ -110,6 +120,74 @@ class Admin::Subscription < ApplicationRecord
     true
   end
 
+  def group
+    subscription_type.group
+  end
+
+  def split_name
+    @split_name = user.name.split(' ')
+  end
+
+  def first_name
+    split_name.first
+  end
+
+  def middle_name
+    return '' if split_name.length < 2
+    split_name[1...split_name.length-1].join(' ')
+  end
+
+  def last_name
+    split_name.length > 1 ? split_name.last : ''
+  end
+
+  # def self.to_csv
+  #   CSV.generate do |csv|
+  #     csv << 'id'
+  #     all.each do |subscription|
+  #       csv << subscription.subscription_id
+  #     end
+  #   end
+  # end
+
+  HEADER = %i[Gruppe  abonr fornavn mellemnavn efternavn attention kontaktperson vejnavn husnr litra sal side postnr bynavn land antalaviser co tiltaleform gadeident david]
+
+  def self.to_csv
+    # attributes = %w{id fo}
+
+    CSV.generate(headers: true) do |csv|
+      csv << HEADER
+
+      all.each do |subscription|
+        csv << [
+          subscription.group,
+          subscription.subscription_id,
+          subscription.first_name,
+          subscription.middle_name,
+          subscription.last_name,
+          '',
+          '',
+          subscription.delivery_address.address,
+          subscription.delivery_address.address.to_i,
+          '',
+          '',
+          '',
+          subscription.delivery_address.zipp_code,
+          subscription.delivery_address.city,
+          'DK',
+          '1',
+          '',
+          '',
+          '',
+          ''
+
+
+        ]
+      end
+    end
+  end
+
+
   private
 
   def user_address_copy
@@ -123,4 +201,5 @@ class Admin::Subscription < ApplicationRecord
       )
   end
   alias copy_address user_address_copy
+
 end

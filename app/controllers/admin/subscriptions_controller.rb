@@ -52,15 +52,13 @@ class Admin::SubscriptionsController < AdminController
   private
 
   def new_subscription
-    subscription_type = Admin::SubscriptionType.imported
-
-    subscription_id = admin_subscription_params[:subscription_id]
+    subscription_type = Admin::SubscriptionType.from_economics
 
     Admin::Subscription.new(
       start_date: Time.zone.now,
       end_date: Time.zone.now + subscription_type.duration.days,
       subscription_type_id: subscription_type.id,
-      subscription_id: subscription_id, # Admin::Subscription.new_subscription_id,
+      subscription_id: Admin::Subscription.new_subscription_id,
       addresses: [subscription_address]
     )
   end

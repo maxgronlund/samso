@@ -212,6 +212,5 @@ class User < ApplicationRecord
 
     (900000 + user.id + 1)
   end
-
 end
 # rubocop:enable Metrics/ClassLength

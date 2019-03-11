@@ -8,9 +8,9 @@ h3 = t('user.create_printed_subscription')
 	method: 'POST'do |f|
   = f.error_notification
   .form-inputs
-    .row
-      .col-sm-12
-        = f.input :subscription_id, label: '#Abonnoments NR'
+    / .row
+    /   .col-sm-12
+    /     = f.input :subscription_id, label: '#Abonnoments NR'
   	.row
       .col-sm-6
         = f.input :name, autofocus: true

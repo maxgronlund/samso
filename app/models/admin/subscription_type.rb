@@ -6,7 +6,7 @@ class Admin::SubscriptionType < ApplicationRecord
 
   INTERNAL = 'internal'.freeze
   FREE  = 'free'.freeze
-  #IMPORTED = 'imported'.freeze
+  IMPORTED = 'imported'.freeze
   FROM_ECONOMICS = 'Abonnement'.freeze
   FREE_FROM_ECONOMICS = 'FriAbb'.freeze
   AB_EAN_FROM_ECONOMICS = 'AB-EAN'.freeze

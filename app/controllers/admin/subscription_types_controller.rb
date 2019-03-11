@@ -8,7 +8,7 @@ class Admin::SubscriptionTypesController < AdminController
   # GET /admin/subscription_types
   # GET /admin/subscription_types.json
   def index
-    @admin_subscription_types = Admin::SubscriptionType.order(:duration)
+    @admin_subscription_types = Admin::SubscriptionType.order(:id)
   end
 
   # GET /admin/subscription_types/1

@@ -32,6 +32,10 @@ class Address < ApplicationRecord
     update(address_type: TEMPORARY_ADDRESS)
   end
 
+  def in_period?
+    start_date > Time.zone.now && end_date < Time.zone.now
+  end
+
   def user
     case addressable_type
     when 'User'
