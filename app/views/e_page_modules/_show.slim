@@ -6,6 +6,7 @@
      = simple_format e_page.body
      = image_tag(e_page.image_link, class: 'img-fluid mr-1')
   - else
-    h3 = e_page.title
-    = simple_format e_page.body
-    = image_tag(e_page.image_link, class: 'img-fluid mr-1')
+    = link_to(create_account_index_path) do
+      h3 = e_page.title
+      = simple_format e_page.body
+      = image_tag(e_page.image_link, class: 'img-fluid mr-1')

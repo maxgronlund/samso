@@ -3,6 +3,7 @@ class AcceptedPaymentsController < ApplicationController
   # hence te cc is a great validation
   def index
     params.permit!
+    ap params
     raise and return if payment.nil?
     update_subscription
     update_payment
@@ -11,6 +12,7 @@ class AcceptedPaymentsController < ApplicationController
     @payment.user.destroy_pending_payments
     @message = Admin::SystemMessage.subscription_payment_completed
     session[:user_id] = subscriper.id
+    @current_user = subscriper
     # confirm_user
     # login_user
   end
