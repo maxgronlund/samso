@@ -1,5 +1,6 @@
 class Api::V1::EpaperVerificationController < ApplicationController
   # this is called from https://www.e-pages.dk
+  # http://samso.herokuapp.com/api/v1/epaper_verification/1?locale=da
   def index
     @access_to_e_paper =
       if access_to_e_paper?
@@ -24,9 +25,9 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def e_paper_token_url
     secret = e_paper_secret
 
-    "http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241&date=2019-03-14"
+    #"http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241&date=2019-03-14"
 
-    # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-03-08&edition=SM1"
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
     # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
   end
 
