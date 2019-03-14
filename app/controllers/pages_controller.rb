@@ -9,6 +9,9 @@ class PagesController < ApplicationController
     @footer           = @page.footer
     @body_style       = @page.body_style
     session[:page_id] = @page.id
+    # if user_signed_in? && @page.id == admin_system_setup.subscription_page_id
+    #   redirect_to root_path
+    # end
   rescue
     render_404
   end

@@ -117,7 +117,7 @@ class Admin::Subscription < ApplicationRecord
     return false if subscription_type.nil?
     return false if expired?
 
-    true
+    subscription_type.print_version
   end
 
   def group

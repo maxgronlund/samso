@@ -7,7 +7,6 @@ class PostsController < ApplicationController
     @blog_post.shown!
     @blog = @blog_post.blog
     @landing_page = landing_page
-    session[:page_id]
 
     render 'pages/show'
   end

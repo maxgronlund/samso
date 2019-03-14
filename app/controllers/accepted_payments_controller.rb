@@ -13,8 +13,7 @@ class AcceptedPaymentsController < ApplicationController
     @message = Admin::SystemMessage.subscription_payment_completed
     session[:user_id] = subscriper.id
     @current_user = subscriper
-    # confirm_user
-    # login_user
+    session[:stored_path] = root_path
   end
 
   private
