@@ -9,7 +9,6 @@ class Admin::Subscription < ApplicationRecord
     # expire all subscriptions
     def initialize
       @group = ''
-      #Admin::Subscription.economic_imported.update_all(end_date: Time.zone.now - 1.days)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -21,9 +20,10 @@ class Admin::Subscription < ApplicationRecord
         options = parse_options(unescaped_row)
         @options = utf_8_encode(options)
         next if index.zero?
+
         expire_subscriptions if @group.empty?
 
-        @subscription  = get_subscription
+        @subscription = get_subscription
 
         if @subscription.persisted?
           extend_subscription
@@ -71,8 +71,7 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def find_or_create_user
-      user =
-        User
+      User
         .where(
           user_id: @options[:subscription_id]
         )

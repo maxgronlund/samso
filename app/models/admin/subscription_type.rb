@@ -9,7 +9,6 @@ class Admin::SubscriptionType < ApplicationRecord
   IMPORTED = 'imported'.freeze
   FROM_ECONOMICS = 'Abonnement'.freeze
   FREE_FROM_ECONOMICS = 'FriAbb'.freeze
-  AB_EAN_FROM_ECONOMICS = 'AB-EAN'.freeze
 
   scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }

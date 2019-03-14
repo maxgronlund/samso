@@ -35,6 +35,7 @@ da:
     select_csv_file: Vælg CSV dokument
     new: Upload CSV dokument
     index: CSV dokumenter - Unicode (UTF-8)
+    dao: DAO liste (gammel)
     catogories: Kategorier
     economic: E-Conomics export
     subscriptions: Abonnomenter (E-Conomics)

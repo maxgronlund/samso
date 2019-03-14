@@ -8,10 +8,9 @@ class Admin::ExportDeliveryListController < AdminController
       .joins(:subscription_type)
       .where(admin_subscription_types: { print_version: true })
 
-      respond_to do |format|
-        format.html
-        format.csv { send_data @subscriptions.to_csv, filename: "users-#{Date.today}.csv" }
-        #format.csv { render text: @subscriptions.to_csv }
-      end
+    respond_to do |format|
+      format.html
+      format.csv { send_data @subscriptions.to_csv, filename: "DAO-Hovedliste-#{Date.today}.csv" }
+    end
   end
 end

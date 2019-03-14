@@ -180,8 +180,6 @@ class Admin::Subscription < ApplicationRecord
           '',
           '',
           ''
-
-
         ]
       end
     end

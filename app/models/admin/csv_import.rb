@@ -14,7 +14,8 @@ class Admin::CsvImport < ApplicationRecord
       [I18n.t('csv_file.subscriptions'), Admin::Subscription.name],
       [I18n.t('csv_file.articles'), Admin::BlogPost.name],
       [I18n.t('csv_file.users'), User.name],
-      [I18n.t('csv_file.catogories'), Admin::Blog.name]
+      [I18n.t('csv_file.catogories'), Admin::Blog.name],
+      [I18n.t('csv_file.dao'), Admin::Subscription::DaoImport.name]
     ]
   end
 
@@ -32,6 +33,8 @@ class Admin::CsvImport < ApplicationRecord
       I18n.t('csv_file.users')
     when 'Admin::Subscription'
       I18n.t('csv_file.subscriptions')
+    when 'Admin::Subscription::DaoImport'
+      I18n.t('csv_file.dao')
     end
   end
 end

@@ -29,6 +29,10 @@ class Admin::CsvImport < ApplicationRecord
         ::Admin::Subscription::Import
           .new
           .import(csv_import)
+      when Admin::Subscription::DaoImport.name
+        ::Admin::Subscription::DaoImport
+          .new
+          .import(csv_import)
       end
     end
     # rubocop:enable Metrics/MethodLength

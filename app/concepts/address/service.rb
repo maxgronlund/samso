@@ -750,6 +750,62 @@ class Address < ApplicationRecord
       '5792': 'Årslev',
       '5560': 'Aarup'
     }
+
+    def self.update_address(address)
+      user = address.user
+      split_name = user.name.split(' ')
+      first_name = split_name.first
+      middle_name = split_name.length < 2 ? '' : split_name[1...split_name.length-1].join(' ')
+      last_name = split_name.length > 1 ? split_name.last : ''
+
+      split_address = address.address.split(' ')
+      state = 'street_name'
+      street_name = []
+      house_number = 0
+      letter = ''
+      floor = ''
+      side = ''
+
+      split_address.each do |address_split|
+        if state == 'street_name'
+          unless address_split.to_i.zero?
+            state = 'house_number'
+          end
+        elsif state == 'letter'
+
+          if address_split.to_i > 0
+            state = 'floor'
+          end
+        end
+
+        case state
+        when 'street_name'
+          street_name << address_split
+        when 'house_number'
+          house_number = address_split.to_i
+          letter = address_split.delete(house_number.to_s)
+          state = 'letter'
+        when 'letter'
+          letter = letter.blank? ? address_split : letter
+          state = 'floor'
+        when 'floor'
+          floor = address_split.to_i.to_s
+          state = 'side'
+        when 'side'
+          side = address_split
+        end
+      end
+      address.update(
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        street_name: street_name.join(' '),
+        house_number: house_number,
+        letter: letter,
+        floor: floor,
+        side: side,
+        country: 'DK'
+      )
+    end
   end
 end
-

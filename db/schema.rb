@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_103732) do
+ActiveRecord::Schema.define(version: 2019_03_11_205508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2019_03_11_103732) do
     t.date "start_date"
     t.date "end_date"
     t.string "country", default: "Danmark"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "street_name"
+    t.integer "house_number"
+    t.string "letter"
+    t.string "floor"
+    t.string "side"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 

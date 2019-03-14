@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 namespace :addresses do
+
+  # usage
+  # rake addresses:update_address_fields
+  desc 'Update address with first middle and last name'
+  task update_address_fields: :environment do
+    Address.find_each do |address|
+      Address::Service.update_address(address)
+    end
+  end
+
   # usage
   # rake addresses:create_user_addresse
   desc 'Create one addresses record for all users'
