@@ -25,8 +25,6 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def e_paper_token_url
     secret = e_paper_secret
 
-    #"http://samsoposten.e-pages.dk/index.php?action=show_subscription&paymentid=12241&date=2019-03-14"
-
     "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
     # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2018-05-03&edition=SM1"
   end

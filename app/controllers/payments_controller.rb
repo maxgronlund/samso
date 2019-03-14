@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
-    ap subscription_type_id = session[:subscription_type_id] || params[:subscription_type_id]
+    subscription_type_id = session[:subscription_type_id] || params[:subscription_type_id]
     @subscription_type = Admin::SubscriptionType.find_by(id: subscription_type_id)
     if @subscription_type.nil?
       render_404

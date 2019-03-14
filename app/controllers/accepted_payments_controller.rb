@@ -7,6 +7,7 @@ class AcceptedPaymentsController < ApplicationController
     update_subscription
     update_payment
     update_subscriper
+    initialize_user
     @payment.user.destroy_pending_payments
     @message = Admin::SystemMessage.subscription_payment_completed
     session[:user_id] = subscriper.id
@@ -15,6 +16,11 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   private
+
+  def initialize_user
+    user_service = User::Service.new(subscriper)
+    user_service.initialize_user
+  end
 
   def update_subscriper
     subscriper.update(latest_online_payment: Time.zone.now) if subscriper.present?
