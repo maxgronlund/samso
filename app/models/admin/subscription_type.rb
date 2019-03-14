@@ -5,10 +5,11 @@ class Admin::SubscriptionType < ApplicationRecord
   has_many :subscriptions, class_name: 'Admin::Subscription', foreign_key: :subscription_type_id
 
   INTERNAL = 'internal'.freeze
-  FREE  = 'free'.freeze
+  FREE = 'free'.freeze
   IMPORTED = 'imported'.freeze
   FROM_ECONOMICS = 'Abonnement'.freeze
   FREE_FROM_ECONOMICS = 'FriAbb'.freeze
+  AB_EAN_FROM_ECONOMICS = 'AB-EAN'.freeze
 
   scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }
