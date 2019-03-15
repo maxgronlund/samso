@@ -92,7 +92,7 @@ class User < ApplicationRecord
         postnr_by: row[F].empty? ? nil : row[F].strip.downcase.titleize,
         Telefon: row[G].empty? ? nil : row[G].strip.downcase,
         Mobil: row[H].empty? ? nil : row[H].strip.downcase,
-        Nyhedsbrev: row[U].present?,
+        Nyhedsbrev: row[I] == '1',
         email: User::Service.sanitize_email(row[J]),
         Brugernavn: row[K].empty? ? nil : row[K].strip,
         password: row[L].empty? ? nil : row[L].strip,
@@ -114,7 +114,7 @@ class User < ApplicationRecord
 
     def build_subscription_id(row)
       subscription_id = row[B].strip
-      subscription_id.presence ||  User.new_user_id
+      subscription_id.presence || User.new_user_id
     end
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
@@ -122,9 +122,10 @@ class User < ApplicationRecord
     def import_user(options = {})
       user = User.where(user_id: options[:Abonnr]).first_or_initialize
       email = User::Service.sanitize_email(options[:email])
-      if user.persisted? || User.exists?(email: email)
-        user.update(subscribe_to_news: options[:Nyhedsbrev])
-        @persisted << {options: options, user: user.attributes, subscription: user.subscriptions}
+      user = User.find_by(email: email) if User.exists?(email: email)
+      if user.persisted?
+        user.update!(subscribe_to_news: options[:Nyhedsbrev])
+        @persisted << { options: options, user: user.attributes, subscription: user.subscriptions }
         return
       end
 

@@ -26,7 +26,6 @@ class Admin::SubscriptionsController < AdminController
   end
 
   def create
-    ap subscription_params
     @user = User.new(subscription_params)
     @user.addresses.first.name = @user.name
     @user.password_digest = User::Service.fake_password
@@ -36,7 +35,7 @@ class Admin::SubscriptionsController < AdminController
     @user.roles = [Role.new]
     @user.subscriptions = [new_subscription]
     if @user.save
-      send_welcome_message
+      # send_welcome_message
       redirect_to admin_show_subscription_id_path(@user.id)
     else
       render :new
@@ -90,6 +89,8 @@ class Admin::SubscriptionsController < AdminController
   def subscription_params
     @subscription_params ||= admin_subscription_params.dup
     @subscription_params.delete :subscription_id
+    @subscription_params.confirmed_at = Time.zone.now
+    @subscription_params.confirmation_token = nil
     @subscription_params
   end
 

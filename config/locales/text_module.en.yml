@@ -24,7 +24,7 @@ en:
       url: Image / Link / Button uses this link
       url_text: Text on link
     placeholders:
-      url: http://samso.dk
+      url: http://samsoposten.dk
     show_to:
       all: Always
       guests:  Only when not logged in

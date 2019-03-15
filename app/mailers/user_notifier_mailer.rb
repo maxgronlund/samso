@@ -1,6 +1,6 @@
 # notifications to users
 class UserNotifierMailer < ApplicationMailer
-  default from: 'no-reply@samso.dk'
+  default from: 'support@samsoposten.dk'
   layout 'user_notifier_mailer'
 
   # send a signup email to the user, pass in the user object that

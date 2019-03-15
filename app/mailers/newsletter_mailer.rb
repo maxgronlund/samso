@@ -1,6 +1,6 @@
 # Newsletter to users
 class NewsletterMailer < ApplicationMailer
-  default from: 'no-reply@samso.dk'
+  default from: 'support@samsoposten.dk'
   layout 'newsletter_mailer'
 
   def send_newsletter(options = {})

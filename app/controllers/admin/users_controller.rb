@@ -46,7 +46,8 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(user_params)
     @user.uuid = SecureRandom.uuid
-    # @user.validate_email = true
+    @user.confirmed_at = Time.zone.now
+    @user.confirmation_token = nil
     if @user.save
       redirect_to admin_users_path
     else

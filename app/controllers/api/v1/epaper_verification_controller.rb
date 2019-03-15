@@ -1,3 +1,6 @@
+# the authorization dance documentation
+# https://support.visiolink.com/hc/en-us/articles/200003711?input_string=integration+af+e-paper
+
 class Api::V1::EpaperVerificationController < ApplicationController
   # this is called from https://www.e-pages.dk
   # http://samso.herokuapp.com/api/v1/epaper_verification/1?locale=da

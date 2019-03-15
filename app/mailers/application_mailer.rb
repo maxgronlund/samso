@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'no-reply@samso.dk'
+  default from: 'support@samsoposten.dk'
   layout 'mailer'
 end
