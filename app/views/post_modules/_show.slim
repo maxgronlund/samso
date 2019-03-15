@@ -24,7 +24,7 @@
     = simple_format (blog_post.body)
     = render 'shared/social_icons', blog_post: blog_post
     - if blog_post.enable_comments?
-      = render 'comments/index', comments: blog_post.comments, commentable: blog_post
+      = render 'comments/index', comments: blog_post.comments.order(created_at: :desc), commentable: blog_post
 
     - if blog_post.show_facebook_comments?
       - data_href = ENV['RAILS_HOST'] + request.path

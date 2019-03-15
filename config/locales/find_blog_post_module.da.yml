@@ -6,7 +6,7 @@ da:
         other: Find artikler
     attributes:
       admin/find_blog_post_module:
-        name:  Find artikkel
+        name:  Find artikel
 
   find_blog_post_module:
     fo: Fo
@@ -14,4 +14,4 @@ da:
 
 
   admin/find_blog_post_module:
-    name: Find artikkel modul
+    name: Find artikel modul

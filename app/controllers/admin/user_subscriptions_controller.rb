@@ -12,7 +12,7 @@ class Admin::UserSubscriptionsController < AdminController
   end
 
   def create
-    subscription_type = Admin::SubscriptionType.free_subscription
+    subscription_type = Admin::SubscriptionType.free
     subscription =
       @user
       .subscriptions

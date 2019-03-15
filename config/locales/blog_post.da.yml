@@ -19,12 +19,12 @@ da:
         post_page_id: Vis på side
 
   blog_post:
-    new: 'Ny artikkel'
-    edit: 'Rediger artikkel'
+    new: 'Ny artikel'
+    edit: 'Rediger artikel'
     read_more: Læs mere
     next: Næste
     prev: Forige
-    image_top: Billed over artikkel
+    image_top: Billed over artikel
     image_left: Billed til venstre
     image_right: Billed til højre
     enable_comments_hint: Interne kommentarer

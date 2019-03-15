@@ -70,8 +70,7 @@
               tr
                 td = commentable_page_path(comment)
                 td = l comment.created_at
-                td
-                  = simple_format comment.comment&.truncate(100)
+                td = simple_format comment.comment&.truncate(100)
                 td = show_comment(comment)
 
   - if @user.payments.any?

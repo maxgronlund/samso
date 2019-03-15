@@ -1,5 +1,5 @@
 $('#new_comment_form').val("");
-$("#add-comment").append('<%=j render "comments/comment", comment: @comment %>');
+$("#add-comment").prepend('<%=j render "comments/comment", comment: @comment %>');
 $('#destroy_comment_' + "<%= @comment.id %>").hide();
 $('#destroy_comment_' + "<%= @comment.id %>").show(200);
 

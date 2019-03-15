@@ -2,28 +2,25 @@
 module CommentsHelper
   def commentable_page_path(comment)
     commentable = comment.commentable
-    page        = comment_page(commentable)
-    return if page.nil?
+    return if commentable.nil?
 
-    link_to commentable.title, page_post_path(page, commentable, anchor: dom_id(comment))
+    link_to commentable.title, commentable_path(commentable)
   end
 
   def show_comment(comment)
     commentable = comment.commentable
-    page        = comment_page(commentable)
-    return if page.nil?
+    return if commentable.nil?
 
-    link_to 'Vis', page_post_path(page, commentable, anchor: dom_id(comment))
+    link_to 'Vis', commentable_path(commentable), class: 'btn btn-sm btn-light'
   end
 
   private
 
-  def comment_page(commentable)
-    return if commentable.nil?
-
+  def commentable_path(commentable)
     case commentable.class.name
     when 'Admin::BlogPost'
-      return Page.find_by(id: commentable.post_page_id)
+      return page_post_path(commentable.show_page, commentable)
     end
+    root_path
   end
 end

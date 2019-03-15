@@ -21,6 +21,13 @@
               i.fa.fa-users
               |&nbsp;
               = t('sidebar.users')
+      - if editor?
+        li.nav-item
+          = link_to admin_newsletters_path do
+            . class="nav-link #{selected == 'newsletters' ? 'disabled' : ''}"
+              i.fa.fa-bullhorn
+              |&nbsp;
+              'Nyheds breve
   br
   hr.admin-links
 
