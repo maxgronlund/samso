@@ -765,6 +765,8 @@ class Address < ApplicationRecord
       letter = ''
       floor = ''
       side = ''
+      zipp_code = ''
+      city = ''
 
       split_address.each do |address_split|
         if state == 'street_name'
@@ -786,8 +788,15 @@ class Address < ApplicationRecord
           letter = address_split.delete(house_number.to_s)
           state = 'letter'
         when 'letter'
-          letter = letter.blank? ? address_split : letter
-          state = 'floor'
+          lttr = letter.blank? ? address_split : letter
+          if lttr.to_i.zero?
+            letter = lttr
+            state = 'floor'
+        else
+          floor = ltte.to_i
+          state = 'side'
+        end
+
         when 'floor'
           floor = address_split.to_i.to_s
           state = 'side'
@@ -795,6 +804,7 @@ class Address < ApplicationRecord
           side = address_split
         end
       end
+
       address.update(
         first_name: first_name,
         middle_name: middle_name,

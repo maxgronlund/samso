@@ -16,7 +16,7 @@ class Address < ApplicationRecord
   scope :temporary_address, -> { find_by(address_type: TEMPORARY_ADDRESS) }
 
   def valid_address?
-    return false if name.nil? || address.nil? || zipp_code.nil? || city.nil?
+    return false if first_name.nil? || street_name.nil? || house_number.nil? || zipp_code.nil? || city.nil?
     true
   end
 

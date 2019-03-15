@@ -124,7 +124,7 @@ class User < ApplicationRecord
       email = User::Service.sanitize_email(options[:email])
       user = User.find_by(email: email) if User.exists?(email: email)
       if user.persisted?
-        user.update!(subscribe_to_news: options[:Nyhedsbrev])
+        user.update!(subscribe_to_news: options[:Nyhedsbrev]) if user.email.to_s.valid_email?
         @persisted << { options: options, user: user.attributes, subscription: user.subscriptions }
         return
       end
@@ -141,11 +141,22 @@ class User < ApplicationRecord
       user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
       user.uuid = SecureRandom.uuid
-      if user.save
+      if user.save!
+        update_address(user.address)
+        if user.valid_subscriber?
+          subscription = user.subscriptions.last
+          subscription.addresses.each do |addrs|
+            update_address(addrs)
+          end
+        end
         @succeeded += 1
       else
         @failed << {options: options, user: user.attributes, subscription: user.subscriptions}
       end
+    end
+
+    def update_address(address)
+      Address::Service.update_address(address)
     end
 
     def user_has_a_subscription(options)
@@ -160,12 +171,35 @@ class User < ApplicationRecord
       zipp_code         = parse_zipp_code(options)
       city              = parse_city(zipp_code, options)
       Address.new(
+        address: options[:adresse].presence || '',
         addressable_type: addressable_type,
-        name: options[:navn].presence || '-',
-        address: options[:adresse].presence || '-',
+        name: options[:navn],
+        first_name: first_name(options),
+        middle_name: middle_name(options),
+        last_name: last_name(options),
+        street_name: options[:adresse].presence || '-',
         zipp_code: zipp_code.presence || '-',
-        city: city.presence || 'Danmark'
+        city: city.presence || '-',
+        country: 'DK'
       )
+    end
+
+
+    def split_name(options = {})
+      options[:navn].split(' ')
+    end
+
+    def first_name(options = {})
+      split_name(options).first
+    end
+
+    def middle_name(options = {})
+      return '' if split_name(options).length < 2
+      split_name(options)[1...split_name(options).length-1].join(' ')
+    end
+
+    def last_name(options = {})
+      split_name(options).length > 1 ? split_name(options).last : ''
     end
 
     def subscription(options)
@@ -193,6 +227,9 @@ class User < ApplicationRecord
     end
 
     def parse_zipp_code(options = {})
+      zipp = options[:postnr_by].to_i
+      return zipp.to_s unless zipp.zero?
+
       zipp_code = postal_code_and_city(options).first.to_s
       return zipp_code if Address::Service::ZIP_CODE_TO_CITY[zipp_code.to_sym].present?
 
@@ -215,7 +252,7 @@ class User < ApplicationRecord
     end
 
     def subscription_type(options)
-      return Admin::SubscriptionType.free_subscription if options[:Friabon]
+      return Admin::SubscriptionType.free if options[:Friabon]
       return subscription_types(options).first if subscription_types(options).any?
 
       create_subscription_type(options)

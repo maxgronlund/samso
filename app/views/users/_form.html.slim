@@ -4,7 +4,7 @@
   .form-inputs
     .row
       .col-sm-6
-        = f.input :name, autofocus: true
+        = f.input :name, autofocus: true, label: 'Bruger navn'
       .col-sm-6
         = f.input :email, hint: 'Brug en email du har adgang til'
     .row
@@ -16,21 +16,33 @@
           placeholder: '••••••••••'
 
     = f.simple_fields_for :addresses do |address|
-       .row
-         .col-sm-4
-           = address.input :address,
-           label: t('address.address'),
-           required: true
-         .col-sm-4
-           = address.input :zipp_code,
-           label: t('address.zipp_code'),
-           input_html: { class: 'post-code-autofill-dk' },
-           required: true
-         .col-sm-4
-           = address.input :city,
-           label: t('address.city'),
-           input_html: { class: 'city-name-autofill' },
-           required: true
+      .row
+        .col-sm-4
+          = address.input :first_name, label: t('address.first_name')
+        .col-sm-4
+          = address.input :middle_name, label: t('address.middle_name')
+        .col-sm-4
+          = address.input :last_name, label: t('address.last_name')
+
+      .row
+        .col-sm-4
+          = address.input :street_name, label: t('address.street_name')
+        .col-sm-2
+          = address.input :house_number, label: t('address.house_number')
+        .col-sm-2
+          = address.input :letter, label: t('address.letter')
+        .col-sm-2
+          = address.input :floor, label: t('address.floor')
+        .col-sm-2
+          = address.input :side, label: t('address.side')
+
+      .row
+        .col-sm-4
+          /= address.input :address, label: t('address.address')
+          = address.input :zipp_code, label: t('address.zipp_code'), input_html: { class: 'post-code-autofill-dk' }
+        .col-sm-4
+          = address.input :city, label: t('address.city')
+
 
     - if @user.valid_subscriber?
       = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')

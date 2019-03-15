@@ -33,6 +33,10 @@ class Admin::Subscription < ApplicationRecord
         user.addresses = [address('User')]
         user.subscriptions = [@subscription]
         user.save!
+        update_address(user.address)
+        @subscription.addresses.each do |addr|
+          update_address(addr)
+        end
       end
     end
     # rubocop:enable Security/Open
@@ -96,6 +100,10 @@ class Admin::Subscription < ApplicationRecord
         city: @options[:city].presence || '',
         country: @options[:country].presence || 'Danmark'
       )
+    end
+
+    def update_address(address)
+      Address::Service.update_address(address)
     end
 
     def utf_8_encode(options)

@@ -50,7 +50,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates_confirmation_of :password
-  validates_with User::Validator
+  # validates_with User::Validator
 
   FAKE_EMAIL =    '@10ff3690--bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'c01141c5-d91d-4995-9a56-c01cc198fe25'.freeze

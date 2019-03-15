@@ -112,7 +112,7 @@ class Admin::UsersController < AdminController
       :signature,
       :update_subscription_address,
       :subscribe_to_news,
-      addresses_attributes: %i[id name address zipp_code city],
+      addresses_attributes: %i[id name first_name middle_name last_name street_name house_number letter floor side address zipp_code city],
       roles_attributes: %i[permission id]
     )
   end

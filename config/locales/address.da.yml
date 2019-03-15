@@ -13,6 +13,14 @@ da:
   address:
     index: Adresser
     name: Navn
+    first_name: Fornavn
+    middle_name: Mellemnavn
+    last_name: Efternavn
+    street_name: Gadenavn
+    house_number: Husnummer
+    letter: Bogstav
+    floor: Etage
+    side: Side
     address: Adresse
     city: By
     zipp_code: Postnummer

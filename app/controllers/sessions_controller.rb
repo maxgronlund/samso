@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
 
   def signin_user(user)
     session[:user_id] = user.id
-    redirect_to default_path(root_url)
+    redirect_to user.editor? ? admin_index_path : default_path(root_url)
   end
 
   def session_params

@@ -150,7 +150,7 @@ class Admin::Subscription < ApplicationRecord
   #   end
   # end
 
-  HEADER = %i[Gruppe  abonr fornavn mellemnavn efternavn attention kontaktperson vejnavn husnr litra sal side postnr bynavn land antalaviser co tiltaleform gadeident david]
+  HEADER = %i[ abonr fornavn mellemnavn efternavn attention kontaktperson vejnavn husnr litra sal side postnr bynavn land antalaviser co tiltaleform gadeident david]
 
   def self.to_csv
     # attributes = %w{id fo}
@@ -160,21 +160,20 @@ class Admin::Subscription < ApplicationRecord
 
       all.each do |subscription|
         csv << [
-          subscription.group,
           subscription.subscription_id,
           subscription.first_name,
           subscription.middle_name,
           subscription.last_name,
           '',
           '',
-          subscription.delivery_address.address,
-          subscription.delivery_address.address.to_i,
-          '',
-          '',
-          '',
+          subscription.delivery_address.street_name,
+          subscription.delivery_address.house_number,
+          subscription.delivery_address.letter,
+          subscription.delivery_address.floor,
+          subscription.delivery_address.side,
           subscription.delivery_address.zipp_code,
           subscription.delivery_address.city,
-          'DK',
+          subscription.country,
           '1',
           '',
           '',

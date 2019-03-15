@@ -38,8 +38,8 @@ class Address::Validator < ActiveModel::Validator
   end
 
   def validate_address(address)
-    address.errors[:name] << 'Navn skal udfyldes' if address.name.blank?
-    address.errors[:address] << 'Adresse skal udfyldes' if address.address.blank?
+    address.errors[:first_name] << 'Fornavn skal udfyldes' if address.first_name.blank?
+    address.errors[:street_name] << 'Adresse skal udfyldes' if address.street_name.blank?
     address.errors[:zipp_code] << 'Postnummer skal udfyldes' if address.zipp_code.blank?
     address.errors[:city] << 'By skal udfyldes' if address.city.blank?
   end

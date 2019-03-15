@@ -1,6 +1,7 @@
 .table-responsive
-  table.table.table-bordered.table-hover.table-sm
-    - if address.temporary?
+
+  - if address.temporary?
+    table.table.table-bordered.table-hover.table-sm
       tr
         th
           .pull-right
@@ -13,27 +14,18 @@
             = t('address.end_date')
         th
           strong = l address.end_date
+  table.table.table-bordered.table-hover.table-sm
     tr
-      th
-        .pull-right Navn
-      th
-        strong = address.name
-    tr
-      th
-        .pull-right Addrese
-      th
-        strong = address.address
-    tr
-      th
-        .pull-right Post nummer, by
       th
         strong
-          = address.zipp_code
-          '&nbsp;,
-          = address.city
+          = address.first_name
+          = " #{address.middle_name}" if address.middle_name.present?
+          = " #{address.last_name}" if address.last_name.present?
     tr
       th
-        .pull-right Land
-      th
         strong
-          = address.country
+          = address.street_name
+          = " #{address.house_number}" if address.house_number.present?
+          = " #{address.letter}" if address.letter.present?
+          = " #{address.floor}" if address.floor.present?
+          = " #{address.side}" if address.side.present?

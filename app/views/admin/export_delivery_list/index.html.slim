@@ -1,3 +1,4 @@
+== render 'shared/admin_links', selected: 'dao-list'
 h3 DAO liste
 b = "#{@subscriptions.count } abonnenter modtager avisen med DAO 365"
 
@@ -6,7 +7,8 @@ b = "#{@subscriptions.count } abonnenter modtager avisen med DAO 365"
   table.table.table-striped.table-bordered.table-hover.table-sm
     thead.thead-dark
       tr
-        th Gruppe
+        th
+        /th Gruppe
         th abonr
         th fornavn
         th mellemnavn
@@ -27,25 +29,30 @@ b = "#{@subscriptions.count } abonnenter modtager avisen med DAO 365"
         th gadeident
         th david
     tbody
-      - @subscriptions.each do |subscription|
+      - @subscriptions.each_with_index do |subscription, index|
         tr
-          td = subscription.group
+          td = index + 1
+          /td = subscription.group
           td = link_to subscription.subscription_id, admin_user_path(subscription.user_id), class: 'btn btn-sm btn-light'
           td = subscription.first_name
           td = subscription.middle_name
           td = subscription.last_name
           td
           th
-          th = subscription.delivery_address.address
-          th = subscription.delivery_address.address.to_i
-          th
+          th = subscription.delivery_address.street_name
+          th = subscription.delivery_address.house_number.to_s
+          th = subscription.delivery_address.letter
           th
           th
           th = subscription.delivery_address.zipp_code
           th = subscription.delivery_address.city
-          th # Country DK
+          th = subscription.delivery_address.country
           th 1
-          th # CO
-          th # Tiltaleform
-          th # gadeindent
-          th # david
+          th
+            /= CO
+          th
+            /= Tiltaleform
+          th
+            /= gadeindent
+          th
+            /= david

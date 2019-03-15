@@ -3,6 +3,7 @@ class Admin::ExportDeliveryListController < AdminController
   def index
     @subscriptions =
       Admin::Subscription
+      .valid
       .order(:subscription_id)
       .joins(:user)
       .joins(:subscription_type)
