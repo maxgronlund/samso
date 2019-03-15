@@ -26,6 +26,10 @@
         strong
           = address.street_name
           = " #{address.house_number}" if address.house_number.present?
-          = " #{address.letter}" if address.letter.present?
+          = "#{address.letter}" if address.letter.present?
           = " #{address.floor}" if address.floor.present?
           = " #{address.side}" if address.side.present?
+    tr
+      th
+        strong
+          = address.country

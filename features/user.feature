@@ -7,6 +7,7 @@ Feature: I can see the subscription module if I have no valid subscription
     And there is a "valid-subscriber" with the email "valid-subscriber@example.com" and the password "ComeOnIn123"
     And the user "valid-subscriber@example.com" has a "valid-subscription"
 
+
   Scenario: As a user I can edit my profile
     When I login as "valid-subscriber@example.com" with the password "ComeOnIn123"
     Then I can click on a "user_account" link

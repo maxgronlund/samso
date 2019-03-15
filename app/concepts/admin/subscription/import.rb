@@ -92,14 +92,35 @@ class Admin::Subscription < ApplicationRecord
 
     # build a new address
     def address(addressable_type)
+      ap first_name
       Address.new(
         addressable_type: addressable_type,
-        name: @options[:name].presence || 'No Name',
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
         address: @options[:address].presence || 'NA',
+        street_name: @options[:address].to_s.split(' ').first,
         zipp_code: @options[:zipp_code].presence || 'NA',
         city: @options[:city].presence || '',
         country: @options[:country].presence || 'Danmark'
       )
+    end
+
+    def split_name
+      @split_name = @options[:name].split(' ')
+    end
+
+    def first_name
+      split_name.first
+    end
+
+    def middle_name
+      return '' if split_name.length < 2
+      split_name[1...split_name.length-1].join(' ')
+    end
+
+    def last_name
+      split_name.length > 1 ? split_name.last : ''
     end
 
     def update_address(address)
