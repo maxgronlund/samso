@@ -186,8 +186,17 @@ class Admin::Subscription < ApplicationRecord
 
   def user_address_copy
     user_address = user.address
-    address_copy = addresses.create
-    copy_address(user.address, address_copy)
+    Address.new(
+      name: user_address.name, address: user_address.address,
+      zipp_code: user_address.zipp_code,
+      city: user_address.city,
+      country: user_address.country,
+      first_name: user_address.first_name,
+      middle_name: user_address.middle_name, last_name: user_address.last_name,
+      street_name: user_address.street_name, house_number: user_address.house_number,
+      letter: user_address.letter, floor: user_address.floor, side: user_address.side
+    )
+    #copy_address(user.address, address_copy)
   end
   alias copy_address user_address_copy
 
