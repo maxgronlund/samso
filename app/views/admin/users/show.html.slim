@@ -14,7 +14,7 @@ nav aria-label="breadcrumb"
     = t('user.user_id', user_id: @user.user_id)
     - if @user.real_email?
       br
-      = mail_to @user.email 
+      = mail_to @user.email
     br
 
     .btn-group.mt-10
@@ -62,7 +62,7 @@ nav aria-label="breadcrumb"
                 th
                   .pull-right
                     .btn-group
-                      
+
                       - unless subscription.expired?
                           = link_to t('subscription.expire'),
                             admin_subscription_path(subscription.subscription_id),
@@ -73,8 +73,8 @@ nav aria-label="breadcrumb"
                         = link_to t('subscription.delivery_address'),
                           admin_subscription_delivery_addresses_path(subscription),
                           class: 'btn btn-light btn-sm'
-        
-                      = link_to t('subscription.edit_dates'),
+
+                      = link_to t('edit'),
                         edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
                         class: 'btn btn-light btn-sm'
 - if @user.sign_in_ips.any?

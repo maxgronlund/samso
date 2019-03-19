@@ -12,7 +12,7 @@ class Admin::Subscription < ApplicationRecord
     # rubocop:disable Metrics/MethodLength
     def import(csv_import)
       csv = open(csv_import.file_url)
-      missing_subscriptions = []
+      @missing_subscriptions = []
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         next if index.zero?
 
@@ -20,8 +20,8 @@ class Admin::Subscription < ApplicationRecord
         set_options(unescaped_row)
         set_subscription
         if @subscription.nil?
-
-          missing_subscriptions << { options: @options }
+          @missing_subscriptions << { options: @options }
+          user = create_user
           next
         end
         set_delivery_address
@@ -31,17 +31,13 @@ class Admin::Subscription < ApplicationRecord
         update_delivery_address
         update_user_address
 
-
-
-        # ap @delivery_address
-        # ap @user_address
         # ap '------------------'
       end
-      if missing_subscriptions.any?
+      if @missing_subscriptions.any?
         ap '------------------------------'
-        ap 'ERROR SUBSCRIPTIONS NOT FOUND!'
+        ap 'FAILED TO CREATE USERS'
         ap '------------------------------'
-        ap missing_subscriptions
+        ap @missing_subscriptions
       end
     end
     # rubocop:enable Security/Open
@@ -49,6 +45,58 @@ class Admin::Subscription < ApplicationRecord
     # rubocop:enable Metrics/MethodLength
 
     private
+
+    def create_user
+      user =
+        User.new(
+          name: full_name.presence || '-',
+          addresses: [new_address('User')],
+          roles: [Role.new],
+          uuid: SecureRandom.uuid,
+          imported: true,
+          uuid: SecureRandom.uuid,
+          email: User::Service.fake_email,
+          password_digest: User::Service.fake_password,
+          subscriptions: [new_subscription]
+        )
+      unless user.save!
+        @missing_subscriptions << @options
+      end
+    end
+
+    def full_name
+      [@options[:fornavn], @options[:mellemnavn], @options[:efternavn]].join(' ')
+    end
+
+    def new_subscription
+      subscription =
+        Admin::Subscription.new(
+          subscription_id: @options[:abonr],
+          subscription_type_id: Admin::SubscriptionType.from_economics.id,
+          start_date: Time.zone.now,
+          end_date: Time.zone.now + 1000.years,
+          addresses: [new_address('Admin::Subscription')]
+        )
+    end
+
+    def new_address(addressable_type)
+      Address.new(
+        addressable_type: addressable_type,
+        address: @options[:adresse].presence || '',
+        name: @options[:fornavn].presence || '-',
+        first_name: @options[:fornavn].presence || '-',
+        middle_name: @options[:mellemnavn],
+        last_name: @options[:efternavn].presence || '-',
+        street_name: @options[:vejnavn],
+        house_number: @options[:husnr],
+        letter: @options[:litra],
+        floor: @options[:sal],
+        side: @options[:side],
+        zipp_code: @options[:postnr],
+        city: @options[:bynavn],
+        country: @options[:land]
+      )
+    end
 
     def set_subscription
       @subscription = Admin::Subscription.find_by(subscription_id: @options[:abonr])

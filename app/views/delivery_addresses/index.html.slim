@@ -50,13 +50,13 @@
             h5 = t("address.#{temporary_address.address_type}")
             = render 'shared/address', address: temporary_address
             .pull-right
-              - if temporary_address.start_date < Time.zone.today - 2.days
+              - if temporary_address.end_date > Time.zone.today
                 = link_to t('delete'),
                   subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
                   data: { confirm: t('confirm') },
                   method: :delete,
                   class: 'btn btn-danger'
-          
+
                 = link_to t('edit'),
                   edit_subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
                   class: 'btn btn-light'

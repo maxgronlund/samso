@@ -1,30 +1,10 @@
 = simple_form_for [:admin, @user], multipart: true do |f|
   = f.error_notification
   .form-inputs
-    .row
-      .col-sm-6
-        = f.input :name
-      .col-sm-6
-        = f.input :email
-    .row
-      .col-sm-6
-        = f.input :password,
-          placeholder: '••••••••••'
-      .col-sm-6
-        = f.input :password_confirmation,
-          placeholder: '••••••••••'
-    = f.input :signature, label: 'Underskrift', hint: 'Bliver brugt af jurnalister'
-
-    - if current_user.can_edit?(@user)
-      = f.simple_fields_for :roles do |roles_form|
-        = roles_form.input :permission, collection: Role::TRANSLATED_ROLES, include_blank: false
-
-
-
     = f.simple_fields_for :addresses do |address|
       .row
         .col-sm-4
-          = address.input :first_name, label: t('address.first_name')
+          = address.input :first_name, label: t('address.first_name'), autofocus: true
         .col-sm-4
           = address.input :middle_name, label: t('address.middle_name')
         .col-sm-4
@@ -41,6 +21,56 @@
           = address.input :floor, label: t('address.floor')
         .col-sm-2
           = address.input :side, label: t('address.side')
+      .row
+        .col-sm-4
+          /= f.input :address, label: t('address.address')
+          = address.input :zipp_code, label: t('address.zipp_code'), input_html: { class: 'post-code-autofill-dk' }
+        .col-sm-4
+          = address.input :city, input_html: { class: 'city-name-autofill' }, label: t('address.city')
+
+
+    .row
+      .col-sm-4
+        = f.input :email
+      .col-sm-4
+        = f.input :password,
+          placeholder: '••••••••••'
+      .col-sm-4
+        = f.input :password_confirmation,
+          placeholder: '••••••••••'
+
+    .row
+      .col-sm-4
+        = f.input :subscribe_to_news, as: :boolean
+      .col-sm-4
+        = f.input :signature, label: 'Underskrift', hint: 'Bliver kun brugt af jurnalister'
+      .col-sm-4
+        - if current_user.can_edit?(@user)
+          = f.simple_fields_for :roles do |roles_form|
+            = roles_form.input :permission, collection: Role::TRANSLATED_ROLES, include_blank: false
+
+
+
+    / = f.simple_fields_for :addresses do |address|
+    /   .row
+    /     .col-sm-4
+    /       = address.input :first_name, label: t('address.first_name')
+    /     .col-sm-4
+    /       = address.input :middle_name, label: t('address.middle_name')
+    /     .col-sm-4
+    /       = address.input :last_name, label: t('address.last_name')
+
+    /   .row
+    /     .col-sm-4
+    /       = address.input :street_name, label: t('address.street_name')
+    /     .col-sm-2
+    /       = address.input :house_number, label: t('address.house_number')
+    /     .col-sm-2
+    /       = address.input :letter, label: t('address.letter')
+    /     .col-sm-2
+    /       = address.input :floor, label: t('address.floor')
+    /     .col-sm-2
+    /       = address.input :side, label: t('address.side')
 
       .row
         .col-sm-4

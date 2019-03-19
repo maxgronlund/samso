@@ -751,14 +751,8 @@ class Address < ApplicationRecord
       '5560': 'Aarup'
     }
 
-    def self.update_address(address)
-      user = address.user
-      split_name = user.name.split(' ')
-      first_name = split_name.first
-      middle_name = split_name.length < 2 ? '' : split_name[1...split_name.length-1].join(' ')
-      last_name = split_name.length > 1 ? split_name.last : ''
-
-      split_address = address.address.split(' ')
+    def self.address_fields(address)
+      split_address = address.split(' ')
       state = 'street_name'
       street_name = []
       house_number = 0
@@ -804,18 +798,37 @@ class Address < ApplicationRecord
           side = address_split
         end
       end
-
-      address.update(
-        first_name: first_name,
-        middle_name: middle_name,
-        last_name: last_name,
+      {
         street_name: street_name.join(' '),
         house_number: house_number,
         letter: letter,
         floor: floor,
         side: side,
         country: 'DK'
-      )
+      }
+    end
+
+    # take a full_name name e.g. 'John junor Doe' and split it
+    # first_name: 'John', middle_name: 'junor', last_name: 'Doe'
+    def self.user_names(full_name)
+      split_name = full_name.split(' ')
+      first_name = split_name.first
+      middle_name = split_name.length < 2 ? '' : split_name[1...split_name.length-1].join(' ')
+      last_name = split_name.length > 1 ? split_name.last : '-'
+      {
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name
+      }
+    end
+
+    def self.update_address(address)
+      user = address.user
+
+      address_fields(address)
+        .merge!(user_names(user.name))
+
+      address.update(address_fields)
     end
   end
 end

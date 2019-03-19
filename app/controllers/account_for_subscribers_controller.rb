@@ -2,7 +2,6 @@ class AccountForSubscribersController < ApplicationController
   def new
     @user = User.new
     @user.subscription_id = '123'
-    ap @user
   end
 
   def create

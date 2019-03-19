@@ -33,7 +33,7 @@
                 - if @subscription.end_date.present?
                   = l @subscription.end_date
               td
-                = link_to t('subscription.edit_dates'),
+                = link_to t('subscription.edit'),
                   edit_admin_user_user_subscription_path(@subscription.user, @subscription.subscription_id),
                   class: 'btn btn-light btn-sm'
       .row

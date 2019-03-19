@@ -24,32 +24,17 @@ class Admin::NewslettersController < AdminController
 
   # POST /admin/newsletters
   def create
-
-    # @admin_newsletter = Admin::Newsletter.new(admin_newsletter_params)
-    #admin_newsletter_params.delete :blog_post_ids
-
-
-
-
     @admin_newsletter = Admin::Newsletter.new(params_without_blog_post_ids)
-    #@admin_newsletter.newsletter_posts = newsletter_posts
-    ap @admin_newsletter
 
     @admin_newsletter.save!
     create_newsletter_posts
 
     redirect_to admin_newsletters_path
-
-    #if @admin_newsletter.save
-    #  redirect_to @admin_newsletter, notice: 'Newsletter was successfully created.'
-    #else
-    #  render :new
-    #end
   end
 
   def blog_post_ids
     blog_post_ids = admin_newsletter_params[:blog_post_ids]
-    blog_post_ids.drop_while {|i| i.empty?}
+    blog_post_ids.drop_while { |i| i.empty? }
   end
 
   def params_without_blog_post_ids

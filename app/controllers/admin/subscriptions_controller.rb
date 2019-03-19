@@ -26,15 +26,16 @@ class Admin::SubscriptionsController < AdminController
   end
 
   def create
-    @user = User.new(subscription_params)
-    @user.addresses.first.name = @user.name
+    @user = User.new(new_subscriber_params)
     @user.password_digest = User::Service.fake_password
+    @user.email = User::Service.fake_email
     @user.uuid = SecureRandom.uuid
     @user.reset_password_token = SecureRandom.hex(32)
     @user.reset_password_sent_at = Time.zone.now
     @user.roles = [Role.new]
+
     @user.subscriptions = [new_subscription]
-    if @user.save
+    if @user.save!
       # send_welcome_message
       redirect_to admin_show_subscription_id_path(@user.id)
     else
@@ -63,14 +64,11 @@ class Admin::SubscriptionsController < AdminController
   end
 
   def subscription_address
-    address = admin_subscription_params[:addresses_attributes]['0']
-    Address.new(
-      addressable_type: 'Admin::Subscription',
-      name: admin_subscription_params[:name],
-      address: address[:address],
-      zipp_code: address[:zipp_code],
-      city: address[:city]
-    )
+    Address.new(address_params)
+  end
+
+  def address_params
+    @address_params ||= admin_subscription_params[:addresses_attributes]['0']
   end
 
   def add_member_role
@@ -86,12 +84,16 @@ class Admin::SubscriptionsController < AdminController
     @admin_subscription = Admin::Subscription.find(params[:id])
   end
 
-  def subscription_params
-    @subscription_params ||= admin_subscription_params.dup
-    @subscription_params.delete :subscription_id
-    @subscription_params.confirmed_at = Time.zone.now
-    @subscription_params.confirmation_token = nil
-    @subscription_params
+  def new_subscriber_params
+    @new_subscriber_params ||= admin_subscription_params.dup
+    @new_subscriber_params.delete :subscription_id
+    @new_subscriber_params[:confirmed_at] = Time.zone.now
+    @new_subscriber_params[:name] = full_name
+    @new_subscriber_params
+  end
+
+  def full_name
+    [address_params[:first_name], address_params[:middle_name], address_params[:last_name]].join(' ')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -103,7 +105,7 @@ class Admin::SubscriptionsController < AdminController
       :password_confirmation,
       :subscribe_to_news,
       :subscription_id,
-      addresses_attributes: %i[id name address zipp_code city],
+      addresses_attributes: %i[first_name middle_name last_name street_name house_number letter floor side zipp_code city],
       roles_attributes: %i[permission id]
     )
   end

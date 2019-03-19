@@ -8,19 +8,19 @@ class Admin::UserSubscriptionsController < AdminController
     @subscription =
       @user
       .subscriptions
-      .new(end_date: Time.zone.now + 1.month)
+      .new(
+        end_date: Time.zone.now + 1.month
+      )
   end
 
   def create
-    subscription_type = Admin::SubscriptionType.free
+    # subscription_type = Admin::SubscriptionType.free
+
     subscription =
       @user
       .subscriptions
-      .new(subscription_params)
-    subscription.subscription_type_id = subscription_type.id
-    subscription.subscription_id = Admin::Subscription.new_subscription_id
-    subscription.save
-    subscription.set_address
+      .new(subscription_and_address_params)
+    subscription.save!
     redirect_to admin_user_path(@user)
   end
 
@@ -44,8 +44,25 @@ class Admin::UserSubscriptionsController < AdminController
     @user = User.find(params[:user_id])
   end
 
+  def subscription_and_address_params
+    prms = subscription_params.dup
+    prms[:subscription_id] = Admin::Subscription.new_subscription_id
+    prms[:addresses] = [Address.new(address_params)]
+    prms
+  end
+
+  def address_params
+    address = @user.address.attributes
+    address.delete('id')
+    address.delete('addressable_type')
+    address.delete('addressable_id')
+    address.delete('created_at')
+    address[:last_name] = '-' if address[:last_name].blank?
+    address
+  end
+
   def subscription_params
     params[:admin_subscription]
-      .permit(:start_date, :end_date)
+      .permit(:start_date, :end_date, :subscription_type_id, :subscription_type_id)
   end
 end

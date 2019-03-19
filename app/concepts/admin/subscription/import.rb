@@ -92,7 +92,6 @@ class Admin::Subscription < ApplicationRecord
 
     # build a new address
     def address(addressable_type)
-      ap first_name
       Address.new(
         addressable_type: addressable_type,
         first_name: first_name,

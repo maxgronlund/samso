@@ -68,16 +68,14 @@ module SubscriptionAddressesConcerns
     params
       .require(:address)
       .permit(
-        :addressable_id,
-        :addressable_type,
-        :user_id,
-        :name,
-        :address,
-        :zipp_code,
-        :city,
-        :start_date,
-        :end_date,
-        :subscription_id
+        :addressable_id, :addressable_type,
+        :user_id, :name,
+        :address, :zipp_code, :city,
+        :start_date, :end_date,
+        :subscription_id,
+        :country,
+        :first_name, :middle_name, :last_name,
+        :street_name, :house_number, :letter, :floor, :side
       )
   end
 end

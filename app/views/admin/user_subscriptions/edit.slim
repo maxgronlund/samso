@@ -17,7 +17,7 @@
   .row.justify-content-md-center
     .col-md-12
       .card
-        h4.card-header = t('subscription.edit_dates')
+        h4.card-header = t('subscription.edit')
 
         .card-body
           p#notice = notice
@@ -25,19 +25,21 @@
             url: admin_user_user_subscription_path(@user, @subscription.subscription_id),
             method: 'PUT' do |f|
               .row
-                .col-sm-6
+                .col-sm-4
                   = f.input :start_date,
                     as: :date,
                     start_year: Date.today.year - 5,
                     end_year: Date.today.year + 25,
                     order: [:day, :month, :year]
 
-                .col-sm-6
+                .col-sm-4
                   = f.input :end_date,
                     as: :date,
                     start_year: Date.today.year - 5,
                     end_year: Date.today.year + 25,
                     order: [:day, :month, :year]
+                .col-sm-4
+                  = f.input :subscription_type_id, collection: Admin::SubscriptionType.all
               .pull-right
                 = link_to t('cancel'), admin_user_path(@subscription.user_id), class: 'btn btn-light'
                 = f.submit t('save'), class: 'btn btn-primary'

@@ -12,7 +12,7 @@
             = t('new')
 
   .row.justify-content-md-center
-    .col-md-auto.col-md-8
+    .col-md-auto.col-md-12
       .card
         h4.card-header Opret friabonnoment
 
@@ -21,10 +21,16 @@
             url: admin_user_user_subscriptions_url(@user),
             method: 'POST' do |f|
             .row
-              .col-sm-6
+              .col-sm-4
                 = f.input :start_date
-              .col-sm-6
+              .col-sm-4
                 = f.input :end_date
+              .col-sm-4
+                = f.input :subscription_type_id,
+                  collection: Admin::SubscriptionType.all,
+                  selected: Admin::SubscriptionType.free.id,
+                  include_blank: false
+
             .pull-right
               = f.submit t('save'), class: 'btn btn-primary'
 

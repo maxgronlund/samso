@@ -49,7 +49,6 @@ class User < ApplicationRecord
       Rails.logger.info "Succeeded: #{@succeeded}"
       log_failed if @failed.any?
       log_persisted if @persisted.any?
-
       Rails.logger.info '==============================================================='
 
       # import_subscriptions(csv_import)
@@ -113,8 +112,8 @@ class User < ApplicationRecord
     end
 
     def build_subscription_id(row)
-      subscription_id = row[B].strip
-      subscription_id.presence || User.new_user_id
+      @subscription_id = row[B].strip
+      @subscription_id.presence || User.new_user_id
     end
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
@@ -131,7 +130,7 @@ class User < ApplicationRecord
 
       User::Service.set_password(user, options[:password])
       user.confirmed_at = DateTime.now
-      user.name = options[:navn]
+      user.name = options[:navn].presence || '-'
       user.signature = options[:navn]
       user.email = email
       user.confirmed_at = Time.zone.today
@@ -142,12 +141,12 @@ class User < ApplicationRecord
       user.imported = true
       user.uuid = SecureRandom.uuid
       if user.save!
-        update_address(user.address)
+        # update_address(user.address)
         if user.valid_subscriber?
-          subscription = user.subscriptions.last
-          subscription.addresses.each do |addrs|
-            update_address(addrs)
-          end
+          # subscription = user.subscriptions.last
+          # subscription.addresses.each do |addrs|
+          #   update_address(addrs)
+          # end
         end
         @succeeded += 1
       else
@@ -155,9 +154,9 @@ class User < ApplicationRecord
       end
     end
 
-    def update_address(address)
-      Address::Service.update_address(address)
-    end
+    # def update_address(address)
+    #   Address::Service.update_address(address)
+    # end
 
     def user_has_a_subscription(options)
       return false if options[:Oprettet].blank?
@@ -168,45 +167,38 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/MethodLength
 
     def address(addressable_type, options = {})
-      zipp_code         = parse_zipp_code(options)
-      city              = parse_city(zipp_code, options)
+      zipp_code = parse_zipp_code(options)
+      city = parse_city(zipp_code, options)
+      address_fields =
+        Address::Service
+        .address_fields(options[:adresse])
+      user_names =
+        Address::Service
+        .user_names(options[:navn])
+
       Address.new(
-        address: options[:adresse].presence || '',
+        address: options[:adresse].presence || '-',
         addressable_type: addressable_type,
-        name: options[:navn],
-        first_name: first_name(options),
-        middle_name: middle_name(options),
-        last_name: last_name(options),
-        street_name: options[:adresse].presence || '-',
+        name: options[:navn].presence || '-',
+        first_name: user_names[:first_name].presence || '-',
+        middle_name: user_names[:middle_name],
+        last_name: user_names[:last_name].presence || '-',
+        street_name: address_fields[:street_name].presence || '-',
+        house_number: address_fields[:house_number],
+        letter: address_fields[:letter],
+        floor: address_fields[:floor],
+        side: address_fields[:side],
         zipp_code: zipp_code.presence || '-',
         city: city.presence || '-',
-        country: 'DK'
+        country: address_fields[:country]
       )
-    end
-
-
-    def split_name(options = {})
-      options[:navn].split(' ')
-    end
-
-    def first_name(options = {})
-      split_name(options).first
-    end
-
-    def middle_name(options = {})
-      return '' if split_name(options).length < 2
-      split_name(options)[1...split_name(options).length-1].join(' ')
-    end
-
-    def last_name(options = {})
-      split_name(options).length > 1 ? split_name(options).last : ''
     end
 
     def subscription(options)
       Admin::Subscription
         .new(
           subscription_type_id: subscription_type(options).id,
-          subscription_id: subscription_id(options),#Admin::Subscription.new_subscription_id,
+          subscription_id: subscription_id(options),
           start_date: options[:Oprettet],
           end_date: expitation_date(options),
           addresses: [address('Admin::Subscription', options)]

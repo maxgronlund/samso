@@ -80,18 +80,11 @@ class Admin::Subscription < ApplicationRecord
     return Address.new if addresses.count.zero?
     return address if addresses.count == 1
     return temporary_address if temporary_address.in_period?
+
     primary_address
   end
 
-  def copy_from_address(address)
-    primary_address
-      .update(
-        name: address.name,
-        address: address.address,
-        zipp_code: address.zipp_code,
-        city: address.city
-      )
-  end
+
 
   def free?
     subscription_type.nil? ? true : subscription_type.free?
@@ -159,6 +152,7 @@ class Admin::Subscription < ApplicationRecord
       csv << HEADER
 
       all.each do |subscription|
+        delivery_address = subscription.delivery_address
         csv << [
           subscription.subscription_id,
           subscription.first_name,
@@ -166,14 +160,14 @@ class Admin::Subscription < ApplicationRecord
           subscription.last_name,
           '',
           '',
-          subscription.delivery_address.street_name,
-          subscription.delivery_address.house_number,
-          subscription.delivery_address.letter,
-          subscription.delivery_address.floor,
-          subscription.delivery_address.side,
-          subscription.delivery_address.zipp_code,
-          subscription.delivery_address.city,
-          subscription.country,
+          delivery_address.street_name,
+          delivery_address.house_number,
+          delivery_address.letter,
+          delivery_address.floor,
+          delivery_address.side,
+          delivery_address.zipp_code,
+          delivery_address.city,
+          delivery_address.country,
           '1',
           '',
           '',
@@ -184,19 +178,30 @@ class Admin::Subscription < ApplicationRecord
     end
   end
 
+  def copy_from_address(from_address)
+    copy_address(from_address, primary_address)
+  end
 
   private
 
   def user_address_copy
     user_address = user.address
-    addresses
-      .create(
-        name: user.name,
-        address: user_address.address,
-        zipp_code: user_address.zipp_code,
-        city: user_address.city
-      )
+    address_copy = addresses.create
+    copy_address(user.address, address_copy)
   end
   alias copy_address user_address_copy
 
+  def copy_address(from, to)
+    to
+      .update(
+        name: from.name, address: from.address,
+        zipp_code: from.zipp_code,
+        city: from.city,
+        country: from.country,
+        first_name: from.first_name,
+        middle_name: from.middle_name, last_name: from.last_name,
+        street_name: from.street_name, house_number: from.house_number,
+        letter: from.letter, floor: from.floor, side: from.side
+      )
+  end
 end

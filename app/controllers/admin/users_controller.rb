@@ -40,6 +40,7 @@ class Admin::UsersController < AdminController
   def edit
     @user.password = nil
     @user.email = nil if @user.fake_email?
+    @user.update_subscription_address = true
   end
 
   # POST /users
@@ -97,7 +98,16 @@ class Admin::UsersController < AdminController
     User::Service.sanitize_password(sanitized_params)
     sanitized_params[:email] = User::Service.sanitize_email(sanitized_params[:email])
     User::Service.set_address_name(sanitized_params)
+    sanitized_params[:name] = full_name
     sanitized_params
+  end
+
+  def full_name
+    [address_params[:first_name], address_params[:middle_name], address_params[:last_name]].join(' ')
+  end
+
+  def address_params
+    @address_params ||= permitted_user_params[:addresses_attributes]['0']
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
