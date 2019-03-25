@@ -20,17 +20,10 @@ class Admin::Subscription < ApplicationRecord
         expire_subscriptions if index == 1
 
         user = find_or_initialize_user
-        user.persisted? ? update_user_address(user) : user.save!
+        user.persisted? ? update_user_address(user) : save_user(user)
 
         subscription = find_or_initialize_subscription(user)
         subscription.persisted? ? update_subscription(subscription) : subscription.save!
-      # rescue => e
-      #   Admin::EventNotification.create(
-      #     title: "e-conomics Import - #{@name}",
-      #     body: e.message,
-      #     message_type: 'economics_import',
-      #     metadata: @options
-      #   )
       end
     end
 
@@ -40,13 +33,42 @@ class Admin::Subscription < ApplicationRecord
 
     private
 
+    def save_user(user)
+      return if user.save!
+
+      Admin::EventNotification.create(
+        title: "e-conomics Import - #{@name}",
+        body: "Unable to save user: #{user.attributes}",
+        message_type: 'economics_import',
+        metadata: @options
+      )
+    end
+
+    def save_subscription(subscription)
+      return if subscription.save!
+
+      Admin::EventNotification.create(
+        title: "e-conomics Import - #{@name}",
+        body: "Unable to save subscription: #{subscription.attributes}",
+        message_type: 'economics_import',
+        metadata: @options
+      )
+    end
+
     def find_or_initialize_subscription(user)
       user.subscriptions.find_by(subscription_id: @options[:subscription_id]) || build_subscription(user)
     end
 
     def update_subscription(subscription)
       subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
-      subscription.primary_address.update(address_options)
+      return if subscription.primary_address.update(address_options)
+
+      Admin::EventNotification.create(
+        title: "e-conomics Import - #{@name}",
+        body: "Unable to update subscription address: #{subscription.primary_address.attributes}",
+        message_type: 'economics_import',
+        metadata: address_options
+      )
     end
 
     def build_subscription(user)
@@ -81,12 +103,21 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def update_user_address(user)
-      user.address.update(address_options)
+      return if user.address.update(address_options)
+
+      Admin::EventNotification.create(
+        title: "e-conomics Import - #{@name}",
+        body: "Unable to update user address: #{user.attributes}",
+        message_type: 'economics_import',
+        metadata: address_options
+      )
     end
 
     # build a new address
     def new_address(addressable_type)
-      Address::Service.new_address(addressable_type)
+      options = address_options
+      options[:addressable_type] = addressable_type
+      Address.new(options)
     end
 
     def address_options

@@ -11,6 +11,7 @@
   table.table.table-striped.table-bordered.table-hover.table-sm
     thead.thead-dark
       tr
+        th
         th Title
         th Message type
         th Status
@@ -21,6 +22,7 @@
     tbody
       - @admin_event_notifications.each do |admin_event_notification|
         tr
+          td = l admin_event_notification.created_at
           td = admin_event_notification.title
           td = admin_event_notification.message_type
           td
@@ -41,5 +43,4 @@
                   class: 'btn btn-sm btn-danger'
 
 br
-
-= link_to 'New Event notification', new_admin_event_notification_path
+ = paginate @admin_event_notifications

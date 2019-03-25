@@ -3,7 +3,11 @@ class Admin::EventNotificationsController < AdminController
 
   # GET /admin/event_notifications
   def index
-    @admin_event_notifications = Admin::EventNotification.all
+    @admin_event_notifications =
+      Admin::EventNotification
+      .order(created_at: :desc)
+      .page(params[:page])
+      .per(50)
   end
 
   # GET /admin/event_notifications/1
