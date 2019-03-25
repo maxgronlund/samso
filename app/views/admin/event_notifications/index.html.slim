@@ -13,6 +13,7 @@
       tr
         th Title
         th Message type
+        th Status
         th
 
 
@@ -22,6 +23,11 @@
         tr
           td = admin_event_notification.title
           td = admin_event_notification.message_type
+          td
+            - if admin_event_notification.pending?
+              'Ny
+            - else
+              'Læst
           td
             .pull-right
               .btn-group
