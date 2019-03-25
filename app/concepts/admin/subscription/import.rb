@@ -24,13 +24,13 @@ class Admin::Subscription < ApplicationRecord
 
         subscription = find_or_initialize_subscription(user)
         subscription.persisted? ? update_subscription(subscription) : subscription.save!
-      rescue => e
-        Admin::EventNotification.create(
-          title: "e-conomics Import - #{@name}",
-          body: e.message,
-          message_type: 'economics_import',
-          metadata: @options
-        )
+      # rescue => e
+      #   Admin::EventNotification.create(
+      #     title: "e-conomics Import - #{@name}",
+      #     body: e.message,
+      #     message_type: 'economics_import',
+      #     metadata: @options
+      #   )
       end
     end
 
