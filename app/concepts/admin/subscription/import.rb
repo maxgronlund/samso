@@ -11,9 +11,11 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def import(csv_import)
+      @name = csv_import[:name]
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         next if index.zero?
+
         set_options(row)
         expire_subscriptions if index == 1
 
@@ -22,7 +24,13 @@ class Admin::Subscription < ApplicationRecord
 
         subscription = find_or_initialize_subscription(user)
         subscription.persisted? ? update_subscription(subscription) : subscription.save!
-
+      rescue => e
+        Admin::EventNotification.create(
+          title: "e-conomics Import - #{@name}",
+          body: e.message,
+          message_type: 'economics_import',
+          metadata: @options
+        )
       end
     end
 
