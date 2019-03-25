@@ -36,6 +36,7 @@ class User < ApplicationRecord
   class Import
     # rubocop:disable Security/Open
     def import(csv_import)
+      @name = csv_import[:name]
       @succeeded = 0
       @persisted = []
       @failed = []
@@ -151,6 +152,13 @@ class User < ApplicationRecord
         @succeeded += 1
       else
         @failed << {options: options, user: user.attributes, subscription: user.subscriptions}
+
+        Admin::EventNotification.create(
+          title: "USER Import - #{@name}",
+          body: 'Unable to import user',
+          message_type: 'user_import',
+          metadata: {options: options, user: user.attributes, subscription: user.subscriptions}
+        )
       end
     end
 
