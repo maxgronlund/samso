@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_24_092113) do
+ActiveRecord::Schema.define(version: 2019_03_25_094452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -475,6 +475,7 @@ ActiveRecord::Schema.define(version: 2019_03_24_092113) do
     t.integer "search_page_id"
     t.string "administrator_email"
     t.string "editor_emails", default: ""
+    t.string "e_pages_date"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|

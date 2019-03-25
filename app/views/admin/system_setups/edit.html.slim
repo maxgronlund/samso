@@ -46,6 +46,9 @@ h3 = t('edit_model', model_name: 'System opsætning')
             = f.input :delete_logo, as: :boolean
         .col-sm-6
           = f.input :background_color
+  .row
+    .col-sm-4
+      = f.input :e_pages_date, hint: 'yyyy-mm-dd', placeholder: '2019-03-14'
   .pull-right
     = link_to t('cancel'), admin_index_path, class: 'btn btn-light'
     = f.submit t('save'), class: 'btn btn-primary'

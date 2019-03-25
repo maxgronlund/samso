@@ -40,7 +40,8 @@ class Admin::SystemSetupsController < AdminController
       :delete_logo,
       :background_color,
       :administrator_email,
-      :editor_emails
+      :editor_emails,
+      :e_pages_date
     )
   end
 end
