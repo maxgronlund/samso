@@ -27,11 +27,11 @@ class Api::V1::EpaperVerificationController < ApplicationController
 
   def e_paper_token_url
     secret = e_paper_secret
-    ap admin_system_setup.e_pages_date
+    # ap admin_system_setup.e_pages_date
     # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
-    ap "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=#{admin_system_setup.e_pages_date}&edition=SM1"
-    ap "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
-    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
+    "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=#{admin_system_setup.e_pages_date}&edition=SM1"
+    #ap "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
+    #{}"http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
   end
 
   def e_paper_secret
