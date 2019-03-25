@@ -124,7 +124,7 @@ class User < ApplicationRecord
       email = User::Service.sanitize_email(options[:email])
       user = User.find_by(email: email) if User.exists?(email: email)
       if user.persisted?
-        user.update!(subscribe_to_news: options[:Nyhedsbrev]) if user.email.to_s.valid_email?
+        user.update(subscribe_to_news: options[:Nyhedsbrev]) if user.email.to_s.valid_email?
         @persisted << { options: options, user: user.attributes, subscription: user.subscriptions }
         return
       end
@@ -141,7 +141,7 @@ class User < ApplicationRecord
       user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
       user.uuid = SecureRandom.uuid
-      if user.save!
+      if user.save
         # update_address(user.address)
         if user.valid_subscriber?
           # subscription = user.subscriptions.last
@@ -151,24 +151,21 @@ class User < ApplicationRecord
         end
         @succeeded += 1
       else
-        @failed << {options: options, user: user.attributes, subscription: user.subscriptions}
+        @failed << { options: options, user: user.attributes, subscription: user.subscriptions }
 
         Admin::EventNotification.create(
           title: "USER Import - #{@name}",
           body: 'Unable to import user',
           message_type: 'user_import',
-          metadata: {options: options, user: user.attributes, subscription: user.subscriptions}
+          metadata: { options: options, user: user.attributes, subscription: user.subscriptions }
         )
       end
     end
 
-    # def update_address(address)
-    #   Address::Service.update_address(address)
-    # end
-
     def user_has_a_subscription(options)
       return false if options[:Oprettet].blank?
       return false if options[:Abon_periode].zero?
+
       options[:Abonnr].present?
     end
     # rubocop:enable Metrics/AbcSize
@@ -216,9 +213,8 @@ class User < ApplicationRecord
     end
 
     def subscription_id(options = {})
-      if Admin::Subscription.exists?(subscription_id: options[:Abonnr])
-        return Admin::Subscription.new_subscription_id
-      end
+      return Admin::Subscription.new_subscription_id if Admin::Subscription.exists?(subscription_id: options[:Abonnr])
+
       options[:Abonnr]
     end
 
@@ -259,7 +255,7 @@ class User < ApplicationRecord
         .where(
           duration: truncate_duration(options),
           internet_version: true,
-          print_version: options[:bestil_abonavis],
+          print_version: options[:bestil_abonavis]
         )
     end
 
@@ -268,7 +264,7 @@ class User < ApplicationRecord
 
       Admin::SubscriptionType
         .where(
-          title: "Importeret: #{duration.to_s} dage",
+          title: "Importeret: #{duration} dage",
           identifier: Admin::SubscriptionType::IMPORTED,
           duration: duration,
           print_version: options[:bestil_abonavis],
@@ -283,6 +279,7 @@ class User < ApplicationRecord
       return 7 if options[:Abon_periode] <= 7
       return 30 if options[:Abon_periode] <= 30
       return 90 if options[:Abon_periode] <= 90
+
       365
     end
 

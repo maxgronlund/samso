@@ -23,7 +23,7 @@ class Admin::Subscription < ApplicationRecord
         user.persisted? ? update_user_address(user) : save_user(user)
 
         subscription = find_or_initialize_subscription(user)
-        subscription.persisted? ? update_subscription(subscription) : subscription.save!
+        subscription.persisted? ? update_subscription(subscription) : subscription.save
       end
     end
 
@@ -34,7 +34,7 @@ class Admin::Subscription < ApplicationRecord
     private
 
     def save_user(user)
-      return if user.save!
+      return if user.save
 
       Admin::EventNotification.create(
         title: "e-conomics Import - #{@name}",
@@ -45,7 +45,7 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def save_subscription(subscription)
-      return if subscription.save!
+      return if subscription.save
 
       Admin::EventNotification.create(
         title: "e-conomics Import - #{@name}",

@@ -31,16 +31,19 @@ class Admin::Subscription < ApplicationRecord
 
     def import_user
       user = find_or_initialize_user
-      user.persisted? ? update_user_address(user) : user.save!
+      user.persisted? ? update_user_address(user) : save_user(user)
       user
-    rescue => e
+    end
+
+    def save_user(user)
+      return if user.save
+
       Admin::EventNotification.create(
         title: "DAO Import - #{@name}",
-        body: e.message,
+        body: "Unable to save user: #{user.attributes}",
         message_type: 'dao_import',
         metadata: @options
       )
-      nil
     end
 
     def find_or_initialize_user
@@ -65,7 +68,18 @@ class Admin::Subscription < ApplicationRecord
 
     def import_subscription(user)
       find_or_initialize_subscription(user)
-      @subscription.persisted? ? update_subscription_address : @subscription.save!
+      @subscription.persisted? ? update_subscription_address : save_subscription(subscription)
+    end
+
+    def save_subscription(subscription)
+      return if subscription.save
+
+      Admin::EventNotification.create(
+        title: "e-conomics Import - #{@name}",
+        body: "Unable to save subscription: #{subscription.attributes}",
+        message_type: 'economics_import',
+        metadata: @options
+      )
     end
 
     def find_or_initialize_subscription(user)
