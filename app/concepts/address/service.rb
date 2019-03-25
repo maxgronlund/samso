@@ -751,6 +751,10 @@ class Address < ApplicationRecord
       '5560': 'Aarup'
     }
 
+    # split a string with address in to a hash with address attributes
+    # usage
+    # Address::Service.address_fields('Jydeholmen 2, 4. tv')
+    # -> {street_name: 'Jydeholmen', house_number: 2, letter: '', floor: '4', side: 'tv', country: 'DK'}
     def self.address_fields(address)
       split_address = address.split(' ')
       state = 'street_name'
@@ -800,7 +804,7 @@ class Address < ApplicationRecord
       end
       {
         street_name: street_name.join(' '),
-        house_number: house_number,
+        house_number: house_number.to_s,
         letter: letter,
         floor: floor,
         side: side,
@@ -808,9 +812,10 @@ class Address < ApplicationRecord
       }
     end
 
+    # usage Address::Service.user_fields('John junor Doe')
     # take a full_name name e.g. 'John junor Doe' and split it
     # first_name: 'John', middle_name: 'junor', last_name: 'Doe'
-    def self.user_names(full_name)
+    def self.user_fields(full_name)
       split_name = full_name.split(' ')
       first_name = split_name.first
       middle_name = split_name.length < 2 ? '' : split_name[1...split_name.length-1].join(' ')
@@ -825,10 +830,34 @@ class Address < ApplicationRecord
     def self.update_address(address)
       user = address.user
 
-      address_fields(address)
-        .merge!(user_names(user.name))
+      address_attributes =
+        address_fields(address.address)
+        .merge!(user_fields(user.name))
 
-      address.update(address_fields)
+      address.update(address_attributes)
+    end
+
+    # def self.new_address(addressable_type, options)
+    #   options = address_options
+    #   options.merge!(addressable_type: addressable_type)
+    #   Address.new(options)
+    # end
+
+    def self.address_options(options)
+      {
+        first_name: options[:first_name],
+        middle_name: options[:middle_name],
+        last_name: options[:last_name],
+        address: options[:address],
+        street_name: options[:street_name],
+        house_number: options[:house_number],
+        letter: options[:letter],
+        floor: options[:floor],
+        side: options[:side],
+        zipp_code: options[:zipp_code],
+        city: options[:city],
+        country: options[:country]
+      }
     end
   end
 end

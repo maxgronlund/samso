@@ -34,7 +34,7 @@ namespace :users do
     end
 
     Admin::CsvImport
-    .where(import_type: ['User', 'Admin::Subscription'])
+    .where(import_type: ['User', 'Admin::Subscription', 'Admin::Subscription::DaoImport'])
     .update_all(imported: nil)
   end
 end

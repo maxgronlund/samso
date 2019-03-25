@@ -1,33 +1,31 @@
-.container
-  .admin-links
-    ul.nav
-      li.nav-item
-        = link_to admin_index_path do
-          . class="nav-link #{selected == 'admin' ? 'disabled' : ''}"
-            i.fa.fa-cog
-            |&nbsp;
-            = t('sidebar.admin')
+.admin-links
+  ul.nav
+    li.nav-item
+      = link_to admin_index_path do
+        . class="nav-link #{selected == 'admin' ? 'disabled' : ''}"
+          i.fa.fa-cog
+          |&nbsp;
+          = t('sidebar.admin')
 
+    li.nav-item
+      = link_to admin_articles_path do
+        . class="nav-link #{selected == 'articles' ? 'disabled' : ''}"
+          i.fa.fa-newspaper
+          |&nbsp;
+          = t('sidebar.articles')
+    - if administrator?
       li.nav-item
-        = link_to admin_articles_path do
-          . class="nav-link #{selected == 'articles' ? 'disabled' : ''}"
-            i.fa.fa-newspaper
+        = link_to admin_users_path do
+          . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
+            i.fa.fa-users
             |&nbsp;
-            = t('sidebar.articles')
-      - if administrator?
-        li.nav-item
-          = link_to admin_users_path do
-            . class="nav-link #{selected == 'users' ? 'disabled' : ''}"
-              i.fa.fa-users
-              |&nbsp;
-              = t('sidebar.users')
-      - if editor?
-        li.nav-item
-          = link_to admin_newsletters_path do
-            . class="nav-link #{selected == 'newsletters' ? 'disabled' : ''}"
-              i.fa.fa-bullhorn
-              |&nbsp;
-              'Nyheds breve
-  br
+            = t('sidebar.users')
+    - if editor?
+      li.nav-item
+        = link_to admin_newsletters_path do
+          . class="nav-link #{selected == 'newsletters' ? 'disabled' : ''}"
+            i.fa.fa-bullhorn
+            |&nbsp;
+            'Nyheds breve
+br
   hr.admin-links
-

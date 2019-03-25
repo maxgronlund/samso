@@ -1,0 +1,31 @@
+.row
+  .col-sm-12
+    == render 'shared/admin_links', selected: ''
+
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'System beskeder', admin_event_notifications_path
+    li.breadcrumb-item.active aria-current="page"
+      = @admin_event_notification.title
+.row
+  .col-sm-12
+    h3 = @admin_event_notification.title
+    p
+      strong Message type:&nbsp;
+      = @admin_event_notification.message_type
+
+
+
+p
+  strong Body:
+  = simple_format @admin_event_notification.body
+
+/ p
+/   strong State:
+/   = @admin_event_notification.state
+
+p
+  strong Metadata:
+    = @admin_event_notification.metadata
+

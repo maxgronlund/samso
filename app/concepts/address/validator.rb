@@ -28,11 +28,11 @@ class Address::Validator < ActiveModel::Validator
   def validate_temporary_subscription_address(address)
     validate_address(address)
     subscription = address.addressable
-    if address.end_date < address.start_date + 1.weeks
+    if address.end_date < address.start_date + 1.week
       address.errors[:end_date] << 'Varigheden er ugyldig'
     end
 
-    if address.start_date < Time.zone.today
+    if address.start_date < Time.zone.today - 1.day
       address.errors[:start_date] << 'Datoen kan ikke være tidligere end idag'
     end
   end
@@ -40,8 +40,8 @@ class Address::Validator < ActiveModel::Validator
   def validate_address(address)
     address.errors[:first_name] << 'Fornavn skal udfyldes' if address.first_name.blank?
     address.errors[:last_name] << 'Efternavn skal udfyldes' if address.last_name.blank?
-    address.errors[:street_name] << 'Adresse skal udfyldes' if address.street_name.blank?
-    address.errors[:house_number] << 'Postnummer skal udfyldes' if address.house_number.blank?
+    address.errors[:street_name] << 'Gadenavn skal udfyldes' if address.street_name.blank?
+    address.errors[:house_number] << 'Husnummer skal udfyldes' if address.house_number.blank?
     address.errors[:zipp_code] << 'Postnummer skal udfyldes' if address.zipp_code.blank?
     address.errors[:city] << 'By skal udfyldes' if address.city.blank?
   end

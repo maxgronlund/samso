@@ -57,13 +57,13 @@
             h5 = t("address.#{temporary_address.address_type}")
             = render 'shared/address', address: temporary_address
             .pull-right
-              - if @subscription.valid_period?
+              - if true # @subscription.valid_period?
                 = link_to t('delete'),
                   admin_subscription_delivery_address_path(@subscription.subscription_id, temporary_address),
                   data: { confirm: t('confirm') },
                   method: :delete,
                   class: 'btn btn-danger'
-              - if @subscription.valid_period?
+              - if true # @subscription.valid_period?
                 = link_to t('edit'),
                   edit_admin_subscription_delivery_address_path(@subscription, temporary_address),
                   class: 'btn btn-light'

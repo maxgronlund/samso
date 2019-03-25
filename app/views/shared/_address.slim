@@ -20,7 +20,7 @@
         strong
           = address.first_name
           = " #{address.middle_name}" if address.middle_name.present?
-          = " #{address.last_name}" if address.last_name.present?
+          = " #{address.last_name}" if address.last_name.present? && address.last_name != 'NA'
     tr
       th
         strong

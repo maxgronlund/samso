@@ -33,7 +33,7 @@ class Address < ApplicationRecord
   end
 
   def in_period?
-    start_date > Time.zone.now && end_date < Time.zone.now
+    start_date < Time.zone.now && end_date > Time.zone.now
   end
 
   def user

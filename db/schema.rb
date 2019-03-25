@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_205508) do
+ActiveRecord::Schema.define(version: 2019_03_24_092113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -210,6 +210,16 @@ ActiveRecord::Schema.define(version: 2019_03_11_205508) do
     t.text "body"
     t.string "link"
     t.string "image_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_event_notifications", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "message_type"
+    t.string "state", default: "pending"
+    t.text "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

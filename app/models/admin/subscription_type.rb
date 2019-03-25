@@ -7,6 +7,7 @@ class Admin::SubscriptionType < ApplicationRecord
   INTERNAL = 'internal'.freeze
   FREE = 'free'.freeze
   IMPORTED = 'imported'.freeze
+  DAO_IMPORTED = 'dap-imported'.freeze
   FROM_ECONOMICS = 'Abonnement'.freeze
   FREE_FROM_ECONOMICS = 'FriAbb'.freeze
   AB_EAN_FROM_ECONOMICS = 'AB-EAN'.freeze
@@ -16,6 +17,7 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :payed, -> { internal.where(free: false) }
   scope :internal, -> { where(identifier: INTERNAL).order(:position) }
   scope :imported, -> { where(identifier: IMPORTED) }
+  scope :dao_imported, -> { find_by(identifier: DAO_IMPORTED) }
   scope :free, -> { find_by(identifier: FREE) }
   scope :from_economics, -> { find_by(identifier: FROM_ECONOMICS) }
   scope :free_from_economics, -> { find_by(identifier: FREE_FROM_ECONOMICS) }

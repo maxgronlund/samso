@@ -131,5 +131,13 @@ class User < ApplicationRecord
         user.password = password
       end
     end
+
+    def self.full_name(options)
+      user_name = []
+      user_name << options[:first_name] if options[:first_name].present?
+      user_name << options[:middle_name] if options[:middle_name].present?
+      user_name << options[:last_name] if options[:last_name].present?
+      user_name.join(' ')
+    end
   end
 end

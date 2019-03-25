@@ -1,0 +1,39 @@
+
+.row
+  .col-sm-12
+    == render 'shared/admin_links', selected: ''
+.row
+  .col-sm-8
+    h3 System beskeder
+
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th Title
+        th Message type
+        th
+
+
+
+    tbody
+      - @admin_event_notifications.each do |admin_event_notification|
+        tr
+          td = admin_event_notification.title
+          td = admin_event_notification.message_type
+          td
+            .pull-right
+              .btn-group
+                = link_to 'Show',
+                  admin_event_notification,
+                  class: 'btn btn-sm btn-light'
+                = link_to 'Destroy',
+                  admin_event_notification,
+                  data: { confirm: 'Are you sure?' },
+                  method: :delete,
+                  class: 'btn btn-sm btn-danger'
+
+br
+
+= link_to 'New Event notification', new_admin_event_notification_path

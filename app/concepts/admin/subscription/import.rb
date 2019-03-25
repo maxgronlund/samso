@@ -1,6 +1,5 @@
 # subscriptions imported from e-conomics
 
-# rubocop:disable Metrics/ClassLength
 class Admin::Subscription < ApplicationRecord
   require 'csv'
   require 'cgi'
@@ -11,62 +10,44 @@ class Admin::Subscription < ApplicationRecord
       @group = ''
     end
 
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Security/Open
     def import(csv_import)
       csv = open(csv_import.file_url)
       CSV.parse(csv, headers: false).each_with_index do |row, index|
-        unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-        options = parse_options(unescaped_row)
-        @options = utf_8_encode(options)
         next if index.zero?
+        set_options(row)
+        expire_subscriptions if index == 1
 
-        expire_subscriptions if @group.empty?
+        user = find_or_initialize_user
+        user.persisted? ? update_user_address(user) : user.save!
 
-        @subscription = get_subscription
+        subscription = find_or_initialize_subscription(user)
+        subscription.persisted? ? update_subscription(subscription) : subscription.save!
 
-        if @subscription.persisted?
-          extend_subscription
-          next
-        end
-        user = find_or_create_user
-        user.addresses = [address('User')]
-        user.subscriptions = [@subscription]
-        user.save!
-        update_address(user.address)
-        @subscription.addresses.each do |addr|
-          update_address(addr)
-        end
       end
     end
-    # rubocop:enable Security/Open
 
     def expire_subscriptions
-      @group = @options[:group]
-      subscription_type =
-        Admin::SubscriptionType
-        .find_by(identifier: @options[:group])
-
       subscription_type.subscriptions.update_all(end_date: Time.zone.now - 1.days)
     end
 
     private
 
-    def get_subscription
-      Admin::Subscription.find(@options[:subscription_id]) || build_subscription
+    def find_or_initialize_subscription(user)
+      user.subscriptions.find_by(subscription_id: @options[:subscription_id]) || build_subscription(user)
     end
 
-    def extend_subscription
-      @subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+    def update_subscription(subscription)
+      subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+      subscription.primary_address.update(address_options)
     end
 
-    def build_subscription
-      Admin::Subscription.new(
+    def build_subscription(user)
+      user.subscriptions.new(
         subscription_id: @options[:subscription_id],
         start_date: Time.zone.now,
         end_date: Time.zone.now + subscription_type.duration.days,
         subscription_type_id: subscription_type.id,
-        addresses: [address('Admin::Subscription')]
+        addresses: [new_address('Admin::Subscription')]
       )
     end
 
@@ -74,7 +55,7 @@ class Admin::Subscription < ApplicationRecord
       Admin::SubscriptionType.find_by(identifier: @options[:group])
     end
 
-    def find_or_create_user
+    def find_or_initialize_user
       User
         .where(
           user_id: @options[:subscription_id]
@@ -86,44 +67,28 @@ class Admin::Subscription < ApplicationRecord
           email: User::Service.fake_email,
           password_digest: User::Service.fake_password,
           roles: [Role.new],
-          uuid: SecureRandom.uuid
+          uuid: SecureRandom.uuid,
+          addresses: [new_address('User')]
         )
     end
 
+    def update_user_address(user)
+      user.address.update(address_options)
+    end
+
     # build a new address
-    def address(addressable_type)
-      Address.new(
-        addressable_type: addressable_type,
-        first_name: first_name,
-        middle_name: middle_name,
-        last_name: last_name,
-        address: @options[:address].presence || 'NA',
-        street_name: @options[:address].to_s.split(' ').first,
-        zipp_code: @options[:zipp_code].presence || 'NA',
-        city: @options[:city].presence || '',
-        country: @options[:country].presence || 'Danmark'
-      )
+    def new_address(addressable_type)
+      Address::Service.new_address(addressable_type)
     end
 
-    def split_name
-      @split_name = @options[:name].split(' ')
+    def address_options
+      Address::Service.address_options(@options)
     end
 
-    def first_name
-      split_name.first
-    end
-
-    def middle_name
-      return '' if split_name.length < 2
-      split_name[1...split_name.length-1].join(' ')
-    end
-
-    def last_name
-      split_name.length > 1 ? split_name.last : ''
-    end
-
-    def update_address(address)
-      Address::Service.update_address(address)
+    def set_options(row)
+      unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
+      options = parse_options(unescaped_row)
+      @options = utf_8_encode(options)
     end
 
     def utf_8_encode(options)
@@ -135,11 +100,21 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def parse_options(row)
+      user_fields = Address::Service.user_fields(row[2])
+      address_fields = Address::Service.address_fields(row[3])
       {
         group: row[0], # "Gruppe",
         subscription_id: row[1], # "Nr.",
         name: row[2], # "Navn",
+        first_name: user_fields[:first_name],
+        middle_name: user_fields[:middle_name],
+        last_name: user_fields[:last_name],
         address: row[3], # "Adresse 1",
+        street_name: address_fields[:street_name],
+        house_number: address_fields[:house_number].to_s,
+        letter: address_fields[:letter],
+        floor: address_fields[:floor],
+        side: address_fields[:side],
         zipp_code: row[4], # "Postnr.",
         city: row[5], # "By",
         country: row[6], # "Land",
@@ -148,10 +123,6 @@ class Admin::Subscription < ApplicationRecord
         ref_id: row[9], # "Deres ref.",
         email: row[10] # "E-mail"
       }
-    end
-
-    def admin_system_setup
-      @admin_system_setup ||= Admin::SystemSetup.find_by(locale: I18n.locale)
     end
   end
 end

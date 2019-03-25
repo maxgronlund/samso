@@ -169,20 +169,16 @@ class User < ApplicationRecord
     def address(addressable_type, options = {})
       zipp_code = parse_zipp_code(options)
       city = parse_city(zipp_code, options)
-      address_fields =
-        Address::Service
-        .address_fields(options[:adresse])
-      user_names =
-        Address::Service
-        .user_names(options[:navn])
+      address_fields = Address::Service.address_fields(options[:adresse])
+      user_fields =  Address::Service.user_fields(options[:navn])
 
       Address.new(
         address: options[:adresse].presence || '-',
         addressable_type: addressable_type,
         name: options[:navn].presence || '-',
-        first_name: user_names[:first_name].presence || '-',
-        middle_name: user_names[:middle_name],
-        last_name: user_names[:last_name].presence || '-',
+        first_name: user_fields[:first_name].presence || '-',
+        middle_name: user_fields[:middle_name],
+        last_name: user_fields[:last_name].presence || '-',
         street_name: address_fields[:street_name].presence || '-',
         house_number: address_fields[:house_number],
         letter: address_fields[:letter],

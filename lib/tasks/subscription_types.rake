@@ -64,5 +64,20 @@ namespace :subscription_types do
         position: 0,
         free: false
       )
+    Admin::SubscriptionType
+      .where(identifier: Admin::SubscriptionType::DAO_IMPORTED)
+      .first_or_create(
+        title: "Import fra DAO Liste",
+        body: 'Må ikke slettes',
+        identifier: Admin::SubscriptionType::DAO_IMPORTED,
+        duration: 365000,
+        internet_version: true,
+        print_version: true,
+        price: 0,
+        locale: 'da',
+        active: false,
+        position: 0,
+        free: false
+      )
   end
 end

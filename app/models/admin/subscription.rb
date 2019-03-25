@@ -71,14 +71,12 @@ class Admin::Subscription < ApplicationRecord
   alias set_address primary_address
 
   def temporary_address
-    @temporary_address =
-      addresses
-      .find_by(address_type: Address::TEMPORARY_ADDRESS)
+    addresses.find_by(address_type: Address::TEMPORARY_ADDRESS)
   end
 
   def delivery_address
     return Address.new if addresses.count.zero?
-    return address if addresses.count == 1
+    return primary_address if addresses.count == 1
     return temporary_address if temporary_address.in_period?
 
     primary_address
@@ -155,9 +153,9 @@ class Admin::Subscription < ApplicationRecord
         delivery_address = subscription.delivery_address
         csv << [
           subscription.subscription_id,
-          subscription.first_name,
-          subscription.middle_name,
-          subscription.last_name,
+          delivery_address.first_name,
+          delivery_address.middle_name,
+          delivery_address.last_name,
           '',
           '',
           delivery_address.street_name,

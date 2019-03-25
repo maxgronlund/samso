@@ -93,6 +93,18 @@ p Kun for administratorer
           a.card-link
             .pull-right
               'Rediger
+
+.row.mt-10
+  .col-sm-6
+    = link_to admin_event_notifications_path
+      .card
+        .card-body
+          h4.card-title System beskeder
+          p.card-text
+            = simple_format 'Liste over fejl&#10;Events der bliver samlet op&#10;Imports mm.'
+          a.card-link
+            .pull-right
+              = t('show')
 br
 br
 

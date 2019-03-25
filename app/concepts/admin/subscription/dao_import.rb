@@ -7,153 +7,145 @@ class Admin::Subscription < ApplicationRecord
   # services for Admin::CsvImport
   class DaoImport
     # expire all subscriptions
-    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Security/Open
-    # rubocop:disable Metrics/MethodLength
     def import(csv_import)
+      @name = csv_import[:name]
       csv = open(csv_import.file_url)
       @missing_subscriptions = []
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         next if index.zero?
 
-        unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
-        set_options(unescaped_row)
-        set_subscription
-        if @subscription.nil?
-          @missing_subscriptions << { options: @options }
-          user = create_user
-          next
-        end
-        set_delivery_address
-        set_user
-        set_user_address
-
-        update_delivery_address
-        update_user_address
-
-        # ap '------------------'
-      end
-      if @missing_subscriptions.any?
-        ap '------------------------------'
-        ap 'FAILED TO CREATE USERS'
-        ap '------------------------------'
-        ap @missing_subscriptions
+        prepare(row)
+        user = import_user
+        import_subscription(user) if user.present?
       end
     end
     # rubocop:enable Security/Open
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
 
     private
 
-    def create_user
-      user =
-        User.new(
-          name: full_name.presence || '-',
-          addresses: [new_address('User')],
-          roles: [Role.new],
-          uuid: SecureRandom.uuid,
-          imported: true,
-          uuid: SecureRandom.uuid,
+    def prepare(row)
+      @subscription = nil
+      set_options(row)
+    end
+
+    def import_user
+      user = find_or_initialize_user
+      user.persisted? ? update_user_address(user) : user.save!
+      user
+    rescue => e
+      Admin::EventNotification.create(
+        title: "DAO Import - #{@name}",
+        body: e.message,
+        message_type: 'dao_import',
+        metadata: @options
+      )
+      nil
+    end
+
+    def find_or_initialize_user
+      return subscription.user if user_exists?
+
+      User
+        .new(
+          user_id: @options[:subscription_id],
+          name: @options[:name],
+          signature: @options[:name],
           email: User::Service.fake_email,
           password_digest: User::Service.fake_password,
-          subscriptions: [new_subscription]
+          roles: [Role.new],
+          uuid: SecureRandom.uuid,
+          addresses: [new_address('User')]
         )
-      unless user.save!
-        @missing_subscriptions << @options
-      end
     end
 
-    def full_name
-      [@options[:fornavn], @options[:mellemnavn], @options[:efternavn]].join(' ')
+    def user_exists?
+      subscription.present? && subscription.user.present?
     end
 
-    def new_subscription
-      subscription =
-        Admin::Subscription.new(
-          subscription_id: @options[:abonr],
-          subscription_type_id: Admin::SubscriptionType.from_economics.id,
+    def import_subscription(user)
+      find_or_initialize_subscription(user)
+      @subscription.persisted? ? update_subscription_address : @subscription.save!
+    end
+
+    def find_or_initialize_subscription(user)
+      subscription.presence || build_subscription(user)
+    end
+
+    def build_subscription(user)
+      @subscription =
+        user.subscriptions.new(
+          subscription_id: @options[:subscription_id],
           start_date: Time.zone.now,
-          end_date: Time.zone.now + 1000.years,
+          end_date: Time.zone.now + subscription_type.duration.days,
+          subscription_type_id: subscription_type.id,
           addresses: [new_address('Admin::Subscription')]
         )
     end
 
+    def subscription_type
+      Admin::SubscriptionType.dao_imported
+    end
+
+    def subscription
+      @subscription ||= Admin::Subscription.find(@options[:subscription_id])
+    end
+
     def new_address(addressable_type)
-      Address.new(
-        addressable_type: addressable_type,
-        address: @options[:adresse].presence || '',
-        name: @options[:fornavn].presence || '-',
-        first_name: @options[:fornavn].presence || '-',
-        middle_name: @options[:mellemnavn],
-        last_name: @options[:efternavn].presence || '-',
-        street_name: @options[:vejnavn],
-        house_number: @options[:husnr],
-        letter: @options[:litra],
-        floor: @options[:sal],
-        side: @options[:side],
-        zipp_code: @options[:postnr],
-        city: @options[:bynavn],
-        country: @options[:land]
-      )
+      options = Address::Service.address_options(@options)
+      options[:addressable_type] = addressable_type
+      Address.new(options)
     end
 
-    def set_subscription
-      @subscription = Admin::Subscription.find_by(subscription_id: @options[:abonr])
-    end
-
-    def set_delivery_address
-      @delivery_address = @subscription.delivery_address
-    end
-
-    def set_user
-      @user = @subscription.user
-    end
-
-    def set_user_address
-      @user_address = @user.address
-    end
-
-    def update_delivery_address
-      update_address(@delivery_address)
+    def address_options
+      Address::Service.address_options(@options)
     end
 
     def update_subscription_address
-      subscription_address = @subscription.primary_address
-      return if subscription_address.id == @delivery_address.id
-
-      update_address(subscription_address)
+      ap 'update_subscription_address'
+      ap subscription_address_is_temporary?
+      if subscription_address_is_temporary?
+        update_temporary_address
+      else
+        subscription.address.update(address_options)
+      end
     end
 
-    def update_user_address
-      update_address(@user_address) if delivery_address_is_user_address?
+    def update_user_address(user)
+      user.address.update(address_options)
     end
 
     def update_address(address)
-      address
-        .update(
-          first_name: @options[:fornavn],
-          middle_name: @options[:mellemnavn],
-          last_name: @options[:efternavn],
-          street_name: @options[:vejnavn],
-          house_number: @options[:husnr],
-          letter: @options[:litra],
-          zipp_code: @options[:postnr],
-          city: @options[:bynavn],
-          floor: @options[:sal],
-          side: @options[:side]
-        )
+      address.update(address_options)
     end
 
-    def set_temporary_subscription_address
-      @temporary_user_address = @user.primary_address
+    def subscription_address_is_temporary?
+      address = subscription.primary_address
+      !same_address?(address)
     end
 
-    def delivery_address_is_user_address?
-      return false unless @user_address.address.include?(@delivery_address.street_name)
-      return false unless @user_address.address.include?(@delivery_address.house_number.to_s)
+    def same_address?(address)
+      street_name = address.street_name
+      house_number = address.house_number.to_s
+      (@options[:house_number] == house_number) && (@options[:street_name] = street_name)
+    end
 
-      true
+    def update_temporary_address
+      if subscription.temporary_address.present?
+        subscription.temporary_address.update(address_options)
+        return
+      end
+      create_temporary_subscription_address
+    end
+
+    def create_temporary_subscription_address
+      options = {
+        address_type: Address::TEMPORARY_ADDRESS,
+        start_date: Time.zone.today,
+        end_date: Time.zone.today + 365.days
+      }
+      options.merge!(address_options)
+      subscription.addresses.create(options)
     end
 
     def utf_8_encode(options)
@@ -165,28 +157,40 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def set_options(row)
-      @options = {
+      unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
+      options = parse_options(unescaped_row)
+      @options = utf_8_encode(options)
+      @options[:name] = full_name
+      @options[:last_name] = 'NA' if @options[:last_name].blank?
+    end
+
+    def parse_options(row)
+      {
         gruppe: row[0],
-        abonr: row[1],
-        fornavn: row[2],
-        mellemnavn: row[3],
-        efternavn: row[4],
+        subscription_id: row[1],
+        first_name: row[2],
+        middle_name: row[3],
+        last_name: row[4],
         attention: row[5],
         kontaktperson: row[6],
-        vejnavn: row[7],
-        husnr: row[8],
-        litra: row[9],
+        street_name: row[7],
+        house_number: row[8],
+        letter: row[9],
         sal: row[10],
         side: row[11],
-        postnr: row[12],
-        bynavn: row[13],
-        land: row[14],
+        zipp_code: row[12],
+        city: row[13],
+        country: row[14],
         antalaviser: row[15],
         co: row[16],
         tiltaleform: row[17],
         gadeident: row[18],
         david: row[19]
       }
+    end
+
+    def full_name
+      User::Service.full_name(@options)
     end
   end
 end

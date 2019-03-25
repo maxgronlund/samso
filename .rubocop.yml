@@ -22,6 +22,7 @@ AllCops:
     - 'db/schema.rb'
     - 'lib/tasks/cucumber.rake'
     - 'app/views/**/*'
+  TargetRubyVersion: 2.6.0.0
 
 
 Bundler/OrderedGems:
