@@ -12,12 +12,7 @@ class AccountForSubscribersController < ApplicationController
 
     if subscription.present?
       @user = subscription.user
-      if @user.fake_email?
-        if @user.update(user_params)
-          login('Din konto er klar og du kan nu logge ind')
-        else
-          render_new('Kontroler venligst email og password')
-        end
+      if update_user_account!
       else
         login('Der findes allerede en konto med den angivne email')
       end
@@ -26,16 +21,29 @@ class AccountForSubscribersController < ApplicationController
     end
   end
 
+  def update_user_account!
+    return false unless @user.fake_email?
+
+    if @user.update(user_params)
+      login('Din konto er klar og du kan nu logge ind')
+    else
+      @user.errors[:email] << 'Email skal udfyldes'
+      render_new('Kontroler venligst email og password')
+    end
+  end
+
   def render_new(message)
-    @user = User.new(user_params)
+    # @user = User.new(user_params)
     flash[:alert] = message
-    @subscription_id = permitted_user_params[:subscription_id]
+    # @subscription_id = permitted_user_params[:subscription_id]
     render :new
   end
 
   def login(message)
     flash.now.alert = message
-    redirect_to new_session_path
+    session[:user_id] = @user.id
+    redirect_to @user.editor? ? admin_index_path : default_path(root_url)
+    #redirect_to new_session_path
   end
 
   def show
@@ -46,6 +54,7 @@ class AccountForSubscribersController < ApplicationController
   def user_params
     @user_params ||= permitted_user_params.dup
     @user_params.delete :subscription_id
+    @user_params[:confirmed_at] = Time.zone.now
     @user_params
   end
 

@@ -1,0 +1,41 @@
+h1 Statestik
+
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th Stats
+        th Antal
+    tbody
+      tr
+        td Brugere
+        td = @users
+      tr
+        td Brugere der er blevet oprettet inden for den sidste uge
+        td = @last_weeks_new_users
+      tr
+        td Gange der er blevet logget ind
+        td = @times_signed_in
+      tr
+        td Brugere der har logget ind mindst en gang
+        td = @users_signed_in
+      tr
+        td Læsninger af artikkeler
+        td = @total_posts_views
+      tr
+        td Læsninger af artikler de sidste 7 dage
+        td = @last_week_posts_views
+      tr
+        td Kommentarer
+        td = @comments
+      tr
+        td Kommentarer de sidste 7 dage
+        td = @last_weeks_comments
+      tr
+        td Brugere der har mindst en kommentar
+        td = @users_with_comments
+
+
+
+

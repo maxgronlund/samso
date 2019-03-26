@@ -88,6 +88,7 @@ Rails.application.routes.draw do
       resources :send_newsletters, only: %i[update]
       resources :sign_in_ips, only: %i[index]
       resources :show_subscription_ids, only: %i[show]
+      resources :stats
       resources :subscriptions do
         resources :delivery_addresses
       end

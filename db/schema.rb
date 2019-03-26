@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_094452) do
+ActiveRecord::Schema.define(version: 2019_03_26_104442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -677,6 +677,7 @@ ActiveRecord::Schema.define(version: 2019_03_25_094452) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
+    t.integer "comments_count"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

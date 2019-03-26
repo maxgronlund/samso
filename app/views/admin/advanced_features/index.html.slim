@@ -99,9 +99,19 @@ p Kun for administratorer
     = link_to admin_event_notifications_path
       .card
         .card-body
-          h4.card-title System beskeder
+          h4.card-title System notificationer
           p.card-text
             = simple_format 'Liste over fejl&#10;Events der bliver samlet op&#10;Imports mm.'
+          a.card-link
+            .pull-right
+              = t('show')
+  .col-sm-6
+    = link_to admin_stats_path
+      .card
+        .card-body
+          h4.card-title Statestik
+          p.card-text
+            = simple_format 'Bruger der blev logget in&#10;Hvor mange gange artikler er blevet læst&#10;System notifikationsr'
           a.card-link
             .pull-right
               = t('show')
