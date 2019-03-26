@@ -7,16 +7,15 @@ class Admin::StatsController < AdminController
     @times_signed_in = signed_in_users.sum(:sign_in_count)
     @users_signed_in = signed_in_users.count
     @total_posts_views = Admin::BlogPost.sum(:views)
-    @last_week_posts_views =
-      Admin::BlogPost
-      .where('updated_at >= :a_week_ago', a_week_ago)
-      .sum(:views)
+    @last_week_posts_views = Admin::BlogPost .where('updated_at >= :a_week_ago', a_week_ago).count
     @comments = Comment.count
     @last_weeks_comments =
       Comment
       .where('created_at >= :a_week_ago', a_week_ago)
       .count
     @users_with_comments = User.where.not(comments_count: 0).count
+    @subscriptions_count = Admin::Subscription.count
+    @valid_subscriptions_count = Admin::Subscription.valid.count
   end
 
   private

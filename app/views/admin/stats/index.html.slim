@@ -21,10 +21,10 @@ h1 Statestik
         td Brugere der har logget ind mindst en gang
         td = @users_signed_in
       tr
-        td Læsninger af artikkeler
+        td Gange der er blevet læst en artikkel
         td = @total_posts_views
       tr
-        td Læsninger af artikler de sidste 7 dage
+        td Artikler der er læst de sidste 7 dage
         td = @last_week_posts_views
       tr
         td Kommentarer
@@ -33,8 +33,14 @@ h1 Statestik
         td Kommentarer de sidste 7 dage
         td = @last_weeks_comments
       tr
-        td Brugere der har mindst en kommentar
+        td Brugere der har kommenteret mindst en gang
         td = @users_with_comments
+      tr
+        td Abonnementer tegnet
+        td = @subscriptions_count
+      tr
+        td Gyldige abonnementer
+        td = @valid_subscriptions_count
 
 
 
