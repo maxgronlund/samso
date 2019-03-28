@@ -35,7 +35,7 @@ module PaymentsConcerns
     {
       onpay_gatewayid: ENV['ONPAY_GATEWAY_ID'],
       onpay_currency: ENV['ONPAY_CURRENCY'],
-      onpay_amount: subscription_type.price_in_cent,
+      onpay_amount: subscription_type.form_price,
       onpay_reference: onpay_reference,
       onpay_accepturl: onpay_accepturl,
       subscription_type_id: subscription_type.id.to_s

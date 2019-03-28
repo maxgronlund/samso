@@ -27,6 +27,10 @@ class Admin::SubscriptionType < ApplicationRecord
     (price.presence || 0) * 100
   end
 
+  def form_price
+    price_in_cent.to_i.to_s
+  end
+
   def free?
     return true if price.nil? || price.zero?
 
