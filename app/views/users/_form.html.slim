@@ -39,9 +39,13 @@
       .row
         .col-sm-4
           /= address.input :address, label: t('address.address')
-          = address.input :zipp_code, label: t('address.zipp_code'), input_html: { class: 'post-code-autofill-dk' }
+          = address.input :zipp_code,
+            label: t('address.zipp_code'),
+            input_html: { class: 'post-code-autofill-dk' }
         .col-sm-4
-          = address.input :city, label: t('address.city')
+          = address.input :city,
+            label: t('address.city'),
+            input_html: { class: 'city-name-autofill' }
 
 
     - if @user.valid_subscriber?

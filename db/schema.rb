@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_104442) do
+ActiveRecord::Schema.define(version: 2019_03_27_192320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -613,6 +613,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_104442) do
     t.string "payment_provider"
     t.integer "payable_id"
     t.string "payable_type"
+    t.string "onpay_reference"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 

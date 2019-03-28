@@ -43,7 +43,7 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   def payment
-    @payment ||= Payment.find_by(uuid: params[:onpay_reference])
+    @payment ||= Payment.find_by(onpay_reference: params[:onpay_reference])
   end
 
   def subscription_type
