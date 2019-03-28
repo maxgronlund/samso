@@ -19,6 +19,7 @@ module PaymentsConcerns
     payment.payable_type = payable_type
     payment.payable_id = payable_id
     payment.payment_provider = Payment::PROVIDER_ONPAY
+    payment.uuid = SecureRandom.uuid
     payment.save
     @form_data = form_data(@subscription_type, onpay_reference)
 

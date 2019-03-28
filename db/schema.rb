@@ -613,7 +613,7 @@ ActiveRecord::Schema.define(version: 2019_03_27_192320) do
     t.string "payment_provider"
     t.integer "payable_id"
     t.string "payable_type"
-    t.string "onpay_reference"
+    t.string "onpay_reference", default: "na"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
