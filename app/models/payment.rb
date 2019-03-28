@@ -77,7 +77,7 @@ class Payment < ApplicationRecord
   def transaction_id
     case payment_provider
     when PROVIDER_ONPAY
-      transaction_info['onpay_number']
+      transaction_info['onpay_reference']
     else
       ''
     end

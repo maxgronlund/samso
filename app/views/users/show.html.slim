@@ -1,7 +1,7 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container
   .row
-    .col-sm-6
+    .col-sm-8
       h3= @user.name
 
       - unless @user.fake_email?
@@ -14,10 +14,9 @@
         = link_to 'Slet konto',
           cancel_account_path(@user.id),
           class: 'btn btn-danger'
-    .col-sm-6
-      .pull-right
-        'Adresse:&nbsp;
-        = render 'shared/address', address: @user.address
+    .col-sm-4
+      'Adresse:&nbsp;
+      = render 'shared/address', address: @user.address
 
   br
   .row
