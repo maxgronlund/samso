@@ -1,2 +1,37 @@
-h1 DeclinedPayments#index
-p Find me in app/views/declined_payments/index.html.slim
+= render 'shared/navbar', menu: @menu
+
+.container-fluid
+  .row.mt-20
+    .col-sm-12
+      h3 Betalingen blev afvist
+  .row
+    .col-sm-12
+      .table-responsive
+        table.table.table-striped.table-bordered.table-hover.table-sm
+          thead.thead-dark
+            tr
+              th Transaktions information
+              th
+          tbody
+            tr
+              td Transaktionsnummer
+              td = @payment.transaction_info["onpay_number"]
+            tr
+              td Ordre ID
+              td = @payment.transaction_info["onpay_reference"]
+            tr
+              td Beløb
+              td = number_to_currency(@payment.transaction_info["onpay_amount"], precision: 2)
+            tr
+              td Korttype
+              td = @payment.transaction_info["onpay_cardtype"].capitalize
+            tr
+              td Kort
+              td = @payment.transaction_info["onpay_cardmask"]
+            tr
+              td Korttype
+              td = @payment.transaction_info["onpay_cardtype"].capitalize
+            tr
+              td Status
+              td = @payment.transaction_info["onpay_status"].capitalize
+

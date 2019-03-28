@@ -38,15 +38,16 @@ module PaymentsConcerns
       onpay_amount: subscription_type.form_price,
       onpay_reference: onpay_reference,
       onpay_accepturl: onpay_accepturl,
+      onpay_declineurl: onpay_declineturl,
       subscription_type_id: subscription_type.id.to_s
     }
   end
 
   def onpay_accepturl
-    Rails.env.development? ? 'https://d6a0c0ca.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? 'https://4bd053e9.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? 'https://d6a0c0ca.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? 'https://4bd053e9.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
   end
 end

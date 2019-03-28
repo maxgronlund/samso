@@ -98,7 +98,8 @@ class AcceptedPaymentsController < ApplicationController
       onpay_method: params[:onpay_method],
       onpay_cardtype: params[:onpay_cardtype],
       onpay_cardcountry: params[:onpay_cardcountry],
-      onpay_cardmask: params[:onpay_cardmask]
+      onpay_cardmask: params[:onpay_cardmask],
+      onpay_status: Payment::ACCEPTED
     }
   end
 
