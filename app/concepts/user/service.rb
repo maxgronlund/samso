@@ -103,7 +103,7 @@ class User < ApplicationRecord
     end
 
     def self.set_address_name(options)
-      return if options[:addresses_attributes].nil?
+      return nil if options[:addresses_attributes].nil?
 
       options[:addresses_attributes]['0'][:name] = options[:name]
     end

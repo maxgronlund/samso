@@ -98,25 +98,21 @@ class Admin::UsersController < AdminController
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
     sanitized_params[:email] = User::Service.sanitize_email(sanitized_params[:email])
-    User::Service.set_address_name(sanitized_params)
-    sanitized_params[:name] = full_name
+    sanitized_params[:name] =  user_name
     sanitized_params
   end
 
-  def full_name
-    fname = [address_params[:first_name], address_params[:middle_name], address_params[:last_name]].join(' ')
-    return permitted_user_params[:email] if fname.delete(' ').empty?
+  def user_name
+    permitted_user_params[:addresses_attributes].present? ? full_name : permitted_user_params[:name]
+  end
 
-    fname
+  def full_name
+    [address_params[:first_name], address_params[:middle_name], address_params[:last_name]].join(' ')
   end
 
   def address_params
     @address_params ||=
-      if permitted_user_params[:addresses_attributes].present?
-        permitted_user_params[:addresses_attributes]['0']
-      else
-        {}
-      end
+      permitted_user_params[:addresses_attributes].present? ? permitted_user_params[:addresses_attributes]['0'] : nil
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
