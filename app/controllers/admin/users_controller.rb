@@ -59,7 +59,8 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
-    if @user.update(user_params)
+    ap user_params
+    if @user.update!(user_params)
       if Check.checked?(user_params[:update_subscription_address])
         update_subscription_address
       end
@@ -103,11 +104,19 @@ class Admin::UsersController < AdminController
   end
 
   def full_name
-    [address_params[:first_name], address_params[:middle_name], address_params[:last_name]].join(' ')
+    fname = [address_params[:first_name], address_params[:middle_name], address_params[:last_name]].join(' ')
+    return permitted_user_params[:email] if fname.delete(' ').empty?
+
+    fname
   end
 
   def address_params
-    @address_params ||= permitted_user_params[:addresses_attributes]['0']
+    @address_params ||=
+      if permitted_user_params[:addresses_attributes].present?
+        permitted_user_params[:addresses_attributes]['0']
+      else
+        {}
+      end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
