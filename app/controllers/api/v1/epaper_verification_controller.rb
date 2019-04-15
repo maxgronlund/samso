@@ -32,6 +32,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
     "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=#{admin_system_setup.e_pages_date}&edition=SM1"
     #ap "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
     #{}"http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
+    "https://samsoposten.e-pages.pub/titles/samsoposten/880/publications/latest/?token=#{secret}"
   end
 
   def e_paper_secret
