@@ -7,7 +7,7 @@ class Admin::CsvImportsController < AdminController
 
   # GET /admin/csv_imports
   def index
-    @admin_csv_imports = Admin::CsvImport.all
+    @admin_csv_imports = Admin::CsvImport.order(:import_type)
   end
 
   # GET /admin/csv_imports/1

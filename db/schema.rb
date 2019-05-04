@@ -678,7 +678,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_094847) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
-    t.integer "comments_count"
+    t.integer "comments_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
