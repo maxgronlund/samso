@@ -38,12 +38,12 @@ class Admin::Subscription < ApplicationRecord
               backtrace: e.backtrace
             )
 
-           Admin::EventNotification.create(
-              title: "ERROR! e-conomics Import",
-              body: "Unable to parse row",
-              message_type: 'economics_import',
-              metadata: metadate
-            )
+          Admin::EventNotification.create(
+            title: 'ERROR! e-conomics Import',
+            body: 'Unable to parse row',
+            message_type: 'economics_import',
+            metadata: metadate
+          )
         end
       end
       create_import_event_notification(rows_in_csv_file)
