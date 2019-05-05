@@ -82,14 +82,13 @@ class Admin::Subscription < ApplicationRecord
     primary_address
   end
 
-
-
   def free?
     subscription_type.nil? ? true : subscription_type.free?
   end
 
   def send_reminder!
     return if reminder_send
+
     update(reminder_send: true)
   end
 

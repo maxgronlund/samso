@@ -13,22 +13,55 @@ class Admin::Subscription < ApplicationRecord
     def import(csv_import)
       @name = csv_import[:name]
       csv = open(csv_import.file_url)
+      rows_in_csv_file = 0
       CSV.parse(csv, headers: false).each_with_index do |row, index|
         next if index.zero?
 
-        set_options(row)
-        expire_subscriptions if index == 1
+        begin
+          rows_in_csv_file += 1
+          set_options(row)
+          expire_subscriptions if index == 1
 
-        user = find_or_initialize_user
-        user.persisted? ? update_user_address(user) : save_user(user)
+          user = find_or_initialize_user
+          user.persisted? ? update_user_address(user) : save_user(user)
 
-        subscription = find_or_initialize_subscription(user)
-        subscription.persisted? ? update_subscription(subscription) : subscription.save
+          subscription = find_or_initialize_subscription(user)
+          subscription.persisted? ? update_subscription(subscription) : save_subscription(subscription)
+        rescue => e
+          metadate =
+            { row_number: index,
+              file: @name }
+            .merge(options: '===================')
+            .merge(@options)
+            .merge(
+              message: e.message,
+              backtrace: e.backtrace
+            )
+
+           Admin::EventNotification.create(
+              title: "ERROR! e-conomics Import",
+              body: "Unable to parse row",
+              message_type: 'economics_import',
+              metadata: metadate
+            )
+        end
       end
+      create_import_event_notification(rows_in_csv_file)
+    end
+
+    def create_import_event_notification(rows_in_csv_file)
+      Admin::EventNotification.create(
+         title: "STATUS e-conomics Import ",
+         body: "CSV file: #{@name}",
+         message_type: 'economics_import',
+         metadata: { scv_file: @name, rows_in_csv_file: rows_in_csv_file }
+       )
     end
 
     def expire_subscriptions
-      subscription_type.subscriptions.update_all(end_date: Time.zone.now - 1.days)
+      subscription_type
+        .subscriptions
+        .update_all(end_date: Time.zone.now - 1.day)
     end
 
     private
@@ -37,8 +70,8 @@ class Admin::Subscription < ApplicationRecord
       return if user.save
 
       Admin::EventNotification.create(
-        title: "e-conomics Import - #{@name}",
-        body: "Unable to save user: #{user.attributes}",
+        title: "ERROR! e-conomics Import: Save User",
+        body: "Unable to save user",
         message_type: 'economics_import',
         metadata: @options
       )
@@ -48,8 +81,8 @@ class Admin::Subscription < ApplicationRecord
       return if subscription.save
 
       Admin::EventNotification.create(
-        title: "e-conomics Import - #{@name}",
-        body: "Unable to save subscription: #{subscription.attributes}",
+        title: "ERROR! e-conomics Import: Save Subscription",
+        body: "Unable to save subscription",
         message_type: 'economics_import',
         metadata: @options
       )
@@ -64,8 +97,8 @@ class Admin::Subscription < ApplicationRecord
       return if subscription.primary_address.update(address_options)
 
       Admin::EventNotification.create(
-        title: "e-conomics Import - #{@name}",
-        body: "Unable to update subscription address: #{subscription.primary_address.attributes}",
+        title: "ERROR! e-conomics Import: Update Subscription",
+        body: "Unable to update subscription address",
         message_type: 'economics_import',
         metadata: address_options
       )
@@ -106,8 +139,8 @@ class Admin::Subscription < ApplicationRecord
       return if user.address.update(address_options)
 
       Admin::EventNotification.create(
-        title: "e-conomics Import - #{@name}",
-        body: "Unable to update user address: #{user.attributes}",
+        title: "ERROR! e-conomics Import: Update User Address",
+        body: "Unable to update user address",
         message_type: 'economics_import',
         metadata: address_options
       )
@@ -133,7 +166,8 @@ class Admin::Subscription < ApplicationRecord
     def utf_8_encode(options)
       opts = {}
       options.each do |key, value|
-        opts[key] = value.force_encoding('ISO-8859-1').encode('UTF-8')
+        value = value.presence || ''
+        opts[key] = value # value.force_encoding('ISO-8859-1').encode('UTF-8')
       end
       opts
     end

@@ -43,4 +43,8 @@ class Admin::SubscriptionType < ApplicationRecord
   def self.for_subscription
     internal.active.locale.payed.order(:position)
   end
+
+  def free_from_economics?
+    identifier == FREE_FROM_ECONOMICS
+  end
 end

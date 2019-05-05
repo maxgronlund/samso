@@ -13,7 +13,7 @@
       tr
         th Dato
         th Title
-        th Type
+        / th Type
         th Status
         th
 
@@ -23,8 +23,12 @@
       - @admin_event_notifications.each do |admin_event_notification|
         tr
           td = l admin_event_notification.created_at
-          td = admin_event_notification.title
-          td = admin_event_notification.message_type
+          td
+            - if admin_event_notification.title.include?("ERROR")
+              b.red-text = admin_event_notification.title
+            - else
+              = admin_event_notification.title
+          / td = admin_event_notification.message_type
           td
             - if admin_event_notification.pending?
               'Ny
@@ -33,12 +37,12 @@
           td
             .pull-right
               .btn-group
-                = link_to 'Show',
+                = link_to t('show'),
                   admin_event_notification,
                   class: 'btn btn-sm btn-light'
-                = link_to 'Destroy',
+                = link_to t('delete'),
                   admin_event_notification,
-                  data: { confirm: 'Are you sure?' },
+                  data: { confirm: t('are_you_sure') },
                   method: :delete,
                   class: 'btn btn-sm btn-danger'
 

@@ -17,15 +17,13 @@ nav aria-label="breadcrumb"
 
 
 
-p
-  strong Body:
-  = simple_format @admin_event_notification.body
 
-/ p
-/   strong State:
-/   = @admin_event_notification.state
+b = simple_format @admin_event_notification.body
 
-p
-  strong Metadata:
-  = @admin_event_notification.metadata
-
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    tbody
+      - @admin_event_notification.metadata.each do |key, value|
+        tr
+          td = key.to_s.capitalize.gsub('_', ' ')
+          td = value
