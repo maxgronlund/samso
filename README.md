@@ -127,7 +127,7 @@ $ Admin::BlogPost.import force: true
 
 
 
-
+On Heroku
 Address.__elasticsearch__.delete_index!
 Address.__elasticsearch__.create_index!
 Address.__elasticsearch__.refresh_index!
