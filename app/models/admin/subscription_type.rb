@@ -4,13 +4,14 @@
 class Admin::SubscriptionType < ApplicationRecord
   has_many :subscriptions, class_name: 'Admin::Subscription', foreign_key: :subscription_type_id
 
-  INTERNAL = 'internal'.freeze
-  FREE = 'free'.freeze
-  IMPORTED = 'imported'.freeze
-  DAO_IMPORTED = 'dap-imported'.freeze
-  FROM_ECONOMICS = 'Abonnement'.freeze
-  FREE_FROM_ECONOMICS = 'FriAbb'.freeze
-  AB_EAN_FROM_ECONOMICS = 'AB-EAN'.freeze
+  INTERNAL = 'internal'
+  FREE = 'free'
+  IMPORTED = 'imported'
+  DAO_IMPORTED = 'dap-imported'
+  FROM_ECONOMICS = 'Abonnement'
+  FREE_FROM_ECONOMICS = 'FriAbb'
+  AB_EAN_FROM_ECONOMICS = 'AB-EAN'
+  FREE_SUBSCRIPTION = 'free_subscription'
 
   scope :active, -> { internal.where(active: true) }
   scope :locale, -> { internal.where(locale: I18n.locale.to_s) }
@@ -18,7 +19,9 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :internal, -> { where(identifier: INTERNAL).order(:position) }
   scope :imported, -> { where(identifier: IMPORTED) }
   scope :dao_imported, -> { find_by(identifier: DAO_IMPORTED) }
-  scope :free, -> { find_by(identifier: FREE) }
+  scope :payed, -> { internal.where(free: false) }
+  #scope :free, -> { find_by(identifier: FREE) }
+  scope :free, -> { find_by(identifier: FREE_SUBSCRIPTION) }
   scope :from_economics, -> { find_by(identifier: FROM_ECONOMICS) }
   scope :free_from_economics, -> { find_by(identifier: FREE_FROM_ECONOMICS) }
   scope :ab_ean_economics, -> { find_by(identifier: AB_EAN_FROM_ECONOMICS) }
@@ -39,5 +42,9 @@ class Admin::SubscriptionType < ApplicationRecord
 
   def self.for_subscription
     internal.active.locale.payed.order(:position)
+  end
+
+  def free_from_economics?
+    identifier == FREE_FROM_ECONOMICS
   end
 end

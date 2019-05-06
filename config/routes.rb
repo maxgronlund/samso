@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       resources :e_page_modules, only: %i[edit update]
       resources :featured_post_modules, only: %i[edit update]
       resources :find_blog_post_modules, only: %i[edit update]
+      resources :iframe_modules, only: %i[edit update]
       resources :search_result_modules, only: %i[edit update]
       resources :most_popular_modules, only: %i[edit update]
       resources :newsletters

@@ -127,7 +127,7 @@ $ Admin::BlogPost.import force: true
 
 
 
-
+On Heroku
 Address.__elasticsearch__.delete_index!
 Address.__elasticsearch__.create_index!
 Address.__elasticsearch__.refresh_index!
@@ -148,6 +148,9 @@ heroku domains --app samso
 
 * ngrok
 ./ngrok http 3000
+
+
+<iframe width="290" height="200" frameborder="0" scrolling="yes" src="http://samsoposten.dk.nt5.unoeuro-server.com/event/visidag.asp"></iframe>
 
 
 

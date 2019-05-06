@@ -50,6 +50,7 @@ class User < ApplicationRecord
       Rails.logger.info "Succeeded: #{@succeeded}"
       log_failed if @failed.any?
       log_persisted if @persisted.any?
+      create_import_event_notification
       Rails.logger.info '==============================================================='
 
       # import_subscriptions(csv_import)
@@ -76,6 +77,20 @@ class User < ApplicationRecord
           Rails.logger.info "#{k}: #{v}"
         end
       end
+    end
+
+    def create_import_event_notification
+      metadata = {
+        new_users_sucessfully_imported: @succeeded,
+        failed_imports: @failed.count,
+        users_updated: @persisted.count
+      }
+      Admin::EventNotification.create(
+         title: "STATUS User Import ",
+         body: "CSV file: #{@name}",
+         message_type: 'user_import',
+         metadata: metadata
+       )
     end
 
     # rubocop:disable Metrics/PerceivedComplexity
@@ -154,7 +169,7 @@ class User < ApplicationRecord
         @failed << { options: options, user: user.attributes, subscription: user.subscriptions }
 
         Admin::EventNotification.create(
-          title: "USER Import - #{@name}",
+          title: "ERROR! USER Import",
           body: 'Unable to import user',
           message_type: 'user_import',
           metadata: { options: options, user: user.attributes, subscription: user.subscriptions }

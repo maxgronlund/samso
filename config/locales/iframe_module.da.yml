@@ -1,0 +1,18 @@
+da:
+  activerecord:
+    models:
+      admin/iframe_module:
+        one: iframe
+        other: iframes
+    attributes:
+      admin/iframe_module:
+        name:  Name
+        snippet:  Snippet
+
+  iframe_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/iframe_module:
+    name: Iframe modul
