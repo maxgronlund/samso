@@ -17,6 +17,7 @@ class AccountForSubscribersController < ApplicationController
         login('Der findes allerede en konto med den angivne email')
       end
     else
+      @user = User.new(email: permitted_user_params[:email])
       render_new('Kontroler venligst abonnement nummert')
     end
   end
