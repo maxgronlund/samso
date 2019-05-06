@@ -140,6 +140,7 @@ class User < ApplicationRecord
       user = User.find_by(email: email) if User.exists?(email: email)
       if user.persisted?
         user.update(subscribe_to_news: options[:Nyhedsbrev]) if user.email.to_s.valid_email?
+        extend_subscription(options, user) if user_has_a_subscription?(options)
         @persisted << { options: options, user: user.attributes, subscription: user.subscriptions }
         return
       end
@@ -152,7 +153,7 @@ class User < ApplicationRecord
       user.confirmed_at = Time.zone.today
       user.addresses = [address('User', options)]
       user.roles = [Role.new]
-      user.subscriptions = [subscription(options)] if user_has_a_subscription(options)
+      user.subscriptions = [new_subscription(options)] if user_has_a_subscription?(options)
       user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
       user.uuid = SecureRandom.uuid
@@ -177,7 +178,18 @@ class User < ApplicationRecord
       end
     end
 
-    def user_has_a_subscription(options)
+    def extend_subscription(options, user)
+      subbsctiption_to_extend =
+        Admin::Subscription.find(options[:Abonnr])
+      if subbsctiption_to_extend.present?
+        subbsctiption_to_extend.update(end_date: options[:UdloebsDato])
+      else
+        user.subscriptions = [new_subscription(options)]
+        user.save
+      end
+    end
+
+    def user_has_a_subscription?(options)
       return false if options[:Oprettet].blank?
       return false if options[:Abon_periode].zero?
 
@@ -210,13 +222,13 @@ class User < ApplicationRecord
       )
     end
 
-    def subscription(options)
+    def new_subscription(options)
       Admin::Subscription
         .new(
           subscription_type_id: subscription_type(options).id,
           subscription_id: subscription_id(options),
           start_date: options[:Oprettet],
-          end_date: expitation_date(options),
+          end_date: options[:UdloebsDato],
           addresses: [address('Admin::Subscription', options)]
         )
     end
