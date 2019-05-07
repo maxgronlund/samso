@@ -139,6 +139,7 @@ class User < ApplicationRecord
       email = User::Service.sanitize_email(options[:email])
       user = User.find_by(email: email) if User.exists?(email: email)
       if user.persisted?
+        ap options
         user.update(subscribe_to_news: options[:Nyhedsbrev]) if user.email.to_s.valid_email?
         extend_subscription(options, user) if user_has_a_subscription?(options)
         @persisted << { options: options, user: user.attributes, subscription: user.subscriptions }
