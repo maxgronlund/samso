@@ -12,4 +12,8 @@ class PagesController < ApplicationController
   rescue
     render_404
   end
+
+  def index
+    redirect_to root_path
+  end
 end
