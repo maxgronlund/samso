@@ -40,6 +40,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def expired?
+    return true if end_date.blank?
     end_date < Time.zone.today
     # return false if end_date.nil?
 

@@ -44,6 +44,9 @@ class User < ApplicationRecord
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
+
+        ap '============='
+        ap options
         import_user(options) unless options[:user_id].blank?
       end
       Rails.logger.info '===================== IMPORT OF USERS ========================='
@@ -128,7 +131,7 @@ class User < ApplicationRecord
     end
 
     def build_subscription_id(row)
-      @subscription_id = row[B].strip
+      @subscription_id = row[B].to_s.strip
       @subscription_id.presence || User.new_user_id
     end
     # rubocop:enable Metrics/PerceivedComplexity
@@ -271,7 +274,7 @@ class User < ApplicationRecord
     end
 
     def subscription_type(options)
-      return Admin::SubscriptionType.free if options[:Friabon]
+      return Admin::SubscriptionType.find_by(identifier: Admin::SubscriptionType::FREE) if options[:Friabon]
       return subscription_types(options).first if subscription_types(options).any?
 
       create_subscription_type(options)
