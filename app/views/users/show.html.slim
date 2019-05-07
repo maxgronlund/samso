@@ -39,7 +39,9 @@
                   td = subscription.type_name
                   td = subscription.subscription_id
                   td = l subscription.start_date
-                  td = l subscription.end_date
+                  td
+                    - if subscription.end_date
+                      = l subscription.end_date
                   td = subscription.expired? ? 'Udløbet' : 'Ja'
                   th
                     .pull-right

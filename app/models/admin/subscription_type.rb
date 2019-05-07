@@ -21,10 +21,14 @@ class Admin::SubscriptionType < ApplicationRecord
   scope :dao_imported, -> { find_by(identifier: DAO_IMPORTED) }
   scope :payed, -> { internal.where(free: false) }
   #scope :free, -> { find_by(identifier: FREE) }
-  scope :free, -> { find_by(identifier: FREE_SUBSCRIPTION) }
+  #scope :free, -> { find_by(identifier: FREE_SUBSCRIPTION) }
   scope :from_economics, -> { find_by(identifier: FROM_ECONOMICS) }
   scope :free_from_economics, -> { find_by(identifier: FREE_FROM_ECONOMICS) }
   scope :ab_ean_economics, -> { find_by(identifier: AB_EAN_FROM_ECONOMICS) }
+
+  def self.free
+    find_by(identifier: FREE)
+  end
 
   def price_in_cent
     (price.presence || 0) * 100
@@ -37,7 +41,7 @@ class Admin::SubscriptionType < ApplicationRecord
   def free?
     return true if price.nil? || price.zero?
 
-    free
+    false
   end
 
   def self.for_subscription
