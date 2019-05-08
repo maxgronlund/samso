@@ -121,7 +121,7 @@ class User < ApplicationRecord
     end
 
     def import_user(options = {})
-      user = find_or_initialize_user(options)
+      ap user = find_or_initialize_user(options)
 
       if user.persisted?
         user.update(
