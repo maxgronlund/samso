@@ -23,6 +23,9 @@ b = simple_format @admin_event_notification.body
 .table-responsive
   table.table.table-striped.table-bordered.table-hover.table-sm
     tbody
+      tr
+        td Created :
+        td = l @admin_event_notification.created_at
       - @admin_event_notification.metadata.each do |key, value|
         tr
           td = key.to_s.capitalize.gsub('_', ' ')

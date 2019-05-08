@@ -34,11 +34,10 @@ class User < ApplicationRecord
 
   # importer
   class Import
-    @@locked = false
+
     # rubocop:disable Security/Open
     def import(csv_import)
-      return if @@locked
-      @@locked = true
+
       @name = csv_import[:name]
       @succeeded = 0
       @subscriptions_updated = 0
@@ -49,113 +48,21 @@ class User < ApplicationRecord
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
-
-        #set_legacy_id(options)
-        #merge_with_economics_import(options)
         import_user(options)# unless options[:user_id].blank?
 
       end
 
       create_import_event_notification
-      @@locked = false
+
     end
     # rubocop:enable Security/Open
 
     private
 
-    def set_legacy_id(options)
-      new_address = address('User', options)
-      addresses =
-        Address
-        .where(
-          address: new_address.address,
-          addressable_type: new_address.addressable_type,
-          name: new_address.name,
-          first_name: new_address.first_name,
-          middle_name: new_address.middle_name,
-          last_name: new_address.last_name,
-          street_name: new_address.street_name,
-          house_number: new_address.house_number,
-          letter: new_address.letter,
-          floor: new_address.floor,
-          side: new_address.side,
-          zipp_code: new_address.zipp_code,
-          city: new_address.city,
-          country: new_address.country
-        )
-
-      addresses.each do |address|
-        user = address.user
-        next if user.nil?
-
-        user.update(legacy_id: options[:Abonnr])
-      end
-    end
-
-    def merge_with_economics_import(options)
-      user_found_by_user_id = User.find_by(user_id: options[:Abonnr])
-      return if user_found_by_user_id.nil?
-
-      users_found_by_legacy_id = User.where(legacy_id: options[:Abonnr]).order(:created_at)
-      return if users_found_by_legacy_id.empty?
-
-      users_found_by_legacy_id.each do |user|
-        user.update(email: "#{user.id.to_s}-remove-me-#{options[:email]}")
-      end
-
-      user_from_import = users_found_by_legacy_id.first
-
-      if user_found_by_user_id.fake_email? || user_found_by_user_id.email.blank?
-        user_found_by_user_id.email = user_from_import.email.gsub("#{user_from_import.id.to_s}-remove-me-", "")
-      end
-
-      if user_found_by_user_id.fake_password? || user_found_by_user_id.password_digest.blank?
-        user_found_by_user_id.password_digest = user_from_import.password_digest
-        user_found_by_user_id.confirmed_at = user_from_import.confirmed_at
-      end
-
-      economic_user.save!
-
-      # subscription_type_ids =
-      #   Admin::SubscriptionType
-      #   .where(identifier: ["AB-EAN", "FriAbb", "Abonnement"]).pluck(:id)
-
-      # subscriptions =
-      #   economic_user
-      #   .subscriptions
-      #   .where(subscription_type_id: subscription_type_ids)
-
-      # if subscriptions.any?
-
-      # else
-      #   economic_user.
-      # end
-    end
 
     def password(options={})
       options[:password].nil? ? User::Service.fake_password : options[:password]
     end
-
-    # def log_failed
-    #   Rails.logger.info "Failed: #{@failed.length}"
-    #   @failed.each do |failed|
-    #     Rails.logger.info '--------------------------------'
-    #     failed.each do |k,v|
-    #       Rails.logger.info "#{k}: #{v}"
-    #     end
-    #   end
-    # end
-
-    # def log_persisted
-    #   Rails.logger.info "Persisted: #{@persisted.length}"
-    #   @persisted.each do |persisted|
-    #     Rails.logger.info '--------------------------------'
-    #     persisted.each do |k,v|
-    #       Rails.logger.info "#{k}: #{v}"
-    #     end
-    #   end
-    # end
-
 
     def create_import_event_notification
       metadata = {
@@ -214,7 +121,7 @@ class User < ApplicationRecord
     end
 
     def import_user(options = {})
-      ap user = find_or_initialize_user(options)
+      user = find_or_initialize_user(options)
 
       if user.persisted?
         user.update(
