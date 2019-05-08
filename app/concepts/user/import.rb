@@ -51,8 +51,6 @@ class User < ApplicationRecord
         options = parsed_row(unescaped_row)
 
         set_legacy_id(options)
-
-
         merge_with_economics_import(options)
         # import_user(options) unless options[:user_id].blank?
 
@@ -89,13 +87,13 @@ class User < ApplicationRecord
       addresses.each do |address|
         user = address.user
         next if user.nil?
+
         user.update(legacy_id: options[:Abonnr])
       end
     end
+
     def merge_with_economics_import(options)
-
       economic_user = User.find_by(user_id: options[:Abonnr])
-
       return if economic_user.nil?
 
       users_from_import = User.where(legacy_id: options[:Abonnr]).order(:created_at)
@@ -117,6 +115,21 @@ class User < ApplicationRecord
       end
 
       economic_user.save!
+
+      # subscription_type_ids =
+      #   Admin::SubscriptionType
+      #   .where(identifier: ["AB-EAN", "FriAbb", "Abonnement"]).pluck(:id)
+
+      # subscriptions =
+      #   economic_user
+      #   .subscriptions
+      #   .where(subscription_type_id: subscription_type_ids)
+
+      # if subscriptions.any?
+
+      # else
+      #   economic_user.
+      # end
     end
 
     def password(options={})

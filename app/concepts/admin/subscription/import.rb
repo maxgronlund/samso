@@ -25,8 +25,10 @@ class Admin::Subscription < ApplicationRecord
           user = find_or_initialize_user
           user.persisted? ? update_user_address(user) : save_user(user)
 
-          subscription = find_or_initialize_subscription(user)
-          subscription.persisted? ? update_subscription(subscription) : save_subscription(subscription)
+          ap subscription = find_or_initialize_subscription(user)
+
+          subscription.persisted? ? update_subscription(subscription, user) : save_subscription(subscription)
+          ap subscription
         rescue => e
           metadate =
             { row_number: index,
@@ -89,11 +91,22 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def find_or_initialize_subscription(user)
-      user.subscriptions.find_by(subscription_id: @options[:subscription_id]) || build_subscription(user)
+      Admin::Subscription.find_by(subscription_id: @options[:subscription_id]) || build_subscription(user)
     end
 
-    def update_subscription(subscription)
-      subscription.update(end_date: Time.zone.now + subscription_type.duration.days)
+    # def subscription_type_ids
+    #   @subscription_type_ids =||
+    #     Admin::SubscriptionType
+    #     .where(identifier: ["AB-EAN", "FriAbb", "Abonnement"]).pluck(:id)
+    # end
+
+    def update_subscription(subscription, user)
+      subscription
+        .update(
+          end_date: Time.zone.now + subscription_type.duration.days,
+          subscription_type_id: subscription_type.id,
+          user_id: user.id
+        )
       return if subscription.primary_address.update(address_options)
 
       Admin::EventNotification.create(
@@ -136,6 +149,11 @@ class Admin::Subscription < ApplicationRecord
     end
 
     def update_user_address(user)
+
+      # if user.email.include?("user.id.to_s}-remove-me-")
+
+      # end
+
       return if user.address.update(address_options)
 
       Admin::EventNotification.create(
