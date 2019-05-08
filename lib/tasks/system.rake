@@ -26,6 +26,15 @@ namespace :system do
     create_system_messages
   end
 
+  # useage
+  # rake system:destroy_user_import_notifications
+  desc 'destroy event notifications'
+  task destroy_user_import_notifications: :environment do
+    Admin::EventNotification
+      .where(message_type: 'user_import')
+      .destroy_all
+  end
+
   private
 
   def build_footer(locale)

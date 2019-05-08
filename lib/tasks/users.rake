@@ -37,4 +37,22 @@ namespace :users do
     .where(import_type: ['User', 'Admin::Subscription', 'Admin::Subscription::DaoImport'])
     .update_all(imported: nil)
   end
+
+  # usage
+  # rake users:remove_not_from_economics
+  desc 'remove all users not imported from economics'
+  task remove_not_from_economics: :environment do
+    subscription_type_ids =
+      Admin::SubscriptionType.where(identifier: ["Abonnement", "AB-EAN", "FriAbb"]).pluck(:id)
+
+    User.find_each do |user|
+      next if user.editor?
+
+      destroy_user = true
+      user.subscriptions.each do |subscription|
+        destroy_user = false if subscription_type_ids.include?(subscription.subscription_type_id)
+      end
+      user.destroy if destroy_user
+    end
+  end
 end
