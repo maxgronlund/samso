@@ -45,9 +45,8 @@ class User < ApplicationRecord
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
 
-        ap '============='
-        ap options
-        import_user(options) unless options[:user_id].blank?
+        merge_with_economics_import(options)
+        # import_user(options) unless options[:user_id].blank?
       end
       Rails.logger.info '===================== IMPORT OF USERS ========================='
       Rails.logger.info "Succeeded: #{@succeeded}"
@@ -61,6 +60,10 @@ class User < ApplicationRecord
     # rubocop:enable Security/Open
 
     private
+
+    def merge_with_economics_import(options)
+      ap User.find_by(user_id: options[:Abonnr])
+    end
 
     def log_failed
       Rails.logger.info "Failed: #{@failed.length}"
