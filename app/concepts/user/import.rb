@@ -34,69 +34,129 @@ class User < ApplicationRecord
 
   # importer
   class Import
+    @@locked = false
     # rubocop:disable Security/Open
     def import(csv_import)
+      return if @@locked
+      @@locked = true
       @name = csv_import[:name]
       @succeeded = 0
-      @persisted = []
-      @failed = []
+      @subscriptions_updated = 0
+      @new_subscriptions = 0
+      @users_udated = 0
+      @failed = 0
       csv_file = open(csv_import.file_url)
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
 
+        set_legacy_id(options)
+
+
         merge_with_economics_import(options)
         # import_user(options) unless options[:user_id].blank?
-      end
-      Rails.logger.info '===================== IMPORT OF USERS ========================='
-      Rails.logger.info "Succeeded: #{@succeeded}"
-      log_failed if @failed.any?
-      log_persisted if @persisted.any?
-      create_import_event_notification
-      Rails.logger.info '==============================================================='
 
-      # import_subscriptions(csv_import)
+      end
+
+      create_import_event_notification
+      @@locked = false
     end
     # rubocop:enable Security/Open
 
     private
 
+    def set_legacy_id(options)
+      new_address = address('User', options)
+      addresses =
+        Address
+        .where(
+          address: new_address.address,
+          addressable_type: new_address.addressable_type,
+          name: new_address.name,
+          first_name: new_address.first_name,
+          middle_name: new_address.middle_name,
+          last_name: new_address.last_name,
+          street_name: new_address.street_name,
+          house_number: new_address.house_number,
+          letter: new_address.letter,
+          floor: new_address.floor,
+          side: new_address.side,
+          zipp_code: new_address.zipp_code,
+          city: new_address.city,
+          country: new_address.country
+        )
+
+      addresses.each do |address|
+        user = address.user
+        next if user.nil?
+        user.update(legacy_id: options[:Abonnr])
+      end
+    end
     def merge_with_economics_import(options)
-      ap User.find_by(user_id: options[:Abonnr])
+
+      economic_user = User.find_by(user_id: options[:Abonnr])
+
+      return if economic_user.nil?
+
+      users_from_import = User.where(legacy_id: options[:Abonnr]).order(:created_at)
+      return if users_from_import.empty?
+
+      users_from_import.each do |user|
+        user.update(email: "#{user.id.to_s}-remove-me-#{options[:email]}")
+      end
+
+      user_from_import = users_from_import.first
+
+      if economic_user.fake_email? || economic_user.email.blank?
+        economic_user.email = user_from_import.email.gsub("#{user_from_import.id.to_s}-remove-me-", "")
+      end
+
+      if economic_user.fake_password? || economic_user.password_digest.blank?
+        economic_user.password_digest = user_from_import.password_digest
+        economic_user.confirmed_at = user_from_import.confirmed_at
+      end
+
+      economic_user.save!
     end
 
-    def log_failed
-      Rails.logger.info "Failed: #{@failed.length}"
-      @failed.each do |failed|
-        Rails.logger.info '--------------------------------'
-        failed.each do |k,v|
-          Rails.logger.info "#{k}: #{v}"
-        end
-      end
+    def password(options={})
+      options[:password].nil? ? User::Service.fake_password : options[:password]
     end
 
-    def log_persisted
-      Rails.logger.info "Persisted: #{@persisted.length}"
-      @persisted.each do |persisted|
-        Rails.logger.info '--------------------------------'
-        persisted.each do |k,v|
-          Rails.logger.info "#{k}: #{v}"
-        end
-      end
-    end
+    # def log_failed
+    #   Rails.logger.info "Failed: #{@failed.length}"
+    #   @failed.each do |failed|
+    #     Rails.logger.info '--------------------------------'
+    #     failed.each do |k,v|
+    #       Rails.logger.info "#{k}: #{v}"
+    #     end
+    #   end
+    # end
+
+    # def log_persisted
+    #   Rails.logger.info "Persisted: #{@persisted.length}"
+    #   @persisted.each do |persisted|
+    #     Rails.logger.info '--------------------------------'
+    #     persisted.each do |k,v|
+    #       Rails.logger.info "#{k}: #{v}"
+    #     end
+    #   end
+    # end
+
 
     def create_import_event_notification
       metadata = {
         new_users_sucessfully_imported: @succeeded,
-        failed_imports: @failed.count,
-        users_updated: @persisted.count
+        failed_imports: @failed,
+        users_updated: @users_udated,
+        subscriptions_updated: @subscriptions_updated
       }
       Admin::EventNotification.create(
-         title: "STATUS User Import ",
-         body: "CSV file: #{@name}",
-         message_type: 'user_import',
-         metadata: metadata
-       )
+        title: "STATUS User Import ",
+        body: "CSV file: #{@name}",
+        message_type: 'user_import',
+        metadata: metadata
+      )
     end
 
     # rubocop:disable Metrics/PerceivedComplexity
@@ -106,7 +166,7 @@ class User < ApplicationRecord
     def parsed_row(row)
       {
         user_id: row[A].empty? ? nil : row[A].to_i,
-        Abonnr: build_subscription_id(row),
+        Abonnr: row[B].empty? ? nil : row[B].to_i, # build_subscription_id(row),
         navn: row[C].strip.downcase.titleize,
         adresse: row[D].strip.downcase.titleize,
         Stednavn: row[E].empty? ? nil : row[E].strip.downcase.titleize,
@@ -132,22 +192,21 @@ class User < ApplicationRecord
         passivAbon: row[Y] == '0'
       }
     end
-
-    def build_subscription_id(row)
-      @subscription_id = row[B].to_s.strip
-      @subscription_id.presence || User.new_user_id
-    end
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
 
+    def build_subscription_id(row)
+      @subscription_id = row[B].to_s.strip
+      @subscription_id.presence || Admin::Subscription.new_subscription_id
+    end
+
     def import_user(options = {})
-      user = User.where(user_id: options[:Abonnr]).first_or_initialize
-      email = User::Service.sanitize_email(options[:email])
-      user = User.find_by(email: email) if User.exists?(email: email)
+      user = find_or_initialize_user(options)
+
       if user.persisted?
-        user.update(subscribe_to_news: options[:Nyhedsbrev]) if user.email.to_s.valid_email?
-        extend_subscription(options, user) if user_has_a_subscription?(options)
-        @persisted << { options: options, user: user.attributes, subscription: user.subscriptions }
+        user.update(subscribe_to_news: options[:Nyhedsbrev]) if options[:email].present?
+        extend_subscription(options, user) if valid_subscription_options?(options)
+        @users_udated += 1
         return
       end
 
@@ -155,51 +214,81 @@ class User < ApplicationRecord
       user.confirmed_at = DateTime.now
       user.name = options[:navn].presence || '-'
       user.signature = options[:navn]
-      user.email = email
+      user.email = options[:email]
       user.confirmed_at = Time.zone.today
       user.addresses = [address('User', options)]
       user.roles = [Role.new]
-      user.subscriptions = [new_subscription(options)] if user_has_a_subscription?(options)
+      user.subscriptions = [new_subscription(options)] if valid_subscription_options?(options)
       user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
       user.uuid = SecureRandom.uuid
+      user.user_id = User.new_user_id if user.user_id.blank?
       if user.save
-        # update_address(user.address)
-        if user.valid_subscriber?
-          # subscription = user.subscriptions.last
-          # subscription.addresses.each do |addrs|
-          #   update_address(addrs)
-          # end
-        end
         @succeeded += 1
       else
-        @failed << { options: options, user: user.attributes, subscription: user.subscriptions }
-
+        @failed =+ 1
+        metadata = { row: '========================' }
+        metadata.merge!(options)
+        metadata.merge!(user_attributes: '========================')
+        metadata.merge!(user.attributes)
+        # metadata.merge!(user_address: '========================')
+        # metadata.merge!(user.address.attributes)
+        metadata.merge!(error_message: '========================')
+        metadata.merge!(message: user.errors.full_messages)
+        user.subscriptions.each do |subscription|
+          metadata
+            .merge!(subscription_attributes: '========================')
+            .merge!(subscription.attributes)
+        end
         Admin::EventNotification.create(
           title: "ERROR! USER Import",
-          body: 'Unable to import user',
+          body: 'Unable to save user',
           message_type: 'user_import',
-          metadata: { options: options, user: user.attributes, subscription: user.subscriptions }
+          metadata: metadata
         )
       end
     end
 
+    def find_or_initialize_user(options)
+      return User.where(email: options[:email]).first_or_initialize if email_is_real?(options)
+      # return User.where(user_id: options[:Abonnr]).first_or_initialize if options[:Abonnr].present?
+
+      User.new
+    end
+
+    def email_is_real?(options)
+      return false if options[:email].blank?
+      return false if options[:email].include?(User::FAKE_EMAIL)
+
+      true
+    end
+
     def extend_subscription(options, user)
-      subbsctiption_to_extend =
-        Admin::Subscription.find(options[:Abonnr])
+      subbsctiption_to_extend = subbsctiption_to_extend(options, user)
       if subbsctiption_to_extend.present?
-        subbsctiption_to_extend.update(end_date: options[:UdloebsDato])
+        if subbsctiption_to_extend.update(end_date: options[:UdloebsDato])
+          @subscriptions_updated += 1
+        end
       else
         user.subscriptions = [new_subscription(options)]
         user.save
       end
     end
 
-    def user_has_a_subscription?(options)
+    def subbsctiption_to_extend(options, user)
+      subscription = Admin::Subscription.find(options[:Abonnr])
+      return subscription if subscription.present?
+      return user.subscriptions.last if user.subscriptions.any?
+
+      nil
+    end
+
+    def valid_subscription_options?(options)
       return false if options[:Oprettet].blank?
       return false if options[:Abon_periode].zero?
 
-      options[:Abonnr].present?
+      # options[:Abonnr].present?
+      true
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
@@ -229,6 +318,7 @@ class User < ApplicationRecord
     end
 
     def new_subscription(options)
+      @new_subscriptions += 1
       Admin::Subscription
         .new(
           subscription_type_id: subscription_type(options).id,
@@ -247,6 +337,7 @@ class User < ApplicationRecord
 
     def subscription_id(options = {})
       return Admin::Subscription.new_subscription_id if Admin::Subscription.exists?(subscription_id: options[:Abonnr])
+      return Admin::Subscription.new_subscription_id if options[:Abonnr].blank?
 
       options[:Abonnr]
     end

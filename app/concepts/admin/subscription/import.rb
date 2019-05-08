@@ -167,7 +167,7 @@ class Admin::Subscription < ApplicationRecord
       opts = {}
       options.each do |key, value|
         value = value.presence || ''
-        opts[key] = value # value.force_encoding('ISO-8859-1').encode('UTF-8')
+        opts[key] = value.force_encoding('ISO-8859-1').encode('UTF-8')
       end
       opts
     end
