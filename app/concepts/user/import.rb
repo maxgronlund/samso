@@ -50,9 +50,9 @@ class User < ApplicationRecord
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
 
-        set_legacy_id(options)
-        merge_with_economics_import(options)
-        # import_user(options) unless options[:user_id].blank?
+        #set_legacy_id(options)
+        #merge_with_economics_import(options)
+        import_user(options)# unless options[:user_id].blank?
 
       end
 
@@ -214,11 +214,17 @@ class User < ApplicationRecord
     end
 
     def import_user(options = {})
-      user = find_or_initialize_user(options)
+      ap user = find_or_initialize_user(options)
 
       if user.persisted?
-        user.update(subscribe_to_news: options[:Nyhedsbrev]) if options[:email].present?
-        extend_subscription(options, user) if valid_subscription_options?(options)
+        user.update(
+          subscribe_to_news: options[:Nyhedsbrev],
+          email: options[:email],
+          password: options[:password],
+          confirmed_at: Time.zone.today
+        )
+        # extend_subscription(options, user) if valid_subscription_options?(options)
+
         @users_udated += 1
         return
       end
@@ -236,7 +242,7 @@ class User < ApplicationRecord
       user.imported = true
       user.uuid = SecureRandom.uuid
       user.user_id = User.new_user_id if user.user_id.blank?
-      if user.save
+      if user.save!
         @succeeded += 1
       else
         @failed =+ 1
@@ -263,8 +269,8 @@ class User < ApplicationRecord
     end
 
     def find_or_initialize_user(options)
-      return User.where(email: options[:email]).first_or_initialize if email_is_real?(options)
-      # return User.where(user_id: options[:Abonnr]).first_or_initialize if options[:Abonnr].present?
+      # return User.where(email: options[:email]).first_or_initialize if email_is_real?(options)
+      return User.where(user_id: options[:Abonnr]).first_or_initialize if options[:Abonnr].present?
 
       User.new
     end
