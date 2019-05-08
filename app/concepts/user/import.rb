@@ -93,25 +93,25 @@ class User < ApplicationRecord
     end
 
     def merge_with_economics_import(options)
-      economic_user = User.find_by(user_id: options[:Abonnr])
-      return if economic_user.nil?
+      user_found_by_user_id = User.find_by(user_id: options[:Abonnr])
+      return if user_found_by_user_id.nil?
 
-      users_from_import = User.where(legacy_id: options[:Abonnr]).order(:created_at)
-      return if users_from_import.empty?
+      users_found_by_legacy_id = User.where(legacy_id: options[:Abonnr]).order(:created_at)
+      return if users_found_by_legacy_id.empty?
 
-      users_from_import.each do |user|
+      users_found_by_legacy_id.each do |user|
         user.update(email: "#{user.id.to_s}-remove-me-#{options[:email]}")
       end
 
-      user_from_import = users_from_import.first
+      user_from_import = users_found_by_legacy_id.first
 
-      if economic_user.fake_email? || economic_user.email.blank?
-        economic_user.email = user_from_import.email.gsub("#{user_from_import.id.to_s}-remove-me-", "")
+      if user_found_by_user_id.fake_email? || user_found_by_user_id.email.blank?
+        user_found_by_user_id.email = user_from_import.email.gsub("#{user_from_import.id.to_s}-remove-me-", "")
       end
 
-      if economic_user.fake_password? || economic_user.password_digest.blank?
-        economic_user.password_digest = user_from_import.password_digest
-        economic_user.confirmed_at = user_from_import.confirmed_at
+      if user_found_by_user_id.fake_password? || user_found_by_user_id.password_digest.blank?
+        user_found_by_user_id.password_digest = user_from_import.password_digest
+        user_found_by_user_id.confirmed_at = user_from_import.confirmed_at
       end
 
       economic_user.save!
