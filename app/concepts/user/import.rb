@@ -127,7 +127,7 @@ class User < ApplicationRecord
         if user.update(
             subscribe_to_news: options[:Nyhedsbrev],
             email: options[:email],
-            password: options[:password],
+            password: password(options),
             confirmed_at: Time.zone.today
           )
           # extend_subscription(options, user) if valid_subscription_options?(options)

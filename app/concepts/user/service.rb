@@ -125,7 +125,7 @@ class User < ApplicationRecord
     end
 
     def self.set_password(user, password)
-      if password.nil?
+      if password.blank?
         user.password_digest = User::Service.fake_password
       else
         user.password = password
