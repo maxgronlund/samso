@@ -25,10 +25,8 @@ class Admin::Subscription < ApplicationRecord
           user = find_or_initialize_user
           user.persisted? ? update_user_address(user) : save_user(user)
 
-          ap subscription = find_or_initialize_subscription(user)
-
+          subscription = find_or_initialize_subscription(user)
           subscription.persisted? ? update_subscription(subscription, user) : save_subscription(subscription)
-          ap subscription
         rescue => e
           metadate =
             { row_number: index,
