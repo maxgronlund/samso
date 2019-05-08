@@ -149,7 +149,7 @@ class User < ApplicationRecord
       user.imported = true
       user.uuid = SecureRandom.uuid
       user.user_id = User.new_user_id if user.user_id.blank?
-      if user.save!
+      if user.save
         @succeeded += 1
       else
         @failed =+ 1
