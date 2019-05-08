@@ -124,15 +124,18 @@ class User < ApplicationRecord
       ap user = find_or_initialize_user(options)
 
       if user.persisted?
-        user.update(
-          subscribe_to_news: options[:Nyhedsbrev],
-          email: options[:email],
-          password: options[:password],
-          confirmed_at: Time.zone.today
-        )
-        # extend_subscription(options, user) if valid_subscription_options?(options)
+        if user.update(
+            subscribe_to_news: options[:Nyhedsbrev],
+            email: options[:email],
+            password: options[:password],
+            confirmed_at: Time.zone.today
+          )
+          # extend_subscription(options, user) if valid_subscription_options?(options)
 
-        @users_udated += 1
+          @users_udated += 1
+        else
+          error_message(options, user)
+        end
         return
       end
 
@@ -153,7 +156,12 @@ class User < ApplicationRecord
         @succeeded += 1
       else
         @failed =+ 1
-        metadata = { row: '========================' }
+        error_message(options, user)
+      end
+    end
+
+    def error_message(options, user)
+      metadata = { row: '========================' }
         metadata.merge!(options)
         metadata.merge!(user_attributes: '========================')
         metadata.merge!(user.attributes)
@@ -172,7 +180,6 @@ class User < ApplicationRecord
           message_type: 'user_import',
           metadata: metadata
         )
-      end
     end
 
     def find_or_initialize_user(options)
