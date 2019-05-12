@@ -1,10 +1,14 @@
 .row
-  .col-md-3
-    = f.input :image
-  .col-md-3
-    - if @admin_blog_post.image.present?
-      = f.input :delete_image, as: :boolean
-      = image_tag @admin_blog_post.image.url(:thumb)
+  .col-md-6
+    .row
+      .col-md-6
+        = f.input :image
+      .col-md-6
+        - if @admin_blog_post.image.present?
+          = f.input :delete_image, as: :boolean
+          = image_tag @admin_blog_post.image.url(:thumb)
+
+    = f.input :image_caption
 
   .col-md-6
     = f.input :video_url, input_html: {rows: '5'}

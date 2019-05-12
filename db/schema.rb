@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_110253) do
+ActiveRecord::Schema.define(version: 2019_05_12_171549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2019_05_08_110253) do
     t.text "video_url", default: ""
     t.boolean "enable_comments", default: false
     t.boolean "show_facebook_comments", default: true
+    t.string "image_caption"
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_posts_on_post_page_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"

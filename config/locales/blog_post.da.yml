@@ -8,6 +8,7 @@ da:
         subtitle: Undertitel
         teaser: "Kort resumé"
         body: Brødtekst
+        image_caption: Billed tekst
         admin_blog_post_category_id: Kategori
         signature: Signatur
         start_date: Start dato

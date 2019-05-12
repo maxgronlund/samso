@@ -17,6 +17,11 @@ class Admin::PostModule < ApplicationRecord
     blog_post_image_url(blog_post_id)
   end
 
+  def image_caption(blog_post_id)
+    blog_post(blog_post_id).present?
+    blog_post(blog_post_id).image_caption
+  end
+
   def blog_post_image_url(blog_post_id)
     @blog_post_image_url ||=
       blog_post(blog_post_id).image.url(:full_size)

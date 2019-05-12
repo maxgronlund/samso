@@ -89,7 +89,8 @@ class Admin::BlogPostsController < AdminController
         :enable_comments,
         :signature,
         :show_facebook_comments,
-        :delete_image
+        :delete_image,
+        :image_caption
       )
   end
 

@@ -18,6 +18,10 @@
     - elsif post_module.image_present?(blog_post_id)
       .mb-8
         = image_tag(post_module.image_url(blog_post_id), class: 'img-fluid')
+        - image_caption = post_module.image_caption(blog_post.id)
+        - if image_caption.present?
+          .image_caption
+            = image_caption
     .start_date = l start_date unless start_date.nil?
     h3 = blog_post.title
     = blog_post.signature
