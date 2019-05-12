@@ -77,6 +77,13 @@ Things you may want to cover:
   $ heroku run --app samso rake pg_search:multisearch:rebuild[User]
 
 
+  * download the db
+  $ heroku pg:backups:capture --app samso
+  $ heroku pg:backups:download --app samso
+
+  pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_development /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
+
+
   $ heroku addons:create heroku-postgresql:hobby-basic --app samso
 
   heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_MAUVE_URL --app samso

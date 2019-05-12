@@ -24,5 +24,6 @@ samso_development
 /config/secrets.yml
 
 .DS_Store
+latest.dump
 
 

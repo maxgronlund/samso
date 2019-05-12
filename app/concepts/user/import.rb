@@ -44,27 +44,82 @@ class User < ApplicationRecord
       @new_subscriptions = 0
       @users_udated = 0
       @failed = 0
+      @moved_subscriptions = {}
       csv_file = open(csv_import.file_url)
       CSV.parse(csv_file, headers: false).each do |row|
         unescaped_row = row.map { |i| CGI.unescape(i.to_s) }
         options = parsed_row(unescaped_row)
-        import_user(options)# unless options[:user_id].blank?
-
+        import_user(options)
+        # move_subscriptions(options)
+        # import_missing_users(options)
       end
 
-      create_import_event_notification
-
+      log_user_import
+      log_moved_subscription
     end
     # rubocop:enable Security/Open
 
     private
+
+    # for some reason some users do not exist
+    # import unless a user with the same email of user_id exists
+    def import_missing_users(options)
+      return if options[:email].include?(FAKE_EMAIL)
+      return if User.find_by(email: options[:email]).present?
+      return if User.find_by(user_id: options[:Abonnr]).present?
+      import_user(options)
+    end
+
+    # in the old system two users with the same email was possible
+    # when the import encounter an user with an existing email
+    # that users subscriptions are added the first users account
+    # and a notification is added
+    def move_subscriptions(options)
+      return if options[:email].include?(FAKE_EMAIL)
+      first_user = User.find_by(email: options[:email])
+      return if first_user.nil?
+      return if options[:UdloebsDato].nil?
+      return if options[:UdloebsDato] < Time.zone.now
+
+      subscription_to_move = new_subscription(options)
+      # return if subscription_to_move.expired?
+      # return unless subscription_exists?(subscription_to_move, first_user)
+      return
+
+      subscription_to_move.user_id = first_user.id
+      # subscription_to_move.save!
+
+
+      @moved_subscriptions["#{first_user.id} ----------------------".to_sym] = first_user.id
+      @moved_subscriptions["moved_to_user_#{first_user.id}".to_sym] = first_user.email
+      # @moved_subscriptions["moved_subscription_#{subscription_to_move.id}".to_sym] = subscription_to_move.id
+
+    end
+
+    def subscription_exists?(subscription_to_move, first_user)
+      first_user.subscriptions.each do |existing_subscription|
+        return false  if subscription_to_move.start_date != existing_subscription.start_date
+        return false  if subscription_to_move.end_date != existing_subscription.end_date
+        return false  if subscription_to_move.subscription_type_id != existing_subscription.subscription_type_id
+      end
+      true
+    end
+
+    def log_moved_subscription
+      Admin::EventNotification.create(
+        title: "Moved Subscription",
+        body: "CSV file: #{@name}",
+        message_type: 'user_import',
+        metadata: @moved_subscriptions
+      )
+    end
 
 
     def password(options={})
       options[:password].nil? ? User::Service.fake_password : options[:password]
     end
 
-    def create_import_event_notification
+    def log_user_import
       metadata = {
         new_users_sucessfully_imported: @succeeded,
         failed_imports: @failed,
@@ -86,7 +141,7 @@ class User < ApplicationRecord
     def parsed_row(row)
       {
         user_id: row[A].empty? ? nil : row[A].to_i,
-        Abonnr: row[B].empty? ? nil : row[B].to_i, # build_subscription_id(row),
+        Abonnr: row[B].empty? ? nil : row[B].to_i,
         navn: row[C].strip.downcase.titleize,
         adresse: row[D].strip.downcase.titleize,
         Stednavn: row[E].empty? ? nil : row[E].strip.downcase.titleize,
@@ -115,14 +170,18 @@ class User < ApplicationRecord
     # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity
 
-    def build_subscription_id(row)
-      @subscription_id = row[B].to_s.strip
-      @subscription_id.presence || Admin::Subscription.new_subscription_id
-    end
-
     def import_user(options = {})
-      ap user = find_or_initialize_user(options)
 
+      # if a user with the email alread exsts
+      user = User.find_by(email: options[:email])
+      if user.present?
+        # move subscriptions from the csv file into the existing user
+        move_subscriptions(options)
+        return
+      end
+
+      # there might be users with a Abbnr/user_id already importer
+      user = find_or_initialize_user(options)
       if user.persisted?
         if user.update(
             subscribe_to_news: options[:Nyhedsbrev],
@@ -130,17 +189,18 @@ class User < ApplicationRecord
             password: password(options),
             confirmed_at: Time.zone.today
           )
-          # extend_subscription(options, user) if valid_subscription_options?(options)
-
           @users_udated += 1
+          # make sure subscriptions are moved
+          move_subscriptions(options)
         else
           error_message(options, user)
         end
-        return
+        return # we do not need to do anything more
       end
 
+      # the user do not exist so set the info from the csv file to the new user
       User::Service.set_password(user, options[:password])
-      user.confirmed_at = DateTime.now
+      user.confirmed_at = Time.zone.now
       user.name = options[:navn].presence || '-'
       user.signature = options[:navn]
       user.email = options[:email]
@@ -151,7 +211,7 @@ class User < ApplicationRecord
       user.subscribe_to_news = options[:Nyhedsbrev]
       user.imported = true
       user.uuid = SecureRandom.uuid
-      user.user_id = User.new_user_id if user.user_id.blank?
+      user.user_id = User.new_user_id if user.user_id.blank? # create a new id
       if user.save
         @succeeded += 1
       else
@@ -183,10 +243,8 @@ class User < ApplicationRecord
     end
 
     def find_or_initialize_user(options)
-      # return User.where(email: options[:email]).first_or_initialize if email_is_real?(options)
-      return User.where(user_id: options[:Abonnr]).first_or_initialize if options[:Abonnr].present?
-
-      User.new
+      return User.new(user_id: User.new_user_id) if options[:Abonnr].blank? # if there is no user_id
+      User.where(user_id: options[:Abonnr]).first_or_initialize
     end
 
     def email_is_real?(options)

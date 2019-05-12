@@ -206,11 +206,14 @@ class User < ApplicationRecord
     self[:signature].presence || name
   end
 
+  # create a user_id based on the last user_id
   def self.new_user_id
-    user = last
-    return 900000 if user.nil?
-
-    (900000 + user.id + 1)
+    return 9000000 if last.nil?
+    new_id = last.user_id.nil? ? 9000001 : last.user_id + 1
+    while User.find_by(user_id: new_id).present? do
+      new_id += 1
+    end
+    new_id
   end
 end
 # rubocop:enable Metrics/ClassLength

@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       end
       # set_menu
       # @landing_page = admin_system_setup.landing_page
-      # flash.now.alert = t('please_confirm_your_account')
+      flash.now.alert = t('please_confirm_your_account')
       render 'new'
     elsif user && user.authenticate(params[:password])
       update_login_stats(user)

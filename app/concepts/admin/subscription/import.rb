@@ -92,12 +92,6 @@ class Admin::Subscription < ApplicationRecord
       Admin::Subscription.find_by(subscription_id: @options[:subscription_id]) || build_subscription(user)
     end
 
-    # def subscription_type_ids
-    #   @subscription_type_ids =||
-    #     Admin::SubscriptionType
-    #     .where(identifier: ["AB-EAN", "FriAbb", "Abonnement"]).pluck(:id)
-    # end
-
     def update_subscription(subscription, user)
       subscription
         .update(
@@ -142,15 +136,12 @@ class Admin::Subscription < ApplicationRecord
           password_digest: User::Service.fake_password,
           roles: [Role.new],
           uuid: SecureRandom.uuid,
+          confirmed_at: Time.zone.now,
           addresses: [new_address('User')]
         )
     end
 
     def update_user_address(user)
-
-      # if user.email.include?("user.id.to_s}-remove-me-")
-
-      # end
 
       return if user.address.update(address_options)
 
@@ -184,8 +175,8 @@ class Admin::Subscription < ApplicationRecord
       options.each do |key, value|
         value = value.presence || ''
         # on localhost force_encoding should be outcomment
-        # opts[key] = value
-        opts[key] = value.force_encoding('ISO-8859-1').encode('UTF-8')
+        opts[key] = value
+        # opts[key] = value.force_encoding('ISO-8859-1').encode('UTF-8')
       end
       opts
     end
