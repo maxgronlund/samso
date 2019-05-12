@@ -1,0 +1,13 @@
+h3 Tilføj billed til artiklen
+
+= simple_form_for [:admin, @admin_blog_post, @admin_blog_post_image],
+  multipart: true,
+  url: url_for(action: 'create', controller: 'admin/blog_post_images'),
+  method: 'post' do |f|
+  = f.error_notification
+  == render 'form', f: f
+
+
+/ == render 'form'
+
+/ = link_to 'Back', admin_blog_post_images_path

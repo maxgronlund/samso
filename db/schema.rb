@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_171549) do
+ActiveRecord::Schema.define(version: 2019_05_12_175603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -87,6 +87,19 @@ ActiveRecord::Schema.define(version: 2019_05_12_171549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
+  end
+
+  create_table "admin_blog_post_images", force: :cascade do |t|
+    t.string "image_caption"
+    t.bigint "admin_blog_post_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["admin_blog_post_id"], name: "index_admin_blog_post_images_on_admin_blog_post_id"
   end
 
   create_table "admin_blog_posts", force: :cascade do |t|
@@ -692,6 +705,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_171549) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admin_blog_post_images", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_newsletters"
   add_foreign_key "admin_sign_in_ips", "users"

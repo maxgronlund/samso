@@ -38,14 +38,16 @@ class Admin::BlogPost < ApplicationRecord
   has_attached_file :photo,
   :styles => { :thumb => "100x100#" }, :convert_options => {:thumb => "-quality 75 -strip" }
 
-
-
-
-
   validates :body, presence: true unless Rails.env == 'test'
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many(
+    :blog_post_images,
+    dependent: :destroy,
+    class_name: 'Admin::BlogPostImage',
+    foreign_key: 'admin_blog_post_id'
+  )
 
   has_many :newsletter_posts, class_name: 'Admin::NewsletterPost', foreign_key: 'admin_blog_post_id'
   has_many :newsletters, through: :newsletter_posts, source: 'admin_newsletter'
@@ -129,6 +131,20 @@ class Admin::BlogPost < ApplicationRecord
     src = '<iframe width="560" height="315" src="https://www.youtube.com/embed/'
     src += video_url.split('https://youtu.be/').last
     src + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
+  end
+
+  def images
+    blog_post_images.order(:position)
+  end
+
+  def last_image
+    images.last
+  end
+
+  def next_image_position
+    return 0 unless last_image.present?
+
+    last_image.position + 10
   end
 
   def self.all_posts

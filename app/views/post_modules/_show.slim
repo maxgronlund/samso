@@ -8,7 +8,11 @@
     - if params[:page_id].present? && editor?
       - blog = blog_post.blog
       .pull-right
-        = link_to t('edit'),
+        = link_to 'billeder',
+          admin_blog_post_blog_post_images_path(blog_post),
+          class: 'btn btn-sm btn-light'
+
+        =< link_to t('edit'),
           edit_admin_blog_blog_post_path(blog, blog_post_id),
           class: 'btn btn-light btn-sm'
     - video_url = blog_post.build_video_url
@@ -26,6 +30,12 @@
     h3 = blog_post.title
     = blog_post.signature
     = simple_format (blog_post.body)
+
+    = render 'post_modules/gallery', blog_post: blog_post
+
+
+
+
     = render 'shared/social_icons', blog_post: blog_post
     - if blog_post.enable_comments?
       = render 'comments/index', comments: blog_post.comments.order(created_at: :desc), commentable: blog_post

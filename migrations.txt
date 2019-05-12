@@ -54,6 +54,8 @@ rails g factory_bot:model Admin::BlogPost layout subtitle:text teaser:text body:
 
 rails g scaffold service_functions/printed_ad start_date:date number_of_columns:integer body:text comment:text name address zipp_code city email phone contact_person
 
+rails g scaffold admin/blog_post_images image image_caption admin_blog_post:belongs_to position:integer --no-controller-specs --no-helper --no-assets
+
 
 
 rails g migration add_payable_to_payments payable references{polymorphic}

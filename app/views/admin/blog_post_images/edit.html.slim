@@ -1,0 +1,13 @@
+h3 Rediger billed
+
+= simple_form_for [:admin, @admin_blog_post, @admin_blog_post_image],
+  multipart: true,
+  url: url_for(action: 'update', controller: 'admin/blog_post_images'),
+  method: 'put' do |f|
+  = f.error_notification
+  == render 'form', f: f
+
+/ => link_to 'Show', @admin_blog_post_image
+/ '|
+/ =< link_to 'Back', admin_blog_post_images_path
+

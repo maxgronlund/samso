@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   namespace :api do
     namespace :v1 do
       resources :epaper_verification, only: %i[index show]
@@ -30,6 +28,9 @@ Rails.application.routes.draw do
       resources :articles, only: %i[index]
       resources :blogs do
         resources :blog_posts
+      end
+      resources :blog_posts, only: [] do
+        resources :blog_post_images
       end
       resources :blog_modules, only: %i[edit update]
       resources :calendars do
