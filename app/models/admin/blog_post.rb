@@ -83,6 +83,14 @@ class Admin::BlogPost < ApplicationRecord
   end
   # rubocop:enable Metrics/MethodLength
 
+  def comments?
+    comments_count.positive?
+  end
+
+  def comments_count
+    @comments_count ||= comments.count
+  end
+
   def show_page
     blog.show_page
   end

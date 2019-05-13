@@ -7,10 +7,10 @@
         = f.hidden_field :commentable_id, value: commentable.id
         = f.hidden_field :commentable_type, value: commentable.class.name
         = f.hidden_field :user_id, value: current_user.id
-        = f.submit t('comment.save'), class: 'btn btn-light btn-sm'
+        .pull-right
+          = f.submit t('comment.save'), class: 'btn btn-primary btn-sm'
       #add-comment
     - if comments.any?
-      h5 = t('comment.comments')
       - comments.order(created_at: :asc).each do |comment|
         == render "comments/comment", comment: comment
 

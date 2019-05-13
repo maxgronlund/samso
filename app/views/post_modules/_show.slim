@@ -30,11 +30,7 @@
     h3 = blog_post.title
     = blog_post.signature
     = simple_format (blog_post.body)
-
     = render 'post_modules/gallery', blog_post: blog_post
-
-
-
 
     = render 'shared/social_icons', blog_post: blog_post
     - if blog_post.enable_comments?
@@ -43,6 +39,7 @@
     - if blog_post.show_facebook_comments?
       - data_href = ENV['RAILS_HOST'] + request.path
       .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
+
   - else
     == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
 

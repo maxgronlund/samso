@@ -30,3 +30,7 @@ en:
 
   admin/blog_post:
     name: Blog post module
+    comments:
+      count:
+        one: One comment
+        other: "%{count} comments"

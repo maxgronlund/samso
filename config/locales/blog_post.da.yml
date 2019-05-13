@@ -33,3 +33,7 @@ da:
 
   admin/blog_post:
     name: Blog post modul
+    comments:
+      count:
+        one: En kommentar
+        other: "%{count} kommentarer"

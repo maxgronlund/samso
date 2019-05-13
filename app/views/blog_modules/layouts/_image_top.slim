@@ -12,6 +12,9 @@
               'Featured
           .category-name
             = post.category_name
+          .comments-count
+            - if post.comments?
+              = t('admin/blog_post.comments.count', count: post.comments_count)
           .start_date = l start_date unless start_date.nil?
           h3 = post.title
           .signature = post.signature

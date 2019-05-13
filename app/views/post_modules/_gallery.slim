@@ -5,7 +5,7 @@
         .carousel-inner role="listbox"
           - blog_post.images.each_with_index do |slide, index|
             div class="#{index == 0 ? 'carousel-item active' : 'carousel-item'}"
-              = image_tag(slide.image.url, class: 'img-fluid')
+              = image_tag(slide.image.url(:full_size), class: 'img-fluid')
               = slide.image_caption
 
         a.carousel-control-prev data-slide="prev" href="#carouselExampleIndicators" role="button"
