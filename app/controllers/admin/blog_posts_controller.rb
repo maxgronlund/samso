@@ -16,13 +16,12 @@ class Admin::BlogPostsController < AdminController
         signature: signature,
         enable_comments: true,
         show_facebook_comments: false
-
       )
   end
 
   # POST /admin/posts
   def create
-    @admin_blog = Admin::Blog.find(params[:blog_id])
+    @admin_blog = Admin::Blog.find(admin_blog_post_params[:blog_id])
     @admin_blog_post = @admin_blog.posts.new(admin_blog_post_params)
     @admin_blog_post.user = current_user
     if @admin_blog_post.save
@@ -90,7 +89,7 @@ class Admin::BlogPostsController < AdminController
         :signature,
         :show_facebook_comments,
         :delete_image,
-        :image_caption
+        :image_caption,
       )
   end
 
