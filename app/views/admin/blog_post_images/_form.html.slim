@@ -5,7 +5,7 @@
   = f.input :image
   = f.input :image_caption
   = f.hidden_field :admin_blog_post_id, value: @admin_blog_post.id
-  = f.input :position
+  = f.input :position, hint: t('admin/blog_post_image.position_hint')
 
 .form-actions
-  = f.button :submit
+  = f.submit t('save'), class: 'btn btn-primary'

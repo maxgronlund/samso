@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      admin/blog_post_image: Image
+    attributes:
+      admin/blog_post_image:
+        image_caption: Image caption
+
+  admin/blog_post_image:
+    new: Add image
+    position_hint: Small number are shown first

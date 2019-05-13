@@ -1,25 +1,44 @@
-h1 Listing admin_blog_post_images
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/article.index'), admin_articles_path
+    li.breadcrumb-item
+      = link_to @admin_blog_post.title, admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post)
+    i.breadcrumb-item.active aria-current="page"
+      'Billeder
+.row
+  .col-sm-8
+    h3 = "#{@admin_blog_post.title}: Billeder"
+  .col-sm-4
+    .pull-right
+      = link_to 'Tilføj billed',
+        new_admin_blog_post_blog_post_image_path(@admin_blog_post),
+        class: 'btn btn-primary'
+.row
+  .col-sm-12
+    .table-responsive
+      table.table.table-striped.table-bordered.table-hover.table-sm
+        thead.thead-dark
 
-table
-  thead
-    tr
-      th Image
-      th Image caption
-      th Position
-      / th
-      th
-      th
+          tr
+            th Image
+            th Image caption
+            th Position
+            th
 
-  tbody
-    - @admin_blog_post_images.each do |admin_blog_post_image|
-      tr
-        td = image_tag admin_blog_post_image.image.url(:thumb)
-        td = admin_blog_post_image.image_caption
-        td = admin_blog_post_image.position
-        / td = link_to 'Show', admin_blog_post_image
-        td = link_to 'Edit', edit_admin_blog_post_blog_post_image_path(@admin_blog_post, admin_blog_post_image)
-        td = link_to 'Destroy', admin_blog_post_blog_post_image_path(@admin_blog_post, admin_blog_post_image), data: { confirm: 'Are you sure?' }, method: :delete
+        tbody
+          - @admin_blog_post_images.each do |admin_blog_post_image|
+            tr
+              td = image_tag admin_blog_post_image.image.url(:thumb)
+              td = admin_blog_post_image.image_caption
+              td = admin_blog_post_image.position
+              / td = link_to 'Show', admin_blog_post_image
+              td
+                = link_to t('delete'), admin_blog_post_blog_post_image_path(@admin_blog_post, admin_blog_post_image), data: { confirm: 'Are you sure?' },
+                method: :delete,
+                class: 'btn btn-sm btn-danger'
+                = link_to t('edit'),
+                  edit_admin_blog_post_blog_post_image_path(@admin_blog_post,admin_blog_post_image),
+                  class: 'btn btn-sm btn-light'
 
-br
 
-= link_to 'Upload billed', new_admin_blog_post_blog_post_image_path(@admin_blog_post)

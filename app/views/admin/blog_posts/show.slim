@@ -4,7 +4,17 @@ nav aria-label="breadcrumb"
       = link_to t('admin/article.index'), admin_articles_path
     i.breadcrumb-item.active aria-current="page"
       = @admin_blog_post.title
-
+h3 Visning på liste
+'Klik på artiklen for at læse den fulde artikel og se ekstra billeder
+.row
+  .col-sm-8
+    .pull-right
+      = link_to 'billeder',
+        admin_blog_post_blog_post_images_path(@admin_blog_post),
+        class: 'btn btn-light'
+      = link_to t('edit'),
+        edit_admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post),
+        class: 'btn btn-primary'
 .row
   .col-sm-8
 
@@ -13,10 +23,3 @@ nav aria-label="breadcrumb"
       featured: @admin_blog_post.featured,
       start_date: @admin_blog_post.start_date,
       body: @admin_blog_post.body
-    .pull-right
-      = link_to 'billeder',
-        admin_blog_post_blog_post_images_path(@admin_blog_post),
-        class: 'btn btn-sm btn-light'
-      = link_to t('edit'),
-        edit_admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post),
-        class: 'btn btn-primary btn-sm'

@@ -1,7 +1,7 @@
 class Admin::BlogPostImage < ApplicationRecord
   belongs_to :admin_blog_post, class_name: 'Admin::BlogPost'
 
-
+  validates :image, presence: true
 
   has_attached_file :image,
   styles: {

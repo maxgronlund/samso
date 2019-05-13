@@ -1,25 +1,15 @@
 class Admin::BlogPostImagesController < AdminController
-  before_action :set_admin_blog_post_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_blog_post_image, only: %w[show edit update destroy]
+  before_action :set_admin_blog_post, only: %w[index new create edit update destroy]
 
   # GET /admin/blog_post_images
   def index
-    @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
     @admin_blog_post_images =
       @admin_blog_post.blog_post_images
   end
 
-  # # GET /admin/blog_post_images/1
-  # def show
-  #   @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
-  #   @admin_blog_post_images =
-  #     @admin_blog_post.blog_post_images
-  # end
-
   # GET /admin/blog_post_images/new
   def new
-    @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
-
-    @admin_blog_post.blog_post_images.count
     @admin_blog_post_image =
       @admin_blog_post
       .blog_post_images
@@ -30,24 +20,17 @@ class Admin::BlogPostImagesController < AdminController
 
   # GET /admin/blog_post_images/1/edit
   def edit
-    @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
   end
 
   # POST /admin/blog_post_images
   def create
-    @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
     @admin_blog_post_image =
       @admin_blog_post
       .blog_post_images
       .new(admin_blog_post_image_params)
 
     if @admin_blog_post_image.save
-      redirect_to(
-        admin_blog_blog_post_path(
-          @admin_blog_post.blog,
-          @admin_blog_post
-        )
-      )
+      bounce_back
     else
       render :new
     end
@@ -55,14 +38,8 @@ class Admin::BlogPostImagesController < AdminController
 
   # PATCH/PUT /admin/blog_post_images/1
   def update
-    @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
     if @admin_blog_post_image.update(admin_blog_post_image_params)
-      redirect_to(
-        admin_blog_blog_post_path(
-          @admin_blog_post.blog,
-          @admin_blog_post
-        )
-      )
+      bounce_back
     else
       render :edit
     end
@@ -71,10 +48,23 @@ class Admin::BlogPostImagesController < AdminController
   # DELETE /admin/blog_post_images/1
   def destroy
     @admin_blog_post_image.destroy
-    redirect_to admin_blog_post_images_url, notice: 'Blog post image was successfully destroyed.'
+    bounce_back
   end
 
   private
+
+  def bounce_back
+    redirect_to(
+      admin_blog_post_blog_post_images_path(
+        @admin_blog_post
+      )
+    )
+  end
+
+  def set_admin_blog_post
+    @admin_blog_post = Admin::BlogPost.find(params[:blog_post_id])
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_blog_post_image
       @admin_blog_post_image = Admin::BlogPostImage.find(params[:id])

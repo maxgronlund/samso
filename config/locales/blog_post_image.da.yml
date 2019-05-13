@@ -1,0 +1,12 @@
+da:
+  activerecord:
+    models:
+      admin/blog_post_image: Billed
+    attributes:
+      admin/blog_post_image:
+        image_caption: Billed tekst
+        position: Position
+
+  admin/blog_post_image:
+    new: Tilføj billed
+    position_hint: Laveste nummer vises først

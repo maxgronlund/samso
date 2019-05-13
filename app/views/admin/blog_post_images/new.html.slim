@@ -1,4 +1,15 @@
-h3 Tilføj billed til artiklen
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/article.index'), admin_articles_path
+    li.breadcrumb-item
+      = link_to @admin_blog_post.title, admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post)
+    li.breadcrumb-item
+      = link_to 'Billeder', admin_blog_post_blog_post_images_path(@admin_blog_post)
+    i.breadcrumb-item.active aria-current="page"
+      'Tilføj billed
+
+h3 = "Tilføj billed til #{@admin_blog_post.title}"
 
 = simple_form_for [:admin, @admin_blog_post, @admin_blog_post_image],
   multipart: true,
