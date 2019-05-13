@@ -13,4 +13,5 @@
     - if comments.any?
       - comments.order(created_at: :asc).each do |comment|
         == render "comments/comment", comment: comment
+      hr
 
