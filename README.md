@@ -75,6 +75,8 @@ Things you may want to cover:
   $ heroku run --app samso rake blog_posts:update_layout
   $ heroku restart -a samso
   $ heroku run --app samso rake pg_search:multisearch:rebuild[User]
+  $ heroku domains:add samso.com
+  $ heroku domains:add \*.samso.com
 
 
   * download the db

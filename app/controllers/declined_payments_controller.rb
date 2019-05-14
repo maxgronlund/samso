@@ -37,4 +37,3 @@ class DeclinedPaymentsController < ApplicationController
     @payment ||= Payment.find_by(onpay_reference: params[:onpay_reference])
   end
 end
-

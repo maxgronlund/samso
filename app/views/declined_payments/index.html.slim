@@ -24,14 +24,13 @@
               td = number_to_currency(@payment.transaction_info["onpay_amount"], precision: 2)
             tr
               td Korttype
-              td = @payment.transaction_info["onpay_cardtype"].capitalize
+              td = @payment.transaction_info["onpay_cardtype"].to_s.capitalize
             tr
               td Kort
               td = @payment.transaction_info["onpay_cardmask"]
             tr
               td Korttype
-              td = @payment.transaction_info["onpay_cardtype"].capitalize
+              td = @payment.transaction_info["onpay_cardtype"].to_s.capitalize
             tr
               td Status
-              td = @payment.transaction_info["onpay_status"].capitalize
-
+              td = @payment.transaction_info["onpay_status"].to_s.capitalize
