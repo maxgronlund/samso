@@ -5,7 +5,7 @@
       .row
         .col-12
           h5 = Admin::SystemMessage.thanks_for_signing_up.title
-          = Admin::SystemMessage.thanks_for_signing_up.body
+          = simple_format Admin::SystemMessage.thanks_for_signing_up.body
       .row
         .col-12
           .pull-right
