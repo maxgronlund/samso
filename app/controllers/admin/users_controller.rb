@@ -59,8 +59,7 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
-    ap user_params
-    if @user.update!(user_params)
+    if @user.update(user_params)
       if Check.checked?(user_params[:update_subscription_address])
         update_subscription_address
       end
