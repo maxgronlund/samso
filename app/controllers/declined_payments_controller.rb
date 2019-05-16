@@ -1,8 +1,8 @@
 class DeclinedPaymentsController < ApplicationController
   def index
     params.permit!
-    raise and return if payment.nil?
-    render_404 and return unless current_user == payment.user
+    render_404 and return if payment.nil?
+    render_404 and return if payment.created_at < Time.zone.now - 20.minutes
     update_payment
   end
 

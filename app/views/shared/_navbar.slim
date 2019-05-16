@@ -46,24 +46,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                 .col-sm-2
                   = submit_tag t('user.search.submit'), :name => nil, class: 'btn btn-light'
                 .col-sm-4.menu-links
-
-
-
                   - if access_to_e_paper?
                     = link_to( 'Læs avisen online', api_v1_epaper_verification_path(current_user), target: '_blank', class: 'menu-link')
                   - else
                     = link_to('Læs avisen online', create_account_index_path, class: 'menu-link')
-
-
-
-
-
-
-
-
-                  /= link_to "Læs avisen online",
-                  /  '#',
-                  /  class: 'menu-link'
 
         - Admin::Blog.find_in_batches(start: 0, batch_size: 3).each do |batch|
           .row.menu-links
