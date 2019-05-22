@@ -4,7 +4,7 @@
 class Admin::MostPopularModule < ApplicationRecord
   has_many :page_col_modules, as: :moduleable
   include PageColConcerns
-
+#
   def page_module
     PageModule.find_by(
       moduleable_type: 'Admin::MostPopularModule',
@@ -13,10 +13,13 @@ class Admin::MostPopularModule < ApplicationRecord
   end
 
   def self.posts
-    Admin::BlogPost
-      .order(views: :desc)
+    blog_post_ids =
+      BlogPostStat
       .where(find_condition, time_range)
+      .order(views: :desc)
       .first(5)
+      .pluck(:admin_blog_post_id)
+    Admin::BlogPost.where(id: blog_post_ids)
   end
 
   def self.find_condition
@@ -26,7 +29,7 @@ class Admin::MostPopularModule < ApplicationRecord
   def self.time_range
     {
       today: Time.zone.now,
-      one_week_ago: Time.zone.now - 1.week
+      one_week_ago: Time.zone.now - 20.week
     }
   end
 end

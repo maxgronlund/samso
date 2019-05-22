@@ -11,12 +11,19 @@ Given('there is a blog page with {int} blog posts') do |nr_posts|
   )
 
   nr_posts.times do
-    FactoryBot
+    admin_blog_post =
+      FactoryBot
       .create(
         :admin_blog_post,
         blog_id: blog.id,
         free_content: true
       )
+    FactoryBot
+      .create(
+        :blog_post_stat,
+        admin_blog_post_id: admin_blog_post.id
+      )
+
   end
 end
 

@@ -10,7 +10,8 @@ Given('there is blog page with a free and protected blog post') do
       show_all_categories: true
     )
 
-  FactoryBot
+  blog_post =
+    FactoryBot
     .create(
       :blog_post,
       title: 'free_content',
@@ -20,10 +21,25 @@ Given('there is blog page with a free and protected blog post') do
 
   FactoryBot
     .create(
+      :blog_post_stat,
+      admin_blog_post_id: blog_post.id,
+      start_date: blog_post.start_date
+    )
+
+  blog_post =
+    FactoryBot
+    .create(
       :blog_post,
       title: 'protected_content',
       blog_id: blog.id,
       free_content: false
+    )
+
+  FactoryBot
+    .create(
+      :blog_post_stat,
+      admin_blog_post_id: blog_post.id,
+      start_date: blog_post.start_date
     )
 
   index_page =

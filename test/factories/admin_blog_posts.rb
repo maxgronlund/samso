@@ -12,7 +12,7 @@ FactoryBot.define do
     start_date { '2018-12-22 08:16:05' }
     end_date { '2018-12-22 08:16:05' }
     user_id { 1 }
-    views { 1 }
+    obsolete_views { 1 }
     signature { generate(:blog_post_signature) }
     post_page_id { 1 }
     created_at { '2018-12-22 08:16:05' }

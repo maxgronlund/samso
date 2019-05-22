@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_175603) do
+ActiveRecord::Schema.define(version: 2019_05_22_203603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_175603) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "user_id"
-    t.integer "views", default: 0
+    t.integer "obsolete_views", default: 0
     t.string "signature", default: ""
     t.integer "post_page_id"
     t.datetime "created_at", null: false
@@ -545,6 +545,15 @@ ActiveRecord::Schema.define(version: 2019_05_12_175603) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "blog_post_stats", force: :cascade do |t|
+    t.bigint "admin_blog_post_id"
+    t.integer "views", default: 0
+    t.datetime "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_blog_post_id"], name: "index_blog_post_stats_on_admin_blog_post_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "comment"
     t.bigint "user_id"
@@ -710,6 +719,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_175603) do
   add_foreign_key "admin_newsletter_posts", "admin_newsletters"
   add_foreign_key "admin_sign_in_ips", "users"
   add_foreign_key "admin_subscriptions", "users"
+  add_foreign_key "blog_post_stats", "admin_blog_posts"
   add_foreign_key "comments", "users"
   add_foreign_key "e_paper_tokens", "users"
   add_foreign_key "page_col_modules", "page_cols"

@@ -25,6 +25,7 @@ class Admin::BlogPostsController < AdminController
     @admin_blog_post = @admin_blog.posts.new(admin_blog_post_params)
     @admin_blog_post.user = current_user
     if @admin_blog_post.save
+      BlogPostStat.create(admin_blog_post_id: @admin_blog_post.id)
       clear_page_cache
       redirect_to admin_blog_path(@admin_blog)
     else

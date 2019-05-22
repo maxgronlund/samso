@@ -23,6 +23,22 @@ namespace :blog_posts do
     end
   end
 
+  # rake blog_posts:create_blog_post_stats
+  desc 'update stats'
+  task create_blog_post_stats: :environment do
+    BlogPostStat.destroy_all
+    Admin::BlogPost.find_each do |blog_post|
+      blog_post_stat = BlogPostStat.where(
+        admin_blog_post_id: blog_post.id
+      ).first_or_initialize(
+        admin_blog_post_id: blog_post.id
+      )
+      blog_post_stat.views = blog_post.obsolete_views
+      blog_post_stat.start_date = blog_post.start_date
+      blog_post_stat.save
+    end
+  end
+
   # rake blog_posts:delete_dublets
   desc 'remove dublets'
   task delete_dublets: :environment do

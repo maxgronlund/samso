@@ -11,7 +11,7 @@ FactoryBot.define do
     f.featured { false }
     f.end_date { nil }
     f.user_id { 1 }
-    f.views { 1 }
+    f.obsolete_views { 1 }
     f.signature { 'Jack the Penn' }
     f.post_page_id { nil }
     f.image_file_name { nil }

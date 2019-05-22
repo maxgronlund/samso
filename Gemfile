@@ -64,7 +64,8 @@ group :test do
   gem 'database_cleaner'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
-  gem 'chromedriver-helper'
+  #gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 3.0'
 end
 
 group :development do

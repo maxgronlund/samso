@@ -6,7 +6,7 @@ class Admin::StatsController < AdminController
     @last_weeks_new_users = User.where('created_at >= :a_week_ago', a_week_ago).count
     @times_signed_in = signed_in_users.sum(:sign_in_count)
     @users_signed_in = signed_in_users.count
-    @total_posts_views = Admin::BlogPost.sum(:views)
+    @total_posts_views = BlogPostStat.sum(:views)
     @last_week_posts_views = Admin::BlogPost .where('updated_at >= :a_week_ago', a_week_ago).count
     @comments = Comment.count
     @last_weeks_comments =
