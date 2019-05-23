@@ -1,10 +1,10 @@
 = render 'shared/navbar', menu: @menu
 - session[:stored_path] = request.path
-- if @page.cache_page
-  - cache @page do
-    = render 'pages/show', page: @page
-- else
-  = render 'pages/show', page: @page
+/- if @page.cache_page
+/  - cache @page do
+/    = render 'pages/show', page: @page
+/- else
+= render 'pages/show', page: @page
 
 
 #gdpr_acceptance_missing
