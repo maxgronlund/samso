@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    if comment_params[:comment].present?
+    if comment_params[:comment].present? && user_signed_in?
       comment_params[:user_id] = current_user.id
       @comment = Comment.create(comment_params)
     else
