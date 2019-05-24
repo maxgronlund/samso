@@ -1,48 +1,48 @@
 - post_module = modulable
 - blog_post_id = params[:id]
 - blog_post = post_module.blog_post(blog_post_id)
-= cache blog_post do
-  - start_date = blog_post.start_date
-  - if  blog_post.free_content? || access_to_subscribed_content?
-    - blog_post.shown!
-    - if params[:page_id].present? && editor?
-      - blog = blog_post.blog
-      .pull-right
-        = link_to 'billeder',
-          admin_blog_post_blog_post_images_path(blog_post),
-          class: 'btn btn-sm btn-light'
 
-        =< link_to t('edit'),
-          edit_admin_blog_blog_post_path(blog, blog_post_id),
-          class: 'btn btn-light btn-sm'
-    - video_url = blog_post.build_video_url
-    - if video_url.present?
-      .video-container
-        =  raw video_url
-    - elsif post_module.image_present?(blog_post_id)
-      .mb-8
-        = image_tag(post_module.image_url(blog_post_id), class: 'img-fluid')
-        - image_caption = post_module.image_caption(blog_post.id)
-        - if image_caption.present?
-          .image_caption
-            = image_caption
-    .start_date = l start_date unless start_date.nil?
-    h3 = blog_post.title
-    = blog_post.signature
-    = simple_format (blog_post.body)
-    = render 'post_modules/gallery', blog_post: blog_post
+- start_date = blog_post.start_date
+- if  blog_post.free_content? || access_to_subscribed_content?
+  - blog_post.shown!
+  - if params[:page_id].present? && editor?
+    - blog = blog_post.blog
+    .pull-right
+      = link_to 'billeder',
+        admin_blog_post_blog_post_images_path(blog_post),
+        class: 'btn btn-sm btn-light'
 
-    = render 'shared/social_icons', blog_post: blog_post
-    - if blog_post.enable_comments?
-      = render 'comments/index', comments: blog_post.comments.order(created_at: :desc), commentable: blog_post
+      =< link_to t('edit'),
+        edit_admin_blog_blog_post_path(blog, blog_post_id),
+        class: 'btn btn-light btn-sm'
+  - video_url = blog_post.build_video_url
+  - if video_url.present?
+    .video-container
+      =  raw video_url
+  - elsif post_module.image_present?(blog_post_id)
+    .mb-8
+      = image_tag(post_module.image_url(blog_post_id), class: 'img-fluid')
+      - image_caption = post_module.image_caption(blog_post.id)
+      - if image_caption.present?
+        .image_caption
+          = image_caption
+  .start_date = l start_date unless start_date.nil?
+  h3 = blog_post.title
+  = blog_post.signature
+  = simple_format (blog_post.body)
+  = render 'post_modules/gallery', blog_post: blog_post
 
-    - if blog_post.show_facebook_comments?
-      - data_href = ENV['RAILS_HOST'] + request.path
-      .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
+  = render 'shared/social_icons', blog_post: blog_post
+  - if blog_post.enable_comments?
+    = render 'comments/index', comments: blog_post.comments.order(created_at: :desc), commentable: blog_post
 
-  - else
-    == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
+  - if blog_post.show_facebook_comments?
+    - data_href = ENV['RAILS_HOST'] + request.path
+    .fb-comments data-href="#{data_href}" data-numposts="5" data-width="100%"
 
-  javascript:
-    $(".video-container").fitVids();
-    $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
+- else
+  == render 'subscription_modules/show', modulable: Admin::SystemSetup.subscription_module
+
+javascript:
+  $(".video-container").fitVids();
+  $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
