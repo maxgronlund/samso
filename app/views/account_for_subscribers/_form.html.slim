@@ -28,4 +28,7 @@
         = link_to t('cancel'), session[:stored_path].presence || root_path, class: 'btn btn-light'
       - else
         = link_to t('cancel'), user_path(current_user), class: 'btn btn-light'
-      = f.submit t('save'), class: 'btn btn-primary', id: 'submit'
+      = f.submit t('save'),
+        class: 'btn btn-primary',
+        id: 'submit',
+        data: { disable_with: t('please_wait') }

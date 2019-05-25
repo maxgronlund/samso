@@ -14,5 +14,5 @@ h3 = t('admin/calendar_module.edit')
         = f.input :layout, collection: Admin::CalendarModule::LAYOUTS, include_blank: false
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+    = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
 

@@ -35,7 +35,7 @@
     = f.input :free_content
   .col-md-6
     = f.input :featured
-.row 
+.row
   .col-md-5
     = f.input :signature
 
@@ -44,7 +44,7 @@
 
 .form-actions
   .pull-right
-    = f.submit t('save'), class: 'btn btn-primary'
+    = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
 
 javascript:
   $(function() {

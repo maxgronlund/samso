@@ -33,5 +33,5 @@
       .pull-right
         = link_to t('cancel'), admin_pages_path, class: 'btn btn-light'
         '&nbsp;
-        = f.submit t('save'), class: 'btn btn-primary'
+        = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
 

@@ -21,4 +21,4 @@
         = f.input :background_color
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+    = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

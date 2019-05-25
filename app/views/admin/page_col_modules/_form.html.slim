@@ -14,4 +14,4 @@
             admin_page_path(@page_col.page),
             class: 'btn btn-secondary'
           '&nbsp;
-          = f.submit t('save'), class: 'btn btn-primary'
+          = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

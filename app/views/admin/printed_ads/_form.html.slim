@@ -13,7 +13,7 @@
 
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-light'
+    = f.submit t('save'), class: 'btn btn-light', data: { disable_with: t('please_wait') }
 
 javascript:
   $(function() {

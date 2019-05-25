@@ -50,4 +50,4 @@ h3 = t('user.create_printed_subscription')
         = f.input :subscribe_to_news, as: :boolean
   .form-actions
     .pull-right
-      = f.submit t('save'), class: 'btn btn-primary'
+      = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

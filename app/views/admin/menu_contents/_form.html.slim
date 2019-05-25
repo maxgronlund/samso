@@ -6,4 +6,4 @@
   .form-actions
     .pull-right
         = link_to t('cancel'), admin_menu_contents_path, class: 'btn btn-light'
-        = f.submit t('save'), class: 'btn btn-primary'
+        = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

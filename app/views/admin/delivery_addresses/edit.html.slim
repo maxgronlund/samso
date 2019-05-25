@@ -71,4 +71,4 @@
               = link_to t('cancel'),
                 admin_subscription_delivery_addresses_path(@subscription),
                 class: 'btn btn-light'
-              = f.submit t('save'), class: 'btn btn-primary'
+              = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

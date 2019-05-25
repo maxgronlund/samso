@@ -88,5 +88,5 @@
               /   class: 'btn btn-light'
               / = link_to t('cancel'), subscription_delivery_address_path(@subscription), class: 'btn btn-light'
               /= link_to t('cancel'), user_path(@subscription.user_id), class: 'btn btn-light'
-              = f.submit t('save'), class: 'btn btn-primary'
+              = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
 br

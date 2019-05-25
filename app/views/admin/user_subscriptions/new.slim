@@ -32,37 +32,4 @@
                   include_blank: false
 
             .pull-right
-              = f.submit t('save'), class: 'btn btn-primary'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/ nav aria-label="breadcrumb"
-/   ol.breadcrumb
-/     li.breadcrumb-item
-/       = link_to 'Brugerer', admin_users_path
-/     li.breadcrumb-item
-/       = link_to  @user.name, admin_user_path(@user)
-/     li.breadcrumb-item.active aria-current="page"
-/       'Friabonnoment'
-/ h3 Opret friabonnoment
-/ = simple_form_for [@user, @subscription],
-/   url: admin_user_user_subscriptions_url(@user),
-/   method: 'POST' do |f|
-/   .row
-/     .col-sm-4
-/       = f.input :start_date
-/     .col-sm-4
-/       = f.input :end_date
-/   = f.submit t('save'), class: 'btn btn-light'
+              = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

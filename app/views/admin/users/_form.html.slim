@@ -100,4 +100,4 @@
       = f.input :update_subscription_address, as: :boolean, label: t('user.update_address_on_subscription')
   .form-actions
     .pull-right
-      = f.submit t('save'), class: 'btn btn-primary'
+      = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

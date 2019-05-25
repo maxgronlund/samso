@@ -8,7 +8,7 @@ h3 = t('edit_model', model_name: @page_row.model_name.human)
     input_html: {value: @page_row.page_cols_count}
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+    = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
     '&nbsp
     = link_to t('cancel'), admin_page_path(@page_row.page), class: 'btn btn-secondary'
 

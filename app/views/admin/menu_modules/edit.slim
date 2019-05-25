@@ -16,5 +16,5 @@
         = f.input :menu_content_id, collection: Admin::MenuContent.all
 
   .form-actions
-    = f.submit t('save'), class: 'btn btn-primary'
+    = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
 

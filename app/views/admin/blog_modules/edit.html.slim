@@ -31,4 +31,4 @@ h3 = t('edit_model', model_name: @admin_blog_module.model_name.human)
 
   .form-actions
     .pull-right
-      = f.submit t('save'), class: 'btn btn-primary'
+      = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
