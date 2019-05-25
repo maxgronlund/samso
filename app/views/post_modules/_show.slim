@@ -7,14 +7,16 @@
   - blog_post.shown!
   - if params[:page_id].present? && editor?
     - blog = blog_post.blog
-    .pull-right
-      = link_to 'billeder',
-        admin_blog_post_blog_post_images_path(blog_post),
-        class: 'btn btn-sm btn-light'
+    .row
+      .col-sm-12
+        .pull-right
+          = link_to 'billeder',
+            admin_blog_post_blog_post_images_path(blog_post),
+            class: 'btn btn-sm btn-light'
 
-      =< link_to t('edit'),
-        edit_admin_blog_blog_post_path(blog, blog_post_id),
-        class: 'btn btn-light btn-sm'
+          =< link_to t('edit'),
+            edit_admin_blog_blog_post_path(blog, blog_post_id),
+            class: 'btn btn-light btn-sm'
   - video_url = blog_post.build_video_url
   - if video_url.present?
     .video-container
