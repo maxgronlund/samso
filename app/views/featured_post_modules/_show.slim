@@ -1,13 +1,12 @@
 - featured_post_module = modulable
-= cache featured_post_module do
-  h5 = featured_post_module.title
-  .blog-post
-    - featured_post_module.posts.each do |post|
-      - link = page_post_url(post.show_page, post)
-      - unless link == request.url
-        = link_to link do
-          .featured-post
-            .content
-                = post.title
-                .time-ago
-                  = time_ago_in_words(post.start_date)
+h5 = featured_post_module.title
+.blog-post
+  - featured_post_module.posts.each do |post|
+    - link = page_post_url(post.show_page, post)
+    - unless link == request.url
+      = link_to link do
+        .featured-post
+          .content
+              = post.title
+              .time-ago
+                = time_ago_in_words(post.start_date)

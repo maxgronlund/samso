@@ -1,20 +1,20 @@
 - blog_module = modulable
 - featured_posts  = blog_module.featured_posts
 - paginated_posts = blog_module.paginated_posts(params[:page]) - featured_posts
-= cache featured_posts do
-  - featured_posts.each do |post|
-    - start_date = post.start_date
-    = render "blog_modules/layouts/#{post.layout}",
-      blog_module: blog_module,
-      post: post, featured: true,
-      start_date: post.start_date
+
+- featured_posts.each do |post|
+  - start_date = post.start_date
+  = render "blog_modules/layouts/#{post.layout}",
+    blog_module: blog_module,
+    post: post, featured: true,
+    start_date: post.start_date
 h3 = blog_module.name
-= cache paginated_posts do
-  - paginated_posts.each do |post|
-     = render "blog_modules/layouts/#{post.layout}",
-      blog_module: blog_module,
-      post: post, featured: false,
-      start_date: post.start_date
+
+- paginated_posts.each do |post|
+   = render "blog_modules/layouts/#{post.layout}",
+    blog_module: blog_module,
+    post: post, featured: false,
+    start_date: post.start_date
 
 ow.mt-10
   .col-sm-12
