@@ -4,12 +4,8 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    if comment_params[:comment].present? && user_signed_in?
-      comment_params[:user_id] = current_user.id
-      @comment = Comment.create(comment_params)
-    else
-      render nothing: true
-    end
+    @comment = Comment.new(new_comment_params)
+    render nothing: true unless @comment.save
   end
 
   # PATCH/PUT /comments/1
@@ -27,6 +23,12 @@ class CommentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def new_comment_params
+    _params = comment_params.dup
+    _params[:user_id] = current_user.id if user_signed_in?
+    _params
   end
 
   # Only allow a trusted parameter "white list" through.
