@@ -4,8 +4,7 @@ class Admin::SignInIp < ApplicationRecord
   belongs_to :user, counter_cache: true
 
   def location
-    # curl -u 9bd1d2726a3a47 ipinfo.io/152.115.55.39
-    url = URI.parse("http://ipinfo.io/#{ip.to_s}?token=9bd1d2726a3a47")
+    url = URI.parse("http://ipinfo.io/#{ip.to_s}?token=#{ENV['IPINFO_TOKEN']}")
     req = Net::HTTP::Get.new(url.to_s)
 
     res = Net::HTTP.start(url.host, url.port) {|http|
@@ -13,9 +12,13 @@ class Admin::SignInIp < ApplicationRecord
     }
     JSON.parse(res.body)
   end
+
+  def fetch_ipinfo
+    update(ipinfo: location)
+  end
+
+  def ipinfo
+    fetch_ipinfo if self[:ipinfo].empty?
+    self[:ipinfo]
+  end
 end
-
-
-
-
-
