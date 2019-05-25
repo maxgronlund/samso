@@ -138,7 +138,7 @@ Rails.application.routes.draw do
 
     resources :sessions, only: %i[new destroy create index]
 
-    resources :subscriptions do
+    resources :subscriptions, only: %i[create] do
       resources :delivery_addresses
     end
     get '/:locale' => 'home#index'

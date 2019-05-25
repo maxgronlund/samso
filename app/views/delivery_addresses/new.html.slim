@@ -86,6 +86,7 @@
               .col-sm-4
                 = f.input :city,
                   label: t('address.city'),
+                  input_html: { class: 'city-name-autofill' },
                   required: true
             .pull-right
               / = link_to t('subscription.new_temporary_delivery_address'),
