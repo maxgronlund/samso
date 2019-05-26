@@ -86,13 +86,18 @@ nav aria-label="breadcrumb"
         table.table.table-striped.table-bordered.table-hover.table-sm
           thead.thead-dark
             tr
-              th IP
+              th IP / by / region
+              th Info
               th Dato
               th Gange logget ind
           tbody
             - @user.sign_in_ips.order(sign_in_at: :desc).each do |sign_in_ip|
               tr
                 td = sign_in_ip.ip.to_s
+                td
+                  = sign_in_ip.city
+                  br = sign_in_ip.region
+                  br = sign_in_ip.org
                 td = l sign_in_ip.sign_in_at
                 td = sign_in_ip.count
 

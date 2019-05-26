@@ -7,9 +7,7 @@ class Admin::SignInIp < ApplicationRecord
     url = URI.parse("http://ipinfo.io/#{ip.to_s}?token=#{ENV['IPINFO_TOKEN']}")
     req = Net::HTTP::Get.new(url.to_s)
 
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
+    res = Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
     JSON.parse(res.body)
   end
 
@@ -20,5 +18,17 @@ class Admin::SignInIp < ApplicationRecord
   def ipinfo
     fetch_ipinfo if self[:ipinfo].empty?
     self[:ipinfo]
+  end
+
+  def city
+    ipinfo['city']
+  end
+
+  def region
+    ipinfo['region']
+  end
+
+  def org
+    ipinfo['org']
   end
 end
