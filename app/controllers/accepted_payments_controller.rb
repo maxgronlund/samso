@@ -5,9 +5,11 @@ class AcceptedPaymentsController < ApplicationController
     params.permit!
     raise and return if payment.nil?
     update_subscription
+    secure_subscription_address
     update_payment
     update_subscriper
     initialize_user
+    send_email_to_admin
     @payment.user.destroy_pending_payments
     @message = Admin::SystemMessage.subscription_payment_completed
     session[:user_id] = subscriper.id
@@ -16,6 +18,17 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   private
+
+  def secure_subscription_address
+    address = subscription.primary_address
+    return if address.persisted?
+
+    address.save
+  end
+
+  def send_email_to_admin
+    SubscriptionCreatedMailer.send_message_to_system_administrator(subscription.subscription_id,sys.id).deliver
+  end
 
   def initialize_user
     user_service = User::Service.new(subscriper)

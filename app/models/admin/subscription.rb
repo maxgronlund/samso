@@ -71,6 +71,12 @@ class Admin::Subscription < ApplicationRecord
   end
   alias set_address primary_address
 
+  def secure_address!
+    return if addresses.any?
+
+    set_address
+  end
+
   def temporary_address
     addresses.find_by(address_type: Address::TEMPORARY_ADDRESS)
   end
@@ -183,6 +189,8 @@ class Admin::Subscription < ApplicationRecord
   private
 
   def user_address_copy
+    return default_address if user.addresses.empty?
+
     user_address = user.address
     Address.new(
       name: user_address.name, address: user_address.address,
@@ -197,6 +205,12 @@ class Admin::Subscription < ApplicationRecord
     #copy_address(user.address, address_copy)
   end
   alias copy_address user_address_copy
+
+  def default_address
+    address = addresses.new
+    address.set_default_values
+    address
+  end
 
   def copy_address(from, to)
     to

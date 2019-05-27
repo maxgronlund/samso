@@ -1,0 +1,28 @@
+b = "Der er blevet oprettet et amonnoment #{@subscription.type_name} id: ##{@subscription.subscription_id}"
+br
+'Gyldigt fra:&nbsp;
+= l @subscription.start_date
+'&nbsp;til:&nbsp;
+= l @subscription.end_date
+br
+br
+= "Abonnomentet er oprettet af #{@user.name}"
+br
+'Vedrørende kontoen&nbsp;
+a href="#{@user_url}"
+  = @user.name
+br
+br
+
+
+b Abonnentens adresse
+br
+= @address.name
+br
+= @address.address
+br
+= @address.zipp_code
+',&nbsp;
+= @address.city
+
+

@@ -11,7 +11,7 @@
               = @user.name
               ',&nbsp;
               = Admin::SystemMessage.welcome.title
-            = Admin::SystemMessage.welcome.body
+            = simple_format Admin::SystemMessage.welcome.body
             .row
               .col-12.mt-8
                 .pull-right
