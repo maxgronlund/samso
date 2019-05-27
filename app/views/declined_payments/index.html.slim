@@ -21,7 +21,7 @@
               td = @payment.transaction_info["onpay_reference"]
             tr
               td Beløb
-              td = number_to_currency(@payment.transaction_info["onpay_amount"], precision: 2)
+              td = number_to_currency(@payment.transaction_info["onpay_amount"].to_i * 0.01, precision: 2)
             tr
               td Korttype
               td = @payment.transaction_info["onpay_cardtype"].to_s.capitalize
