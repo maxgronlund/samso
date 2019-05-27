@@ -20,6 +20,8 @@ class AcceptedPaymentsController < ApplicationController
   private
 
   def secure_subscription_address
+    return unless subscription.print_version?
+
     address = subscription.primary_address
     return if address.persisted?
 
@@ -27,7 +29,11 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   def send_email_to_admin
-    SubscriptionCreatedMailer.send_message_to_system_administrator(subscription.subscription_id,sys.id).deliver
+    SubscriptionCreatedMailer
+      .send_message_to_system_administrator(
+        subscription.subscription_id,
+        admin_system_setup.id
+      ).deliver
   end
 
   def initialize_user

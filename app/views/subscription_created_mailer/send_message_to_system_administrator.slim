@@ -1,4 +1,5 @@
-b = "Der er blevet oprettet et amonnoment #{@subscription.type_name} id: ##{@subscription.subscription_id}"
+h3 Abonnement oprettet
+b = "#{@subscription.type_name} id: ##{@subscription.subscription_id}"
 br
 'Gyldigt fra:&nbsp;
 = l @subscription.start_date
@@ -6,23 +7,41 @@ br
 = l @subscription.end_date
 br
 br
-= "Abonnomentet er oprettet af #{@user.name}"
+= "Oprettet af: #{@user.name}"
 br
-'Vedrørende kontoen&nbsp;
+'Oprettet på kontoen&nbsp;
 a href="#{@user_url}"
   = @user.name
 br
 br
 
-
-b Abonnentens adresse
-br
-= @address.name
-br
-= @address.address
-br
-= @address.zipp_code
-',&nbsp;
-= @address.city
+- if @address.present?
+  b Abonnentens adresse
+  br
+  = @address.first_name
+  - if @address.middle_name.present?
+    |&nbsp;
+    = @address.middle_name
+  |&nbsp;
+  = @address.last_name
+  br
+  = @address.street_name
+  |&nbsp;
+  = @address.house_number
+  - if @address.letter.present?
+    |&nbsp;
+    = @address.letter
+  - if @address.floor.present?
+    |,&nbsp;
+    = @address.floor
+  - if @address.side.present?
+    |&nbsp;
+    = @address.side
+  br
+  = @address.zipp_code
+  ',&nbsp;
+  = @address.city
+  br
+  = @address.country
 
 
