@@ -29,6 +29,27 @@
                   = mail_to 'info@samsoposten.dk', 'info@samsoposten.dk'
                 td
                   = payment.user.name
+                  br
+                  - address = payment.user.address
+                  - if address.present?
+                    = address.street_name
+                    |&nbsp;
+                    = address.house_number
+                    - if address.letter.present?
+                      |&nbsp;
+                      = address.letter
+                    - if address.floor.present?
+                      |,&nbsp;
+                      = address.floor
+                    - if address.side.present?
+                      |&nbsp;
+                      = address.side
+                    br
+                    = address.zipp_code
+                    ',&nbsp;
+                    = address.city
+                    br
+                    = address.country
 
 
         tr.heading
