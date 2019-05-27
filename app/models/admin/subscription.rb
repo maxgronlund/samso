@@ -192,7 +192,7 @@ class Admin::Subscription < ApplicationRecord
     return default_address if user.addresses.empty?
 
     user_address = user.address
-    Address.new(
+    addresses.new(
       name: user_address.name, address: user_address.address,
       zipp_code: user_address.zipp_code,
       city: user_address.city,
@@ -209,6 +209,8 @@ class Admin::Subscription < ApplicationRecord
   def default_address
     address = addresses.new
     address.set_default_values
+    address.addressable_type = self.class.name
+    address.addressable_id = id
     address
   end
 

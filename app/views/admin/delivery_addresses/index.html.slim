@@ -39,12 +39,13 @@
       .row
         .col-sm-6
           - address = @subscription.primary_address
-          h5 = t("address.#{address.address_type}")
-          = render 'shared/address', address: address
-          .pull-right
-            = link_to t('edit'),
-              edit_admin_subscription_delivery_address_path(@subscription.subscription_id, address),
-              class: 'btn btn-light'
+          - if address.present?
+            h5 = t("address.#{address.address_type}")
+            = render 'shared/address', address: address
+            .pull-right
+              = link_to t('edit'),
+                edit_admin_subscription_delivery_address_path(@subscription.subscription_id, address),
+                class: 'btn btn-light'
         .col-sm-6
           - if @subscription.temporary_address.blank?
             .pull-right
