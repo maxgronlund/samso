@@ -4,7 +4,7 @@
     .row
       .col-sm-8
         h5 = Admin::SystemMessage.general_data_protection_regulation.title
-        = Admin::SystemMessage.general_data_protection_regulation.body
+        = simple_format Admin::SystemMessage.general_data_protection_regulation.body
       .col-sm-4
     .row
       .col-sm-6

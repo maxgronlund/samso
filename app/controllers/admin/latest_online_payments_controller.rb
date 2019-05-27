@@ -12,7 +12,7 @@ class Admin::LatestOnlinePaymentsController < AdminController
         User
           .where
           .not(latest_online_payment: nil)
-          .order(latest_online_payment: :asc)
+          .order(latest_online_payment: :desc)
           .page params[:page]
       end
     @selected = 'users'
