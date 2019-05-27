@@ -4,6 +4,7 @@
 class Comment < ApplicationRecord
   belongs_to :user, counter_cache: true
   belongs_to :commentable, polymorphic: true
+  validates :comment, presence: true
 
   def author_name
     user.present? ? user.name : ''

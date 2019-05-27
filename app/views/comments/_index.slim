@@ -1,5 +1,6 @@
 .row
   .col-sm-12
+    #comment-error
     - if current_user.present?
       = simple_form_for([Comment.new], remote: true) do |f|
         = f.error_notification
@@ -13,5 +14,5 @@
     - if comments.any?
       - comments.order(created_at: :asc).each do |comment|
         == render "comments/comment", comment: comment
-      hr
+      br
 

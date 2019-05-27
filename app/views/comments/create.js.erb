@@ -1,5 +1,10 @@
-$('#new_comment_form').val("");
-$("#add-comment").prepend('<%=j render "comments/comment", comment: @comment %>');
-$('#destroy_comment_' + "<%= @comment.id %>").hide();
-$('#destroy_comment_' + "<%= @comment.id %>").show(200);
-
+<% if @comment.persisted? %>
+  $("#comment-error").empty();
+  $('#new_comment_form').val("");
+  $("#add-comment").prepend('<%=j render "comments/comment", comment: @comment %>');
+  $('#destroy_comment_' + "<%= @comment.id %>").hide();
+  $('#destroy_comment_' + "<%= @comment.id %>").show(200);
+<% else %>
+  $("#comment-error").empty();
+  $("#comment-error").prepend('<%=j render "comments/error" %>');
+<% end %>
