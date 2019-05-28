@@ -36,7 +36,7 @@ class Admin::SubscriptionsController < AdminController
     @user.roles = [Role.new]
 
     @user.subscriptions = [new_subscription]
-    if @user.save!
+    if @user.save
       admin_system_setup
         .update(
           last_subscription_id: admin_subscription_params[:subscription_id]
@@ -44,6 +44,8 @@ class Admin::SubscriptionsController < AdminController
       # send_welcome_message
       redirect_to admin_show_subscription_id_path(@user.id)
     else
+      @user.errors[:subscription_id] << 'Er brugt' if Admin::Subscription.exists?(subscription_id: admin_subscription_params[:subscription_id])
+      @subscription_id = admin_system_setup.last_subscription_id.to_i
       render :new
     end
   end
