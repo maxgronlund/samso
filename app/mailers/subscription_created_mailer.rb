@@ -17,9 +17,9 @@ class SubscriptionCreatedMailer < ApplicationMailer
 
     @administrator_emails.split(',').each do |email|
       next if email.delete(' ').invalid_email?
-      ap mail(
+      mail(
         to: email,
-        subject: 'Abonnoment oprettet'
+        subject: 'Abonnement oprettet'
       )
     end
   end
