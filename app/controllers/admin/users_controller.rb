@@ -12,11 +12,11 @@ class Admin::UsersController < AdminController
       if params[:search].present?
         User
           .search_by_name_or_email(params[:search])
-          .order(:latest_online_payment)
+          .order(created_at: :desc)
           .page params[:page]
       else
         User
-          .order(:latest_online_payment)
+          .order(created_at: :desc)
           .page params[:page]
       end
     @selected = 'users'

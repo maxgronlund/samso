@@ -6,7 +6,7 @@ class Admin::LatestOnlinePaymentsController < AdminController
           .where
           .not(latest_online_payment: nil)
           .search_by_name_or_email(params[:search])
-          .order(:latest_online_payment)
+          .order(latest_online_payment: :desc)
           .page params[:page]
       else
         User
