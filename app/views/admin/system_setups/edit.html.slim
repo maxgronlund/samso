@@ -49,6 +49,8 @@ h3 = t('edit_model', model_name: 'System opsætning')
   .row
     .col-sm-4
       = f.input :e_pages_date, hint: 'yyyy-mm-dd', placeholder: '2019-03-14'
+    .col-sm-4
+      = f.input :last_subscription_id, label: 'Sidste brugte abonnement nr.'
   .pull-right
     = link_to t('cancel'), admin_index_path, class: 'btn btn-light'
     = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

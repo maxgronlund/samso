@@ -40,6 +40,9 @@
                     order: [:day, :month, :year]
                 .col-sm-4
                   = f.input :subscription_type_id, collection: Admin::SubscriptionType.all
+              .row
+                .col-sm-4
+                  = f.input :subscription_id, label: 'Abonnement Nr.'
               .pull-right
                 = link_to t('cancel'), admin_user_path(@subscription.user_id), class: 'btn btn-light'
                 = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }

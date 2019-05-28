@@ -35,7 +35,7 @@ da:
         permission: 'Adgangs rettigheder'
 
   user:
-    missing_address: Rediger venligst brugeren da adressen er mangelfuld
+    missing_delivery_address: Rediger venligst forsendelses addressen da den er mangelfuld
     count: "%{count} : Brugere"
     create: Opret bruger konto
     delete_account: Slet bruger konto

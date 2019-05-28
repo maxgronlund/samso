@@ -18,6 +18,7 @@ class Admin::SubscriptionsController < AdminController
   # GET /admin/subscriptions/new
   def new
     @user = User.new
+    @subscription_id = admin_system_setup.last_subscription_id.to_i
     @user.addresses.build
   end
 
@@ -36,6 +37,10 @@ class Admin::SubscriptionsController < AdminController
 
     @user.subscriptions = [new_subscription]
     if @user.save!
+      admin_system_setup
+        .update(
+          last_subscription_id: admin_subscription_params[:subscription_id]
+        )
       # send_welcome_message
       redirect_to admin_show_subscription_id_path(@user.id)
     else
@@ -58,7 +63,7 @@ class Admin::SubscriptionsController < AdminController
       start_date: Time.zone.now,
       end_date: Time.zone.now + subscription_type.duration.days,
       subscription_type_id: subscription_type.id,
-      subscription_id: Admin::Subscription.new_subscription_id,
+      subscription_id: admin_subscription_params[:subscription_id],#Admin::Subscription.new_subscription_id,
       addresses: [subscription_address]
     )
   end

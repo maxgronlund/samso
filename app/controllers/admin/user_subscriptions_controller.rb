@@ -30,8 +30,11 @@ class Admin::UserSubscriptionsController < AdminController
   end
 
   def update
-    subscription.update!(subscription_params)
-    redirect_to admin_user_path(@user)
+    if subscription.update(subscription_params)
+      redirect_to admin_user_path(@user)
+    else
+      render :edit
+    end
   end
 
   private
@@ -71,6 +74,6 @@ class Admin::UserSubscriptionsController < AdminController
 
   def subscription_params
     params[:admin_subscription]
-      .permit(:start_date, :end_date, :subscription_type_id, :subscription_type_id)
+      .permit(:start_date, :end_date, :subscription_type_id, :subscription_id)
   end
 end

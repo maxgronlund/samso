@@ -34,6 +34,12 @@ h3 = t('user.create_printed_subscription')
           = address.input :zipp_code, label: t('address.zipp_code'), input_html: { class: 'post-code-autofill-dk' }
         .col-sm-4
           = address.input :city, input_html: { class: 'city-name-autofill' }, label: t('address.city')
+        .col-sm-4
+          = f.input :subscription_id,
+            label: 'Abonnement NR',
+            hint: "Sidst brugte nummer: #{@subscription_id}",
+            as: :integer
+
 
     / .row
     /   .col-sm-4

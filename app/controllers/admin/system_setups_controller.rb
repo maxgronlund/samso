@@ -41,7 +41,8 @@ class Admin::SystemSetupsController < AdminController
       :background_color,
       :administrator_email,
       :editor_emails,
-      :e_pages_date
+      :e_pages_date,
+      :last_subscription_id
     )
   end
 end
