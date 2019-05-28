@@ -52,12 +52,19 @@ class Admin::UserSubscriptionsController < AdminController
   end
 
   def address_params
-    address = @user.address.attributes
+    address = user_address.attributes
     address.delete('id')
     address.delete('addressable_type')
     address.delete('addressable_id')
     address.delete('created_at')
     address[:last_name] = '-' if address[:last_name].blank?
+    address
+  end
+
+  def user_address
+    address = @user.address
+    address.set_defaults unless address.valid_address?
+    address.save
     address
   end
 
