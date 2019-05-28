@@ -2,12 +2,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def show
+    render_404 and return if @post.nil?
     @page = Page.find(params[:page_id])
     @blog_post = Admin::BlogPost.find(params[:id])
     @blog_post.shown!
     @blog = @blog_post.blog
     @landing_page = landing_page
-
     render 'pages/show'
   end
 
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Admin::BlogPost.find(params[:id])
+    @post = Admin::BlogPost.find_by(id: params[:id])
   end
 
   # store the page in a session so we can bounce to it after sign up / login
