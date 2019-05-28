@@ -26,7 +26,22 @@ class Admin::UsersController < AdminController
 
   # GET /admin/users/1
   def show
-    @subscriptions = @user.subscriptions.order(:subscription_id)
+    @subscriptions = subscriptions
+    flash.now.alert = t('user.missing_address') if missing_address?
+  end
+
+  def missing_address?
+    #return false unless @user.valid_subscriber?
+    subscriptions.valid.each do |subscription|
+      next unless subscription.print_version?
+      return true if subscription.valid? && subscription.address.valid_address?
+    end
+    false
+  end
+
+  def subscriptions
+    @subscriptions ||=
+      @user.subscriptions.order(:subscription_id)
   end
 
   # GET /users/new

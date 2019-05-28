@@ -1,40 +1,45 @@
 .table-responsive
-
-  - if address.temporary?
+  - if address.completed?
+    - if address.temporary?
+      table.table.table-bordered.table-hover.table-sm
+        tr
+          th
+            .pull-right
+              = t('address.start_date')
+          th
+            strong = l address.start_date
+        tr
+          th
+            .pull-right
+              = t('address.end_date')
+          th
+            strong = l address.end_date
     table.table.table-bordered.table-hover.table-sm
       tr
         th
-          .pull-right
-            = t('address.start_date')
-        th
-          strong = l address.start_date
+          strong
+            = address.first_name
+            = " #{address.middle_name}" if address.middle_name.present?
+            = " #{address.last_name}" if address.last_name.present? && address.last_name != 'NA'
       tr
         th
-          .pull-right
-            = t('address.end_date')
+          strong
+            = address.street_name
+            = " #{address.house_number}" if address.house_number.present?
+            = "#{address.letter}" if address.letter.present?
+            = ", #{address.floor} etage" if address.floor.present?
+            = ", #{address.side}" if address.side.present?
+      tr
         th
-          strong = l address.end_date
-  table.table.table-bordered.table-hover.table-sm
-    tr
-      th
-        strong
-          = address.first_name
-          = " #{address.middle_name}" if address.middle_name.present?
-          = " #{address.last_name}" if address.last_name.present? && address.last_name != 'NA'
-    tr
-      th
-        strong
-          = address.street_name
-          = " #{address.house_number}" if address.house_number.present?
-          = "#{address.letter}" if address.letter.present?
-          = ", #{address.floor} etage" if address.floor.present?
-          = ", #{address.side}" if address.side.present?
-    tr
-      th
-        strong
-          = address.zipp_code
-          = " #{address.city}"
-    tr
-      th
-        strong
-          = address.country
+          strong
+            = address.zipp_code
+            = " #{address.city}"
+      tr
+        th
+          strong
+            = address.country
+  - else
+    table.table.table-bordered.table-hover.table-sm
+      tr
+        th Adresse
+        th Er mangelfuld

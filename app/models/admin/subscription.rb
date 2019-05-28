@@ -48,7 +48,7 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def valid_period?
-    end_date > Time.zone.today && start_date < Time.zone.today
+    end_date > Time.zone.today && start_date < Time.zone.today + 1.day
     # return true if end_date.nil? || start_date.nil?
 
     # start_date < Time.zone.today && end_date > Time.zone.today

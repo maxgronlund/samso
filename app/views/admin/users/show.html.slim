@@ -7,6 +7,9 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item.active aria-current="page"
       = @user.name
 
+- if flash.present? && flash.alert.present?
+  .alert.alert-danger
+    = flash.alert
 .row
   .col-sm-4
     h3 = @user.name

@@ -55,6 +55,10 @@ class User < ApplicationRecord
   FAKE_EMAIL =    '@10ff3690--bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'c01141c5-d91d-4995-9a56-c01cc198fe25'.freeze
 
+  def missing_address?
+
+  end
+
   def address
     addresses.first_or_create
   end

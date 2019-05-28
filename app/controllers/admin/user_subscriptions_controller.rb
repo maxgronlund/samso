@@ -21,6 +21,7 @@ class Admin::UserSubscriptionsController < AdminController
       .subscriptions
       .new(subscription_and_address_params)
     subscription.save!
+
     redirect_to admin_user_path(@user)
   end
 

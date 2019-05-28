@@ -3,11 +3,11 @@
 .card
   h4.card-header  = subscription_module.title
   .card-body
-    = raw subscription_module.body
+    = simple_format subscription_module.body
     hr
     .subscription-module
       = form_tag('/subscriptions', method: :post)
-        - Admin::SubscriptionType.internal.each_with_index do |subscription_type, index|
+        - Admin::SubscriptionType.active.internal.each_with_index do |subscription_type, index|
           = label_tag do
             - if index == 0
               = radio_button_tag 'subscription_type_id', subscription_type.id, checked='checked'

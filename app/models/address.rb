@@ -20,6 +20,15 @@ class Address < ApplicationRecord
     true
   end
 
+  def completed?
+    return false if first_name == 'na'
+    return false if street_name == 'na'
+    return false if house_number == 'na'
+    return false if zipp_code == 'na'
+    return false if city  == 'na'
+    true
+  end
+
   def primary?
     address_type == PRIMARY_ADDRESS
   end
@@ -72,7 +81,6 @@ class Address < ApplicationRecord
     return false unless self.name == 'na'
     return false unless self.address == "na"
     return false unless self.zipp_code == "na"
-    return false unless self.city == "na"
     return false unless self.first_name == "na"
     return false unless self.middle_name == ""
     return false unless self.last_name == "na"
