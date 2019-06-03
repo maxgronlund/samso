@@ -55,7 +55,15 @@ class Admin::Subscription < ApplicationRecord
   end
 
   def address
-    addresses.find_by(address_type: Address::PRIMARY_ADDRESS)
+    addrs = addresses.find_by(address_type: Address::PRIMARY_ADDRESS)
+    return addrs unless addrs.blank?
+
+    addrs = user_address_copy
+    addrs.address_type = Address::PRIMARY_ADDRESS
+    addrs.addressable_type = "Admin::Subscription"
+    addrs.addressable_id = id
+    addrs.save
+    addrs
   end
 
   def print_version?
