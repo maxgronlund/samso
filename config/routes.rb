@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /da|en/ do
     resources :account_for_subscribers
     resources :cancel_newsletters
-    resources :comments
+    resources :comments, except: %i[show]
     resources :contact, only: [:index]
     resources :create_account, only: [:index]
     resources :terms_and_conditions, only: [:index]
