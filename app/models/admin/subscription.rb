@@ -216,7 +216,7 @@ class Admin::Subscription < ApplicationRecord
 
   def default_address
     address = addresses.new
-    address.set_default_values
+    address.set_defaults
     address.addressable_type = self.class.name
     address.addressable_id = id
     address
