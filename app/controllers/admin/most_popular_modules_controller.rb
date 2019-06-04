@@ -37,7 +37,8 @@ class Admin::MostPopularModulesController < AdminController
     params.require(:admin_most_popular_module).permit(
       :position,
       :name,
-      :access_to
+      :access_to,
+      :articles
     )
   end
 

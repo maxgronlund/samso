@@ -6,11 +6,11 @@ en:
         other: most_populars
     attributes:
       admin/most_popular_module:
-        name:  Name
+        name:  Headline
+        articles: Articles
 
   most_popular_module:
     default_name: Most read this week
-
 
   admin/most_popular_module:
     name: MostPopular article module

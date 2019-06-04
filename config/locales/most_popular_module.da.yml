@@ -6,7 +6,8 @@ da:
         other: Ugens mest læste moduler
     attributes:
       admin/most_popular_module:
-        name:  Name
+        name:  Overskrift
+        articles: Artikler
 
   most_popular_module:
     default_name: Ugens mest læste
