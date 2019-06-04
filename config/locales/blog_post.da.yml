@@ -30,6 +30,9 @@ da:
     image_right: Billed til højre
     enable_comments_hint: Interne kommentarer
     post_page_id_hint: "*Vælg en kategori side"
+    views_last_seven_days:
+      one: Læst en gang de sidste 7 dage
+      other: "Læst %{count} gange de sidste 7 dage"
 
   admin/blog_post:
     name: Blog post modul

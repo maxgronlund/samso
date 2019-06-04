@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_123405) do
+ActiveRecord::Schema.define(version: 2019_06_04_202141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -553,6 +553,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_123405) do
     t.datetime "start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "weekly_views_count", default: 0
     t.index ["admin_blog_post_id"], name: "index_blog_post_stats_on_admin_blog_post_id"
   end
 
@@ -716,6 +717,13 @@ ActiveRecord::Schema.define(version: 2019_05_28_123405) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "weekly_views", force: :cascade do |t|
+    t.bigint "blog_post_stat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_post_stat_id"], name: "index_weekly_views_on_blog_post_stat_id"
+  end
+
   add_foreign_key "admin_blog_post_images", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_newsletters"
@@ -730,4 +738,5 @@ ActiveRecord::Schema.define(version: 2019_05_28_123405) do
   add_foreign_key "pages", "admin_footers"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"
+  add_foreign_key "weekly_views", "blog_post_stats"
 end

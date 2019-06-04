@@ -116,7 +116,10 @@ class Admin::BlogPost < ApplicationRecord
 
   def views
     blog_post_stat.views
+  end
 
+  def views_last_seven_days
+    blog_post_stat.views_last_seven_days
   end
 
   def to_param

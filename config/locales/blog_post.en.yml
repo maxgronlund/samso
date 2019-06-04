@@ -27,6 +27,9 @@ en:
     image_right: Image right
     enable_comments_hint: Internal system
     show_facebook_comments_hint: "*Check system setup"
+    views_last_seven_days:
+      one: Read one time
+      other: "Read %{count} times"
 
   admin/blog_post:
     name: Blog post module

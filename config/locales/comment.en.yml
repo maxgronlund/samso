@@ -1,9 +1,9 @@
-da:
+en:
   comment:
     comments: Kommentarer
     posted_at: "For %{time_ago} siden"
     new_comment: Skriv kommentar
-    save: Opret kommentar
+    save: Publicer
     hint: Du skal trykke på knappen for at din kommentar bliver gemt
     update: Opdater
     destroy: Slet

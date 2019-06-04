@@ -11,7 +11,7 @@ namespace :subscriptions do
     end
   end
 
-  desc 'attach addresses to subscriptions'
+  desc 'remove all addresses from subscriptions'
   task remove_addresses: :environment do
     Address.where(addressable_type: 'Admin::Subscription').destroy_all
   end
