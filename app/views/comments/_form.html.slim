@@ -1,11 +1,16 @@
-= simple_form_for([comment], remote: true) do |f|
-  = f.error_notification
+.comment
+  = simple_form_for([comment], remote: true) do |f|
+    = f.error_notification
 
-  .form-inputs
-    = f.input :comment, label: t('comment.new_comment')
-    = f.hidden_field :commentable_id, value: commentable.id
-    = f.hidden_field :commentable_type, value: commentable.class.name
-    = f.hidden_field :user_id, value: current_user.id
+    .form-inputs
+      = f.input :comment, label: t('comment.new_comment')
+      .row
+        .col-sm-8
+          = f.input :author_name, label: 'Navn'
+      = f.hidden_field :commentable_id, value: commentable.id
+      = f.hidden_field :commentable_type, value: commentable.class.name
+      = f.hidden_field :user_id, value: current_user.id
 
-  .form-actions
-    = f.submit t('comment.save'), class: 'btn btn-light'
+    .form-actions
+      = f.submit t('comment.save'), class: 'btn btn-light'
+

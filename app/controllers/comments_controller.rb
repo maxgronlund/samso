@@ -5,12 +5,14 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = Comment.new(new_comment_params)
+    set_state
     render nothing: true unless @comment.save
   end
 
   # PATCH/PUT /comments/1
   def update
     @comment.update(comment_params)
+    set_state
   end
 
   # DELETE /comments/1
@@ -19,6 +21,13 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_state
+    return if current_user.name == @comment.author_name
+    return unless @comment.default?
+
+    @comment.update(state: 'reported')
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
@@ -39,7 +48,9 @@ class CommentsController < ApplicationController
         :comment,
         :user_id,
         :commentable_id,
-        :commentable_type
+        :commentable_type,
+        :author_name,
+        :state
       )
   end
 end

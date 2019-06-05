@@ -1,20 +1,33 @@
 .row
   .col-sm-12
-    #comment-error
-    - if current_user.present?
-      = simple_form_for([Comment.new], remote: true) do |f|
-        = f.error_notification
-        = f.input :comment, label: t('comment.new_comment'), input_html: {id: 'new_comment_form'}
-        = f.hidden_field :commentable_id, value: commentable.id
-        = f.hidden_field :commentable_type, value: commentable.class.name
-        = f.hidden_field :user_id, value: current_user.id
-        .hint = t('comment.hint')
-        .pull-right
-          = f.submit t('comment.save'), class: 'btn btn-primary btn-sm'
+    .comment
+      #comment-error
+      - if current_user.present?
+        = simple_form_for([Comment.new(author_name: current_user.name)], remote: true) do |f|
+          = f.error_notification
 
-      #add-comment
-    - if comments.any?
-      - comments.order(created_at: :asc).each do |comment|
-        == render "comments/comment", comment: comment
-      br
+          = f.input :comment,
+            label: t('comment.new_comment'),
+            placeholder: 'Husk at hold den gode tone',
+            input_html: {id: 'new_comment_form'}
+          .row
+            .col-sm-8
+              = f.input :author_name, label: 'Navn'
+          = f.hidden_field :commentable_id, value: commentable.id
+          = f.hidden_field :commentable_type, value: commentable.class.name
+          = f.hidden_field :user_id, value: current_user.id
+          .row
+            .col-sm-12
+              .pull-right
+                .hint = t('comment.hint')
+            .col-sm-12
+              .pull-right
+                = f.submit t('comment.save'), class: 'btn btn-primary btn-sm'
+
+        #add-comment
+      - if comments.any?
+        hr
+        - comments.order(created_at: :asc).each do |comment|
+          == render "comments/comment", comment: comment
+        br
 

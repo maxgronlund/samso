@@ -1,23 +1,38 @@
-. id="destroy_#{dom_id(comment)}"
-  .comments.comment id=dom_id(comment)
-    = t('comment.posted_at', time_ago: time_ago_in_words(comment.created_at))
-    .commet-author = comment.author_name
-    = simple_format comment.comment
-    - if comment.edditable?(current_user)
-      .float-right
-        = link_to t('edit'),
-          edit_comment_path(comment),
-          remote: true
-        '&nbsp;
-        = link_to t('comment.destroy'),
-          comment_path(comment),
-          data: { confirm: t('confirm') },
-          method: :delete,
-          remote: true
+- if comment.show?(current_user)
+  . id="destroy_#{dom_id(comment)}"
+    .comments.comment id=dom_id(comment)
+      = t('comment.posted_at', time_ago: time_ago_in_words(comment.created_at))
+      .commet-author = comment.author_name
+      - if comment.show_hidden_label?(current_user)
+        .red-text
+          b = "Kommentaren er kun synlig på kontoen #{comment.account_name}"
+      = simple_format comment.comment
+      - if comment.edditable?(current_user)
+        .float-right
+          = link_to t('edit'),
+            edit_comment_path(comment),
+            remote: true
+          '&nbsp;
+          = link_to t('comment.destroy'),
+            comment_path(comment),
+            data: { confirm: t('confirm') },
+            method: :delete,
+            remote: true
 
-  . id="#{dom_id(comment)}_form" style="display: none;"
-    = simple_form_for([comment], remote: true) do |f|
-      = f.error_notification
-      = f.input :comment, input_html: {class: 'comment-form'}
-      = f.submit t('comment.update'), class: 'btn btn-light btn-sm'
-      hr
+    . id="#{dom_id(comment)}_form" style="display: none;"
+      = simple_form_for([comment], remote: true) do |f|
+        = f.error_notification
+        = f.input :comment, input_html: {class: 'comment-form'}
+        .row
+          .col-sm-8
+            = f.input :author_name, label: 'Navn'
+          .col-sm-4
+            - if administrator?
+              = f.input :state,
+                collection: Comment::STATES,
+                include_blank: false,
+                label: false
+        .row
+          .col-sm-12
+            .pull-right
+              = f.submit t('comment.update'), class: 'btn btn-primary btn-sm'
