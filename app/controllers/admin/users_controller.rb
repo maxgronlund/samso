@@ -75,6 +75,8 @@ class Admin::UsersController < AdminController
 
   # PATCH/PUT /admin/users/1
   def update
+    ap permitted_user_params
+    ap user_params
     if @user.update(user_params)
       if Check.checked?(user_params[:update_subscription_address])
         update_subscription_address
@@ -113,7 +115,7 @@ class Admin::UsersController < AdminController
     User::Service.titleize_name(sanitized_params)
     User::Service.sanitize_password(sanitized_params)
     sanitized_params[:email] = User::Service.sanitize_email(sanitized_params[:email])
-    sanitized_params[:name] =  user_name
+    # sanitized_params[:name] =  user_name
     sanitized_params
   end
 

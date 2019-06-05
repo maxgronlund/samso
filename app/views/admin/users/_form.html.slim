@@ -1,9 +1,9 @@
 = simple_form_for [:admin, @user], multipart: true do |f|
   = f.error_notification
   .row
-    - if @user.addresses.empty?
-      .col-sm-4
-        = f.input :name
+    /- if @user.addresses.empty?
+    .col-sm-4
+      = f.input :name, label: 'Bruger navn'
     .col-sm-4
       = f.input :signature, label: 'Underskrift', hint: 'Bliver kun brugt af jurnalister'
     .col-sm-4
