@@ -9,5 +9,5 @@ h5 = most_popular.name
           = link_to link do
             = post.title
             .time-ago
-              /= t('blog_post.views_last_seven_days', count: post.views_last_seven_days)
+              = t('blog_post.views_last_seven_days', count: post.views_last_seven_days)
               /= time_ago_in_words(post.start_date)
