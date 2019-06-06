@@ -26,7 +26,6 @@
 
         #add-comment
       - if comments.any?
-        hr
         - comments.order(created_at: :asc).each do |comment|
           == render "comments/comment", comment: comment
         br
