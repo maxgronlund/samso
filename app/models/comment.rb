@@ -4,6 +4,7 @@
 class Comment < ApplicationRecord
   belongs_to :user, counter_cache: true
   belongs_to :commentable, polymorphic: true
+  has_many :weekly_comments, dependent: :destroy
   validates :comment, presence: true
 
   STATES = [

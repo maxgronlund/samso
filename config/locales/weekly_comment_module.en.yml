@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/weekly_comment_module:
+        one: weekly_comment
+        other: weekly_comments
+    attributes:
+      admin/weekly_comment_module:
+        name:  Name
+
+  weekly_comment_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/weekly_comment_module:
+    name: WeeklyComment module

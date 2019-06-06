@@ -6,7 +6,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(new_comment_params)
     set_state
-    render nothing: true unless @comment.save
+    if @comment.save
+      @comment.weekly_comments.create
+      commentable = @comment.commentable
+      update_weekly_comments(commentable)
+    else
+      render nothing: true
+    end
   end
 
   # PATCH/PUT /comments/1
@@ -17,7 +23,9 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
+    commentable = @comment.commentable
     @comment.destroy
+    update_weekly_comments(commentable)
   end
 
   private
@@ -38,6 +46,10 @@ class CommentsController < ApplicationController
     _params = comment_params.dup
     _params[:user_id] = current_user.id if user_signed_in?
     _params
+  end
+
+  def update_weekly_comments(commentable)
+    commentable.update_weekly_comments_count! if commentable.is_a?(Admin::BlogPost)
   end
 
   # Only allow a trusted parameter "white list" through.

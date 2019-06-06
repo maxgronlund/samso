@@ -1,0 +1,17 @@
+da:
+  activerecord:
+    models:
+      admin/weekly_comment_module:
+        one: Ugens mest kommenterede modul
+        other: Ugens mest kommenterede modul
+    attributes:
+      admin/weekly_comment_module:
+        name:  Name
+
+  weekly_comment_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/weekly_comment_module:
+    name: Ugens mest kommenterede

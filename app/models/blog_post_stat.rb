@@ -23,11 +23,32 @@ class BlogPostStat < ApplicationRecord
     )
   end
 
+  def commented!(comment_id)
+    weekly_comments.create
+  end
+
   def views_last_seven_days
     # TODO: move to task
-    BlogPostStat.destroy_old_weekly_views
+    BlogPostStat.destroy_old_weekly_views!
     weekly_views_count
   end
+
+  def comments_last_seven_days
+    # TODO: move to task
+    BlogPostStat.destroy_old_weekly_comments!
+    weekly_comments_count
+  end
+
+  def update_weekly_comments_count!
+    count =
+      admin_blog_post
+      .comments
+      .count
+    update(weekly_comments_count: count)
+  end
+
+  #       .where(BlogPostStat.find_condition, BlogPostStat.time_range )
+
 
   # usage
   # BlogPostStat.post_with_most_views_last_seven_days
@@ -43,8 +64,14 @@ class BlogPostStat < ApplicationRecord
 
   private
 
-  def self.destroy_old_weekly_views
+  def self.destroy_old_weekly_views!
     WeeklyView
+      .where(find_condition, time_range )
+      .destroy_all
+  end
+
+  def self.destroy_old_weekly_comments!
+    WeeklyComment
       .where(find_condition, time_range )
       .destroy_all
   end

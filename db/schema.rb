@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_074740) do
+ActiveRecord::Schema.define(version: 2019_06_06_144839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -499,7 +499,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_074740) do
     t.string "administrator_email"
     t.string "editor_emails", default: ""
     t.string "e_pages_date"
-    t.integer "last_subscription_id"
+    t.integer "last_subscription_id", default: 8005250
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
@@ -523,6 +523,13 @@ ActiveRecord::Schema.define(version: 2019_06_05_074740) do
     t.datetime "image_updated_at"
     t.index ["page_id"], name: "index_admin_text_modules_on_page_id"
     t.index ["user_id"], name: "index_admin_text_modules_on_user_id"
+  end
+
+  create_table "admin_weekly_comment_modules", force: :cascade do |t|
+    t.string "name"
+    t.integer "articles", default: 8
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admin_youtube_modules", force: :cascade do |t|
@@ -555,6 +562,7 @@ ActiveRecord::Schema.define(version: 2019_06_05_074740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "weekly_views_count", default: 0
+    t.integer "weekly_comments_count", default: 0
     t.index ["admin_blog_post_id"], name: "index_blog_post_stats_on_admin_blog_post_id"
   end
 
@@ -714,10 +722,17 @@ ActiveRecord::Schema.define(version: 2019_06_05_074740) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
-    t.integer "comments_count"
+    t.integer "comments_count", default: 0
     t.integer "legacy_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weekly_comments", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_weekly_comments_on_comment_id"
   end
 
   create_table "weekly_views", force: :cascade do |t|
@@ -741,5 +756,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_074740) do
   add_foreign_key "pages", "admin_footers"
   add_foreign_key "payments", "users"
   add_foreign_key "roles", "users"
+  add_foreign_key "weekly_comments", "comments"
   add_foreign_key "weekly_views", "blog_post_stats"
 end
