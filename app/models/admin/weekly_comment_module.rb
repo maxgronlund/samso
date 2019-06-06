@@ -9,4 +9,10 @@ class Admin::WeeklyCommentModule < ApplicationRecord
       moduleable_id: id
     )
   end
+
+  def comments_last_seven_days(blog_post_id)
+    BlogPostStat
+      .find_by(admin_blog_post_id: blog_post_id)
+      .comments_last_seven_days
+  end
 end

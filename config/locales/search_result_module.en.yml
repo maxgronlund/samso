@@ -11,6 +11,9 @@ en:
   search_result_module:
     fo: Fo
     bar: Bar
+    comments:
+      one: One comment
+      other: "%{count} comments"
 
 
   admin/search_result_module:

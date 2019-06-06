@@ -106,6 +106,7 @@ Rails.application.routes.draw do
         resources :user_subscriptions
         resources :invoices, only: %i[index show destroy]
       end
+      resources :weekly_comment_modules, only: %i[edit update]
     end
 
 

@@ -11,6 +11,9 @@ da:
   weekly_comment_module:
     fo: Fo
     bar: Bar
+    comments:
+      one: En kommentar
+      other: "%{count} kommentarer"
 
 
   admin/weekly_comment_module:

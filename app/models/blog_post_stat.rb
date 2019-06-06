@@ -34,8 +34,6 @@ class BlogPostStat < ApplicationRecord
   end
 
   def comments_last_seven_days
-    # TODO: move to task
-    BlogPostStat.destroy_old_weekly_comments!
     weekly_comments_count
   end
 
@@ -45,6 +43,12 @@ class BlogPostStat < ApplicationRecord
       .comments
       .count
     update(weekly_comments_count: count)
+    # TODO: move to task
+    BlogPostStat.destroy_old_weekly_comments!
+  end
+
+  def destroy_old_weekly_comments
+    BlogPostStat.destroy_old_weekly_comments!
   end
 
   #       .where(BlogPostStat.find_condition, BlogPostStat.time_range )

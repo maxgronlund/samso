@@ -115,7 +115,6 @@ class Admin::BlogPost < ApplicationRecord
   # rubocop:enable Lint/HandleExceptions
 
   def update_weekly_comments_count!
-    ap 'update_weekly_comments_count'
     blog_post_stat.update_weekly_comments_count!
   end
 

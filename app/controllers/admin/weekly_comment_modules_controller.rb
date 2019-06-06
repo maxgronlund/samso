@@ -33,7 +33,8 @@ class Admin::WeeklyCommentModulesController < AdminController
     params.require(:admin_weekly_comment_module).permit(
       :position,
       :name,
-      :access_to
+      :access_to,
+      :articles
     )
   end
 end
