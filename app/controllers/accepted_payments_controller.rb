@@ -3,6 +3,7 @@ class AcceptedPaymentsController < ApplicationController
   # hence te cc is a great validation
   def index
     params.permit!
+    ap params
     raise and return if payment.nil?
     log_payment
     update_subscription
@@ -41,6 +42,8 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   def send_email_to_admin
+    return if payment_completed?
+
     SubscriptionCreatedMailer
       .send_message_to_system_administrator(
         subscription.subscription_id,
@@ -54,6 +57,8 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   def update_subscriper
+    return if payment_completed?
+
     subscriper.update(latest_online_payment: Time.zone.now) if subscriper.present?
   end
 
@@ -115,8 +120,15 @@ class AcceptedPaymentsController < ApplicationController
   # only extend subscription one time pr payment
   def extend_subscription
     return if payment_completed?
+    ap subscription_type
 
-    new_end_date = subscription.end_date + subscription_type.duration.days
+    new_end_date =
+      if subscription.expired?
+        Time.zone.today + subscription_type.duration.days
+      else
+        subscription.end_date + subscription_type.duration.days
+      end
+
     subscription
       .update(
         end_date: new_end_date,

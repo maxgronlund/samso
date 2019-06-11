@@ -9,10 +9,14 @@
         .card-body
           | Hvis du allerede er oprettet og gerne vil forny dit abonnoment
           .pull-right
-            = link_to t('login'), new_session_path, class: 'btn btn-primary'
+            = link_to t('login_and_renew'), new_session_path, class: 'btn btn-primary'
 
 .card
-  h4.card-header  = subscription_module.title
+  h4.card-header
+    - if current_user.nil?
+      = subscription_module.title
+    - else
+      | Opret / Forny abonnoment
   .card-body
     = simple_format subscription_module.body
     hr

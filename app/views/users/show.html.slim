@@ -43,13 +43,12 @@
                     - if subscription.end_date
                       = l subscription.end_date
                   td = subscription.expired? ? 'Udløbet' : 'Ja'
-                  th
+                  td
                     .pull-right
                       .btn-group
-                        - if subscription.expired? && subscription.editable?
-                          = link_to 'Forny',
-                            edit_renew_subscription_path(subscription.subscription_id),
-                            class: 'btn btn-primary btn-sm'
+                        = link_to 'Forny',
+                          edit_renew_subscription_path(subscription.subscription_id),
+                          class: 'btn btn-primary btn-sm'
                         - if subscription.editable?
                           = link_to t('edit'),
                             subscription_delivery_addresses_path(subscription),

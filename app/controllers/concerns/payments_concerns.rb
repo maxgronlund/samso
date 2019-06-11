@@ -7,9 +7,6 @@ module PaymentsConcerns
     payable_type = options[:payable_type]
     payable_id = options[:payable_id]
 
-    last_id = Payment.last.present? ? Payment.last.id : 0
-    onpay_reference = 'SP-' + (last_id + 8000).to_s
-
     payment =
       user
       .payments
@@ -49,5 +46,11 @@ module PaymentsConcerns
 
   def onpay_declineturl
     Rails.env.development? ? 'https://fcd8cc84.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
+  end
+
+  def onpay_reference
+    last_id = Payment.last.present? ? Payment.last.id : 0
+    formatted_id = (last_id + 8001).to_s
+    Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
   end
 end

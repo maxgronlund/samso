@@ -58,6 +58,7 @@ da:
   signup: 'Opret konto'
   send: Send
   login: Log ind
+  login_and_renew: Log ind og forny
   sign_out: Log ud
   signed_in: Logget ind
   signed_out: Logged ud

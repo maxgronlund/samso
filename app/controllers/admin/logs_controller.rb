@@ -3,7 +3,7 @@ class Admin::LogsController < AdminController
 
   # GET /admin/logs
   def index
-    @admin_logs = Admin::Log.all
+    @admin_logs = Admin::Log.order(created_at: :desc)
   end
 
   # GET /admin/logs/1

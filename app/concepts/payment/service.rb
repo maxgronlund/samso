@@ -45,4 +45,3 @@ end
 # secret = "e88ebc73104651e3c8ee9af666c19b0626c9ecacd7f8f857e3633e355776baad92e67b7faf9b87744f8c6ce4303978ed65b4165f29534118c882c0fd95f52d0c"
 # Payment::Service.mac_sha1(test_data, secret)
 #   => "16586ad0b3446b58df92446296cf821500ac57d8"
-
