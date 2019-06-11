@@ -4,7 +4,6 @@ class AcceptedPaymentsController < ApplicationController
   def index
     params.permit!
     raise and return if payment.nil?
-
     log_payment
     update_subscription
     secure_subscription_address
@@ -13,10 +12,11 @@ class AcceptedPaymentsController < ApplicationController
     initialize_user
     send_email_to_admin
     @payment.user.destroy_pending_payments
-    @message = Admin::SystemMessage.subscription_payment_completed
     session[:user_id] = subscriper.id
     @current_user = subscriper
     session[:stored_path] = root_path
+
+    @message = Admin::SystemMessage.subscription_payment_completed
   end
 
   private
@@ -114,7 +114,7 @@ class AcceptedPaymentsController < ApplicationController
 
   # only extend subscription one time pr payment
   def extend_subscription
-    return if subscription.last_payment_uuid == payment.uuid
+    return if payment_completed?
 
     new_end_date = subscription.end_date + subscription_type.duration.days
     subscription
@@ -122,6 +122,10 @@ class AcceptedPaymentsController < ApplicationController
         end_date: new_end_date,
         last_payment_uuid: payment.uuid
       )
+  end
+
+  def payment_completed?
+    @payment_completed ||= subscription.last_payment_uuid == payment.uuid
   end
 
   # paper trail

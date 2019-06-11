@@ -1,5 +1,16 @@
 - subscription_module = Admin::SystemSetup.subscription_module
 
+- if current_user.nil?
+  .row
+    .col-12.mb-20
+      .card
+        h4.card-header
+          | Har du allerede et abonnoment?
+        .card-body
+          | Hvis du allerede er oprettet og gerne vil forny dit abonnoment
+          .pull-right
+            = link_to t('login'), new_session_path, class: 'btn btn-primary'
+
 .card
   h4.card-header  = subscription_module.title
   .card-body
