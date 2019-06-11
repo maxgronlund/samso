@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_06_144839) do
+ActiveRecord::Schema.define(version: 2019_06_11_172415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -319,6 +319,14 @@ ActiveRecord::Schema.define(version: 2019_06_06_144839) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "admin_logs", force: :cascade do |t|
+    t.string "title"
+    t.string "log_type"
+    t.hstore "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "admin_menu_contents", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -469,6 +477,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_144839) do
     t.datetime "reminder_send"
     t.boolean "send_reminder", default: false
     t.integer "subscription_id"
+    t.uuid "last_payment_uuid"
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end
@@ -499,7 +508,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_144839) do
     t.string "administrator_email"
     t.string "editor_emails", default: ""
     t.string "e_pages_date"
-    t.integer "last_subscription_id"
+    t.integer "last_subscription_id", default: 8005250
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
@@ -722,7 +731,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_144839) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
-    t.integer "comments_count"
+    t.integer "comments_count", default: 0
     t.integer "legacy_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -4,6 +4,8 @@ class AcceptedPaymentsController < ApplicationController
   def index
     params.permit!
     raise and return if payment.nil?
+
+    log_payment
     update_subscription
     secure_subscription_address
     update_payment
@@ -18,6 +20,16 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   private
+
+  # no matter what we log the response from onpay
+  def log_payment
+    info = onpay_info(params)
+    Admin::Log.create(
+      title: info[:onpay_reference],
+      log_type: Admin::Log::ONPAY_ACCEPTED,
+      info: info
+    )
+  end
 
   def secure_subscription_address
     return unless subscription.print_version?
@@ -100,10 +112,16 @@ class AcceptedPaymentsController < ApplicationController
     @subscription = Admin::Subscription.create(subscription_options)
   end
 
-  # extend subscription
+  # only extend subscription one time pr payment
   def extend_subscription
+    return if subscription.last_payment_uuid == payment.uuid
+
     new_end_date = subscription.end_date + subscription_type.duration.days
-    subscription.update(end_date: new_end_date)
+    subscription
+      .update(
+        end_date: new_end_date,
+        last_payment_uuid: payment.uuid
+      )
   end
 
   # paper trail
@@ -128,7 +146,8 @@ class AcceptedPaymentsController < ApplicationController
       user_id: payment.user_id,
       subscription_type_id: subscription_type.id,
       start_date: start_date,
-      end_date: end_date
+      end_date: end_date,
+      last_payment_uuid: payment.uuid
     }
   end
 end

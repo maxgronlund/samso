@@ -1,0 +1,23 @@
+h1 Listing admin_logs
+
+table
+  thead
+    tr
+      th Title
+      th Type
+      / th Info
+      th
+      / th
+      / th
+
+  tbody
+    - @admin_logs.each do |admin_log|
+      tr
+        td = admin_log.title
+        / td = admin_log.log_type
+        td = l admin_log.created_at
+        td = link_to 'Show', admin_log
+        / td = link_to 'Destroy', admin_log, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+

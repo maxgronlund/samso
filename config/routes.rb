@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api do
     namespace :v1 do
       resources :epaper_verification, only: %i[index show]
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
       resources :find_blog_post_modules, only: %i[edit update]
       resources :iframe_modules, only: %i[edit update]
       resources :search_result_modules, only: %i[edit update]
+      resources :logs, only: %i[index show]
       resources :most_popular_modules, only: %i[edit update]
       resources :newsletters
       resources :newspaper_ads

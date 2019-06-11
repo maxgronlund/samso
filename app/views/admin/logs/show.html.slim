@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @admin_log.title
+p
+  strong Type:
+  = @admin_log.log_type
+p
+  strong Info:
+  = @admin_log.info
+
+
+'|
+=< link_to 'Back', admin_logs_path

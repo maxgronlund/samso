@@ -2,11 +2,22 @@ class DeclinedPaymentsController < ApplicationController
   def index
     params.permit!
     render_404 and return if payment.nil?
-    render_404 and return if payment.created_at < Time.zone.now - 20.minutes
+    # render_404 and return if payment.created_at < Time.zone.now - 20.minutes
+    log_payment
     update_payment
   end
 
   private
+
+  # no matter what we log the response from onpay
+  def log_payment
+    info = onpay_info(params)
+    Admin::Log.create(
+      title: info[:onpay_reference],
+      type: Admin::Log::ONPAY_DECLINED,
+      log_type: info
+    )
+  end
 
   def update_payment
     return unless payment.pending?
