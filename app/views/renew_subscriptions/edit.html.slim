@@ -19,7 +19,7 @@
   .row
     .col-sm-12
       h5 = @subscription_type.title
-      = @subscription_type.body
+      / = @subscription_type.body
 
       hr
       .row
@@ -28,9 +28,18 @@
           = number_to_currency(@subscription_type.price)
         .col-sm-6
           'Periode:
-          = l @subscription.end_date
-          '&nbsp;-&nbsp;
-          = l @subscription.end_date + @subscription_type.duration.days
+          - if @subscription.end_date < Time.zone.now
+            = l Time.zone.today
+            '&nbsp;-&nbsp;
+            = l Time.zone.today + @subscription_type.duration.days
+          - else
+            = l @subscription.end_date
+            '&nbsp;-&nbsp;
+            = l @subscription.end_date + @subscription_type.duration.days
+          br
+          / = l @subscription.end_date
+          / '&nbsp;-&nbsp;
+          / = l @subscription.end_date + @subscription_type.duration.days
 
 
       hr

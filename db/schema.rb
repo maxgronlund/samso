@@ -508,7 +508,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_172415) do
     t.string "administrator_email"
     t.string "editor_emails", default: ""
     t.string "e_pages_date"
-    t.integer "last_subscription_id", default: 8005250
+    t.integer "last_subscription_id"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
@@ -731,7 +731,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_172415) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
-    t.integer "comments_count", default: 0
+    t.integer "comments_count"
     t.integer "legacy_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
