@@ -1,14 +1,53 @@
-p#notice = notice
 
-p
-  strong Title:
-  = @admin_log.title
-p
-  strong Type:
-  = @admin_log.log_type
-p
-  strong Info:
-  = @admin_log.info
+.row
+  .col-sm-12
+    == render 'shared/admin_links', selected: ''
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to 'Logs', admin_logs_path
+    li.breadcrumb-item.active aria-current="page"
+      =  @admin_log.title
+
+.row
+  .col-sm-6
+    h3 = @admin_log.title
+    p
+      strong Type:
+      = @admin_log.log_type
+  .col-sm-6
+    - if @admin_log.loggable.present?
+      .pull-right
+        - case @admin_log.loggable_type
+        - when 'Payment'
+          - payment = @admin_log.loggable
+          = link_to 'Vis bruger',
+            admin_user_path(payment.user_id),
+            class: 'btn btn-light'
+          = link_to 'Vis faktura',
+            admin_user_invoice_path(payment.user_id, payment.uuid),
+            class: 'btn btn-primary',
+            target: '_blank'
+- if @admin_log.info.present?
+  .table-responsive
+    table.table.table-striped.table-bordered.table-hover
+      thead.thead-dark
+        tr
+          th Title
+          th Værdi
+      tbody
+        tr
+          td
+            b Type:&nbsp;
+            = @admin_log.loggable_type.presence || 'na'
+          td
+            b ID:&nbsp;
+            = @admin_log.loggable_id.presence || 'na'
+        - @admin_log.info.each do |k,v|
+          tr
+            td = k
+            td = v
+
 
 
 '|

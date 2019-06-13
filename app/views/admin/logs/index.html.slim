@@ -1,23 +1,27 @@
-h1 Listing admin_logs
-
-table
-  thead
-    tr
-      th Title
-      th Type
-      / th Info
-      th
-      / th
-      / th
-
-  tbody
-    - @admin_logs.each do |admin_log|
+.row
+  .col-sm-12
+    == render 'shared/admin_links', selected: ''
+h3 Log
+|Her vises alle transaktioner med OnPay godkendte som afviste
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead.thead-dark
       tr
-        td = admin_log.title
-        / td = admin_log.log_type
-        td = l admin_log.created_at
-        td = link_to 'Show', admin_log
-        / td = link_to 'Destroy', admin_log, data: { confirm: 'Are you sure?' }, method: :delete
+        th Title
+        th Type
+        th Oprettet
+        th
+        / th
+        / th
+
+    tbody
+      - @admin_logs.each do |admin_log|
+        tr
+          td = admin_log.title
+          td = admin_log.log_type
+          td = l admin_log.created_at
+          td = link_to t('show'), admin_log, class: 'btn btn-light btn-sm'
+          / td = link_to 'Destroy', admin_log, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
-
+= paginate @admin_logs

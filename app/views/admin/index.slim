@@ -35,3 +35,7 @@
           tr
             th = link_to 'DAO 365', admin_export_delivery_list_index_path, class: 'btn btn-light btn-sm'
             td = link_to 'Download CSV', "#{root_path}/admin/export_delivery_list.csv"
+            td
+          tr
+            th = link_to 'Logs', admin_logs_path, class: 'btn btn-light btn-sm'
+            td Transaktions log

@@ -15,7 +15,7 @@ class DeclinedPaymentsController < ApplicationController
     Admin::Log.create(
       title: info[:onpay_reference],
       log_type: Admin::Log::ONPAY_DECLINED,
-      log_type: info
+      info: info
     )
   end
 
