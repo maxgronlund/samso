@@ -4,5 +4,8 @@ class Admin::Log < ApplicationRecord
 
   belongs_to :loggable, polymorphic: true
 
+  def declined?
+    log_type == Admin::Log::ONPAY_DECLINED
+  end
 
 end

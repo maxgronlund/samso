@@ -18,7 +18,12 @@ h3 Log
       - @admin_logs.each do |admin_log|
         tr
           td = admin_log.title
-          td = admin_log.log_type
+          td
+            - if admin_log.declined?
+              .red-text
+                = admin_log.log_type
+            - else
+              = admin_log.log_type
           td = l admin_log.created_at
           td = link_to t('show'), admin_log, class: 'btn btn-light btn-sm'
           / td = link_to 'Destroy', admin_log, data: { confirm: 'Are you sure?' }, method: :delete

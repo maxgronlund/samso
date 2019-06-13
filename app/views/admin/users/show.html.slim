@@ -119,11 +119,12 @@ nav aria-label="breadcrumb"
               th Faktura
           -  @user.payments.order(:created_at).each do |payment|
             tr
-              td = payment.id
+              td = payment.onpay_reference
               td = l payment.created_at
               td = number_to_currency(payment.amount, precision: 2)
               td = payment.for
               th
                 .pull-right
-                  = link_to t('show'), admin_user_invoice_path(@user, payment.uuid), "data-turbolinks" => false, class: 'btn btn-sm btn-light'
+                  = link_to t('show'), admin_user_invoice_path(@user, payment.uuid), "data-turbolinks" => false, class: 'btn btn-sm btn-light',
+                    target: '_blank'
 
