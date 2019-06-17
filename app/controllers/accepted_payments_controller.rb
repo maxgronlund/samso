@@ -5,7 +5,7 @@ class AcceptedPaymentsController < ApplicationController
     params.permit!
     log_request
     raise and return if payment.nil?
-    log_payment
+
     update_subscription
     secure_subscription_address
     update_payment
@@ -16,8 +16,8 @@ class AcceptedPaymentsController < ApplicationController
     session[:user_id] = subscriper.id
     @current_user = subscriper
     session[:stored_path] = root_path
-
     @message = Admin::SystemMessage.subscription_payment_completed
+    log_payment
   end
 
   private
@@ -28,19 +28,18 @@ class AcceptedPaymentsController < ApplicationController
     Admin::Log.create(
       title: info[:onpay_reference],
       log_type: Admin::Log::ONPAY_ACCEPTED,
-      info: info
+      info: info,
+      loggable_id: @payment.id,
+      loggable_type: @payment.class.name
     )
   end
 
   def log_request
-      metadata = {
-      params: params.to_h,
-    }
     Admin::EventNotification.create(
       title: "Accepted Payment params",
       body: "Responce from OnPay",
       message_type: 'success responce',
-      metadata: metadata
+      metadata: params.to_h
     )
   end
 

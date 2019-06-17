@@ -41,15 +41,19 @@ module PaymentsConcerns
   end
 
   def onpay_accepturl
-    Rails.env.development? ? 'https://b9043802.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? 'https://fdfd743e.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? 'https://b9043802.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? 'https://fdfd743e.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
   end
 
   def onpay_reference
-    last_id = Payment.last.present? ? Payment.last.id : 0
+    @onpay_reference ||= build_onpay_reference
+  end
+
+  def build_onpay_reference
+    last_id = Payment.last.present? ? Payment.order(:id).last.id : 0
     formatted_id = (last_id + 8001).to_s
     Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
   end

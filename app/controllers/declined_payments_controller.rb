@@ -11,14 +11,11 @@ class DeclinedPaymentsController < ApplicationController
   private
 
   def log_request
-      metadata = {
-      params: params.to_h,
-    }
     Admin::EventNotification.create(
       title: "Declined Payment params",
       body: "Responce from OnPay",
       message_type: 'declined responce',
-      metadata: metadata
+      metadata: params.to_h
     )
   end
 
@@ -28,7 +25,9 @@ class DeclinedPaymentsController < ApplicationController
     Admin::Log.create(
       title: info[:onpay_reference],
       log_type: Admin::Log::ONPAY_DECLINED,
-      info: info
+      info: info,
+      logable_id: payment.id,
+      logable_type: payment.class.name
     )
   end
 
