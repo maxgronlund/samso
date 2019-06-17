@@ -8,6 +8,8 @@ class Payment < ApplicationRecord
 
   PROVIDER_ONPAY = 'onpay'.freeze
 
+  validates :onpay_reference, uniqueness: true
+
   scope :pending, -> { where(state: PENDING) }
 
   belongs_to :user
