@@ -7,18 +7,20 @@ module PaymentsConcerns
     payable_type = options[:payable_type]
     payable_id = options[:payable_id]
 
+    ref = onpay_reference
+
     payment =
       user
       .payments
       .pending
       .first_or_initialize
-    payment.onpay_reference = onpay_reference
+    payment.onpay_reference = ref
     payment.payable_type = payable_type
     payment.payable_id = payable_id
     payment.payment_provider = Payment::PROVIDER_ONPAY
     payment.uuid = SecureRandom.uuid
     payment.save
-    @form_data = form_data(@subscription_type, onpay_reference)
+    @form_data = form_data(@subscription_type, ref)
 
     @onpay_hmac_sha1 =
       Payment::Service
@@ -28,12 +30,12 @@ module PaymentsConcerns
   private
 
   # Use this to calculate the @onpay_hmac_sha1 for usage in the form
-  def form_data(subscription_type, onpay_reference)
+  def form_data(subscription_type, ref)
     {
       onpay_gatewayid: ENV['ONPAY_GATEWAY_ID'],
       onpay_currency: ENV['ONPAY_CURRENCY'],
       onpay_amount: subscription_type.form_price,
-      onpay_reference: onpay_reference,
+      onpay_reference: ref,
       onpay_accepturl: onpay_accepturl,
       onpay_declineurl: onpay_declineturl,
       subscription_type_id: subscription_type.id.to_s
@@ -49,12 +51,9 @@ module PaymentsConcerns
   end
 
   def onpay_reference
-    @onpay_reference ||= build_onpay_reference
-  end
-
-  def build_onpay_reference
     last_id = Payment.last.present? ? Payment.order(:id).last.id : 0
     formatted_id = (last_id + 8001).to_s
     Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
   end
+
 end
