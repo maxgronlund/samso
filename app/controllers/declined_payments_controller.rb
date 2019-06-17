@@ -26,8 +26,8 @@ class DeclinedPaymentsController < ApplicationController
       title: info[:onpay_reference],
       log_type: Admin::Log::ONPAY_DECLINED,
       info: info,
-      logable_id: payment.id,
-      logable_type: payment.class.name
+      loggable_id: payment.id,
+      loggable_type: payment.class.name
     )
   end
 
