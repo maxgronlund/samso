@@ -1,6 +1,7 @@
 class DeclinedPaymentsController < ApplicationController
   def index
     params.permit!
+    log_request
     render_404 and return if payment.nil?
     # render_404 and return if payment.created_at < Time.zone.now - 20.minutes
     log_payment
@@ -8,6 +9,18 @@ class DeclinedPaymentsController < ApplicationController
   end
 
   private
+
+  def log_request
+      metadata = {
+      params: params.to_h,
+    }
+    Admin::EventNotification.create(
+      title: "Declined Payment params",
+      body: "Responce from OnPay",
+      message_type: 'declined responce',
+      metadata: metadata
+    )
+  end
 
   # no matter what we log the response from onpay
   def log_payment

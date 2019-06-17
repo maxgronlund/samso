@@ -3,6 +3,7 @@ class AcceptedPaymentsController < ApplicationController
   # hence te cc is a great validation
   def index
     params.permit!
+    log_request
     raise and return if payment.nil?
     log_payment
     update_subscription
@@ -28,6 +29,18 @@ class AcceptedPaymentsController < ApplicationController
       title: info[:onpay_reference],
       log_type: Admin::Log::ONPAY_ACCEPTED,
       info: info
+    )
+  end
+
+  def log_request
+      metadata = {
+      params: params.to_h,
+    }
+    Admin::EventNotification.create(
+      title: "Accepted Payment params",
+      body: "Responce from OnPay",
+      message_type: 'success responce',
+      metadata: metadata
     )
   end
 
