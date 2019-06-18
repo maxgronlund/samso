@@ -37,21 +37,19 @@ class BlogPostStat < ApplicationRecord
     weekly_comments_count
   end
 
-  def update_weekly_comments_count!
-    count =
-      admin_blog_post
-      .comments
-      .count
-    update(weekly_comments_count: count)
-    # TODO: move to task
-    BlogPostStat.destroy_old_weekly_comments!
-  end
+  # def update_weekly_comments_count!
+  #   count =
+  #     admin_blog_post
+  #     .comments
+  #     .count
+  #   update(weekly_comments_count: count)
+  #   # TODO: move to task
+  #   BlogPostStat.destroy_old_weekly_comments!
+  # end
 
-  def destroy_old_weekly_comments
-    BlogPostStat.destroy_old_weekly_comments!
-  end
-
-  #       .where(BlogPostStat.find_condition, BlogPostStat.time_range )
+  # def destroy_old_weekly_comments
+  #   BlogPostStat.destroy_old_weekly_comments!
+  # end
 
 
   # usage
@@ -70,12 +68,6 @@ class BlogPostStat < ApplicationRecord
 
   def self.destroy_old_weekly_views!
     WeeklyView
-      .where(find_condition, time_range )
-      .destroy_all
-  end
-
-  def self.destroy_old_weekly_comments!
-    WeeklyComment
       .where(find_condition, time_range )
       .destroy_all
   end

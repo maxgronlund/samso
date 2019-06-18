@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_181031) do
+ActiveRecord::Schema.define(version: 2019_06_18_213355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -586,6 +586,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_181031) do
     t.datetime "updated_at", null: false
     t.string "author_name", default: ""
     t.string "state", default: "default"
+    t.integer "weekly_comments_count", default: 0
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
