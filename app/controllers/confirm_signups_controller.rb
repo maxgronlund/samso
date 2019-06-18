@@ -11,5 +11,6 @@ class ConfirmSignupsController < ApplicationController
 
     user_service.initialize_user
     session[:user_id] = @user.id
+    cookies[:auth_token] = @user.auth_token
   end
 end

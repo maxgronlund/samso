@@ -14,6 +14,7 @@ class AcceptedPaymentsController < ApplicationController
     send_email_to_admin
     @payment.user.destroy_pending_payments
     session[:user_id] = subscriper.id
+    cookies[:auth_token] = subscriper.auth_token
     @current_user = subscriper
     session[:stored_path] = root_path
     @message = Admin::SystemMessage.subscription_payment_completed

@@ -72,6 +72,7 @@ da:
   ok: Ok
   show_all: Vis alle
   please_wait: "Vent venligst..."
+  remember_me: Husk login
 
 
   activerecord:

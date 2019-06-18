@@ -50,15 +50,4 @@ module PaymentsConcerns
   def onpay_declineturl
     Rails.env.development? ? 'https://b86b5fee.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
   end
-
-  # def update_onpay_reference!(payment)
-  #   onpay_reference = id + 8001
-  # end
-
-  # def onpay_reference
-  #   last_id = Payment.last.present? ? Payment.order(:id).last.id : 0
-  #   formatted_id = (last_id + 8001).to_s
-  #   Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
-  # end
-
 end

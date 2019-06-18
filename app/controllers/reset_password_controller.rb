@@ -16,6 +16,7 @@ class ResetPasswordController < ApplicationController
     user_service = User::Service.new(@user)
     if user_service.valid_token? && user_service.reset_user(user_params)
       session[:user_id] = @user.id
+      cookies[:auth_token] = @user.auth_token
       redirect_to @user, notice: t('user.password.updated')
     else
       @user = nil
