@@ -28,29 +28,12 @@ class BlogPostStat < ApplicationRecord
   end
 
   def views_last_seven_days
-    # TODO: move to task
-    BlogPostStat.destroy_old_weekly_views!
     weekly_views_count
   end
 
   def comments_last_seven_days
     weekly_comments_count
   end
-
-  # def update_weekly_comments_count!
-  #   count =
-  #     admin_blog_post
-  #     .comments
-  #     .count
-  #   update(weekly_comments_count: count)
-  #   # TODO: move to task
-  #   BlogPostStat.destroy_old_weekly_comments!
-  # end
-
-  # def destroy_old_weekly_comments
-  #   BlogPostStat.destroy_old_weekly_comments!
-  # end
-
 
   # usage
   # BlogPostStat.post_with_most_views_last_seven_days
@@ -64,7 +47,6 @@ class BlogPostStat < ApplicationRecord
     blog_post_ids.map { |blog_post_id|  Admin::BlogPost.find(blog_post_id)}
   end
 
-  private
 
   def self.destroy_old_weekly_views!
     WeeklyView

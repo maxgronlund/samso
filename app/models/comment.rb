@@ -14,10 +14,6 @@ class Comment < ApplicationRecord
     ['Godkendt', 'apporved']
   ].freeze
 
-  # def author_name
-  #   user.present? ? user.name : ''
-  # end
-
   def default?
     state == 'default'
   end
