@@ -9,6 +9,7 @@ class WeeklyComment < ApplicationRecord
       .order(weekly_comments_count: :desc)
       .first(count)
       .pluck(:commentable_id)
+      .uniq
 
     blog_post_ids.map { |blog_post_id| Admin::BlogPost.find(blog_post_id) }
   end
