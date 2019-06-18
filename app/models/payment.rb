@@ -8,12 +8,13 @@ class Payment < ApplicationRecord
 
   PROVIDER_ONPAY = 'onpay'.freeze
 
-  validates :onpay_reference, uniqueness: true
+
 
   scope :pending, -> { where(state: PENDING) }
 
   belongs_to :user
   validates :user_id, presence: true
+  validates :onpay_reference, uniqueness: true
 
   def pending!
     update(state: PENDING)
@@ -105,5 +106,13 @@ class Payment < ApplicationRecord
 
   def payment_name
     'Abonnoment'
+  end
+
+  def secure_onpay_reference
+    return onpay_reference if onpay_reference.include?('SP-')
+    formatted_id = (id + 8001).to_s
+    ref = Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
+    update(onpay_reference: ref)
+    onpay_reference
   end
 end

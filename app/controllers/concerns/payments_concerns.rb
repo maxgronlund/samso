@@ -7,20 +7,21 @@ module PaymentsConcerns
     payable_type = options[:payable_type]
     payable_id = options[:payable_id]
 
-    ref = onpay_reference
+    # ref = SecureRandom.uuid
 
     payment =
       user
       .payments
       .pending
       .first_or_initialize
-    payment.onpay_reference = ref
+
+    payment.onpay_reference = SecureRandom.uuid if payment.onpay_reference == 'na'
     payment.payable_type = payable_type
     payment.payable_id = payable_id
     payment.payment_provider = Payment::PROVIDER_ONPAY
     payment.uuid = SecureRandom.uuid
-    payment.save
-    @form_data = form_data(@subscription_type, ref)
+    payment.save!
+    @form_data = form_data(@subscription_type, payment.secure_onpay_reference)
 
     @onpay_hmac_sha1 =
       Payment::Service
@@ -43,17 +44,21 @@ module PaymentsConcerns
   end
 
   def onpay_accepturl
-    Rails.env.development? ? 'https://fdfd743e.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
+    Rails.env.development? ? 'https://b86b5fee.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
   end
 
   def onpay_declineturl
-    Rails.env.development? ? 'https://fdfd743e.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
+    Rails.env.development? ? 'https://b86b5fee.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
   end
 
-  def onpay_reference
-    last_id = Payment.last.present? ? Payment.order(:id).last.id : 0
-    formatted_id = (last_id + 8001).to_s
-    Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
-  end
+  # def update_onpay_reference!(payment)
+  #   onpay_reference = id + 8001
+  # end
+
+  # def onpay_reference
+  #   last_id = Payment.last.present? ? Payment.order(:id).last.id : 0
+  #   formatted_id = (last_id + 8001).to_s
+  #   Rails.env.development? ? 'SP-DEV-' + formatted_id : 'SP-' + formatted_id
+  # end
 
 end
