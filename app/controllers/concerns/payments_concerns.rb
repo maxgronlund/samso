@@ -12,7 +12,6 @@ module PaymentsConcerns
     payment =
       user
       .payments
-      .pending
       .first_or_initialize
     payment.onpay_reference = ref
     payment.payable_type = payable_type
