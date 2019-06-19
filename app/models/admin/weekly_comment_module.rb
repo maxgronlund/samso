@@ -10,9 +10,14 @@ class Admin::WeeklyCommentModule < ApplicationRecord
     )
   end
 
-  def comments_last_seven_days(blog_post_id)
-    BlogPostStat
-      .find_by(admin_blog_post_id: blog_post_id)
-      .comments_last_seven_days
+  def self.comments_last_seven_days(blog_post_id)
+    comment_ids =
+      Comment
+      .where(commentable_type: 'Admin::BlogPost', commentable_id: blog_post_id)
+      .pluck(:id)
+      .uniq
+
+    WeeklyComment.where(comment_id: comment_ids).count
+
   end
 end

@@ -9,5 +9,5 @@ h5 = weekly_comment.name
           = link_to link do
             = post.title
             .time-ago
-              - count = weekly_comment.comments_last_seven_days(post.id)
+              - count = Admin::WeeklyCommentModule.comments_last_seven_days(post.id)
               = t('weekly_comment_module.comments', count: count)

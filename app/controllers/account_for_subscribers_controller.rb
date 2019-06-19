@@ -5,7 +5,6 @@ class AccountForSubscribersController < ApplicationController
   end
 
   def create
-
     subscription =
       Admin::Subscription
       .find(permitted_user_params[:subscription_id])
@@ -43,6 +42,7 @@ class AccountForSubscribersController < ApplicationController
   def login(message)
     flash.now.alert = message
     session[:user_id] = @user.id
+    cookies[:auth_token] = user.auth_token
     redirect_to @user.editor? ? admin_index_path : default_path(root_url)
     #redirect_to new_session_path
   end

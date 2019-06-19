@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
+    cookies.delete(:auth_token)
     redirect_to root_url, notice: t('signed_out')
   end
 
@@ -40,6 +41,11 @@ class SessionsController < ApplicationController
 
   def signin_user(user)
     session[:user_id] = user.id
+    if params[:remember_me]
+      cookies.permanent[:auth_token] = user.auth_token
+    else
+      cookies[:auth_token] = user.auth_token
+    end
     redirect_to user.editor? ? admin_index_path : default_path(root_url)
   end
 
@@ -51,3 +57,5 @@ class SessionsController < ApplicationController
     User::Service.new(user).update_login_stats(request)
   end
 end
+
+

@@ -22,6 +22,10 @@
               br
               = password_field_tag :password, '', class: 'form-control'
               br
+              .inline-checkbox-label
+                = check_box_tag :remember_me, 1, params[:remember_me], class: 'checkbox'
+                = label_tag :remember_me, t('remember_me')
+              br
             .form-actions
               .pull-right
                 = submit_tag t('login'), class: 'btn btn-primary', id: 'log-in'

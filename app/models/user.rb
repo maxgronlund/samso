@@ -55,6 +55,14 @@ class User < ApplicationRecord
   FAKE_EMAIL =    '@10ff3690--bd40a8d99fa5.example.com'.freeze
   FAKE_PASSWORD = 'c01141c5-d91d-4995-9a56-c01cc198fe25'.freeze
 
+  before_create { generate_token(:auth_token) }
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+
   def missing_address?
 
   end
