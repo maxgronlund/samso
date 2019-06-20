@@ -7,7 +7,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def index
     @access_to_e_paper =
       if access_to_e_paper?
-        'Api::V1::EpaperVerification'
+        'Api::V1::EpaperVerification=true'
       else
         SecureRandom.uuid
       end
@@ -16,7 +16,6 @@ class Api::V1::EpaperVerificationController < ApplicationController
   # Called when the user click on the thumb on the e_page_module
   def show
     user = User.find_by(id: params[:id])
-    # binding.pry
     if permitted?(user)
       redirect_to e_paper_token_url
     else
