@@ -6,11 +6,12 @@ class Api::V1::EpaperVerificationController < ApplicationController
   # http://samso.herokuapp.com/api/v1/epaper_verification/1?locale=da
   def index
     @access_to_e_paper =
-      if true #access_to_e_paper?
+      if access_to_e_paper?
         'Api::V1::EpaperVerification'
       else
         SecureRandom.uuid
       end
+    render plain: @access_to_e_paper
   end
 
   # Called when the user click on the thumb on the e_page_module
@@ -45,6 +46,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   end
 
   def access_to_e_paper?
+    binding.pry
     params.permit!
     e_paper_token = EPaperToken.find_by(secret: params[:secret])
     return false if e_paper_token.nil?
