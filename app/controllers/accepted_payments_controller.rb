@@ -9,7 +9,6 @@ class AcceptedPaymentsController < ApplicationController
     update_subscription
     secure_subscription_address
     update_payment
-    update_subscriper
     initialize_user
     send_email_to_admin
     @payment.user.destroy_pending_payments
@@ -68,20 +67,6 @@ class AcceptedPaymentsController < ApplicationController
     user_service.initialize_user
   end
 
-  def update_subscriper
-    return if payment_completed?
-
-    subscriper.update(latest_online_payment: Time.zone.now) if subscriper.present?
-  end
-
-  # def confirm_user
-  #   subscriper.update(confirmed_at: Time.zone.now)
-  # end
-
-  # def login_user
-  #   session[:user_id] = subscriper.id
-  # end
-
   def subscriper
     subscription.user
   end
@@ -125,14 +110,13 @@ class AcceptedPaymentsController < ApplicationController
     subscription.present? ? extend_subscription : create_subscription
   end
 
-  def create_subscription
-    @subscription = Admin::Subscription.create(subscription_options)
+  def update_subscripers_latest_online_payment
+    subscriper.update(latest_online_payment: Time.zone.now) if subscriper.present?
   end
 
   # only extend subscription one time pr payment
   def extend_subscription
     return if payment_completed?
-    ap subscription_type
 
     new_end_date =
       if subscription.expired?
@@ -146,8 +130,15 @@ class AcceptedPaymentsController < ApplicationController
         end_date: new_end_date,
         last_payment_uuid: payment.uuid
       )
+    update_subscripers_latest_online_payment
   end
 
+  def create_subscription
+    @subscription = Admin::Subscription.create(subscription_options)
+    update_subscripers_latest_online_payment
+  end
+
+  # awoid extending subscriptions by reloading the page
   def payment_completed?
     @payment_completed ||= subscription.last_payment_uuid == payment.uuid
   end

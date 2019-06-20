@@ -35,6 +35,7 @@ da:
         permission: 'Adgangs rettigheder'
 
   user:
+    latest_online_payment: Dato
     missing_delivery_address: Rediger venligst forsendelses addressen da den er mangelfuld
     count: "%{count} : Brugere"
     create: Opret bruger konto

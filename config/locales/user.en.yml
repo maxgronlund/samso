@@ -6,6 +6,7 @@ en:
         permission: 'Access permissions'
 
   user:
+    latest_online_payment: Date
     create: 'Create account'
     delete_account: Delete account
     edit: Edit account

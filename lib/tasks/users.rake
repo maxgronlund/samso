@@ -55,4 +55,15 @@ namespace :users do
       user.destroy if destroy_user
     end
   end
+
+  # usage
+  # rake users:update_latest_online_payments
+  desc 'update when the latest online payment was created'
+  task update_latest_online_payments: :environment do
+    Payment.order(:created_at).each do |payment|
+      next unless payment.accepted? && payment.user.present?
+
+      payment.user.update(latest_online_payment: payment.created_at)
+    end
+  end
 end
