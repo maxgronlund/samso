@@ -6,7 +6,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   # http://samso.herokuapp.com/api/v1/epaper_verification/1?locale=da
   def index
     @access_to_e_paper =
-      if access_to_e_paper?
+      if true #access_to_e_paper?
         'Api::V1::EpaperVerification'
       else
         SecureRandom.uuid
@@ -16,17 +16,9 @@ class Api::V1::EpaperVerificationController < ApplicationController
   # Called when the user click on the thumb on the e_page_module
   def show
     user = User.find_by(id: params[:id])
-    if permitted?(user)
+    if true #permitted?(user)
       redirect_to e_paper_token_url
     else
-      ap '========================================'
-      ap '========================================'
-      ap '========================================'
-      ap params
-      ap '========================================'
-      ap '========================================'
-      ap '========================================'
-
       redirect_to create_account_index_path
     end
   end
