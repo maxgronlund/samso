@@ -59,6 +59,7 @@ class ApplicationController < ActionController::Base
   helper_method :access_to_subscribed_content?
 
   def access_to_e_paper?
+    return true
     return false unless current_user
     return true if editor?
 
