@@ -19,6 +19,14 @@ class Api::V1::EpaperVerificationController < ApplicationController
     if permitted?(user)
       redirect_to e_paper_token_url
     else
+      ap '========================================'
+      ap '========================================'
+      ap '========================================'
+      ap params
+      ap '========================================'
+      ap '========================================'
+      ap '========================================'
+
       redirect_to create_account_index_path
     end
   end
