@@ -46,7 +46,6 @@ class Api::V1::EpaperVerificationController < ApplicationController
   end
 
   def access_to_e_paper?
-    binding.pry
     params.permit!
     e_paper_token = EPaperToken.find_by(secret: params[:secret])
     return false if e_paper_token.nil?
