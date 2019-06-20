@@ -1,4 +1,6 @@
 class DeclinedPaymentsController < ApplicationController
+  include PaymentsConcerns
+
   def index
     params.permit!
     log_request
@@ -6,9 +8,17 @@ class DeclinedPaymentsController < ApplicationController
     # render_404 and return if payment.created_at < Time.zone.now - 20.minutes
     log_payment
     update_payment
+    @link_to = session[:payments_path]
+    session[:payments_path] = nil
   end
 
   private
+
+  def new_payment_params
+    subscription_type_id = params[:subscription_type_id]
+    @subscription_type = Admin::SubscriptionType.find_by(id: subscription_type_id)
+    return if @subscription_type.nil?
+  end
 
   def log_request
     Admin::EventNotification.create(

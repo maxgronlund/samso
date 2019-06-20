@@ -34,3 +34,6 @@
             tr
               td Status
               td = @payment.transaction_info["onpay_status"].to_s.capitalize
+  /= link_to 'Prøv igen',
+
+= link_to t('back'), @link_to, class: 'btn btn-primary' if @link_to.present?

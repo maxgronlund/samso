@@ -33,7 +33,7 @@ nav aria-label="breadcrumb"
     = render 'shared/address', address: @user.address
 
 - if @subscriptions.any?
-  hr
+  br
   h5 Abonnoment
   .row.mt-20
     .col-sm-12
@@ -80,7 +80,7 @@ nav aria-label="breadcrumb"
                         edit_admin_user_user_subscription_path(@user, subscription.subscription_id),
                         class: 'btn btn-light btn-sm'
 - if @user.sign_in_ips.any?
-  hr
+  br
   h5 IP addresser brugt de sidste to uger
   .row.mt-20
     .col-sm-12
@@ -104,7 +104,7 @@ nav aria-label="breadcrumb"
                 td = sign_in_ip.count
 
 - if @user.payments.any?
-  hr
+  br
   h5 Transaktioner
   .row.mt-20
     .col-sm-12

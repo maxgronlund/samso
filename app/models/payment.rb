@@ -8,9 +8,8 @@ class Payment < ApplicationRecord
 
   PROVIDER_ONPAY = 'onpay'.freeze
 
-
-
   scope :pending, -> { where(state: PENDING) }
+  scope :accepted, -> { where(state: ACCEPTED) }
 
   belongs_to :user
   validates :user_id, presence: true
@@ -51,11 +50,13 @@ class Payment < ApplicationRecord
     when 'Admin::Subscription'
       payable.type_name
     else
-      ''
+      'Ukendt'
     end
   end
 
   def for
+    return 'Afvist' if state == DECLINED
+    return 'Afventer' if state == PENDING
     return payment_name if payable.nil?
 
     case payable_type

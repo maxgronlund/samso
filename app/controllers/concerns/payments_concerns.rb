@@ -7,18 +7,13 @@ module PaymentsConcerns
     payable_type = options[:payable_type]
     payable_id = options[:payable_id]
 
-    # ref = SecureRandom.uuid
-
-    payment =
-      user
-      .payments
-      .first_or_initialize
+    payment = user.payments.pending.first_or_initialize
 
     payment.onpay_reference = SecureRandom.uuid if payment.onpay_reference == 'na'
     payment.payable_type = payable_type
     payment.payable_id = payable_id
     payment.payment_provider = Payment::PROVIDER_ONPAY
-    payment.uuid = SecureRandom.uuid
+    payment.uuid = SecureRandom.uuid if payment.uuid.nil?
     payment.save!
     @form_data = form_data(@subscription_type, payment.secure_onpay_reference)
 
