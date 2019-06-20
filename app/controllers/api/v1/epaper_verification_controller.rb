@@ -7,7 +7,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   def index
     @access_to_e_paper =
       if access_to_e_paper?
-        'Api::V1::EpaperVerification=true'
+        'Api::V1::EpaperVerification'
       else
         SecureRandom.uuid
       end
