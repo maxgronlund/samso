@@ -2,7 +2,7 @@ da:
   role:
     member: Medlem
     admin: Administrator
-    editor: Redaktør (Jurnalist)
+    editor: Redaktør (Journalist)
     super_admin: Super administrator
     subscriber: Abonnent
 
