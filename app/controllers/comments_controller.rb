@@ -4,11 +4,12 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
+    ap new_comment_params
     @comment = Comment.new(new_comment_params)
     # set_state
     if @comment.save
       @comment.weekly_comments.create
-      commentable = @comment.commentable
+      # commentable = @comment.commentable
     else
       render nothing: true
     end
@@ -52,6 +53,7 @@ class CommentsController < ApplicationController
       .permit(
         :comment,
         :user_id,
+        :admin_blog_post_id,
         :commentable_id,
         :commentable_type,
         :author_name,

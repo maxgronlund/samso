@@ -3,7 +3,7 @@
 # internal comments
 class Comment < ApplicationRecord
   belongs_to :user, counter_cache: true
-  belongs_to :admin_blog_post, counter_cache: true
+  belongs_to :admin_blog_post, counter_cache: true, class_name: 'Admin::BlogPost'
   has_many :weekly_comments, dependent: :destroy
   validates :comment, presence: true
 
@@ -45,5 +45,9 @@ class Comment < ApplicationRecord
     return true if edditor.administrator?
 
     edditor == user
+  end
+
+  def commentable
+    admin_blog_post
   end
 end

@@ -13,6 +13,7 @@
           .row
             .col-sm-8
               = f.input :author_name, label: 'Navn'
+          = f.hidden_field :admin_blog_post_id, value: commentable.id
           = f.hidden_field :commentable_id, value: commentable.id
           = f.hidden_field :commentable_type, value: commentable.class.name
           = f.hidden_field :user_id, value: current_user.id

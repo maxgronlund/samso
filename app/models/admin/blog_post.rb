@@ -42,7 +42,7 @@ class Admin::BlogPost < ApplicationRecord
   validates :body, presence: true unless Rails.env == 'test'
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
-  has_many :comments, foreign_key: "admin_blog_post_id", dependent: :destroy
+  has_many :comments, foreign_key: "admin_blog_post_id", class_name: 'Comment', dependent: :destroy
   has_many(
     :blog_post_images,
     dependent: :destroy,
