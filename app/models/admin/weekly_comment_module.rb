@@ -10,14 +10,23 @@ class Admin::WeeklyCommentModule < ApplicationRecord
     )
   end
 
-  def self.comments_last_seven_days(blog_post_id)
-    comment_ids =
+  def articles_with_comments
+    blog_post_ids =
       Comment
-      .where(commentable_type: 'Admin::BlogPost', commentable_id: blog_post_id)
-      .pluck(:id)
-      .uniq
+      .where('created_at <= :one_week_ago', one_week_ago: Time.zone.now - 1.week)
+      .where.not(state: 'removed')
+      .pluck(:admin_blog_post_id)
 
-    WeeklyComment.where(comment_id: comment_ids).count
+    Admin::BlogPost
+      .where(id: blog_post_ids)
+      .where.not(comments_count: 0)
+      .last(articles)
+    # comment_ids =
+    #   Comment
+    #   .where(commentable_type: 'Admin::BlogPost', commentable_id: blog_post_id)
+    #   .pluck(:id)
+    #   .uniq
 
+    # WeeklyComment.where(comment_id: comment_ids).count
   end
 end

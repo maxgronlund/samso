@@ -4,13 +4,12 @@ h5 = weekly_comment_module.name
   Admin::WeeklyCommentModule.articles
 
 
-  /- WeeklyComment.articles(weekly_comment_module.articles).each do |post|
-  /  - link = page_post_url(post.show_page, post)
-  /  - unless link == request.url
-  /    .featured-post
-  /      .content
-  /        = link_to link do
-  /          = post.title
-  /          .time-ago
-  /            - count = Admin::WeeklyCommentModule.comments_last_seven_days(post.id)
-  /            = t('weekly_comment_module.comments', count: count)
+  - weekly_comment_module.articles_with_comments.each do |post|
+    - link = page_post_url(post.show_page, post)
+    - unless link == request.url
+    .featured-post
+      .content
+        = link_to link do
+          = post.title
+          .time-ago
+            = t('weekly_comment_module.comments', count: post.comments_count)
