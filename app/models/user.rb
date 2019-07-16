@@ -17,7 +17,7 @@ class User < ApplicationRecord
     },
     associated_against: {
       subscriptions: [:subscription_id],
-      addresses: %i[zipp_code address city]
+      addresses: %i[zipp_code address city first_name middle_name last_name street_name house_number]
     }
   )
   has_secure_password
