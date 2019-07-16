@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = Comment.new(new_comment_params)
-    set_state
+    # set_state
     if @comment.save
       @comment.weekly_comments.create
       commentable = @comment.commentable
@@ -17,7 +17,6 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     @comment.update(comment_params)
-    set_state
   end
 
   # DELETE /comments/1
@@ -28,12 +27,12 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_state
-    return if current_user.name == @comment.author_name
-    return unless @comment.default?
+  # def set_state
+  #   return if current_user.name == @comment.author_name
+  #   return unless @comment.default?
 
-    @comment.update(state: 'reported')
-  end
+  #   @comment.update(state: 'reported')
+  # end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_comment

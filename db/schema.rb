@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_213355) do
+ActiveRecord::Schema.define(version: 2019_07_16_071912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_213355) do
     t.boolean "enable_comments", default: false
     t.boolean "show_facebook_comments", default: true
     t.string "image_caption"
+    t.integer "comments_count", default: 0
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_posts_on_post_page_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
@@ -587,6 +588,8 @@ ActiveRecord::Schema.define(version: 2019_06_18_213355) do
     t.string "author_name", default: ""
     t.string "state", default: "default"
     t.integer "weekly_comments_count", default: 0
+    t.integer "admin_blog_post_id"
+    t.index ["admin_blog_post_id"], name: "index_comments_on_admin_blog_post_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end

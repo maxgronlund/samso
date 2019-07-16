@@ -85,6 +85,9 @@ Things you may want to cover:
 
   pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_development /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 
+  alternative
+  heroku pg:pull postgres://gsrwkvfqdujbtr:e11ea59968cc5bb63b5a695fa722b3efc77474a37d368b41d42749af7f161e82@ec2-54-195-241-106.eu-west-1.compute.amazonaws.com:5432/d3m4k2rgl9urs2 samso_development --app samso
+
 
   $ heroku addons:create heroku-postgresql:hobby-basic --app samso
 
