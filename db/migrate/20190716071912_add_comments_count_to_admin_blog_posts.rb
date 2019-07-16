@@ -18,7 +18,7 @@ class AddCommentsCountToAdminBlogPosts < ActiveRecord::Migration[5.2]
     Comment.find_each do |comment|
       comment.update(admin_blog_post_id: comment.commentable_id)
     end
-    ap blog_post_ids =
+    blog_post_ids =
       Comment
       .pluck(:admin_blog_post_id)
       .uniq

@@ -42,7 +42,7 @@ class Admin::BlogPost < ApplicationRecord
   validates :body, presence: true unless Rails.env == 'test'
   validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
   before_validation { image.clear if delete_image == '1' }
-  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many(
     :blog_post_images,
     dependent: :destroy,
@@ -85,11 +85,7 @@ class Admin::BlogPost < ApplicationRecord
   # rubocop:enable Metrics/MethodLength
 
   def comments?
-    comments_count.positive?
-  end
-
-  def comments_count
-    @comments_count ||= comments.count
+    !comments_count.zero?
   end
 
   def show_page

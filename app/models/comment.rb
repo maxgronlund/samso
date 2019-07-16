@@ -3,7 +3,7 @@
 # internal comments
 class Comment < ApplicationRecord
   belongs_to :user, counter_cache: true
-  belongs_to :commentable, polymorphic: true
+  belongs_to :admin_blog_post, counter_cache: true
   has_many :weekly_comments, dependent: :destroy
   validates :comment, presence: true
 

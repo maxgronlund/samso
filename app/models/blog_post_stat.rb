@@ -2,7 +2,6 @@ class BlogPostStat < ApplicationRecord
   belongs_to :admin_blog_post, class_name: 'Admin::BlogPost'
   has_many :weekly_views, dependent: :destroy
 
-
   def shown!
     return if updated_at > DateTime.now - 0.5.seconds
     weekly_views.create
@@ -44,13 +43,12 @@ class BlogPostStat < ApplicationRecord
       .order(weekly_views_count: :desc)
       .first(posts_count)
       .pluck(:admin_blog_post_id)
-    blog_post_ids.map { |blog_post_id|  Admin::BlogPost.find(blog_post_id)}
+    blog_post_ids.map { |blog_post_id| Admin::BlogPost.find(blog_post_id) }
   end
-
 
   def self.destroy_old_weekly_views!
     WeeklyView
-      .where(find_condition, time_range )
+      .where(find_condition, time_range)
       .destroy_all
   end
 
@@ -59,6 +57,6 @@ class BlogPostStat < ApplicationRecord
   end
 
   def self.time_range
-    {one_week_ago: Time.zone.now - 1.week}
+    { one_week_ago: Time.zone.now - 1.week }
   end
 end
