@@ -1,18 +1,12 @@
+# require 'newspaper_ad_mailer'
+
 class ServiceFunctions::PrintedAdsController < ApplicationController
   before_action :set_service_functions_printed_ad, only: [:show, :edit, :update, :destroy]
   before_action :set_page, only: %i[index new edit show]
 
   # GET /service_functions/printed_ads
   def index
-    @service_functions_printed_ads = ServiceFunctions::PrintedAd.all
 
-    # @page =
-    #   Page
-    #   .includes(page_rows: [page_cols: [:page_col_modules]])
-    #  .find(params[:id])
-
-  rescue
-    render_404
   end
 
   # GET /service_functions/printed_ads/1
@@ -38,14 +32,12 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
     @service_functions_printed_ad = ServiceFunctions::PrintedAd.new(service_functions_printed_ad_params)
 
     if @service_functions_printed_ad.save
-       NewspaperAdMailer
-        .send_message_to_administrators(
-          printed_ad_id: @service_functions_printed_ad.id,
-          emails: admin_system_setup.administrator_email,
-          link: admin_newspaper_ad_url(@service_functions_printed_ad)
-        )
-        .deliver
-        redirect_to service_functions_printed_ads_path, notice: 'show'
+      NewspaperAdMailer.send_message_to_administrators(
+        printed_ad_id: @service_functions_printed_ad.id,
+        emails: admin_system_setup.administrator_email,
+        link: admin_newspaper_ad_url(@service_functions_printed_ad)
+      ).deliver
+      redirect_to service_functions_printed_ads_path, notice: 'show'
     else
       render :new
     end

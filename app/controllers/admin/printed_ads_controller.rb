@@ -1,8 +1,6 @@
-class Admin::PrintedAdsController< AdminController
+class Admin::PrintedAdsController < AdminController
   before_action :set_admin_printed_ad, only: %i[edit update destroy]
-  layout "print", only: [:show]
-
-
+  layout 'print', only: [:show]
 
   # GET /admin/printed_ads
   def index
@@ -55,22 +53,23 @@ class Admin::PrintedAdsController< AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin_printed_ad
-      @admin_printed_ad = Admin::PrintedAd.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def admin_printed_ad_params
-      params
-        .require(:admin_printed_ad)
-        .permit(
-          :title,
-          :body,
-          :impressions,
-          :image,
-          :position,
-          :active
-        )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin_printed_ad
+    @admin_printed_ad = Admin::PrintedAd.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def admin_printed_ad_params
+    params
+      .require(:admin_printed_ad)
+      .permit(
+        :title,
+        :body,
+        :impressions,
+        :image,
+        :position,
+        :active
+      )
+  end
 end

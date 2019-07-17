@@ -1,0 +1,42 @@
+h3 Der er oprettet en annonce
+a href="#{@printed_ad_url}"
+  'Se annonce
+br
+br
+b Annonce tekst:
+br
+
+= simple_format @printed_ad.body
+br
+
+b Bemærkning:
+= simple_format @printed_ad.comment
+br
+
+b Navn:
+= @printed_ad.name
+br
+
+b Adresse:
+= @printed_ad.address
+br
+
+b Postnummer:
+= @printed_ad.zipp_code
+br
+
+b By:
+= @printed_ad.city
+br
+
+b Telefon:
+= @printed_ad.phone
+br
+
+b Kontakt person
+= @printed_ad.contact_person
+br
+
+b email:
+= mail_to @printed_ad.email, @printed_ad.email
+
