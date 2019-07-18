@@ -8,28 +8,28 @@
       h3 Opret konto
 
   .row
+    .col-sm-4.mt-10
+      .card
+        img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-03.jpg" /
+        .card-body
+          h5.card-title Har du et abonnement?
+          p.card-text Hvis du har registreret dig som bruger kan du logge ind her og forny dit abonnement hvis det er nødvendigt
+          = link_to 'Log ind', new_session_path, class: 'btn btn-primary'
     - if @subscription_page.present?
       .col-sm-4.mt-10
         .card
           img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-02.jpg" /
           .card-body
             h5.card-title For nye brugere
-            p.card-text Du har ikke noget abonnoment og vil gerne læse Samsøposten
-            = link_to 'Fortsæt', page_url(@subscription_page), class: 'btn btn-primary'
-    .col-sm-4.mt-10
-      .card
-        img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-03.jpg" /
-        .card-body
-          h5.card-title Eksisterende brugere
-          p.card-text Hvis du er registreret som bruger kan du logge ind her
-          = link_to 'Fortsæt', new_session_path, class: 'btn btn-primary'
+            p.card-text Du har ikke noget abonnement og vil gerne læse Samsøposten
+            = link_to 'Køb abonnement', page_url(@subscription_page), class: 'btn btn-primary'
     .col-sm-4.mt-10
       .card
         img.card-img-top alt="..." src="https://s3.eu-central-1.amazonaws.com/samso-files/create-account/samso-create-account-01.jpg" /
         .card-body
-          h5.card-title Hvis du har et abonnement
-          p.card-text Hvis du abonnere på den trykte avis men ikke har adgang online.
-          = link_to 'Fortsæt', new_account_for_subscriber_path, class: 'btn btn-primary'
+          h5.card-title Hvis du abonnere på den trykte avis?
+          p.card-text Du kan oprette en online konto med dit abonnements nummer.
+          = link_to 'Opret konto', new_account_for_subscriber_path, class: 'btn btn-primary'
 
   .row.mt-12
     .col-sm-12
