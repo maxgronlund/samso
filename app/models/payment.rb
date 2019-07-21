@@ -2,11 +2,19 @@
 
 # papertrail of payments
 class Payment < ApplicationRecord
-  PENDING = 'pending'.freeze
-  ACCEPTED = 'accepted'.freeze
-  DECLINED = 'declined'.freeze
-
-  PROVIDER_ONPAY = 'onpay'.freeze
+  PENDING = 'pending'
+  ACCEPTED = 'accepted'
+  DECLINED = 'declined'
+  PROVIDER_ONPAY = 'onpay'
+  include PgSearch
+  pg_search_scope(
+    :search,
+    against: %i[onpay_reference],
+    associated_against: {
+      user: [:name]
+      # addresses: %i[zipp_code address city first_name middle_name last_name street_name house_number]
+    }
+  )
 
   scope :pending, -> { where(state: PENDING) }
   scope :accepted, -> { where(state: ACCEPTED) }

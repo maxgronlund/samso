@@ -1,0 +1,8 @@
+da:
+  invoice:
+    index: Fakturaer
+    search: Søg
+    show_all: Vis alle
+    for: Betaling for
+    payer: Betaler
+    date: Dato

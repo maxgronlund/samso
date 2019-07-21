@@ -1,2 +1,43 @@
-h1 Invoices#index
-p Find me in app/views/invoices/index.html.slim
+== render 'shared/admin_links', selected: ''
+- session[:stored_path] = request.path
+
+.row
+  .col-sm-6
+    h3 = t('invoice.index')
+  .col-sm-6
+    .pull-right
+
+
+
+
+= form_tag admin_invoices_path, method: 'get', class: 'md-form' do
+  .row
+    .col-sm-6
+      i.fa.fa-search.prefix.grey-text
+      = label_tag :search, 'Søg'
+      = text_field_tag :search, params[:search], autofocus: true, class: 'form-control'
+    .col-sm-6
+      .btn-group
+        = submit_tag t('invoice.search'), :name => nil, class: 'btn btn-light'
+        = link_to t('invoice.show_all'), admin_invoices_path, class: 'btn btn-light'
+
+
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover.table-sm
+    thead.thead-dark
+      tr
+        th ID
+        th = t('invoice.for')
+        th = t('invoice.payer')
+        th = t('invoice.date')
+
+    tbody
+      - @invoices.each do |invoice|
+        tr
+          td = invoice.onpay_reference
+          td = link_to invoice.for, admin_invoice_path(invoice.uuid), class: 'btn btn-sm btn-light', target: 'top'
+          td = link_to invoice.user.name, admin_user_path(invoice.user), class: 'btn btn-sm btn-light'
+          td = l invoice.created_at
+
+= paginate @invoices

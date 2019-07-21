@@ -1,0 +1,8 @@
+en:
+  invoice:
+    index: Invoices
+    search: Search
+    show_all: Show all
+    for: Payment for
+    payer: Payer
+    date: Date
