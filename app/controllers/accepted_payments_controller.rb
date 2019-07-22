@@ -53,7 +53,7 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   def send_email_to_admin
-    return if payment_completed?
+    return unless subscription.print_version?
 
     SubscriptionCreatedMailer
       .send_message_to_system_administrator(
