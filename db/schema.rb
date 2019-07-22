@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_071912) do
+ActiveRecord::Schema.define(version: 2019_07_22_083506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -511,7 +511,8 @@ ActiveRecord::Schema.define(version: 2019_07_16_071912) do
     t.string "administrator_email"
     t.string "editor_emails", default: ""
     t.string "e_pages_date"
-    t.integer "last_subscription_id", default: 8005250
+    t.integer "last_subscription_id"
+    t.string "order_completed_email"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
@@ -737,7 +738,7 @@ ActiveRecord::Schema.define(version: 2019_07_16_071912) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
-    t.integer "comments_count", default: 0
+    t.integer "comments_count"
     t.integer "legacy_id"
     t.string "auth_token"
     t.index ["email"], name: "index_users_on_email", unique: true

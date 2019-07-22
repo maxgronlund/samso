@@ -14,6 +14,8 @@ da:
       admin/system_setup: System opsætning
   system_setup:
     administrator_email: Email til administrator
-    administrator_email_hint: Beskeder om nye abonnenter
+    administrator_email_hint: Annoncer, og andet
+    order_completed_email: Email om trykt abonnement
+    order_completed_email_hint: Sendes ved betaling/oprettelse
     editor_emails: Emails til Jurnalister
     editor_emails_hint: Emails med Læserbreve sendes til.

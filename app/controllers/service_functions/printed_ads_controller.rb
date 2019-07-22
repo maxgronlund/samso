@@ -34,7 +34,6 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
     if @service_functions_printed_ad.save
       NewspaperAdMailer.send_message_to_administrators(
         printed_ad_id: @service_functions_printed_ad.id,
-        emails: admin_system_setup.administrator_email,
         link: admin_newspaper_ad_url(@service_functions_printed_ad)
       ).deliver
       redirect_to service_functions_printed_ads_path, notice: 'show'

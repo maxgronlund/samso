@@ -28,10 +28,40 @@ class Admin::SystemSetup < ApplicationRecord
     Page.find_each(&:touch)
   end
 
+  def self.admin_emails
+    emails =
+      system_setup
+      .administrator_email
+    split_and_sanitize(emails)
+  rescue
+    []
+  end
+
+  def self.order_completed_emails
+    emails =
+      system_setup
+      .order_completed_email
+    split_and_sanitize(emails)
+  rescue
+    []
+  end
+
+  def self.split_and_sanitize(emails)
+    emails
+      .split(',')
+      .map(&:strip)
+      .reject(&:blank?)
+      .reject(&:invalid_email?)
+  end
+
   # Admin::SystemSetup.subscription_module
   def self.subscription_module
     Admin::SubscriptionModule
       .where(locale: I18n.locale)
       .first_or_create(locale: I18n.locale)
+  end
+
+  def self.system_setup
+    Admin::SystemSetup.find_by(locale: I18n.locale)
   end
 end

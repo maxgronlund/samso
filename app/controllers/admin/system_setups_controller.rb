@@ -42,7 +42,8 @@ class Admin::SystemSetupsController < AdminController
       :administrator_email,
       :editor_emails,
       :e_pages_date,
-      :last_subscription_id
+      :last_subscription_id,
+      :order_completed_email
     )
   end
 end

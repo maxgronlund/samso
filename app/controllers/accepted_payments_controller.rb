@@ -1,6 +1,6 @@
 class AcceptedPaymentsController < ApplicationController
-  # The paument went true so we don't need to validate the user
-  # hence te cc is a great validation
+  # The payment went true so we don't need to validate the user
+  # hence the cc is a great validation
   def index
     params.permit!
     log_request
@@ -57,8 +57,7 @@ class AcceptedPaymentsController < ApplicationController
 
     SubscriptionCreatedMailer
       .send_message_to_system_administrator(
-        subscription.subscription_id,
-        admin_system_setup.id
+        subscription.subscription_id
       ).deliver
   end
 

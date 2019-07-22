@@ -23,7 +23,12 @@ h3 = t('edit_model', model_name: 'System opsætning')
       as: :email,
       label: t('system_setup.editor_emails'),
       hint: t('system_setup.editor_emails_hint')
-
+  .row
+    .col-sm-6
+      = f.input :order_completed_email,
+        as: :email,
+        label: t('system_setup.order_completed_email'),
+        hint: t('system_setup.order_completed_email_hint')
   .row
     .col-sm-6
       = f.input :landing_page_id,
