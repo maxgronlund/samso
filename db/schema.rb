@@ -511,7 +511,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_083506) do
     t.string "administrator_email"
     t.string "editor_emails", default: ""
     t.string "e_pages_date"
-    t.integer "last_subscription_id"
+    t.integer "last_subscription_id", default: 8005250
     t.string "order_completed_email"
   end
 
@@ -738,7 +738,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_083506) do
     t.boolean "subscribe_to_news", default: false
     t.datetime "latest_online_payment"
     t.uuid "uuid"
-    t.integer "comments_count"
+    t.integer "comments_count", default: 0
     t.integer "legacy_id"
     t.string "auth_token"
     t.index ["email"], name: "index_users_on_email", unique: true
