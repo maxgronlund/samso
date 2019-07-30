@@ -1,8 +1,15 @@
 class ResetPasswordController < ApplicationController
   def index
-    return if resend_password_params[:send].nil?
-
-    @message = Admin::SystemMessage.resend_password
+    case resend_password_params[:send]
+    when nil
+      @show_form = true
+    when 'true'
+      @message = Admin::SystemMessage.resend_password
+      @show_form = false
+    when 'false'
+      @show_form = true
+      @message = Admin::SystemMessage.no_user_found
+    end
   end
 
   def edit
@@ -26,8 +33,13 @@ class ResetPasswordController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    send_reset_password_link(user) unless user.nil?
-    redirect_to reset_password_index_path(send: true)
+    if user.present?
+      send_reset_password_link(user)
+      redirect_to reset_password_index_path(send: true)
+    else
+      create_event_notification
+      redirect_to reset_password_index_path(send: false, email: resend_password_params[:email])
+    end
   end
 
   # def show
@@ -35,6 +47,17 @@ class ResetPasswordController < ApplicationController
   # end
 
   private
+
+  def create_event_notification
+    Admin::EventNotification.create(
+      title: Admin::SystemMessage.no_user_found.title,
+      body: Admin::SystemMessage.no_user_found.body,
+      message_type: 'reset_password',
+      metadata: {
+        email: resend_password_params[:email]
+      }
+    )
+  end
 
   def resend_password_params
     params.permit!

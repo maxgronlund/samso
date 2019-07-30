@@ -1,6 +1,12 @@
 = render 'shared/navbar', menu: @menu, top_page: @page
 .container.pt-60
-  - if @message.nil?
+  - if params["send"] == "false"
+    .row.justify-content-md-center
+      .col-md-auto.col-md-8
+        .alert.alert-danger
+          h4 = @message.title
+          = simple_format @message.body
+  - if @show_form
     .row.justify-content-md-center
       .col-md-auto.col-md-8
         .card
@@ -16,7 +22,7 @@
               .form-actions
                 .pull-right
                   = submit_tag t('send'), class: 'btn btn-primary'
-  - else
+  - if params["send"] == "true"
     .row.justify-content-md-center
       .col-md-auto.col-md-8
         .card
