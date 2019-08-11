@@ -24,6 +24,18 @@ class Admin::SystemMessage < ApplicationRecord
       )
   end
 
+  def self.no_user_found
+    @resend_password =
+      Admin::SystemMessage
+      .where(locale: I18n.locale, identifier: 'no_user_found')
+      .first_or_create(
+        locale: I18n.locale,
+        identifier: 'no_user_found',
+        title: 'no_user_found',
+        body: 'no_user_with_email'
+      )
+  end
+
   def self.new_password_email
     @new_password_email =
       Admin::SystemMessage
