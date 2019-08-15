@@ -6,9 +6,10 @@
 
 # Ignore bundler config.
 /.bundle
-~*
-*.swp
-*.swo
+.swp
+.swo
+.gitignore~
+
 # Ignore the default SQLite database.
 samso_development
 
