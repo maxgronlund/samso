@@ -1,0 +1,39 @@
+= render 'shared/navbar', menu: @menu, top_page: @page
+.container.pt-60
+  - if params["send"] == "false"
+    .row.justify-content-md-center
+      .col-md-auto.col-md-8
+        .alert.alert-danger
+          h4 = @message.title
+          = simple_format @message.body
+  - if @show_form
+    .row.justify-content-md-center
+      .col-md-auto.col-md-8
+        .card
+          h4.card-header = t('user.reset_password')
+
+          .card-body
+            = form_tag reset_password_index_path, method: 'post' do |f|
+              .form-inputs
+                = label_tag :email
+                br
+                = text_field_tag :email, params[:email] , class: 'form-control' , required: true, autofocus: true
+                br
+              .form-actions
+                .pull-right
+                  = submit_tag t('send'), class: 'btn btn-primary'
+  - if params["send"] == "true"
+    .row.justify-content-md-center
+      .col-md-auto.col-md-8
+        .card
+          h4.card-header = @message.title
+
+          .card-body
+            = simple_format @message.body
+            hr
+            .row
+              .col-md-12
+                .pull-right
+
+                  = link_to t('ok'), root_path, class: 'btn btn-light'
+
