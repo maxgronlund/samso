@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :text_module, class: Admin::TextModule do |f|
-    f.title { Faker::Hipster.sentence(3) }
-    f.body { Faker::Hipster.sentence(16) }
+    f.title { Faker::Hipster.sentence(word_count: 3) }
+    f.body { Faker::Hipster.sentence(word_count: 16) }
     f.url { '' }
     f.url_text { nil }
     f.page_id { nil }

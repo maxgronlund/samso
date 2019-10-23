@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/ClassLength
 class User < ApplicationRecord
   paginates_per 50
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope(
     :search_by_name_or_email,
     against: %i[name email],

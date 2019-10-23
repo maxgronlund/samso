@@ -6,7 +6,7 @@ class Payment < ApplicationRecord
   ACCEPTED = 'accepted'
   DECLINED = 'declined'
   PROVIDER_ONPAY = 'onpay'
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope(
     :search,
     against: %i[onpay_reference],
