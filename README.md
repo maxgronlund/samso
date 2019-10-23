@@ -3,7 +3,6 @@
 # README
 
 
-
 A framework for building custom web-app.
 it trades explicity over implicity
 It's based on Bootstrap
