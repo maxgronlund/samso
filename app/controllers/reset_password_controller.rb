@@ -1,7 +1,5 @@
 class ResetPasswordController < ApplicationController
   def index
-    ap "==========================="
-    ap resend_password_params[:send]
     case resend_password_params[:send]
     when nil
       @show_form = true
@@ -11,8 +9,6 @@ class ResetPasswordController < ApplicationController
     when 'false'
       @show_form = true
       @message = Admin::SystemMessage.no_user_found
-    when nil
-      @show_form = true
     end
   end
 
