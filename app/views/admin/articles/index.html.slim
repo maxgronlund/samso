@@ -41,7 +41,7 @@ br
 
 
     tbody
-      - @blog_pots.each do |blog_post|
+      - @blog_post.each do |blog_post|
         tr
           td
             = blog_post.title
@@ -50,7 +50,7 @@ br
           td = blog_post.category_name
           td = l(blog_post.start_date) unless blog_post.start_date.nil?
           td
-            = t('admin/article.views', views: blog_post.views)
+            = t('admin/article.views', views: blog_post.views.to_s)
             .pull-right
               .btn-group
                 = link_to t('show'),
@@ -65,4 +65,4 @@ br
                   method: :delete,
                   class: 'btn btn-danger btn-sm'
 
-= paginate @blog_pots
+= paginate @blog_post
