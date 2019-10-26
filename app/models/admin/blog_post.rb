@@ -106,20 +106,29 @@ class Admin::BlogPost < ApplicationRecord
 
   # rubocop:disable Lint/HandleExceptions
   def shown!
-    blog_post_stat.shown!
+    secure_blog_post_stat.shown!
   end
   # rubocop:enable Lint/HandleExceptions
 
   def views
-    blog_post_stat ? blog_post_stat.views : 0
+    secure_blog_post_stat
   end
 
   def views_last_seven_days
-    blog_post_stat.views_last_seven_days
+    secure_blog_post_stat.views_last_seven_days
   end
 
   def to_param
     "#{id} #{title}".parameterize
+  end
+
+  def secure_blog_post_stat
+    blog_post_stat.presence ||
+      BlogPostStat.create(
+        admin_blog_post_id: self.id,
+        views: 1,
+        start_date: Time.zone.now
+      )
   end
 
   def author_name
