@@ -111,7 +111,7 @@ class Admin::BlogPost < ApplicationRecord
   # rubocop:enable Lint/HandleExceptions
 
   def views
-    secure_blog_post_stat
+    secure_blog_post_stat.views
   end
 
   def views_last_seven_days
