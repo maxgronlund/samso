@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_083506) do
+ActiveRecord::Schema.define(version: 2019_10_28_142218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_083506) do
     t.boolean "show_facebook_comments", default: true
     t.string "image_caption"
     t.integer "comments_count", default: 0
+    t.index "(((((setweight(to_tsvector('danish'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::\"char\") || ''::tsvector) || setweight(to_tsvector('danish'::regconfig, COALESCE(subtitle, ''::text)), 'B'::\"char\")) || ''::tsvector) || setweight(to_tsvector('danish'::regconfig, COALESCE(body, ''::text)), 'C'::\"char\")))", name: "admin_blog_posts_fts_idx", using: :gin
     t.index ["blog_id"], name: "index_admin_blog_posts_on_blog_id"
     t.index ["post_page_id"], name: "index_admin_blog_posts_on_post_page_id"
     t.index ["user_id"], name: "index_admin_blog_posts_on_user_id"
