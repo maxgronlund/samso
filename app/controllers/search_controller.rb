@@ -2,12 +2,20 @@
 class SearchController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def index
+    # @blog_posts =
+    #   Admin::BlogPost
+    #   .elasticsearch(params[:query])
+    #   .page(params[:page])
+    #   .per(20)
+    #   .records
     @blog_posts =
       Admin::BlogPost
-      .elasticsearch(params[:query])
-      .page(params[:page])
-      .per(20)
-      .records
+        .order(start_date: :desc)
+        .search_for(params[:query])
+        .page(params[:page])
+        .per(20)
+
+
 
     @page             = admin_system_setup.search_page
     @landing_page     = admin_system_setup.landing_page || Page.find_by(locale: I18n.locale)
@@ -31,5 +39,4 @@ class SearchController < ApplicationController
   end
 end
 
-
-# @blog_posts = Admin::BlogPost.elasticsearch("samso").page(1).per(10).records
+ # ap Admin::BlogPost.search_for("samso").first(10)

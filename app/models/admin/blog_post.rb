@@ -2,21 +2,36 @@
 
 # Post in the blog
 class Admin::BlogPost < ApplicationRecord
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include PgSearch::Model
+  # pg_search_scope :search_for, against: %i(title body signature subtitle), using: [:tsearch, :trigram]
 
-  index_name    "articles-#{Rails.env}"
-  document_type 'post'
+  pg_search_scope(
+    :search_for,
+    against: %i[title subtitle body signature],
+    using: {
+      tsearch: {
+        dictionary: 'danish'
+      },
+      trigram: {
+        only: %i[title subtitle signature]
+      }
+    }
+  )
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
 
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :title, analyzer: 'danish', type: 'text'
-      indexes :body, analyzer: 'danish', type: 'text'
-      indexes :signature, analyzer: 'danish', type: 'text'
-      indexes :subtitle, analyzer: 'danish', type: 'text'
-      indexes :teaser, analyzer: 'danish', type: 'text'
-    end
-  end
+  # index_name    "articles-#{Rails.env}"
+  # document_type 'post'
+
+  # settings index: { number_of_shards: 1 } do
+  #   mappings dynamic: 'false' do
+  #     indexes :title, analyzer: 'danish', type: 'text'
+  #     indexes :body, analyzer: 'danish', type: 'text'
+  #     indexes :signature, analyzer: 'danish', type: 'text'
+  #     indexes :subtitle, analyzer: 'danish', type: 'text'
+  #     indexes :teaser, analyzer: 'danish', type: 'text'
+  #   end
+  # end
 
   attr_accessor :delete_image, :page_id
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true, optional: true

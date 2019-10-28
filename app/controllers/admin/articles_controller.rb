@@ -16,9 +16,8 @@ class Admin::ArticlesController < AdminController
 
   def blog_posts
     Admin::BlogPost
-      .search(params[:search])
-      .records
       .order(start_date: :desc)
+      .search_for(params[:search])
       .page(params[:page])
       .per(20)
   end
