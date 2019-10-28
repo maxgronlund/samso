@@ -55,6 +55,7 @@ Things you may want to cover:
 
 * Database restore
   $ psql samso_development < samso_development
+  psql samso_development < /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 
 * Import categories as csv file and build pages for articles
   rake page:build
@@ -82,6 +83,7 @@ Things you may want to cover:
   $ heroku pg:backups:capture --app samso
   $ heroku pg:backups:download --app samso
 
+# install backup from Heroku on localhost
   pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_development /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 
   alternative

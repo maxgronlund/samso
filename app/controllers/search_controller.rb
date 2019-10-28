@@ -30,3 +30,6 @@ class SearchController < ApplicationController
     params.permit!
   end
 end
+
+
+# @blog_posts = Admin::BlogPost.elasticsearch("samso").page(1).per(10).records
