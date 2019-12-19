@@ -49,6 +49,7 @@ gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 # gem 'rails_autoscale_agent'
 # gem 'httparty'
 # gem "wysiwyg-rails"
+gem "rails_autoscale_agent"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
