@@ -10,7 +10,7 @@ Feature: I can see the subscription module if I have no valid subscription
   @javascript
   Scenario: As a user I can edit my profile
     When I login as "valid-subscriber@example.com" with the password "ComeOnIn123"
-    Then I visit my account page
+    Then I click on a link with id "user_account"
     Then I can see my account
     Then I can click on a "edit" link
     Then I can change my address

@@ -15,8 +15,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .pull-right
       .top-menu-links
         - if user_signed_in?
-          = link_to current_user.name, user_path(@current_user), class: 'top-menu-link'
-          =< link_to t('sign_out'), session_path(1), method: :delete, class: 'top-menu-link', id: 'user_account'
+          = link_to current_user.name, user_path(@current_user), class: 'top-menu-link', id: 'user_account'
+          =< link_to t('sign_out'), session_path(1), method: :delete, class: 'top-menu-link'
         - else
           /= link_to t('signup'), new_user_path, class: 'top-menu-link'
           = link_to t('signup'), create_account_index_path, class: 'top-menu-link'
