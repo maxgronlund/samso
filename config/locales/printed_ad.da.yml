@@ -53,5 +53,6 @@ da:
     position_hint: De to aktiverede annoncer med det højeste nummer bliver vist
     impressions: Visninger
     index_help: Kun de to øverste aktive annoncer bliver vist
+    week_and_year: "Uge: %{week} - %{year}"
 
 
