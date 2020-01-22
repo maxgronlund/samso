@@ -12,5 +12,4 @@ end
 
 Then('I click on a link with id {string}') do |id|
   find("##{id}").click
-  sleep 3
 end
