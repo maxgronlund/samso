@@ -166,5 +166,5 @@ heroku domains --app samso
 <iframe width="290" height="200" frameborder="0" scrolling="yes" src="http://samsoposten.dk.nt5.unoeuro-server.com/event/visidag.asp"></iframe>
 
 
-
+heroku[router]: at=error code=H12 desc="Request timeout" method=GET path="/" host=samso.herokuapp.com request_id=6a28f876-076f-4afb-ab9e-46f5f5f35a63 fwd="195.210.18.10,157.167.45.180" dyno=web.1 connect=0ms service=30000ms status=503 bytes=0 protocol=htt
 

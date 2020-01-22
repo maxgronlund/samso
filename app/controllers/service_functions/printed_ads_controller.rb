@@ -18,9 +18,9 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
     @service_functions_printed_ad =
       ServiceFunctions::PrintedAd
       .new(
-        start_date: Date.today.beginning_of_week + 8.day + 9.hours,
         number_of_columns: 2
       )
+    set_week_and_year
   end
 
   # GET /service_functions/printed_ads/1/edit
@@ -29,7 +29,9 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
 
   # POST /service_functions/printed_ads
   def create
-    @service_functions_printed_ad = ServiceFunctions::PrintedAd.new(service_functions_printed_ad_params)
+    @service_functions_printed_ad =
+      ServiceFunctions::PrintedAd
+      .new(service_functions_printed_ad_params)
 
     if @service_functions_printed_ad.save
       NewspaperAdMailer.send_message_to_administrators(
@@ -58,6 +60,13 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
   end
 
   private
+
+    def set_week_and_year
+      y,m,d = Time.now.strftime("%Y,%m,%e").split(",")
+      @this_week = Date.civil(y.to_i, m.to_i, d.to_i).cweek
+      @years = y.to_i..(y.to_i + 5)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_service_functions_printed_ad
       @service_functions_printed_ad = ServiceFunctions::PrintedAd.find(params[:id])
@@ -65,7 +74,22 @@ class ServiceFunctions::PrintedAdsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def service_functions_printed_ad_params
-      params.require(:service_functions_printed_ad).permit(:start_date, :number_of_columns, :body, :comment, :name, :address, :zipp_code, :city, :email, :phone, :contact_person)
+      params.require(:service_functions_printed_ad)
+        .permit(
+          :start_date,
+          :number_of_columns,
+          :body,
+          :comment,
+          :name,
+          :address,
+          :zipp_code,
+          :city,
+          :email,
+          :phone,
+          :contact_person,
+          :week,
+          :year
+        )
     end
 
     def set_page

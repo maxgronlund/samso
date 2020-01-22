@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_142218) do
+ActiveRecord::Schema.define(version: 2020_01_22_080009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -711,6 +711,8 @@ ActiveRecord::Schema.define(version: 2019_10_28_142218) do
     t.string "state", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "week", default: 1
+    t.integer "year", default: 2020
   end
 
   create_table "users", force: :cascade do |t|

@@ -22,6 +22,8 @@ da:
         phone: Telefon
         contact_person: Kontaktperson
         state: Status
+        week: Uge
+        year: År
 
     models:
       service_functions/printed_ad: Trykt annonce
@@ -35,6 +37,7 @@ da:
     approved: Godkendt
     printed: Trykt
     dead_line: "(Deadline %{date_time} inden udgivelsen, for annoncer over ½ side er deadline mandag kl. 12 inden udgivelsen)"
+    prepress: Deadline tirsdage kl. 9 inden udgivelsen.
     create: Opret trykt annonce
     index: Anonncer til udskrifts side
     side_nav:

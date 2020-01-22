@@ -3,7 +3,12 @@
 
   .row
     .col-sm-6
-      = f.input :start_date, hint: t('printed_ad.start_date_hint')
+      .row
+        .col-sm-6
+          = f.input :week, collection: @this_week..53, as: :select, include_blank: false
+        .col-sm-6
+          = f.input :year, collection: @years, as: :select, include_blank: false
+      /= f.input :start_date, hint: t('printed_ad.start_date_hint')
     .col-sm-6
       = f.input :number_of_columns, collection: 0...5, as: :radio_buttons, class: 'horizontal-radio'
   .row
