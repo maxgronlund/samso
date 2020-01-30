@@ -27,12 +27,18 @@
         .row
           .col-sm-8
             = f.input :author_name, label: 'Navn'
-          .col-sm-4
-            - if administrator?
+        - if administrator?
+          .row
+            .col-sm-8
+              = link_to admin_user_path(comment.user) do
+                = "Kommentaren er skrevet af #{comment.user.name}"
+            .col-sm-4
               = f.input :state,
-                collection: Comment::STATES,
-                include_blank: false,
-                label: false
+                  collection: Comment::STATES,
+                  include_blank: false,
+                  label: false
+
+
         .row
           .col-sm-12
             .pull-right
