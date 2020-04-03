@@ -183,6 +183,7 @@ GEM
     minitest (5.12.2)
     multi_json (1.14.1)
     multi_test (0.1.2)
+    newrelic_rpm (6.9.0.363)
     nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
@@ -364,6 +365,7 @@ DEPENDENCIES
   kaminari
   kaminari-bootstrap (~> 3.0.1)
   listen (>= 3.0.5, < 3.2)
+  newrelic_rpm
   paperclip
   pg (~> 0.18)
   pg_search

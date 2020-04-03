@@ -24,7 +24,7 @@ nav aria-label="breadcrumb"
         edit_admin_user_path(@user),
         class: 'btn btn-primary btn-sm'
       - unless @user.free_subscription?
-        = link_to 'Opret friabonnoment',
+        = link_to 'Opret friabonnement',
           new_admin_user_user_subscription_path(@user),
           class: 'btn btn-sm btn-success'
   .col-sm-4

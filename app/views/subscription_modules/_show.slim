@@ -5,9 +5,9 @@
     .col-12.mb-20
       .card
         h4.card-header
-          | Har du allerede et abonnoment?
+          | Har du allerede et abonnement?
         .card-body
-          | Hvis du allerede er oprettet og gerne vil forny dit abonnoment
+          | Hvis du allerede er oprettet og gerne vil forny dit abonnement
           .pull-right
             = link_to t('login_and_renew'), new_session_path, class: 'btn btn-primary'
 
@@ -16,7 +16,7 @@
     - if current_user.nil?
       = subscription_module.title
     - else
-      | Opret / Forny abonnoment
+      | Opret / Forny abonnement
   .card-body
     = simple_format subscription_module.body
     hr
