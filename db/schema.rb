@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_080009) do
+ActiveRecord::Schema.define(version: 2020_04_03_110605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.string "letter"
     t.string "floor"
     t.string "side"
+    t.index ["address_type"], name: "index_addresses_on_address_type"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
@@ -145,7 +146,9 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.integer "blog_posts_count", default: 0
     t.integer "index_page_id"
     t.integer "show_page_id"
+    t.index ["index_page_id"], name: "index_admin_blogs_on_index_page_id"
     t.index ["show_page_id"], name: "index_admin_blogs_on_show_page_id"
+    t.index ["title"], name: "index_admin_blogs_on_title"
   end
 
   create_table "admin_calendar_events", force: :cascade do |t|
@@ -366,6 +369,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_admin_module_names_on_name"
   end
 
   create_table "admin_most_popular_modules", force: :cascade do |t|
@@ -468,6 +472,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.boolean "free", default: false
     t.string "identifier", default: "internal"
     t.string "group", default: "Abonnement"
+    t.index ["identifier"], name: "index_admin_subscription_types_on_identifier"
   end
 
   create_table "admin_subscriptions", force: :cascade do |t|
@@ -482,6 +487,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.boolean "send_reminder", default: false
     t.integer "subscription_id"
     t.uuid "last_payment_uuid"
+    t.index ["subscription_id"], name: "index_admin_subscriptions_on_subscription_id"
     t.index ["subscription_type_id"], name: "index_admin_subscriptions_on_subscription_type_id"
     t.index ["user_id"], name: "index_admin_subscriptions_on_user_id"
   end
@@ -514,6 +520,8 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.string "e_pages_date"
     t.integer "last_subscription_id", default: 8005250
     t.string "order_completed_email"
+    t.index ["locale", "id"], name: "index_admin_system_setups_on_locale_and_id"
+    t.index ["locale"], name: "index_admin_system_setups_on_locale"
   end
 
   create_table "admin_text_modules", force: :cascade do |t|
@@ -601,6 +609,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.string "secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["secret"], name: "index_e_paper_tokens_on_secret"
     t.index ["user_id"], name: "index_e_paper_tokens_on_user_id"
   end
 
@@ -614,6 +623,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
+    t.index ["moduleable_type"], name: "index_page_col_modules_on_moduleable_type"
     t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
   end
 
@@ -623,6 +633,8 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.integer "index", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["index"], name: "index_page_cols_on_index"
+    t.index ["layout"], name: "index_page_cols_on_layout"
     t.index ["page_row_id"], name: "index_page_cols_on_page_row_id"
   end
 
@@ -662,6 +674,9 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.datetime "updated_at", null: false
     t.boolean "category_page", default: false
     t.index ["admin_footer_id"], name: "index_pages_on_admin_footer_id"
+    t.index ["locale"], name: "index_pages_on_locale"
+    t.index ["menu_title"], name: "index_pages_on_menu_title"
+    t.index ["title"], name: "index_pages_on_title"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -675,7 +690,9 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.integer "payable_id"
     t.string "payable_type"
     t.string "onpay_reference", default: "na"
+    t.index ["onpay_reference"], name: "index_payments_on_onpay_reference"
     t.index ["user_id"], name: "index_payments_on_user_id"
+    t.index ["uuid"], name: "index_payments_on_uuid"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -693,6 +710,7 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["permission"], name: "index_roles_on_permission"
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
@@ -744,8 +762,13 @@ ActiveRecord::Schema.define(version: 2020_01_22_080009) do
     t.integer "comments_count", default: 0
     t.integer "legacy_id"
     t.string "auth_token"
+    t.index ["auth_token"], name: "index_users_on_auth_token"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["signature"], name: "index_users_on_signature"
+    t.index ["user_id"], name: "index_users_on_user_id"
+    t.index ["uuid"], name: "index_users_on_uuid"
   end
 
   create_table "weekly_comments", force: :cascade do |t|

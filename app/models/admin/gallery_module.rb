@@ -17,7 +17,9 @@ class Admin::GalleryModule < ApplicationRecord
   end
 
   def show_page
-    Page.find_by(id: page_id)
+    Page.find(page_id)
+  rescue => e
+    nil
   end
 
   def prev_page(request_path, current_page)

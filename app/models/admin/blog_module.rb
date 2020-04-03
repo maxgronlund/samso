@@ -81,7 +81,9 @@ class Admin::BlogModule < ApplicationRecord
   end
 
   def blog
-    @blog ||= Admin::Blog.find_by(id: admin_blog_id)
+    @blog ||= Admin::Blog.find(admin_blog_id)
+  rescue => e
+    nil
   end
 
   def self.collection

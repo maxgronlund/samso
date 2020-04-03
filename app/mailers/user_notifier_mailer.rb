@@ -7,8 +7,7 @@ class UserNotifierMailer < ApplicationMailer
   # contains the user's email address
   # usage UserNotifierMailer.send_signup_email(5).deliver_now
   def send_signup_email(user_id)
-    @user = User.find_by(id: user_id)
-    return if @user.nil?
+    @user = User.find(user_id)
 
     @token = @user.confirmation_token
     return if @token.nil?
@@ -22,12 +21,14 @@ class UserNotifierMailer < ApplicationMailer
       to: @user.email,
       subject: I18n.t('thanks_for_signing_up')
     )
+  rescue => e
+    return
   end
 
   # send a signup email to the user, pass in the user object that
   # contains the user's email address
   def send_reset_password_link(user_id)
-    @user = User.find_by(id: user_id)
+    @user = User.find(user_id)
     return if @user.nil?
 
     @token = @user.reset_password_token

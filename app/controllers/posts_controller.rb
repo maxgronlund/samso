@@ -62,7 +62,9 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Admin::BlogPost.find_by(id: params[:id])
+    @post = Admin::BlogPost.find(params[:id])
+  rescue => e
+    nil
   end
 
   # store the page in a session so we can bounce to it after sign up / login

@@ -50,7 +50,9 @@ class Payment < ApplicationRecord
   def payable
     return nil if payable_type.nil? || payable_id.nil?
 
-    payable_type.constantize.find_by(id: payable_id)
+    payable_type.constantize.find(payable_id)
+  rescue => e
+    nil
   end
 
   def payable_name

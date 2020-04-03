@@ -20,9 +20,8 @@ class Admin::ImageModule < ApplicationRecord
   private
 
   def galery_image(gallery_image_id)
-    @gallery_image ||= Admin::GalleryImage.find_by(id: gallery_image_id)
-    return @gallery_image unless @gallery_image.nil?
-
+    @gallery_image ||= Admin::GalleryImage.find(gallery_image_id)
+  rescue => e
     Admin::GalleryImage.last
   end
 end
