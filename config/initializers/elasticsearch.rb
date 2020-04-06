@@ -1,6 +1,6 @@
 Searchkick.client =
   Elasticsearch::Client.new(
-    hosts: ["localhost:9200"],
+    hosts: ["https://paas:a8a01d233d3291abe7f0721b9f909663@gloin-eu-west-1.searchly.com"],
     retry_on_failure: true,
     transport_options: {request: {timeout: 250}}
   )
