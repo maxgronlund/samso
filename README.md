@@ -146,6 +146,11 @@ Address.__elasticsearch__.create_index!
 Address.__elasticsearch__.refresh_index!
 Address.import force: true
 
+heroku run rake searchkick:reindex CLASS=User --app samso
+heroku run rake searchkick:reindex CLASS=Admin::BlogPost --app samso
+
+heroku config:set ELASTICSEARCH_URL="heroku config:get SEARCHBOX_URL"
+
 
 start elasticsearch
 $ elasticsearch
