@@ -39,10 +39,12 @@ class User < ApplicationRecord
 
   def search_data
     {
+      id: id,
       name: name,
       signature: signature,
       email: email,
       user_id: user_id.to_s,
+      latest_online_payment: latest_online_payment,
       conversions: [addresses]
     }
   end

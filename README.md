@@ -127,24 +127,7 @@ Things you may want to cover:
 
 
 
-Admin::BlogPost.__elasticsearch__.delete_index!
-Admin::BlogPost.__elasticsearch__.create_index!
-Admin::BlogPost.__elasticsearch__.refresh_index!
-Admin::BlogPost.__elasticsearch__.import force: true
 
-$ Admin::BlogPost.__elasticsearch__.create_index! √
-$ Admin::BlogPost.__elasticsearch__.create_index! force: true
-$ Admin::BlogPost.__elasticsearch__.refresh_index! √
-$
-$ Admin::BlogPost.import force: true
-
-
-
-On Heroku
-Address.__elasticsearch__.delete_index!
-Address.__elasticsearch__.create_index!
-Address.__elasticsearch__.refresh_index!
-Address.import force: true
 
 heroku run rake searchkick:reindex CLASS=User --app samso
 heroku run rake searchkick:reindex CLASS=Admin::BlogPost --app samso
