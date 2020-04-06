@@ -3,13 +3,23 @@
 # rubocop:disable Metrics/ClassLength
 class User < ApplicationRecord
   paginates_per 50
-
-
-
-
-
-
-
+  include PgSearch::Model
+  pg_search_scope(
+    :search_by_name_or_email,
+    against: %i[name email],
+    using: {
+      tsearch: {
+        dictionary: 'danish'
+      },
+      trigram: {
+        only: 'email'
+      }
+    },
+    associated_against: {
+      subscriptions: [:subscription_id],
+      addresses: %i[zipp_code address city first_name middle_name last_name street_name house_number]
+    }
+  )
   has_secure_password
   attr_accessor(
     :delete_avatar,
@@ -33,19 +43,6 @@ class User < ApplicationRecord
     as: :addressable,
     dependent: :destroy
   )
-
-
-  searchkick conversions: [:addresses]
-
-  def search_data
-    {
-      name: name,
-      signature: signature,
-      email: email,
-      user_id: user_id.to_s,
-      conversions: [addresses]
-    }
-  end
 
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :roles

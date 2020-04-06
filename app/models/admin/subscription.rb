@@ -2,6 +2,15 @@
 
 # a subscription
 class Admin::Subscription < ApplicationRecord
+  # searchkick
+
+  # def search_data
+  #   {
+  #     subscription_id: subscription_id.to_s
+  #   }
+  # end
+
+
   require 'csv'
   attr_accessor :on_hold
   belongs_to :subscription_type, class_name: 'Admin::SubscriptionType', counter_cache: true

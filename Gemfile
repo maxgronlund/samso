@@ -9,7 +9,7 @@ end
 gem 'rails', '~> 5.2.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg', '~> 0.18'
-gem 'pg_search'
+# gem 'pg_search'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
@@ -34,6 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'awesome_print'
 # gem 'elasticsearch-model', '~> 6.0.0'
 # gem 'elasticsearch-rails', '~> 6.0.0'
+gem 'searchkick'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'font-awesome-sass'
