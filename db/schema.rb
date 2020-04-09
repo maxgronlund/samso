@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_110605) do
+ActiveRecord::Schema.define(version: 2020_04_09_074408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -220,6 +220,15 @@ ActiveRecord::Schema.define(version: 2020_04_03_110605) do
 
   create_table "admin_dmi_modules", force: :cascade do |t|
     t.string "forecast_duration", default: "days_two_forecast"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_e_page_free_modules", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "link"
+    t.string "image_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
