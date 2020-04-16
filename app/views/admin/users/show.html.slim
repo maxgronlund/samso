@@ -73,7 +73,7 @@ nav aria-label="breadcrumb"
                               class: 'btn btn-danger btn-sm'
                       - if subscription.print_version?
                         = link_to t('subscription.delivery_address'),
-                          admin_subscription_delivery_addresses_path(subscription),
+                          admin_subscription_delivery_addresses_path(subscription.subscription_id),
                           class: 'btn btn-light btn-sm'
 
                       = link_to t('edit'),
