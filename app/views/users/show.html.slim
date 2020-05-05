@@ -51,7 +51,7 @@
                           class: 'btn btn-primary btn-sm'
                         - if subscription.editable?
                           = link_to t('edit'),
-                            subscription_delivery_addresses_path(subscription),
+                            subscription_delivery_addresses_path(subscription.subscription_id),
                             class: 'btn btn-light btn-sm'
                   / td = l subscription.on_hold_date unless subscription.on_hold_date.nil?
 

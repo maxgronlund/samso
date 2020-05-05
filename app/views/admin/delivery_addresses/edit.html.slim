@@ -69,6 +69,6 @@
                 = f.input :city, label: t('address.city')
             .pull-right
               = link_to t('cancel'),
-                admin_subscription_delivery_addresses_path(@subscription),
+                admin_subscription_delivery_addresses_path(@subscription.subscription_id),
                 class: 'btn btn-light'
               = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
