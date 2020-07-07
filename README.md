@@ -34,56 +34,56 @@ As an editor you can add / edit content without accessing the admin backend
 
 
 
-Things you may want to cover:
 
-* Ruby version
-  2.4.1
+###Ruby version
+  - 2.4.1
 
-* System dependencies
+###System dependencies
+  - Elasticsearch
 
-* Configuration
-  Os X / Ubunto
+###Configuration
+  - Os X / Ubunto
 
-* Database creation
-  rake db:create
+###Database creation
+  - rake db:create
 
-* Database initialization
-  rake db:seed
+###Database initialization
+  - rake db:seed
 
-* Database dump
-  $ psql samso_development > samso_development
+###Database dump
+  - $ psql samso_development > samso_development
 
-* Database restore
-  $ psql samso_development < samso_development
-  psql samso_development < /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
+###Database restore
+  - $ psql samso_development < samso_development
+  - psql samso_development < /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 
-* Import categories as csv file and build pages for articles
-  rake page:build
-
-
-* Database migration
-  $ heroku run --app samso rake db:migrate
+###Import categories as csv file and build pages for articles
+  - rake page:build
 
 
-* Logging
-  $ heroku logs --tail --app samso
-
-* Tasks
-
-  $ heroku run --app samso rake db:migrate
-  $ heroku run --app samso rake db:seed
-  $ heroku run --app samso rake blog_posts:update_layout
-  $ heroku restart -a samso
-  $ heroku run --app samso rake pg_search:multisearch:rebuild[User]
-  $ heroku domains:add samso.com
-  $ heroku domains:add \*.samso.com
+###Database migration
+  - $ heroku run --app samso rake db:migrate
 
 
-  * download the db
-  $ heroku pg:backups:capture --app samso
-  $ heroku pg:backups:download --app samso
+###Logging
+  - $ heroku logs --tail --app samso
 
-# install backup from Heroku on localhost
+###Tasks
+
+  - $ heroku run --app samso rake db:migrate
+  - $ heroku run --app samso rake db:seed
+  - $ heroku run --app samso rake blog_posts:update_layout
+  - $ heroku restart -a samso
+  - $ heroku run --app samso rake pg_search:multisearch:rebuild[User]
+  - $ heroku domains:add samso.com
+  - $ heroku domains:add \*.samso.com
+
+
+###Download the db
+  - $ heroku pg:backups:capture --app samso
+  - $ heroku pg:backups:download --app samso
+
+###install backup from Heroku on localhost
   pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_development /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 
   alternative
@@ -96,7 +96,7 @@ Things you may want to cover:
   heroku pg:promote HEROKU_POSTGRESQL_MAUVE_URL --app samso
 
 
-* How to run the test suite
+###How to run the test suite
   # Run only model specs
   $ bundle exec rspec spec/models
 
@@ -106,6 +106,8 @@ Things you may want to cover:
   # Run only spec on line 8 of AccountsController
   $ bundle exec rspec spec/controllers/accounts_controller_spec.rb:8
 
+###Start elasticsearch
+  - $ elasticsearch
 
 * Services (job queues, cache servers, search engines, etc.)
   $ heroku logs --tail --app samso
@@ -127,28 +129,15 @@ Things you may want to cover:
 
 
 
-Admin::BlogPost.__elasticsearch__.delete_index!
-Admin::BlogPost.__elasticsearch__.create_index!
-Admin::BlogPost.__elasticsearch__.refresh_index!
-Admin::BlogPost.__elasticsearch__.import force: true
 
-$ Admin::BlogPost.__elasticsearch__.create_index! √
-$ Admin::BlogPost.__elasticsearch__.create_index! force: true
-$ Admin::BlogPost.__elasticsearch__.refresh_index! √
-$
-$ Admin::BlogPost.import force: true
+
+heroku run rake searchkick:reindex CLASS=User --app samso
+heroku run rake searchkick:reindex CLASS=Admin::BlogPost --app samso
+
+heroku config:set ELASTICSEARCH_URL="heroku config:get SEARCHBOX_URL" --app samso
 
 
 
-On Heroku
-Address.__elasticsearch__.delete_index!
-Address.__elasticsearch__.create_index!
-Address.__elasticsearch__.refresh_index!
-Address.import force: true
-
-
-start elasticsearch
-$ elasticsearch
 
 * maintance
 heroku maintenance:on --app samso
@@ -171,5 +160,5 @@ heroku pg:backups:download --app samso
 $ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U DATA_BASE_USER -d DATA_BASE latest.dump
 
 
-
+heroku[router]: at=error code=H12 desc="Request timeout" method=GET path="/" host=samso.herokuapp.com request_id=6a28f876-076f-4afb-ab9e-46f5f5f35a63 fwd="195.210.18.10,157.167.45.180" dyno=web.1 connect=0ms service=30000ms status=503 bytes=0 protocol=htt
 

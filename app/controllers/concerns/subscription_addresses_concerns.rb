@@ -3,7 +3,9 @@ module SubscriptionAddressesConcerns
 
 
   def index
-    @subscription = Admin::Subscription.find_by(id: params[:subscription_id])
+    @subscription = Admin::Subscription.find(params[:subscription_id])
+  rescue => e
+    nil
   end
 
   def new

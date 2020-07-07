@@ -1,0 +1,6 @@
+- e_page_free = modulable
+.e-pages
+  = link_to( e_page_free.link, target: '_blank') do
+   h3 = e_page_free.title
+   = simple_format e_page_free.body
+   = image_tag(e_page_free.image_link, class: 'img-fluid mr-1')

@@ -1,0 +1,19 @@
+da:
+  activerecord:
+    models:
+      admin/e_page_free_module:
+        one: e_page_free
+        other: e_page_frees
+        link: link
+        image_link: Link til billed
+    attributes:
+      admin/e_page_free_module:
+        name:  e-pages-free
+
+  e_page_free_module:
+    fo: Fo
+    bar: Bar
+
+
+  admin/e_page_free_module:
+    name: E-page-free module

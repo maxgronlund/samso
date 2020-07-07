@@ -5,11 +5,15 @@ class Admin::Blog < ApplicationRecord
   has_many :posts, class_name: 'Admin::BlogPost', dependent: :destroy
 
   def show_page
-    Page.find_by(id: show_page_id)
+    Page.find(show_page_id)
+  rescue => e
+    nil
   end
 
   def index_page
-    Page.find_by(id: index_page_id)
+    Page.find(index_page_id)
+  rescue => e
+    nil
   end
 
   def clear_page_cache

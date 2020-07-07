@@ -23,7 +23,7 @@ h3 = t('ads.for_print_in_newspaper')
       - @newspaper_ads.each do |ad|
         tr
           td = ad.name
-          td = l ad.start_date
+          td = "Uge: #{ad.week} - #{ad.year}"
           td = ad.contact_person
           td = t('ads.' + ad.state)
           td = ad.number_of_columns

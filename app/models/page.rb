@@ -53,7 +53,9 @@ class Page < ApplicationRecord
   end
 
   def footer
-    @footer = Admin::Footer.find_by(id: admin_footer_id)
+    @footer = Admin::Footer.find(admin_footer_id)
+  rescue => e
+    nil
   end
 
   def deletable?

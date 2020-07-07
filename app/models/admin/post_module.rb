@@ -48,8 +48,8 @@ class Admin::PostModule < ApplicationRecord
   end
 
   def blog_post(blog_post_id)
-    @blog_post ||= Admin::BlogPost.find_by(id: blog_post_id)
-    return @blog_post if @blog_post.present?
+    @blog_post ||= Admin::BlogPost.find(blog_post_id)
+  rescue => e
 
     Admin::BlogPost.last
   end

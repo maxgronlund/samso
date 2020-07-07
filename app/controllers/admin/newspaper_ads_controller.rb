@@ -14,6 +14,7 @@ class Admin::NewspaperAdsController < AdminController
         start_date: Date.today.beginning_of_week + 8.day + 9.hours,
         number_of_columns: 2
       )
+    set_week_and_year
   end
 
   def create
@@ -28,6 +29,7 @@ class Admin::NewspaperAdsController < AdminController
 
   def edit
     @newspaper_ad = ServiceFunctions::PrintedAd.find(params[:id])
+    set_week_and_year
   end
 
   def update
@@ -46,6 +48,12 @@ class Admin::NewspaperAdsController < AdminController
   end
 
   private
+
+  def set_week_and_year
+    y,m,d = Time.now.strftime("%Y,%m,%e").split(",")
+    @this_week = Date.civil(y.to_i, m.to_i, d.to_i).cweek
+    @years = y.to_i..(y.to_i + 5)
+  end
 
   # Only allow a trusted parameter "white list" through.
   def printed_ad_params

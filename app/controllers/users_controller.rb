@@ -143,7 +143,9 @@ class UsersController < ApplicationController
   def subscription_type
     @subscription_type ||=
       Admin::SubscriptionType
-      .find_by(id: params[:subscription_type_id])
+      .find(params[:subscription_type_id])
+  rescue => e
+    nil
   end
 end
 # rubocop:enable Metrics/ClassLength

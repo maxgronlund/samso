@@ -19,12 +19,13 @@ end
 Then('I visit my account page') do
   user = User.find_by(email: 'valid-subscriber@example.com')
   visit user_path(I18n.locale, user.id)
+
 end
 
 Then('I can see my account') do
   user = User.find_by(email: 'valid-subscriber@example.com')
   expect(user_path(I18n.locale, user.id)).to have_content(current_path)
-  expect(page).to have_content(I18n.t('edit'))
+  expect(page).to have_content(I18n.t('edit').upcase)
   expect(page).to have_content(user.name)
 end
 
@@ -43,8 +44,6 @@ Then('I can change my address') do
   fill_in 'user_addresses_attributes_0_zipp_code', with: zipp_code
   fill_in 'user_addresses_attributes_0_city', with: city
   click_on I18n.t('save')
-
-
 
   # expect(page).to have_content(city)
   # expect(page).to have_content(zipp_code)

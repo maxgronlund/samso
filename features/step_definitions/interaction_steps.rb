@@ -9,3 +9,7 @@ end
 Then('I can click {string}') do |translation|
   click_on I18n.t(translation)
 end
+
+Then('I click on a link with id {string}') do |id|
+  find("##{id}").click
+end

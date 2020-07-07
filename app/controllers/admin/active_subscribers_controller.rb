@@ -15,10 +15,14 @@ class Admin::ActiveSubscribersController < AdminController
     @users =
       if params[:search].present?
         User
-          .where(id: user_ids)
-          .search_by_name_or_email(params[:search])
-          .order(:name)
-          .page params[:page]
+          .search(
+            params[:search],
+            where: {id: user_ids},
+            order: [name: :desc],
+            page: params[:page],
+            per_page: 50
+          )
+
       else
         User
           .where(id: user_ids)

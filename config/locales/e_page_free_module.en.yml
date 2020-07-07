@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      admin/e_page_free_module:
+        one: e_page_free
+        other: e_page_frees
+    attributes:
+      admin/e_page_free_module:
+        name:  Name
+
+  e_page_free_module:
+    fo: Fo
+    bar: Bar
+
+  
+  admin/e_page_free_module:
+    name: EPageFree module

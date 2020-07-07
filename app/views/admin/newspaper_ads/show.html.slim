@@ -28,7 +28,8 @@ nav aria-label="breadcrumb"
             .pull-right
               = t('address.start_date')
           th
-            strong = l @newspaper_ad.start_date
+            strong = "Uge: #{@newspaper_ad.week} - #{@newspaper_ad.year}"
+            / strong = t("printed_ad.week_and_year", week: @newspaper_ad.week, year: @newspaper_ad.year)
         tr
           th
             .pull-right Kolloner

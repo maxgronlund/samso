@@ -8,6 +8,7 @@ class CreateAdminEPageModules < ActiveRecord::Migration[5.1]
       t.text :body
       t.string :link
       t.string :image_link
+
       t.timestamps
     end
     Admin::ModuleName

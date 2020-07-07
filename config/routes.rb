@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       resources :dmi_modules, only: %i[edit update]
 
       resources :e_page_modules, only: %i[edit update]
+      resources :e_page_free_modules, only: %i[edit update]
       resources :featured_post_modules, only: %i[edit update]
       resources :find_blog_post_modules, only: %i[edit update]
       resources :iframe_modules, only: %i[edit update]
@@ -86,6 +87,7 @@ Rails.application.routes.draw do
       resources :post_modules, only: %i[edit update]
       resources :printed_ads, except: %[show]
       resources :e_page_modules, only: %i[edit update]
+      resources :e_page_free_modules, only: %i[edit update]
       # resources :subscription_addresses, only: %i[show]
       # resources :subscriptions do
       #   resources :addresses, only: %i[new edit update destroy]

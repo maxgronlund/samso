@@ -16,7 +16,7 @@ class DeclinedPaymentsController < ApplicationController
 
   def new_payment_params
     subscription_type_id = params[:subscription_type_id]
-    @subscription_type = Admin::SubscriptionType.find_by(id: subscription_type_id)
+    @subscription_type = Admin::SubscriptionType.find(subscription_type_id)
     return if @subscription_type.nil?
   end
 
@@ -68,5 +68,7 @@ class DeclinedPaymentsController < ApplicationController
 
   def payment
     @payment ||= Payment.find_by(onpay_reference: params[:onpay_reference])
+  rescue => e
+    nil
   end
 end

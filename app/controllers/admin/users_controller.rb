@@ -10,14 +10,9 @@ class Admin::UsersController < AdminController
   def index
     @users =
       if params[:search].present?
-        User
-          .search_by_name_or_email(params[:search])
-          .order(created_at: :desc)
-          .page params[:page]
+        User.search(params[:search], page: params[:page], per_page: 50)
       else
-        User
-          .order(created_at: :desc)
-          .page params[:page]
+        User.order(created_at: :desc).page params[:page]
       end
     @selected = 'users'
     @user_count = User.count
