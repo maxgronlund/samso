@@ -165,6 +165,11 @@ heroku domains --app samso
 
 <iframe width="290" height="200" frameborder="0" scrolling="yes" src="http://samsoposten.dk.nt5.unoeuro-server.com/event/visidag.asp"></iframe>
 
+## download backup
+heroku pg:backups:download --app samso
+
+$ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U DATA_BASE_USER -d DATA_BASE latest.dump
+
 
 
 
