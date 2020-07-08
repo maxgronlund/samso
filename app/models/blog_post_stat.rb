@@ -7,7 +7,7 @@ class BlogPostStat < ApplicationRecord
     weekly_views.create
     update_attributes(views: views + 1)
   rescue => e
-    metadate =
+    metadata =
       { blog_post_id: id, title: title }
       .merge(
         message: e.message,
@@ -17,8 +17,8 @@ class BlogPostStat < ApplicationRecord
     Admin::EventNotification.create(
       title: 'ERROR! BlogPostStat',
       body: 'Unable to update views',
-      message_type: 'blot_post_stat',
-      metadata: metadate
+      message_type: 'blog_post_stat',
+      metadata: metadata
     )
   end
 

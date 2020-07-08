@@ -27,7 +27,7 @@ class Admin::WeeklyCommentModule < ApplicationRecord
 
     Admin::BlogPost
       .where.not(comments_count: 0)
-      .where("start_date > :start_date", start_date: Time.now - 1.week)
+      .where("start_date > :start_date", start_date: Time.zone.now - 1.week)
       .order('comments_count DESC').first(8)
 
   end
