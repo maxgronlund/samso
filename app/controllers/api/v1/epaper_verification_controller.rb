@@ -17,7 +17,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   # Called when the user click on the thumb on the e_page_module
   def show
     user = User.find(params[:id])
-    if permitted?(user)
+    if user.present? && user.access_to_e_paper?
       redirect_to e_paper_token_url
     else
       redirect_to create_account_index_path
