@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   def access_to_e_paper?
     #return true
     return false unless current_user
-    return true if editor?
+    return true if editor? || administrator?
 
     current_user.access_to_e_paper?
   end
