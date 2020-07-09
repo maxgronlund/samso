@@ -17,7 +17,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   # Called when the user click on the thumb on the e_page_module
   def show
     user = User.find(params[:id])
-    if true #permitted?(user)
+    if permitted?(user)
       redirect_to e_paper_token_url
     else
       redirect_to create_account_index_path
@@ -30,11 +30,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
 
   def e_paper_token_url
     secret = e_paper_secret
-    # ap admin_system_setup.e_pages_date
-    # "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
     "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=#{admin_system_setup.e_pages_date}&edition=SM1"
-    #ap "http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
-    #{}"http://login.e-pages.dk/samsoposten/open/?secret=#{secret}&date=2019-03-14&edition=SM1"
     "https://samsoposten.e-pages.pub/titles/samsoposten/880/publications/latest/?token=#{secret}"
   end
 
@@ -60,11 +56,7 @@ class Api::V1::EpaperVerificationController < ApplicationController
   end
 
   def permitted?(user)
-    return false if current_user.nil?
     return false if user.nil?
-    return false unless current_user.access_to_e_paper?
-    return false unless current_user == user
-
-    current_user.access_to_e_paper?
+    user.access_to_e_paper?
   end
 end
