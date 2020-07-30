@@ -12,6 +12,8 @@ class Admin::BlogModule < ApplicationRecord
     posts
       .limit(posts_pr_page)
       .offset(page_id.to_i * posts_pr_page)
+  rescue => e
+    posts.limit(posts_pr_page)
   end
 
   def featured_post

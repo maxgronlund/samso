@@ -152,7 +152,7 @@ class User < ApplicationRecord
   end
 
   def access_to_e_paper?
-    valid_subscriber?
+    valid_subscriber? || administrator?
   end
 
   def free_subscription?
