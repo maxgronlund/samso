@@ -55,15 +55,32 @@ class UserNotifierMailer < ApplicationMailer
     )
   end
 
-  def subscription_about_to_expier(user_id)
+  def subscription_about_to_expier(user_id, days, subscription_id)
     @user = User.find(user_id)
     if Rails.env == 'development'
-      return unless @user.email == 'max@synthmax.dk'
+      return unless @user.email == 'admin@synthmax.dk'
     end
-    ap @message = Admin::SystemMessage.subscription_about_to_expire
+    expires_in_days = in_days(days)
+
+    @message = Admin::SystemMessage.subscription_about_to_expire
+    @title = @message.title.gsub("EXPIRES_IN_DAYS", expires_in_days)
+    @subscription_id = subscription_id
+    @body =
+      @message.body
+      .gsub("USERNAME", @user.name)
+      .gsub("EXPIRES_IN_DAYS", expires_in_days)
     mail(
       to: @user.email,
-      subject: @message.title
+      subject: @title
     )
+  end
+
+  def  in_days(days)
+    I18n.t("subscription_type.remind_before_days", count: days)
+  end
+
+  def link(subscription_id)
+    here = I18n.t("subscription_type.here")
+    link_to here, edit_renew_subscriptions_url
   end
 end

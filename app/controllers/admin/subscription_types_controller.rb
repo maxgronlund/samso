@@ -94,7 +94,9 @@ class Admin::SubscriptionTypesController < AdminController
       :duration,
       :position,
       :free,
-      :identifier
+      :identifier,
+      :send_reminder,
+      :remind_before_days
     )
   end
 end

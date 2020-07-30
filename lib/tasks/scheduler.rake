@@ -17,3 +17,8 @@ desc 'Destroy old weekly views'
 task destroy_old_weekly_views: :environment do
   BlogPostStat.destroy_old_weekly_views!
 end
+
+# desc 'Send reminders about expiring subscription'
+# task send_subscription_reminder: :environment do
+#   BlogPostStat.destroy_old_weekly_views!
+# end

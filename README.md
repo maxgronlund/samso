@@ -83,6 +83,13 @@ As an editor you can add / edit content without accessing the admin backend
   - $ heroku pg:backups:capture --app samso
   - $ heroku pg:backups:download --app samso
 
+###Backup
+https://devcenter.heroku.com/articles/heroku-postgres-backups
+heroku pg:backups:schedule DATABASE_URL --at '02:00 Europe/Copenhagen' --app samso
+
+  - download backup
+  - $ heroku pg:backups:url
+
 ###install backup from Heroku on localhost
   pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_development /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 

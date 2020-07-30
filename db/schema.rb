@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_074408) do
+ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -481,6 +481,8 @@ ActiveRecord::Schema.define(version: 2020_04_09_074408) do
     t.boolean "free", default: false
     t.string "identifier", default: "internal"
     t.string "group", default: "Abonnement"
+    t.boolean "send_reminder", default: false
+    t.integer "remind_before_days", default: 1
     t.index ["identifier"], name: "index_admin_subscription_types_on_identifier"
   end
 
@@ -492,6 +494,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_074408) do
     t.datetime "on_hold_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    # TODO: remove reminder_send and send_reminder
     t.datetime "reminder_send"
     t.boolean "send_reminder", default: false
     t.integer "subscription_id"
