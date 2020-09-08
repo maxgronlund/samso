@@ -1,3 +1,4 @@
+# touched
 source 'https://rubygems.org'
 ruby "2.5.1"
 git_source(:github) do |repo_name|
@@ -6,10 +7,9 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2.1'
-# Use sqlite3 as the database for Active Record
+gem 'rails', '~> 6.0.3.2'
+# Use postgres as the database for Active Record
 gem 'pg', '~> 0.18'
-# gem 'pg_search'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
@@ -44,7 +44,7 @@ gem 'sendgrid-ruby'
 gem 'slim-rails'
 gem 'simple_form'
 gem 'paperclip'
-gem 'airbrake', '~> 6.2'
+gem 'airbrake'
 # gem 'aws-sdk', '~> 2.3'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 # gem 'rails_autoscale_agent'

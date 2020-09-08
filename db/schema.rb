@@ -494,7 +494,6 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.datetime "on_hold_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    # TODO: remove reminder_send and send_reminder
     t.datetime "reminder_send"
     t.boolean "send_reminder", default: false
     t.integer "subscription_id"
