@@ -10,7 +10,7 @@ class CreateAdminFooters < ActiveRecord::Migration[5.1]
       t.string :about_page_link_name, default: ''
       t.integer :copyright_page_id, :integer
       t.string :copyright_page_link_name, default: ''
-      t.integer :term_of_usage_page_id, :integer
+      t.integer :term_of_usage_page_id
       t.string :term_of_usage_page_link_name, derault: ''
       t.string :email, default: ''
       t.string :company_name, default: ''

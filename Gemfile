@@ -1,6 +1,6 @@
 # touched
 source 'https://rubygems.org'
-ruby "2.5.1"
+ruby "2.6.5"
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
@@ -65,7 +65,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails', '1.8.0', require: false
   gem 'cucumber'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
