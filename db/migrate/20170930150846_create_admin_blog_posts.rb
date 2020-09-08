@@ -12,7 +12,6 @@ class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
       t.text :subtitle
       t.text :teaser
       t.text :body
-      t.text :teaser
       t.integer :position
       t.integer :blog_id
       t.boolean :free_content, default: false
