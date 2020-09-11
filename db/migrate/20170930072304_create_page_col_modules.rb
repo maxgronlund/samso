@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # ploymorphic joyn so modules can be inserted into a page_col
-class CreatePageColModules < ActiveRecord::Migration[5.1]
+class CreatePageColModules < ActiveRecord::Migration[6.0]
   def change
     create_table :page_col_modules do |t|
       t.belongs_to :page_col, foreign_key: true

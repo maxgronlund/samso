@@ -9,7 +9,8 @@ nav aria-label="breadcrumb"
     i.breadcrumb-item.active aria-current="page"
       'Tilføj billed
 
-h3 = "Tilføj billed til #{@admin_blog_post.title}"
+h3 Tilføj billed til:
+h4 = @admin_blog_post.title
 
 = simple_form_for [:admin, @admin_blog_post, @admin_blog_post_image],
   multipart: true,

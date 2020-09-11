@@ -1,0 +1,21 @@
+en:
+  activerecord:
+    models:
+      admin/blog_post_content: Blog post content
+    attributes:
+      admin/blog_post_content:
+        body: Text
+        layout: Layout
+        video_url: Video snippet
+        image: Image
+        image_caption: Image caption
+        position: Position
+
+  blog_post_content:
+    add_content: 'Add content'
+    edit: 'Edit'
+    image_top: Image over article
+    image_left: Image left
+    image_right: Image right
+
+

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # blog posts
-class CreateAdminBlogPosts < ActiveRecord::Migration[5.1]
+class CreateAdminBlogPosts < ActiveRecord::Migration[6.0]
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def up

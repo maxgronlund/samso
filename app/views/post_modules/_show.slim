@@ -32,6 +32,18 @@
   h3 = blog_post.title
   = blog_post.signature
   = simple_format (blog_post.body)
+  - blog_post.blog_post_contents.each do |blog_post_content|
+    - if blog_post_content.image.present?
+      .mb-8
+        = image_tag(blog_post_content.image.url(:full_size), class: 'img-fluid')
+        - image_caption = blog_post_content.image_caption
+        - if image_caption.present?
+          .image_caption
+            = image_caption
+    = simple_format blog_post_content.body
+
+
+
   = render 'post_modules/gallery', blog_post: blog_post
 
   = render 'shared/social_icons', blog_post: blog_post

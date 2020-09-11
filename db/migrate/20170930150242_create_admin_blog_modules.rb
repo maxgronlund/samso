@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # blog
-class CreateAdminBlogModules < ActiveRecord::Migration[5.1]
+class CreateAdminBlogModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_blog_modules do |t|
       t.string :name

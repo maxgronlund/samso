@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Support for subscription types
-class CreateAdminSubscriptionTypes < ActiveRecord::Migration[5.1]
+class CreateAdminSubscriptionTypes < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_subscription_types do |t|
       t.string :title

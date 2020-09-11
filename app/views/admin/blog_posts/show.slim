@@ -4,22 +4,61 @@ nav aria-label="breadcrumb"
       = link_to t('admin/article.index'), admin_articles_path
     i.breadcrumb-item.active aria-current="page"
       = @admin_blog_post.title
-h3 Visning på liste
-'Klik på artiklen for at læse den fulde artikel og se ekstra billeder
+/ h3 Visning på liste
+/ 'Klik på artiklen for at læse den fulde artikel og se ekstra billeder
 .row
   .col-sm-8
     .pull-right
       = link_to 'billeder',
         admin_blog_post_blog_post_images_path(@admin_blog_post),
-        class: 'btn btn-light'
+        class: 'btn btn-sm btn-light'
       = link_to t('edit'),
         edit_admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post),
-        class: 'btn btn-primary'
+        class: 'btn btn-sm btn-light'
 .row
   .col-sm-8
+    - video_url = @admin_blog_post.build_video_url
+    - if video_url.present?
+      .video-container
+        =  raw video_url
+    - elsif @admin_blog_post.image.present?
+      .mb-8
+        = image_tag(@admin_blog_post.image.url(:full_size), class: 'img-fluid')
+        - image_caption = @admin_blog_post.image_caption
+        - if image_caption.present?
+          .image_caption
+            = image_caption
 
-    = render "blog_modules/layouts/#{@admin_blog_post.layout}",
-      post: @admin_blog_post,
-      featured: @admin_blog_post.featured,
-      start_date: @admin_blog_post.start_date,
-      body: @admin_blog_post.body
+    h3 = @admin_blog_post.title
+    = @admin_blog_post.signature
+    = simple_format (@admin_blog_post.body)
+
+    - @admin_blog_post.blog_post_contents.each do |blog_post_content|
+      .row
+        .col-sm-12
+          hr
+          .pull-right
+            = link_to t("blog_post_content.edit_additional_content"), edit_admin_blog_post_blog_post_content_path(@admin_blog_post, blog_post_content), class: "btn btn-sm btn-light"
+
+      - if blog_post_content.image.present?
+        .mb-8
+          = image_tag(blog_post_content.image.url(:full_size), class: 'img-fluid')
+          - image_caption = blog_post_content.image_caption
+          - if image_caption.present?
+            .image_caption
+              = image_caption
+      = simple_format blog_post_content.body
+
+
+
+.row
+  .col-sm-8
+    .pull-right
+      = link_to t("blog_post_content.add_content"),
+        new_admin_blog_post_blog_post_content_path(@admin_blog_post),
+        class: "btn btn-primary"
+
+
+javascript:
+  $(".video-container").fitVids();
+  $(".video-container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});

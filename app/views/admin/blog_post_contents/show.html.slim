@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @admin_blog_post_content.title
+p
+  strong Body:
+  = @admin_blog_post_content.body
+p
+  strong Image:
+  = @admin_blog_post_content.image
+p
+  strong Image caption:
+  = @admin_blog_post_content.image_caption
+p
+  strong Position:
+  = @admin_blog_post_content.position
+p
+  strong Admin blog post:
+  = @admin_blog_post_content.admin_blog_post
+
+=> link_to 'Edit', edit_admin_blog_post_content_path(@admin_blog_post_content)
+'|
+=< link_to 'Back', admin_blog_post_contents_path

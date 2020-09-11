@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # module for showing a blog post
-class CreateAdminPostModules < ActiveRecord::Migration[5.1]
+class CreateAdminPostModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_post_modules do |t|
       t.string :name

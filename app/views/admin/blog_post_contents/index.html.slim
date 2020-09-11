@@ -1,0 +1,31 @@
+h1 Listing admin_blog_post_contents
+
+table
+  thead
+    tr
+      th Title
+      th Body
+      th Image
+      th Image caption
+      th Position
+      th Admin blog post
+      th
+      th
+      th
+
+  tbody
+    - @admin_blog_post_contents.each do |admin_blog_post_content|
+      tr
+        td = admin_blog_post_content.title
+        td = admin_blog_post_content.body
+        td = admin_blog_post_content.image
+        td = admin_blog_post_content.image_caption
+        td = admin_blog_post_content.position
+        td = admin_blog_post_content.admin_blog_post
+        td = link_to 'Show', admin_blog_post_content
+        td = link_to 'Edit', edit_admin_blog_post_content_path(admin_blog_post_content)
+        td = link_to 'Destroy', admin_blog_post_content, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Blog post content', new_admin_blog_post_content_path

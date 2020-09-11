@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module for new feature
-class CreateAdminMenuModules < ActiveRecord::Migration[5.1]
+class CreateAdminMenuModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_menu_modules do |t|
       t.string :name

@@ -1,0 +1,21 @@
+da:
+  activerecord:
+    models:
+      admin/blog_post_content: Blog post content
+    attributes:
+      admin/blog_post_content:
+        body: Brødtekst
+        layout: Layout
+        video_url: Video snippet
+        image: Billed
+        image_caption: Billed tekst
+        position: Position
+
+  blog_post_content:
+    add_content: 'Tilføj indhold'
+    edit: 'Rediger'
+    image_top: Billed over tekst
+    image_left: Billed til venstre
+    image_right: Billed til højre
+
+

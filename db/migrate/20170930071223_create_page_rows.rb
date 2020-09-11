@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # bootstrap style rows
-class CreatePageRows < ActiveRecord::Migration[5.1]
+class CreatePageRows < ActiveRecord::Migration[6.0]
   def change
     create_table :page_rows do |t|
       t.belongs_to :page, foreign_key: true

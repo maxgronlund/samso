@@ -5,7 +5,6 @@ class Admin::BlogPost < ApplicationRecord
 
   searchkick
 
-
   attr_accessor :delete_image, :page_id
   belongs_to :blog, class_name: 'Admin::Blog', counter_cache: true, optional: true
   belongs_to :user, class_name: 'User', counter_cache: true, optional: true
@@ -35,6 +34,12 @@ class Admin::BlogPost < ApplicationRecord
     :blog_post_images,
     dependent: :destroy,
     class_name: 'Admin::BlogPostImage',
+    foreign_key: 'admin_blog_post_id'
+  )
+  has_many(
+    :blog_post_contents,
+    dependent: :destroy,
+    class_name: 'Admin::BlogPostContent',
     foreign_key: 'admin_blog_post_id'
   )
 
@@ -132,6 +137,20 @@ class Admin::BlogPost < ApplicationRecord
     return 0 unless last_image.present?
 
     last_image.position + 10
+  end
+
+  def contents
+    blog_post_contents.order(:position)
+  end
+
+  def last_content
+    contents.last
+  end
+
+  def next_content_position
+    return 10 unless last_content.present?
+
+    last_content.position + 10
   end
 
   def self.all_posts

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # link for the vertiacal menu content
-class CreateAdminMenuLinks < ActiveRecord::Migration[5.1]
+class CreateAdminMenuLinks < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_menu_links do |t|
       t.string :title, default: ''

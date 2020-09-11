@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # system settings
-class CreateAdminSystemSetups < ActiveRecord::Migration[5.1]
+class CreateAdminSystemSetups < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_system_setups do |t|
       t.boolean :maintenance

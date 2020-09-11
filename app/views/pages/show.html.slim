@@ -21,7 +21,7 @@
           .modal-body
             = simple_format Admin::SystemMessage.accept_gdpr_message.body
           .modal-footer
-            = simple_form_for [current_user], url: url_for(action: 'update', controller: 'gdpr'), method: 'PUT' do |f|
+            = simple_form_for [locale, current_user], url: url_for(action: 'update', controller: 'gdpr'), method: 'PUT' do |f|
               .form-actions
                 .pull-right
                   = f.submit t('accept'), class: 'btn btn-success', id: 'submit'

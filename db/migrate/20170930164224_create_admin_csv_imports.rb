@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # generic csv importer
-class CreateAdminCsvImports < ActiveRecord::Migration[5.1]
+class CreateAdminCsvImports < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_csv_imports do |t|
       t.string :name

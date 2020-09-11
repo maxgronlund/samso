@@ -1,5 +1,5 @@
 # Module for new feature
-class CreateAdminEPageFreeModules < ActiveRecord::Migration[5.1]
+class CreateAdminEPageFreeModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_e_page_free_modules do |t|
       t.string :title

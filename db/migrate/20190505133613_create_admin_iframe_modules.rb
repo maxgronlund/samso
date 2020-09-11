@@ -1,5 +1,5 @@
 # Module for new feature
-class CreateAdminIframeModules < ActiveRecord::Migration[5.1]
+class CreateAdminIframeModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_iframe_modules do |t|
       t.string :name

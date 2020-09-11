@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_185708) do
+ActiveRecord::Schema.define(version: 2020_09_10_114948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   create_table "admin_advertisement_modules", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_advertisements", force: :cascade do |t|
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.text "notes", default: ""
     t.integer "user_id"
     t.index ["user_id"], name: "index_admin_advertisements_on_user_id"
@@ -85,9 +85,25 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.boolean "show_all_categories", default: false
     t.integer "featured_posts_pr_page", default: 0
     t.boolean "show_search", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
+  end
+
+  create_table "admin_blog_post_contents", force: :cascade do |t|
+    t.string "layout", default: "image_top"
+    t.text "body"
+    t.string "image_caption"
+    t.text "video_url", default: ""
+    t.integer "position"
+    t.bigint "admin_blog_post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["admin_blog_post_id"], name: "index_admin_blog_post_contents_on_admin_blog_post_id"
   end
 
   create_table "admin_blog_post_images", force: :cascade do |t|
@@ -120,8 +136,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "obsolete_views", default: 0
     t.string "signature", default: ""
     t.integer "post_page_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.bigint "image_file_size"
@@ -141,8 +157,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "title"
     t.string "locale"
     t.integer "legacy_category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "blog_posts_count", default: 0
     t.integer "index_page_id"
     t.integer "show_page_id"
@@ -159,8 +175,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "gmap"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["calendar_id"], name: "index_admin_calendar_events_on_calendar_id"
   end
 
@@ -168,8 +184,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "name"
     t.string "layout", default: "month_detailed"
     t.bigint "admin_calendar_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_calendar_id"], name: "index_admin_calendar_modules_on_admin_calendar_id"
   end
 
@@ -177,15 +193,15 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "title"
     t.integer "calendar_events_count"
     t.string "locale"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_carousel_modules", force: :cascade do |t|
     t.string "name"
     t.string "layout"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_carousel_slides", force: :cascade do |t|
@@ -194,8 +210,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "position", default: 0
     t.integer "page_id"
     t.integer "carousel_module_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.bigint "image_file_size"
@@ -209,8 +225,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "import_type"
     t.text "comments"
     t.text "summary"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "csv_file_file_name"
     t.string "csv_file_content_type"
     t.bigint "csv_file_file_size"
@@ -220,8 +236,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   create_table "admin_dmi_modules", force: :cascade do |t|
     t.string "forecast_duration", default: "days_two_forecast"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_e_page_free_modules", force: :cascade do |t|
@@ -229,8 +245,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.text "body"
     t.string "link"
     t.string "image_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_e_page_modules", force: :cascade do |t|
@@ -238,8 +254,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.text "body"
     t.string "link"
     t.string "image_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_event_notifications", force: :cascade do |t|
@@ -257,8 +273,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "admin_blog_module_id"
     t.integer "featured_posts_pr_page", default: 16
     t.string "content_type", default: "featured_posts"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "blog_id"
     t.index ["admin_blog_module_id"], name: "index_admin_featured_post_modules_on_admin_blog_module_id"
     t.index ["blog_id"], name: "index_admin_featured_post_modules_on_blog_id"
@@ -266,8 +282,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   create_table "admin_find_blog_post_modules", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_footers", force: :cascade do |t|
@@ -284,8 +300,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "company_name", default: ""
     t.string "phone", default: ""
     t.string "vat_nr", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_gallery_images", force: :cascade do |t|
@@ -294,8 +310,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "gallery_module_id"
     t.bigint "user_id"
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.bigint "image_file_size"
@@ -313,24 +329,24 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "background_color", default: "#FFFFFF"
     t.integer "gallery_images_count", default: 0
     t.integer "images_pr_page", default: 16
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["page_id"], name: "index_admin_gallery_modules_on_page_id"
   end
 
   create_table "admin_iframe_modules", force: :cascade do |t|
     t.string "name"
     t.text "snippet"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_image_modules", force: :cascade do |t|
     t.string "layout"
     t.string "color", default: "#000000"
     t.string "background_color", default: "#FFFFFF"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_logs", force: :cascade do |t|
@@ -345,8 +361,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   create_table "admin_menu_contents", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_menu_links", force: :cascade do |t|
@@ -357,8 +373,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "color", default: "#000"
     t.string "background_color", default: "#FFF"
     t.integer "menu_content_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "position", default: 0
     t.index ["menu_content_id"], name: "index_admin_menu_links_on_menu_content_id"
   end
@@ -367,8 +383,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "name"
     t.integer "menu_content_id"
     t.string "layout", default: "vertical"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_content_id"], name: "index_admin_menu_modules_on_menu_content_id"
   end
 
@@ -376,15 +392,15 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "name"
     t.string "locale"
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_admin_module_names_on_name"
   end
 
   create_table "admin_most_popular_modules", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "articles", default: 8
   end
 
@@ -408,8 +424,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   create_table "admin_post_modules", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_printed_ads", force: :cascade do |t|
@@ -432,15 +448,15 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "posts_pr_page", default: 8
     t.boolean "show_all_categories", default: true
     t.boolean "image_on_top", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["blog_id"], name: "index_admin_read_also_modules_on_blog_id"
   end
 
   create_table "admin_search_result_modules", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_sign_in_ips", force: :cascade do |t|
@@ -460,8 +476,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "layout"
     t.string "expired_title"
     t.text "expired_body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "locale", default: "en"
   end
 
@@ -476,8 +492,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "duration"
     t.integer "position", default: 0
     t.integer "subscriptions_count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "free", default: false
     t.string "identifier", default: "internal"
     t.string "group", default: "Abonnement"
@@ -492,8 +508,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.date "start_date"
     t.date "end_date"
     t.datetime "on_hold_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.datetime "reminder_send"
     t.boolean "send_reminder", default: false
     t.integer "subscription_id"
@@ -508,8 +524,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.text "body"
     t.string "identifier"
     t.string "locale"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_system_setups", force: :cascade do |t|
@@ -519,8 +535,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "locale"
     t.string "locale_name"
     t.string "background_color", default: "none"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "logo_file_name"
     t.string "logo_content_type"
     t.bigint "logo_file_size"
@@ -548,8 +564,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "link_layout", default: "text"
     t.string "image_ratio", default: "2_1"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.bigint "image_file_size"
@@ -561,15 +577,15 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
   create_table "admin_weekly_comment_modules", force: :cascade do |t|
     t.string "name"
     t.integer "articles", default: 8
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_youtube_modules", force: :cascade do |t|
     t.string "name"
     t.text "snippet"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "ads", force: :cascade do |t|
@@ -604,8 +620,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.bigint "user_id"
     t.string "commentable_type"
     t.bigint "commentable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "author_name", default: ""
     t.string "state", default: "default"
     t.integer "weekly_comments_count", default: 0
@@ -618,8 +634,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
   create_table "e_paper_tokens", force: :cascade do |t|
     t.bigint "user_id"
     t.string "secret"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["secret"], name: "index_e_paper_tokens_on_secret"
     t.index ["user_id"], name: "index_e_paper_tokens_on_user_id"
   end
@@ -631,8 +647,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "position", default: 0
     t.integer "margin_bottom", default: 20
     t.string "access_to", default: "all"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["moduleable_type", "moduleable_id"], name: "index_page_col_modules_on_moduleable_type_and_moduleable_id"
     t.index ["moduleable_type"], name: "index_page_col_modules_on_moduleable_type"
     t.index ["page_col_id"], name: "index_page_col_modules_on_page_col_id"
@@ -642,8 +658,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.bigint "page_row_id"
     t.string "layout"
     t.integer "index", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["index"], name: "index_page_cols_on_index"
     t.index ["layout"], name: "index_page_cols_on_layout"
     t.index ["page_row_id"], name: "index_page_cols_on_page_row_id"
@@ -661,8 +677,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.integer "background_image_file_size"
     t.datetime "background_image_updated_at"
     t.integer "page_cols_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["page_id"], name: "index_page_rows_on_page_id"
   end
 
@@ -681,8 +697,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.string "background_color", default: "none"
     t.bigint "admin_footer_id"
     t.boolean "cache_page", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "category_page", default: false
     t.index ["admin_footer_id"], name: "index_pages_on_admin_footer_id"
     t.index ["locale"], name: "index_pages_on_locale"
@@ -692,8 +708,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
 
   create_table "payments", force: :cascade do |t|
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.uuid "uuid"
     t.string "state", default: "pending"
     t.hstore "transaction_info", default: {}, null: false
@@ -710,8 +726,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.text "content"
     t.string "searchable_type"
     t.bigint "searchable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
@@ -719,8 +735,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.bigint "user_id"
     t.string "permission", default: "member"
     t.boolean "active", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["permission"], name: "index_roles_on_permission"
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
@@ -761,8 +777,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "blog_posts_count", default: 0
     t.integer "e_paper_tokens_count"
     t.boolean "gdpr_accepted", default: false
@@ -796,6 +812,7 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.index ["blog_post_stat_id"], name: "index_weekly_views_on_blog_post_stat_id"
   end
 
+  add_foreign_key "admin_blog_post_contents", "admin_blog_posts"
   add_foreign_key "admin_blog_post_images", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_newsletters"

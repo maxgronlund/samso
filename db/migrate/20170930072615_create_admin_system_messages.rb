@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # translated system messages
-class CreateAdminSystemMessages < ActiveRecord::Migration[5.1]
+class CreateAdminSystemMessages < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_system_messages do |t|
       t.string :title

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module for new feature
-class CreateAdminAdvertisementModules < ActiveRecord::Migration[5.1]
+class CreateAdminAdvertisementModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_advertisement_modules do |t|
       t.string :name

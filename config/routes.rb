@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       end
       resources :blog_posts, only: [] do
         resources :blog_post_images
+        resources :blog_post_contents
       end
       resources :blog_modules, only: %i[edit update]
       resources :calendars do
@@ -113,7 +114,6 @@ Rails.application.routes.draw do
       end
       resources :weekly_comment_modules, only: %i[edit update]
     end
-
 
     resources :print_posts, only: %i[show]
     resources :renew_subscriptions, only: %i[edit update]

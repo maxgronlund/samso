@@ -1,5 +1,5 @@
 # Module for new feature
-class CreateAdminWeeklyCommentModules < ActiveRecord::Migration[5.1]
+class CreateAdminWeeklyCommentModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_weekly_comment_modules do |t|
       t.string :name

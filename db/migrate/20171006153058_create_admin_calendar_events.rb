@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Event for the calendar
-class CreateAdminCalendarEvents < ActiveRecord::Migration[5.1]
+class CreateAdminCalendarEvents < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_calendar_events do |t|
       t.integer :calendar_id
