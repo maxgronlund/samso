@@ -33,7 +33,7 @@ nav aria-label="breadcrumb"
     = @admin_blog_post.signature
     = simple_format (@admin_blog_post.body)
 
-    - @admin_blog_post.blog_post_contents.each do |blog_post_content|
+    - @admin_blog_post.blog_post_contents.order(:position).each do |blog_post_content|
       .row
         .col-sm-12
           hr

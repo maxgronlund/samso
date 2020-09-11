@@ -40,32 +40,26 @@ class Admin::BlogPostContentsController < AdminController
     end
   end
 
-  # POST /admin/blog_post_contents
-  # def create
-  #   @admin_blog_post_content = Admin::BlogPostContent.new(admin_blog_post_content_params)
-
+  # PATCH/PUT /admin/blog_post_contents/1
+  # PATCH/PUT /admin/blog_post_contents/1.json
+  # def update
   #   respond_to do |format|
-  #     if @admin_blog_post_content.save
-  #       format.html { redirect_to @admin_blog_post_content, notice: 'Blog post content was successfully created.' }
-  #       format.json { render :show, status: :created, location: @admin_blog_post_content }
+  #     if @admin_blog_post_content.update(admin_blog_post_content_params)
+  #       format.html { redirect_to @admin_blog_post_content, notice: 'Blog post content was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @admin_blog_post_content }
   #     else
-  #       format.html { render :new }
+  #       format.html { render :edit }
   #       format.json { render json: @admin_blog_post_content.errors, status: :unprocessable_entity }
   #     end
   #   end
   # end
 
-  # PATCH/PUT /admin/blog_post_contents/1
-  # PATCH/PUT /admin/blog_post_contents/1.json
+  # PATCH/PUT /admin/blog_post_images/1
   def update
-    respond_to do |format|
-      if @admin_blog_post_content.update(admin_blog_post_content_params)
-        format.html { redirect_to @admin_blog_post_content, notice: 'Blog post content was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_blog_post_content }
-      else
-        format.html { render :edit }
-        format.json { render json: @admin_blog_post_content.errors, status: :unprocessable_entity }
-      end
+    if @admin_blog_post_content.update(admin_blog_post_content_params)
+      redirect_to(admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post))
+    else
+      render :edit
     end
   end
 

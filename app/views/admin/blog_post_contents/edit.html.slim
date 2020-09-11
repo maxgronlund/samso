@@ -1,8 +1,23 @@
-h1 Editing admin_blog_post_content
+nav aria-label="breadcrumb"
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to t('admin/article.index'), admin_articles_path
+    li.breadcrumb-item
+      = link_to @admin_blog_post.title, admin_blog_blog_post_path(@admin_blog_post.blog, @admin_blog_post)
+    i.breadcrumb-item.active aria-current="page"
+      'Tilføj indhold
 
-== render 'form'
+h3 Rediger indhold for:
+h4 = @admin_blog_post.title
 
-=> link_to 'Show', @admin_blog_post_content
-'|
-=< link_to 'Back', admin_blog_post_contents_path
+= simple_form_for [:admin, @admin_blog_post, @admin_blog_post_content],
+  multipart: true,
+  url: url_for(action: 'update', controller: 'admin/blog_post_contents'),
+  method: 'put' do |f|
+  = f.error_notification
+  == render 'form', f: f
+
+/ => link_to 'Show', @admin_blog_post_content
+/ '|
+/ =< link_to 'Back', admin_blog_post_contents_path
 
