@@ -76,7 +76,8 @@ class Admin::PagesController < AdminController
       :body_background,
       :delete_body_background,
       :background_color,
-      :cache_page
+      :cache_page,
+      :category_page
     )
   end
 end
