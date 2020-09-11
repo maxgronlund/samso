@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module for new feature
-class CreateAdminSearchResultModules < ActiveRecord::Migration[5.1]
+class CreateAdminSearchResultModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_search_result_modules do |t|
       t.string :name

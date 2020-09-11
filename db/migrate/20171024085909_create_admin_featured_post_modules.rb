@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module for new feature
-class CreateAdminFeaturedPostModules < ActiveRecord::Migration[5.1]
+class CreateAdminFeaturedPostModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_featured_post_modules do |t|
       t.string :title

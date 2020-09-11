@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # subscription
-class CreateAdminSubscriptionModule < ActiveRecord::Migration[5.1]
+class CreateAdminSubscriptionModule < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_subscription_modules do |t|
       t.string :title

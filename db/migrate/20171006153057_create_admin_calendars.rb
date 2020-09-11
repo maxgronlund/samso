@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Calendars for the calendar_modules
-class CreateAdminCalendars < ActiveRecord::Migration[5.1]
+class CreateAdminCalendars < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_calendars do |t|
       t.string :title

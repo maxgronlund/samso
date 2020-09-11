@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # page footer
-class CreateAdminFooters < ActiveRecord::Migration[5.1]
+class CreateAdminFooters < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_footers do |t|
       t.string :title, default: ''

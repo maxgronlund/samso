@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # blog to embed in BlogModule
-class CreateAdminBlogs < ActiveRecord::Migration[5.1]
+class CreateAdminBlogs < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_blogs do |t|
       t.string :title

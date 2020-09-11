@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # gallery module
-class CreateAdminGalleryModules < ActiveRecord::Migration[5.1]
+class CreateAdminGalleryModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_gallery_modules do |t|
       t.string :name

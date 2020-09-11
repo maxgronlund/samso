@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Generic page
-class CreatePages < ActiveRecord::Migration[5.1]
+class CreatePages < ActiveRecord::Migration[6.0]
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def change

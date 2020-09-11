@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_185708) do
+ActiveRecord::Schema.define(version: 2020_09_11_084524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.bigint "addressable_id"
     t.string "name"
     t.string "address"
-    t.string "zipp_code", default: ""
+    t.string "zipp_code"
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,6 +88,22 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_blog_id"], name: "index_admin_blog_modules_on_admin_blog_id"
+  end
+
+  create_table "admin_blog_post_contents", force: :cascade do |t|
+    t.string "layout", default: "image_top"
+    t.text "body"
+    t.string "image_caption"
+    t.text "video_url", default: ""
+    t.integer "position"
+    t.bigint "admin_blog_post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["admin_blog_post_id"], name: "index_admin_blog_post_contents_on_admin_blog_post_id"
   end
 
   create_table "admin_blog_post_images", force: :cascade do |t|
@@ -796,6 +812,7 @@ ActiveRecord::Schema.define(version: 2020_07_27_185708) do
     t.index ["blog_post_stat_id"], name: "index_weekly_views_on_blog_post_stat_id"
   end
 
+  add_foreign_key "admin_blog_post_contents", "admin_blog_posts"
   add_foreign_key "admin_blog_post_images", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_blog_posts"
   add_foreign_key "admin_newsletter_posts", "admin_newsletters"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # an image that fits in to the gallery
-class CreateAdminGalleryImages < ActiveRecord::Migration[5.1]
+class CreateAdminGalleryImages < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_gallery_images do |t|
       t.string :title

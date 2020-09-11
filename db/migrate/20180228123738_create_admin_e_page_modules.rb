@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module for new feature
-class CreateAdminEPageModules < ActiveRecord::Migration[5.1]
+class CreateAdminEPageModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_e_page_modules do |t|
       t.string :title

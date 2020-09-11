@@ -2,7 +2,7 @@
 
 # TODO: Rename to UserSubscription
 # a user subscription
-class CreateAdminSubscriptions < ActiveRecord::Migration[5.1]
+class CreateAdminSubscriptions < ActiveRecord::Migration[6.0]
   def change
     create_table :admin_subscriptions do |t|
       t.belongs_to :user, foreign_key: true

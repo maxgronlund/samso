@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UpdateAdminAdverticements < ActiveRecord::Migration[5.1]
+class UpdateAdminAdverticements < ActiveRecord::Migration[6.0]
   def up
     add_column :admin_advertisements, :notes, :text, default: ''
     add_column :admin_advertisements, :user_id, :integer

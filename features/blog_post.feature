@@ -13,3 +13,4 @@ Feature: Create Update and Delete blog posts
     Then I can click "blog_post.new"
     Then I fill the form and submit it
     Then I can see the post I created
+

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Module for new feature
-class CreateAdminYoutubeModules < ActiveRecord::Migration[5.1]
+class CreateAdminYoutubeModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_youtube_modules do |t|
       t.string :name

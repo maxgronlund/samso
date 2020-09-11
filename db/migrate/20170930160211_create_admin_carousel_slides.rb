@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # slide for the carousel
-class CreateAdminCarouselSlides < ActiveRecord::Migration[5.1]
+class CreateAdminCarouselSlides < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_carousel_slides do |t|
       t.string :title

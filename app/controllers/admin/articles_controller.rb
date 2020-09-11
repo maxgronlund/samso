@@ -2,8 +2,6 @@
 
 class Admin::ArticlesController < AdminController
   def index
-
-
     @blog_post =
       if params[:search].present?
         @blog_posts =

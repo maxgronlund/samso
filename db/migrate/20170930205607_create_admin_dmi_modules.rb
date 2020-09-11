@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # show wheter forecast
-class CreateAdminDmiModules < ActiveRecord::Migration[5.1]
+class CreateAdminDmiModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_dmi_modules do |t|
       t.string :forecast_duration, default: 'days_two_forecast'

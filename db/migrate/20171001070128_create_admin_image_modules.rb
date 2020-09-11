@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # module to show one image
-class CreateAdminImageModules < ActiveRecord::Migration[5.1]
+class CreateAdminImageModules < ActiveRecord::Migration[6.0]
   def up
     create_table :admin_image_modules do |t|
       t.string :layout

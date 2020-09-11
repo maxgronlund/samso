@@ -1,0 +1,19 @@
+.form-inputs
+  = f.input :image
+  = f.input :image_caption
+  = f.input :body
+  = f.input :position
+  = f.hidden_field :admin_blog_post_id, value: @admin_blog_post.id
+
+.form-actions
+  = f.submit t('save'), class: 'btn btn-primary', data: { disable_with: t('please_wait') }
+
+
+  javascript:
+    $(function() {
+      $('#admin_blog_post_content_body').froalaEditor(
+        {
+          toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+        }
+      )
+    });

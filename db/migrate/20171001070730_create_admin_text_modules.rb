@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # generic text module
-class CreateAdminTextModules < ActiveRecord::Migration[5.1]
+class CreateAdminTextModules < ActiveRecord::Migration[6.0]
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def up

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # user model
-class CreateUsers < ActiveRecord::Migration[5.1]
+class CreateUsers < ActiveRecord::Migration[6.0]
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def change
