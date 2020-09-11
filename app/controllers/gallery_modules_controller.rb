@@ -1,4 +1,4 @@
-class GalleryModuleController < ApplicationController
+class GalleryModulesController < ApplicationController
   before_action :set_image, only: %i[edit update destroy]
   before_action :set_gallery, only: %i[new create edit destroy]
 
