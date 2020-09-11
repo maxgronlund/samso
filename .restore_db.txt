@@ -1,1 +1,1 @@
-$ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso2_development latest.dump
+$ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_production latest.dump
