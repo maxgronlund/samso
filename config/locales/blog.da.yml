@@ -6,8 +6,11 @@ da:
       admin/blog:
         title: Navn
         page_id: Vis på siden
+        index_page_id: Index side
+        show_page_id: Vis på side
 
   admin/blog:
     index: Kategorier
     new: Opret ny kategori
     edit: Rediger kategori
+

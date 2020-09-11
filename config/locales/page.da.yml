@@ -14,6 +14,7 @@ da:
         background_color: Baggrundsfarve
         body_background: Baggrundsbilled
         delete_body_background: Fjern baggrundsbilled
+        category_page: Index side
     models:
       page: Side
 

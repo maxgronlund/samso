@@ -12,7 +12,7 @@ module KnowBlogPostContentHelper
 
   def persisted_fake_blog_post_content_form_data
     @persisted_fake_blog_post_content_form_data ||=
-      {body: Faker::Hipster.paragraph}
+      {image_caption: 'some image caption'}
   end
 end
 

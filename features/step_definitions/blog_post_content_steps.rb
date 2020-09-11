@@ -24,10 +24,17 @@ Then("I visit an article page") do
 end
 
 Then("I fill the blog_post_content_form and submit it") do
-  blog_post_content_form_data = persisted_fake_blog_post_content_form_data
+  content = persisted_fake_blog_post_content_form_data
+
+  # ask('does that look right?')
+  fill_in 'admin_blog_post_content_image_caption', with: content[:image_caption]
+  ask('does that look right?')
   click_on I18n.t('save')
 end
 
 Then("I can see the blog_post_content i created") do
-  pending # Write code here that turns the phrase above into concrete actions
+
+  content = persisted_fake_blog_post_content_form_data
+  expect(page).to have_content(content[:image_caption])
 end
+
