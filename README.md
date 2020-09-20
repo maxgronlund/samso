@@ -36,7 +36,7 @@ As an editor you can add / edit content without accessing the admin backend
 
 
 ###Ruby version
-  - 2.4.1
+  - 2.5.1
 
 ###System dependencies
   - Elasticsearch
@@ -168,4 +168,8 @@ $ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U DATA_BASE_USE
 
 
 heroku[router]: at=error code=H12 desc="Request timeout" method=GET path="/" host=samso.herokuapp.com request_id=6a28f876-076f-4afb-ab9e-46f5f5f35a63 fwd="195.210.18.10,157.167.45.180" dyno=web.1 connect=0ms service=30000ms status=503 bytes=0 protocol=htt
+
+* test payment
+
+https://manage.onpay.io/docs/#test-data
 

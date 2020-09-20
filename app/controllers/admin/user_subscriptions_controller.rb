@@ -2,7 +2,16 @@
 
 class Admin::UserSubscriptionsController < AdminController
   before_action :no_editor, only: %i[index show edit update destroy]
-  before_action :set_user, only: %i[new create edit update]
+  before_action :set_user, only: %i[show new create edit update]
+
+  def show
+    # ap subscription_params
+    params.permit!
+    ap params
+    ap subscription =
+      Admin::Subscription.find_by(subscription_id: params["id"])
+    ap subscription.last_payment
+  end
 
   def new
     @subscription =

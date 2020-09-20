@@ -6,15 +6,16 @@ module PaymentsConcerns
     user = options[:user]
     payable_type = options[:payable_type]
     payable_id = options[:payable_id]
-
     payment = user.payments.pending.first_or_initialize
-
     payment.onpay_reference = SecureRandom.uuid if payment.onpay_reference == 'na'
     payment.payable_type = payable_type
     payment.payable_id = payable_id
     payment.payment_provider = Payment::PROVIDER_ONPAY
     payment.uuid = SecureRandom.uuid if payment.uuid.nil?
+
     payment.save!
+    ap payment
+
     @form_data = form_data(@subscription_type, payment.secure_onpay_reference)
 
     @onpay_hmac_sha1 =
@@ -31,17 +32,11 @@ module PaymentsConcerns
       onpay_currency: ENV['ONPAY_CURRENCY'],
       onpay_amount: subscription_type.form_price,
       onpay_reference: ref,
-      onpay_accepturl: onpay_accepturl,
-      onpay_declineurl: onpay_declineturl,
-      subscription_type_id: subscription_type.id.to_s
+      onpay_accepturl: ENV['ONPAY_ACCEPTURL'],
+      onpay_declineurl: ENV['ONPAY_DECLINEURL'],
+      subscription_type_id: subscription_type.id.to_s,
+      onpay_testmode: ENV['ONPAY_TESTMODE']
+
     }
-  end
-
-  def onpay_accepturl
-    Rails.env.development? ? 'https://c644da66.ngrok.io/da/accepted_payments' : ENV['ONPAY_ACCEPTURL']
-  end
-
-  def onpay_declineturl
-    Rails.env.development? ? 'https://c644da66.ngrok.io/da/declined_payments' : ENV['ONPAY_DECLINEURL']
   end
 end

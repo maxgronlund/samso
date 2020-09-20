@@ -11,6 +11,7 @@ class Payment < ApplicationRecord
   scope :accepted, -> { where(state: ACCEPTED) }
 
   belongs_to :user
+  # belongs_to :payable
   validates :user_id, presence: true
   validates :onpay_reference, uniqueness: true
 
@@ -41,7 +42,7 @@ class Payment < ApplicationRecord
   def payable
     return nil if payable_type.nil? || payable_id.nil?
 
-    payable_type.constantize.find(payable_id)
+    payable_type.constantize.find_by(id: payable_id)
   rescue => e
     nil
   end

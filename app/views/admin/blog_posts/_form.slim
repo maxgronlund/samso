@@ -59,11 +59,29 @@
       class: 'btn btn-primary',
       data: { disable_with: t('please_wait') }
 
+= "#{stylesheet_link_tag('admin')}"
+
+
+= asset_path("application.css")
+
 javascript:
-  $(function() {
-    $('#admin_blog_post_body').froalaEditor(
-      {
-        toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
-      }
-    )
+  tinymce.init({
+    selector: '#admin_blog_post_body',
+    menubar: false,
+    toolbar: "alignleft aligncenter alignright | formatselect bold italic | indent outdent | bullist numlist | link",
+    height : 300,
+    plugins: "code lists link",
+    content_css: "#{asset_path("application.css")}"
   });
+
+
+/ content_css: "#{Routes.static_path(@conn, "/css/app.css")}",
+/
+  javascript:
+    $(function() {
+      $('#admin_blog_post_body').froalaEditor(
+        {
+          toolbarButtons: [ 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'insertLink', '|', 'insertHR', 'selectAll', 'clearFormatting', 'undo', 'redo']
+        }
+      )
+    });

@@ -6,18 +6,22 @@ class AcceptedPaymentsController < ApplicationController
     log_request
     raise and return if payment.nil?
 
-    update_subscription
-    secure_subscription_address
-    update_payment
-    initialize_user
-    send_email_to_admin
-    @payment.user.destroy_pending_payments
-    session[:user_id] = subscriper.id
-    cookies[:auth_token] = subscriper.auth_token
-    @current_user = subscriper
-    session[:stored_path] = root_path
-    @message = Admin::SystemMessage.subscription_payment_completed
-    log_payment
+    if payment.accepted?
+      render_404
+    else
+      update_subscription
+      secure_subscription_address
+      update_payment
+      initialize_user
+      send_email_to_admin
+      @payment.user.destroy_pending_payments
+      session[:user_id] = subscriper.id
+      cookies[:auth_token] = subscriper.auth_token
+      @current_user = subscriper
+      session[:stored_path] = root_path
+      @message = Admin::SystemMessage.subscription_payment_completed
+      log_payment
+    end
   end
 
   private
@@ -70,6 +74,7 @@ class AcceptedPaymentsController < ApplicationController
     subscription.user
   end
 
+  #### Bug here payment.payable return nil
   def subscription
     @subscription ||= payment.payable
   end
@@ -115,7 +120,7 @@ class AcceptedPaymentsController < ApplicationController
 
   # only extend subscription one time pr payment
   def extend_subscription
-    return if payment_completed?
+    # return if payment_completed?
 
     new_end_date =
       if subscription.expired?
@@ -138,9 +143,10 @@ class AcceptedPaymentsController < ApplicationController
   end
 
   # awoid extending subscriptions by reloading the page
-  def payment_completed?
-    @payment_completed ||= subscription.last_payment_uuid == payment.uuid
-  end
+  # def payment_completed?
+  #   payment.accepted?
+  #   #@payment_completed ||= subscription.last_payment_uuid == payment.uuid
+  # end
 
   # paper trail
   def onpay_info(params)
@@ -157,6 +163,9 @@ class AcceptedPaymentsController < ApplicationController
       onpay_status: Payment::ACCEPTED
     }
   end
+
+  # test url
+  # localhost:3000/accepted_payments?onpay_reference=SP-9394&subscription_type_id=90
 
   def subscription_options
     {

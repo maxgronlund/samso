@@ -15,7 +15,7 @@ class Admin::Subscription < ApplicationRecord
   attr_accessor :on_hold
   belongs_to :subscription_type, class_name: 'Admin::SubscriptionType', counter_cache: true
   belongs_to :user
-  #has_many :payments, as: :payable
+  # has_many :payments, as: :payable
 
   scope :economic_imported, -> { where(subscription_type_id: Admin::SubscriptionType.imported.id)}
   scope :free_economic_imported, -> { where(subscription_type_id: Admin::SubscriptionType.imported.id)}
@@ -29,8 +29,14 @@ class Admin::Subscription < ApplicationRecord
 
   validates :subscription_id, uniqueness: true
 
+  def last_payment
+    Payment.find_by(uuid: last_payment_uuid)
+  end
+
   def payments
+    ap payment = Payment.find_by(uuid: last_payment_uuid)
     Payment.where(payable_type: 'Admin::Subscription', payable_id: id)
+
   end
 
   def expire!
@@ -132,6 +138,10 @@ class Admin::Subscription < ApplicationRecord
     return false if expired?
 
     subscription_type.print_version
+  end
+
+  def accepted?
+    self.state == Payment::ACCEPTED
   end
 
   def group

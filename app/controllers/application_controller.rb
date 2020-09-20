@@ -123,9 +123,17 @@ class ApplicationController < ActionController::Base
     @menu = Page.for_menu('menu_bar')
   end
 
+  def render_400
+    respond_to do |format|
+      format.html { render file: "#{Rails.public_path}/400", layout: false, status: :forbidden }
+      format.xml  { head :forbidden }
+      format.any  { head :forbidden }
+    end
+  end
+
   def render_404
     respond_to do |format|
-      format.html { render file: "#{Rails.root}/public/404", layout: false, status: :not_found }
+      format.html { render file: "#{Rails.public_path}/404", layout: false, status: :not_found }
       format.xml  { head :not_found }
       format.any  { head :not_found }
     end
@@ -133,7 +141,15 @@ class ApplicationController < ActionController::Base
 
   def render_403
     respond_to do |format|
-      format.html { render file: "#{Rails.root}/public/403", layout: false, status: :forbidden }
+      format.html { render file: "#{Rails.public_path}/403", layout: false, status: :forbidden }
+      format.xml  { head :forbidden }
+      format.any  { head :forbidden }
+    end
+  end
+
+  def render_500
+    respond_to do |format|
+      format.html { render file: "#{Rails.public_path}/500", layout: false, status: :forbidden }
       format.xml  { head :forbidden }
       format.any  { head :forbidden }
     end
