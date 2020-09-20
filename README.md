@@ -155,7 +155,7 @@ heroku config:set MAINTENANCE_PAGE_URL=//s3.amazonaws.com/samso-images/maintance
 * DNS
 heroku domains --app samso
 
-* ngrok
+* ngrok from root dir
 ./ngrok http 3000
 
 

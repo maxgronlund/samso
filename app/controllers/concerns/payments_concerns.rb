@@ -34,9 +34,8 @@ module PaymentsConcerns
       onpay_reference: ref,
       onpay_accepturl: ENV['ONPAY_ACCEPTURL'],
       onpay_declineurl: ENV['ONPAY_DECLINEURL'],
-      subscription_type_id: subscription_type.id.to_s,
-      onpay_testmode: ENV['ONPAY_TESTMODE']
-
+      onpay_testmode: ENV['ONPAY_TESTMODE'],
+      subscription_type_id: subscription_type.id.to_s
     }
   end
 end

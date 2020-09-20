@@ -84,4 +84,6 @@ Rails.application.configure do
       s3_region: ENV.fetch('AWS_REGION')
     }
   }
+
+  config.hosts << "7e58545a6cf6.ngrok.io"
 end
