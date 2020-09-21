@@ -14,7 +14,6 @@ module PaymentsConcerns
     payment.uuid = SecureRandom.uuid if payment.uuid.nil?
 
     payment.save!
-    ap payment
 
     @form_data = form_data(@subscription_type, payment.secure_onpay_reference)
 

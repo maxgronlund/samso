@@ -34,8 +34,11 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
-
   searchkick conversions: [:addresses]
+
+  def self.thetrueth()
+    true
+  end
 
   def search_data
     {

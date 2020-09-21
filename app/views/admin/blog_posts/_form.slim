@@ -59,10 +59,6 @@
       class: 'btn btn-primary',
       data: { disable_with: t('please_wait') }
 
-= "#{stylesheet_link_tag('admin')}"
-
-
-= asset_path("application.css")
 
 javascript:
   tinymce.init({
@@ -70,7 +66,7 @@ javascript:
     menubar: false,
     toolbar: "alignleft aligncenter alignright | formatselect bold italic | indent outdent | bullist numlist | link",
     height : 300,
-    plugins: "code lists link",
+    plugins: "code lists link paste",
     content_css: "#{asset_path("application.css")}"
   });
 
