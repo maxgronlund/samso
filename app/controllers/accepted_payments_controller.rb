@@ -3,6 +3,7 @@ class AcceptedPaymentsController < ApplicationController
   # hence the cc is a great validation
   def index
     params.permit!
+    ap params
     log_request
     raise and return if payment.nil?
 
@@ -74,9 +75,13 @@ class AcceptedPaymentsController < ApplicationController
     subscription.user
   end
 
-  #### Bug here payment.payable return nil
   def subscription
-    @subscription ||= payment.payable
+    @subscription ||=
+      payment
+      .user.subscriptions
+      .where(subscription_type_id: params[:subscription_type_id])
+      .order(:end_date)
+      .last
   end
 
   def payment
@@ -111,6 +116,7 @@ class AcceptedPaymentsController < ApplicationController
 
   # only create a subscription if there is none
   def update_subscription
+    ap subscription
     subscription.present? ? extend_subscription : create_subscription
   end
 
