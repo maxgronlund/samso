@@ -1,0 +1,42 @@
+Datatil syn
+
+Databasen med artikler
+https://www.datatilsynet.dk/emner/medier-og-udgivelser
+Vi skal indsænde formular
+
+Brug af billeder
+https://www.datatilsynet.dk/emner/internet-og-apps/billeder-paa-internettet
+Tiladt i offentlige situationer men ikke hos lægen og i religiøse sammenhæng, jeg ved ikke om en gudstjæneste er
+
+Sociale funktioner
+https://www.datatilsynet.dk/emner/internet-og-apps/sociale-netvaerk
+Sletning af medlems profiler og tilhørende kommentarer
+
+SSH
+https://www.datatilsynet.dk/emner/persondatasikkerhed/indbygget-databeskyttelse-privacy-by-design
+ET krav
+
+Backup og sletning
+https://www.datatilsynet.dk/emner/persondatasikkerhed/sletning
+BØVLE
+
+Risikovurdering
+https://www.datatilsynet.dk/emner/persondatasikkerhed/risikovurdering
+BEGRENSET, ingen følsome data er obevaret
+
+konsekvensanalyser
+https://www.datatilsynet.dk/emner/persondatasikkerhed/konsekvensanalyser
+IKKE RELLEVANT
+
+
+Ved brud på sikkerhed
+https://www.datatilsynet.dk/emner/persondatasikkerhed/underretning-af-den-registrerede-ved-brud-paa-persondatasikkerheden
+IKKE RELLEVANT
+
+kreditoplysninger
+https://www.datatilsynet.dk/emner/kreditoplysninger
+IKKE RELLEVANT
+
+dataansvarlig vs databehandler
+https://www.datatilsynet.dk/emner/dataansvarlig-og-databehandler
+VI ER BEGGE DELE

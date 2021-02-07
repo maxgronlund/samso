@@ -93,11 +93,6 @@ heroku pg:backups:schedule DATABASE_URL --at '02:00 Europe/Copenhagen' --app sam
 ###install backup from Heroku on localhost
   pg_restore --verbose --clean --no-acl --no-owner -h localhost -U maxgronlund -d samso_development /Users/maxgronlund/Documents/rails-projects/samso/latest.dump
 
-  alternative
-  heroku pg:pull postgres://gsrwkvfqdujbtr:e11ea59968cc5bb63b5a695fa722b3efc77474a37d368b41d42749af7f161e82@ec2-54-195-241-106.eu-west-1.compute.amazonaws.com:5432/d3m4k2rgl9urs2 samso_development --app samso
-
-
-  $ heroku addons:create heroku-postgresql:hobby-basic --app samso
 
   heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_MAUVE_URL --app samso
   heroku pg:promote HEROKU_POSTGRESQL_MAUVE_URL --app samso
@@ -166,8 +161,6 @@ heroku pg:backups:download --app samso
 
 $ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U DATA_BASE_USER -d DATA_BASE latest.dump
 
-
-heroku[router]: at=error code=H12 desc="Request timeout" method=GET path="/" host=samso.herokuapp.com request_id=6a28f876-076f-4afb-ab9e-46f5f5f35a63 fwd="195.210.18.10,157.167.45.180" dyno=web.1 connect=0ms service=30000ms status=503 bytes=0 protocol=htt
 
 * test payment
 

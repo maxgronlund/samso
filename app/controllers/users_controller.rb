@@ -137,7 +137,9 @@ class UsersController < ApplicationController
   end
 
   def add_subscription_address?
-    subscription_type.present? && subscription_type.print_version
+    # subscription_type.present? && subscription_type.print_version
+    # TODO: add field to subscription types
+    true
   end
 
   def subscription_type

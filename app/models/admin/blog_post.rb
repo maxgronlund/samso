@@ -115,6 +115,7 @@ class Admin::BlogPost < ApplicationRecord
 
   def build_video_url
     return youtube_video_url if video_url.include?('https://youtu.be/')
+    # return vimeo_video_url if video_url.include?('https://vimeo.com')
 
     video_url
   end
@@ -124,6 +125,14 @@ class Admin::BlogPost < ApplicationRecord
     src += video_url.split('https://youtu.be/').last
     src + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
   end
+
+#   def vimeo_video_url
+#     src = '<iframe src="https://player.vimeo.com/video/'
+#     src += video_url.split
+
+#     <iframe src="https://player.vimeo.com/video/460211281" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+# <p><a href="https://vimeo.com/460211281">9B3F5F8D-8F2B-4E34-BCE7-580CF6B9FDC8</a> from <a href="https://vimeo.com/user123623317">Max Gr&oslash;nlund</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+#   end
 
   def images
     blog_post_images.order(:position)
