@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @user.addresses = [Address.new] if add_subscription_address?
+    @user.addresses = [Address.new] # if add_subscription_address?
     session[:subscription_type_id] = params[:subscription_type_id]
   end
 

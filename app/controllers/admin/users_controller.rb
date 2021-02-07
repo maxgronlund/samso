@@ -32,7 +32,8 @@ class Admin::UsersController < AdminController
       next if subscription.address.completed?
       return true if subscription.print_version? && subscription.valid?
     end
-    false
+    # false
+    true
   end
 
   def subscriptions
@@ -52,6 +53,8 @@ class Admin::UsersController < AdminController
     @user.password = nil
     @user.email = nil if @user.fake_email?
     @user.update_subscription_address = true
+    ap @user.addresses.first_or_create
+    # @user.addresses = [Address.new] if @user.addresses.empty? # if add_subscription_address?
   end
 
   # POST /users
