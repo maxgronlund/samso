@@ -73,6 +73,7 @@ class UsersController < ApplicationController
       UserNotifierMailer.send_signup_email(@user.id).deliver
       redirect_user
     else
+      @user.addresses = [Address.new]
       render :new
     end
   end
