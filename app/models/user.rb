@@ -4,12 +4,6 @@
 class User < ApplicationRecord
   paginates_per 50
 
-
-
-
-
-
-
   has_secure_password
   attr_accessor(
     :delete_avatar,
