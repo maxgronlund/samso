@@ -51,7 +51,7 @@ class Admin::SystemSetup < ApplicationRecord
       .split(',')
       .map(&:strip)
       .reject(&:blank?)
-      .reject(&:invalid_email?)
+      #.reject(&:invalid_email?)
   end
 
   # Admin::SystemSetup.subscription_module
