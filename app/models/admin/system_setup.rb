@@ -33,8 +33,6 @@ class Admin::SystemSetup < ApplicationRecord
       system_setup
       .administrator_email
     split_and_sanitize(emails)
-  rescue
-    []
   end
 
   def self.order_completed_emails
@@ -42,8 +40,6 @@ class Admin::SystemSetup < ApplicationRecord
       system_setup
       .order_completed_email
     split_and_sanitize(emails)
-  rescue
-    []
   end
 
   def self.split_and_sanitize(emails)
